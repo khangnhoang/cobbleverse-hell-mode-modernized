@@ -20,7 +20,7 @@ def load_approved_replacements(reports_dir: str) -> tuple:
         if v.get("status") == "INVALID_UNIQUE_CANONICAL_MATCH"
     }
 
-    # 2. Moves (do NOT include INVALID_NO_MATCH such as shadowblitz)
+    # 2. Moves (including runtime-discovered x_scissor and shadowblitz resolutions)
     with open(os.path.join(reports_dir, "moves.json"), "r", encoding="utf-8") as f:
         mv_data = json.load(f)
     move_replacements = {
@@ -28,6 +28,8 @@ def load_approved_replacements(reports_dir: str) -> tuple:
         for k, v in mv_data.get("moves", {}).items()
         if v.get("status") == "INVALID_UNIQUE_CANONICAL_MATCH"
     }
+    move_replacements["x_scissor"] = "xscissor"
+    move_replacements["shadowblitz"] = "shadowball"
 
     # 3. Abilities
     with open(os.path.join(reports_dir, "abilities.json"), "r", encoding="utf-8") as f:
@@ -72,6 +74,7 @@ def normalize_pack(repo_root: str = None) -> dict:
     abil_changes = Counter()
     asp_changes = Counter()
     gimmick_changes = []
+    bag_changes = []
     multi_held_records = []
 
     for fn in trainer_files:
@@ -172,6 +175,35 @@ def normalize_pack(repo_root: str = None) -> dict:
                 if len(gim) == 0:
                     del p["gimmicks"]
 
+        # 6. Bag item normalization (convert unsupported revive items into cobblemon:full_restore)
+        bag = data.get("bag")
+        if bag and isinstance(bag, list):
+            revive_items = [b for b in bag if "revive" in b.get("item", "").lower()]
+            if revive_items:
+                revive_qty = sum(int(b.get("quantity", 1)) for b in revive_items)
+                new_bag = [b for b in bag if "revive" not in b.get("item", "").lower()]
+                fr_entry = None
+                for b in new_bag:
+                    if b.get("item") == "cobblemon:full_restore":
+                        fr_entry = b
+                        break
+                if fr_entry:
+                    fr_entry["quantity"] = int(fr_entry.get("quantity", 0)) + revive_qty
+                else:
+                    new_bag.append({
+                        "item": "cobblemon:full_restore",
+                        "quantity": revive_qty
+                    })
+                for b in new_bag:
+                    b["quantity"] = int(b.get("quantity", 1))
+                data["bag"] = new_bag
+                file_changed = True
+                bag_changes.append({
+                    "trainer_file": fn,
+                    "converted_revive_quantity": revive_qty,
+                    "new_full_restore_quantity": fr_entry["quantity"] if fr_entry else revive_qty
+                })
+
         if file_changed:
             files_modified += 1
             modified_filenames.append(fn)
@@ -194,7 +226,8 @@ def normalize_pack(repo_root: str = None) -> dict:
             "ability_replacements_count": sum(abil_changes.values()),
             "aspect_replacements_count": sum(asp_changes.values()),
             "invalid_gimmick_keys_removed_count": len(gimmick_changes),
-            "unresolved_moves_preserved": ["shadowblitz"],
+            "bag_revive_conversions_count": len(bag_changes),
+            "unresolved_moves_preserved": [],
             "unresolved_aspects_preserved_count": 13,
             "multi_held_arrays_preserved_count": 201
         },
@@ -203,7 +236,8 @@ def normalize_pack(repo_root: str = None) -> dict:
         "move_changes": dict(sorted(move_changes.items())),
         "ability_changes": dict(sorted(abil_changes.items())),
         "aspect_changes": dict(sorted(asp_changes.items())),
-        "gimmick_changes": gimmick_changes
+        "gimmick_changes": gimmick_changes,
+        "bag_changes": bag_changes
     }
 
     # Generate normalization reports only when changes occurred or report missing
@@ -218,8 +252,8 @@ def normalize_pack(repo_root: str = None) -> dict:
 
         summary_md = f"""# Phase D — Deterministic Content Normalization Report
 
-**Target Environment:** COBBLEVERSE 1.7.42-CF (Minecraft 1.21.1 Fabric)  
-**Dataset:** Modernized `pack/data/rctmod/trainers/` ({total_files} trainers)  
+**Target Environment:** COBBLEVERSE 1.7.42-CF (Minecraft 1.21.1 Fabric)
+**Dataset:** Modernized `pack/data/rctmod/trainers/` ({total_files} trainers)
 
 ---
 
@@ -229,12 +263,13 @@ def normalize_pack(repo_root: str = None) -> dict:
 | :--- | :--- | :--- |
 | **Trainer Files Modified** | **{files_modified} files** | Out of {total_files} total trainers ({files_modified} updated, {total_files - files_modified} unchanged) |
 | **Held-Item Replacements** | **{sum(item_changes.values())} occurrences** | Corrected 33 unique invalid IDs (Z-Crystals, Orbs, Plates, Memories, bare IDs) |
-| **Move Typo Replacements** | **{sum(move_changes.values())} occurrences** | Corrected 21 unique truncated move typos (`belly` -> `bellydrum`, `moonbl` -> `moonblast`, etc.) |
+| **Move Typo Replacements** | **{sum(move_changes.values())} occurrences** | Corrected 23 unique move IDs (21 typos + runtime fixes for `x_scissor` and `shadowblitz`) |
 | **Ability Typo Replacements** | **{sum(abil_changes.values())} occurrences** | Corrected 2 truncated abilities (`magic` -> `magicbounce`, `shield` -> `shielddust`) |
 | **Aspect / Form Syntax Fixes** | **{sum(asp_changes.values())} occurrences** | Corrected 29 unique species-aspect syntax discrepancies (`ice-rider`, `dusk-fusion`, `blaze-breed`) |
 | **Invalid Gimmick Usages** | **{len(gimmick_changes)} occurrences** | Removed `"mega": true` inside `gimmicks` record (Apollo Sharpedo, Giovanni Tyranitar) |
+| **Unsupported Bag Revives** | **{len(bag_changes)} trainers** | Converted unsupported `max_revive` entries into `cobblemon:full_restore` (preserving `maxItemUses`) |
 | **Multi-Held Arrays** | **201 preserved** | Kept as arrays with identical element order; inner IDs canonicalized |
-| **Intentionally Unresolved Values** | **Preserved** | `shadowblitz` (1), Radical Red Sevii forms (6), `wishiwashi::hisuian` (1), cosmetic aspects (4) |
+| **Intentionally Unresolved Values** | **Preserved** | Radical Red Sevii forms (6), `wishiwashi::hisuian` (1), cosmetic aspects (4) |
 
 ---
 
@@ -246,10 +281,18 @@ def normalize_pack(repo_root: str = None) -> dict:
 - **Bare & Missing Namespace (4 IDs):** `charcoal` -> `minecraft:charcoal`, `booster_energy` -> `mega_showdown:booster_energy`, `adamant_crystal` -> `mega_showdown:adamant_crystal`, `lustrous_globe` -> `mega_showdown:lustrous_globe`.
 - **Namespace Typo (1 ID):** `megas_showdown:wellspring_mask` -> `mega_showdown:wellspring_mask`.
 
-### Moves ({sum(move_changes.values())} replacements across 21 unique IDs)
+### Bag Revive Items ({len(bag_changes)} trainers converted)
+- RCT trainer battle AI rejects revives on fainted party members (`is neither a BagItemLike or PokemonSelectingItem`).
+- Converted `max_revive` into equivalent additional `cobblemon:full_restore` units across 10 League/Champion encounters:
+  `hoenn_champion_rocco`, `hoenn_league_drake`, `hoenn_league_ester`, `hoenn_league_fosco`, `hoenn_league_frida`, `sinnoh_champion_camilla`, `sinnoh_league_aaron`, `sinnoh_league_luciano`, `sinnoh_league_terrie`, `sinnoh_league_vulcano`.
+- Normalized string quantities (`'5'` -> `5`) to numeric integers.
+- Preserved existing `battleRules.maxItemUses` (6 for Aaron/Luciano/Vulcano/Terrie/Rocco, 5 for Fosco/Ester/Frida/Drake, 7 for Camilla).
+
+### Moves ({sum(move_changes.values())} replacements across 23 unique IDs)
 - Truncated move names corrected to canonical Showdown names:
   `absor` -> `absorb`, `belly` -> `bellydrum`, `calmm` -> `calmmind`, `close` -> `closecombat`, `dazz` -> `dazzlinggleam`, `drain` -> `drainingkiss`, `dream` -> `dreameater`, `icebea` -> `icebeam`, `kara` -> `karatechop`, `moonbl` -> `moonblast`, `psych` -> `psychic`, `quick` -> `quickattack`, `reco` -> `recover`, `rockb` -> `rockblast`, `stonea` -> `stoneaxe`, `supers` -> `supersonic`, `thunderfa` -> `thunderfang`, `thunders` -> `thundershock`, `thunderw` -> `thunderwave`, `vicegrip` -> `visegrip`, `waterspo` -> `watersport`.
-- **Preserved Unresolved:** `shadowblitz` (Pokémon Colosseum shadow move) was intentionally NOT modified and remains queued for Phase E redesign.
+- **Runtime Correction:** `x_scissor` on Genesect in `johto_raffaello.json` -> `xscissor`.
+- **Runtime Correction:** `shadowblitz` on Cofagrigus in `channeler_carly_01ba.json` -> `shadowball` (canonical Ghost STAB matching Doctor's Cofagrigus template in `ruin_mamoac_foster_0246.json`).
 
 ### Abilities ({sum(abil_changes.values())} replacements across 2 unique IDs)
 - `magic` on Hatterene in `hoenn_tell.json` -> `magicbounce`

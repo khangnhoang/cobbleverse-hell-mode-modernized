@@ -393,14 +393,15 @@ class TestCanonicalAuditReports(unittest.TestCase):
 
         s = data["summary"]
         self.assertEqual(s["total_pack_trainers"], 1714)
-        self.assertEqual(s["trainer_files_modified"], 99)
+        self.assertEqual(s["trainer_files_modified"], 107)
         self.assertEqual(s["held_item_replacements_count"], 53)
-        self.assertEqual(s["move_replacements_count"], 22)
+        self.assertEqual(s["move_replacements_count"], 24)
         self.assertEqual(s["ability_replacements_count"], 2)
         self.assertEqual(s["aspect_replacements_count"], 43)
         self.assertEqual(s["invalid_gimmick_keys_removed_count"], 2)
+        self.assertEqual(s["bag_revive_conversions_count"], 10)
         self.assertEqual(s["multi_held_arrays_preserved_count"], 201)
-        self.assertEqual(s["unresolved_moves_preserved"], ["shadowblitz"])
+        self.assertEqual(s["unresolved_moves_preserved"], [])
 
     def test_phase_d_pack_semantic_invariants(self):
         """Spot-check normalized trainer JSONs to verify semantic integrity."""
@@ -442,6 +443,35 @@ class TestCanonicalAuditReports(unittest.TestCase):
         # 6. Multi-held array type preservation on Giovanni Tyranitar
         self.assertIsInstance(tyranitar.get("heldItem"), list)
         self.assertEqual(len(tyranitar.get("heldItem")), 2)
+
+        # 7. Channeler Carly Cofagrigus: shadowblitz resolved to shadowball
+        with open(os.path.join(trainers_dir, "channeler_carly_01ba.json"), "r", encoding="utf-8") as f:
+            carly = json.load(f)
+        cofagrigus = [p for p in carly["team"] if p.get("species") == "cofagrigus"][0]
+        self.assertIn("shadowball", cofagrigus.get("moveset", []))
+        self.assertNotIn("shadowblitz", cofagrigus.get("moveset", []))
+
+        # 8. Johto Raffaello Genesect: x_scissor resolved to xscissor
+        with open(os.path.join(trainers_dir, "johto_raffaello.json"), "r", encoding="utf-8") as f:
+            raffaello = json.load(f)
+        genesect = [p for p in raffaello["team"] if p.get("species") == "genesect"][0]
+        self.assertIn("xscissor", genesect.get("moveset", []))
+        self.assertNotIn("x_scissor", genesect.get("moveset", []))
+
+        # 9. Hoenn Champion Rocco & Camilla: max_revive converted to full_restore
+        with open(os.path.join(trainers_dir, "hoenn_champion_rocco.json"), "r", encoding="utf-8") as f:
+            rocco = json.load(f)
+        self.assertNotIn("max_revive", [b["item"] for b in rocco.get("bag", [])])
+        fr_rocco = [b for b in rocco.get("bag", []) if b["item"] == "cobblemon:full_restore"][0]
+        self.assertEqual(fr_rocco["quantity"], 6)
+        self.assertEqual(rocco.get("battleRules", {}).get("maxItemUses"), 6)
+
+        with open(os.path.join(trainers_dir, "sinnoh_champion_camilla.json"), "r", encoding="utf-8") as f:
+            camilla = json.load(f)
+        self.assertNotIn("max_revive", [b["item"] for b in camilla.get("bag", [])])
+        fr_camilla = [b for b in camilla.get("bag", []) if b["item"] == "cobblemon:full_restore"][0]
+        self.assertEqual(fr_camilla["quantity"], 7)
+        self.assertEqual(camilla.get("battleRules", {}).get("maxItemUses"), 7)
 
     def test_phase_d_normalization_idempotent(self):
         """Verify that running normalize_pack on the already-normalized pack produces 0 modifications."""
@@ -535,6 +565,49 @@ class TestCanonicalAuditReports(unittest.TestCase):
             }
             with open(tf, "w") as f:
                 json.dump(bad_gimmick_trainer, f)
+            self.assertFalse(validate_future_pack(td))
+
+            # 5. Reintroduce unsupported revive in bag -> fails
+            bad_bag_trainer = {
+                "bag": [{"item": "max_revive", "quantity": 1}],
+                "team": [
+                    {
+                        "species": "pikachu",
+                        "level": 50,
+                        "moveset": ["thunderbolt"]
+                    }
+                ]
+            }
+            with open(tf, "w") as f:
+                json.dump(bad_bag_trainer, f)
+            self.assertFalse(validate_future_pack(td))
+
+            # 6. Reintroduce invalid move 'x_scissor' -> fails
+            bad_xscissor_trainer = {
+                "team": [
+                    {
+                        "species": "genesect",
+                        "level": 70,
+                        "moveset": ["x_scissor"]
+                    }
+                ]
+            }
+            with open(tf, "w") as f:
+                json.dump(bad_xscissor_trainer, f)
+            self.assertFalse(validate_future_pack(td))
+
+            # 7. Reintroduce unsupported move 'shadowblitz' -> fails
+            bad_shadow_trainer = {
+                "team": [
+                    {
+                        "species": "cofagrigus",
+                        "level": 39,
+                        "moveset": ["shadowblitz"]
+                    }
+                ]
+            }
+            with open(tf, "w") as f:
+                json.dump(bad_shadow_trainer, f)
             self.assertFalse(validate_future_pack(td))
 
 if __name__ == "__main__":

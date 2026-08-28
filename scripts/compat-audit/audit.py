@@ -555,7 +555,8 @@ def run_audit(instance_path=None, reports_dir=None):
         "quick": "quickattack",
         "rockb": "rockblast",
         "thunderw": "thunderwave",
-        "kara": "karatechop"
+        "kara": "karatechop",
+        "shadowblitz": "shadowball"
     }
 
     moves_report = {
@@ -570,15 +571,20 @@ def run_audit(instance_path=None, reports_dir=None):
     }
     for m, count in sorted(move_counts.items()):
         m_clean = clean_identifier(m)
-        if m_clean in showdown_moves or m.lower() in showdown_moves:
+        if m.lower() in showdown_moves:
             status = "VALID_EXACT"
             canonical = m
             evidence = "Registered in Cobblemon Showdown moves"
             moves_report["summary"]["valid_exact_count"] += 1
+        elif m_clean in showdown_moves:
+            status = "INVALID_UNIQUE_CANONICAL_MATCH"
+            canonical = m_clean
+            evidence = f"Canonical Showdown identifier is {m_clean} without underscores/hyphens"
+            moves_report["summary"]["invalid_canonical_match_count"] += 1
         elif m_clean in canonical_move_fixes:
             status = "INVALID_UNIQUE_CANONICAL_MATCH"
             canonical = canonical_move_fixes[m_clean]
-            evidence = f"Truncated move name; resolved to Showdown move '{canonical}'"
+            evidence = f"Truncated or unsupported move name; resolved to Showdown move '{canonical}'"
             moves_report["summary"]["invalid_canonical_match_count"] += 1
         else:
             status = "INVALID_NO_MATCH"

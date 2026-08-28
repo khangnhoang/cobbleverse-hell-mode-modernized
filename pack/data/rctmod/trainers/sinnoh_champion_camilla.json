@@ -17,12 +17,8 @@
   },
   "bag": [
     {
-      "item": "max_revive",
-      "quantity": 1
-    },
-    {
       "item": "cobblemon:full_restore",
-      "quantity": "6"
+      "quantity": 7
     }
   ],
   "team": [
