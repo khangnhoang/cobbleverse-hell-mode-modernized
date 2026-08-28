@@ -5,28 +5,33 @@ import subprocess
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
-DEFAULT_INSTANCE_PATH = r"C:\Users\khang\curseforge\minecraft\Instances\COBBLEVERSE - Pokemon Adventure [Cobblemon]"
 
 class TestLocalIntegrationAudit(unittest.TestCase):
     """
     Authoritative local integration test.
     Requires the actual installed Cobbleverse instance.
     Runs the full audit.py against mod JARs and verifies deterministic report outputs.
-    Skipped in CI runners where the external game instance is not present.
+    Skipped when COBBLEVERSE_INSTANCE_PATH is not configured or path does not exist.
     """
     @classmethod
     def setUpClass(cls):
-        cls.instance_path = os.environ.get("COBBLEVERSE_INSTANCE_PATH", DEFAULT_INSTANCE_PATH)
+        cls.instance_path = os.environ.get("COBBLEVERSE_INSTANCE_PATH")
+        if not cls.instance_path:
+            raise unittest.SkipTest(
+                "COBBLEVERSE_INSTANCE_PATH environment variable not set. "
+                "Local integration audit requires the external installed modpack. "
+                "Set COBBLEVERSE_INSTANCE_PATH to run this test."
+            )
         if not os.path.exists(cls.instance_path):
             raise unittest.SkipTest(
                 f"Cobbleverse instance not found at '{cls.instance_path}'. "
-                "Local integration audit requires installed modpack instance."
+                "Local integration audit requires an existing installed modpack directory."
             )
 
     def test_external_reference_binaries_exist(self):
         mods_dir = os.path.join(self.instance_path, "mods")
         dp_dir = os.path.join(self.instance_path, "datapacks")
-        
+
         expected_files = [
             os.path.join(mods_dir, "Cobblemon-fabric-1.7.3+1.21.1.jar"),
             os.path.join(mods_dir, "mega_showdown-fabric-1.8.4+1.7.3+1.21.1.jar"),

@@ -15,8 +15,12 @@ Validation is split cleanly into two layers:
 
 2. **Local Full Integration Audit (`audit.py` & `test_local_integration.py`)**:
    - Runs locally on the developer machine.
-   - Requires the live Cobbleverse instance (Cobblemon 1.7.3 JAR, Mega Showdown 1.8.4 JAR, RCT Mod 0.18.1-beta JAR, and Cobbleverse DP v20).
-   - Extracts bytecode registries, checks item models, parses Showdown moves/abilities, and verifies report regeneration determinism.
+   - Requires the external installed Cobbleverse instance (Cobblemon 1.7.3 JAR, Mega Showdown 1.8.4 JAR, RCT Mod 0.18.1-beta JAR, and Cobbleverse DP v20).
+   - **Authoritative Item Registries:**
+     - Mega Showdown: Bytecode extraction of registered `RegistrySupplier` item fields directly from `MegaShowdownItems.class` constant pool.
+     - Cobblemon: Authoritative item definitions from `assets/cobblemon/lang/en_us.json` cross-referenced with item models.
+     - Vanilla Minecraft: Validated standard Minecraft 1.21.1 items used as held items (`minecraft:gold_nugget`, `minecraft:charcoal`). Note that vanilla runtime registries reside in Minecraft's version JAR outside the modpack instance directory.
+   - **Ambiguity-Safe Aspect Matching:** Evaluates all candidate FormData aspects in Cobblemon; fuzzy matches with multiple candidates strictly produce `INVALID_AMBIGUOUS` with `None` rather than arbitrarily selecting the first candidate.
    - **Note on Mod Binaries:** Game and mod JARs are copyrighted third-party assets and are intentionally not committed to Git.
 
 ---
@@ -43,19 +47,28 @@ python scripts/ci/check_legacy_baseline.py
 ## Running Full Local Integration Audit
 
 ### 1. Execute Master Audit
-```bash
-# Using default local CurseForge instance
-python scripts/compat-audit/audit.py
+Provide the path to the installed Cobbleverse instance via CLI argument or environment variable:
 
-# Or pointing to a custom instance directory
-python scripts/compat-audit/audit.py --instance "C:/path/to/Instances/COBBLEVERSE - Pokemon Adventure [Cobblemon]"
+```bash
+# Via command-line argument:
+python scripts/compat-audit/audit.py --instance "C:/path/to/Cobbleverse/Instance"
+
+# Or via environment variable:
+set COBBLEVERSE_INSTANCE_PATH="C:/path/to/Cobbleverse/Instance"
+python scripts/compat-audit/audit.py
 ```
+
+If neither is supplied, `audit.py` fails with clear instructions.
 
 ### 2. Verify Audit Determinism & Integrity
 ```bash
-# Runs full audit against the instance and verifies byte-for-byte report stability
+# Set instance path in environment
+set COBBLEVERSE_INSTANCE_PATH="C:/path/to/Cobbleverse/Instance"
+
+# Run integration tests (checks binary presence and verifies byte-for-byte report determinism)
 python -m unittest scripts/compat-audit/test_local_integration.py -v
 ```
+*(If `COBBLEVERSE_INSTANCE_PATH` is not set, this integration test skips cleanly with an informative message).*
 
 ---
 

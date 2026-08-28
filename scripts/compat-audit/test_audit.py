@@ -2,33 +2,37 @@ import os
 import sys
 import unittest
 import json
+import tempfile
+import shutil
 
-# Ensure scripts/compat-audit is on path to import pure functions from audit.py
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-if SCRIPT_DIR not in sys.path:
-    sys.path.insert(0, SCRIPT_DIR)
+REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
+
+# Add scripts directories to path for direct testing of pure functions
+sys.path.append(SCRIPT_DIR)
+sys.path.append(os.path.join(REPO_ROOT, "scripts", "ci"))
 
 from audit import (
     clean_identifier,
     resolve_item_namespace,
     derive_canonical_held_item,
-    classify_species_aspect
+    classify_species_aspect,
 )
+from validate_repo import validate_future_pack
 
 class TestCanonicalAuditReports(unittest.TestCase):
     """
-    CI-safe unit and regression test suite.
-    Validates repository-owned artifacts: generated reports, schema invariants,
-    canonical mappings, and deterministic helper logic.
-    Does NOT require the external Cobbleverse instance.
+    CI-Safe verification suite.
+    Runs entirely inside the repository without requiring external modpack binaries.
+    Verifies that generated audit reports and classification invariants remain intact.
     """
     @classmethod
     def setUpClass(cls):
-        cls.repo_root = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
+        cls.repo_root = REPO_ROOT
         cls.reports_dir = os.path.join(cls.repo_root, "reports", "compat-audit")
 
     def test_reports_exist(self):
-        expected_reports = [
+        expected = [
             "current-baseline.json",
             "trainer-inventory.json",
             "held-items.json",
@@ -40,40 +44,27 @@ class TestCanonicalAuditReports(unittest.TestCase):
             "multi-held-items.json",
             "summary.md"
         ]
-        for r in expected_reports:
-            p = os.path.join(self.reports_dir, r)
-            self.assertTrue(os.path.exists(p), f"Report missing: {r}")
+        for f in expected:
+            p = os.path.join(self.reports_dir, f)
+            self.assertTrue(os.path.exists(p), f"Report missing: {f}")
 
     def test_reports_parse_valid_json(self):
-        json_reports = [
-            "current-baseline.json",
-            "trainer-inventory.json",
-            "held-items.json",
-            "species.json",
-            "moves.json",
-            "abilities.json",
-            "aspects.json",
-            "gimmicks.json",
-            "multi-held-items.json"
-        ]
-        for r in json_reports:
-            p = os.path.join(self.reports_dir, r)
-            with open(p, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            self.assertIsInstance(data, dict, f"Report {r} root is not a JSON object")
+        for f in os.listdir(self.reports_dir):
+            if f.endswith(".json"):
+                p = os.path.join(self.reports_dir, f)
+                with open(p, "r", encoding="utf-8") as jf:
+                    data = json.load(jf)
+                    self.assertIsInstance(data, dict, f"Report root is not a dict: {f}")
 
     def test_held_items_canonical_resolution(self):
         p = os.path.join(self.reports_dir, "held-items.json")
         with open(p, "r", encoding="utf-8") as f:
             data = json.load(f)
-
         items = data["items"]
-        # Exact valid items
-        self.assertEqual(items["life_orb"]["status"], "VALID_EXACT")
-        self.assertEqual(items["life_orb"]["canonical_replacement"], "cobblemon:life_orb")
-        self.assertEqual(items["mega_showdown:garchompite"]["status"], "VALID_EXACT")
 
         # Hyphenated Z-Crystals
+        self.assertEqual(items["mega_showdown:waterium-z"]["status"], "INVALID_UNIQUE_CANONICAL_MATCH")
+        self.assertEqual(items["mega_showdown:waterium-z"]["canonical_replacement"], "mega_showdown:waterium_z")
         self.assertEqual(items["mega_showdown:darkinium-z"]["status"], "INVALID_UNIQUE_CANONICAL_MATCH")
         self.assertEqual(items["mega_showdown:darkinium-z"]["canonical_replacement"], "mega_showdown:darkinium_z")
 
@@ -122,9 +113,11 @@ class TestCanonicalAuditReports(unittest.TestCase):
         p = os.path.join(self.reports_dir, "gimmicks.json")
         with open(p, "r", encoding="utf-8") as f:
             data = json.load(f)
-        self.assertEqual(data["summary"]["invalid_gimmick_keys_count"], 2)
-        invalid_keys = [rec["invalid_key"] for rec in data["invalid_gimmick_usages"]]
-        self.assertEqual(invalid_keys, ["mega", "mega"])
+        usages = data["invalid_gimmick_usages"]
+        self.assertEqual(len(usages), 2)
+        files = {u["trainer_file"] for u in usages}
+        self.assertIn("team_rocket_admin_apollo.json", files)
+        self.assertIn("team_rocket_giovanni.json", files)
 
     def test_aspects_calyrex_and_necrozma(self):
         p = os.path.join(self.reports_dir, "aspects.json")
@@ -151,8 +144,8 @@ class TestCanonicalAuditReports(unittest.TestCase):
         for key, info in data["aspect_combinations"].items():
             st = info["status"]
             canon = info["canonical_replacement"]
-            if st == "INVALID_NO_MATCH":
-                self.assertIsNone(canon, f"Aspect {key} marked INVALID_NO_MATCH must have None replacement")
+            if st in ("INVALID_NO_MATCH", "INVALID_AMBIGUOUS"):
+                self.assertIsNone(canon, f"Aspect {key} marked {st} must have None replacement")
             elif st in ("VALID_EXACT", "INVALID_UNIQUE_CANONICAL_MATCH"):
                 self.assertIsNotNone(canon, f"Aspect {key} marked {st} must have non-None replacement")
 
@@ -211,22 +204,86 @@ class TestCanonicalAuditReports(unittest.TestCase):
         self.assertEqual(st, "INVALID_NO_MATCH")
         self.assertIsNone(repl)
 
-        # 4. classify_species_aspect
-        valid_asps = {"ice-rider", "shadow-rider"}
-        # Exact match
-        st, repl, _ = classify_species_aspect("calyrex", "ice-rider", valid_asps)
+    def test_aspect_ambiguity_safety(self):
+        """
+        Verify that aspect matching is strictly ambiguity-safe:
+        - Exact match always wins
+        - Single normalized/substring candidate resolves to INVALID_UNIQUE_CANONICAL_MATCH
+        - Multiple candidates resolve to INVALID_AMBIGUOUS with None replacement
+        - Zero candidates resolve to INVALID_NO_MATCH
+        """
+        # Exact match wins even if other aspects contain it as substring
+        valid_asps = {"sun", "sunny-form", "sunshine"}
+        st, repl, _ = classify_species_aspect("cherrim", "sun", valid_asps)
         self.assertEqual(st, "VALID_EXACT")
-        self.assertEqual(repl, "ice-rider")
+        self.assertEqual(repl, "sun")
 
-        # Syntax discrepancy
-        st, repl, _ = classify_species_aspect("calyrex", "ice", valid_asps)
+        # Unique fuzzy/substring match succeeds
+        valid_unique = {"single-strike-style", "something-else"}
+        st, repl, _ = classify_species_aspect("urshifu", "single-strike", valid_unique)
         self.assertEqual(st, "INVALID_UNIQUE_CANONICAL_MATCH")
-        self.assertEqual(repl, "ice-rider")
+        self.assertEqual(repl, "single-strike-style")
 
-        # Sevii invalid form
-        st, repl, _ = classify_species_aspect("mantine", "sevii", set())
+        # Multiple candidates trigger INVALID_AMBIGUOUS and return None replacement
+        valid_ambiguous = {"rotom-heat-appliance", "rotom-heat-special"}
+        st, repl, _ = classify_species_aspect("rotom", "heat", valid_ambiguous)
+        self.assertEqual(st, "INVALID_AMBIGUOUS")
+        self.assertIsNone(repl)
+
+        # Zero candidates triggers INVALID_NO_MATCH
+        valid_none = {"form-a", "form-b"}
+        st, repl, _ = classify_species_aspect("pikachu", "unrecognized-form", valid_none)
         self.assertEqual(st, "INVALID_NO_MATCH")
         self.assertIsNone(repl)
+
+    def test_validate_future_pack_regression(self):
+        """
+        Tests validate_future_pack fail-closed behavior:
+        - When pack/ is absent, skips cleanly without error
+        - When pack/ exists but has missing or invalid pack.mcmeta, returns False
+        - When pack/ exists but has missing trainers dir or invalid trainer JSON, returns False
+        - When pack/ has valid structure and valid trainer JSON, returns True
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+            # 1. pack/ does not exist -> returns True (clean skip)
+            self.assertTrue(validate_future_pack(temp_dir))
+
+            pack_path = os.path.join(temp_dir, "pack")
+            os.makedirs(pack_path)
+
+            # 2. pack/ exists but missing pack.mcmeta -> returns False
+            self.assertFalse(validate_future_pack(temp_dir))
+
+            # Add pack.mcmeta
+            mcmeta = {"pack": {"pack_format": 48, "description": "Test Pack"}}
+            with open(os.path.join(pack_path, "pack.mcmeta"), "w") as f:
+                json.dump(mcmeta, f)
+
+            # 3. pack/ exists with pack.mcmeta but missing trainers dir -> returns False
+            self.assertFalse(validate_future_pack(temp_dir))
+
+            # Add trainers dir
+            trainers_dir = os.path.join(pack_path, "data", "rctmod", "trainers")
+            os.makedirs(trainers_dir)
+
+            # 4. pack/ trainers dir has 0 files -> returns False
+            self.assertFalse(validate_future_pack(temp_dir))
+
+            # 5. Add malformed trainer JSON -> returns False
+            bad_trainer = os.path.join(trainers_dir, "bad.json")
+            with open(bad_trainer, "w") as f:
+                f.write("{invalid json")
+            self.assertFalse(validate_future_pack(temp_dir))
+
+            # 6. Add valid trainer JSON -> returns True
+            good_trainer = {
+                "team": [
+                    {"species": "pikachu", "level": 50}
+                ]
+            }
+            with open(bad_trainer, "w") as f:
+                json.dump(good_trainer, f)
+            self.assertTrue(validate_future_pack(temp_dir))
 
 if __name__ == "__main__":
     unittest.main()

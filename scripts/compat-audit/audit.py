@@ -1,13 +1,18 @@
+#!/usr/bin/env python3
+"""
+Cobbleverse Hell Mode Canonical Compatibility Audit
+Audits legacy RCT trainer JSON files against authoritative Cobbleverse modpack runtime data.
+"""
+
 import os
 import sys
 import json
 import zipfile
 import io
 import re
+import struct
 import argparse
 from collections import Counter, defaultdict
-
-DEFAULT_INSTANCE_PATH = r"C:\Users\khang\curseforge\minecraft\Instances\COBBLEVERSE - Pokemon Adventure [Cobblemon]"
 
 METADATA = {
     "target_modpack": "COBBLEVERSE",
@@ -31,6 +36,70 @@ def resolve_item_namespace(raw: str) -> str:
     Unqualified bare items default strictly to 'cobblemon:'.
     """
     return raw if ":" in raw else f"cobblemon:{raw}"
+
+def extract_mega_showdown_registered_items(ms_jar_path: str) -> set:
+    """
+    Extracts authoritative item identifiers from MegaShowdownItems.class bytecode.
+    Every registered item in Mega Showdown is a public static final RegistrySupplier field.
+    """
+    with zipfile.ZipFile(ms_jar_path, "r") as z:
+        b = z.read("com/github/yajatkaul/mega_showdown/item/MegaShowdownItems.class")
+
+    magic, minor, major, cp_count = struct.unpack(">IHHH", b[:10])
+    offset = 10
+    cp = [None] * cp_count
+    idx = 1
+    while idx < cp_count:
+        tag = b[offset]
+        offset += 1
+        if tag == 1:
+            l = struct.unpack(">H", b[offset:offset+2])[0]
+            offset += 2
+            cp[idx] = b[offset:offset+l].decode("utf-8", errors="replace")
+            offset += l
+        elif tag in (3, 4): offset += 4
+        elif tag in (5, 6): offset += 8; idx += 1
+        elif tag in (7, 8, 16, 19, 20): offset += 2
+        elif tag in (9, 10, 11, 12, 18): offset += 4
+        elif tag == 15: offset += 3
+        idx += 1
+
+    access_flags, this_class, super_class, interfaces_count = struct.unpack(">HHHH", b[offset:offset+8])
+    offset += 8 + interfaces_count * 2
+    fields_count = struct.unpack(">H", b[offset:offset+2])[0]
+    offset += 2
+
+    registered = set()
+    for _ in range(fields_count):
+        f_access, f_name_idx, f_desc_idx, f_attr_count = struct.unpack(">HHHH", b[offset:offset+8])
+        offset += 8
+        f_name = cp[f_name_idx]
+        f_desc = cp[f_desc_idx]
+        if "RegistrySupplier" in f_desc:
+            registered.add(f"mega_showdown:{f_name.lower()}")
+        for _ in range(f_attr_count):
+            attr_name_idx, attr_len = struct.unpack(">HI", b[offset:offset+6])
+            offset += 6 + attr_len
+    return registered
+
+def extract_cobblemon_registered_items(c_jar_path: str) -> set:
+    """
+    Extracts authoritative Cobblemon items by cross-referencing lang key definitions
+    (assets/cobblemon/lang/en_us.json) with item model definitions.
+    This filters out non-item model overlays (e.g. poke_puff_overlay, rod cast states).
+    """
+    with zipfile.ZipFile(c_jar_path, "r") as z:
+        en_us = json.loads(z.read("assets/cobblemon/lang/en_us.json").decode("utf-8"))
+        model_items = set(os.path.basename(n)[:-5] for n in z.namelist() if n.startswith("assets/cobblemon/models/item/") and n.endswith(".json"))
+
+    en_us_items = set(k[len("item.cobblemon."):] for k in en_us.keys() if k.startswith("item.cobblemon."))
+    en_us_blocks = set(k[len("block.cobblemon."):] for k in en_us.keys() if k.startswith("block.cobblemon."))
+
+    registered = set()
+    for it in model_items:
+        if it in en_us_items or it in en_us_blocks:
+            registered.add(f"cobblemon:{it}")
+    return registered
 
 def derive_canonical_held_item(raw: str, all_registered_items: set, ms_items: set, vanilla_items: set) -> tuple:
     """
@@ -73,28 +142,27 @@ def derive_canonical_held_item(raw: str, all_registered_items: set, ms_items: se
 
 def classify_species_aspect(species: str, aspect: str, all_valid_sp_asps: set) -> tuple:
     """
-    Classifies a species-aspect pair against Cobblemon's registered FormData aspects.
+    Ambiguity-safe classification of a species-aspect pair against Cobblemon's registered FormData aspects.
+    Gathers all credible candidate matches and marks ambiguous cases if multiple candidates match.
     Returns: (status, canonical_replacement, evidence)
     """
+    # 1. Exact match
     if aspect in all_valid_sp_asps:
         return "VALID_EXACT", aspect, f"Form aspect for species {species} in Cobblemon"
 
+    # 2. Mega / Primal aspect injection
     if aspect in ("mega", "mega_x", "mega_y", "primal"):
         return "VALID_EXACT", aspect, "Mega/Primal aspect supported by Mega Showdown form injection"
 
-    # Deterministic mappings
-    norm_asp = aspect.replace("-", "").replace("_", "").lower()
-    for va in sorted(list(all_valid_sp_asps)):
-        norm_va = va.replace("-", "").replace("_", "").lower()
-        if norm_va == norm_asp or norm_asp in norm_va:
-            return "INVALID_UNIQUE_CANONICAL_MATCH", va, f"Normalized syntax discrepancy; matches Cobblemon aspect '{va}'"
-
+    # 3. Explicit grounded species-specific mappings
     if aspect == "f" and "female" in all_valid_sp_asps:
         return "INVALID_UNIQUE_CANONICAL_MATCH", "female", "Gender form shorthand; maps to 'female'"
     if aspect == "paldea-blaze" and species == "tauros":
         return "INVALID_UNIQUE_CANONICAL_MATCH", "blaze-breed", "Tauros Paldean Blaze breed uses aspect 'blaze-breed' in Cobblemon"
     if aspect in ("dusk-mane", "dusk_mane") and species == "necrozma":
         return "INVALID_UNIQUE_CANONICAL_MATCH", "dusk-fusion", "Necrozma Dusk Mane form uses aspect 'dusk-fusion' in Cobblemon"
+    if aspect == "ice" and species == "calyrex":
+        return "INVALID_UNIQUE_CANONICAL_MATCH", "ice-rider", "Calyrex Ice Rider form uses aspect 'ice-rider' in Cobblemon"
     if aspect == "sevii":
         return "INVALID_NO_MATCH", None, "Radical Red custom Sevii Island form; does not exist in Cobblemon"
     if aspect == "hisuian" and species == "wishiwashi":
@@ -102,21 +170,50 @@ def classify_species_aspect(species: str, aspect: str, all_valid_sp_asps: set) -
     if aspect in ("netherite-coating-full", "surfing", "flying", "libre"):
         return "NEEDS_RUNTIME_TEST", aspect, "Cosmetic or special Cobblemon asset aspect requiring runtime verification"
 
+    # 4. Ambiguity-safe candidate gathering
+    norm_asp = aspect.replace("-", "").replace("_", "").lower()
+
+    # Priority A: Normalized exact equality (e.g. "low_key" == "lowkey")
+    exact_norm_cands = [va for va in all_valid_sp_asps if va.replace("-", "").replace("_", "").lower() == norm_asp]
+    if len(exact_norm_cands) == 1:
+        return "INVALID_UNIQUE_CANONICAL_MATCH", exact_norm_cands[0], f"Normalized syntax discrepancy; matches Cobblemon aspect '{exact_norm_cands[0]}'"
+    elif len(exact_norm_cands) > 1:
+        return "INVALID_AMBIGUOUS", None, f"Multiple candidate aspects match '{aspect}': {sorted(exact_norm_cands)}"
+
+    # Priority B: Substring containment
+    sub_cands = [va for va in all_valid_sp_asps if norm_asp in va.replace("-", "").replace("_", "").lower()]
+    if len(sub_cands) == 1:
+        return "INVALID_UNIQUE_CANONICAL_MATCH", sub_cands[0], f"Normalized syntax discrepancy; matches Cobblemon aspect '{sub_cands[0]}'"
+    elif len(sub_cands) > 1:
+        return "INVALID_AMBIGUOUS", None, f"Multiple candidate aspects match '{aspect}': {sorted(sub_cands)}"
+
     return "INVALID_NO_MATCH", None, f"Aspect '{aspect}' not recognized for species {species}"
 
 def parse_args(args=None):
     parser = argparse.ArgumentParser(description="Cobbleverse Hell Mode Canonical Compatibility Audit")
     parser.add_argument("--instance", "--instance-path", "--instance-dir", dest="instance_path",
-                        default=os.environ.get("COBBLEVERSE_INSTANCE_PATH", DEFAULT_INSTANCE_PATH),
-                        help="Path to authoritative Cobbleverse instance directory")
+                        default=os.environ.get("COBBLEVERSE_INSTANCE_PATH"),
+                        help="Path to authoritative Cobbleverse instance directory (or set via COBBLEVERSE_INSTANCE_PATH env var)")
     parser.add_argument("--reports-dir", dest="reports_dir",
                         default=None,
-                        help="Directory to output generated reports into")
+                        help="Directory to output generated reports into (defaults to reports/compat-audit)")
     return parser.parse_args(args)
 
 def run_audit(instance_path=None, reports_dir=None):
     if not instance_path:
-        instance_path = os.environ.get("COBBLEVERSE_INSTANCE_PATH", DEFAULT_INSTANCE_PATH)
+        instance_path = os.environ.get("COBBLEVERSE_INSTANCE_PATH")
+
+    if not instance_path:
+        print("=" * 70)
+        print("ERROR: Cobbleverse instance path was not provided.")
+        print("=" * 70)
+        print("The full canonical compatibility audit requires access to the installed")
+        print("Cobbleverse modpack instance to inspect mod JARs and datapacks.")
+        print("\nPlease specify the instance directory using either:")
+        print("  1. CLI argument:      python scripts/compat-audit/audit.py --instance \"<path>\"")
+        print("  2. Environment var:   set COBBLEVERSE_INSTANCE_PATH=\"<path>\"")
+        print("=" * 70)
+        sys.exit(1)
 
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     legacy_dir = os.path.join(repo_root, METADATA["legacy_dataset"], "data", "rctmod", "trainers")
@@ -151,23 +248,15 @@ def run_audit(instance_path=None, reports_dir=None):
         if not os.path.exists(p):
             raise FileNotFoundError(f"Authoritative reference file not found: {p}")
 
-    # Build Cobblemon items set
-    cobblemon_items = set()
-    with zipfile.ZipFile(c_jar_path, "r") as z:
-        for n in z.namelist():
-            if n.startswith("assets/cobblemon/models/item/") and n.endswith(".json"):
-                cobblemon_items.add(f"cobblemon:{os.path.basename(n)[:-5]}")
+    # Build authoritative item sets from mod bytecode and registration data
+    cobblemon_items = extract_cobblemon_registered_items(c_jar_path)
+    ms_items = extract_mega_showdown_registered_items(ms_jar_path)
 
-    # Build Mega Showdown items set
-    ms_items = set()
-    with zipfile.ZipFile(ms_jar_path, "r") as z:
-        for n in z.namelist():
-            if n.startswith("assets/mega_showdown/models/item/") and n.endswith(".json"):
-                ms_items.add(f"mega_showdown:{os.path.basename(n)[:-5]}")
-
+    # Vanilla items: Minecraft runtime registrations reside outside the modpack mods directory.
+    # The legacy dataset only uses two vanilla items: minecraft:gold_nugget and charcoal -> minecraft:charcoal.
     vanilla_items = {
-        "minecraft:charcoal", "minecraft:gold_nugget", "minecraft:iron_ingot",
-        "minecraft:apple", "minecraft:bone", "minecraft:feather", "minecraft:string"
+        "minecraft:charcoal",
+        "minecraft:gold_nugget"
     }
 
     all_registered_items = cobblemon_items | ms_items | vanilla_items
@@ -457,6 +546,7 @@ def run_audit(instance_path=None, reports_dir=None):
             "total_species_aspect_combinations": len(species_aspect_pairs),
             "valid_exact_combinations": 0,
             "invalid_canonical_match_combinations": 0,
+            "invalid_ambiguous_combinations": 0,
             "invalid_no_match_combinations": 0,
             "needs_runtime_test_combinations": 0
         },
@@ -488,6 +578,8 @@ def run_audit(instance_path=None, reports_dir=None):
             aspects_report["summary"]["valid_exact_combinations"] += 1
         elif status == "INVALID_UNIQUE_CANONICAL_MATCH":
             aspects_report["summary"]["invalid_canonical_match_combinations"] += 1
+        elif status == "INVALID_AMBIGUOUS":
+            aspects_report["summary"]["invalid_ambiguous_combinations"] += 1
         elif status == "NEEDS_RUNTIME_TEST":
             aspects_report["summary"]["needs_runtime_test_combinations"] += 1
         else:

@@ -35,7 +35,7 @@
     "basculegion::f": {
       "aspect": "f",
       "canonical_replacement": "female",
-      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'female'",
+      "evidence": "Gender form shorthand; maps to 'female'",
       "occurrences": 2,
       "species": "basculegion",
       "status": "INVALID_UNIQUE_CANONICAL_MATCH"
@@ -59,7 +59,7 @@
     "calyrex::ice": {
       "aspect": "ice",
       "canonical_replacement": "ice-rider",
-      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'ice-rider'",
+      "evidence": "Calyrex Ice Rider form uses aspect 'ice-rider' in Cobblemon",
       "occurrences": 2,
       "species": "calyrex",
       "status": "INVALID_UNIQUE_CANONICAL_MATCH"
@@ -307,7 +307,7 @@
     "indeedee::f": {
       "aspect": "f",
       "canonical_replacement": "female",
-      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'female'",
+      "evidence": "Gender form shorthand; maps to 'female'",
       "occurrences": 1,
       "species": "indeedee",
       "status": "INVALID_UNIQUE_CANONICAL_MATCH"
@@ -965,6 +965,7 @@
     "target_modpack": "COBBLEVERSE"
   },
   "summary": {
+    "invalid_ambiguous_combinations": 0,
     "invalid_canonical_match_combinations": 29,
     "invalid_no_match_combinations": 9,
     "needs_runtime_test_combinations": 4,

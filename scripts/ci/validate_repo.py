@@ -6,7 +6,7 @@ Validates:
 - Complete JSON parseability across all legacy trainer files.
 - Report JSON parseability, schema invariants, and classification logic.
 - Ensures no ambiguous or unresolvable items claim approved auto-fixes.
-- Future-proof hook for Phase C/D modernized pack when created.
+- Fail-closed validation of modernized pack/ if present (preventing false-green CI).
 """
 
 import os
@@ -154,8 +154,8 @@ def validate_reports(repo_root):
                 log_fail(f"aspects.json: combo '{key}' has unrecognized status '{st}'")
                 return False
             canon = info.get("canonical_replacement")
-            if st == "INVALID_NO_MATCH" and canon is not None:
-                log_fail(f"aspects.json: combo '{key}' marked INVALID_NO_MATCH must have canonical_replacement=None, got '{canon}'")
+            if st in ("INVALID_NO_MATCH", "INVALID_AMBIGUOUS") and canon is not None:
+                log_fail(f"aspects.json: combo '{key}' marked {st} must have canonical_replacement=None, got '{canon}'")
                 return False
         log_pass(f"aspects.json invariant check passed ({len(combos)} combinations verified)")
     except Exception as e:
@@ -195,15 +195,70 @@ def validate_reports(repo_root):
     return True
 
 def validate_future_pack(repo_root):
-    print("\n--- 4. Future Modernized Pack Hook (Phase C/D Preparation) ---")
+    print("\n--- 4. Modernized Pack Validation (Phase C/D Preparation) ---")
     pack_dir = os.path.join(repo_root, "pack")
     if not os.path.exists(pack_dir):
-        log_pass("Future modernized pack directory ('pack/') not present yet; skipping Phase C/D checks cleanly.")
+        log_pass("Modernized pack directory ('pack/') not present yet; skipping Phase C/D checks cleanly.")
         return True
 
-    # When Phase C/D creates pack/, additional checks execute here:
-    log_pass("Modernized pack directory present; executing future content validations...")
-    # placeholder for Phase C/D automated validations
+    log_pass("Modernized pack directory ('pack/') detected; executing fail-closed structure & syntax validation...")
+
+    # 1. pack.mcmeta validation
+    mcmeta_path = os.path.join(pack_dir, "pack.mcmeta")
+    if not os.path.exists(mcmeta_path):
+        log_fail(f"Modernized pack missing required pack.mcmeta at: {mcmeta_path}")
+        return False
+
+    try:
+        with open(mcmeta_path, "r", encoding="utf-8") as f:
+            meta = json.load(f)
+        pack_sec = meta.get("pack")
+        if not isinstance(pack_sec, dict) or "pack_format" not in pack_sec or "description" not in pack_sec:
+            log_fail("pack/pack.mcmeta must contain 'pack' object with 'pack_format' and 'description'")
+            return False
+        log_pass(f"pack/pack.mcmeta valid (pack_format: {pack_sec.get('pack_format')})")
+    except Exception as e:
+        log_fail(f"Failed to parse pack/pack.mcmeta as JSON: {e}")
+        return False
+
+    # 2. trainers directory validation
+    trainers_dir = os.path.join(pack_dir, "data", "rctmod", "trainers")
+    if not os.path.isdir(trainers_dir):
+        log_fail(f"Modernized pack missing trainers directory at: {trainers_dir}")
+        return False
+
+    # 3. trainer JSON syntax & structure validation
+    count = 0
+    errors = []
+    for root, dirs, files in os.walk(trainers_dir):
+        for f in files:
+            if f.endswith(".json"):
+                count += 1
+                fp = os.path.join(root, f)
+                try:
+                    with open(fp, "r", encoding="utf-8") as jf:
+                        d = json.load(jf)
+                    if not isinstance(d, dict):
+                        errors.append(f"{f}: root is not a JSON object")
+                    elif "team" not in d or not isinstance(d["team"], list):
+                        errors.append(f"{f}: missing or invalid 'team' array")
+                    elif len(d["team"]) == 0:
+                        errors.append(f"{f}: 'team' array must contain at least 1 Pokemon")
+                except Exception as e:
+                    errors.append(f"{f}: JSON parse error: {e}")
+
+    if count == 0:
+        log_fail("Modernized pack directory contains zero trainer JSON files")
+        return False
+
+    if errors:
+        for err in errors[:10]:
+            log_fail(f"pack trainer error: {err}")
+        if len(errors) > 10:
+            log_fail(f"... and {len(errors) - 10} more trainer errors")
+        return False
+
+    log_pass(f"All {count} modernized trainer JSON files parsed and verified successfully.")
     return True
 
 def main():

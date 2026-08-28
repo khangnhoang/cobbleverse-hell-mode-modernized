@@ -65,6 +65,7 @@ Authoritative audit validating directly against the live Cobbleverse mod JARs an
 python scripts/compat-audit/audit.py --instance "C:/path/to/Cobbleverse/Instance"
 
 # Run local integration tests (verifies report regeneration determinism)
+set COBBLEVERSE_INSTANCE_PATH="C:/path/to/Cobbleverse/Instance"
 python -m unittest scripts/compat-audit/test_local_integration.py -v
 ```
 
