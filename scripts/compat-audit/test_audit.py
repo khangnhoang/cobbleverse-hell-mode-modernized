@@ -344,5 +344,38 @@ class TestCanonicalAuditReports(unittest.TestCase):
             )
             self.assertIn("M  reports/compat-audit/test-report.json", staged_status.stdout)
 
+    def test_phase_c_reconciliation_report(self):
+        """Verify Phase C reconciliation report exists and adheres to expected schema and counts."""
+        rec_dir = os.path.join(self.repo_root, "reports", "trainer-reconciliation")
+        json_path = os.path.join(rec_dir, "reconciliation.json")
+        summary_path = os.path.join(rec_dir, "summary.md")
+
+        self.assertTrue(os.path.exists(json_path), "reconciliation.json missing")
+        self.assertTrue(os.path.exists(summary_path), "summary.md missing")
+
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        summary = data["summary"]
+        self.assertEqual(summary["source_legacy_trainer_count"], 1663)
+        self.assertEqual(summary["current_effective_baseline_count"], 1714)
+        self.assertEqual(summary["resulting_pack_trainer_count"], 1714)
+        self.assertEqual(summary["obsolete_ids_removed_count"], 3)
+        self.assertEqual(summary["current_ids_added_count"], 54)
+        self.assertEqual(summary["safely_pruned_overrides_count"], 0)
+        self.assertEqual(summary["conservatively_retained_overrides_count"], 1660)
+        self.assertEqual(summary["trainers_pending_phase_e_redesign_count"], 54)
+
+    def test_phase_c_pack_inventory(self):
+        """Verify modernized pack/ contains exactly 1,714 valid trainers and zero obsolete IDs."""
+        pack_trainers_dir = os.path.join(self.repo_root, "pack", "data", "rctmod", "trainers")
+        self.assertTrue(os.path.isdir(pack_trainers_dir), "pack trainers dir missing")
+
+        trainers = [f for f in os.listdir(pack_trainers_dir) if f.endswith(".json")]
+        self.assertEqual(len(trainers), 1714)
+
+        obsolete_ids = {"galaxy_bobbo.json", "galaxy_ominorosso.json", "swimmer_gengar.json"}
+        self.assertEqual(set(trainers) & obsolete_ids, set(), "Obsolete IDs must be absent from pack/")
+
 if __name__ == "__main__":
     unittest.main()

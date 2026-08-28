@@ -1,0 +1,92 @@
+{
+  "name": {
+    "literal": "Team Galactic Grunt"
+  },
+  "ai": {
+    "type": "rct",
+    "data": {
+      "moveBias": 1,
+      "switchBias": 0.5,
+      "statMoveBias": 1,
+      "itemBias": 0.8,
+      "maxSelectMargin": 0.15
+    }
+  },
+  "battleRules": {},
+  "team": [
+    {
+      "moveset": [
+        "tackle",
+        "stringshot",
+        "bugbite",
+        "irondefense"
+      ],
+      "ivs": {
+        "spe": 10,
+        "spd": 10,
+        "spa": 10,
+        "def": 10,
+        "atk": 10,
+        "hp": 10
+      },
+      "evs": {
+        "def": 50,
+        "hp": 50
+      },
+      "species": "cascoon",
+      "gender": "FEMALE",
+      "level": 22,
+      "nature": "hardy",
+      "ability": "shedskin"
+    },
+    {
+      "moveset": [
+        "tackle",
+        "stringshot",
+        "bugbite",
+        "irondefense"
+      ],
+      "ivs": {
+        "spe": 10,
+        "spd": 10,
+        "spa": 10,
+        "def": 10,
+        "atk": 10,
+        "hp": 10
+      },
+      "evs": {
+        "def": 50,
+        "hp": 50
+      },
+      "species": "silcoon",
+      "gender": "MALE",
+      "level": 22,
+      "nature": "hardy",
+      "ability": "shedskin"
+    },
+    {
+      "moveset": [
+        "tackle",
+        "stringshot"
+      ],
+      "ivs": {
+        "spe": 10,
+        "spd": 10,
+        "spa": 10,
+        "def": 10,
+        "atk": 10,
+        "hp": 10
+      },
+      "evs": {
+        "atk": 20,
+        "hp": 20
+      },
+      "species": "wurmple",
+      "gender": "FEMALE",
+      "level": 20,
+      "nature": "docile",
+      "ability": "shielddust"
+    }
+  ],
+  "battleFormat": "GEN_9_SINGLES"
+}
