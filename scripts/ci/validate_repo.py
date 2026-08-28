@@ -259,6 +259,31 @@ def validate_future_pack(repo_root):
         return False
 
     log_pass(f"All {count} modernized trainer JSON files parsed and verified successfully.")
+
+    # 4. Inventory checks (when reports/compat-audit/trainer-inventory.json is present)
+    inv_file = os.path.join(repo_root, "reports", "compat-audit", "trainer-inventory.json")
+    if os.path.exists(inv_file):
+        try:
+            with open(inv_file, "r", encoding="utf-8") as jf:
+                inv = json.load(jf)
+            obsolete_ids = set(inv.get("obsolete_trainers_in_hell", []))
+            pack_filenames = set(os.listdir(trainers_dir))
+            present_obsolete = obsolete_ids & pack_filenames
+            if present_obsolete:
+                log_fail(f"Obsolete trainer IDs must not exist in modernized pack: {sorted(present_obsolete)}")
+                return False
+            log_pass(f"Obsolete trainer IDs ({len(obsolete_ids)}) confirmed absent from modernized pack.")
+
+            expected_count = inv.get("summary", {}).get("total_effective_baseline_trainers")
+            if expected_count and count != expected_count:
+                log_fail(f"Modernized pack trainer count ({count}) does not match expected baseline ({expected_count})")
+                return False
+            if expected_count:
+                log_pass(f"Modernized pack trainer count ({count}) matches upstream baseline ({expected_count}).")
+        except Exception as e:
+            log_fail(f"Failed to check trainer-inventory.json against modernized pack: {e}")
+            return False
+
     return True
 
 def main():

@@ -1,0 +1,71 @@
+{
+  "name": {
+    "literal": "Team Galactic Grunt"
+  },
+  "ai": {
+    "type": "rct",
+    "data": {
+      "moveBias": 1,
+      "switchBias": 0.5,
+      "statMoveBias": 1,
+      "itemBias": 0.8,
+      "maxSelectMargin": 0.15
+    }
+  },
+  "battleRules": {},
+  "team": [
+    {
+      "moveset": [
+        "extrasensory",
+        "gyroball",
+        "confuseray",
+        "irondefense"
+      ],
+      "ivs": {
+        "spe": 25,
+        "spd": 25,
+        "spa": 25,
+        "def": 25,
+        "atk": 25,
+        "hp": 25
+      },
+      "evs": {
+        "spd": 100,
+        "def": 100,
+        "hp": 150
+      },
+      "species": "bronzor",
+      "gender": "GENDERLESS",
+      "level": 38,
+      "nature": "relaxed",
+      "ability": "levitate"
+    },
+    {
+      "moveset": [
+        "nightslash",
+        "sludgebomb",
+        "suckerpunch",
+        "screech"
+      ],
+      "ivs": {
+        "spe": 25,
+        "spd": 25,
+        "spa": 25,
+        "def": 25,
+        "atk": 25,
+        "hp": 25
+      },
+      "evs": {
+        "spe": 100,
+        "atk": 150,
+        "hp": 100
+      },
+      "species": "stunky",
+      "gender": "MALE",
+      "level": 40,
+      "nature": "adamant",
+      "ability": "aftermath"
+    }
+  ],
+  "battleFormat": "GEN_9_SINGLES"
+}

@@ -1,0 +1,45 @@
+{
+  "name": {
+    "literal": "Team Galactic Grunt"
+  },
+  "ai": {
+    "type": "rct",
+    "data": {
+      "moveBias": 1,
+      "switchBias": 0.5,
+      "statMoveBias": 1,
+      "itemBias": 0.8,
+      "maxSelectMargin": 0.15
+    }
+  },
+  "battleRules": {},
+  "team": [
+    {
+      "moveset": [
+        "mudslap",
+        "poisonsting",
+        "feintattack",
+        "venoshock"
+      ],
+      "ivs": {
+        "spe": 20,
+        "spd": 20,
+        "spa": 20,
+        "def": 20,
+        "atk": 20,
+        "hp": 20
+      },
+      "evs": {
+        "spe": 50,
+        "spa": 50,
+        "atk": 100
+      },
+      "species": "croagunk",
+      "gender": "MALE",
+      "level": 32,
+      "nature": "lonely",
+      "ability": "anticipation"
+    }
+  ],
+  "battleFormat": "GEN_9_SINGLES"
+}

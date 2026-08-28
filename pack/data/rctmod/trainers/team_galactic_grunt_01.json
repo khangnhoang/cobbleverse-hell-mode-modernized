@@ -1,0 +1,69 @@
+{
+  "name": {
+    "literal": "Team Galactic Grunt"
+  },
+  "ai": {
+    "type": "rct",
+    "data": {
+      "moveBias": 1,
+      "switchBias": 0.5,
+      "statMoveBias": 1,
+      "itemBias": 0.8,
+      "maxSelectMargin": 0.15
+    }
+  },
+  "battleRules": {},
+  "team": [
+    {
+      "moveset": [
+        "wingattack",
+        "bite",
+        "confuseray",
+        "supersonic"
+      ],
+      "ivs": {
+        "spe": 20,
+        "spd": 20,
+        "spa": 20,
+        "def": 20,
+        "atk": 20,
+        "hp": 20
+      },
+      "evs": {
+        "spe": 100,
+        "atk": 100
+      },
+      "species": "zubat",
+      "gender": "MALE",
+      "level": 24,
+      "nature": "jolly",
+      "ability": "innerfocus"
+    },
+    {
+      "moveset": [
+        "fakeout",
+        "furyswipes",
+        "hypnosis",
+        "feintattack"
+      ],
+      "ivs": {
+        "spe": 20,
+        "spd": 20,
+        "spa": 20,
+        "def": 20,
+        "atk": 20,
+        "hp": 20
+      },
+      "evs": {
+        "spe": 100,
+        "atk": 100
+      },
+      "species": "glameow",
+      "gender": "FEMALE",
+      "level": 26,
+      "nature": "adamant",
+      "ability": "limber"
+    }
+  ],
+  "battleFormat": "GEN_9_SINGLES"
+}

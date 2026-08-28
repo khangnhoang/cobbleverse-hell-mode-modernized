@@ -101,11 +101,13 @@ Automated validation tooling has been established in `scripts/compat-audit/` and
   5. **Gimmicks:** Only 2 invalid usages of `"mega": true` inside the `gimmicks` record (`team_rocket_admin_apollo` and `team_rocket_giovanni`).
   6. **Multi-Held Items:** 201 cases inventoried (200 clearly intending Mega/Z-Crystal priority; 1 requiring design review).
 
-### Phase C — Trainer Reconciliation & Override Pruning
-1. **Prune Obsolete Trainers:** Delete the 3 orphan IDs (`galaxy_bobbo`, `galaxy_ominorosso`, `swimmer_gengar`).
-2. **Port Missing Upstream Content:** Ingest the 54 missing Cobbleverse DP v20 trainers (Team Galactic bosses Cyrus, Mars, Jupiter, Saturn, Charon, and Hisuian NPCs). Design authentic, competitive Doubles teams for them rather than leaving them in default Singles.
-3. **Review Category B Overrides:** Inspect the ~273 trivial format-only overrides. If a trainer's roster is unchanged from upstream, consider retiring the override to reduce maintenance footprint.
-4. **Reconcile Category D Bosses:** Deliberately review the ~101 story and gym encounters against Cobbleverse DP v20 lore.
+### Phase C — Trainer Reconciliation & Modernized Pack Baseline
+1. **Create Modernized Pack Baseline:** Establish `pack/` with valid `pack.mcmeta` and `data/rctmod/trainers/` structure without altering the preserved legacy baseline.
+2. **Prune Obsolete Trainers:** Exclude the 3 orphan IDs (`galaxy_bobbo`, `galaxy_ominorosso`, `swimmer_gengar`) from `pack/`.
+3. **Port Missing Upstream Content:** Ingest the 54 missing Cobbleverse DP v20 trainers (Team Galactic bosses Cyrus, Mars, Jupiter, Saturn, Charon, and Hisuian NPCs) with authentic upstream definitions preserved, queueing competitive Doubles redesign for Phase E.
+4. **Evaluate Override Pruning:** Inspect the shared legacy overrides. Conservative pruning policy: retain overrides containing deliberate AI bias weights (`moveBias`, `switchBias`, `statMoveBias`, `itemBias`) or Doubles formatting to prevent gameplay degradation to vanilla RCT.
+5. **Reconcile Boss & Story Overrides:** Verified all 101 overlapping Cobbleverse DP v20 boss/story definitions retain necessary schema/identity fields.
+6. **Provenance & Reporting:** Generate machine-readable inventory reconciliation report and summary under `reports/trainer-reconciliation/`.
 
 ### Phase D — Content Normalization
 Automate deterministic data repairs:
