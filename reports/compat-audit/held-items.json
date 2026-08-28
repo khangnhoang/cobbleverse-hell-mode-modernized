@@ -2,14 +2,14 @@
   "items": {
     "ability_capsule": {
       "canonical_replacement": "cobblemon:ability_capsule",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:ability_capsule",
       "status": "VALID_EXACT"
     },
     "ability_shield": {
       "canonical_replacement": "cobblemon:ability_shield",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:ability_shield",
       "status": "VALID_EXACT"
@@ -23,70 +23,70 @@
     },
     "aguav_berry": {
       "canonical_replacement": "cobblemon:aguav_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:aguav_berry",
       "status": "VALID_EXACT"
     },
     "air_balloon": {
       "canonical_replacement": "cobblemon:air_balloon",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 16,
       "runtime_resolved_form": "cobblemon:air_balloon",
       "status": "VALID_EXACT"
     },
     "assault_vest": {
       "canonical_replacement": "cobblemon:assault_vest",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 83,
       "runtime_resolved_form": "cobblemon:assault_vest",
       "status": "VALID_EXACT"
     },
     "babiri_berry": {
       "canonical_replacement": "cobblemon:babiri_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 6,
       "runtime_resolved_form": "cobblemon:babiri_berry",
       "status": "VALID_EXACT"
     },
     "berry_juice": {
       "canonical_replacement": "cobblemon:berry_juice",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 13,
       "runtime_resolved_form": "cobblemon:berry_juice",
       "status": "VALID_EXACT"
     },
     "big_root": {
       "canonical_replacement": "cobblemon:big_root",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 11,
       "runtime_resolved_form": "cobblemon:big_root",
       "status": "VALID_EXACT"
     },
     "black_belt": {
       "canonical_replacement": "cobblemon:black_belt",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 56,
       "runtime_resolved_form": "cobblemon:black_belt",
       "status": "VALID_EXACT"
     },
     "black_glasses": {
       "canonical_replacement": "cobblemon:black_glasses",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 6,
       "runtime_resolved_form": "cobblemon:black_glasses",
       "status": "VALID_EXACT"
     },
     "black_sludge": {
       "canonical_replacement": "cobblemon:black_sludge",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 23,
       "runtime_resolved_form": "cobblemon:black_sludge",
       "status": "VALID_EXACT"
     },
     "blunder_policy": {
       "canonical_replacement": "cobblemon:blunder_policy",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:blunder_policy",
       "status": "VALID_EXACT"
@@ -100,14 +100,14 @@
     },
     "bright_powder": {
       "canonical_replacement": "cobblemon:bright_powder",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 5,
       "runtime_resolved_form": "cobblemon:bright_powder",
       "status": "VALID_EXACT"
     },
     "bug_gem": {
       "canonical_replacement": "cobblemon:bug_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:bug_gem",
       "status": "VALID_EXACT"
@@ -121,357 +121,357 @@
     },
     "charcoal_stick": {
       "canonical_replacement": "cobblemon:charcoal_stick",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 9,
       "runtime_resolved_form": "cobblemon:charcoal_stick",
       "status": "VALID_EXACT"
     },
     "charti_berry": {
       "canonical_replacement": "cobblemon:charti_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 7,
       "runtime_resolved_form": "cobblemon:charti_berry",
       "status": "VALID_EXACT"
     },
     "cheri_berry": {
       "canonical_replacement": "cobblemon:cheri_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:cheri_berry",
       "status": "VALID_EXACT"
     },
     "chesto_berry": {
       "canonical_replacement": "cobblemon:chesto_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 6,
       "runtime_resolved_form": "cobblemon:chesto_berry",
       "status": "VALID_EXACT"
     },
     "choice_band": {
       "canonical_replacement": "cobblemon:choice_band",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 42,
       "runtime_resolved_form": "cobblemon:choice_band",
       "status": "VALID_EXACT"
     },
     "choice_scarf": {
       "canonical_replacement": "cobblemon:choice_scarf",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 54,
       "runtime_resolved_form": "cobblemon:choice_scarf",
       "status": "VALID_EXACT"
     },
     "choice_specs": {
       "canonical_replacement": "cobblemon:choice_specs",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 26,
       "runtime_resolved_form": "cobblemon:choice_specs",
       "status": "VALID_EXACT"
     },
     "chople_berry": {
       "canonical_replacement": "cobblemon:chople_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 10,
       "runtime_resolved_form": "cobblemon:chople_berry",
       "status": "VALID_EXACT"
     },
     "coba_berry": {
       "canonical_replacement": "cobblemon:coba_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:coba_berry",
       "status": "VALID_EXACT"
     },
     "cobblemon:metal_coat": {
       "canonical_replacement": "cobblemon:metal_coat",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:metal_coat",
       "status": "VALID_EXACT"
     },
     "colbur_berry": {
       "canonical_replacement": "cobblemon:colbur_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 7,
       "runtime_resolved_form": "cobblemon:colbur_berry",
       "status": "VALID_EXACT"
     },
     "covert_cloak": {
       "canonical_replacement": "cobblemon:covert_cloak",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 5,
       "runtime_resolved_form": "cobblemon:covert_cloak",
       "status": "VALID_EXACT"
     },
     "custap_berry": {
       "canonical_replacement": "cobblemon:custap_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 5,
       "runtime_resolved_form": "cobblemon:custap_berry",
       "status": "VALID_EXACT"
     },
     "damp_rock": {
       "canonical_replacement": "cobblemon:damp_rock",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 15,
       "runtime_resolved_form": "cobblemon:damp_rock",
       "status": "VALID_EXACT"
     },
     "dark_gem": {
       "canonical_replacement": "cobblemon:dark_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:dark_gem",
       "status": "VALID_EXACT"
     },
     "dragon_gem": {
       "canonical_replacement": "cobblemon:dragon_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:dragon_gem",
       "status": "VALID_EXACT"
     },
     "eject_pack": {
       "canonical_replacement": "cobblemon:eject_pack",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:eject_pack",
       "status": "VALID_EXACT"
     },
     "electric_gem": {
       "canonical_replacement": "cobblemon:electric_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:electric_gem",
       "status": "VALID_EXACT"
     },
     "electric_seed": {
       "canonical_replacement": "cobblemon:electric_seed",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:electric_seed",
       "status": "VALID_EXACT"
     },
     "everstone": {
       "canonical_replacement": "cobblemon:everstone",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:everstone",
       "status": "VALID_EXACT"
     },
     "eviolite": {
       "canonical_replacement": "cobblemon:eviolite",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 32,
       "runtime_resolved_form": "cobblemon:eviolite",
       "status": "VALID_EXACT"
     },
     "expert_belt": {
       "canonical_replacement": "cobblemon:expert_belt",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 84,
       "runtime_resolved_form": "cobblemon:expert_belt",
       "status": "VALID_EXACT"
     },
     "fairy_feather": {
       "canonical_replacement": "cobblemon:fairy_feather",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:fairy_feather",
       "status": "VALID_EXACT"
     },
     "fairy_gem": {
       "canonical_replacement": "cobblemon:fairy_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:fairy_gem",
       "status": "VALID_EXACT"
     },
     "fighting_gem": {
       "canonical_replacement": "cobblemon:fighting_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:fighting_gem",
       "status": "VALID_EXACT"
     },
     "fire_gem": {
       "canonical_replacement": "cobblemon:fire_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:fire_gem",
       "status": "VALID_EXACT"
     },
     "flame_orb": {
       "canonical_replacement": "cobblemon:flame_orb",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 20,
       "runtime_resolved_form": "cobblemon:flame_orb",
       "status": "VALID_EXACT"
     },
     "flying_gem": {
       "canonical_replacement": "cobblemon:flying_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 8,
       "runtime_resolved_form": "cobblemon:flying_gem",
       "status": "VALID_EXACT"
     },
     "focus_sash": {
       "canonical_replacement": "cobblemon:focus_sash",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 172,
       "runtime_resolved_form": "cobblemon:focus_sash",
       "status": "VALID_EXACT"
     },
     "ghost_gem": {
       "canonical_replacement": "cobblemon:ghost_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:ghost_gem",
       "status": "VALID_EXACT"
     },
     "grass_gem": {
       "canonical_replacement": "cobblemon:grass_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:grass_gem",
       "status": "VALID_EXACT"
     },
     "grassy_seed": {
       "canonical_replacement": "cobblemon:grassy_seed",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:grassy_seed",
       "status": "VALID_EXACT"
     },
     "ground_gem": {
       "canonical_replacement": "cobblemon:ground_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:ground_gem",
       "status": "VALID_EXACT"
     },
     "haban_berry": {
       "canonical_replacement": "cobblemon:haban_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:haban_berry",
       "status": "VALID_EXACT"
     },
     "hard_stone": {
       "canonical_replacement": "cobblemon:hard_stone",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:hard_stone",
       "status": "VALID_EXACT"
     },
     "heat_rock": {
       "canonical_replacement": "cobblemon:heat_rock",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 10,
       "runtime_resolved_form": "cobblemon:heat_rock",
       "status": "VALID_EXACT"
     },
     "heavy_duty_boots": {
       "canonical_replacement": "cobblemon:heavy_duty_boots",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 13,
       "runtime_resolved_form": "cobblemon:heavy_duty_boots",
       "status": "VALID_EXACT"
     },
     "hyper_potion": {
       "canonical_replacement": "cobblemon:hyper_potion",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:hyper_potion",
       "status": "VALID_EXACT"
     },
     "iapapa_berry": {
       "canonical_replacement": "cobblemon:iapapa_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:iapapa_berry",
       "status": "VALID_EXACT"
     },
     "ice_gem": {
       "canonical_replacement": "cobblemon:ice_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:ice_gem",
       "status": "VALID_EXACT"
     },
     "icy_rock": {
       "canonical_replacement": "cobblemon:icy_rock",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:icy_rock",
       "status": "VALID_EXACT"
     },
     "iron_ball": {
       "canonical_replacement": "cobblemon:iron_ball",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 8,
       "runtime_resolved_form": "cobblemon:iron_ball",
       "status": "VALID_EXACT"
     },
     "kasib_berry": {
       "canonical_replacement": "cobblemon:kasib_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:kasib_berry",
       "status": "VALID_EXACT"
     },
     "kebia_berry": {
       "canonical_replacement": "cobblemon:kebia_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:kebia_berry",
       "status": "VALID_EXACT"
     },
     "kings_rock": {
       "canonical_replacement": "cobblemon:kings_rock",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:kings_rock",
       "status": "VALID_EXACT"
     },
     "leftovers": {
       "canonical_replacement": "cobblemon:leftovers",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 186,
       "runtime_resolved_form": "cobblemon:leftovers",
       "status": "VALID_EXACT"
     },
     "life_orb": {
       "canonical_replacement": "cobblemon:life_orb",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 230,
       "runtime_resolved_form": "cobblemon:life_orb",
       "status": "VALID_EXACT"
     },
     "light_ball": {
       "canonical_replacement": "cobblemon:light_ball",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:light_ball",
       "status": "VALID_EXACT"
     },
     "light_clay": {
       "canonical_replacement": "cobblemon:light_clay",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 26,
       "runtime_resolved_form": "cobblemon:light_clay",
       "status": "VALID_EXACT"
     },
     "loaded_dice": {
       "canonical_replacement": "cobblemon:loaded_dice",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:loaded_dice",
       "status": "VALID_EXACT"
     },
     "lum_berry": {
       "canonical_replacement": "cobblemon:lum_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 20,
       "runtime_resolved_form": "cobblemon:lum_berry",
       "status": "VALID_EXACT"
@@ -485,35 +485,35 @@
     },
     "magnet": {
       "canonical_replacement": "cobblemon:magnet",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 11,
       "runtime_resolved_form": "cobblemon:magnet",
       "status": "VALID_EXACT"
     },
     "medicinal_leek": {
       "canonical_replacement": "cobblemon:medicinal_leek",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:medicinal_leek",
       "status": "VALID_EXACT"
     },
     "mega_showdown:abomasite": {
       "canonical_replacement": "mega_showdown:abomasite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 4,
       "runtime_resolved_form": "mega_showdown:abomasite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:absolite": {
       "canonical_replacement": "mega_showdown:absolite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 6,
       "runtime_resolved_form": "mega_showdown:absolite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:adamant_orb": {
       "canonical_replacement": "mega_showdown:adamant_orb",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 3,
       "runtime_resolved_form": "mega_showdown:adamant_orb",
       "status": "VALID_EXACT"
@@ -527,21 +527,21 @@
     },
     "mega_showdown:aerodactylite": {
       "canonical_replacement": "mega_showdown:aerodactylite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:aerodactylite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:aggronite": {
       "canonical_replacement": "mega_showdown:aggronite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 8,
       "runtime_resolved_form": "mega_showdown:aggronite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:alakazite": {
       "canonical_replacement": "mega_showdown:alakazite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 5,
       "runtime_resolved_form": "mega_showdown:alakazite",
       "status": "VALID_EXACT"
@@ -555,56 +555,56 @@
     },
     "mega_showdown:altarianite": {
       "canonical_replacement": "mega_showdown:altarianite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 3,
       "runtime_resolved_form": "mega_showdown:altarianite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:ampharosite": {
       "canonical_replacement": "mega_showdown:ampharosite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 4,
       "runtime_resolved_form": "mega_showdown:ampharosite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:audinite": {
       "canonical_replacement": "mega_showdown:audinite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 3,
       "runtime_resolved_form": "mega_showdown:audinite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:banettite": {
       "canonical_replacement": "mega_showdown:banettite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 3,
       "runtime_resolved_form": "mega_showdown:banettite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:beedrillite": {
       "canonical_replacement": "mega_showdown:beedrillite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 4,
       "runtime_resolved_form": "mega_showdown:beedrillite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:blastoisinite": {
       "canonical_replacement": "mega_showdown:blastoisinite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 3,
       "runtime_resolved_form": "mega_showdown:blastoisinite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:blazikenite": {
       "canonical_replacement": "mega_showdown:blazikenite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 5,
       "runtime_resolved_form": "mega_showdown:blazikenite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:blue_orb": {
       "canonical_replacement": "mega_showdown:blue_orb",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:blue_orb",
       "status": "VALID_EXACT"
@@ -618,7 +618,7 @@
     },
     "mega_showdown:booster_energy": {
       "canonical_replacement": "mega_showdown:booster_energy",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 9,
       "runtime_resolved_form": "mega_showdown:booster_energy",
       "status": "VALID_EXACT"
@@ -632,35 +632,35 @@
     },
     "mega_showdown:cameruptite": {
       "canonical_replacement": "mega_showdown:cameruptite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 3,
       "runtime_resolved_form": "mega_showdown:cameruptite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:charizardite_x": {
       "canonical_replacement": "mega_showdown:charizardite_x",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 5,
       "runtime_resolved_form": "mega_showdown:charizardite_x",
       "status": "VALID_EXACT"
     },
     "mega_showdown:charizardite_y": {
       "canonical_replacement": "mega_showdown:charizardite_y",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 4,
       "runtime_resolved_form": "mega_showdown:charizardite_y",
       "status": "VALID_EXACT"
     },
     "mega_showdown:chill_drive": {
       "canonical_replacement": "mega_showdown:chill_drive",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:chill_drive",
       "status": "VALID_EXACT"
     },
     "mega_showdown:cornerstone_mask": {
       "canonical_replacement": "mega_showdown:cornerstone_mask",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:cornerstone_mask",
       "status": "VALID_EXACT"
@@ -681,14 +681,14 @@
     },
     "mega_showdown:diancite": {
       "canonical_replacement": "mega_showdown:diancite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:diancite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:douse_drive": {
       "canonical_replacement": "mega_showdown:douse_drive",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:douse_drive",
       "status": "VALID_EXACT"
@@ -737,28 +737,28 @@
     },
     "mega_showdown:galladite": {
       "canonical_replacement": "mega_showdown:galladite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 4,
       "runtime_resolved_form": "mega_showdown:galladite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:garchompite": {
       "canonical_replacement": "mega_showdown:garchompite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 8,
       "runtime_resolved_form": "mega_showdown:garchompite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:gardevoirite": {
       "canonical_replacement": "mega_showdown:gardevoirite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 8,
       "runtime_resolved_form": "mega_showdown:gardevoirite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:gengarite": {
       "canonical_replacement": "mega_showdown:gengarite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 9,
       "runtime_resolved_form": "mega_showdown:gengarite",
       "status": "VALID_EXACT"
@@ -772,14 +772,14 @@
     },
     "mega_showdown:glalitite": {
       "canonical_replacement": "mega_showdown:glalitite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 5,
       "runtime_resolved_form": "mega_showdown:glalitite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:griseous_orb": {
       "canonical_replacement": "mega_showdown:griseous_orb",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:griseous_orb",
       "status": "VALID_EXACT"
@@ -793,21 +793,21 @@
     },
     "mega_showdown:gyaradosite": {
       "canonical_replacement": "mega_showdown:gyaradosite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 8,
       "runtime_resolved_form": "mega_showdown:gyaradosite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:heracronite": {
       "canonical_replacement": "mega_showdown:heracronite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 3,
       "runtime_resolved_form": "mega_showdown:heracronite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:houndoominite": {
       "canonical_replacement": "mega_showdown:houndoominite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 5,
       "runtime_resolved_form": "mega_showdown:houndoominite",
       "status": "VALID_EXACT"
@@ -821,7 +821,7 @@
     },
     "mega_showdown:kangaskhanite": {
       "canonical_replacement": "mega_showdown:kangaskhanite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 4,
       "runtime_resolved_form": "mega_showdown:kangaskhanite",
       "status": "VALID_EXACT"
@@ -835,70 +835,70 @@
     },
     "mega_showdown:latiasite": {
       "canonical_replacement": "mega_showdown:latiasite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:latiasite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:latiosite": {
       "canonical_replacement": "mega_showdown:latiosite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:latiosite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:lopunnite": {
       "canonical_replacement": "mega_showdown:lopunnite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 7,
       "runtime_resolved_form": "mega_showdown:lopunnite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:lucarionite": {
       "canonical_replacement": "mega_showdown:lucarionite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 4,
       "runtime_resolved_form": "mega_showdown:lucarionite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:lustrous_globe": {
       "canonical_replacement": "mega_showdown:lustrous_globe",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:lustrous_globe",
       "status": "VALID_EXACT"
     },
     "mega_showdown:lustrous_orb": {
       "canonical_replacement": "mega_showdown:lustrous_orb",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:lustrous_orb",
       "status": "VALID_EXACT"
     },
     "mega_showdown:manectite": {
       "canonical_replacement": "mega_showdown:manectite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 8,
       "runtime_resolved_form": "mega_showdown:manectite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:mawilite": {
       "canonical_replacement": "mega_showdown:mawilite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 5,
       "runtime_resolved_form": "mega_showdown:mawilite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:medichamite": {
       "canonical_replacement": "mega_showdown:medichamite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 3,
       "runtime_resolved_form": "mega_showdown:medichamite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:metagrossite": {
       "canonical_replacement": "mega_showdown:metagrossite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 9,
       "runtime_resolved_form": "mega_showdown:metagrossite",
       "status": "VALID_EXACT"
@@ -912,14 +912,14 @@
     },
     "mega_showdown:mewtwonite_x": {
       "canonical_replacement": "mega_showdown:mewtwonite_x",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:mewtwonite_x",
       "status": "VALID_EXACT"
     },
     "mega_showdown:mewtwonite_y": {
       "canonical_replacement": "mega_showdown:mewtwonite_y",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 2,
       "runtime_resolved_form": "mega_showdown:mewtwonite_y",
       "status": "VALID_EXACT"
@@ -940,14 +940,14 @@
     },
     "mega_showdown:pidgeotite": {
       "canonical_replacement": "mega_showdown:pidgeotite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 3,
       "runtime_resolved_form": "mega_showdown:pidgeotite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:pinsirite": {
       "canonical_replacement": "mega_showdown:pinsirite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 5,
       "runtime_resolved_form": "mega_showdown:pinsirite",
       "status": "VALID_EXACT"
@@ -982,49 +982,49 @@
     },
     "mega_showdown:rusted_sword": {
       "canonical_replacement": "mega_showdown:rusted_sword",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 2,
       "runtime_resolved_form": "mega_showdown:rusted_sword",
       "status": "VALID_EXACT"
     },
     "mega_showdown:sablenite": {
       "canonical_replacement": "mega_showdown:sablenite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 2,
       "runtime_resolved_form": "mega_showdown:sablenite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:salamencite": {
       "canonical_replacement": "mega_showdown:salamencite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 9,
       "runtime_resolved_form": "mega_showdown:salamencite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:sceptilite": {
       "canonical_replacement": "mega_showdown:sceptilite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 6,
       "runtime_resolved_form": "mega_showdown:sceptilite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:scizorite": {
       "canonical_replacement": "mega_showdown:scizorite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 6,
       "runtime_resolved_form": "mega_showdown:scizorite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:sharpedonite": {
       "canonical_replacement": "mega_showdown:sharpedonite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 4,
       "runtime_resolved_form": "mega_showdown:sharpedonite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:slowbronite": {
       "canonical_replacement": "mega_showdown:slowbronite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 2,
       "runtime_resolved_form": "mega_showdown:slowbronite",
       "status": "VALID_EXACT"
@@ -1038,7 +1038,7 @@
     },
     "mega_showdown:soul_dew": {
       "canonical_replacement": "mega_showdown:soul_dew",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:soul_dew",
       "status": "VALID_EXACT"
@@ -1052,7 +1052,7 @@
     },
     "mega_showdown:steelixite": {
       "canonical_replacement": "mega_showdown:steelixite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 1,
       "runtime_resolved_form": "mega_showdown:steelixite",
       "status": "VALID_EXACT"
@@ -1066,14 +1066,14 @@
     },
     "mega_showdown:swampertite": {
       "canonical_replacement": "mega_showdown:swampertite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 5,
       "runtime_resolved_form": "mega_showdown:swampertite",
       "status": "VALID_EXACT"
     },
     "mega_showdown:tyranitarite": {
       "canonical_replacement": "mega_showdown:tyranitarite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 7,
       "runtime_resolved_form": "mega_showdown:tyranitarite",
       "status": "VALID_EXACT"
@@ -1087,7 +1087,7 @@
     },
     "mega_showdown:venusaurite": {
       "canonical_replacement": "mega_showdown:venusaurite",
-      "evidence": "Registered in mega_showdown",
+      "evidence": "Registered in Mega Showdown item bytecode registry",
       "occurrences": 6,
       "runtime_resolved_form": "mega_showdown:venusaurite",
       "status": "VALID_EXACT"
@@ -1108,392 +1108,392 @@
     },
     "mental_herb": {
       "canonical_replacement": "cobblemon:mental_herb",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 11,
       "runtime_resolved_form": "cobblemon:mental_herb",
       "status": "VALID_EXACT"
     },
     "metal_coat": {
       "canonical_replacement": "cobblemon:metal_coat",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:metal_coat",
       "status": "VALID_EXACT"
     },
     "minecraft:gold_nugget": {
       "canonical_replacement": "minecraft:gold_nugget",
-      "evidence": "Registered in minecraft",
+      "evidence": "Standard Minecraft 1.21.1 vanilla item",
       "occurrences": 3,
       "runtime_resolved_form": "minecraft:gold_nugget",
       "status": "VALID_EXACT"
     },
     "miracle_seed": {
       "canonical_replacement": "cobblemon:miracle_seed",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 10,
       "runtime_resolved_form": "cobblemon:miracle_seed",
       "status": "VALID_EXACT"
     },
     "mirror_herb": {
       "canonical_replacement": "cobblemon:mirror_herb",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:mirror_herb",
       "status": "VALID_EXACT"
     },
     "muscle_band": {
       "canonical_replacement": "cobblemon:muscle_band",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 6,
       "runtime_resolved_form": "cobblemon:muscle_band",
       "status": "VALID_EXACT"
     },
     "mystic_water": {
       "canonical_replacement": "cobblemon:mystic_water",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 26,
       "runtime_resolved_form": "cobblemon:mystic_water",
       "status": "VALID_EXACT"
     },
     "never_melt_ice": {
       "canonical_replacement": "cobblemon:never_melt_ice",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:never_melt_ice",
       "status": "VALID_EXACT"
     },
     "normal_gem": {
       "canonical_replacement": "cobblemon:normal_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 10,
       "runtime_resolved_form": "cobblemon:normal_gem",
       "status": "VALID_EXACT"
     },
     "occa_berry": {
       "canonical_replacement": "cobblemon:occa_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 5,
       "runtime_resolved_form": "cobblemon:occa_berry",
       "status": "VALID_EXACT"
     },
     "oran_berry": {
       "canonical_replacement": "cobblemon:oran_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 12,
       "runtime_resolved_form": "cobblemon:oran_berry",
       "status": "VALID_EXACT"
     },
     "passho_berry": {
       "canonical_replacement": "cobblemon:passho_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:passho_berry",
       "status": "VALID_EXACT"
     },
     "persim_berry": {
       "canonical_replacement": "cobblemon:persim_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:persim_berry",
       "status": "VALID_EXACT"
     },
     "poison_barb": {
       "canonical_replacement": "cobblemon:poison_barb",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:poison_barb",
       "status": "VALID_EXACT"
     },
     "poison_gem": {
       "canonical_replacement": "cobblemon:poison_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:poison_gem",
       "status": "VALID_EXACT"
     },
     "power_herb": {
       "canonical_replacement": "cobblemon:power_herb",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 20,
       "runtime_resolved_form": "cobblemon:power_herb",
       "status": "VALID_EXACT"
     },
     "prism_scale": {
       "canonical_replacement": "cobblemon:prism_scale",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:prism_scale",
       "status": "VALID_EXACT"
     },
     "psychic_gem": {
       "canonical_replacement": "cobblemon:psychic_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:psychic_gem",
       "status": "VALID_EXACT"
     },
     "psychic_seed": {
       "canonical_replacement": "cobblemon:psychic_seed",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:psychic_seed",
       "status": "VALID_EXACT"
     },
     "quick_claw": {
       "canonical_replacement": "cobblemon:quick_claw",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 21,
       "runtime_resolved_form": "cobblemon:quick_claw",
       "status": "VALID_EXACT"
     },
     "rawst_berry": {
       "canonical_replacement": "cobblemon:rawst_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:rawst_berry",
       "status": "VALID_EXACT"
     },
     "razor_claw": {
       "canonical_replacement": "cobblemon:razor_claw",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:razor_claw",
       "status": "VALID_EXACT"
     },
     "reaper_cloth": {
       "canonical_replacement": "cobblemon:reaper_cloth",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:reaper_cloth",
       "status": "VALID_EXACT"
     },
     "red_card": {
       "canonical_replacement": "cobblemon:red_card",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:red_card",
       "status": "VALID_EXACT"
     },
     "rindo_berry": {
       "canonical_replacement": "cobblemon:rindo_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 14,
       "runtime_resolved_form": "cobblemon:rindo_berry",
       "status": "VALID_EXACT"
     },
     "rock_gem": {
       "canonical_replacement": "cobblemon:rock_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:rock_gem",
       "status": "VALID_EXACT"
     },
     "rocky_helmet": {
       "canonical_replacement": "cobblemon:rocky_helmet",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 21,
       "runtime_resolved_form": "cobblemon:rocky_helmet",
       "status": "VALID_EXACT"
     },
     "safety_goggles": {
       "canonical_replacement": "cobblemon:safety_goggles",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 5,
       "runtime_resolved_form": "cobblemon:safety_goggles",
       "status": "VALID_EXACT"
     },
     "salac_berry": {
       "canonical_replacement": "cobblemon:salac_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:salac_berry",
       "status": "VALID_EXACT"
     },
     "scope_lens": {
       "canonical_replacement": "cobblemon:scope_lens",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 15,
       "runtime_resolved_form": "cobblemon:scope_lens",
       "status": "VALID_EXACT"
     },
     "sharp_beak": {
       "canonical_replacement": "cobblemon:sharp_beak",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 7,
       "runtime_resolved_form": "cobblemon:sharp_beak",
       "status": "VALID_EXACT"
     },
     "shell_bell": {
       "canonical_replacement": "cobblemon:shell_bell",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 11,
       "runtime_resolved_form": "cobblemon:shell_bell",
       "status": "VALID_EXACT"
     },
     "shuca_berry": {
       "canonical_replacement": "cobblemon:shuca_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 8,
       "runtime_resolved_form": "cobblemon:shuca_berry",
       "status": "VALID_EXACT"
     },
     "silk_scarf": {
       "canonical_replacement": "cobblemon:silk_scarf",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 7,
       "runtime_resolved_form": "cobblemon:silk_scarf",
       "status": "VALID_EXACT"
     },
     "silver_powder": {
       "canonical_replacement": "cobblemon:silver_powder",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:silver_powder",
       "status": "VALID_EXACT"
     },
     "sitrus_berry": {
       "canonical_replacement": "cobblemon:sitrus_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 100,
       "runtime_resolved_form": "cobblemon:sitrus_berry",
       "status": "VALID_EXACT"
     },
     "smooth_rock": {
       "canonical_replacement": "cobblemon:smooth_rock",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:smooth_rock",
       "status": "VALID_EXACT"
     },
     "soft_sand": {
       "canonical_replacement": "cobblemon:soft_sand",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 6,
       "runtime_resolved_form": "cobblemon:soft_sand",
       "status": "VALID_EXACT"
     },
     "spell_tag": {
       "canonical_replacement": "cobblemon:spell_tag",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 6,
       "runtime_resolved_form": "cobblemon:spell_tag",
       "status": "VALID_EXACT"
     },
     "steel_gem": {
       "canonical_replacement": "cobblemon:steel_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:steel_gem",
       "status": "VALID_EXACT"
     },
     "tanga_berry": {
       "canonical_replacement": "cobblemon:tanga_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:tanga_berry",
       "status": "VALID_EXACT"
     },
     "terrain_extender": {
       "canonical_replacement": "cobblemon:terrain_extender",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 9,
       "runtime_resolved_form": "cobblemon:terrain_extender",
       "status": "VALID_EXACT"
     },
     "throat_spray": {
       "canonical_replacement": "cobblemon:throat_spray",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 11,
       "runtime_resolved_form": "cobblemon:throat_spray",
       "status": "VALID_EXACT"
     },
     "toxic_orb": {
       "canonical_replacement": "cobblemon:toxic_orb",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 11,
       "runtime_resolved_form": "cobblemon:toxic_orb",
       "status": "VALID_EXACT"
     },
     "twisted_spoon": {
       "canonical_replacement": "cobblemon:twisted_spoon",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:twisted_spoon",
       "status": "VALID_EXACT"
     },
     "utility_umbrella": {
       "canonical_replacement": "cobblemon:utility_umbrella",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 1,
       "runtime_resolved_form": "cobblemon:utility_umbrella",
       "status": "VALID_EXACT"
     },
     "wacan_berry": {
       "canonical_replacement": "cobblemon:wacan_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 4,
       "runtime_resolved_form": "cobblemon:wacan_berry",
       "status": "VALID_EXACT"
     },
     "water_gem": {
       "canonical_replacement": "cobblemon:water_gem",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 8,
       "runtime_resolved_form": "cobblemon:water_gem",
       "status": "VALID_EXACT"
     },
     "weakness_policy": {
       "canonical_replacement": "cobblemon:weakness_policy",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 23,
       "runtime_resolved_form": "cobblemon:weakness_policy",
       "status": "VALID_EXACT"
     },
     "white_herb": {
       "canonical_replacement": "cobblemon:white_herb",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 23,
       "runtime_resolved_form": "cobblemon:white_herb",
       "status": "VALID_EXACT"
     },
     "wide_lens": {
       "canonical_replacement": "cobblemon:wide_lens",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 8,
       "runtime_resolved_form": "cobblemon:wide_lens",
       "status": "VALID_EXACT"
     },
     "wiki_berry": {
       "canonical_replacement": "cobblemon:wiki_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 3,
       "runtime_resolved_form": "cobblemon:wiki_berry",
       "status": "VALID_EXACT"
     },
     "wise_glasses": {
       "canonical_replacement": "cobblemon:wise_glasses",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 9,
       "runtime_resolved_form": "cobblemon:wise_glasses",
       "status": "VALID_EXACT"
     },
     "x_attack": {
       "canonical_replacement": "cobblemon:x_attack",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 2,
       "runtime_resolved_form": "cobblemon:x_attack",
       "status": "VALID_EXACT"
     },
     "yache_berry": {
       "canonical_replacement": "cobblemon:yache_berry",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 14,
       "runtime_resolved_form": "cobblemon:yache_berry",
       "status": "VALID_EXACT"
     },
     "zoom_lens": {
       "canonical_replacement": "cobblemon:zoom_lens",
-      "evidence": "Registered in cobblemon",
+      "evidence": "High-confidence static match in Cobblemon item resources (lang + model)",
       "occurrences": 6,
       "runtime_resolved_form": "cobblemon:zoom_lens",
       "status": "VALID_EXACT"

@@ -1,0 +1,35 @@
+name: CI Validation
+
+on:
+  push:
+    branches:
+      - main
+      - 'feat/**'
+      - 'fix/**'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Repository & Data Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 1. Legacy Baseline Immutability Check
+        run: python scripts/ci/check_legacy_baseline.py
+
+      - name: 2. Repository & Data Validation
+        run: python scripts/ci/validate_repo.py
+
+      - name: 3. CI-Safe Regression Tests
+        run: python -m unittest scripts/compat-audit/test_audit.py -v
