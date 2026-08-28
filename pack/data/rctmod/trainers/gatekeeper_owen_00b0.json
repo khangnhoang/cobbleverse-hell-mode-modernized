@@ -46,7 +46,7 @@
         "life_orb"
       ],
       "aspects": [
-        "pirouette"
+        "pirouette-forme"
       ]
     },
     {
@@ -75,7 +75,7 @@
         "spe": 252
       },
       "heldItem": [
-        "mega_showdown:mewnium-z",
+        "mega_showdown:mewnium_z",
         "psychic_gem"
       ]
     },
@@ -137,7 +137,7 @@
         "life_orb"
       ],
       "aspects": [
-        "origin"
+        "origin-forme"
       ]
     },
     {
@@ -169,7 +169,7 @@
         "assault_vest"
       ],
       "aspects": [
-        "therian"
+        "therian-forme"
       ]
     },
     {

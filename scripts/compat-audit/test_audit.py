@@ -12,6 +12,7 @@ REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
 # Add scripts directories to path for direct testing of pure functions
 sys.path.append(SCRIPT_DIR)
 sys.path.append(os.path.join(REPO_ROOT, "scripts", "ci"))
+sys.path.append(os.path.join(REPO_ROOT, "scripts", "normalize-pack"))
 
 from audit import (
     clean_identifier,
@@ -20,6 +21,7 @@ from audit import (
     classify_species_aspect,
 )
 from validate_repo import validate_future_pack
+from normalize import normalize_pack
 
 class TestCanonicalAuditReports(unittest.TestCase):
     """
@@ -376,6 +378,164 @@ class TestCanonicalAuditReports(unittest.TestCase):
 
         obsolete_ids = {"galaxy_bobbo.json", "galaxy_ominorosso.json", "swimmer_gengar.json"}
         self.assertEqual(set(trainers) & obsolete_ids, set(), "Obsolete IDs must be absent from pack/")
+
+    def test_phase_d_normalization_report(self):
+        """Verify Phase D normalization report exists and reflects exact expected modification metrics."""
+        norm_dir = os.path.join(self.repo_root, "reports", "content-normalization")
+        json_path = os.path.join(norm_dir, "normalization.json")
+        summary_path = os.path.join(norm_dir, "summary.md")
+
+        self.assertTrue(os.path.exists(json_path), "normalization.json missing")
+        self.assertTrue(os.path.exists(summary_path), "summary.md missing")
+
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        s = data["summary"]
+        self.assertEqual(s["total_pack_trainers"], 1714)
+        self.assertEqual(s["trainer_files_modified"], 99)
+        self.assertEqual(s["held_item_replacements_count"], 53)
+        self.assertEqual(s["move_replacements_count"], 22)
+        self.assertEqual(s["ability_replacements_count"], 2)
+        self.assertEqual(s["aspect_replacements_count"], 43)
+        self.assertEqual(s["invalid_gimmick_keys_removed_count"], 2)
+        self.assertEqual(s["multi_held_arrays_preserved_count"], 201)
+        self.assertEqual(s["unresolved_moves_preserved"], ["shadowblitz"])
+
+    def test_phase_d_pack_semantic_invariants(self):
+        """Spot-check normalized trainer JSONs to verify semantic integrity."""
+        trainers_dir = os.path.join(self.repo_root, "pack", "data", "rctmod", "trainers")
+
+        # 1. Apollo Sharpedo: gimmick mega removed
+        with open(os.path.join(trainers_dir, "team_rocket_admin_apollo.json"), "r", encoding="utf-8") as f:
+            apollo = json.load(f)
+        sharpedo = [p for p in apollo["team"] if p.get("species") == "sharpedo"][0]
+        self.assertNotIn("mega", sharpedo.get("gimmicks", {}))
+
+        # 2. Giovanni Tyranitar: gimmick mega removed, dynamax & gmax preserved
+        with open(os.path.join(trainers_dir, "team_rocket_giovanni.json"), "r", encoding="utf-8") as f:
+            giovanni = json.load(f)
+        tyranitar = [p for p in giovanni["team"] if p.get("species") == "tyranitar"][0]
+        self.assertNotIn("mega", tyranitar.get("gimmicks", {}))
+        self.assertTrue(tyranitar.get("gimmicks", {}).get("dynamax"))
+        self.assertTrue(tyranitar.get("gimmicks", {}).get("gmax"))
+
+        # 3. Calyrex ice-rider aspect
+        with open(os.path.join(trainers_dir, "leader_pryce_004f.json"), "r", encoding="utf-8") as f:
+            pryce = json.load(f)
+        calyrex = [p for p in pryce["team"] if p.get("species") == "calyrex"][0]
+        self.assertIn("ice-rider", calyrex.get("aspects", []))
+        self.assertNotIn("ice", calyrex.get("aspects", []))
+
+        # 4. Wurmple shielddust ability
+        with open(os.path.join(trainers_dir, "youngster_dallas_03f4.json"), "r", encoding="utf-8") as f:
+            dallas = json.load(f)
+        wurmple = [p for p in dallas["team"] if p.get("species") == "wurmple"][0]
+        self.assertEqual(wurmple.get("ability"), "shielddust")
+
+        # 5. Hatterene magicbounce ability
+        with open(os.path.join(trainers_dir, "hoenn_tell.json"), "r", encoding="utf-8") as f:
+            tell = json.load(f)
+        hatterene = [p for p in tell["team"] if p.get("species") == "hatterene"][0]
+        self.assertEqual(hatterene.get("ability"), "magicbounce")
+
+        # 6. Multi-held array type preservation on Giovanni Tyranitar
+        self.assertIsInstance(tyranitar.get("heldItem"), list)
+        self.assertEqual(len(tyranitar.get("heldItem")), 2)
+
+    def test_phase_d_normalization_idempotent(self):
+        """Verify that running normalize_pack on the already-normalized pack produces 0 modifications."""
+        stats = normalize_pack(self.repo_root)
+        self.assertEqual(stats["summary"]["trainer_files_modified"], 0)
+        self.assertEqual(stats["summary"]["held_item_replacements_count"], 0)
+        self.assertEqual(stats["summary"]["move_replacements_count"], 0)
+        self.assertEqual(stats["summary"]["ability_replacements_count"], 0)
+        self.assertEqual(stats["summary"]["aspect_replacements_count"], 0)
+        self.assertEqual(stats["summary"]["invalid_gimmick_keys_removed_count"], 0)
+
+    def test_phase_d_validator_catches_reintroduced_invalid(self):
+        """Verify that CI validator detects reintroduction of deterministic invalid items/moves/gimmicks."""
+        with tempfile.TemporaryDirectory() as td:
+            pack_path = os.path.join(td, "pack")
+            trainers_dir = os.path.join(pack_path, "data", "rctmod", "trainers")
+            os.makedirs(trainers_dir)
+
+            mcmeta = {"pack": {"pack_format": 48, "description": "Test Pack"}}
+            with open(os.path.join(pack_path, "pack.mcmeta"), "w") as f:
+                json.dump(mcmeta, f)
+
+            # Copy compat reports to temp repo so validator loads forbidden sets
+            shutil.copytree(self.reports_dir, os.path.join(td, "reports", "compat-audit"))
+
+            # 1. Clean valid trainer -> passes
+            good_trainer = {
+                "team": [
+                    {
+                        "species": "pikachu",
+                        "level": 50,
+                        "moveset": ["thunderbolt"],
+                        "heldItem": "cobblemon:light_ball"
+                    }
+                ]
+            }
+            tf = os.path.join(trainers_dir, "test.json")
+            with open(tf, "w") as f:
+                json.dump(good_trainer, f)
+            # (Ignore inventory count check since trainer-inventory.json expects 1714)
+            # Overwrite trainer-inventory.json with total_effective_baseline_trainers: 1 for clean test
+            inv_file = os.path.join(td, "reports", "compat-audit", "trainer-inventory.json")
+            with open(inv_file, "r") as f:
+                inv = json.load(f)
+            inv["summary"]["total_effective_baseline_trainers"] = 1
+            with open(inv_file, "w") as f:
+                json.dump(inv, f)
+
+            self.assertTrue(validate_future_pack(td))
+
+            # 2. Reintroduce unnormalized heldItem 'mega_showdown:waterium-z' -> fails
+            bad_item_trainer = {
+                "team": [
+                    {
+                        "species": "pikachu",
+                        "level": 50,
+                        "moveset": ["thunderbolt"],
+                        "heldItem": "mega_showdown:waterium-z"
+                    }
+                ]
+            }
+            with open(tf, "w") as f:
+                json.dump(bad_item_trainer, f)
+            self.assertFalse(validate_future_pack(td))
+
+            # 3. Reintroduce unnormalized move 'belly' -> fails
+            bad_move_trainer = {
+                "team": [
+                    {
+                        "species": "pikachu",
+                        "level": 50,
+                        "moveset": ["belly"],
+                        "heldItem": "cobblemon:light_ball"
+                    }
+                ]
+            }
+            with open(tf, "w") as f:
+                json.dump(bad_move_trainer, f)
+            self.assertFalse(validate_future_pack(td))
+
+            # 4. Reintroduce invalid gimmick 'mega': true -> fails
+            bad_gimmick_trainer = {
+                "team": [
+                    {
+                        "species": "pikachu",
+                        "level": 50,
+                        "moveset": ["thunderbolt"],
+                        "gimmicks": {"mega": True}
+                    }
+                ]
+            }
+            with open(tf, "w") as f:
+                json.dump(bad_gimmick_trainer, f)
+            self.assertFalse(validate_future_pack(td))
 
 if __name__ == "__main__":
     unittest.main()

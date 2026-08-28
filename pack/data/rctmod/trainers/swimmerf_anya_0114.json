@@ -1,6 +1,6 @@
 {
   "name": {
-    "literal": "Swimmer♀ Anya"
+    "literal": "Swimmer\u2640 Anya"
   },
   "ai": {
     "type": "rct",
@@ -122,7 +122,7 @@
         "spe": 10
       },
       "aspects": [
-        "blue_striped"
+        "bluestriped"
       ]
     }
   ]

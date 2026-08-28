@@ -227,7 +227,35 @@ def validate_future_pack(repo_root):
         log_fail(f"Modernized pack missing trainers directory at: {trainers_dir}")
         return False
 
-    # 3. trainer JSON syntax & structure validation
+    # 3. Phase D semantic rules from accepted compatibility reports
+    compat_reports_dir = os.path.join(repo_root, "reports", "compat-audit")
+    forbidden_items = set()
+    forbidden_moves = set()
+    forbidden_abilities = set()
+    forbidden_aspects = set()
+
+    if os.path.isdir(compat_reports_dir):
+        hi_path = os.path.join(compat_reports_dir, "held-items.json")
+        if os.path.exists(hi_path):
+            with open(hi_path, "r", encoding="utf-8") as f:
+                forbidden_items = {k for k, v in json.load(f).get("items", {}).items() if v.get("status") == "INVALID_UNIQUE_CANONICAL_MATCH"}
+
+        mv_path = os.path.join(compat_reports_dir, "moves.json")
+        if os.path.exists(mv_path):
+            with open(mv_path, "r", encoding="utf-8") as f:
+                forbidden_moves = {k for k, v in json.load(f).get("moves", {}).items() if v.get("status") == "INVALID_UNIQUE_CANONICAL_MATCH"}
+
+        ab_path = os.path.join(compat_reports_dir, "abilities.json")
+        if os.path.exists(ab_path):
+            with open(ab_path, "r", encoding="utf-8") as f:
+                forbidden_abilities = {k for k, v in json.load(f).get("abilities", {}).items() if v.get("status") == "INVALID_UNIQUE_CANONICAL_MATCH"}
+
+        asp_path = os.path.join(compat_reports_dir, "aspects.json")
+        if os.path.exists(asp_path):
+            with open(asp_path, "r", encoding="utf-8") as f:
+                forbidden_aspects = {k.lower() for k, v in json.load(f).get("aspect_combinations", {}).items() if v.get("status") == "INVALID_UNIQUE_CANONICAL_MATCH"}
+
+    # 4. trainer JSON syntax, structure & semantic validation
     count = 0
     errors = []
     for root, dirs, files in os.walk(trainers_dir):
@@ -244,6 +272,30 @@ def validate_future_pack(repo_root):
                         errors.append(f"{f}: missing or invalid 'team' array")
                     elif len(d["team"]) == 0:
                         errors.append(f"{f}: 'team' array must contain at least 1 Pokemon")
+                    else:
+                        for p in d.get("team", []):
+                            sp = p.get("species", "").lower()
+                            hi = p.get("heldItem")
+                            if isinstance(hi, list):
+                                for it in hi:
+                                    if it in forbidden_items:
+                                        errors.append(f"{f}: contains unnormalized heldItem '{it}'")
+                            elif isinstance(hi, str) and hi in forbidden_items:
+                                errors.append(f"{f}: contains unnormalized heldItem '{hi}'")
+
+                            for m in p.get("moveset", []):
+                                if m in forbidden_moves:
+                                    errors.append(f"{f}: contains unnormalized move '{m}'")
+
+                            if p.get("ability") in forbidden_abilities:
+                                errors.append(f"{f}: contains unnormalized ability '{p.get('ability')}'")
+
+                            for a in p.get("aspects", []):
+                                if f"{sp}::{a.lower()}" in forbidden_aspects:
+                                    errors.append(f"{f}: contains unnormalized aspect '{a}' on species '{sp}'")
+
+                            if isinstance(p.get("gimmicks"), dict) and "mega" in p["gimmicks"]:
+                                errors.append(f"{f}: contains invalid 'mega' key in 'gimmicks' record")
                 except Exception as e:
                     errors.append(f"{f}: JSON parse error: {e}")
 
@@ -259,6 +311,8 @@ def validate_future_pack(repo_root):
         return False
 
     log_pass(f"All {count} modernized trainer JSON files parsed and verified successfully.")
+    if forbidden_items or forbidden_moves or forbidden_abilities or forbidden_aspects:
+        log_pass("Phase D semantic validation: zero forbidden deterministic compatibility invalids found in modernized pack.")
 
     # 4. Inventory checks (when reports/compat-audit/trainer-inventory.json is present)
     inv_file = os.path.join(repo_root, "reports", "compat-audit", "trainer-inventory.json")

@@ -114,8 +114,8 @@ Automate deterministic data repairs:
 - Replace hyphenated Z-Crystal IDs with underscore variants (`mega_showdown:darkinium-z` -> `mega_showdown:darkinium_z`).
 - Fix missing underscores in Primal/Drive/Memory items (`blueorb` -> `blue_orb`, `redorb` -> `red_orb`, `steelmemory` -> `steel_memory`, `dousedrive` -> `douse_drive`).
 - Fix namespace errors (`megas_showdown:wellspring_mask` -> `mega_showdown:wellspring_mask`, `charcoal` -> `minecraft:charcoal`, `booster_energy` -> `mega_showdown:booster_energy`).
-- Flatten multi-held items into a single primary held item per Pokémon.
-- Remove invalid top-level or gimmick `"mega": true` flags, relying strictly on Mega Stones or `aspects: ["mega"]`.
+- Canonicalize identifiers inside multi-held item arrays while strictly preserving array structure and element order (destructive flattening is explicitly deferred to runtime/design verification).
+- Remove confirmed invalid `"mega": true` keys from the `gimmicks` record (relying on Mega Stones or `aspects: ["mega"]` without altering valid `dynamax`/`gmax`/`tera` gimmicks).
 
 ### Phase E — Doubles Team Modernization
 Ensure all retained and newly created teams adhere to competitive Doubles design standards:
