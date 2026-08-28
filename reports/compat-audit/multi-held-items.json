@@ -1,0 +1,3236 @@
+{
+  "metadata": {
+    "cobblemon_version": "1.7.3",
+    "legacy_dataset": "!Doctors HELL MODE DOUBLE BATTLE EVERYTHING",
+    "mega_showdown_version": "1.8.4",
+    "minecraft_version": "1.21.1",
+    "modloader": "Fabric",
+    "modpack_version": "1.7.42-CF",
+    "rct_api_version": "0.15.2-beta",
+    "rct_mod_version": "0.18.1-beta",
+    "target_modpack": "COBBLEVERSE"
+  },
+  "records": [
+    {
+      "configured_items": [
+        "mega_showdown:audinite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:audinite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:audinite",
+        "cobblemon:leftovers"
+      ],
+      "species": "audino",
+      "trainer_file": "ace_trainer_alexa_0194.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:blazikenite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:blazikenite",
+        "cobblemon:life_orb"
+      ],
+      "species": "blaziken",
+      "trainer_file": "ace_trainer_andrew_0002.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:kommonium-z",
+        "dragon_gem"
+      ],
+      "gimmick_item": "mega_showdown:kommonium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:kommonium_z",
+        "cobblemon:dragon_gem"
+      ],
+      "species": "kommoo",
+      "trainer_file": "ace_trainer_barry_0058.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:lopunnite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:lopunnite",
+        "cobblemon:life_orb"
+      ],
+      "species": "lopunny",
+      "trainer_file": "ace_trainer_caroline_0193.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:sharpedonite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:sharpedonite",
+        "cobblemon:life_orb"
+      ],
+      "species": "sharpedo",
+      "trainer_file": "ace_trainer_colby_018a.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:pinsirite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:pinsirite",
+        "cobblemon:life_orb"
+      ],
+      "species": "pinsir",
+      "trainer_file": "ace_trainer_george_0189.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:waterium-z",
+        "water_gem"
+      ],
+      "gimmick_item": "mega_showdown:waterium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:waterium_z",
+        "cobblemon:water_gem"
+      ],
+      "species": "barraskewda",
+      "trainer_file": "ace_trainer_janny_00af.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:absolite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:absolite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:absolite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "absol",
+      "trainer_file": "ace_trainer_naomi_0196.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:garchompite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:garchompite",
+        "cobblemon:life_orb"
+      ],
+      "species": "garchomp",
+      "trainer_file": "ace_trainer_nick_0055.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:flyinium-z",
+        "flying_gem"
+      ],
+      "gimmick_item": "mega_showdown:flyinium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:flyinium_z",
+        "cobblemon:flying_gem"
+      ],
+      "species": "zapdos",
+      "trainer_file": "ace_trainer_nick_0055.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:ampharosite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:ampharosite",
+        "cobblemon:life_orb"
+      ],
+      "species": "ampharos",
+      "trainer_file": "ace_trainer_rolando_018c.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:salamencite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:salamencite",
+        "cobblemon:life_orb"
+      ],
+      "species": "salamence",
+      "trainer_file": "ace_trainer_runan_007c.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:ghostium-z",
+        "ghost_gem"
+      ],
+      "gimmick_item": "mega_showdown:ghostium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:ghostium_z",
+        "cobblemon:ghost_gem"
+      ],
+      "species": "aegislash",
+      "trainer_file": "ace_trainer_runan_007c.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:garchompite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:garchompite",
+        "cobblemon:life_orb"
+      ],
+      "species": "garchomp",
+      "trainer_file": "ace_trainer_samantha_0052.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:groundium-z",
+        "ground_gem"
+      ],
+      "gimmick_item": "mega_showdown:groundium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:groundium_z",
+        "cobblemon:ground_gem"
+      ],
+      "species": "dugtrio",
+      "trainer_file": "ace_trainer_sharon_00ae.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:absolite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:absolite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:absolite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "absol",
+      "trainer_file": "ace_trainer_sharon_00ae.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:pinsirite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:pinsirite",
+        "cobblemon:life_orb"
+      ],
+      "species": "pinsir",
+      "trainer_file": "ace_trainer_wilton_0133.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:sablenite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:sablenite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:sablenite",
+        "cobblemon:leftovers"
+      ],
+      "species": "sableye",
+      "trainer_file": "aroma_lady_nikki_020b.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:groundium-z",
+        "ground_gem"
+      ],
+      "gimmick_item": "mega_showdown:groundium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:groundium_z",
+        "cobblemon:ground_gem"
+      ],
+      "species": "archeops",
+      "trainer_file": "battleground_alice_05f4.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:pidgeotite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:pidgeotite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:pidgeotite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "pidgeot",
+      "trainer_file": "battleground_alice_05f4.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:firium-z",
+        "fire_gem"
+      ],
+      "gimmick_item": "mega_showdown:firium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:firium_z",
+        "cobblemon:fire_gem"
+      ],
+      "species": "volcarona",
+      "trainer_file": "battleground_benjamin_05f9.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:scizorite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:scizorite",
+        "cobblemon:life_orb"
+      ],
+      "species": "scizor",
+      "trainer_file": "battleground_benjamin_05f9.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:aggronite",
+        "iron_ball"
+      ],
+      "gimmick_item": "mega_showdown:aggronite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:aggronite",
+        "cobblemon:iron_ball"
+      ],
+      "species": "aggron",
+      "trainer_file": "battleground_big_mo_05f7.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:darkinium-z",
+        "dark_gem"
+      ],
+      "gimmick_item": "mega_showdown:darkinium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:darkinium_z",
+        "cobblemon:dark_gem"
+      ],
+      "species": "guzzlord",
+      "trainer_file": "battleground_big_mo_05f7.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:lopunnite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:lopunnite",
+        "cobblemon:life_orb"
+      ],
+      "species": "lopunny",
+      "trainer_file": "battleground_mel_05f5.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:normalium-z",
+        "normal_gem"
+      ],
+      "gimmick_item": "mega_showdown:normalium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:normalium_z",
+        "cobblemon:normal_gem"
+      ],
+      "species": "porygonz",
+      "trainer_file": "battleground_mel_05f5.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:venusaurite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:venusaurite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:venusaurite",
+        "cobblemon:leftovers"
+      ],
+      "species": "venusaur",
+      "trainer_file": "battleground_mirskle_05f2.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:waterium-z",
+        "water_gem"
+      ],
+      "gimmick_item": "mega_showdown:waterium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:waterium_z",
+        "cobblemon:water_gem"
+      ],
+      "species": "kingdra",
+      "trainer_file": "battleground_tessy_05f8.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:swampertite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:swampertite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:swampertite",
+        "cobblemon:leftovers"
+      ],
+      "species": "swampert",
+      "trainer_file": "battleground_tessy_05f8.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:waterium-z",
+        "water_gem"
+      ],
+      "gimmick_item": "mega_showdown:waterium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:waterium_z",
+        "cobblemon:water_gem"
+      ],
+      "species": "greninja",
+      "trainer_file": "battleground_vega_05f3.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:absolite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:absolite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:absolite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "absol",
+      "trainer_file": "battleground_vega_05f3.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:groundium-z",
+        "ground_gem"
+      ],
+      "gimmick_item": "mega_showdown:groundium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:groundium_z",
+        "cobblemon:ground_gem"
+      ],
+      "species": "flygon",
+      "trainer_file": "biker_goon_0210.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:sharpedonite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:sharpedonite",
+        "cobblemon:life_orb"
+      ],
+      "species": "sharpedo",
+      "trainer_file": "biker_goon_0211.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:beedrillite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:beedrillite",
+        "cobblemon:life_orb"
+      ],
+      "species": "beedrill",
+      "trainer_file": "biker_hideo_00c9.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:cameruptite",
+        "assault_vest"
+      ],
+      "gimmick_item": "mega_showdown:cameruptite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:cameruptite",
+        "cobblemon:assault_vest"
+      ],
+      "species": "camerupt",
+      "trainer_file": "biker_jared_00c3.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:lopunnite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:lopunnite",
+        "cobblemon:life_orb"
+      ],
+      "species": "lopunny",
+      "trainer_file": "biker_ruben_00ca.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:charizardite_x",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:charizardite_x",
+        "cobblemon:life_orb"
+      ],
+      "species": "charizard",
+      "trainer_file": "bird_keeper_sebastian_012c.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:medichamite",
+        "choice_scarf"
+      ],
+      "gimmick_item": "mega_showdown:medichamite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:medichamite",
+        "cobblemon:choice_scarf"
+      ],
+      "species": "medicham",
+      "trainer_file": "black_belt_hugh_022a.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:heracronite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:heracronite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:heracronite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "heracross",
+      "trainer_file": "black_ferrothorn_barbs_05e8.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:mewtwonite_y",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:mewtwonite_y",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:mewtwonite_y",
+        "cobblemon:expert_belt"
+      ],
+      "species": "mewtwo",
+      "trainer_file": "boss_giovanni_0045.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:kangaskhanite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:kangaskhanite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:kangaskhanite",
+        "cobblemon:leftovers"
+      ],
+      "species": "kangaskhan",
+      "trainer_file": "boss_giovanni_015c.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:kangaskhanite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:kangaskhanite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:kangaskhanite",
+        "cobblemon:leftovers"
+      ],
+      "species": "kangaskhan",
+      "trainer_file": "boss_giovanni_015d.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:normalium-z",
+        "normal_gem"
+      ],
+      "gimmick_item": "mega_showdown:normalium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:normalium_z",
+        "cobblemon:normal_gem"
+      ],
+      "species": "porygonz",
+      "trainer_file": "boss_thug_0017.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:medichamite",
+        "choice_scarf"
+      ],
+      "gimmick_item": "mega_showdown:medichamite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:medichamite",
+        "cobblemon:choice_scarf"
+      ],
+      "species": "medicham",
+      "trainer_file": "boss_thug_0017.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:houndoominite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:houndoominite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:houndoominite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "houndoom",
+      "trainer_file": "boss_zeph_1_05bb.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gengarite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:gengarite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:gengarite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "gengar",
+      "trainer_file": "boss_zeph_2_05bf.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gardevoirite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:gardevoirite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:gardevoirite",
+        "cobblemon:leftovers"
+      ],
+      "species": "gardevoir",
+      "trainer_file": "breeder_annie_05a9.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gardevoirite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:gardevoirite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:gardevoirite",
+        "cobblemon:leftovers"
+      ],
+      "species": "gardevoir",
+      "trainer_file": "breeder_annie_05d8.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gardevoirite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:gardevoirite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:gardevoirite",
+        "cobblemon:leftovers"
+      ],
+      "species": "gardevoir",
+      "trainer_file": "breeder_annie_0604.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:blazikenite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:blazikenite",
+        "cobblemon:life_orb"
+      ],
+      "species": "blaziken",
+      "trainer_file": "burglar_switzer_05e0.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:salamencite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:salamencite",
+        "cobblemon:life_orb"
+      ],
+      "species": "salamence",
+      "trainer_file": "champion_jax_05b7.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:salamencite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:salamencite",
+        "cobblemon:life_orb"
+      ],
+      "species": "salamence",
+      "trainer_file": "champion_lance_0027.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:metagrossite",
+        "assault_vest"
+      ],
+      "gimmick_item": "mega_showdown:metagrossite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:metagrossite",
+        "cobblemon:assault_vest"
+      ],
+      "species": "metagross",
+      "trainer_file": "champion_terry_01b6.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:metagrossite",
+        "assault_vest"
+      ],
+      "gimmick_item": "mega_showdown:metagrossite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:metagrossite",
+        "cobblemon:assault_vest"
+      ],
+      "species": "metagross",
+      "trainer_file": "champion_terry_01b7.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:metagrossite",
+        "assault_vest"
+      ],
+      "gimmick_item": "mega_showdown:metagrossite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:metagrossite",
+        "cobblemon:assault_vest"
+      ],
+      "species": "metagross",
+      "trainer_file": "champion_terry_01b8.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:absolite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:absolite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:absolite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "absol",
+      "trainer_file": "channeler_rachel_0093.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:galladite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:galladite",
+        "cobblemon:life_orb"
+      ],
+      "species": "gallade",
+      "trainer_file": "crush_girl_sharon_0206.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:metagrossite",
+        "assault_vest"
+      ],
+      "gimmick_item": "mega_showdown:metagrossite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:metagrossite",
+        "cobblemon:assault_vest"
+      ],
+      "species": "metagross",
+      "trainer_file": "crush_kin_mik_and_kia_022d.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:scizorite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:scizorite",
+        "cobblemon:life_orb"
+      ],
+      "species": "scizor",
+      "trainer_file": "cue_ball_camron_00fb.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:swampertite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:swampertite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:swampertite",
+        "cobblemon:leftovers"
+      ],
+      "species": "swampert",
+      "trainer_file": "dumbass_gian_0023.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:solganium-z",
+        "steel_gem"
+      ],
+      "gimmick_item": "mega_showdown:solganium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:solganium_z",
+        "cobblemon:steel_gem"
+      ],
+      "species": "necrozma",
+      "trainer_file": "dumbass_gian_0023.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:lustrous_orb",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:lustrous_orb",
+        "cobblemon:life_orb"
+      ],
+      "species": "palkia",
+      "trainer_file": "dumbass_gian_0023.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:garchompite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:garchompite",
+        "cobblemon:life_orb"
+      ],
+      "species": "garchomp",
+      "trainer_file": "dumbass_jojo_fan_0028.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:fightinium-z",
+        "fighting_gem"
+      ],
+      "gimmick_item": "mega_showdown:fightinium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:fightinium_z",
+        "cobblemon:fighting_gem"
+      ],
+      "species": "hoopa",
+      "trainer_file": "dumbass_jojo_fan_0028.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:swampertite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:swampertite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:swampertite",
+        "cobblemon:leftovers"
+      ],
+      "species": "swampert",
+      "trainer_file": "dumbass_kid_0019.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gengarite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:gengarite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:gengarite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "gengar",
+      "trainer_file": "elite_four_agatha_0053.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gengarite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:gengarite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:gengarite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "gengar",
+      "trainer_file": "elite_four_agatha_0054.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:mawilite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:mawilite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:mawilite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "mawile",
+      "trainer_file": "elite_four_arabella_05b5.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:lucarionite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:lucarionite",
+        "cobblemon:life_orb"
+      ],
+      "species": "lucario",
+      "trainer_file": "elite_four_bruno_0050.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:lucarionite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:lucarionite",
+        "cobblemon:life_orb"
+      ],
+      "species": "lucario",
+      "trainer_file": "elite_four_bruno_0051.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:banettite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:banettite",
+        "cobblemon:life_orb"
+      ],
+      "species": "banette",
+      "trainer_file": "elite_four_elias_05b4.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:adamant_orb",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:adamant_orb",
+        "cobblemon:life_orb"
+      ],
+      "species": "dialga",
+      "trainer_file": "elite_four_lance_0056.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:salamencite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:salamencite",
+        "cobblemon:life_orb"
+      ],
+      "species": "salamence",
+      "trainer_file": "elite_four_lance_0056.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:adamant_orb",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:adamant_orb",
+        "cobblemon:life_orb"
+      ],
+      "species": "dialga",
+      "trainer_file": "elite_four_lance_0057.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:salamencite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:salamencite",
+        "cobblemon:life_orb"
+      ],
+      "species": "salamence",
+      "trainer_file": "elite_four_lance_0057.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:abomasite",
+        "assault_vest"
+      ],
+      "gimmick_item": "mega_showdown:abomasite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:abomasite",
+        "cobblemon:assault_vest"
+      ],
+      "species": "abomasnow",
+      "trainer_file": "elite_four_lorelei_004d.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:swampertite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:swampertite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:swampertite",
+        "cobblemon:leftovers"
+      ],
+      "species": "swampert",
+      "trainer_file": "elite_four_lorelei_004e.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:sceptilite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:sceptilite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:sceptilite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "sceptile",
+      "trainer_file": "elite_four_penny_05b6.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:mimikium-z",
+        "fairy_gem"
+      ],
+      "gimmick_item": "mega_showdown:mimikium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:mimikium_z",
+        "cobblemon:fairy_gem"
+      ],
+      "species": "mimikyu",
+      "trainer_file": "expert_kenlawa_mimikyu_3_05e7.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:mimikium-z",
+        "fairy_gem"
+      ],
+      "gimmick_item": "mega_showdown:mimikium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:mimikium_z",
+        "cobblemon:fairy_gem"
+      ],
+      "species": "mimikyu",
+      "trainer_file": "expert_ryuzoji_mimikyu_3_05e4.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:slowbronite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:slowbronite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:slowbronite",
+        "cobblemon:leftovers"
+      ],
+      "species": "slowbro",
+      "trainer_file": "fisherman_tommy_0227.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:lopunnite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:lopunnite",
+        "cobblemon:life_orb"
+      ],
+      "species": "lopunny",
+      "trainer_file": "friendly_thug_0015.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:aggronite",
+        "iron_ball"
+      ],
+      "gimmick_item": "mega_showdown:aggronite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:aggronite",
+        "cobblemon:iron_ball"
+      ],
+      "species": "aggron",
+      "trainer_file": "friendly_thug_0016.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:altarianite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:altarianite",
+        "cobblemon:life_orb"
+      ],
+      "species": "altaria",
+      "trainer_file": "gatekeeper_logan_0253.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:mewnium-z",
+        "psychic_gem"
+      ],
+      "gimmick_item": "mega_showdown:mewnium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:mewnium_z",
+        "cobblemon:psychic_gem"
+      ],
+      "species": "mew",
+      "trainer_file": "gatekeeper_owen_00b0.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:griseous_orb",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:griseous_orb",
+        "cobblemon:life_orb"
+      ],
+      "species": "giratina",
+      "trainer_file": "gatekeeper_owen_00b0.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:pinsirite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:pinsirite",
+        "cobblemon:life_orb"
+      ],
+      "species": "pinsir",
+      "trainer_file": "leader_alice_05ac.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:scizorite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:scizorite",
+        "cobblemon:life_orb"
+      ],
+      "species": "scizor",
+      "trainer_file": "leader_benjamin_05b2.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:charizardite_y",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:charizardite_y",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:charizardite_y",
+        "cobblemon:expert_belt"
+      ],
+      "species": "charizard",
+      "trainer_file": "leader_blaine_01a3.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:aerodactylite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:aerodactylite",
+        "cobblemon:life_orb"
+      ],
+      "species": "aerodactyl",
+      "trainer_file": "leader_brock_0038.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:scizorite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:scizorite",
+        "cobblemon:life_orb"
+      ],
+      "species": "scizor",
+      "trainer_file": "leader_bugsy_0008.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:dousedrive",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:dousedrive",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:douse_drive",
+        "cobblemon:expert_belt"
+      ],
+      "species": "genesect",
+      "trainer_file": "leader_bugsy_004b.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:buginium-z",
+        "bug_gem"
+      ],
+      "gimmick_item": "mega_showdown:buginium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:buginium_z",
+        "cobblemon:bug_gem"
+      ],
+      "species": "arceus",
+      "trainer_file": "leader_bugsy_004b.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:pinsirite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:pinsirite",
+        "cobblemon:life_orb"
+      ],
+      "species": "pinsir",
+      "trainer_file": "leader_bugsy_004b.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:galladite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:galladite",
+        "cobblemon:life_orb"
+      ],
+      "species": "gallade",
+      "trainer_file": "leader_chuck_013d.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:adamant_orb",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:adamant_orb",
+        "cobblemon:life_orb"
+      ],
+      "species": "dialga",
+      "trainer_file": "leader_clair_0026.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:venusaurite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:venusaurite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:venusaurite",
+        "cobblemon:leftovers"
+      ],
+      "species": "venusaur",
+      "trainer_file": "leader_erika_0041.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:venusaurite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:venusaurite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:venusaurite",
+        "cobblemon:leftovers"
+      ],
+      "species": "venusaur",
+      "trainer_file": "leader_erika_01a1.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:pidgeotite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:pidgeotite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:pidgeotite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "pidgeot",
+      "trainer_file": "leader_falkner_002b.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:flyinium-z",
+        "flying_gem"
+      ],
+      "gimmick_item": "mega_showdown:flyinium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:flyinium_z",
+        "cobblemon:flying_gem"
+      ],
+      "species": "gyarados",
+      "trainer_file": "leader_falkner_002b.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:ampharosite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:ampharosite",
+        "cobblemon:life_orb"
+      ],
+      "species": "ampharos",
+      "trainer_file": "leader_galavan_05af.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:steelium-z",
+        "steel_gem"
+      ],
+      "gimmick_item": "mega_showdown:steelium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:steelium_z",
+        "cobblemon:steel_gem"
+      ],
+      "species": "magearna",
+      "trainer_file": "leader_jasmine_001d.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:latiosite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:latiosite",
+        "cobblemon:life_orb"
+      ],
+      "species": "latios",
+      "trainer_file": "leader_jasmine_001d.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:aggronite",
+        "iron_ball"
+      ],
+      "gimmick_item": "mega_showdown:aggronite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:aggronite",
+        "cobblemon:iron_ball"
+      ],
+      "species": "aggron",
+      "trainer_file": "leader_jasmine_003e.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:aggronite",
+        "iron_ball"
+      ],
+      "gimmick_item": "mega_showdown:aggronite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:aggronite",
+        "cobblemon:iron_ball"
+      ],
+      "species": "aggron",
+      "trainer_file": "leader_jasmine_003f.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:aggronite",
+        "iron_ball"
+      ],
+      "gimmick_item": "mega_showdown:aggronite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:aggronite",
+        "cobblemon:iron_ball"
+      ],
+      "species": "aggron",
+      "trainer_file": "leader_jasmine_0040.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:manectite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:manectite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:manectite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "manectric",
+      "trainer_file": "leader_lt_surge_0033.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:manectite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:manectite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:manectite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "manectric",
+      "trainer_file": "leader_lt_surge_01a0.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:lopunnite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:lopunnite",
+        "cobblemon:life_orb"
+      ],
+      "species": "lopunny",
+      "trainer_file": "leader_mel_05ad.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:waterium-z",
+        "water_gem"
+      ],
+      "gimmick_item": "mega_showdown:waterium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:waterium_z",
+        "cobblemon:water_gem"
+      ],
+      "species": "kingdra",
+      "trainer_file": "leader_misty_0020.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gyaradosite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:gyaradosite",
+        "cobblemon:life_orb"
+      ],
+      "species": "gyarados",
+      "trainer_file": "leader_misty_0030.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:ghostium-z",
+        "ghost_gem"
+      ],
+      "gimmick_item": "mega_showdown:ghostium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:ghostium_z",
+        "cobblemon:ghost_gem"
+      ],
+      "species": "mimikyu",
+      "trainer_file": "leader_morty_001c.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gengarite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:gengarite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:gengarite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "gengar",
+      "trainer_file": "leader_morty_001c.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gengarite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:gengarite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:gengarite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "gengar",
+      "trainer_file": "leader_morty_0034.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:glalitite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:glalitite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:glalitite",
+        "cobblemon:leftovers"
+      ],
+      "species": "glalie",
+      "trainer_file": "leader_pryce_003a.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:glalitite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:glalitite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:glalitite",
+        "cobblemon:leftovers"
+      ],
+      "species": "glalie",
+      "trainer_file": "leader_pryce_003b.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:glalitite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:glalitite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:glalitite",
+        "cobblemon:leftovers"
+      ],
+      "species": "glalie",
+      "trainer_file": "leader_pryce_003c.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:icium-z",
+        "ice_gem"
+      ],
+      "gimmick_item": "mega_showdown:icium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:icium_z",
+        "cobblemon:ice_gem"
+      ],
+      "species": "kyurem",
+      "trainer_file": "leader_pryce_004f.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:heracronite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:heracronite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:heracronite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "heracross",
+      "trainer_file": "leader_pryce_004f.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gardevoirite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:gardevoirite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:gardevoirite",
+        "cobblemon:leftovers"
+      ],
+      "species": "gardevoir",
+      "trainer_file": "leader_sabrina_01a4.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gyaradosite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:gyaradosite",
+        "cobblemon:life_orb"
+      ],
+      "species": "gyarados",
+      "trainer_file": "leader_tessy_05b1.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:alakazite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:alakazite",
+        "cobblemon:life_orb"
+      ],
+      "species": "alakazam",
+      "trainer_file": "light_of_ruin_admin_ivory_3_05c3.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gardevoirite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:gardevoirite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:gardevoirite",
+        "cobblemon:leftovers"
+      ],
+      "species": "gardevoir",
+      "trainer_file": "light_of_ruin_aklove_1_05c2.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gardevoirite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:gardevoirite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:gardevoirite",
+        "cobblemon:leftovers"
+      ],
+      "species": "gardevoir",
+      "trainer_file": "light_of_ruin_aklove_2_05c4.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:adrenalineorb",
+        "salac_berry"
+      ],
+      "gimmick_item": "mega_showdown:adrenalineorb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:adrenaline_orb",
+        "cobblemon:salac_berry"
+      ],
+      "species": "meloetta",
+      "trainer_file": "light_of_ruin_aklove_3_05c5.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:diancite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:diancite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:diancite",
+        "cobblemon:leftovers"
+      ],
+      "species": "diancie",
+      "trainer_file": "light_of_ruin_aklove_3_05c5.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:absolite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:absolite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:absolite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "absol",
+      "trainer_file": "light_of_ruin_vega_05c1.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:ampharosite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:ampharosite",
+        "cobblemon:life_orb"
+      ],
+      "species": "ampharos",
+      "trainer_file": "mega_trainer_aloysius_05cc.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:medichamite",
+        "choice_scarf"
+      ],
+      "gimmick_item": "mega_showdown:medichamite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:medichamite",
+        "cobblemon:choice_scarf"
+      ],
+      "species": "medicham",
+      "trainer_file": "mega_trainer_ernesto_05ca.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:absolite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:absolite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:absolite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "absol",
+      "trainer_file": "mega_trainer_krystal_05d0.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:glalitite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:glalitite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:glalitite",
+        "cobblemon:leftovers"
+      ],
+      "species": "glalie",
+      "trainer_file": "mega_trainer_lily_05c6.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:lopunnite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:lopunnite",
+        "cobblemon:life_orb"
+      ],
+      "species": "lopunny",
+      "trainer_file": "mega_trainer_mathis_05c8.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:gyaradosite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:gyaradosite",
+        "cobblemon:life_orb"
+      ],
+      "species": "gyarados",
+      "trainer_file": "mega_trainer_osean_05cd.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:charizardite_y",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:charizardite_y",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:charizardite_y",
+        "cobblemon:expert_belt"
+      ],
+      "species": "charizard",
+      "trainer_file": "mega_trainer_portia_05d2.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:kangaskhanite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:kangaskhanite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:kangaskhanite",
+        "cobblemon:leftovers"
+      ],
+      "species": "kangaskhan",
+      "trainer_file": "mega_trainer_ravonna_kangaskhan_3_05d5.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:sablenite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:sablenite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:sablenite",
+        "cobblemon:leftovers"
+      ],
+      "species": "sableye",
+      "trainer_file": "mega_trainer_reena_05cf.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:venusaurite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:venusaurite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:venusaurite",
+        "cobblemon:leftovers"
+      ],
+      "species": "venusaur",
+      "trainer_file": "mega_trainer_sterling_05d1.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:alakazite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:alakazite",
+        "cobblemon:life_orb"
+      ],
+      "species": "alakazam",
+      "trainer_file": "mega_trainer_timothy_05cb.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:scizorite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:scizorite",
+        "cobblemon:life_orb"
+      ],
+      "species": "scizor",
+      "trainer_file": "mega_trainer_travon_05ce.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:lopunnite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:lopunnite",
+        "cobblemon:life_orb"
+      ],
+      "species": "lopunny",
+      "trainer_file": "mega_trainer_vivian_05c7.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:cameruptite",
+        "assault_vest"
+      ],
+      "gimmick_item": "mega_showdown:cameruptite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:cameruptite",
+        "cobblemon:assault_vest"
+      ],
+      "species": "camerupt",
+      "trainer_file": "mega_trainer_yale_05c9.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:altarianite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:altarianite",
+        "cobblemon:life_orb"
+      ],
+      "species": "altaria",
+      "trainer_file": "picnicker_alma_01d2.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:alakazite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:alakazite",
+        "cobblemon:life_orb"
+      ],
+      "species": "alakazam",
+      "trainer_file": "picnicker_claire_022c.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:charizardite_x",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:charizardite_x",
+        "cobblemon:life_orb"
+      ],
+      "species": "charizard",
+      "trainer_file": "professor_oak_00c8.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:eevium-z",
+        "normal_gem"
+      ],
+      "gimmick_item": "mega_showdown:eevium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:eevium_z",
+        "cobblemon:normal_gem"
+      ],
+      "species": "jolteon",
+      "trainer_file": "professor_oak_00c8.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:pidgeotite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:pidgeotite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:pidgeotite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "pidgeot",
+      "trainer_file": "professor_oak_00d2.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:eevium-z",
+        "normal_gem"
+      ],
+      "gimmick_item": "mega_showdown:eevium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:eevium_z",
+        "cobblemon:normal_gem"
+      ],
+      "species": "flareon",
+      "trainer_file": "professor_oak_00d2.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:manectite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:manectite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:manectite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "manectric",
+      "trainer_file": "ranger_beth_0255.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:garchompite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:garchompite",
+        "cobblemon:life_orb"
+      ],
+      "species": "gabite",
+      "trainer_file": "rival_4_player_chose_beldum_05fe.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:tyranitarite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:tyranitarite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:tyranitarite",
+        "cobblemon:leftovers"
+      ],
+      "species": "pupitar",
+      "trainer_file": "rival_4_player_chose_gible_05fd.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:metagrossite",
+        "assault_vest"
+      ],
+      "gimmick_item": "mega_showdown:metagrossite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:metagrossite",
+        "cobblemon:assault_vest"
+      ],
+      "species": "metagross",
+      "trainer_file": "rival_4_player_chose_larvitar_05ff.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:garchompite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:garchompite",
+        "cobblemon:life_orb"
+      ],
+      "species": "garchomp",
+      "trainer_file": "rival_5_player_chose_beldum_0601.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:tyranitarite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:tyranitarite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:tyranitarite",
+        "cobblemon:leftovers"
+      ],
+      "species": "tyranitar",
+      "trainer_file": "rival_5_player_chose_gible_0600.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:metagrossite",
+        "assault_vest"
+      ],
+      "gimmick_item": "mega_showdown:metagrossite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:metagrossite",
+        "cobblemon:assault_vest"
+      ],
+      "species": "metagross",
+      "trainer_file": "rival_5_player_chose_larvitar_0602.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:blastoisinite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:blastoisinite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:blastoisinite",
+        "cobblemon:leftovers"
+      ],
+      "species": "blastoise",
+      "trainer_file": "rival_terry_01b0.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:venusaurite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:venusaurite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:venusaurite",
+        "cobblemon:leftovers"
+      ],
+      "species": "venusaur",
+      "trainer_file": "rival_terry_01b1.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:charizardite_y",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:charizardite_y",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:charizardite_y",
+        "cobblemon:expert_belt"
+      ],
+      "species": "charizard",
+      "trainer_file": "rival_terry_01b2.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:blastoisinite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:blastoisinite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:blastoisinite",
+        "cobblemon:leftovers"
+      ],
+      "species": "blastoise",
+      "trainer_file": "rival_terry_01b3.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:venusaurite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:venusaurite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:venusaurite",
+        "cobblemon:leftovers"
+      ],
+      "species": "venusaur",
+      "trainer_file": "rival_terry_01b4.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:charizardite_x",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:charizardite_x",
+        "cobblemon:life_orb"
+      ],
+      "species": "charizard",
+      "trainer_file": "rival_terry_01b5.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:blastoisinite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:blastoisinite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:blastoisinite",
+        "cobblemon:leftovers"
+      ],
+      "species": "blastoise",
+      "trainer_file": "rocker_luca_011d.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:latiasite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:latiasite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:latiasite",
+        "cobblemon:leftovers"
+      ],
+      "species": "latias",
+      "trainer_file": "rocket_admin_archer_002a.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:ghostium-z",
+        "ghost_gem"
+      ],
+      "gimmick_item": "mega_showdown:ghostium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:ghostium_z",
+        "cobblemon:ghost_gem"
+      ],
+      "species": "mismagius",
+      "trainer_file": "rocket_admin_archer_002a.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:houndoominite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:houndoominite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:houndoominite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "houndoom",
+      "trainer_file": "rocket_admin_archer_0035.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:houndoominite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:houndoominite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:houndoominite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "houndoom",
+      "trainer_file": "rocket_admin_archer_0043.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:mawilite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:mawilite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:mawilite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "mawile",
+      "trainer_file": "rocket_admin_archer_ariana_m000.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:normalium-z",
+        "normal_gem"
+      ],
+      "gimmick_item": "mega_showdown:normalium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:normalium_z",
+        "cobblemon:normal_gem"
+      ],
+      "species": "victini",
+      "trainer_file": "rocket_admin_ariana_0029.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:mawilite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:mawilite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:mawilite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "mawile",
+      "trainer_file": "rocket_admin_ariana_0029.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:mawilite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:mawilite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:mawilite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "mawile",
+      "trainer_file": "rocket_admin_ariana_0036.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:mawilite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:mawilite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:mawilite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "mawile",
+      "trainer_file": "rocket_admin_ariana_0044.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:sharpedonite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:sharpedonite",
+        "cobblemon:life_orb"
+      ],
+      "species": "sharpedo",
+      "trainer_file": "shadow_admin_marlon_2_05be.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:beedrillite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:beedrillite",
+        "cobblemon:life_orb"
+      ],
+      "species": "beedrill",
+      "trainer_file": "shadow_admin_marlon_3_05c0.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:abomasite",
+        "assault_vest"
+      ],
+      "gimmick_item": "mega_showdown:abomasite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:abomasite",
+        "cobblemon:assault_vest"
+      ],
+      "species": "abomasnow",
+      "trainer_file": "sinnoh_leader_candice_rematch_05e9.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:altarianite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:altarianite",
+        "cobblemon:life_orb"
+      ],
+      "species": "altaria",
+      "trainer_file": "sucessor_maxima_05ae.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:psychium-z",
+        "psychic_gem"
+      ],
+      "gimmick_item": "mega_showdown:psychium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 1,
+      "resolved_items": [
+        "mega_showdown:psychium_z",
+        "cobblemon:psychic_gem"
+      ],
+      "species": "golduck",
+      "trainer_file": "swimmerf_tisha_0231.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:tyranitarite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:tyranitarite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 0,
+      "resolved_items": [
+        "mega_showdown:tyranitarite",
+        "cobblemon:leftovers"
+      ],
+      "species": "tyranitar",
+      "trainer_file": "team_rocket_giovanni.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:salamencite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:salamencite",
+        "cobblemon:life_orb"
+      ],
+      "species": "salamence",
+      "trainer_file": "title_defense_jax_05ee.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:beedrillite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:beedrillite",
+        "cobblemon:life_orb"
+      ],
+      "species": "beedrill",
+      "trainer_file": "title_defense_marlon_05eb.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:audinite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:audinite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:audinite",
+        "cobblemon:leftovers"
+      ],
+      "species": "audino",
+      "trainer_file": "title_defense_milo_05ed.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:garchompite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:garchompite",
+        "cobblemon:life_orb"
+      ],
+      "species": "garchomp",
+      "trainer_file": "title_defense_rival_player_chose_beldum_05f0.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:tyranitarite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:tyranitarite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:tyranitarite",
+        "cobblemon:leftovers"
+      ],
+      "species": "tyranitar",
+      "trainer_file": "title_defense_rival_player_chose_gible_05ef.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:metagrossite",
+        "assault_vest"
+      ],
+      "gimmick_item": "mega_showdown:metagrossite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:metagrossite",
+        "cobblemon:assault_vest"
+      ],
+      "species": "metagross",
+      "trainer_file": "title_defense_rival_player_chose_larvitar_05f1.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:scizorite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:scizorite",
+        "cobblemon:life_orb"
+      ],
+      "species": "scizor",
+      "trainer_file": "title_defense_solenk_05ec.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:decidium-z",
+        "ghost_gem"
+      ],
+      "gimmick_item": "mega_showdown:decidium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:decidium_z",
+        "cobblemon:ghost_gem"
+      ],
+      "species": "decidueye",
+      "trainer_file": "title_defense_zeph_05ea.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:houndoominite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:houndoominite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:houndoominite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "houndoom",
+      "trainer_file": "title_defense_zeph_05ea.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:aloraichium-z",
+        "electric_gem"
+      ],
+      "gimmick_item": "mega_showdown:aloraichium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:aloraichium_z",
+        "cobblemon:electric_gem"
+      ],
+      "species": "raichu",
+      "trainer_file": "trainer_77_05f6.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:manectite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:manectite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:manectite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "manectric",
+      "trainer_file": "trainer_77_05f6.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:electrium-z",
+        "electric_gem"
+      ],
+      "gimmick_item": "mega_showdown:electrium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:electrium_z",
+        "cobblemon:electric_gem"
+      ],
+      "species": "raichu",
+      "trainer_file": "trainer_92_0605.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:manectite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:manectite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:manectite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "manectric",
+      "trainer_file": "trainer_92_0605.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:sceptilite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:sceptilite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:sceptilite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "sceptile",
+      "trainer_file": "trainer_brendan_001a.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:sceptilite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:sceptilite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:sceptilite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "sceptile",
+      "trainer_file": "trainer_brendan_0037.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:pixieplate",
+        "fairy_feather"
+      ],
+      "gimmick_item": null,
+      "has_gimmick_item": false,
+      "phase_d_classification": "human_review_required",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:pixie_plate",
+        "cobblemon:fairy_feather"
+      ],
+      "species": "gardevoir",
+      "trainer_file": "trainer_brendan_0039.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:sceptilite",
+        "expert_belt"
+      ],
+      "gimmick_item": "mega_showdown:sceptilite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:sceptilite",
+        "cobblemon:expert_belt"
+      ],
+      "species": "sceptile",
+      "trainer_file": "trainer_brendan_0039.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:ampharosite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:ampharosite",
+        "cobblemon:life_orb"
+      ],
+      "species": "ampharos",
+      "trainer_file": "trainer_ketchup_0013.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:aggronite",
+        "iron_ball"
+      ],
+      "gimmick_item": "mega_showdown:aggronite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 3,
+      "resolved_items": [
+        "mega_showdown:aggronite",
+        "cobblemon:iron_ball"
+      ],
+      "species": "aggron",
+      "trainer_file": "trainer_ketchup_0014.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:blazikenite",
+        "life_orb"
+      ],
+      "gimmick_item": "life_orb",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:blazikenite",
+        "cobblemon:life_orb"
+      ],
+      "species": "blaziken",
+      "trainer_file": "trainer_may_003d.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:mewtwonite_x",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:mewtwonite_x",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 5,
+      "resolved_items": [
+        "mega_showdown:mewtwonite_x",
+        "cobblemon:leftovers"
+      ],
+      "species": "mewtwo",
+      "trainer_file": "trainer_red_0003.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:slowbronite",
+        "leftovers"
+      ],
+      "gimmick_item": "mega_showdown:slowbronite",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:slowbronite",
+        "cobblemon:leftovers"
+      ],
+      "species": "slowbro",
+      "trainer_file": "tuber_alexis_022f.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:waterium-z",
+        "water_gem"
+      ],
+      "gimmick_item": "mega_showdown:waterium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 4,
+      "resolved_items": [
+        "mega_showdown:waterium_z",
+        "cobblemon:water_gem"
+      ],
+      "species": "hydreigon",
+      "trainer_file": "tuber_alexis_022f.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:poisonium-z",
+        "poison_gem"
+      ],
+      "gimmick_item": "mega_showdown:poisonium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:poisonium_z",
+        "cobblemon:poison_gem"
+      ],
+      "species": "mantine",
+      "trainer_file": "tuber_amira_0207.json"
+    },
+    {
+      "configured_items": [
+        "mega_showdown:electrium-z",
+        "electric_gem"
+      ],
+      "gimmick_item": "mega_showdown:electrium-z",
+      "has_gimmick_item": true,
+      "phase_d_classification": "likely_gameplay_intent_favor_gimmick",
+      "pokemon_index": 2,
+      "resolved_items": [
+        "mega_showdown:electrium_z",
+        "cobblemon:electric_gem"
+      ],
+      "species": "volbeat",
+      "trainer_file": "twins_joy_and_meg_0230.json"
+    }
+  ],
+  "summary": {
+    "human_review_required": 1,
+    "likely_gameplay_intent_favor_gimmick": 200,
+    "total_multi_held_pokemon": 201
+  }
+}

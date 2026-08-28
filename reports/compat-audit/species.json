@@ -1,0 +1,4724 @@
+{
+  "metadata": {
+    "cobblemon_version": "1.7.3",
+    "legacy_dataset": "!Doctors HELL MODE DOUBLE BATTLE EVERYTHING",
+    "mega_showdown_version": "1.8.4",
+    "minecraft_version": "1.21.1",
+    "modloader": "Fabric",
+    "modpack_version": "1.7.42-CF",
+    "rct_api_version": "0.15.2-beta",
+    "rct_mod_version": "0.18.1-beta",
+    "target_modpack": "COBBLEVERSE"
+  },
+  "species": {
+    "abomasnow": {
+      "canonical_replacement": "abomasnow",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "abra": {
+      "canonical_replacement": "abra",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "absol": {
+      "canonical_replacement": "absol",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "accelgor": {
+      "canonical_replacement": "accelgor",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "aegislash": {
+      "canonical_replacement": "aegislash",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "aerodactyl": {
+      "canonical_replacement": "aerodactyl",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "aggron": {
+      "canonical_replacement": "aggron",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "aipom": {
+      "canonical_replacement": "aipom",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "alakazam": {
+      "canonical_replacement": "alakazam",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 23,
+      "status": "VALID_EXACT"
+    },
+    "alcremie": {
+      "canonical_replacement": "alcremie",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "alomomola": {
+      "canonical_replacement": "alomomola",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "altaria": {
+      "canonical_replacement": "altaria",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "ambipom": {
+      "canonical_replacement": "ambipom",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "amoonguss": {
+      "canonical_replacement": "amoonguss",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "ampharos": {
+      "canonical_replacement": "ampharos",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "annihilape": {
+      "canonical_replacement": "annihilape",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "anorith": {
+      "canonical_replacement": "anorith",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "appletun": {
+      "canonical_replacement": "appletun",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "applin": {
+      "canonical_replacement": "applin",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "araquanid": {
+      "canonical_replacement": "araquanid",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "arbok": {
+      "canonical_replacement": "arbok",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 22,
+      "status": "VALID_EXACT"
+    },
+    "arcanine": {
+      "canonical_replacement": "arcanine",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 19,
+      "status": "VALID_EXACT"
+    },
+    "arceus": {
+      "canonical_replacement": "arceus",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "archaludon": {
+      "canonical_replacement": "archaludon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "archen": {
+      "canonical_replacement": "archen",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "archeops": {
+      "canonical_replacement": "archeops",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "arctovish": {
+      "canonical_replacement": "arctovish",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "arctozolt": {
+      "canonical_replacement": "arctozolt",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "ariados": {
+      "canonical_replacement": "ariados",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "armaldo": {
+      "canonical_replacement": "armaldo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "armarouge": {
+      "canonical_replacement": "armarouge",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "arrokuda": {
+      "canonical_replacement": "arrokuda",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "articuno": {
+      "canonical_replacement": "articuno",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "audino": {
+      "canonical_replacement": "audino",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "aurorus": {
+      "canonical_replacement": "aurorus",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "avalugg": {
+      "canonical_replacement": "avalugg",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "azumarill": {
+      "canonical_replacement": "azumarill",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "azurill": {
+      "canonical_replacement": "azurill",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "bagon": {
+      "canonical_replacement": "bagon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "baltoy": {
+      "canonical_replacement": "baltoy",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "banette": {
+      "canonical_replacement": "banette",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "barbaracle": {
+      "canonical_replacement": "barbaracle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "barboach": {
+      "canonical_replacement": "barboach",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "barraskewda": {
+      "canonical_replacement": "barraskewda",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "basculegion": {
+      "canonical_replacement": "basculegion",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "basculin": {
+      "canonical_replacement": "basculin",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "bastiodon": {
+      "canonical_replacement": "bastiodon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "baxcalibur": {
+      "canonical_replacement": "baxcalibur",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "beartic": {
+      "canonical_replacement": "beartic",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "beautifly": {
+      "canonical_replacement": "beautifly",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 19,
+      "status": "VALID_EXACT"
+    },
+    "beedrill": {
+      "canonical_replacement": "beedrill",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "beheeyem": {
+      "canonical_replacement": "beheeyem",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "beldum": {
+      "canonical_replacement": "beldum",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "bellibolt": {
+      "canonical_replacement": "bellibolt",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "bellossom": {
+      "canonical_replacement": "bellossom",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "bellsprout": {
+      "canonical_replacement": "bellsprout",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "bewear": {
+      "canonical_replacement": "bewear",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "bibarel": {
+      "canonical_replacement": "bibarel",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "bidoof": {
+      "canonical_replacement": "bidoof",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 20,
+      "status": "VALID_EXACT"
+    },
+    "bisharp": {
+      "canonical_replacement": "bisharp",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "blacephalon": {
+      "canonical_replacement": "blacephalon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "blastoise": {
+      "canonical_replacement": "blastoise",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "blaziken": {
+      "canonical_replacement": "blaziken",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "blissey": {
+      "canonical_replacement": "blissey",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "blitzle": {
+      "canonical_replacement": "blitzle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "boldore": {
+      "canonical_replacement": "boldore",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "boltund": {
+      "canonical_replacement": "boltund",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "bonsly": {
+      "canonical_replacement": "bonsly",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "bouffalant": {
+      "canonical_replacement": "bouffalant",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "braixen": {
+      "canonical_replacement": "braixen",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "braviary": {
+      "canonical_replacement": "braviary",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "breloom": {
+      "canonical_replacement": "breloom",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "bronzong": {
+      "canonical_replacement": "bronzong",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "bronzor": {
+      "canonical_replacement": "bronzor",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 24,
+      "status": "VALID_EXACT"
+    },
+    "brutebonnet": {
+      "canonical_replacement": "brutebonnet",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "bruxish": {
+      "canonical_replacement": "bruxish",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "budew": {
+      "canonical_replacement": "budew",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "buizel": {
+      "canonical_replacement": "buizel",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 28,
+      "status": "VALID_EXACT"
+    },
+    "bulbasaur": {
+      "canonical_replacement": "bulbasaur",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "buneary": {
+      "canonical_replacement": "buneary",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "burmy": {
+      "canonical_replacement": "burmy",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "butterfree": {
+      "canonical_replacement": "butterfree",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "buzzwole": {
+      "canonical_replacement": "buzzwole",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "cacnea": {
+      "canonical_replacement": "cacnea",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "cacturne": {
+      "canonical_replacement": "cacturne",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "calyrex": {
+      "canonical_replacement": "calyrex",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "camerupt": {
+      "canonical_replacement": "camerupt",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "carbink": {
+      "canonical_replacement": "carbink",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "carkol": {
+      "canonical_replacement": "carkol",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "carnivine": {
+      "canonical_replacement": "carnivine",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "carracosta": {
+      "canonical_replacement": "carracosta",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "carvanha": {
+      "canonical_replacement": "carvanha",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "cascoon": {
+      "canonical_replacement": "cascoon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "castform": {
+      "canonical_replacement": "castform",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "caterpie": {
+      "canonical_replacement": "caterpie",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "celebi": {
+      "canonical_replacement": "celebi",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "celesteela": {
+      "canonical_replacement": "celesteela",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "centiskorch": {
+      "canonical_replacement": "centiskorch",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "cetitan": {
+      "canonical_replacement": "cetitan",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "chandelure": {
+      "canonical_replacement": "chandelure",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "chansey": {
+      "canonical_replacement": "chansey",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "charizard": {
+      "canonical_replacement": "charizard",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 19,
+      "status": "VALID_EXACT"
+    },
+    "charmander": {
+      "canonical_replacement": "charmander",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "charmeleon": {
+      "canonical_replacement": "charmeleon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "chatot": {
+      "canonical_replacement": "chatot",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "cherrim": {
+      "canonical_replacement": "cherrim",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "cherubi": {
+      "canonical_replacement": "cherubi",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "chienpao": {
+      "canonical_replacement": "chienpao",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "chimchar": {
+      "canonical_replacement": "chimchar",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "chimecho": {
+      "canonical_replacement": "chimecho",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "chinchou": {
+      "canonical_replacement": "chinchou",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "chingling": {
+      "canonical_replacement": "chingling",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "chiyu": {
+      "canonical_replacement": "chiyu",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "cinccino": {
+      "canonical_replacement": "cinccino",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "cinderace": {
+      "canonical_replacement": "cinderace",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "clamperl": {
+      "canonical_replacement": "clamperl",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "clawitzer": {
+      "canonical_replacement": "clawitzer",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "claydol": {
+      "canonical_replacement": "claydol",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "clefable": {
+      "canonical_replacement": "clefable",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "clefairy": {
+      "canonical_replacement": "clefairy",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 30,
+      "status": "VALID_EXACT"
+    },
+    "cleffa": {
+      "canonical_replacement": "cleffa",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "clobbopus": {
+      "canonical_replacement": "clobbopus",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "clodsire": {
+      "canonical_replacement": "clodsire",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "cloyster": {
+      "canonical_replacement": "cloyster",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "coalossal": {
+      "canonical_replacement": "coalossal",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "cofagrigus": {
+      "canonical_replacement": "cofagrigus",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "combee": {
+      "canonical_replacement": "combee",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "comfey": {
+      "canonical_replacement": "comfey",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "conkeldurr": {
+      "canonical_replacement": "conkeldurr",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "copperajah": {
+      "canonical_replacement": "copperajah",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "corphish": {
+      "canonical_replacement": "corphish",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "corsola": {
+      "canonical_replacement": "corsola",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "corviknight": {
+      "canonical_replacement": "corviknight",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "corvisquire": {
+      "canonical_replacement": "corvisquire",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "crabominable": {
+      "canonical_replacement": "crabominable",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "crabrawler": {
+      "canonical_replacement": "crabrawler",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "cradily": {
+      "canonical_replacement": "cradily",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "cramorant": {
+      "canonical_replacement": "cramorant",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "cranidos": {
+      "canonical_replacement": "cranidos",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "crawdaunt": {
+      "canonical_replacement": "crawdaunt",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "cresselia": {
+      "canonical_replacement": "cresselia",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "croagunk": {
+      "canonical_replacement": "croagunk",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 21,
+      "status": "VALID_EXACT"
+    },
+    "crobat": {
+      "canonical_replacement": "crobat",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "croconaw": {
+      "canonical_replacement": "croconaw",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "crustle": {
+      "canonical_replacement": "crustle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "cubchoo": {
+      "canonical_replacement": "cubchoo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "cubone": {
+      "canonical_replacement": "cubone",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "cursola": {
+      "canonical_replacement": "cursola",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "cutiefly": {
+      "canonical_replacement": "cutiefly",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "darkrai": {
+      "canonical_replacement": "darkrai",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "darmanitan": {
+      "canonical_replacement": "darmanitan",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "dartrix": {
+      "canonical_replacement": "dartrix",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "decidueye": {
+      "canonical_replacement": "decidueye",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "dedenne": {
+      "canonical_replacement": "dedenne",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "deerling": {
+      "canonical_replacement": "deerling",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "delcatty": {
+      "canonical_replacement": "delcatty",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "delibird": {
+      "canonical_replacement": "delibird",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "delphox": {
+      "canonical_replacement": "delphox",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "deoxys": {
+      "canonical_replacement": "deoxys",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "dewgong": {
+      "canonical_replacement": "dewgong",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "dewott": {
+      "canonical_replacement": "dewott",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "dhelmise": {
+      "canonical_replacement": "dhelmise",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "dialga": {
+      "canonical_replacement": "dialga",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "diancie": {
+      "canonical_replacement": "diancie",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "diggersby": {
+      "canonical_replacement": "diggersby",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "ditto": {
+      "canonical_replacement": "ditto",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "dodrio": {
+      "canonical_replacement": "dodrio",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "doduo": {
+      "canonical_replacement": "doduo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "donphan": {
+      "canonical_replacement": "donphan",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "dottler": {
+      "canonical_replacement": "dottler",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "doublade": {
+      "canonical_replacement": "doublade",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "dracovish": {
+      "canonical_replacement": "dracovish",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "dracozolt": {
+      "canonical_replacement": "dracozolt",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "dragalge": {
+      "canonical_replacement": "dragalge",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "dragapult": {
+      "canonical_replacement": "dragapult",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "dragonair": {
+      "canonical_replacement": "dragonair",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "dragonite": {
+      "canonical_replacement": "dragonite",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "drampa": {
+      "canonical_replacement": "drampa",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "drapion": {
+      "canonical_replacement": "drapion",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "dratini": {
+      "canonical_replacement": "dratini",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "drednaw": {
+      "canonical_replacement": "drednaw",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "drifblim": {
+      "canonical_replacement": "drifblim",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "drifloon": {
+      "canonical_replacement": "drifloon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "drilbur": {
+      "canonical_replacement": "drilbur",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "drowzee": {
+      "canonical_replacement": "drowzee",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "druddigon": {
+      "canonical_replacement": "druddigon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "ducklett": {
+      "canonical_replacement": "ducklett",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "dugtrio": {
+      "canonical_replacement": "dugtrio",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "dunsparce": {
+      "canonical_replacement": "dunsparce",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "duraludon": {
+      "canonical_replacement": "duraludon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "durant": {
+      "canonical_replacement": "durant",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "dusclops": {
+      "canonical_replacement": "dusclops",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "dusknoir": {
+      "canonical_replacement": "dusknoir",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "duskull": {
+      "canonical_replacement": "duskull",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "dustox": {
+      "canonical_replacement": "dustox",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 20,
+      "status": "VALID_EXACT"
+    },
+    "dwebble": {
+      "canonical_replacement": "dwebble",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "eelektrik": {
+      "canonical_replacement": "eelektrik",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "eelektross": {
+      "canonical_replacement": "eelektross",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "eevee": {
+      "canonical_replacement": "eevee",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "eiscue": {
+      "canonical_replacement": "eiscue",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "ekans": {
+      "canonical_replacement": "ekans",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 28,
+      "status": "VALID_EXACT"
+    },
+    "eldegoss": {
+      "canonical_replacement": "eldegoss",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "electabuzz": {
+      "canonical_replacement": "electabuzz",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "electivire": {
+      "canonical_replacement": "electivire",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "electrike": {
+      "canonical_replacement": "electrike",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "electrode": {
+      "canonical_replacement": "electrode",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "elekid": {
+      "canonical_replacement": "elekid",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "elgyem": {
+      "canonical_replacement": "elgyem",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "emboar": {
+      "canonical_replacement": "emboar",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "emolga": {
+      "canonical_replacement": "emolga",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "empoleon": {
+      "canonical_replacement": "empoleon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "enamorus": {
+      "canonical_replacement": "enamorus",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "entei": {
+      "canonical_replacement": "entei",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "escavalier": {
+      "canonical_replacement": "escavalier",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "espeon": {
+      "canonical_replacement": "espeon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "espurr": {
+      "canonical_replacement": "espurr",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "eternatus": {
+      "canonical_replacement": "eternatus",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "excadrill": {
+      "canonical_replacement": "excadrill",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "exeggcute": {
+      "canonical_replacement": "exeggcute",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "exeggutor": {
+      "canonical_replacement": "exeggutor",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "exploud": {
+      "canonical_replacement": "exploud",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "falinks": {
+      "canonical_replacement": "falinks",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "farfetchd": {
+      "canonical_replacement": "farfetchd",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "farigiraf": {
+      "canonical_replacement": "farigiraf",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "fearow": {
+      "canonical_replacement": "fearow",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 30,
+      "status": "VALID_EXACT"
+    },
+    "feebas": {
+      "canonical_replacement": "feebas",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "feraligatr": {
+      "canonical_replacement": "feraligatr",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "ferroseed": {
+      "canonical_replacement": "ferroseed",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "ferrothorn": {
+      "canonical_replacement": "ferrothorn",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "finneon": {
+      "canonical_replacement": "finneon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "flaaffy": {
+      "canonical_replacement": "flaaffy",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "flabebe": {
+      "canonical_replacement": "flabebe",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "flamigo": {
+      "canonical_replacement": "flamigo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "flapple": {
+      "canonical_replacement": "flapple",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "flareon": {
+      "canonical_replacement": "flareon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "floatzel": {
+      "canonical_replacement": "floatzel",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 22,
+      "status": "VALID_EXACT"
+    },
+    "floette": {
+      "canonical_replacement": "floette",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "florges": {
+      "canonical_replacement": "florges",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "fluttermane": {
+      "canonical_replacement": "fluttermane",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "flygon": {
+      "canonical_replacement": "flygon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "forretress": {
+      "canonical_replacement": "forretress",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "fraxure": {
+      "canonical_replacement": "fraxure",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "frogadier": {
+      "canonical_replacement": "frogadier",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "froslass": {
+      "canonical_replacement": "froslass",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 15,
+      "status": "VALID_EXACT"
+    },
+    "frosmoth": {
+      "canonical_replacement": "frosmoth",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "gabite": {
+      "canonical_replacement": "gabite",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "gallade": {
+      "canonical_replacement": "gallade",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "galvantula": {
+      "canonical_replacement": "galvantula",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "garbodor": {
+      "canonical_replacement": "garbodor",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "garchomp": {
+      "canonical_replacement": "garchomp",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "gardevoir": {
+      "canonical_replacement": "gardevoir",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 20,
+      "status": "VALID_EXACT"
+    },
+    "gastly": {
+      "canonical_replacement": "gastly",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "gastrodon": {
+      "canonical_replacement": "gastrodon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "genesect": {
+      "canonical_replacement": "genesect",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "gengar": {
+      "canonical_replacement": "gengar",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 30,
+      "status": "VALID_EXACT"
+    },
+    "geodude": {
+      "canonical_replacement": "geodude",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 35,
+      "status": "VALID_EXACT"
+    },
+    "gholdengo": {
+      "canonical_replacement": "gholdengo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "gible": {
+      "canonical_replacement": "gible",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "gigalith": {
+      "canonical_replacement": "gigalith",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "girafarig": {
+      "canonical_replacement": "girafarig",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "giratina": {
+      "canonical_replacement": "giratina",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "glaceon": {
+      "canonical_replacement": "glaceon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "glalie": {
+      "canonical_replacement": "glalie",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "glameow": {
+      "canonical_replacement": "glameow",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 25,
+      "status": "VALID_EXACT"
+    },
+    "gligar": {
+      "canonical_replacement": "gligar",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "glimmora": {
+      "canonical_replacement": "glimmora",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "gliscor": {
+      "canonical_replacement": "gliscor",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "gloom": {
+      "canonical_replacement": "gloom",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "golbat": {
+      "canonical_replacement": "golbat",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 52,
+      "status": "VALID_EXACT"
+    },
+    "goldeen": {
+      "canonical_replacement": "goldeen",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "golduck": {
+      "canonical_replacement": "golduck",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 21,
+      "status": "VALID_EXACT"
+    },
+    "golem": {
+      "canonical_replacement": "golem",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "golett": {
+      "canonical_replacement": "golett",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "golisopod": {
+      "canonical_replacement": "golisopod",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "goodra": {
+      "canonical_replacement": "goodra",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "gorebyss": {
+      "canonical_replacement": "gorebyss",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "gossifleur": {
+      "canonical_replacement": "gossifleur",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "gothitelle": {
+      "canonical_replacement": "gothitelle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "gothorita": {
+      "canonical_replacement": "gothorita",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "gougingfire": {
+      "canonical_replacement": "gougingfire",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "granbull": {
+      "canonical_replacement": "granbull",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "grapploct": {
+      "canonical_replacement": "grapploct",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "graveler": {
+      "canonical_replacement": "graveler",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 23,
+      "status": "VALID_EXACT"
+    },
+    "greedent": {
+      "canonical_replacement": "greedent",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "greninja": {
+      "canonical_replacement": "greninja",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "grimer": {
+      "canonical_replacement": "grimer",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "grimmsnarl": {
+      "canonical_replacement": "grimmsnarl",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "grotle": {
+      "canonical_replacement": "grotle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "groudon": {
+      "canonical_replacement": "groudon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "grovyle": {
+      "canonical_replacement": "grovyle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "growlithe": {
+      "canonical_replacement": "growlithe",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "grubbin": {
+      "canonical_replacement": "grubbin",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "grumpig": {
+      "canonical_replacement": "grumpig",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "gulpin": {
+      "canonical_replacement": "gulpin",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "gumshoos": {
+      "canonical_replacement": "gumshoos",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "gurdurr": {
+      "canonical_replacement": "gurdurr",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "guzzlord": {
+      "canonical_replacement": "guzzlord",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "gyarados": {
+      "canonical_replacement": "gyarados",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 62,
+      "status": "VALID_EXACT"
+    },
+    "happiny": {
+      "canonical_replacement": "happiny",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "hariyama": {
+      "canonical_replacement": "hariyama",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "hatterene": {
+      "canonical_replacement": "hatterene",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "haunter": {
+      "canonical_replacement": "haunter",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "hawlucha": {
+      "canonical_replacement": "hawlucha",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "haxorus": {
+      "canonical_replacement": "haxorus",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "heatmor": {
+      "canonical_replacement": "heatmor",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "heatran": {
+      "canonical_replacement": "heatran",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "heliolisk": {
+      "canonical_replacement": "heliolisk",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "heracross": {
+      "canonical_replacement": "heracross",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 30,
+      "status": "VALID_EXACT"
+    },
+    "herdier": {
+      "canonical_replacement": "herdier",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "hippopotas": {
+      "canonical_replacement": "hippopotas",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "hippowdon": {
+      "canonical_replacement": "hippowdon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "hitmonchan": {
+      "canonical_replacement": "hitmonchan",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "hitmonlee": {
+      "canonical_replacement": "hitmonlee",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "hitmontop": {
+      "canonical_replacement": "hitmontop",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "honchkrow": {
+      "canonical_replacement": "honchkrow",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "honedge": {
+      "canonical_replacement": "honedge",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "hooh": {
+      "canonical_replacement": "hooh",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "hoopa": {
+      "canonical_replacement": "hoopa",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "hoothoot": {
+      "canonical_replacement": "hoothoot",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "hoppip": {
+      "canonical_replacement": "hoppip",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "horsea": {
+      "canonical_replacement": "horsea",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "houndoom": {
+      "canonical_replacement": "houndoom",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "houndour": {
+      "canonical_replacement": "houndour",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "huntail": {
+      "canonical_replacement": "huntail",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "hydreigon": {
+      "canonical_replacement": "hydreigon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "hypno": {
+      "canonical_replacement": "hypno",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "illumise": {
+      "canonical_replacement": "illumise",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "impidimp": {
+      "canonical_replacement": "impidimp",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "incineroar": {
+      "canonical_replacement": "incineroar",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "indeedee": {
+      "canonical_replacement": "indeedee",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "infernape": {
+      "canonical_replacement": "infernape",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "inteleon": {
+      "canonical_replacement": "inteleon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "ironboulder": {
+      "canonical_replacement": "ironboulder",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "ironcrown": {
+      "canonical_replacement": "ironcrown",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "ironhands": {
+      "canonical_replacement": "ironhands",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "ironleaves": {
+      "canonical_replacement": "ironleaves",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "ironthorns": {
+      "canonical_replacement": "ironthorns",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "ironvaliant": {
+      "canonical_replacement": "ironvaliant",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "ivysaur": {
+      "canonical_replacement": "ivysaur",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "jellicent": {
+      "canonical_replacement": "jellicent",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "jigglypuff": {
+      "canonical_replacement": "jigglypuff",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "jirachi": {
+      "canonical_replacement": "jirachi",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "jolteon": {
+      "canonical_replacement": "jolteon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "joltik": {
+      "canonical_replacement": "joltik",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "jumpluff": {
+      "canonical_replacement": "jumpluff",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "jynx": {
+      "canonical_replacement": "jynx",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "kabutops": {
+      "canonical_replacement": "kabutops",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "kadabra": {
+      "canonical_replacement": "kadabra",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 39,
+      "status": "VALID_EXACT"
+    },
+    "kakuna": {
+      "canonical_replacement": "kakuna",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "kangaskhan": {
+      "canonical_replacement": "kangaskhan",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "karrablast": {
+      "canonical_replacement": "karrablast",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "kartana": {
+      "canonical_replacement": "kartana",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "kecleon": {
+      "canonical_replacement": "kecleon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "keldeo": {
+      "canonical_replacement": "keldeo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "kilowattrel": {
+      "canonical_replacement": "kilowattrel",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "kingambit": {
+      "canonical_replacement": "kingambit",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "kingdra": {
+      "canonical_replacement": "kingdra",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "kingler": {
+      "canonical_replacement": "kingler",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "kirlia": {
+      "canonical_replacement": "kirlia",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "kleavor": {
+      "canonical_replacement": "kleavor",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "klefki": {
+      "canonical_replacement": "klefki",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "klinklang": {
+      "canonical_replacement": "klinklang",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "koffing": {
+      "canonical_replacement": "koffing",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "komala": {
+      "canonical_replacement": "komala",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "kommoo": {
+      "canonical_replacement": "kommoo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "koraidon": {
+      "canonical_replacement": "koraidon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "kricketot": {
+      "canonical_replacement": "kricketot",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "kricketune": {
+      "canonical_replacement": "kricketune",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "krokorok": {
+      "canonical_replacement": "krokorok",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "krookodile": {
+      "canonical_replacement": "krookodile",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "kyogre": {
+      "canonical_replacement": "kyogre",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "kyurem": {
+      "canonical_replacement": "kyurem",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "lairon": {
+      "canonical_replacement": "lairon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "lampent": {
+      "canonical_replacement": "lampent",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "landorus": {
+      "canonical_replacement": "landorus",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "lanturn": {
+      "canonical_replacement": "lanturn",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "lapras": {
+      "canonical_replacement": "lapras",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "larvitar": {
+      "canonical_replacement": "larvitar",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "latias": {
+      "canonical_replacement": "latias",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "latios": {
+      "canonical_replacement": "latios",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "leafeon": {
+      "canonical_replacement": "leafeon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "leavanny": {
+      "canonical_replacement": "leavanny",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "ledian": {
+      "canonical_replacement": "ledian",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "ledyba": {
+      "canonical_replacement": "ledyba",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "lickilicky": {
+      "canonical_replacement": "lickilicky",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "lickitung": {
+      "canonical_replacement": "lickitung",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "liepard": {
+      "canonical_replacement": "liepard",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "lileep": {
+      "canonical_replacement": "lileep",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "lilligant": {
+      "canonical_replacement": "lilligant",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "linoone": {
+      "canonical_replacement": "linoone",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "litleo": {
+      "canonical_replacement": "litleo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "litwick": {
+      "canonical_replacement": "litwick",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "lombre": {
+      "canonical_replacement": "lombre",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "lopunny": {
+      "canonical_replacement": "lopunny",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 19,
+      "status": "VALID_EXACT"
+    },
+    "lotad": {
+      "canonical_replacement": "lotad",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "loudred": {
+      "canonical_replacement": "loudred",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "lucario": {
+      "canonical_replacement": "lucario",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "ludicolo": {
+      "canonical_replacement": "ludicolo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "lumineon": {
+      "canonical_replacement": "lumineon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "lunala": {
+      "canonical_replacement": "lunala",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "lunatone": {
+      "canonical_replacement": "lunatone",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "luvdisc": {
+      "canonical_replacement": "luvdisc",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "luxio": {
+      "canonical_replacement": "luxio",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 23,
+      "status": "VALID_EXACT"
+    },
+    "luxray": {
+      "canonical_replacement": "luxray",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "lycanroc": {
+      "canonical_replacement": "lycanroc",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "machamp": {
+      "canonical_replacement": "machamp",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 29,
+      "status": "VALID_EXACT"
+    },
+    "machoke": {
+      "canonical_replacement": "machoke",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 53,
+      "status": "VALID_EXACT"
+    },
+    "machop": {
+      "canonical_replacement": "machop",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 26,
+      "status": "VALID_EXACT"
+    },
+    "magby": {
+      "canonical_replacement": "magby",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "magcargo": {
+      "canonical_replacement": "magcargo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "magearna": {
+      "canonical_replacement": "magearna",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "magikarp": {
+      "canonical_replacement": "magikarp",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 26,
+      "status": "VALID_EXACT"
+    },
+    "magmar": {
+      "canonical_replacement": "magmar",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "magmortar": {
+      "canonical_replacement": "magmortar",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "magnemite": {
+      "canonical_replacement": "magnemite",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "magneton": {
+      "canonical_replacement": "magneton",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "magnezone": {
+      "canonical_replacement": "magnezone",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "makuhita": {
+      "canonical_replacement": "makuhita",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "mamoswine": {
+      "canonical_replacement": "mamoswine",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "manaphy": {
+      "canonical_replacement": "manaphy",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "mandibuzz": {
+      "canonical_replacement": "mandibuzz",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "manectric": {
+      "canonical_replacement": "manectric",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "mankey": {
+      "canonical_replacement": "mankey",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "mantine": {
+      "canonical_replacement": "mantine",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "mantyke": {
+      "canonical_replacement": "mantyke",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "mareep": {
+      "canonical_replacement": "mareep",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "marill": {
+      "canonical_replacement": "marill",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 19,
+      "status": "VALID_EXACT"
+    },
+    "marowak": {
+      "canonical_replacement": "marowak",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "marshadow": {
+      "canonical_replacement": "marshadow",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "marshtomp": {
+      "canonical_replacement": "marshtomp",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "masquerain": {
+      "canonical_replacement": "masquerain",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "maushold": {
+      "canonical_replacement": "maushold",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "mawile": {
+      "canonical_replacement": "mawile",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "medicham": {
+      "canonical_replacement": "medicham",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "meditite": {
+      "canonical_replacement": "meditite",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "meganium": {
+      "canonical_replacement": "meganium",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "melmetal": {
+      "canonical_replacement": "melmetal",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "meloetta": {
+      "canonical_replacement": "meloetta",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "meowstic": {
+      "canonical_replacement": "meowstic",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "meowth": {
+      "canonical_replacement": "meowth",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "metagross": {
+      "canonical_replacement": "metagross",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "metang": {
+      "canonical_replacement": "metang",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "metapod": {
+      "canonical_replacement": "metapod",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "mew": {
+      "canonical_replacement": "mew",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "mewtwo": {
+      "canonical_replacement": "mewtwo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "mienshao": {
+      "canonical_replacement": "mienshao",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "mightyena": {
+      "canonical_replacement": "mightyena",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "milcery": {
+      "canonical_replacement": "milcery",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "milotic": {
+      "canonical_replacement": "milotic",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "miltank": {
+      "canonical_replacement": "miltank",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "mimejr": {
+      "canonical_replacement": "mimejr",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "mimikyu": {
+      "canonical_replacement": "mimikyu",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "minior": {
+      "canonical_replacement": "minior",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "minun": {
+      "canonical_replacement": "minun",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "miraidon": {
+      "canonical_replacement": "miraidon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "misdreavus": {
+      "canonical_replacement": "misdreavus",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 15,
+      "status": "VALID_EXACT"
+    },
+    "mismagius": {
+      "canonical_replacement": "mismagius",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "moltres": {
+      "canonical_replacement": "moltres",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "monferno": {
+      "canonical_replacement": "monferno",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "morelull": {
+      "canonical_replacement": "morelull",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "morpeko": {
+      "canonical_replacement": "morpeko",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "mothim": {
+      "canonical_replacement": "mothim",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "mrmime": {
+      "canonical_replacement": "mrmime",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 24,
+      "status": "VALID_EXACT"
+    },
+    "mrrime": {
+      "canonical_replacement": "mrrime",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "mudsdale": {
+      "canonical_replacement": "mudsdale",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "muk": {
+      "canonical_replacement": "muk",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 26,
+      "status": "VALID_EXACT"
+    },
+    "munchlax": {
+      "canonical_replacement": "munchlax",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "munna": {
+      "canonical_replacement": "munna",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "murkrow": {
+      "canonical_replacement": "murkrow",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "musharna": {
+      "canonical_replacement": "musharna",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "naganadel": {
+      "canonical_replacement": "naganadel",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "natu": {
+      "canonical_replacement": "natu",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "necrozma": {
+      "canonical_replacement": "necrozma",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "nickit": {
+      "canonical_replacement": "nickit",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "nidoking": {
+      "canonical_replacement": "nidoking",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "nidoqueen": {
+      "canonical_replacement": "nidoqueen",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "nidoranf": {
+      "canonical_replacement": "nidoranf",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "nidoranm": {
+      "canonical_replacement": "nidoranm",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "nidorina": {
+      "canonical_replacement": "nidorina",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "nidorino": {
+      "canonical_replacement": "nidorino",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "nihilego": {
+      "canonical_replacement": "nihilego",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "nincada": {
+      "canonical_replacement": "nincada",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "ninetales": {
+      "canonical_replacement": "ninetales",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 23,
+      "status": "VALID_EXACT"
+    },
+    "ninjask": {
+      "canonical_replacement": "ninjask",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "noctowl": {
+      "canonical_replacement": "noctowl",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "noibat": {
+      "canonical_replacement": "noibat",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "noivern": {
+      "canonical_replacement": "noivern",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "nosepass": {
+      "canonical_replacement": "nosepass",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "numel": {
+      "canonical_replacement": "numel",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "nuzleaf": {
+      "canonical_replacement": "nuzleaf",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "obstagoon": {
+      "canonical_replacement": "obstagoon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "octillery": {
+      "canonical_replacement": "octillery",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "oddish": {
+      "canonical_replacement": "oddish",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "ogerpon": {
+      "canonical_replacement": "ogerpon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "okidogi": {
+      "canonical_replacement": "okidogi",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "omastar": {
+      "canonical_replacement": "omastar",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "onix": {
+      "canonical_replacement": "onix",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 41,
+      "status": "VALID_EXACT"
+    },
+    "oranguru": {
+      "canonical_replacement": "oranguru",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "orbeetle": {
+      "canonical_replacement": "orbeetle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "oricorio": {
+      "canonical_replacement": "oricorio",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "oshawott": {
+      "canonical_replacement": "oshawott",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "overqwil": {
+      "canonical_replacement": "overqwil",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "pachirisu": {
+      "canonical_replacement": "pachirisu",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "palkia": {
+      "canonical_replacement": "palkia",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "palossand": {
+      "canonical_replacement": "palossand",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "palpitoad": {
+      "canonical_replacement": "palpitoad",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "pangoro": {
+      "canonical_replacement": "pangoro",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "pansear": {
+      "canonical_replacement": "pansear",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "paras": {
+      "canonical_replacement": "paras",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "parasect": {
+      "canonical_replacement": "parasect",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "passimian": {
+      "canonical_replacement": "passimian",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "pawmot": {
+      "canonical_replacement": "pawmot",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "pelipper": {
+      "canonical_replacement": "pelipper",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 31,
+      "status": "VALID_EXACT"
+    },
+    "perrserker": {
+      "canonical_replacement": "perrserker",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "persian": {
+      "canonical_replacement": "persian",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 21,
+      "status": "VALID_EXACT"
+    },
+    "petilil": {
+      "canonical_replacement": "petilil",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "phanpy": {
+      "canonical_replacement": "phanpy",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "phantump": {
+      "canonical_replacement": "phantump",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "pheromosa": {
+      "canonical_replacement": "pheromosa",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "pichu": {
+      "canonical_replacement": "pichu",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "pidgeot": {
+      "canonical_replacement": "pidgeot",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "pidgeotto": {
+      "canonical_replacement": "pidgeotto",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 28,
+      "status": "VALID_EXACT"
+    },
+    "pidgey": {
+      "canonical_replacement": "pidgey",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "pignite": {
+      "canonical_replacement": "pignite",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "pikachu": {
+      "canonical_replacement": "pikachu",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 45,
+      "status": "VALID_EXACT"
+    },
+    "piloswine": {
+      "canonical_replacement": "piloswine",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "pincurchin": {
+      "canonical_replacement": "pincurchin",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "pineco": {
+      "canonical_replacement": "pineco",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "pinsir": {
+      "canonical_replacement": "pinsir",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "piplup": {
+      "canonical_replacement": "piplup",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "plusle": {
+      "canonical_replacement": "plusle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "politoed": {
+      "canonical_replacement": "politoed",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "poliwhirl": {
+      "canonical_replacement": "poliwhirl",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "poliwrath": {
+      "canonical_replacement": "poliwrath",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "polteageist": {
+      "canonical_replacement": "polteageist",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "ponyta": {
+      "canonical_replacement": "ponyta",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 28,
+      "status": "VALID_EXACT"
+    },
+    "poochyena": {
+      "canonical_replacement": "poochyena",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "porygon": {
+      "canonical_replacement": "porygon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "porygon2": {
+      "canonical_replacement": "porygon2",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "porygonz": {
+      "canonical_replacement": "porygonz",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "primarina": {
+      "canonical_replacement": "primarina",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "primeape": {
+      "canonical_replacement": "primeape",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "prinplup": {
+      "canonical_replacement": "prinplup",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "probopass": {
+      "canonical_replacement": "probopass",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "psyduck": {
+      "canonical_replacement": "psyduck",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "pumpkaboo": {
+      "canonical_replacement": "pumpkaboo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "pupitar": {
+      "canonical_replacement": "pupitar",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "purugly": {
+      "canonical_replacement": "purugly",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "pyroar": {
+      "canonical_replacement": "pyroar",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "pyukumuku": {
+      "canonical_replacement": "pyukumuku",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "quagsire": {
+      "canonical_replacement": "quagsire",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "quilladin": {
+      "canonical_replacement": "quilladin",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "qwilfish": {
+      "canonical_replacement": "qwilfish",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "raboot": {
+      "canonical_replacement": "raboot",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "ragingbolt": {
+      "canonical_replacement": "ragingbolt",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "raichu": {
+      "canonical_replacement": "raichu",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 30,
+      "status": "VALID_EXACT"
+    },
+    "raikou": {
+      "canonical_replacement": "raikou",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "ralts": {
+      "canonical_replacement": "ralts",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "rampardos": {
+      "canonical_replacement": "rampardos",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "rapidash": {
+      "canonical_replacement": "rapidash",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 27,
+      "status": "VALID_EXACT"
+    },
+    "raticate": {
+      "canonical_replacement": "raticate",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 37,
+      "status": "VALID_EXACT"
+    },
+    "rattata": {
+      "canonical_replacement": "rattata",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "rayquaza": {
+      "canonical_replacement": "rayquaza",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "relicanth": {
+      "canonical_replacement": "relicanth",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "remoraid": {
+      "canonical_replacement": "remoraid",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "reshiram": {
+      "canonical_replacement": "reshiram",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "reuniclus": {
+      "canonical_replacement": "reuniclus",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "rhydon": {
+      "canonical_replacement": "rhydon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "rhyhorn": {
+      "canonical_replacement": "rhyhorn",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "rhyperior": {
+      "canonical_replacement": "rhyperior",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "ribombee": {
+      "canonical_replacement": "ribombee",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "rillaboom": {
+      "canonical_replacement": "rillaboom",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "riolu": {
+      "canonical_replacement": "riolu",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "roaringmoon": {
+      "canonical_replacement": "roaringmoon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "rockruff": {
+      "canonical_replacement": "rockruff",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "roggenrola": {
+      "canonical_replacement": "roggenrola",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "roselia": {
+      "canonical_replacement": "roselia",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 39,
+      "status": "VALID_EXACT"
+    },
+    "roserade": {
+      "canonical_replacement": "roserade",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 15,
+      "status": "VALID_EXACT"
+    },
+    "rotom": {
+      "canonical_replacement": "rotom",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 23,
+      "status": "VALID_EXACT"
+    },
+    "rufflet": {
+      "canonical_replacement": "rufflet",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "runerigus": {
+      "canonical_replacement": "runerigus",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "sableye": {
+      "canonical_replacement": "sableye",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "salamence": {
+      "canonical_replacement": "salamence",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "salazzle": {
+      "canonical_replacement": "salazzle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "samurott": {
+      "canonical_replacement": "samurott",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "sandaconda": {
+      "canonical_replacement": "sandaconda",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "sandile": {
+      "canonical_replacement": "sandile",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "sandshrew": {
+      "canonical_replacement": "sandshrew",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "sandslash": {
+      "canonical_replacement": "sandslash",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 20,
+      "status": "VALID_EXACT"
+    },
+    "sawk": {
+      "canonical_replacement": "sawk",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "sceptile": {
+      "canonical_replacement": "sceptile",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "scizor": {
+      "canonical_replacement": "scizor",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "scolipede": {
+      "canonical_replacement": "scolipede",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "scrafty": {
+      "canonical_replacement": "scrafty",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "scyther": {
+      "canonical_replacement": "scyther",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "seadra": {
+      "canonical_replacement": "seadra",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "seaking": {
+      "canonical_replacement": "seaking",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 30,
+      "status": "VALID_EXACT"
+    },
+    "sealeo": {
+      "canonical_replacement": "sealeo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "seel": {
+      "canonical_replacement": "seel",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "seismitoad": {
+      "canonical_replacement": "seismitoad",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "sentret": {
+      "canonical_replacement": "sentret",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "serperior": {
+      "canonical_replacement": "serperior",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "seviper": {
+      "canonical_replacement": "seviper",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "sewaddle": {
+      "canonical_replacement": "sewaddle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "sharpedo": {
+      "canonical_replacement": "sharpedo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "shaymin": {
+      "canonical_replacement": "shaymin",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "shedinja": {
+      "canonical_replacement": "shedinja",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "shelgon": {
+      "canonical_replacement": "shelgon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "shellder": {
+      "canonical_replacement": "shellder",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "shellos": {
+      "canonical_replacement": "shellos",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "shieldon": {
+      "canonical_replacement": "shieldon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "shiftry": {
+      "canonical_replacement": "shiftry",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "shinx": {
+      "canonical_replacement": "shinx",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "shroomish": {
+      "canonical_replacement": "shroomish",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "shuckle": {
+      "canonical_replacement": "shuckle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "shuppet": {
+      "canonical_replacement": "shuppet",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "sigilyph": {
+      "canonical_replacement": "sigilyph",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "silcoon": {
+      "canonical_replacement": "silcoon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "silicobra": {
+      "canonical_replacement": "silicobra",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "silvally": {
+      "canonical_replacement": "silvally",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "simipour": {
+      "canonical_replacement": "simipour",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "simisage": {
+      "canonical_replacement": "simisage",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "simisear": {
+      "canonical_replacement": "simisear",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "sinistcha": {
+      "canonical_replacement": "sinistcha",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "sinistea": {
+      "canonical_replacement": "sinistea",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "sirfetchd": {
+      "canonical_replacement": "sirfetchd",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "sizzlipede": {
+      "canonical_replacement": "sizzlipede",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "skarmory": {
+      "canonical_replacement": "skarmory",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "skiddo": {
+      "canonical_replacement": "skiddo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "skiploom": {
+      "canonical_replacement": "skiploom",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "skitty": {
+      "canonical_replacement": "skitty",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "skorupi": {
+      "canonical_replacement": "skorupi",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "skuntank": {
+      "canonical_replacement": "skuntank",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "skwovet": {
+      "canonical_replacement": "skwovet",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "slowbro": {
+      "canonical_replacement": "slowbro",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "slowking": {
+      "canonical_replacement": "slowking",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "slowpoke": {
+      "canonical_replacement": "slowpoke",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "smeargle": {
+      "canonical_replacement": "smeargle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "smoochum": {
+      "canonical_replacement": "smoochum",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "sneasel": {
+      "canonical_replacement": "sneasel",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "sneasler": {
+      "canonical_replacement": "sneasler",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "snom": {
+      "canonical_replacement": "snom",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "snorlax": {
+      "canonical_replacement": "snorlax",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "snorunt": {
+      "canonical_replacement": "snorunt",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "snover": {
+      "canonical_replacement": "snover",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "snubbull": {
+      "canonical_replacement": "snubbull",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "solosis": {
+      "canonical_replacement": "solosis",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "solrock": {
+      "canonical_replacement": "solrock",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "spearow": {
+      "canonical_replacement": "spearow",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "spectrier": {
+      "canonical_replacement": "spectrier",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "spewpa": {
+      "canonical_replacement": "spewpa",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "spinarak": {
+      "canonical_replacement": "spinarak",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "spinda": {
+      "canonical_replacement": "spinda",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "spiritomb": {
+      "canonical_replacement": "spiritomb",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "squirtle": {
+      "canonical_replacement": "squirtle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "stantler": {
+      "canonical_replacement": "stantler",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "staraptor": {
+      "canonical_replacement": "staraptor",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 30,
+      "status": "VALID_EXACT"
+    },
+    "staravia": {
+      "canonical_replacement": "staravia",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 29,
+      "status": "VALID_EXACT"
+    },
+    "starly": {
+      "canonical_replacement": "starly",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 25,
+      "status": "VALID_EXACT"
+    },
+    "starmie": {
+      "canonical_replacement": "starmie",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "steelix": {
+      "canonical_replacement": "steelix",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 19,
+      "status": "VALID_EXACT"
+    },
+    "stonjourner": {
+      "canonical_replacement": "stonjourner",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "stoutland": {
+      "canonical_replacement": "stoutland",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "stunfisk": {
+      "canonical_replacement": "stunfisk",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "stunky": {
+      "canonical_replacement": "stunky",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 24,
+      "status": "VALID_EXACT"
+    },
+    "sudowoodo": {
+      "canonical_replacement": "sudowoodo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 15,
+      "status": "VALID_EXACT"
+    },
+    "suicune": {
+      "canonical_replacement": "suicune",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "sunflora": {
+      "canonical_replacement": "sunflora",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "sunkern": {
+      "canonical_replacement": "sunkern",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "surskit": {
+      "canonical_replacement": "surskit",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "swablu": {
+      "canonical_replacement": "swablu",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "swadloon": {
+      "canonical_replacement": "swadloon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "swalot": {
+      "canonical_replacement": "swalot",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "swampert": {
+      "canonical_replacement": "swampert",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "swanna": {
+      "canonical_replacement": "swanna",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "swellow": {
+      "canonical_replacement": "swellow",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "swinub": {
+      "canonical_replacement": "swinub",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "swoobat": {
+      "canonical_replacement": "swoobat",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "sylveon": {
+      "canonical_replacement": "sylveon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "talonflame": {
+      "canonical_replacement": "talonflame",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "tangela": {
+      "canonical_replacement": "tangela",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "tangrowth": {
+      "canonical_replacement": "tangrowth",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "tapubulu": {
+      "canonical_replacement": "tapubulu",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "tapufini": {
+      "canonical_replacement": "tapufini",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "tapukoko": {
+      "canonical_replacement": "tapukoko",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "tapulele": {
+      "canonical_replacement": "tapulele",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "tauros": {
+      "canonical_replacement": "tauros",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "teddiursa": {
+      "canonical_replacement": "teddiursa",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "tentacool": {
+      "canonical_replacement": "tentacool",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "tentacruel": {
+      "canonical_replacement": "tentacruel",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "terapagos": {
+      "canonical_replacement": "terapagos",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "terrakion": {
+      "canonical_replacement": "terrakion",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "thievul": {
+      "canonical_replacement": "thievul",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "throh": {
+      "canonical_replacement": "throh",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "thundurus": {
+      "canonical_replacement": "thundurus",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "thwackey": {
+      "canonical_replacement": "thwackey",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "timburr": {
+      "canonical_replacement": "timburr",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "tinkaton": {
+      "canonical_replacement": "tinkaton",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "tirtouga": {
+      "canonical_replacement": "tirtouga",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "togedemaru": {
+      "canonical_replacement": "togedemaru",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "togekiss": {
+      "canonical_replacement": "togekiss",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "togepi": {
+      "canonical_replacement": "togepi",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "togetic": {
+      "canonical_replacement": "togetic",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "torkoal": {
+      "canonical_replacement": "torkoal",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "torterra": {
+      "canonical_replacement": "torterra",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "toucannon": {
+      "canonical_replacement": "toucannon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "toxapex": {
+      "canonical_replacement": "toxapex",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "toxel": {
+      "canonical_replacement": "toxel",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "toxicroak": {
+      "canonical_replacement": "toxicroak",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "toxtricity": {
+      "canonical_replacement": "toxtricity",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "trapinch": {
+      "canonical_replacement": "trapinch",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "treecko": {
+      "canonical_replacement": "treecko",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "trevenant": {
+      "canonical_replacement": "trevenant",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "tropius": {
+      "canonical_replacement": "tropius",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "tsareena": {
+      "canonical_replacement": "tsareena",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "turtwig": {
+      "canonical_replacement": "turtwig",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "tynamo": {
+      "canonical_replacement": "tynamo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "typhlosion": {
+      "canonical_replacement": "typhlosion",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "tyranitar": {
+      "canonical_replacement": "tyranitar",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "tyrantrum": {
+      "canonical_replacement": "tyrantrum",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "tyrogue": {
+      "canonical_replacement": "tyrogue",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "umbreon": {
+      "canonical_replacement": "umbreon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "unfezant": {
+      "canonical_replacement": "unfezant",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "ursaluna": {
+      "canonical_replacement": "ursaluna",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "ursaring": {
+      "canonical_replacement": "ursaring",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "urshifu": {
+      "canonical_replacement": "urshifu",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 15,
+      "status": "VALID_EXACT"
+    },
+    "vanillish": {
+      "canonical_replacement": "vanillish",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "vanilluxe": {
+      "canonical_replacement": "vanilluxe",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "vaporeon": {
+      "canonical_replacement": "vaporeon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "venipede": {
+      "canonical_replacement": "venipede",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "venomoth": {
+      "canonical_replacement": "venomoth",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "venonat": {
+      "canonical_replacement": "venonat",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "venusaur": {
+      "canonical_replacement": "venusaur",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 15,
+      "status": "VALID_EXACT"
+    },
+    "vespiquen": {
+      "canonical_replacement": "vespiquen",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "vibrava": {
+      "canonical_replacement": "vibrava",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "victini": {
+      "canonical_replacement": "victini",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "victreebel": {
+      "canonical_replacement": "victreebel",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "vigoroth": {
+      "canonical_replacement": "vigoroth",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "vikavolt": {
+      "canonical_replacement": "vikavolt",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "vileplume": {
+      "canonical_replacement": "vileplume",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "vivillon": {
+      "canonical_replacement": "vivillon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "volbeat": {
+      "canonical_replacement": "volbeat",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "volcanion": {
+      "canonical_replacement": "volcanion",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "volcarona": {
+      "canonical_replacement": "volcarona",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "voltorb": {
+      "canonical_replacement": "voltorb",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "vullaby": {
+      "canonical_replacement": "vullaby",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "vulpix": {
+      "canonical_replacement": "vulpix",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "wailord": {
+      "canonical_replacement": "wailord",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "walrein": {
+      "canonical_replacement": "walrein",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "wartortle": {
+      "canonical_replacement": "wartortle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "weavile": {
+      "canonical_replacement": "weavile",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "weedle": {
+      "canonical_replacement": "weedle",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "weepinbell": {
+      "canonical_replacement": "weepinbell",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "weezing": {
+      "canonical_replacement": "weezing",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 28,
+      "status": "VALID_EXACT"
+    },
+    "whimsicott": {
+      "canonical_replacement": "whimsicott",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "whiscash": {
+      "canonical_replacement": "whiscash",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "wigglytuff": {
+      "canonical_replacement": "wigglytuff",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "wingull": {
+      "canonical_replacement": "wingull",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "wishiwashi": {
+      "canonical_replacement": "wishiwashi",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "wobbuffet": {
+      "canonical_replacement": "wobbuffet",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "woobat": {
+      "canonical_replacement": "woobat",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "wooloo": {
+      "canonical_replacement": "wooloo",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "wooper": {
+      "canonical_replacement": "wooper",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "wormadam": {
+      "canonical_replacement": "wormadam",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "wurmple": {
+      "canonical_replacement": "wurmple",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "xatu": {
+      "canonical_replacement": "xatu",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "xerneas": {
+      "canonical_replacement": "xerneas",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "yamask": {
+      "canonical_replacement": "yamask",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "yamper": {
+      "canonical_replacement": "yamper",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "yanma": {
+      "canonical_replacement": "yanma",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "yanmega": {
+      "canonical_replacement": "yanmega",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "yveltal": {
+      "canonical_replacement": "yveltal",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "zacian": {
+      "canonical_replacement": "zacian",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "zamazenta": {
+      "canonical_replacement": "zamazenta",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "zangoose": {
+      "canonical_replacement": "zangoose",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "zapdos": {
+      "canonical_replacement": "zapdos",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "zarude": {
+      "canonical_replacement": "zarude",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "zebstrika": {
+      "canonical_replacement": "zebstrika",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "zeraora": {
+      "canonical_replacement": "zeraora",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "zigzagoon": {
+      "canonical_replacement": "zigzagoon",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "zoroark": {
+      "canonical_replacement": "zoroark",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "zorua": {
+      "canonical_replacement": "zorua",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "zubat": {
+      "canonical_replacement": "zubat",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 35,
+      "status": "VALID_EXACT"
+    },
+    "zygarde": {
+      "canonical_replacement": "zygarde",
+      "evidence": "Found in data/cobblemon/species/",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    }
+  },
+  "summary": {
+    "invalid_count": 0,
+    "total_unique_species": 784,
+    "valid_exact_count": 784
+  }
+}
