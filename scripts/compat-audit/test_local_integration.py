@@ -42,6 +42,32 @@ class TestLocalIntegrationAudit(unittest.TestCase):
             self.assertTrue(os.path.exists(f), f"Reference binary missing: {f}")
 
     def test_full_audit_regeneration_determinism(self):
+        reports_rel_path = os.path.join("reports", "compat-audit")
+        reports_dir = os.path.join(REPO_ROOT, reports_rel_path)
+
+        # 1. Pre-condition: Git status must be clean for reports before test runs (catches staged or uncommitted drift)
+        pre_status = subprocess.run(
+            ["git", "status", "--porcelain", reports_rel_path],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True
+        )
+        self.assertEqual(
+            pre_status.stdout.strip(),
+            "",
+            f"Pre-condition failed: reports directory has uncommitted or staged changes relative to HEAD before running audit:\n{pre_status.stdout}"
+        )
+
+        # 2. Filesystem snapshot before running audit
+        snapshot_before = {}
+        for root, dirs, files in os.walk(reports_dir):
+            for f in sorted(files):
+                fp = os.path.join(root, f)
+                rel = os.path.relpath(fp, reports_dir)
+                with open(fp, "rb") as rf:
+                    snapshot_before[rel] = rf.read()
+
+        # 3. Run audit.py against authoritative instance
         audit_script = os.path.join(REPO_ROOT, "scripts", "compat-audit", "audit.py")
         res = subprocess.run(
             [sys.executable, audit_script, "--instance", self.instance_path],
@@ -51,17 +77,54 @@ class TestLocalIntegrationAudit(unittest.TestCase):
         )
         self.assertEqual(res.returncode, 0, f"audit.py failed:\n{res.stderr}\n{res.stdout}")
 
-        reports_dir = os.path.join(REPO_ROOT, "reports", "compat-audit")
-        git_diff = subprocess.run(
-            ["git", "diff", "--stat", reports_dir],
+        # 4. Filesystem snapshot after running audit
+        snapshot_after = {}
+        for root, dirs, files in os.walk(reports_dir):
+            for f in sorted(files):
+                fp = os.path.join(root, f)
+                rel = os.path.relpath(fp, reports_dir)
+                with open(fp, "rb") as rf:
+                    snapshot_after[rel] = rf.read()
+
+        self.assertEqual(
+            set(snapshot_before.keys()),
+            set(snapshot_after.keys()),
+            "Set of report files changed during audit regeneration!"
+        )
+
+        diffs = []
+        for rel in sorted(snapshot_before.keys()):
+            if snapshot_before[rel] != snapshot_after[rel]:
+                diffs.append(rel)
+        self.assertEqual(
+            diffs,
+            [],
+            f"Audit output modified report content on disk during regeneration: {diffs}"
+        )
+
+        # 5. Git post-condition: must match committed HEAD exactly (both staged and unstaged)
+        head_diff = subprocess.run(
+            ["git", "diff", "HEAD", "--", reports_rel_path],
             cwd=REPO_ROOT,
             capture_output=True,
             text=True
         )
         self.assertEqual(
-            git_diff.stdout.strip(),
+            head_diff.stdout.strip(),
             "",
-            f"Audit output is not deterministic across runs! Diff:\n{git_diff.stdout}"
+            f"Audit output differs from committed HEAD:\n{head_diff.stdout}"
+        )
+
+        post_status = subprocess.run(
+            ["git", "status", "--porcelain", reports_rel_path],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True
+        )
+        self.assertEqual(
+            post_status.stdout.strip(),
+            "",
+            f"Git status reported uncommitted/staged report changes after regeneration:\n{post_status.stdout}"
         )
 
 if __name__ == "__main__":

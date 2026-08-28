@@ -4,6 +4,7 @@ import unittest
 import json
 import tempfile
 import shutil
+import subprocess
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
@@ -284,6 +285,64 @@ class TestCanonicalAuditReports(unittest.TestCase):
             with open(bad_trainer, "w") as f:
                 json.dump(good_trainer, f)
             self.assertTrue(validate_future_pack(temp_dir))
+
+    def test_determinism_detector_catches_staged_drift(self):
+        """
+        Regression test proving determinism checks cannot false-pass on staged changes.
+        Verifies that staged differences relative to HEAD trigger test failure.
+        """
+        with tempfile.TemporaryDirectory() as td:
+            # Initialize a temporary git repository
+            subprocess.run(["git", "init"], cwd=td, check=True, capture_output=True)
+            subprocess.run(["git", "config", "user.email", "ci@antigravity.internal"], cwd=td, check=True)
+            subprocess.run(["git", "config", "user.name", "CI Validator"], cwd=td, check=True)
+
+            rep_dir = os.path.join(td, "reports", "compat-audit")
+            os.makedirs(rep_dir)
+            report_file = os.path.join(rep_dir, "test-report.json")
+            with open(report_file, "w", encoding="utf-8") as f:
+                f.write('{"initial_state": true}\n')
+
+            subprocess.run(["git", "add", "reports"], cwd=td, check=True)
+            subprocess.run(["git", "commit", "-m", "initial report"], cwd=td, check=True)
+
+            # 1. Clean state: diff HEAD is empty
+            clean_diff = subprocess.run(
+                ["git", "diff", "HEAD", "--", "reports/compat-audit"],
+                cwd=td, capture_output=True, text=True
+            )
+            self.assertEqual(clean_diff.stdout.strip(), "")
+
+            clean_status = subprocess.run(
+                ["git", "status", "--porcelain", "reports/compat-audit"],
+                cwd=td, capture_output=True, text=True
+            )
+            self.assertEqual(clean_status.stdout.strip(), "")
+
+            # 2. Introduce drift and STAGE it with git add
+            with open(report_file, "w", encoding="utf-8") as f:
+                f.write('{"drifted_state": true}\n')
+            subprocess.run(["git", "add", "reports"], cwd=td, check=True)
+
+            # 3. Old check ('git diff --stat reports') falsely returned empty
+            old_unstaged_diff = subprocess.run(
+                ["git", "diff", "--stat", "reports/compat-audit"],
+                cwd=td, capture_output=True, text=True
+            )
+            self.assertEqual(old_unstaged_diff.stdout.strip(), "", "Old check would have false-passed!")
+
+            # 4. New check ('git diff HEAD' + 'git status --porcelain') catches the staged drift
+            staged_head_diff = subprocess.run(
+                ["git", "diff", "HEAD", "--", "reports/compat-audit"],
+                cwd=td, capture_output=True, text=True
+            )
+            self.assertNotEqual(staged_head_diff.stdout.strip(), "", "New check must catch staged drift against HEAD!")
+
+            staged_status = subprocess.run(
+                ["git", "status", "--porcelain", "reports/compat-audit"],
+                cwd=td, capture_output=True, text=True
+            )
+            self.assertIn("M  reports/compat-audit/test-report.json", staged_status.stdout)
 
 if __name__ == "__main__":
     unittest.main()

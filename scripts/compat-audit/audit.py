@@ -40,7 +40,7 @@ def resolve_item_namespace(raw: str) -> str:
 def extract_mega_showdown_registered_items(ms_jar_path: str) -> set:
     """
     Extracts authoritative item identifiers from MegaShowdownItems.class bytecode.
-    Every registered item in Mega Showdown is a public static final RegistrySupplier field.
+    Extracts both RegistrySupplier fields and literal String resource arguments passed in <clinit>.
     """
     with zipfile.ZipFile(ms_jar_path, "r") as z:
         b = z.read("com/github/yajatkaul/mega_showdown/item/MegaShowdownItems.class")
@@ -55,13 +55,22 @@ def extract_mega_showdown_registered_items(ms_jar_path: str) -> set:
         if tag == 1:
             l = struct.unpack(">H", b[offset:offset+2])[0]
             offset += 2
-            cp[idx] = b[offset:offset+l].decode("utf-8", errors="replace")
+            cp[idx] = (tag, b[offset:offset+l].decode("utf-8", errors="replace"))
             offset += l
-        elif tag in (3, 4): offset += 4
-        elif tag in (5, 6): offset += 8; idx += 1
-        elif tag in (7, 8, 16, 19, 20): offset += 2
-        elif tag in (9, 10, 11, 12, 18): offset += 4
-        elif tag == 15: offset += 3
+        elif tag in (3, 4): cp[idx] = (tag, b[offset:offset+4]); offset += 4
+        elif tag in (5, 6): cp[idx] = (tag, b[offset:offset+8]); offset += 8; idx += 1
+        elif tag in (7, 8, 16, 19, 20):
+            val = struct.unpack(">H", b[offset:offset+2])[0]
+            cp[idx] = (tag, val)
+            offset += 2
+        elif tag in (9, 10, 11, 12, 18):
+            cp[idx] = (tag, b[offset:offset+4])
+            offset += 4
+        elif tag == 15:
+            cp[idx] = (tag, b[offset:offset+3])
+            offset += 3
+        else:
+            raise ValueError(f"Unsupported constant pool tag {tag} at offset {offset}")
         idx += 1
 
     access_flags, this_class, super_class, interfaces_count = struct.unpack(">HHHH", b[offset:offset+8])
@@ -73,23 +82,70 @@ def extract_mega_showdown_registered_items(ms_jar_path: str) -> set:
     for _ in range(fields_count):
         f_access, f_name_idx, f_desc_idx, f_attr_count = struct.unpack(">HHHH", b[offset:offset+8])
         offset += 8
-        f_name = cp[f_name_idx]
-        f_desc = cp[f_desc_idx]
+        f_name = cp[f_name_idx][1]
+        f_desc = cp[f_desc_idx][1]
         if "RegistrySupplier" in f_desc:
             registered.add(f"mega_showdown:{f_name.lower()}")
         for _ in range(f_attr_count):
             attr_name_idx, attr_len = struct.unpack(">HI", b[offset:offset+6])
             offset += 6 + attr_len
+
+    # Also parse <clinit> string constants for explicit registered paths (e.g. mega_bracelet_red, z_power_ring)
+    methods_count = struct.unpack(">H", b[offset:offset+2])[0]
+    offset += 2
+    for _ in range(methods_count):
+        m_name_idx, m_desc_idx, m_attr_count = struct.unpack(">HHHH", b[offset:offset+8])[1:4]
+        m_name = cp[m_name_idx][1]
+        offset += 8
+        m_code = None
+        for _ in range(m_attr_count):
+            attr_name_idx, attr_len = struct.unpack(">HI", b[offset:offset+6])
+            offset += 6
+            attr_name = cp[attr_name_idx][1]
+            attr_body = b[offset:offset+attr_len]
+            offset += attr_len
+            if m_name == "<clinit>" and attr_name == "Code":
+                m_code = attr_body
+
+        if m_code:
+            code_len = struct.unpack(">I", m_code[4:8])[0]
+            code = m_code[8:8+code_len]
+            ci = 0
+            while ci < len(code):
+                op = code[ci]
+                str_val = None
+                if op == 0x12: # ldc
+                    c_idx = code[ci+1]
+                    if c_idx < cp_count and cp[c_idx] and cp[c_idx][0] == 8:
+                        str_val = cp[cp[c_idx][1]][1]
+                    ci += 2
+                elif op == 0x13: # ldc_w
+                    c_idx = struct.unpack(">H", code[ci+1:ci+3])[0]
+                    if c_idx < cp_count and cp[c_idx] and cp[c_idx][0] == 8:
+                        str_val = cp[cp[c_idx][1]][1]
+                    ci += 3
+                else:
+                    ci += 1
+                if str_val and re.match(r"^[a-z0-9_]+$", str_val) and len(str_val) > 2:
+                    registered.add(f"mega_showdown:{str_val}")
+
+    if len(registered) < 50:
+        raise ValueError(f"Extracted only {len(registered)} items from Mega Showdown bytecode; expected >=50")
+
     return registered
 
 def extract_cobblemon_registered_items(c_jar_path: str) -> set:
     """
-    Extracts authoritative Cobblemon items by cross-referencing lang key definitions
+    Extracts high-confidence Cobblemon item set by cross-referencing lang key definitions
     (assets/cobblemon/lang/en_us.json) with item model definitions.
     This filters out non-item model overlays (e.g. poke_puff_overlay, rod cast states).
     """
     with zipfile.ZipFile(c_jar_path, "r") as z:
-        en_us = json.loads(z.read("assets/cobblemon/lang/en_us.json").decode("utf-8"))
+        try:
+            en_us = json.loads(z.read("assets/cobblemon/lang/en_us.json").decode("utf-8"))
+        except Exception as e:
+            raise ValueError(f"Failed to parse assets/cobblemon/lang/en_us.json: {e}")
+
         model_items = set(os.path.basename(n)[:-5] for n in z.namelist() if n.startswith("assets/cobblemon/models/item/") and n.endswith(".json"))
 
     en_us_items = set(k[len("item.cobblemon."):] for k in en_us.keys() if k.startswith("item.cobblemon."))
@@ -99,6 +155,10 @@ def extract_cobblemon_registered_items(c_jar_path: str) -> set:
     for it in model_items:
         if it in en_us_items or it in en_us_blocks:
             registered.add(f"cobblemon:{it}")
+
+    if len(registered) < 500:
+        raise ValueError(f"Extracted only {len(registered)} item definitions from Cobblemon JAR; expected >=500")
+
     return registered
 
 def derive_canonical_held_item(raw: str, all_registered_items: set, ms_items: set, vanilla_items: set) -> tuple:
@@ -108,7 +168,16 @@ def derive_canonical_held_item(raw: str, all_registered_items: set, ms_items: se
     """
     resolved = resolve_item_namespace(raw)
     if resolved in all_registered_items:
-        return "VALID_EXACT", resolved, f"Registered in {resolved.split(':')[0]}"
+        ns = resolved.split(":")[0]
+        if ns == "mega_showdown":
+            ev = "Registered in Mega Showdown item bytecode registry"
+        elif ns == "cobblemon":
+            ev = "High-confidence static match in Cobblemon item resources (lang + model)"
+        elif ns == "minecraft":
+            ev = "Standard Minecraft 1.21.1 vanilla item"
+        else:
+            ev = f"Registered in {ns}"
+        return "VALID_EXACT", resolved, ev
 
     # Namespace typo check
     if raw.startswith("megas_showdown:"):
@@ -238,7 +307,7 @@ def run_audit(instance_path=None, reports_dir=None):
             "Provide the path via --instance '<path>' or COBBLEVERSE_INSTANCE_PATH environment variable."
         )
 
-    # 1. Load authoritative mod and datapack data
+    # 1. Load authoritative mod and datapack data (fail closed on any missing file)
     c_jar_path = os.path.join(instance_path, "mods", f"Cobblemon-fabric-{METADATA['cobblemon_version']}+{METADATA['minecraft_version']}.jar")
     ms_jar_path = os.path.join(instance_path, "mods", f"mega_showdown-fabric-{METADATA['mega_showdown_version']}+{METADATA['cobblemon_version']}+{METADATA['minecraft_version']}.jar")
     rct_jar_path = os.path.join(instance_path, "mods", f"rctmod-fabric-{METADATA['minecraft_version']}-{METADATA['rct_mod_version']}.jar")
@@ -261,7 +330,7 @@ def run_audit(instance_path=None, reports_dir=None):
 
     all_registered_items = cobblemon_items | ms_items | vanilla_items
 
-    # Load Cobblemon species and forms
+    # Load Cobblemon species and forms (fail closed on any corrupt species JSON)
     species_by_id = {}
     with zipfile.ZipFile(c_jar_path, "r") as z:
         for n in z.namelist():
@@ -270,22 +339,38 @@ def run_audit(instance_path=None, reports_dir=None):
                 try:
                     d = json.loads(z.read(n).decode("utf-8"))
                     species_by_id[base_id] = d
-                except:
-                    pass
+                except Exception as e:
+                    raise ValueError(f"Failed to parse species definition {n} in Cobblemon JAR: {e}")
 
-    # Load Showdown moves and abilities
+    if len(species_by_id) < 784:
+        raise ValueError(f"Extracted only {len(species_by_id)} species from Cobblemon JAR; expected >=784")
+
+    # Load Showdown moves and abilities (fail closed if missing or empty)
     showdown_moves = set()
     showdown_abilities = set()
     with zipfile.ZipFile(c_jar_path, "r") as z:
-        if "data/cobblemon/showdown.zip" in z.namelist():
-            sz_data = z.read("data/cobblemon/showdown.zip")
-            with zipfile.ZipFile(io.BytesIO(sz_data)) as sz:
+        if "data/cobblemon/showdown.zip" not in z.namelist():
+            raise FileNotFoundError("data/cobblemon/showdown.zip not found in Cobblemon JAR")
+        sz_data = z.read("data/cobblemon/showdown.zip")
+        with zipfile.ZipFile(io.BytesIO(sz_data)) as sz:
+            try:
                 ab_txt = sz.read("data/abilities.js").decode("utf-8")
                 for m in re.finditer(r"^\s{2}([a-z0-9]+):\s*\{", ab_txt, re.MULTILINE):
                     showdown_abilities.add(m.group(1).lower())
+            except Exception as e:
+                raise ValueError(f"Failed to parse abilities.js from showdown.zip: {e}")
+
+            try:
                 mv_txt = sz.read("data/moves.js").decode("utf-8")
                 for m in re.finditer(r"^\s{2}([a-z0-9]+):\s*\{", mv_txt, re.MULTILINE):
                     showdown_moves.add(m.group(1).lower())
+            except Exception as e:
+                raise ValueError(f"Failed to parse moves.js from showdown.zip: {e}")
+
+    if len(showdown_moves) < 500:
+        raise ValueError(f"Extracted only {len(showdown_moves)} showdown moves; expected >=500")
+    if len(showdown_abilities) < 200:
+        raise ValueError(f"Extracted only {len(showdown_abilities)} showdown abilities; expected >=200")
 
     # Build Upstream Effective Baseline Trainer Set
     dp_trainers = set()
@@ -300,7 +385,14 @@ def run_audit(instance_path=None, reports_dir=None):
             if n.startswith("data/rctmod/trainers/") and n.endswith(".json"):
                 rct_jar_trainers.add(os.path.basename(n))
 
+    if len(dp_trainers) == 0:
+        raise ValueError(f"No trainer files found in {cv_dp_path}")
+    if len(rct_jar_trainers) == 0:
+        raise ValueError(f"No trainer files found in {rct_jar_path}")
+
     baseline_trainers = dp_trainers | rct_jar_trainers
+    if len(baseline_trainers) < 1000:
+        raise ValueError(f"Extracted only {len(baseline_trainers)} baseline trainers; expected >=1000")
 
     # 2. Scan Legacy Hell Mode Trainer Dataset
     legacy_files = []
@@ -322,8 +414,11 @@ def run_audit(instance_path=None, reports_dir=None):
                 legacy_files.append(f)
                 legacy_trainer_ids.add(f)
                 fp = os.path.join(root, f)
-                with open(fp, "r", encoding="utf-8") as jf:
-                    data = json.load(jf)
+                try:
+                    with open(fp, "r", encoding="utf-8") as jf:
+                        data = json.load(jf)
+                except Exception as e:
+                    raise ValueError(f"Failed to parse legacy trainer JSON {fp}: {e}")
 
                 for p_idx, p in enumerate(data.get("team", [])):
                     sp = p.get("species", "").lower()
