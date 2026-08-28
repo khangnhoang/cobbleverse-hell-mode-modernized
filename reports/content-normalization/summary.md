@@ -1,7 +1,7 @@
 # Phase D — Deterministic Content Normalization Report
 
-**Target Environment:** COBBLEVERSE 1.7.42-CF (Minecraft 1.21.1 Fabric)  
-**Dataset:** Modernized `pack/data/rctmod/trainers/` (1714 trainers)  
+**Target Environment:** COBBLEVERSE 1.7.42-CF (Minecraft 1.21.1 Fabric)
+**Dataset:** Modernized `pack/data/rctmod/trainers/` (1,714 trainers)
 
 ---
 
@@ -9,14 +9,15 @@
 
 | Category | Replaced / Corrected | Details |
 | :--- | :--- | :--- |
-| **Trainer Files Modified** | **99 files** | Out of 1714 total trainers (99 updated, 1615 unchanged) |
+| **Trainer Files Modified** | **107 files** | Out of 1,714 total trainers (107 updated, 1,607 unchanged) |
 | **Held-Item Replacements** | **53 occurrences** | Corrected 33 unique invalid IDs (Z-Crystals, Orbs, Plates, Memories, bare IDs) |
-| **Move Typo Replacements** | **22 occurrences** | Corrected 21 unique truncated move typos (`belly` -> `bellydrum`, `moonbl` -> `moonblast`, etc.) |
+| **Move Typo Replacements** | **24 occurrences** | Corrected 23 unique move IDs (21 typos + runtime fixes for `x_scissor` and `shadowblitz`) |
 | **Ability Typo Replacements** | **2 occurrences** | Corrected 2 truncated abilities (`magic` -> `magicbounce`, `shield` -> `shielddust`) |
 | **Aspect / Form Syntax Fixes** | **43 occurrences** | Corrected 29 unique species-aspect syntax discrepancies (`ice-rider`, `dusk-fusion`, `blaze-breed`) |
 | **Invalid Gimmick Usages** | **2 occurrences** | Removed `"mega": true` inside `gimmicks` record (Apollo Sharpedo, Giovanni Tyranitar) |
+| **Unsupported Bag Revives** | **10 trainers** | Converted unsupported `max_revive` entries into `cobblemon:full_restore` (preserving `maxItemUses`) |
 | **Multi-Held Arrays** | **201 preserved** | Kept as arrays with identical element order; inner IDs canonicalized |
-| **Intentionally Unresolved Values** | **Preserved** | `shadowblitz` (1), Radical Red Sevii forms (6), `wishiwashi::hisuian` (1), cosmetic aspects (4) |
+| **Intentionally Unresolved Values** | **Preserved** | Radical Red Sevii forms (6), `wishiwashi::hisuian` (1), cosmetic aspects (4) |
 
 ---
 
@@ -28,10 +29,18 @@
 - **Bare & Missing Namespace (4 IDs):** `charcoal` -> `minecraft:charcoal`, `booster_energy` -> `mega_showdown:booster_energy`, `adamant_crystal` -> `mega_showdown:adamant_crystal`, `lustrous_globe` -> `mega_showdown:lustrous_globe`.
 - **Namespace Typo (1 ID):** `megas_showdown:wellspring_mask` -> `mega_showdown:wellspring_mask`.
 
-### Moves (22 replacements across 21 unique IDs)
+### Bag Revive Items (10 trainers converted)
+- RCT trainer battle AI rejects revives on fainted party members (`is neither a BagItemLike or PokemonSelectingItem`).
+- Converted `max_revive` into equivalent additional `cobblemon:full_restore` units across 10 League/Champion encounters:
+  `hoenn_champion_rocco`, `hoenn_league_drake`, `hoenn_league_ester`, `hoenn_league_fosco`, `hoenn_league_frida`, `sinnoh_champion_camilla`, `sinnoh_league_aaron`, `sinnoh_league_luciano`, `sinnoh_league_terrie`, `sinnoh_league_vulcano`.
+- Normalized string quantities (`'5'` -> `5`) to numeric integers.
+- Preserved existing `battleRules.maxItemUses` (6 for Aaron/Luciano/Vulcano/Terrie/Rocco, 5 for Fosco/Ester/Frida/Drake, 7 for Camilla).
+
+### Moves (24 replacements across 23 unique IDs)
 - Truncated move names corrected to canonical Showdown names:
   `absor` -> `absorb`, `belly` -> `bellydrum`, `calmm` -> `calmmind`, `close` -> `closecombat`, `dazz` -> `dazzlinggleam`, `drain` -> `drainingkiss`, `dream` -> `dreameater`, `icebea` -> `icebeam`, `kara` -> `karatechop`, `moonbl` -> `moonblast`, `psych` -> `psychic`, `quick` -> `quickattack`, `reco` -> `recover`, `rockb` -> `rockblast`, `stonea` -> `stoneaxe`, `supers` -> `supersonic`, `thunderfa` -> `thunderfang`, `thunders` -> `thundershock`, `thunderw` -> `thunderwave`, `vicegrip` -> `visegrip`, `waterspo` -> `watersport`.
-- **Preserved Unresolved:** `shadowblitz` (Pokémon Colosseum shadow move) was intentionally NOT modified and remains queued for Phase E redesign.
+- **Runtime Correction:** `x_scissor` on Genesect in `johto_raffaello.json` -> `xscissor` (canonical Showdown identifier without underscores).
+- **Runtime Correction:** `shadowblitz` on Cofagrigus in `channeler_carly_01ba.json` -> `shadowball` (canonical Ghost STAB matching Doctor's standard Cofagrigus template in `ruin_mamoac_foster_0246.json`).
 
 ### Abilities (2 replacements across 2 unique IDs)
 - `magic` on Hatterene in `hoenn_tell.json` -> `magicbounce`
@@ -46,10 +55,10 @@
 - `indeedee::f` and `basculegion::f` -> `female`
 - `toxtricity::low_key` -> `low_key-form`
 - `shellos::east_sea` and `gastrodon::east_sea` -> `east-sea`
-- Therian, Origin, and Silvally memory form syntax standardizations.
+- Canonical Therian, Origin, and Silvally memory form syntax standardizations.
 - **Preserved Unresolved:** Radical Red Sevii forms (Mantine, Zebstrika, Zoroark, Ursaring, Milotic, Dodrio), `wishiwashi::hisuian`, and cosmetic aspects (`netherite-coating-full`, `surfing`, `flying`, `libre`) were intentionally preserved for runtime/gameplay verification.
 
-### Gimmick Record Cleanup
+### Gimmick Record Cleanup (2 occurrences)
 - Removed invalid `"mega": true` from `gimmicks` record on:
   - `team_rocket_admin_apollo.json` (Sharpedo — equipped with `mega_showdown:sharpedonite`)
   - `team_rocket_giovanni.json` (Tyranitar — equipped with `mega_showdown:tyranitarite`, retaining `dynamax: true` and `gmax: true`)

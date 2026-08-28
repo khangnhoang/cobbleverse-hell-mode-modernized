@@ -3282,10 +3282,10 @@
       "status": "VALID_EXACT"
     },
     "shadowblitz": {
-      "canonical_replacement": null,
-      "evidence": "Unrecognized move identifier",
       "occurrences": 1,
-      "status": "INVALID_NO_MATCH"
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH",
+      "canonical_replacement": "shadowball",
+      "evidence": "Unsupported shadow move replaced with canonical Ghost STAB shadowball matching Doctor's Cofagrigus template"
     },
     "shadowbone": {
       "canonical_replacement": "shadowbone",
@@ -4368,10 +4368,10 @@
       "status": "VALID_EXACT"
     },
     "x_scissor": {
-      "canonical_replacement": "x_scissor",
-      "evidence": "Registered in Cobblemon Showdown moves",
       "occurrences": 1,
-      "status": "VALID_EXACT"
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH",
+      "canonical_replacement": "xscissor",
+      "evidence": "Canonical Showdown identifier is xscissor without underscores"
     },
     "xscissor": {
       "canonical_replacement": "xscissor",
@@ -4411,9 +4411,9 @@
     }
   },
   "summary": {
-    "invalid_canonical_match_count": 21,
-    "invalid_no_match_count": 1,
+    "invalid_canonical_match_count": 23,
+    "invalid_no_match_count": 0,
     "total_unique_moves": 733,
-    "valid_exact_count": 711
+    "valid_exact_count": 710
   }
 }

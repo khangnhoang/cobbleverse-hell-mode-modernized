@@ -244,6 +244,8 @@ def validate_future_pack(repo_root):
         if os.path.exists(mv_path):
             with open(mv_path, "r", encoding="utf-8") as f:
                 forbidden_moves = {k for k, v in json.load(f).get("moves", {}).items() if v.get("status") == "INVALID_UNIQUE_CANONICAL_MATCH"}
+        forbidden_moves.add("x_scissor")
+        forbidden_moves.add("shadowblitz")
 
         ab_path = os.path.join(compat_reports_dir, "abilities.json")
         if os.path.exists(ab_path):
@@ -273,6 +275,10 @@ def validate_future_pack(repo_root):
                     elif len(d["team"]) == 0:
                         errors.append(f"{f}: 'team' array must contain at least 1 Pokemon")
                     else:
+                        for b in d.get("bag", []):
+                            if "revive" in b.get("item", "").lower():
+                                errors.append(f"{f}: contains unsupported revive item '{b.get('item')}' in bag")
+
                         for p in d.get("team", []):
                             sp = p.get("species", "").lower()
                             hi = p.get("heldItem")
