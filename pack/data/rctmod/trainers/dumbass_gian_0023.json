@@ -46,7 +46,7 @@
         "sitrus_berry"
       ],
       "aspects": [
-        "original"
+        "original-color"
       ]
     },
     {
@@ -105,11 +105,11 @@
         "spe": 252
       },
       "heldItem": [
-        "mega_showdown:solganium-z",
+        "mega_showdown:solganium_z",
         "steel_gem"
       ],
       "aspects": [
-        "dusk_mane"
+        "dusk-fusion"
       ]
     },
     {
@@ -174,7 +174,7 @@
         "life_orb"
       ],
       "aspects": [
-        "origin"
+        "origin-forme"
       ]
     },
     {
@@ -206,7 +206,7 @@
         "choice_specs"
       ],
       "aspects": [
-        "sky"
+        "sky-forme"
       ]
     }
   ]

@@ -1,6 +1,6 @@
 {
   "name": {
-    "literal": "Swimmer♀ Maria"
+    "literal": "Swimmer\u2640 Maria"
   },
   "ai": {
     "type": "rct",
@@ -133,7 +133,7 @@
         "life_orb"
       ],
       "aspects": [
-        "f"
+        "female"
       ]
     }
   ]

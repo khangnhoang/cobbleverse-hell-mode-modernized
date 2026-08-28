@@ -109,11 +109,11 @@
         "spe": 252
       },
       "heldItem": [
-        "mega_showdown:dousedrive",
+        "mega_showdown:douse_drive",
         "expert_belt"
       ],
       "aspects": [
-        "douse"
+        "douse-drive"
       ]
     },
     {
@@ -171,11 +171,11 @@
         "spe": 252
       },
       "heldItem": [
-        "mega_showdown:buginium-z",
+        "mega_showdown:buginium_z",
         "bug_gem"
       ],
       "aspects": [
-        "bug"
+        "bug-plate"
       ]
     },
     {

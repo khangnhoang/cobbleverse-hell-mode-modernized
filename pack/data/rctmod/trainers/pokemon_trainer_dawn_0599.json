@@ -1,6 +1,6 @@
 {
   "name": {
-    "literal": "Pokémon Trainer Dawn"
+    "literal": "Pok\u00e9mon Trainer Dawn"
   },
   "ai": {
     "type": "rct",
@@ -52,7 +52,7 @@
         "leftovers"
       ],
       "aspects": [
-        "sandy_cloak"
+        "sandy-cloak"
       ]
     },
     {
