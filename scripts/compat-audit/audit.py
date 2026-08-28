@@ -4,6 +4,7 @@ import json
 import zipfile
 import io
 import re
+import argparse
 from collections import Counter, defaultdict
 
 DEFAULT_INSTANCE_PATH = r"C:\Users\khang\curseforge\minecraft\Instances\COBBLEVERSE - Pokemon Adventure [Cobblemon]"
@@ -20,18 +21,107 @@ METADATA = {
     "legacy_dataset": "!Doctors HELL MODE DOUBLE BATTLE EVERYTHING"
 }
 
-def get_instance_path():
-    if len(sys.argv) > 1 and sys.argv[1]:
-        return sys.argv[1]
-    if "COBBLEVERSE_INSTANCE_PATH" in os.environ:
-        return os.environ["COBBLEVERSE_INSTANCE_PATH"]
-    return DEFAULT_INSTANCE_PATH
+def clean_identifier(raw: str) -> str:
+    """Strip namespace, spaces, hyphens, and underscores for normalized comparison."""
+    return raw.split(":")[-1].replace("_", "").replace("-", "").replace(" ", "").lower()
 
-def run_audit():
-    instance_path = get_instance_path()
+def resolve_item_namespace(raw: str) -> str:
+    """
+    Simulates RCT's Locations.withNamespace(itemId, 'cobblemon').
+    Unqualified bare items default strictly to 'cobblemon:'.
+    """
+    return raw if ":" in raw else f"cobblemon:{raw}"
+
+def derive_canonical_held_item(raw: str, all_registered_items: set, ms_items: set, vanilla_items: set) -> tuple:
+    """
+    Determines canonical resolution for a held item against registered items.
+    Returns: (status, canonical_replacement, evidence)
+    """
+    resolved = resolve_item_namespace(raw)
+    if resolved in all_registered_items:
+        return "VALID_EXACT", resolved, f"Registered in {resolved.split(':')[0]}"
+
+    # Namespace typo check
+    if raw.startswith("megas_showdown:"):
+        cand = "mega_showdown:" + raw[len("megas_showdown:"):]
+        if cand in ms_items:
+            return "INVALID_UNIQUE_CANONICAL_MATCH", cand, "Fixed namespace typo to mega_showdown"
+
+    # Hyphen / Underscore checks in mega_showdown
+    if raw.startswith("mega_showdown:"):
+        path = raw[len("mega_showdown:"):]
+        path_us = path.replace("-", "_")
+        cand_us = f"mega_showdown:{path_us}"
+        if cand_us in ms_items:
+            return "INVALID_UNIQUE_CANONICAL_MATCH", cand_us, "Corrected hyphen to underscore in mega_showdown item registry"
+        # Missing underscore search (e.g. blueorb -> blue_orb, steelmemory -> steel_memory)
+        cands = [m for m in ms_items if m.replace("_", "") == f"mega_showdown:{path}".replace("_", "")]
+        if len(cands) == 1:
+            return "INVALID_UNIQUE_CANONICAL_MATCH", cands[0], f"Corrected missing underscore to match registered item {cands[0]}"
+
+    # Bare item resolution checks
+    if ":" not in raw:
+        if f"minecraft:{raw}" in vanilla_items:
+            return "INVALID_UNIQUE_CANONICAL_MATCH", f"minecraft:{raw}", "Missing minecraft: namespace on vanilla item"
+        if f"mega_showdown:{raw}" in ms_items:
+            return "INVALID_UNIQUE_CANONICAL_MATCH", f"mega_showdown:{raw}", "Missing mega_showdown: namespace on Mega Showdown item"
+        raw_us = raw.replace("-", "_")
+        if f"mega_showdown:{raw_us}" in ms_items:
+            return "INVALID_UNIQUE_CANONICAL_MATCH", f"mega_showdown:{raw_us}", "Missing namespace and underscore in mega_showdown item"
+
+    return "INVALID_NO_MATCH", None, f"Unrecognized held item '{raw}'"
+
+def classify_species_aspect(species: str, aspect: str, all_valid_sp_asps: set) -> tuple:
+    """
+    Classifies a species-aspect pair against Cobblemon's registered FormData aspects.
+    Returns: (status, canonical_replacement, evidence)
+    """
+    if aspect in all_valid_sp_asps:
+        return "VALID_EXACT", aspect, f"Form aspect for species {species} in Cobblemon"
+
+    if aspect in ("mega", "mega_x", "mega_y", "primal"):
+        return "VALID_EXACT", aspect, "Mega/Primal aspect supported by Mega Showdown form injection"
+
+    # Deterministic mappings
+    norm_asp = aspect.replace("-", "").replace("_", "").lower()
+    for va in sorted(list(all_valid_sp_asps)):
+        norm_va = va.replace("-", "").replace("_", "").lower()
+        if norm_va == norm_asp or norm_asp in norm_va:
+            return "INVALID_UNIQUE_CANONICAL_MATCH", va, f"Normalized syntax discrepancy; matches Cobblemon aspect '{va}'"
+
+    if aspect == "f" and "female" in all_valid_sp_asps:
+        return "INVALID_UNIQUE_CANONICAL_MATCH", "female", "Gender form shorthand; maps to 'female'"
+    if aspect == "paldea-blaze" and species == "tauros":
+        return "INVALID_UNIQUE_CANONICAL_MATCH", "blaze-breed", "Tauros Paldean Blaze breed uses aspect 'blaze-breed' in Cobblemon"
+    if aspect in ("dusk-mane", "dusk_mane") and species == "necrozma":
+        return "INVALID_UNIQUE_CANONICAL_MATCH", "dusk-fusion", "Necrozma Dusk Mane form uses aspect 'dusk-fusion' in Cobblemon"
+    if aspect == "sevii":
+        return "INVALID_NO_MATCH", None, "Radical Red custom Sevii Island form; does not exist in Cobblemon"
+    if aspect == "hisuian" and species == "wishiwashi":
+        return "INVALID_NO_MATCH", None, "Wishiwashi has no official Hisuian form; Radical Red legacy asset"
+    if aspect in ("netherite-coating-full", "surfing", "flying", "libre"):
+        return "NEEDS_RUNTIME_TEST", aspect, "Cosmetic or special Cobblemon asset aspect requiring runtime verification"
+
+    return "INVALID_NO_MATCH", None, f"Aspect '{aspect}' not recognized for species {species}"
+
+def parse_args(args=None):
+    parser = argparse.ArgumentParser(description="Cobbleverse Hell Mode Canonical Compatibility Audit")
+    parser.add_argument("--instance", "--instance-path", "--instance-dir", dest="instance_path",
+                        default=os.environ.get("COBBLEVERSE_INSTANCE_PATH", DEFAULT_INSTANCE_PATH),
+                        help="Path to authoritative Cobbleverse instance directory")
+    parser.add_argument("--reports-dir", dest="reports_dir",
+                        default=None,
+                        help="Directory to output generated reports into")
+    return parser.parse_args(args)
+
+def run_audit(instance_path=None, reports_dir=None):
+    if not instance_path:
+        instance_path = os.environ.get("COBBLEVERSE_INSTANCE_PATH", DEFAULT_INSTANCE_PATH)
+
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     legacy_dir = os.path.join(repo_root, METADATA["legacy_dataset"], "data", "rctmod", "trainers")
-    reports_dir = os.path.join(repo_root, "reports", "compat-audit")
+    if not reports_dir:
+        reports_dir = os.path.join(repo_root, "reports", "compat-audit")
     os.makedirs(reports_dir, exist_ok=True)
 
     print("=" * 70)
@@ -43,13 +133,20 @@ def run_audit():
     print(f"Reports Output:  {reports_dir}")
     print("-" * 70)
 
+    # Verify presence of reference instance
+    if not os.path.exists(instance_path):
+        raise FileNotFoundError(
+            f"Authoritative Cobbleverse instance not found at: '{instance_path}'.\n"
+            "This full compatibility audit requires the external installed modpack.\n"
+            "Provide the path via --instance '<path>' or COBBLEVERSE_INSTANCE_PATH environment variable."
+        )
+
     # 1. Load authoritative mod and datapack data
     c_jar_path = os.path.join(instance_path, "mods", f"Cobblemon-fabric-{METADATA['cobblemon_version']}+{METADATA['minecraft_version']}.jar")
     ms_jar_path = os.path.join(instance_path, "mods", f"mega_showdown-fabric-{METADATA['mega_showdown_version']}+{METADATA['cobblemon_version']}+{METADATA['minecraft_version']}.jar")
     rct_jar_path = os.path.join(instance_path, "mods", f"rctmod-fabric-{METADATA['minecraft_version']}-{METADATA['rct_mod_version']}.jar")
     cv_dp_path = os.path.join(instance_path, "datapacks", "COBBLEVERSE-RCT-DP-v20.zip")
 
-    # Verify presence of reference files
     for p in [c_jar_path, ms_jar_path, rct_jar_path, cv_dp_path]:
         if not os.path.exists(p):
             raise FileNotFoundError(f"Authoritative reference file not found: {p}")
@@ -193,7 +290,6 @@ def run_audit():
     obsolete_in_hell = sorted(list(legacy_trainer_ids - baseline_trainers))
 
     # 4. Held Items Classification
-    # Note: RCT Locations.withNamespace(itemId, "cobblemon") defaults bare items to "cobblemon:"
     held_items_report = {
         "metadata": METADATA,
         "runtime_unqualified_rule": "Locations.withNamespace(raw, 'cobblemon') -> Unqualified IDs default strictly to 'cobblemon:' namespace. Non-cobblemon bare items fail at runtime.",
@@ -209,54 +305,8 @@ def run_audit():
     }
 
     for raw, count in sorted(held_item_counts.items()):
-        resolved = raw if ":" in raw else f"cobblemon:{raw}"
-        status = "INVALID_NO_MATCH"
-        canonical = None
-        source_evidence = None
-
-        if resolved in all_registered_items:
-            status = "VALID_EXACT"
-            canonical = resolved
-            source_evidence = "Registered in " + resolved.split(":")[0]
-        else:
-            # Deterministic replacement derivation
-            if raw.startswith("megas_showdown:"):
-                cand = "mega_showdown:" + raw[len("megas_showdown:"):]
-                if cand in ms_items:
-                    status = "INVALID_UNIQUE_CANONICAL_MATCH"
-                    canonical = cand
-                    source_evidence = "Fixed namespace typo to mega_showdown"
-            elif raw.startswith("mega_showdown:"):
-                path = raw[len("mega_showdown:"):]
-                path_us = path.replace("-", "_")
-                cand_us = f"mega_showdown:{path_us}"
-                if cand_us in ms_items:
-                    status = "INVALID_UNIQUE_CANONICAL_MATCH"
-                    canonical = cand_us
-                    source_evidence = "Corrected hyphen to underscore in mega_showdown item registry"
-                else:
-                    # Missing underscore search (e.g. blueorb -> blue_orb, steelmemory -> steel_memory)
-                    cands = [m for m in ms_items if m.replace("_", "") == f"mega_showdown:{path}".replace("_", "")]
-                    if len(cands) == 1:
-                        status = "INVALID_UNIQUE_CANONICAL_MATCH"
-                        canonical = cands[0]
-                        source_evidence = f"Corrected missing underscore to match registered item {cands[0]}"
-            elif ":" not in raw:
-                # Bare item resolution check
-                if f"minecraft:{raw}" in vanilla_items:
-                    status = "INVALID_UNIQUE_CANONICAL_MATCH"
-                    canonical = f"minecraft:{raw}"
-                    source_evidence = "Missing minecraft: namespace on vanilla item"
-                elif f"mega_showdown:{raw}" in ms_items:
-                    status = "INVALID_UNIQUE_CANONICAL_MATCH"
-                    canonical = f"mega_showdown:{raw}"
-                    source_evidence = "Missing mega_showdown: namespace on Mega Showdown item"
-                else:
-                    raw_us = raw.replace("-", "_")
-                    if f"mega_showdown:{raw_us}" in ms_items:
-                        status = "INVALID_UNIQUE_CANONICAL_MATCH"
-                        canonical = f"mega_showdown:{raw_us}"
-                        source_evidence = "Missing namespace and underscore in mega_showdown item"
+        resolved = resolve_item_namespace(raw)
+        status, canonical, source_evidence = derive_canonical_held_item(raw, all_registered_items, ms_items, vanilla_items)
 
         held_items_report["items"][raw] = {
             "occurrences": count,
@@ -335,7 +385,7 @@ def run_audit():
         "moves": {}
     }
     for m, count in sorted(move_counts.items()):
-        m_clean = m.split(":")[-1].replace("_", "").replace("-", "").replace(" ", "").lower()
+        m_clean = clean_identifier(m)
         if m_clean in showdown_moves or m.lower() in showdown_moves:
             status = "VALID_EXACT"
             canonical = m
@@ -375,7 +425,7 @@ def run_audit():
         "abilities": {}
     }
     for a, count in sorted(ability_counts.items()):
-        a_clean = a.split(":")[-1].replace("_", "").replace("-", "").replace(" ", "").lower()
+        a_clean = clean_identifier(a)
         if a_clean in showdown_abilities or a.lower() in showdown_abilities:
             status = "VALID_EXACT"
             canonical = a
@@ -422,60 +472,7 @@ def run_audit():
                 form_asps.add(fa)
         all_valid_sp_asps = base_asps | form_asps
 
-        status = "INVALID_NO_MATCH"
-        canonical = None
-        evidence = None
-
-        if asp in all_valid_sp_asps:
-            status = "VALID_EXACT"
-            canonical = asp
-            evidence = f"Form aspect for species {sp} in Cobblemon"
-        elif asp in ("mega", "mega_x", "mega_y", "primal"):
-            # Handled by Mega Showdown aspect injection
-            status = "VALID_EXACT"
-            canonical = asp
-            evidence = "Mega/Primal aspect supported by Mega Showdown form injection"
-        else:
-            # Deterministic mappings
-            norm_asp = asp.replace("-", "").replace("_", "").lower()
-            matched = False
-            for va in sorted(list(all_valid_sp_asps)):
-                norm_va = va.replace("-", "").replace("_", "").lower()
-                if norm_va == norm_asp or norm_asp in norm_va:
-                    status = "INVALID_UNIQUE_CANONICAL_MATCH"
-                    canonical = va
-                    evidence = f"Normalized syntax discrepancy; matches Cobblemon aspect '{va}'"
-                    matched = True
-                    break
-            if not matched:
-                if asp == "f" and "female" in all_valid_sp_asps:
-                    status = "INVALID_UNIQUE_CANONICAL_MATCH"
-                    canonical = "female"
-                    evidence = "Gender form shorthand; maps to 'female'"
-                elif asp == "paldea-blaze" and sp == "tauros":
-                    status = "INVALID_UNIQUE_CANONICAL_MATCH"
-                    canonical = "blaze-breed"
-                    evidence = "Tauros Paldean Blaze breed uses aspect 'blaze-breed' in Cobblemon"
-                elif asp in ("dusk-mane", "dusk_mane") and sp == "necrozma":
-                    status = "INVALID_UNIQUE_CANONICAL_MATCH"
-                    canonical = "dusk-fusion"
-                    evidence = "Necrozma Dusk Mane form uses aspect 'dusk-fusion' in Cobblemon"
-                elif asp == "sevii":
-                    status = "INVALID_NO_MATCH"
-                    canonical = None
-                    evidence = "Radical Red custom Sevii Island form; does not exist in Cobblemon"
-                elif asp == "hisuian" and sp == "wishiwashi":
-                    status = "INVALID_NO_MATCH"
-                    canonical = None
-                    evidence = "Wishiwashi has no official Hisuian form; Radical Red legacy asset"
-                elif asp in ("netherite-coating-full", "surfing", "flying", "libre"):
-                    status = "NEEDS_RUNTIME_TEST"
-                    canonical = asp
-                    evidence = "Cosmetic or special Cobblemon asset aspect requiring runtime verification"
-                else:
-                    status = "INVALID_NO_MATCH"
-                    canonical = None
-                    evidence = f"Aspect '{asp}' not recognized for species {sp}"
+        status, canonical, evidence = classify_species_aspect(sp, asp, all_valid_sp_asps)
 
         key = f"{sp}::{asp}"
         aspects_report["aspect_combinations"][key] = {
@@ -700,4 +697,5 @@ def run_audit():
     print("Canonical compatibility audit complete!")
 
 if __name__ == "__main__":
-    run_audit()
+    args = parse_args()
+    run_audit(instance_path=args.instance_path, reports_dir=args.reports_dir)

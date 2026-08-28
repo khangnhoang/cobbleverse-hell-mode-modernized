@@ -1,6 +1,6 @@
 # Cobbleverse Hell Mode Modernized
 
-A community modernization project bringing the intense, world-wide Doubles battle experience of **Doctor''s Hell Mode** up to date with modern **Cobbleverse** versions.
+A community modernization project bringing the intense, world-wide Doubles battle experience of **Doctor's Hell Mode** up to date with modern **Cobbleverse** versions.
 
 > **Status: Work in Progress**  
 > This repository represents an ongoing modernization and compatibility initiative. It is **not yet a finished drop-in replacement** for active play.
@@ -13,7 +13,7 @@ The original Hell Mode created by Doctor provided a comprehensive overhaul that 
 
 However, because the legacy addon was based on a snapshot from early 2026, subsequent updates to Cobbleverse, Cobblemon, and Radical Cobblemon Trainers (RCT) have led to drift, stale items, and missing storyline trainers.
 
-This project aims to preserve the spirit and high-difficulty competitive Doubles design of Doctor''s original work while modernizing it against current modpack standards.
+This project aims to preserve the spirit and high-difficulty competitive Doubles design of Doctor's original work while modernizing it against current modpack standards.
 
 ---
 
@@ -21,10 +21,10 @@ This project aims to preserve the spirit and high-difficulty competitive Doubles
 
 - **Up-to-Date Compatibility:** Ensure seamless compatibility with the latest Cobbleverse modpack releases.
 - **Item & Mechanic Corrections:** Fix legacy item identifier discrepancies (such as hyphenated Z-Crystals, namespace mismatches, and Mega Showdown changes).
-- **Form & Aspect Consistency:** Validate all Pokémon forms, regional variants, and aspect tags against current Cobblemon data.
+- **Form & Aspect Consistency:** Validate all PokÃ©mon forms, regional variants, and aspect tags against current Cobblemon data.
 - **Reconcile New Content:** Port and design proper Doubles teams for newly added Cobbleverse storyline trainers (including Team Galactic commanders and Hisuian characters).
 - **Clean Override Footprint:** Eliminate trivial or unnecessary file overrides, ensuring only intentionally reworked trainers take precedence over upstream data.
-- **Optional Competitive Guardrails:** Provide small, optional server-side companion rules (such as enforcing a maximum of 1 Legendary or Mythical Pokémon in the player''s party).
+- **Optional Competitive Guardrails:** Provide small, optional server-side companion rules (such as enforcing a maximum of 1 Legendary or Mythical PokÃ©mon in the player's party).
 
 ---
 
@@ -41,9 +41,40 @@ This project aims to preserve the spirit and high-difficulty competitive Doubles
 
 ---
 
+## Testing & CI Validation
+
+This repository maintains a two-tier validation architecture:
+
+### 1. CI-Safe Repository Validation (Runs in GitHub Actions)
+Validates repository integrity on every push and pull request without requiring external Minecraft binaries:
+- **Legacy Baseline Protection:** Confirms `!Doctors HELL MODE DOUBLE BATTLE EVERYTHING/` remains unmodified against its pinned reference checksum.
+- **Data & Schema Integrity:** Parses all 1,663 trainer JSONs and generated report files for strict syntax and invariant compliance.
+- **CI-Safe Regression Suite:** Validates report schemas, classification invariants, and pure audit functions.
+
+```bash
+# Run CI-safe checks locally
+python scripts/ci/check_legacy_baseline.py
+python scripts/ci/validate_repo.py
+python -m unittest scripts/compat-audit/test_audit.py -v
+```
+
+### 2. Local Full Integration Audit (Requires Installed Modpack)
+Authoritative audit validating directly against the live Cobbleverse mod JARs and datapack. Mod binaries are intentionally not committed to Git:
+```bash
+# Run full compatibility audit against local Cobbleverse instance
+python scripts/compat-audit/audit.py --instance "C:/path/to/Cobbleverse/Instance"
+
+# Run local integration tests (verifies report regeneration determinism)
+python -m unittest scripts/compat-audit/test_local_integration.py -v
+```
+
+---
+
 ## Project Structure
 
-- `!Doctors HELL MODE DOUBLE BATTLE EVERYTHING/`: Preserved legacy baseline reference dataset.
+- `!Doctors HELL MODE DOUBLE BATTLE EVERYTHING/`: Preserved legacy baseline reference dataset (strictly read-only).
+- `scripts/`: Tooling for compatibility auditing and CI verification.
+- `reports/`: Machine-readable audit evidence and executive summaries.
 - `implementation-plans/`: Technical planning documentation, architecture notes, and progress trackers.
 
 Detailed technical implementation documentation can be found in [`implementation-plans/hell-mode-modernization/plan.md`](implementation-plans/hell-mode-modernization/plan.md).

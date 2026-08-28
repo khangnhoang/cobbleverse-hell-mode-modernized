@@ -34,3 +34,8 @@ $RECYCLE.BIN/
 *.bak
 *.swp
 *~
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
