@@ -88,13 +88,18 @@ cobbleverse-hell-mode-modernized/
 - Write public-facing `README.md` clearly crediting Doctor and setting work-in-progress expectations.
 - Maintain immutable reference to the imported legacy baseline commit.
 
-### Phase B — Canonical Compatibility Audit
-Before executing bulk modifications, run automated validation scripts against the current mod JARs:
-1. **Held Items:** Cross-reference all items against `mega_showdown-1.8.4` and `Cobblemon-1.7.3` item registries.
-2. **Species, Moves, Abilities:** Validate against Showdown data inside Cobblemon 1.7.3 (`data/cobblemon/showdown.zip`).
-3. **Aspects & Forms:** Validate all form strings against Cobblemon `FormData` (e.g. distinguishing `cornerstone-mask` vs `cornerstone_mask`, `ice-rider` vs `ice_rider`).
-4. **Gimmicks:** Validate that only `tera`, `dynamax`, and `gmax` are placed in the `gimmicks` record, removing defunct `"mega": true` attributes.
-5. **Multi-Held Items:** Inventory all 201 instances of dual-item assignments for single-item resolution.
+### Phase B — Canonical Compatibility Audit (Completed Tooling & Evidence)
+Automated validation tooling has been established in `scripts/compat-audit/` and verified against reference mod JARs:
+- **Master Audit Runner:** `python scripts/compat-audit/audit.py`
+- **Regression Test Suite:** `python scripts/compat-audit/test_audit.py`
+- **Generated Reports:** Stored in `reports/compat-audit/` covering held items, species, moves, abilities, aspects, gimmicks, multi-held items, and trainer inventories.
+- **Audit Findings Summary:**
+  1. **Held Items:** 181 valid; 33 invalid with deterministic replacements (22 hyphenated Z-Crystals, 6 missing underscores, 4 bare namespace omissions, 1 typo); 0 ambiguous.
+  2. **Species:** All 784 species verified 100% valid against Cobblemon 1.7.3.
+  3. **Moves & Abilities:** 681 valid moves, 21 truncated typos (safe matches), 1 unsupported shadow move (`shadowblitz`); 275 valid abilities, 2 truncated typos (`magic` -> `magicbounce`, `shield` -> `shielddust`).
+  4. **Aspects:** 79 exact matches; 20 syntax discrepancies with safe matches; 11 unsupported Radical Red forms (`sevii`); 4 cosmetics needing runtime check.
+  5. **Gimmicks:** Only 2 invalid usages of `"mega": true` inside the `gimmicks` record (`team_rocket_admin_apollo` and `team_rocket_giovanni`).
+  6. **Multi-Held Items:** 201 cases inventoried (200 clearly intending Mega/Z-Crystal priority; 1 requiring design review).
 
 ### Phase C — Trainer Reconciliation & Override Pruning
 1. **Prune Obsolete Trainers:** Delete the 3 orphan IDs (`galaxy_bobbo`, `galaxy_ominorosso`, `swimmer_gengar`).

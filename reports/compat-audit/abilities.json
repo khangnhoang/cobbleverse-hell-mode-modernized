@@ -1,0 +1,1569 @@
+{
+  "abilities": {
+    "adaptability": {
+      "canonical_replacement": "adaptability",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 21,
+      "status": "VALID_EXACT"
+    },
+    "aerilate": {
+      "canonical_replacement": "aerilate",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "aftermath": {
+      "canonical_replacement": "aftermath",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 34,
+      "status": "VALID_EXACT"
+    },
+    "analytic": {
+      "canonical_replacement": "analytic",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "angerpoint": {
+      "canonical_replacement": "angerpoint",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "anticipation": {
+      "canonical_replacement": "anticipation",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 23,
+      "status": "VALID_EXACT"
+    },
+    "arenatrap": {
+      "canonical_replacement": "arenatrap",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "armortail": {
+      "canonical_replacement": "armortail",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "aromaveil": {
+      "canonical_replacement": "aromaveil",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "asoneglastrier": {
+      "canonical_replacement": "asoneglastrier",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "asonespectrier": {
+      "canonical_replacement": "asonespectrier",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "baddreams": {
+      "canonical_replacement": "baddreams",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "ballfetch": {
+      "canonical_replacement": "ballfetch",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "battlearmor": {
+      "canonical_replacement": "battlearmor",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 35,
+      "status": "VALID_EXACT"
+    },
+    "battlebond": {
+      "canonical_replacement": "battlebond",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "beadsofruin": {
+      "canonical_replacement": "beadsofruin",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "beastboost": {
+      "canonical_replacement": "beastboost",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "berserk": {
+      "canonical_replacement": "berserk",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "blaze": {
+      "canonical_replacement": "blaze",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 63,
+      "status": "VALID_EXACT"
+    },
+    "bulletproof": {
+      "canonical_replacement": "bulletproof",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "cheekpouch": {
+      "canonical_replacement": "cheekpouch",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "chlorophyll": {
+      "canonical_replacement": "chlorophyll",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 89,
+      "status": "VALID_EXACT"
+    },
+    "clearbody": {
+      "canonical_replacement": "clearbody",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 40,
+      "status": "VALID_EXACT"
+    },
+    "cloudnine": {
+      "canonical_replacement": "cloudnine",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "colorchange": {
+      "canonical_replacement": "colorchange",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "comatose": {
+      "canonical_replacement": "comatose",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "competitive": {
+      "canonical_replacement": "competitive",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "compoundeyes": {
+      "canonical_replacement": "compoundeyes",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 21,
+      "status": "VALID_EXACT"
+    },
+    "contrary": {
+      "canonical_replacement": "contrary",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "corrosion": {
+      "canonical_replacement": "corrosion",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "cottondown": {
+      "canonical_replacement": "cottondown",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "cursedbody": {
+      "canonical_replacement": "cursedbody",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 25,
+      "status": "VALID_EXACT"
+    },
+    "cutecharm": {
+      "canonical_replacement": "cutecharm",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 37,
+      "status": "VALID_EXACT"
+    },
+    "damp": {
+      "canonical_replacement": "damp",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 33,
+      "status": "VALID_EXACT"
+    },
+    "dancer": {
+      "canonical_replacement": "dancer",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "darkaura": {
+      "canonical_replacement": "darkaura",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "dauntlessshield": {
+      "canonical_replacement": "dauntlessshield",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "dazzling": {
+      "canonical_replacement": "dazzling",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "defeatist": {
+      "canonical_replacement": "defeatist",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "defiant": {
+      "canonical_replacement": "defiant",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 15,
+      "status": "VALID_EXACT"
+    },
+    "deltastream": {
+      "canonical_replacement": "deltastream",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "disguise": {
+      "canonical_replacement": "disguise",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "download": {
+      "canonical_replacement": "download",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "drizzle": {
+      "canonical_replacement": "drizzle",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 31,
+      "status": "VALID_EXACT"
+    },
+    "drought": {
+      "canonical_replacement": "drought",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 20,
+      "status": "VALID_EXACT"
+    },
+    "dryskin": {
+      "canonical_replacement": "dryskin",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "earlybird": {
+      "canonical_replacement": "earlybird",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 31,
+      "status": "VALID_EXACT"
+    },
+    "effectspore": {
+      "canonical_replacement": "effectspore",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "electricsurge": {
+      "canonical_replacement": "electricsurge",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "electromorphosis": {
+      "canonical_replacement": "electromorphosis",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "emergencyexit": {
+      "canonical_replacement": "emergencyexit",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "fairyaura": {
+      "canonical_replacement": "fairyaura",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "filter": {
+      "canonical_replacement": "filter",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 22,
+      "status": "VALID_EXACT"
+    },
+    "flamebody": {
+      "canonical_replacement": "flamebody",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 33,
+      "status": "VALID_EXACT"
+    },
+    "flareboost": {
+      "canonical_replacement": "flareboost",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "flashfire": {
+      "canonical_replacement": "flashfire",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 81,
+      "status": "VALID_EXACT"
+    },
+    "flowergift": {
+      "canonical_replacement": "flowergift",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "flowerveil": {
+      "canonical_replacement": "flowerveil",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "fluffy": {
+      "canonical_replacement": "fluffy",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "forecast": {
+      "canonical_replacement": "forecast",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "forewarn": {
+      "canonical_replacement": "forewarn",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "friendguard": {
+      "canonical_replacement": "friendguard",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "frisk": {
+      "canonical_replacement": "frisk",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 72,
+      "status": "VALID_EXACT"
+    },
+    "furcoat": {
+      "canonical_replacement": "furcoat",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "galewings": {
+      "canonical_replacement": "galewings",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "galvanize": {
+      "canonical_replacement": "galvanize",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "gluttony": {
+      "canonical_replacement": "gluttony",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 15,
+      "status": "VALID_EXACT"
+    },
+    "goodasgold": {
+      "canonical_replacement": "goodasgold",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "gooey": {
+      "canonical_replacement": "gooey",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "grassysurge": {
+      "canonical_replacement": "grassysurge",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "grimneigh": {
+      "canonical_replacement": "grimneigh",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "gulpmissile": {
+      "canonical_replacement": "gulpmissile",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "guts": {
+      "canonical_replacement": "guts",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 96,
+      "status": "VALID_EXACT"
+    },
+    "hadronengine": {
+      "canonical_replacement": "hadronengine",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "harvest": {
+      "canonical_replacement": "harvest",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "healer": {
+      "canonical_replacement": "healer",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "heatproof": {
+      "canonical_replacement": "heatproof",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "heavymetal": {
+      "canonical_replacement": "heavymetal",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "honeygather": {
+      "canonical_replacement": "honeygather",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "hospitality": {
+      "canonical_replacement": "hospitality",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "hugepower": {
+      "canonical_replacement": "hugepower",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 22,
+      "status": "VALID_EXACT"
+    },
+    "hungerswitch": {
+      "canonical_replacement": "hungerswitch",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "hustle": {
+      "canonical_replacement": "hustle",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 25,
+      "status": "VALID_EXACT"
+    },
+    "hydration": {
+      "canonical_replacement": "hydration",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 20,
+      "status": "VALID_EXACT"
+    },
+    "hypercutter": {
+      "canonical_replacement": "hypercutter",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 15,
+      "status": "VALID_EXACT"
+    },
+    "icebody": {
+      "canonical_replacement": "icebody",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "iceface": {
+      "canonical_replacement": "iceface",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "icescales": {
+      "canonical_replacement": "icescales",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "illuminate": {
+      "canonical_replacement": "illuminate",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "illusion": {
+      "canonical_replacement": "illusion",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "immunity": {
+      "canonical_replacement": "immunity",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "imposter": {
+      "canonical_replacement": "imposter",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "infiltrator": {
+      "canonical_replacement": "infiltrator",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "innerfocus": {
+      "canonical_replacement": "innerfocus",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 149,
+      "status": "VALID_EXACT"
+    },
+    "insomnia": {
+      "canonical_replacement": "insomnia",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 24,
+      "status": "VALID_EXACT"
+    },
+    "intimidate": {
+      "canonical_replacement": "intimidate",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 262,
+      "status": "VALID_EXACT"
+    },
+    "intrepidsword": {
+      "canonical_replacement": "intrepidsword",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "ironbarbs": {
+      "canonical_replacement": "ironbarbs",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "ironfist": {
+      "canonical_replacement": "ironfist",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 38,
+      "status": "VALID_EXACT"
+    },
+    "justified": {
+      "canonical_replacement": "justified",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "keeneye": {
+      "canonical_replacement": "keeneye",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 61,
+      "status": "VALID_EXACT"
+    },
+    "klutz": {
+      "canonical_replacement": "klutz",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "leafguard": {
+      "canonical_replacement": "leafguard",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "levitate": {
+      "canonical_replacement": "levitate",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 188,
+      "status": "VALID_EXACT"
+    },
+    "lightningrod": {
+      "canonical_replacement": "lightningrod",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 31,
+      "status": "VALID_EXACT"
+    },
+    "limber": {
+      "canonical_replacement": "limber",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 33,
+      "status": "VALID_EXACT"
+    },
+    "liquidooze": {
+      "canonical_replacement": "liquidooze",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "liquidvoice": {
+      "canonical_replacement": "liquidvoice",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "longreach": {
+      "canonical_replacement": "longreach",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "magic": {
+      "canonical_replacement": "magicbounce",
+      "evidence": "Truncated ability name; resolved to 'magicbounce'",
+      "occurrences": 1,
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "magicbounce": {
+      "canonical_replacement": "magicbounce",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 20,
+      "status": "VALID_EXACT"
+    },
+    "magicguard": {
+      "canonical_replacement": "magicguard",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 35,
+      "status": "VALID_EXACT"
+    },
+    "magician": {
+      "canonical_replacement": "magician",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "magmaarmor": {
+      "canonical_replacement": "magmaarmor",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "magnetpull": {
+      "canonical_replacement": "magnetpull",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 13,
+      "status": "VALID_EXACT"
+    },
+    "marvelscale": {
+      "canonical_replacement": "marvelscale",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "megalauncher": {
+      "canonical_replacement": "megalauncher",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "merciless": {
+      "canonical_replacement": "merciless",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "mindseye": {
+      "canonical_replacement": "mindseye",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "minus": {
+      "canonical_replacement": "minus",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "mirrorarmor": {
+      "canonical_replacement": "mirrorarmor",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "mistysurge": {
+      "canonical_replacement": "mistysurge",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "moldbreaker": {
+      "canonical_replacement": "moldbreaker",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 29,
+      "status": "VALID_EXACT"
+    },
+    "moody": {
+      "canonical_replacement": "moody",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "motordrive": {
+      "canonical_replacement": "motordrive",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "moxie": {
+      "canonical_replacement": "moxie",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 15,
+      "status": "VALID_EXACT"
+    },
+    "multiscale": {
+      "canonical_replacement": "multiscale",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "multitype": {
+      "canonical_replacement": "multitype",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "mummy": {
+      "canonical_replacement": "mummy",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 6,
+      "status": "VALID_EXACT"
+    },
+    "naturalcure": {
+      "canonical_replacement": "naturalcure",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 56,
+      "status": "VALID_EXACT"
+    },
+    "neuroforce": {
+      "canonical_replacement": "neuroforce",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "neutralizinggas": {
+      "canonical_replacement": "neutralizinggas",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 22,
+      "status": "VALID_EXACT"
+    },
+    "noguard": {
+      "canonical_replacement": "noguard",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 71,
+      "status": "VALID_EXACT"
+    },
+    "oblivious": {
+      "canonical_replacement": "oblivious",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 28,
+      "status": "VALID_EXACT"
+    },
+    "orichalcumpulse": {
+      "canonical_replacement": "orichalcumpulse",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "overcoat": {
+      "canonical_replacement": "overcoat",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "overgrow": {
+      "canonical_replacement": "overgrow",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 48,
+      "status": "VALID_EXACT"
+    },
+    "owntempo": {
+      "canonical_replacement": "owntempo",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 45,
+      "status": "VALID_EXACT"
+    },
+    "parentalbond": {
+      "canonical_replacement": "parentalbond",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "perishbody": {
+      "canonical_replacement": "perishbody",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "pickpocket": {
+      "canonical_replacement": "pickpocket",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "pickup": {
+      "canonical_replacement": "pickup",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 36,
+      "status": "VALID_EXACT"
+    },
+    "pixilate": {
+      "canonical_replacement": "pixilate",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "plus": {
+      "canonical_replacement": "plus",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "poisonheal": {
+      "canonical_replacement": "poisonheal",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "poisonpoint": {
+      "canonical_replacement": "poisonpoint",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 45,
+      "status": "VALID_EXACT"
+    },
+    "poisontouch": {
+      "canonical_replacement": "poisontouch",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 45,
+      "status": "VALID_EXACT"
+    },
+    "powerconstruct": {
+      "canonical_replacement": "powerconstruct",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "powerspot": {
+      "canonical_replacement": "powerspot",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "prankster": {
+      "canonical_replacement": "prankster",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 22,
+      "status": "VALID_EXACT"
+    },
+    "pressure": {
+      "canonical_replacement": "pressure",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 51,
+      "status": "VALID_EXACT"
+    },
+    "primordialsea": {
+      "canonical_replacement": "primordialsea",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "prismarmor": {
+      "canonical_replacement": "prismarmor",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "protean": {
+      "canonical_replacement": "protean",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "protosynthesis": {
+      "canonical_replacement": "protosynthesis",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "psychicsurge": {
+      "canonical_replacement": "psychicsurge",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "punkrock": {
+      "canonical_replacement": "punkrock",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "purepower": {
+      "canonical_replacement": "purepower",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 29,
+      "status": "VALID_EXACT"
+    },
+    "quarkdrive": {
+      "canonical_replacement": "quarkdrive",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "queenlymajesty": {
+      "canonical_replacement": "queenlymajesty",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "quickfeet": {
+      "canonical_replacement": "quickfeet",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "raindish": {
+      "canonical_replacement": "raindish",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "receiver": {
+      "canonical_replacement": "receiver",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "reckless": {
+      "canonical_replacement": "reckless",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 22,
+      "status": "VALID_EXACT"
+    },
+    "refrigerate": {
+      "canonical_replacement": "refrigerate",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "regenerator": {
+      "canonical_replacement": "regenerator",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 30,
+      "status": "VALID_EXACT"
+    },
+    "ripen": {
+      "canonical_replacement": "ripen",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "rivalry": {
+      "canonical_replacement": "rivalry",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 19,
+      "status": "VALID_EXACT"
+    },
+    "rkssystem": {
+      "canonical_replacement": "rkssystem",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "rockhead": {
+      "canonical_replacement": "rockhead",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 141,
+      "status": "VALID_EXACT"
+    },
+    "roughskin": {
+      "canonical_replacement": "roughskin",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 25,
+      "status": "VALID_EXACT"
+    },
+    "runaway": {
+      "canonical_replacement": "runaway",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 42,
+      "status": "VALID_EXACT"
+    },
+    "sandforce": {
+      "canonical_replacement": "sandforce",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "sandrush": {
+      "canonical_replacement": "sandrush",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 20,
+      "status": "VALID_EXACT"
+    },
+    "sandspit": {
+      "canonical_replacement": "sandspit",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "sandstream": {
+      "canonical_replacement": "sandstream",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 30,
+      "status": "VALID_EXACT"
+    },
+    "sandveil": {
+      "canonical_replacement": "sandveil",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 40,
+      "status": "VALID_EXACT"
+    },
+    "sapsipper": {
+      "canonical_replacement": "sapsipper",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "schooling": {
+      "canonical_replacement": "schooling",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "scrappy": {
+      "canonical_replacement": "scrappy",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 17,
+      "status": "VALID_EXACT"
+    },
+    "screencleaner": {
+      "canonical_replacement": "screencleaner",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "serenegrace": {
+      "canonical_replacement": "serenegrace",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 31,
+      "status": "VALID_EXACT"
+    },
+    "shadowshield": {
+      "canonical_replacement": "shadowshield",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "shadowtag": {
+      "canonical_replacement": "shadowtag",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "sharpness": {
+      "canonical_replacement": "sharpness",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "shedskin": {
+      "canonical_replacement": "shedskin",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 73,
+      "status": "VALID_EXACT"
+    },
+    "sheerforce": {
+      "canonical_replacement": "sheerforce",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 46,
+      "status": "VALID_EXACT"
+    },
+    "shellarmor": {
+      "canonical_replacement": "shellarmor",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "shield": {
+      "canonical_replacement": "shielddust",
+      "evidence": "Truncated ability name; resolved to 'shielddust'",
+      "occurrences": 1,
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "shielddust": {
+      "canonical_replacement": "shielddust",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 43,
+      "status": "VALID_EXACT"
+    },
+    "shieldsdown": {
+      "canonical_replacement": "shieldsdown",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "simple": {
+      "canonical_replacement": "simple",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "skilllink": {
+      "canonical_replacement": "skilllink",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 21,
+      "status": "VALID_EXACT"
+    },
+    "slushrush": {
+      "canonical_replacement": "slushrush",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 9,
+      "status": "VALID_EXACT"
+    },
+    "sniper": {
+      "canonical_replacement": "sniper",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 44,
+      "status": "VALID_EXACT"
+    },
+    "snowcloak": {
+      "canonical_replacement": "snowcloak",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 22,
+      "status": "VALID_EXACT"
+    },
+    "snowwarning": {
+      "canonical_replacement": "snowwarning",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 27,
+      "status": "VALID_EXACT"
+    },
+    "solarpower": {
+      "canonical_replacement": "solarpower",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "solidrock": {
+      "canonical_replacement": "solidrock",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "soulheart": {
+      "canonical_replacement": "soulheart",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "soundproof": {
+      "canonical_replacement": "soundproof",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 25,
+      "status": "VALID_EXACT"
+    },
+    "speedboost": {
+      "canonical_replacement": "speedboost",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 12,
+      "status": "VALID_EXACT"
+    },
+    "stalwart": {
+      "canonical_replacement": "stalwart",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "stamina": {
+      "canonical_replacement": "stamina",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "stancechange": {
+      "canonical_replacement": "stancechange",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 10,
+      "status": "VALID_EXACT"
+    },
+    "static": {
+      "canonical_replacement": "static",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 104,
+      "status": "VALID_EXACT"
+    },
+    "steadfast": {
+      "canonical_replacement": "steadfast",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "steamengine": {
+      "canonical_replacement": "steamengine",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "steelworker": {
+      "canonical_replacement": "steelworker",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "stench": {
+      "canonical_replacement": "stench",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 14,
+      "status": "VALID_EXACT"
+    },
+    "stickyhold": {
+      "canonical_replacement": "stickyhold",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 22,
+      "status": "VALID_EXACT"
+    },
+    "stormdrain": {
+      "canonical_replacement": "stormdrain",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 43,
+      "status": "VALID_EXACT"
+    },
+    "strongjaw": {
+      "canonical_replacement": "strongjaw",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 21,
+      "status": "VALID_EXACT"
+    },
+    "sturdy": {
+      "canonical_replacement": "sturdy",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 113,
+      "status": "VALID_EXACT"
+    },
+    "suctioncups": {
+      "canonical_replacement": "suctioncups",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "superluck": {
+      "canonical_replacement": "superluck",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "supremeoverlord": {
+      "canonical_replacement": "supremeoverlord",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "surgesurfer": {
+      "canonical_replacement": "surgesurfer",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 7,
+      "status": "VALID_EXACT"
+    },
+    "swarm": {
+      "canonical_replacement": "swarm",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 69,
+      "status": "VALID_EXACT"
+    },
+    "sweetveil": {
+      "canonical_replacement": "sweetveil",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "swiftswim": {
+      "canonical_replacement": "swiftswim",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 133,
+      "status": "VALID_EXACT"
+    },
+    "swordofruin": {
+      "canonical_replacement": "swordofruin",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "synchronize": {
+      "canonical_replacement": "synchronize",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 67,
+      "status": "VALID_EXACT"
+    },
+    "tangledfeet": {
+      "canonical_replacement": "tangledfeet",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 19,
+      "status": "VALID_EXACT"
+    },
+    "technician": {
+      "canonical_replacement": "technician",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 86,
+      "status": "VALID_EXACT"
+    },
+    "telepathy": {
+      "canonical_replacement": "telepathy",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "teraformzero": {
+      "canonical_replacement": "teraformzero",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "teravolt": {
+      "canonical_replacement": "teravolt",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "thermalexchange": {
+      "canonical_replacement": "thermalexchange",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "thickfat": {
+      "canonical_replacement": "thickfat",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 89,
+      "status": "VALID_EXACT"
+    },
+    "tintedlens": {
+      "canonical_replacement": "tintedlens",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 21,
+      "status": "VALID_EXACT"
+    },
+    "torrent": {
+      "canonical_replacement": "torrent",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 60,
+      "status": "VALID_EXACT"
+    },
+    "toughclaws": {
+      "canonical_replacement": "toughclaws",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "toxicboost": {
+      "canonical_replacement": "toxicboost",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "toxicchain": {
+      "canonical_replacement": "toxicchain",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "toxicdebris": {
+      "canonical_replacement": "toxicdebris",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 3,
+      "status": "VALID_EXACT"
+    },
+    "trace": {
+      "canonical_replacement": "trace",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 24,
+      "status": "VALID_EXACT"
+    },
+    "transistor": {
+      "canonical_replacement": "transistor",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "triage": {
+      "canonical_replacement": "triage",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 5,
+      "status": "VALID_EXACT"
+    },
+    "turboblaze": {
+      "canonical_replacement": "turboblaze",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "unaware": {
+      "canonical_replacement": "unaware",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 33,
+      "status": "VALID_EXACT"
+    },
+    "unburden": {
+      "canonical_replacement": "unburden",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 16,
+      "status": "VALID_EXACT"
+    },
+    "unnerve": {
+      "canonical_replacement": "unnerve",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "unseenfist": {
+      "canonical_replacement": "unseenfist",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 15,
+      "status": "VALID_EXACT"
+    },
+    "victorystar": {
+      "canonical_replacement": "victorystar",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "vitalspirit": {
+      "canonical_replacement": "vitalspirit",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 19,
+      "status": "VALID_EXACT"
+    },
+    "voltabsorb": {
+      "canonical_replacement": "voltabsorb",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 18,
+      "status": "VALID_EXACT"
+    },
+    "wanderingspirit": {
+      "canonical_replacement": "wanderingspirit",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "waterabsorb": {
+      "canonical_replacement": "waterabsorb",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 66,
+      "status": "VALID_EXACT"
+    },
+    "waterbubble": {
+      "canonical_replacement": "waterbubble",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 4,
+      "status": "VALID_EXACT"
+    },
+    "watercompaction": {
+      "canonical_replacement": "watercompaction",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "waterveil": {
+      "canonical_replacement": "waterveil",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 40,
+      "status": "VALID_EXACT"
+    },
+    "weakarmor": {
+      "canonical_replacement": "weakarmor",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 11,
+      "status": "VALID_EXACT"
+    },
+    "whitesmoke": {
+      "canonical_replacement": "whitesmoke",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "windpower": {
+      "canonical_replacement": "windpower",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    },
+    "wonderguard": {
+      "canonical_replacement": "wonderguard",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 8,
+      "status": "VALID_EXACT"
+    },
+    "wonderskin": {
+      "canonical_replacement": "wonderskin",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 1,
+      "status": "VALID_EXACT"
+    },
+    "zenmode": {
+      "canonical_replacement": "zenmode",
+      "evidence": "Registered in Cobblemon Showdown abilities",
+      "occurrences": 2,
+      "status": "VALID_EXACT"
+    }
+  },
+  "metadata": {
+    "cobblemon_version": "1.7.3",
+    "legacy_dataset": "!Doctors HELL MODE DOUBLE BATTLE EVERYTHING",
+    "mega_showdown_version": "1.8.4",
+    "minecraft_version": "1.21.1",
+    "modloader": "Fabric",
+    "modpack_version": "1.7.42-CF",
+    "rct_api_version": "0.15.2-beta",
+    "rct_mod_version": "0.18.1-beta",
+    "target_modpack": "COBBLEVERSE"
+  },
+  "summary": {
+    "invalid_canonical_match_count": 2,
+    "invalid_no_match_count": 0,
+    "total_unique_abilities": 258,
+    "valid_exact_count": 256
+  }
+}

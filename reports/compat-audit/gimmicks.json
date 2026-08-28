@@ -1,0 +1,60 @@
+{
+  "invalid_gimmick_usages": [
+    {
+      "invalid_key": "mega",
+      "pokemon_index": 1,
+      "species": "sharpedo",
+      "trainer_file": "team_rocket_admin_apollo.json",
+      "value": true
+    },
+    {
+      "invalid_key": "mega",
+      "pokemon_index": 0,
+      "species": "tyranitar",
+      "trainer_file": "team_rocket_giovanni.json",
+      "value": true
+    }
+  ],
+  "metadata": {
+    "cobblemon_version": "1.7.3",
+    "legacy_dataset": "!Doctors HELL MODE DOUBLE BATTLE EVERYTHING",
+    "mega_showdown_version": "1.8.4",
+    "minecraft_version": "1.21.1",
+    "modloader": "Fabric",
+    "modpack_version": "1.7.42-CF",
+    "rct_api_version": "0.15.2-beta",
+    "rct_mod_version": "0.18.1-beta",
+    "target_modpack": "COBBLEVERSE"
+  },
+  "summary": {
+    "gimmick_keys_found": {
+      "dynamax": 1,
+      "gmax": 1,
+      "mega": 2,
+      "tera": 169
+    },
+    "invalid_gimmick_keys_count": 2,
+    "tera_types_count": 19
+  },
+  "tera_types": {
+    "bug": 4,
+    "dark": 7,
+    "dragon": 14,
+    "electric": 9,
+    "fairy": 4,
+    "fighting": 18,
+    "fire": 14,
+    "flying": 2,
+    "ghost": 7,
+    "grass": 13,
+    "ground": 7,
+    "ice": 7,
+    "normal": 6,
+    "poison": 7,
+    "psychic": 18,
+    "rock": 7,
+    "steel": 10,
+    "stellar": 1,
+    "water": 14
+  }
+}

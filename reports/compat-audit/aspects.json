@@ -1,0 +1,975 @@
+{
+  "aspect_combinations": {
+    "arcanine::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": "hisuian",
+      "evidence": "Form aspect for species arcanine in Cobblemon",
+      "occurrences": 5,
+      "species": "arcanine",
+      "status": "VALID_EXACT"
+    },
+    "arceus::bug": {
+      "aspect": "bug",
+      "canonical_replacement": "bug-plate",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'bug-plate'",
+      "occurrences": 1,
+      "species": "arceus",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "articuno::galarian": {
+      "aspect": "galarian",
+      "canonical_replacement": "galarian",
+      "evidence": "Form aspect for species articuno in Cobblemon",
+      "occurrences": 2,
+      "species": "articuno",
+      "status": "VALID_EXACT"
+    },
+    "avalugg::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": "hisuian",
+      "evidence": "Form aspect for species avalugg in Cobblemon",
+      "occurrences": 2,
+      "species": "avalugg",
+      "status": "VALID_EXACT"
+    },
+    "basculegion::f": {
+      "aspect": "f",
+      "canonical_replacement": "female",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'female'",
+      "occurrences": 2,
+      "species": "basculegion",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "basculin::blue_striped": {
+      "aspect": "blue_striped",
+      "canonical_replacement": "bluestriped",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'bluestriped'",
+      "occurrences": 1,
+      "species": "basculin",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "braviary::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": "hisuian",
+      "evidence": "Form aspect for species braviary in Cobblemon",
+      "occurrences": 1,
+      "species": "braviary",
+      "status": "VALID_EXACT"
+    },
+    "calyrex::ice": {
+      "aspect": "ice",
+      "canonical_replacement": "ice-rider",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'ice-rider'",
+      "occurrences": 2,
+      "species": "calyrex",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "calyrex::ice-rider": {
+      "aspect": "ice-rider",
+      "canonical_replacement": "ice-rider",
+      "evidence": "Form aspect for species calyrex in Cobblemon",
+      "occurrences": 3,
+      "species": "calyrex",
+      "status": "VALID_EXACT"
+    },
+    "calyrex::shadow-rider": {
+      "aspect": "shadow-rider",
+      "canonical_replacement": "shadow-rider",
+      "evidence": "Form aspect for species calyrex in Cobblemon",
+      "occurrences": 3,
+      "species": "calyrex",
+      "status": "VALID_EXACT"
+    },
+    "charizard::mega": {
+      "aspect": "mega",
+      "canonical_replacement": "mega",
+      "evidence": "Mega/Primal aspect supported by Mega Showdown form injection",
+      "occurrences": 1,
+      "species": "charizard",
+      "status": "VALID_EXACT"
+    },
+    "charizard::mega_y": {
+      "aspect": "mega_y",
+      "canonical_replacement": "mega_y",
+      "evidence": "Form aspect for species charizard in Cobblemon",
+      "occurrences": 1,
+      "species": "charizard",
+      "status": "VALID_EXACT"
+    },
+    "clawitzer::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": null,
+      "evidence": "Aspect 'hisuian' not recognized for species clawitzer",
+      "occurrences": 1,
+      "species": "clawitzer",
+      "status": "INVALID_NO_MATCH"
+    },
+    "darmanitan::galarian": {
+      "aspect": "galarian",
+      "canonical_replacement": "galarian",
+      "evidence": "Form aspect for species darmanitan in Cobblemon",
+      "occurrences": 2,
+      "species": "darmanitan",
+      "status": "VALID_EXACT"
+    },
+    "decidueye::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": "hisuian",
+      "evidence": "Form aspect for species decidueye in Cobblemon",
+      "occurrences": 3,
+      "species": "decidueye",
+      "status": "VALID_EXACT"
+    },
+    "deoxys::attack": {
+      "aspect": "attack",
+      "canonical_replacement": "attack-forme",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'attack-forme'",
+      "occurrences": 1,
+      "species": "deoxys",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "dialga::origin-forme": {
+      "aspect": "origin-forme",
+      "canonical_replacement": "origin-forme",
+      "evidence": "Form aspect for species dialga in Cobblemon",
+      "occurrences": 1,
+      "species": "dialga",
+      "status": "VALID_EXACT"
+    },
+    "dodrio::sevii": {
+      "aspect": "sevii",
+      "canonical_replacement": null,
+      "evidence": "Radical Red custom Sevii Island form; does not exist in Cobblemon",
+      "occurrences": 2,
+      "species": "dodrio",
+      "status": "INVALID_NO_MATCH"
+    },
+    "dugtrio::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species dugtrio in Cobblemon",
+      "occurrences": 1,
+      "species": "dugtrio",
+      "status": "VALID_EXACT"
+    },
+    "electrode::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": "hisuian",
+      "evidence": "Form aspect for species electrode in Cobblemon",
+      "occurrences": 1,
+      "species": "electrode",
+      "status": "VALID_EXACT"
+    },
+    "enamorus::therian": {
+      "aspect": "therian",
+      "canonical_replacement": "therian-forme",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'therian-forme'",
+      "occurrences": 1,
+      "species": "enamorus",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "eternatus::eternamax": {
+      "aspect": "eternamax",
+      "canonical_replacement": "eternamax",
+      "evidence": "Form aspect for species eternatus in Cobblemon",
+      "occurrences": 3,
+      "species": "eternatus",
+      "status": "VALID_EXACT"
+    },
+    "exeggutor::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species exeggutor in Cobblemon",
+      "occurrences": 3,
+      "species": "exeggutor",
+      "status": "VALID_EXACT"
+    },
+    "farfetchd::galarian": {
+      "aspect": "galarian",
+      "canonical_replacement": "galarian",
+      "evidence": "Form aspect for species farfetchd in Cobblemon",
+      "occurrences": 3,
+      "species": "farfetchd",
+      "status": "VALID_EXACT"
+    },
+    "gardevoir::fairy-plate": {
+      "aspect": "fairy-plate",
+      "canonical_replacement": null,
+      "evidence": "Aspect 'fairy-plate' not recognized for species gardevoir",
+      "occurrences": 1,
+      "species": "gardevoir",
+      "status": "INVALID_NO_MATCH"
+    },
+    "gastrodon::east_sea": {
+      "aspect": "east_sea",
+      "canonical_replacement": "east-sea",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'east-sea'",
+      "occurrences": 2,
+      "species": "gastrodon",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "genesect::douse": {
+      "aspect": "douse",
+      "canonical_replacement": "douse-drive",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'douse-drive'",
+      "occurrences": 1,
+      "species": "genesect",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "geodude::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species geodude in Cobblemon",
+      "occurrences": 2,
+      "species": "geodude",
+      "status": "VALID_EXACT"
+    },
+    "gholdengo::netherite-coating-full": {
+      "aspect": "netherite-coating-full",
+      "canonical_replacement": "netherite-coating-full",
+      "evidence": "Cosmetic or special Cobblemon asset aspect requiring runtime verification",
+      "occurrences": 1,
+      "species": "gholdengo",
+      "status": "NEEDS_RUNTIME_TEST"
+    },
+    "giratina::origin": {
+      "aspect": "origin",
+      "canonical_replacement": "origin-forme",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'origin-forme'",
+      "occurrences": 1,
+      "species": "giratina",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "glalie::mega": {
+      "aspect": "mega",
+      "canonical_replacement": "mega",
+      "evidence": "Form aspect for species glalie in Cobblemon",
+      "occurrences": 1,
+      "species": "glalie",
+      "status": "VALID_EXACT"
+    },
+    "golem::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species golem in Cobblemon",
+      "occurrences": 2,
+      "species": "golem",
+      "status": "VALID_EXACT"
+    },
+    "goodra::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": "hisuian",
+      "evidence": "Form aspect for species goodra in Cobblemon",
+      "occurrences": 2,
+      "species": "goodra",
+      "status": "VALID_EXACT"
+    },
+    "greninja::ash": {
+      "aspect": "ash",
+      "canonical_replacement": "ash",
+      "evidence": "Form aspect for species greninja in Cobblemon",
+      "occurrences": 1,
+      "species": "greninja",
+      "status": "VALID_EXACT"
+    },
+    "grimer::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species grimer in Cobblemon",
+      "occurrences": 3,
+      "species": "grimer",
+      "status": "VALID_EXACT"
+    },
+    "groudon::primal": {
+      "aspect": "primal",
+      "canonical_replacement": "primal",
+      "evidence": "Form aspect for species groudon in Cobblemon",
+      "occurrences": 4,
+      "species": "groudon",
+      "status": "VALID_EXACT"
+    },
+    "growlithe::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": "hisuian",
+      "evidence": "Form aspect for species growlithe in Cobblemon",
+      "occurrences": 1,
+      "species": "growlithe",
+      "status": "VALID_EXACT"
+    },
+    "hoopa::unbound": {
+      "aspect": "unbound",
+      "canonical_replacement": "unbound",
+      "evidence": "Form aspect for species hoopa in Cobblemon",
+      "occurrences": 4,
+      "species": "hoopa",
+      "status": "VALID_EXACT"
+    },
+    "indeedee::f": {
+      "aspect": "f",
+      "canonical_replacement": "female",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'female'",
+      "occurrences": 1,
+      "species": "indeedee",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "kyogre::primal": {
+      "aspect": "primal",
+      "canonical_replacement": "primal",
+      "evidence": "Form aspect for species kyogre in Cobblemon",
+      "occurrences": 3,
+      "species": "kyogre",
+      "status": "VALID_EXACT"
+    },
+    "kyurem::black": {
+      "aspect": "black",
+      "canonical_replacement": "black-fusion",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'black-fusion'",
+      "occurrences": 1,
+      "species": "kyurem",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "kyurem::black-fusion": {
+      "aspect": "black-fusion",
+      "canonical_replacement": "black-fusion",
+      "evidence": "Form aspect for species kyurem in Cobblemon",
+      "occurrences": 1,
+      "species": "kyurem",
+      "status": "VALID_EXACT"
+    },
+    "kyurem::white-fusion": {
+      "aspect": "white-fusion",
+      "canonical_replacement": "white-fusion",
+      "evidence": "Form aspect for species kyurem in Cobblemon",
+      "occurrences": 1,
+      "species": "kyurem",
+      "status": "VALID_EXACT"
+    },
+    "landorus::therian": {
+      "aspect": "therian",
+      "canonical_replacement": "therian-forme",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'therian-forme'",
+      "occurrences": 4,
+      "species": "landorus",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "landorus::therian-forme": {
+      "aspect": "therian-forme",
+      "canonical_replacement": "therian-forme",
+      "evidence": "Form aspect for species landorus in Cobblemon",
+      "occurrences": 2,
+      "species": "landorus",
+      "status": "VALID_EXACT"
+    },
+    "lilligant::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": "hisuian",
+      "evidence": "Form aspect for species lilligant in Cobblemon",
+      "occurrences": 2,
+      "species": "lilligant",
+      "status": "VALID_EXACT"
+    },
+    "magearna::original": {
+      "aspect": "original",
+      "canonical_replacement": "original-color",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'original-color'",
+      "occurrences": 1,
+      "species": "magearna",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "mantine::sevii": {
+      "aspect": "sevii",
+      "canonical_replacement": null,
+      "evidence": "Radical Red custom Sevii Island form; does not exist in Cobblemon",
+      "occurrences": 3,
+      "species": "mantine",
+      "status": "INVALID_NO_MATCH"
+    },
+    "marowak::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species marowak in Cobblemon",
+      "occurrences": 1,
+      "species": "marowak",
+      "status": "VALID_EXACT"
+    },
+    "maushold::maushold-family-four": {
+      "aspect": "maushold-family-four",
+      "canonical_replacement": "maushold-family-four",
+      "evidence": "Form aspect for species maushold in Cobblemon",
+      "occurrences": 1,
+      "species": "maushold",
+      "status": "VALID_EXACT"
+    },
+    "meloetta::pirouette": {
+      "aspect": "pirouette",
+      "canonical_replacement": "pirouette-forme",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'pirouette-forme'",
+      "occurrences": 1,
+      "species": "meloetta",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "meowth::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species meowth in Cobblemon",
+      "occurrences": 1,
+      "species": "meowth",
+      "status": "VALID_EXACT"
+    },
+    "mewtwo::mega_y": {
+      "aspect": "mega_y",
+      "canonical_replacement": "mega_y",
+      "evidence": "Form aspect for species mewtwo in Cobblemon",
+      "occurrences": 1,
+      "species": "mewtwo",
+      "status": "VALID_EXACT"
+    },
+    "milotic::sevii": {
+      "aspect": "sevii",
+      "canonical_replacement": null,
+      "evidence": "Radical Red custom Sevii Island form; does not exist in Cobblemon",
+      "occurrences": 1,
+      "species": "milotic",
+      "status": "INVALID_NO_MATCH"
+    },
+    "moltres::galarian": {
+      "aspect": "galarian",
+      "canonical_replacement": "galarian",
+      "evidence": "Form aspect for species moltres in Cobblemon",
+      "occurrences": 1,
+      "species": "moltres",
+      "status": "VALID_EXACT"
+    },
+    "mrmime::galarian": {
+      "aspect": "galarian",
+      "canonical_replacement": "galarian",
+      "evidence": "Form aspect for species mrmime in Cobblemon",
+      "occurrences": 1,
+      "species": "mrmime",
+      "status": "VALID_EXACT"
+    },
+    "muk::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species muk in Cobblemon",
+      "occurrences": 4,
+      "species": "muk",
+      "status": "VALID_EXACT"
+    },
+    "necrozma::dusk-fusion": {
+      "aspect": "dusk-fusion",
+      "canonical_replacement": "dusk-fusion",
+      "evidence": "Form aspect for species necrozma in Cobblemon",
+      "occurrences": 1,
+      "species": "necrozma",
+      "status": "VALID_EXACT"
+    },
+    "necrozma::dusk-mane": {
+      "aspect": "dusk-mane",
+      "canonical_replacement": "dusk-fusion",
+      "evidence": "Necrozma Dusk Mane form uses aspect 'dusk-fusion' in Cobblemon",
+      "occurrences": 1,
+      "species": "necrozma",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "necrozma::dusk_mane": {
+      "aspect": "dusk_mane",
+      "canonical_replacement": "dusk-fusion",
+      "evidence": "Necrozma Dusk Mane form uses aspect 'dusk-fusion' in Cobblemon",
+      "occurrences": 2,
+      "species": "necrozma",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "necrozma::ultra-fusion": {
+      "aspect": "ultra-fusion",
+      "canonical_replacement": "ultra-fusion",
+      "evidence": "Form aspect for species necrozma in Cobblemon",
+      "occurrences": 1,
+      "species": "necrozma",
+      "status": "VALID_EXACT"
+    },
+    "ninetales::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species ninetales in Cobblemon",
+      "occurrences": 9,
+      "species": "ninetales",
+      "status": "VALID_EXACT"
+    },
+    "ogerpon::cornerstone-mask": {
+      "aspect": "cornerstone-mask",
+      "canonical_replacement": "cornerstone-mask",
+      "evidence": "Form aspect for species ogerpon in Cobblemon",
+      "occurrences": 1,
+      "species": "ogerpon",
+      "status": "VALID_EXACT"
+    },
+    "ogerpon::wellspring-mask": {
+      "aspect": "wellspring-mask",
+      "canonical_replacement": "wellspring-mask",
+      "evidence": "Form aspect for species ogerpon in Cobblemon",
+      "occurrences": 1,
+      "species": "ogerpon",
+      "status": "VALID_EXACT"
+    },
+    "oricorio::pom_pom-style": {
+      "aspect": "pom_pom-style",
+      "canonical_replacement": "pom_pom-style",
+      "evidence": "Form aspect for species oricorio in Cobblemon",
+      "occurrences": 1,
+      "species": "oricorio",
+      "status": "VALID_EXACT"
+    },
+    "palkia::origin": {
+      "aspect": "origin",
+      "canonical_replacement": "origin-forme",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'origin-forme'",
+      "occurrences": 1,
+      "species": "palkia",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "palkia::origin-forme": {
+      "aspect": "origin-forme",
+      "canonical_replacement": "origin-forme",
+      "evidence": "Form aspect for species palkia in Cobblemon",
+      "occurrences": 2,
+      "species": "palkia",
+      "status": "VALID_EXACT"
+    },
+    "persian::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species persian in Cobblemon",
+      "occurrences": 3,
+      "species": "persian",
+      "status": "VALID_EXACT"
+    },
+    "pikachu::flying": {
+      "aspect": "flying",
+      "canonical_replacement": "flying",
+      "evidence": "Cosmetic or special Cobblemon asset aspect requiring runtime verification",
+      "occurrences": 1,
+      "species": "pikachu",
+      "status": "NEEDS_RUNTIME_TEST"
+    },
+    "pikachu::libre": {
+      "aspect": "libre",
+      "canonical_replacement": "libre",
+      "evidence": "Cosmetic or special Cobblemon asset aspect requiring runtime verification",
+      "occurrences": 1,
+      "species": "pikachu",
+      "status": "NEEDS_RUNTIME_TEST"
+    },
+    "pikachu::surfing": {
+      "aspect": "surfing",
+      "canonical_replacement": "surfing",
+      "evidence": "Cosmetic or special Cobblemon asset aspect requiring runtime verification",
+      "occurrences": 1,
+      "species": "pikachu",
+      "status": "NEEDS_RUNTIME_TEST"
+    },
+    "raichu::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species raichu in Cobblemon",
+      "occurrences": 7,
+      "species": "raichu",
+      "status": "VALID_EXACT"
+    },
+    "raticate::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species raticate in Cobblemon",
+      "occurrences": 6,
+      "species": "raticate",
+      "status": "VALID_EXACT"
+    },
+    "rattata::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species rattata in Cobblemon",
+      "occurrences": 2,
+      "species": "rattata",
+      "status": "VALID_EXACT"
+    },
+    "rayquaza::mega": {
+      "aspect": "mega",
+      "canonical_replacement": "mega",
+      "evidence": "Form aspect for species rayquaza in Cobblemon",
+      "occurrences": 1,
+      "species": "rayquaza",
+      "status": "VALID_EXACT"
+    },
+    "rotom::fan-appliance": {
+      "aspect": "fan-appliance",
+      "canonical_replacement": "fan-appliance",
+      "evidence": "Form aspect for species rotom in Cobblemon",
+      "occurrences": 5,
+      "species": "rotom",
+      "status": "VALID_EXACT"
+    },
+    "rotom::frost-appliance": {
+      "aspect": "frost-appliance",
+      "canonical_replacement": "frost-appliance",
+      "evidence": "Form aspect for species rotom in Cobblemon",
+      "occurrences": 2,
+      "species": "rotom",
+      "status": "VALID_EXACT"
+    },
+    "rotom::heat-appliance": {
+      "aspect": "heat-appliance",
+      "canonical_replacement": "heat-appliance",
+      "evidence": "Form aspect for species rotom in Cobblemon",
+      "occurrences": 3,
+      "species": "rotom",
+      "status": "VALID_EXACT"
+    },
+    "rotom::mow": {
+      "aspect": "mow",
+      "canonical_replacement": "mow-appliance",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'mow-appliance'",
+      "occurrences": 1,
+      "species": "rotom",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "rotom::mow-appliance": {
+      "aspect": "mow-appliance",
+      "canonical_replacement": "mow-appliance",
+      "evidence": "Form aspect for species rotom in Cobblemon",
+      "occurrences": 6,
+      "species": "rotom",
+      "status": "VALID_EXACT"
+    },
+    "rotom::wash-appliance": {
+      "aspect": "wash-appliance",
+      "canonical_replacement": "wash-appliance",
+      "evidence": "Form aspect for species rotom in Cobblemon",
+      "occurrences": 4,
+      "species": "rotom",
+      "status": "VALID_EXACT"
+    },
+    "samurott::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": "hisuian",
+      "evidence": "Form aspect for species samurott in Cobblemon",
+      "occurrences": 1,
+      "species": "samurott",
+      "status": "VALID_EXACT"
+    },
+    "sandslash::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species sandslash in Cobblemon",
+      "occurrences": 2,
+      "species": "sandslash",
+      "status": "VALID_EXACT"
+    },
+    "shaymin::sky": {
+      "aspect": "sky",
+      "canonical_replacement": "sky-forme",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'sky-forme'",
+      "occurrences": 2,
+      "species": "shaymin",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "shellos::east-sea": {
+      "aspect": "east-sea",
+      "canonical_replacement": "east-sea",
+      "evidence": "Form aspect for species shellos in Cobblemon",
+      "occurrences": 1,
+      "species": "shellos",
+      "status": "VALID_EXACT"
+    },
+    "shellos::east_sea": {
+      "aspect": "east_sea",
+      "canonical_replacement": "east-sea",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'east-sea'",
+      "occurrences": 5,
+      "species": "shellos",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "silvally::dark": {
+      "aspect": "dark",
+      "canonical_replacement": "dark-memory",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'dark-memory'",
+      "occurrences": 1,
+      "species": "silvally",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "silvally::fairy": {
+      "aspect": "fairy",
+      "canonical_replacement": "fairy-memory",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'fairy-memory'",
+      "occurrences": 1,
+      "species": "silvally",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "silvally::steel-memory": {
+      "aspect": "steel-memory",
+      "canonical_replacement": "steel-memory",
+      "evidence": "Form aspect for species silvally in Cobblemon",
+      "occurrences": 1,
+      "species": "silvally",
+      "status": "VALID_EXACT"
+    },
+    "sinistcha::masterpiece": {
+      "aspect": "masterpiece",
+      "canonical_replacement": "masterpiece",
+      "evidence": "Form aspect for species sinistcha in Cobblemon",
+      "occurrences": 1,
+      "species": "sinistcha",
+      "status": "VALID_EXACT"
+    },
+    "slowbro::galarian": {
+      "aspect": "galarian",
+      "canonical_replacement": "galarian",
+      "evidence": "Form aspect for species slowbro in Cobblemon",
+      "occurrences": 1,
+      "species": "slowbro",
+      "status": "VALID_EXACT"
+    },
+    "slowpoke::galarian": {
+      "aspect": "galarian",
+      "canonical_replacement": "galarian",
+      "evidence": "Form aspect for species slowpoke in Cobblemon",
+      "occurrences": 1,
+      "species": "slowpoke",
+      "status": "VALID_EXACT"
+    },
+    "sneasel::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": "hisuian",
+      "evidence": "Form aspect for species sneasel in Cobblemon",
+      "occurrences": 1,
+      "species": "sneasel",
+      "status": "VALID_EXACT"
+    },
+    "tauros::paldea-blaze": {
+      "aspect": "paldea-blaze",
+      "canonical_replacement": "blaze-breed",
+      "evidence": "Tauros Paldean Blaze breed uses aspect 'blaze-breed' in Cobblemon",
+      "occurrences": 1,
+      "species": "tauros",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "terapagos::stellar-form": {
+      "aspect": "stellar-form",
+      "canonical_replacement": "stellar-form",
+      "evidence": "Form aspect for species terapagos in Cobblemon",
+      "occurrences": 1,
+      "species": "terapagos",
+      "status": "VALID_EXACT"
+    },
+    "thundurus::therian": {
+      "aspect": "therian",
+      "canonical_replacement": "therian-forme",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'therian-forme'",
+      "occurrences": 1,
+      "species": "thundurus",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "toxtricity::amped-form": {
+      "aspect": "amped-form",
+      "canonical_replacement": "amped-form",
+      "evidence": "Form aspect for species toxtricity in Cobblemon",
+      "occurrences": 1,
+      "species": "toxtricity",
+      "status": "VALID_EXACT"
+    },
+    "toxtricity::low_key": {
+      "aspect": "low_key",
+      "canonical_replacement": "low_key-form",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'low_key-form'",
+      "occurrences": 1,
+      "species": "toxtricity",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "toxtricity::low_key-form": {
+      "aspect": "low_key-form",
+      "canonical_replacement": "low_key-form",
+      "evidence": "Form aspect for species toxtricity in Cobblemon",
+      "occurrences": 1,
+      "species": "toxtricity",
+      "status": "VALID_EXACT"
+    },
+    "typhlosion::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": "hisuian",
+      "evidence": "Form aspect for species typhlosion in Cobblemon",
+      "occurrences": 1,
+      "species": "typhlosion",
+      "status": "VALID_EXACT"
+    },
+    "ursaluna::bloodmoon": {
+      "aspect": "bloodmoon",
+      "canonical_replacement": "bloodmoon",
+      "evidence": "Form aspect for species ursaluna in Cobblemon",
+      "occurrences": 3,
+      "species": "ursaluna",
+      "status": "VALID_EXACT"
+    },
+    "ursaring::sevii": {
+      "aspect": "sevii",
+      "canonical_replacement": null,
+      "evidence": "Radical Red custom Sevii Island form; does not exist in Cobblemon",
+      "occurrences": 1,
+      "species": "ursaring",
+      "status": "INVALID_NO_MATCH"
+    },
+    "urshifu::rapid-strike": {
+      "aspect": "rapid-strike",
+      "canonical_replacement": "rapid_strike-style",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'rapid_strike-style'",
+      "occurrences": 1,
+      "species": "urshifu",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "urshifu::rapid_strike": {
+      "aspect": "rapid_strike",
+      "canonical_replacement": "rapid_strike-style",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'rapid_strike-style'",
+      "occurrences": 3,
+      "species": "urshifu",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "urshifu::rapid_strike-style": {
+      "aspect": "rapid_strike-style",
+      "canonical_replacement": "rapid_strike-style",
+      "evidence": "Form aspect for species urshifu in Cobblemon",
+      "occurrences": 3,
+      "species": "urshifu",
+      "status": "VALID_EXACT"
+    },
+    "urshifu::single_strike-style": {
+      "aspect": "single_strike-style",
+      "canonical_replacement": "single_strike-style",
+      "evidence": "Form aspect for species urshifu in Cobblemon",
+      "occurrences": 1,
+      "species": "urshifu",
+      "status": "VALID_EXACT"
+    },
+    "vivillon::vivillon-wings-poke-ball": {
+      "aspect": "vivillon-wings-poke-ball",
+      "canonical_replacement": "vivillon-wings-poke-ball",
+      "evidence": "Form aspect for species vivillon in Cobblemon",
+      "occurrences": 1,
+      "species": "vivillon",
+      "status": "VALID_EXACT"
+    },
+    "voltorb::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": "hisuian",
+      "evidence": "Form aspect for species voltorb in Cobblemon",
+      "occurrences": 1,
+      "species": "voltorb",
+      "status": "VALID_EXACT"
+    },
+    "vulpix::alolan": {
+      "aspect": "alolan",
+      "canonical_replacement": "alolan",
+      "evidence": "Form aspect for species vulpix in Cobblemon",
+      "occurrences": 1,
+      "species": "vulpix",
+      "status": "VALID_EXACT"
+    },
+    "weezing::galarian": {
+      "aspect": "galarian",
+      "canonical_replacement": "galarian",
+      "evidence": "Form aspect for species weezing in Cobblemon",
+      "occurrences": 4,
+      "species": "weezing",
+      "status": "VALID_EXACT"
+    },
+    "wishiwashi::hisuian": {
+      "aspect": "hisuian",
+      "canonical_replacement": null,
+      "evidence": "Wishiwashi has no official Hisuian form; Radical Red legacy asset",
+      "occurrences": 1,
+      "species": "wishiwashi",
+      "status": "INVALID_NO_MATCH"
+    },
+    "wormadam::sandy_cloak": {
+      "aspect": "sandy_cloak",
+      "canonical_replacement": "sandy-cloak",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'sandy-cloak'",
+      "occurrences": 1,
+      "species": "wormadam",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "wormadam::trash_cloak": {
+      "aspect": "trash_cloak",
+      "canonical_replacement": "trash-cloak",
+      "evidence": "Normalized syntax discrepancy; matches Cobblemon aspect 'trash-cloak'",
+      "occurrences": 1,
+      "species": "wormadam",
+      "status": "INVALID_UNIQUE_CANONICAL_MATCH"
+    },
+    "zacian::crowned": {
+      "aspect": "crowned",
+      "canonical_replacement": "crowned",
+      "evidence": "Form aspect for species zacian in Cobblemon",
+      "occurrences": 2,
+      "species": "zacian",
+      "status": "VALID_EXACT"
+    },
+    "zapdos::galarian": {
+      "aspect": "galarian",
+      "canonical_replacement": "galarian",
+      "evidence": "Form aspect for species zapdos in Cobblemon",
+      "occurrences": 2,
+      "species": "zapdos",
+      "status": "VALID_EXACT"
+    },
+    "zebstrika::sevii": {
+      "aspect": "sevii",
+      "canonical_replacement": null,
+      "evidence": "Radical Red custom Sevii Island form; does not exist in Cobblemon",
+      "occurrences": 2,
+      "species": "zebstrika",
+      "status": "INVALID_NO_MATCH"
+    },
+    "zigzagoon::galarian": {
+      "aspect": "galarian",
+      "canonical_replacement": "galarian",
+      "evidence": "Form aspect for species zigzagoon in Cobblemon",
+      "occurrences": 1,
+      "species": "zigzagoon",
+      "status": "VALID_EXACT"
+    },
+    "zoroark::sevii": {
+      "aspect": "sevii",
+      "canonical_replacement": null,
+      "evidence": "Radical Red custom Sevii Island form; does not exist in Cobblemon",
+      "occurrences": 2,
+      "species": "zoroark",
+      "status": "INVALID_NO_MATCH"
+    },
+    "zygarde::complete-percent": {
+      "aspect": "complete-percent",
+      "canonical_replacement": "complete-percent",
+      "evidence": "Form aspect for species zygarde in Cobblemon",
+      "occurrences": 2,
+      "species": "zygarde",
+      "status": "VALID_EXACT"
+    }
+  },
+  "metadata": {
+    "cobblemon_version": "1.7.3",
+    "legacy_dataset": "!Doctors HELL MODE DOUBLE BATTLE EVERYTHING",
+    "mega_showdown_version": "1.8.4",
+    "minecraft_version": "1.21.1",
+    "modloader": "Fabric",
+    "modpack_version": "1.7.42-CF",
+    "rct_api_version": "0.15.2-beta",
+    "rct_mod_version": "0.18.1-beta",
+    "target_modpack": "COBBLEVERSE"
+  },
+  "summary": {
+    "invalid_canonical_match_combinations": 29,
+    "invalid_no_match_combinations": 9,
+    "needs_runtime_test_combinations": 4,
+    "total_species_aspect_combinations": 119,
+    "total_unique_aspects": 68,
+    "valid_exact_combinations": 77
+  }
+}
