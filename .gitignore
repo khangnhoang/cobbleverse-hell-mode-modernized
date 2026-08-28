@@ -1,0 +1,36 @@
+# Gradle / Build artifacts
+.gradle/
+build/
+out/
+bin/
+
+# Minecraft Fabric runtime & logs
+run/
+logs/
+*.log
+crash-reports/
+saves/
+
+# IDE & Editor files
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.sublime-workspace
+*.sublime-project
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Temporary & Swap files
+*.tmp
+*.bak
+*.swp
+*~
