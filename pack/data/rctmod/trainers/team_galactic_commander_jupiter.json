@@ -21,181 +21,181 @@
       "quantity": 4
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "fakeout",
-        "return",
-        "knockoff",
-        "suckerpunch"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "silk_scarf"
-      ],
-      "species": "purugly",
+      "species": "skuntank",
       "gender": "FEMALE",
       "level": 75,
-      "nature": "jolly",
-      "ability": "defiant"
-    },
-    {
+      "nature": "adamant",
+      "ability": "aftermath",
+      "heldItem": [
+        "focus_sash"
+      ],
       "moveset": [
-        "shadowball",
-        "sludgebomb",
-        "taunt",
+        "suckerpunch",
+        "poisonjab",
+        "snarl",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "purugly",
+      "gender": "FEMALE",
+      "level": 74,
+      "nature": "jolly",
+      "ability": "defiant",
       "heldItem": [
-        "leftovers",
-        "mega_showdown:gengarite"
+        "silk_scarf"
       ],
+      "moveset": [
+        "fakeout",
+        "doubleedge",
+        "knockoff",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
       "species": "gengar",
       "gender": "MALE",
       "level": 75,
       "nature": "timid",
-      "ability": "shadowtag"
-    },
-    {
+      "ability": "cursedbody",
+      "heldItem": [
+        "mega_showdown:gengarite"
+      ],
       "moveset": [
-        "poisonjab",
-        "suckerpunch",
-        "taunt",
+        "shadowball",
+        "sludgebomb",
+        "icywind",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "black_sludge"
-      ],
-      "species": "skuntank",
-      "gender": "FEMALE",
-      "level": 74,
-      "nature": "jolly",
-      "ability": "aftermath"
+        "def": 4,
+        "spa": 252,
+        "spe": 252
+      }
     },
     {
+      "species": "crobat",
+      "gender": "MALE",
+      "level": 74,
+      "nature": "jolly",
+      "ability": "infiltrator",
+      "heldItem": [
+        "air_balloon"
+      ],
       "moveset": [
         "tailwind",
-        "bravebird",
         "superfang",
-        "roost"
+        "crosspoison",
+        "taunt"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
+        "hp": 252,
         "def": 4,
-        "hp": 252
-      },
-      "heldItem": [
-        "eviolite"
-      ],
-      "species": "golbat",
+        "spe": 252
+      }
+    },
+    {
+      "species": "toxicroak",
       "gender": "MALE",
       "level": 73,
-      "nature": "jolly",
-      "ability": "innerfocus"
-    },
-    {
-      "moveset": [
-        "rockslide",
-        "crunch",
-        "lowkick",
-        "protect"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spd": 4,
-        "atk": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "assault_vest"
-      ],
-      "species": "tyranitar",
-      "gender": "MALE",
-      "level": 74,
       "nature": "adamant",
-      "ability": "sandstream"
-    },
-    {
-      "moveset": [
-        "knockoff",
-        "suckerpunch",
-        "playrough",
-        "protect"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
+      "ability": "dryskin",
       "heldItem": [
         "life_orb"
       ],
-      "species": "absol",
-      "gender": "MALE",
+      "moveset": [
+        "fakeout",
+        "gunkshot",
+        "drainpunch",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "drapion",
+      "gender": "FEMALE",
       "level": 74,
       "nature": "jolly",
-      "ability": "justified"
+      "ability": "sniper",
+      "heldItem": [
+        "scope_lens"
+      ],
+      "moveset": [
+        "crosspoison",
+        "nightslash",
+        "stompingtantrum",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
     }
-  ],
-  "battleFormat": "GEN_9_DOUBLES"
+  ]
 }

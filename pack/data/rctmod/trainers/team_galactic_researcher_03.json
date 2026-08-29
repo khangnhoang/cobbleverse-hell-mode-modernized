@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Researcher"
   },
+  "identity": "Team Galactic Researcher (3)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,127 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
       "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
+      "species": "aerodactyl",
+      "gender": "MALE",
+      "level": 70,
+      "nature": "jolly",
+      "ability": "unnerve",
+      "heldItem": [
+        "mega_showdown:aerodactylite"
+      ],
       "moveset": [
-        "hydropump",
-        "icebeam",
-        "earthpower",
-        "ancientpower"
+        "rockslide",
+        "dualwingbeat",
+        "irontail",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "omastar",
+      "gender": "MALE",
+      "level": 68,
+      "nature": "modest",
+      "ability": "shellarmor",
       "heldItem": [
         "focus_sash"
       ],
-      "species": "omastar",
-      "gender": "MALE",
-      "level": 67,
-      "nature": "modest",
-      "ability": "weakarmor"
-    },
-    {
       "moveset": [
-        "stoneedge",
-        "earthquake",
-        "dualwingbeat",
-        "ironhead"
+        "muddywater",
+        "icebeam",
+        "earthpower",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "spiritomb",
+      "gender": "MALE",
+      "level": 67,
+      "nature": "relaxed",
+      "ability": "infiltrator",
       "heldItem": [
-        "life_orb"
+        "sitrus_berry"
       ],
-      "species": "aerodactyl",
+      "moveset": [
+        "willowisp",
+        "snarl",
+        "shadowsneak",
+        "foulplay"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "bastiodon",
+      "gender": "MALE",
+      "level": 69,
+      "nature": "calm",
+      "ability": "sturdy",
+      "heldItem": [
+        "air_balloon"
+      ],
+      "moveset": [
+        "wideguard",
+        "ironhead",
+        "rockslide",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "archeops",
       "gender": "MALE",
       "level": 68,
       "nature": "jolly",
-      "ability": "pressure"
-    },
-    {
-      "moveset": [
-        "shadowball",
-        "darkpulse",
-        "willowisp",
-        "painsplit"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spd": 252,
-        "def": 4,
-        "hp": 252
-      },
-      "heldItem": [
-        "leftovers"
-      ],
-      "species": "spiritomb",
-      "gender": "FEMALE",
-      "level": 68,
-      "nature": "calm",
-      "ability": "pressure"
-    },
-    {
-      "moveset": [
-        "earthpower",
-        "thunderbolt",
-        "flashcannon",
-        "powergem"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
+      "ability": "defeatist",
       "heldItem": [
         "life_orb"
       ],
-      "species": "sandyshocks",
-      "gender": "GENDERLESS",
-      "level": 70,
-      "nature": "timid",
-      "ability": "protosynthesis"
+      "moveset": [
+        "acrobatics",
+        "rockslide",
+        "uturn",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "cradily",
+      "gender": "MALE",
+      "level": 67,
+      "nature": "calm",
+      "ability": "stormdrain",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "gigadrain",
+        "ancientpower",
+        "recover",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
     }
-  ],
-  "identity": "Team Galactic Researcher (3)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

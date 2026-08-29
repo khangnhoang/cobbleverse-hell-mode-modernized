@@ -13,188 +13,189 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 6
+    "maxItemUses": 4
   },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 6
+      "quantity": 4
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
+      "species": "toxicroak",
+      "gender": "MALE",
+      "level": 78,
+      "nature": "adamant",
+      "ability": "dryskin",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "fakeout",
+        "gunkshot",
+        "drainpunch",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "alakazam",
+      "gender": "MALE",
+      "level": 77,
+      "nature": "timid",
+      "ability": "magicguard",
+      "heldItem": [
+        "mega_showdown:alakazite"
+      ],
       "moveset": [
         "psychic",
         "shadowball",
-        "protect",
-        "taunt"
+        "dazzlinggleam",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
+        "hp": 4,
         "spa": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "leftovers",
-        "mega_showdown:alakazite"
-      ],
-      "species": "alakazam",
-      "gender": "MALE",
-      "level": 75,
-      "nature": "timid",
-      "ability": "magicguard"
+        "spe": 252
+      }
     },
     {
-      "moveset": [
-        "drainpunch",
-        "poisonjab",
-        "suckerpunch",
-        "icepunch"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "life_orb"
-      ],
-      "species": "toxicroak",
-      "gender": "FEMALE",
-      "level": 78,
-      "nature": "jolly",
-      "ability": "dryskin"
-    },
-    {
-      "moveset": [
-        "gyroball",
-        "trickroom",
-        "protect",
-        "earthquake"
-      ],
-      "ivs": {
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spd": 4,
-        "def": 252,
-        "hp": 252
-      },
+      "species": "bronzong",
+      "gender": "GENDERLESS",
+      "level": 76,
+      "nature": "sassy",
+      "ability": "levitate",
       "heldItem": [
         "leftovers"
       ],
-      "species": "bronzong",
-      "gender": "MALE",
-      "level": 77,
-      "nature": "relaxed",
-      "ability": "levitate"
-    },
-    {
       "moveset": [
-        "bravebird",
-        "tailwind",
-        "superfang",
-        "roost"
+        "gyroball",
+        "bodypress",
+        "irondefense",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "eviolite"
-      ],
-      "species": "golbat",
-      "gender": "MALE",
-      "level": 76,
-      "nature": "jolly",
-      "ability": "levitate"
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
     },
     {
-      "moveset": [
-        "sludgebomb",
-        "blizzard",
-        "earthpower",
-        "thunderbolt"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "life_orb"
-      ],
-      "species": "nidoking",
+      "species": "crobat",
       "gender": "MALE",
       "level": 75,
-      "nature": "timid",
-      "ability": "sheerforce"
-    },
-    {
+      "nature": "jolly",
+      "ability": "infiltrator",
+      "heldItem": [
+        "focus_sash"
+      ],
       "moveset": [
-        "poisonjab",
-        "suckerpunch",
-        "playrough",
+        "tailwind",
+        "superfang",
+        "crosspoison",
         "taunt"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "black_sludge"
-      ],
-      "species": "skuntank",
+        "hp": 252,
+        "def": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "octillery",
       "gender": "MALE",
-      "level": 77,
-      "nature": "jolly",
-      "ability": "aftermath"
+      "level": 75,
+      "nature": "modest",
+      "ability": "sniper",
+      "heldItem": [
+        "expert_belt"
+      ],
+      "moveset": [
+        "waterspout",
+        "icebeam",
+        "energyball",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "gallade",
+      "gender": "MALE",
+      "level": 76,
+      "nature": "adamant",
+      "ability": "sharpness",
+      "heldItem": [
+        "assault_vest"
+      ],
+      "moveset": [
+        "sacredsword",
+        "psychocut",
+        "nightslash",
+        "aquacutter"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
     }
-  ],
-  "battleFormat": "GEN_9_DOUBLES"
+  ]
 }

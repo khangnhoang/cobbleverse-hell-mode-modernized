@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Employee"
   },
+  "identity": "Team Galactic Employee (4)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,127 +13,196 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 2
+      "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "fakeout",
-        "doublehit",
-        "lowkick",
-        "uturn"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
+      "species": "ambipom",
+      "gender": "FEMALE",
+      "level": 67,
+      "nature": "jolly",
+      "ability": "technician",
       "heldItem": [
         "silk_scarf"
       ],
-      "species": "ambipom",
-      "gender": "MALE",
-      "level": 65,
-      "nature": "jolly",
-      "ability": "technician"
-    },
-    {
       "moveset": [
-        "gyroball",
-        "confuseray",
-        "irondefense",
-        "extrasensory"
+        "fakeout",
+        "tailslap",
+        "knockoff",
+        "protect"
       ],
       "ivs": {
-        "spd": 31,
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
         "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 4,
-        "def": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "rocky_helmet"
-      ],
-      "species": "bronzor",
-      "gender": "GENDERLESS",
-      "level": 65,
-      "nature": "relaxed",
-      "ability": "levitate"
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
     },
     {
-      "moveset": [
-        "facade",
-        "crunch",
-        "suckerpunch",
-        "zenheadbutt"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "flame_orb"
-      ],
-      "species": "raticate",
+      "species": "skuntank",
       "gender": "MALE",
       "level": 66,
-      "nature": "jolly",
-      "ability": "guts"
-    },
-    {
+      "nature": "adamant",
+      "ability": "aftermath",
+      "heldItem": [
+        "focus_sash"
+      ],
       "moveset": [
+        "suckerpunch",
         "poisonjab",
-        "nightslash",
-        "playrough",
-        "explosion"
+        "snarl",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "def": 4,
+        "hp": 4,
         "atk": 252,
-        "hp": 252
-      },
+        "spe": 252
+      }
+    },
+    {
+      "species": "bronzong",
+      "gender": "GENDERLESS",
+      "level": 66,
+      "nature": "sassy",
+      "ability": "levitate",
       "heldItem": [
-        "black_sludge"
+        "leftovers"
       ],
-      "species": "skuntank",
-      "gender": "FEMALE",
-      "level": 67,
+      "moveset": [
+        "gyroball",
+        "bodypress",
+        "trickroom",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "raticate",
+      "aspects": [
+        "alolan"
+      ],
+      "gender": "MALE",
+      "level": 65,
       "nature": "adamant",
-      "ability": "aftermath"
+      "ability": "hustle",
+      "heldItem": [
+        "wide_lens"
+      ],
+      "moveset": [
+        "doubleedge",
+        "knockoff",
+        "suckerpunch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "muk",
+      "aspects": [
+        "alolan"
+      ],
+      "gender": "MALE",
+      "level": 66,
+      "nature": "adamant",
+      "ability": "poisontouch",
+      "heldItem": [
+        "assault_vest"
+      ],
+      "moveset": [
+        "knockoff",
+        "poisonjab",
+        "shadowsneak",
+        "drainpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "camerupt",
+      "gender": "MALE",
+      "level": 65,
+      "nature": "quiet",
+      "ability": "solidrock",
+      "heldItem": [
+        "mega_showdown:cameruptite"
+      ],
+      "moveset": [
+        "heatwave",
+        "earthpower",
+        "ancientpower",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
     }
-  ],
-  "identity": "Team Galactic Employee (4)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

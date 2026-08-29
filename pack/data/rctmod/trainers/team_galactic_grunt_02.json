@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Grunt"
   },
+  "identity": "Team Galactic Grunt (2)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,60 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
-  "team": [
+  "battleRules": {
+    "maxItemUses": 2
+  },
+  "bag": [
     {
-      "moveset": [
-        "extrasensory",
-        "gyroball",
-        "confuseray",
-        "irondefense"
-      ],
-      "ivs": {
-        "spe": 25,
-        "spd": 25,
-        "spa": 25,
-        "def": 25,
-        "atk": 25,
-        "hp": 25
-      },
-      "evs": {
-        "spd": 100,
-        "def": 100,
-        "hp": 150
-      },
-      "species": "bronzor",
-      "gender": "GENDERLESS",
-      "level": 38,
-      "nature": "relaxed",
-      "ability": "levitate"
-    },
-    {
-      "moveset": [
-        "nightslash",
-        "sludgebomb",
-        "suckerpunch",
-        "screech"
-      ],
-      "ivs": {
-        "spe": 25,
-        "spd": 25,
-        "spa": 25,
-        "def": 25,
-        "atk": 25,
-        "hp": 25
-      },
-      "evs": {
-        "spe": 100,
-        "atk": 150,
-        "hp": 100
-      },
-      "species": "stunky",
-      "gender": "MALE",
-      "level": 40,
-      "nature": "adamant",
-      "ability": "aftermath"
+      "item": "cobblemon:super_potion",
+      "quantity": 2
     }
   ],
-  "battleFormat": "GEN_9_SINGLES"
+  "battleFormat": "GEN_9_DOUBLES",
+  "team": [
+    {
+      "species": "skuntank",
+      "gender": "FEMALE",
+      "level": 40,
+      "nature": "adamant",
+      "ability": "aftermath",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "suckerpunch",
+        "poisonjab",
+        "snarl",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "bronzor",
+      "gender": "GENDERLESS",
+      "level": 39,
+      "nature": "relaxed",
+      "ability": "levitate",
+      "heldItem": [
+        "eviolite"
+      ],
+      "moveset": [
+        "gyroball",
+        "confuseray",
+        "trickroom",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "purugly",
+      "gender": "FEMALE",
+      "level": 39,
+      "nature": "jolly",
+      "ability": "defiant",
+      "heldItem": [
+        "silk_scarf"
+      ],
+      "moveset": [
+        "fakeout",
+        "slash",
+        "knockoff",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "golbat",
+      "gender": "MALE",
+      "level": 38,
+      "nature": "jolly",
+      "ability": "innerfocus",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "superfang",
+        "poisonfang",
+        "wingattack",
+        "taunt"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "croagunk",
+      "gender": "MALE",
+      "level": 38,
+      "nature": "adamant",
+      "ability": "dryskin",
+      "heldItem": [
+        "black_belt"
+      ],
+      "moveset": [
+        "fakeout",
+        "drainpunch",
+        "poisonjab",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "magneton",
+      "gender": "GENDERLESS",
+      "level": 39,
+      "nature": "modest",
+      "ability": "sturdy",
+      "heldItem": [
+        "eviolite"
+      ],
+      "moveset": [
+        "thunderbolt",
+        "flashcannon",
+        "voltswitch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    }
+  ]
 }

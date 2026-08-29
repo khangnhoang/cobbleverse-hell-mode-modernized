@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Grunt"
   },
+  "identity": "Team Galactic Grunt (5)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,80 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 1
+  },
+  "bag": [
+    {
+      "item": "cobblemon:super_potion",
+      "quantity": 1
+    }
+  ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "thundershock",
-        "sonicboom",
-        "supersonic",
-        "thunderwave"
-      ],
-      "ivs": {
-        "spe": 20,
-        "spd": 20,
-        "spa": 20,
-        "def": 20,
-        "hp": 20
-      },
-      "evs": {
-        "spe": 100,
-        "spa": 100
-      },
       "species": "magnemite",
       "gender": "GENDERLESS",
-      "level": 22,
+      "level": 23,
       "nature": "modest",
-      "ability": "sturdy"
-    },
-    {
+      "ability": "sturdy",
+      "heldItem": [
+        "eviolite"
+      ],
       "moveset": [
-        "hyperfang",
-        "quickattack",
-        "bite",
-        "focusenergy"
+        "shockwave",
+        "flashcannon",
+        "thunderwave",
+        "protect"
       ],
       "ivs": {
-        "spe": 20,
-        "spd": 20,
-        "def": 20,
-        "atk": 20,
-        "hp": 20
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 100,
-        "atk": 100
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "dustox",
+      "gender": "FEMALE",
+      "level": 22,
+      "nature": "calm",
+      "ability": "shielddust",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "gust",
+        "poisonpowder",
+        "moonlight",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
       "species": "rattata",
+      "gender": "MALE",
+      "level": 22,
+      "nature": "jolly",
+      "ability": "guts",
+      "heldItem": [
+        "flame_orb"
+      ],
+      "moveset": [
+        "quickattack",
+        "bite",
+        "headbutt",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "glameow",
+      "gender": "FEMALE",
+      "level": 22,
+      "nature": "jolly",
+      "ability": "limber",
+      "heldItem": [
+        "silk_scarf"
+      ],
+      "moveset": [
+        "fakeout",
+        "quickattack",
+        "bite",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "zubat",
       "gender": "MALE",
       "level": 21,
       "nature": "jolly",
-      "ability": "runaway"
-    },
-    {
+      "ability": "innerfocus",
+      "heldItem": [
+        "focus_sash"
+      ],
       "moveset": [
-        "confusion",
-        "gust",
-        "poisonpowder",
-        "moonlight"
+        "wingattack",
+        "confuseray",
+        "bite",
+        "protect"
       ],
       "ivs": {
-        "spe": 20,
-        "spd": 20,
-        "spa": 20,
-        "def": 20,
-        "hp": 20
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 100,
-        "hp": 100
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "stunky",
+      "gender": "MALE",
+      "level": 22,
+      "nature": "adamant",
+      "ability": "aftermath",
+      "heldItem": [
+        "black_sludge"
+      ],
+      "moveset": [
+        "acid",
+        "bite",
+        "scratch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
-      "species": "dustox",
-      "gender": "FEMALE",
-      "level": 23,
-      "nature": "calm",
-      "ability": "shielddust"
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

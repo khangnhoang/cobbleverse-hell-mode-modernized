@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Grunt"
   },
+  "identity": "Team Galactic Grunt (13)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,34 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 2
+  },
+  "bag": [
+    {
+      "item": "cobblemon:super_potion",
+      "quantity": 2
+    }
+  ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "mudslap",
-        "poisonsting",
-        "feintattack",
-        "venoshock"
-      ],
-      "ivs": {
-        "spe": 20,
-        "spd": 20,
-        "spa": 20,
-        "def": 20,
-        "atk": 20,
-        "hp": 20
-      },
-      "evs": {
-        "spe": 50,
-        "spa": 50,
-        "atk": 100
-      },
       "species": "croagunk",
       "gender": "MALE",
       "level": 32,
-      "nature": "lonely",
-      "ability": "anticipation"
+      "nature": "adamant",
+      "ability": "dryskin",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "fakeout",
+        "drainpunch",
+        "poisonjab",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "golbat",
+      "gender": "MALE",
+      "level": 32,
+      "nature": "jolly",
+      "ability": "innerfocus",
+      "heldItem": [
+        "eviolite"
+      ],
+      "moveset": [
+        "wingattack",
+        "superfang",
+        "confuseray",
+        "taunt"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "stunky",
+      "gender": "MALE",
+      "level": 32,
+      "nature": "adamant",
+      "ability": "aftermath",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "poisonjab",
+        "bite",
+        "suckerpunch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "purugly",
+      "gender": "FEMALE",
+      "level": 32,
+      "nature": "jolly",
+      "ability": "defiant",
+      "heldItem": [
+        "silk_scarf"
+      ],
+      "moveset": [
+        "fakeout",
+        "slash",
+        "knockoff",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "magneton",
+      "gender": "GENDERLESS",
+      "level": 32,
+      "nature": "modest",
+      "ability": "sturdy",
+      "heldItem": [
+        "eviolite"
+      ],
+      "moveset": [
+        "thunderbolt",
+        "flashcannon",
+        "voltswitch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "bronzor",
+      "gender": "GENDERLESS",
+      "level": 32,
+      "nature": "relaxed",
+      "ability": "levitate",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "gyroball",
+        "confuseray",
+        "trickroom",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Engineer"
   },
+  "identity": "Team Galactic Engineer (2)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,128 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 2
+      "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
+      "species": "scizor",
+      "gender": "MALE",
+      "level": 64,
+      "nature": "adamant",
+      "ability": "technician",
+      "heldItem": [
+        "mega_showdown:scizorite"
+      ],
       "moveset": [
-        "flashcannon",
-        "thunderbolt",
-        "triattack",
-        "discharge"
+        "bulletpunch",
+        "bugbite",
+        "swordsdance",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 4,
-        "spa": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "air_balloon"
-      ],
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    },
+    {
       "species": "magnezone",
       "gender": "GENDERLESS",
       "level": 63,
       "nature": "modest",
-      "ability": "analytic"
-    },
-    {
+      "ability": "sturdy",
+      "heldItem": [
+        "air_balloon"
+      ],
       "moveset": [
-        "bulletpunch",
-        "dualwingbeat",
-        "bugbite",
-        "trailblaze"
+        "thunderbolt",
+        "flashcannon",
+        "electroweb",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "def": 4,
-        "atk": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "metal_coat"
-      ],
-      "species": "scizor",
-      "gender": "MALE",
-      "level": 62,
-      "nature": "adamant",
-      "ability": "technician"
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
     },
     {
+      "species": "klinklang",
+      "gender": "GENDERLESS",
+      "level": 63,
+      "nature": "adamant",
+      "ability": "clearbody",
+      "heldItem": [
+        "leftovers"
+      ],
       "moveset": [
         "geargrind",
         "wildcharge",
-        "facade",
-        "assurance"
+        "shiftgear",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
+        "hp": 252,
         "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "metal_coat"
-      ],
-      "species": "klinklang",
-      "gender": "GENDERLESS",
-      "level": 62,
-      "nature": "adamant",
-      "ability": "clearbody"
+        "spe": 4
+      }
     },
     {
-      "moveset": [
-        "heavyslam",
-        "earthquake",
-        "stoneedge",
-        "icepunch"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "def": 252,
-        "atk": 4,
-        "hp": 252
-      },
-      "heldItem": [
-        "leftovers",
-        "mega_showdown:aggronite"
-      ],
       "species": "aggron",
       "gender": "MALE",
       "level": 64,
-      "nature": "impish",
-      "ability": "sturdy"
+      "nature": "brave",
+      "ability": "rockhead",
+      "heldItem": [
+        "assault_vest"
+      ],
+      "moveset": [
+        "headsmash",
+        "heavyslam",
+        "highhorsepower",
+        "icepunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "bronzong",
+      "gender": "GENDERLESS",
+      "level": 62,
+      "nature": "relaxed",
+      "ability": "levitate",
+      "heldItem": [
+        "light_clay"
+      ],
+      "moveset": [
+        "trickroom",
+        "gyroball",
+        "bodypress",
+        "reflect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "forretress",
+      "gender": "MALE",
+      "level": 62,
+      "nature": "relaxed",
+      "ability": "sturdy",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "voltswitch",
+        "gyroball",
+        "bodypress",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
     }
-  ],
-  "identity": "Team Galactic Engineer (2)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

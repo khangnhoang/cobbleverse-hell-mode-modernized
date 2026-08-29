@@ -151,7 +151,7 @@
       "moveset": [
         "crosspoison",
         "nightslash",
-        "earthquake",
+        "stompingtantrum",
         "protect"
       ],
       "ivs": {
@@ -178,7 +178,7 @@
         "toxic_orb"
       ],
       "moveset": [
-        "earthquake",
+        "highhorsepower",
         "toxic",
         "tailwind",
         "protect"

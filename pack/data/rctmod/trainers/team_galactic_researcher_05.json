@@ -92,10 +92,10 @@
         "white_herb"
       ],
       "moveset": [
-        "shellsmash",
+        "stompingtantrum",
         "acrobatics",
         "rockslide",
-        "earthquake"
+        "protect"
       ],
       "ivs": {
         "hp": 31,

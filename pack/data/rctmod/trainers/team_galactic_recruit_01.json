@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Recruit"
   },
+  "identity": "Team Galactic Recruit (1)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,43 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 2
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 1
+      "quantity": 2
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
+      "species": "pelipper",
+      "gender": "FEMALE",
+      "level": 65,
+      "nature": "modest",
+      "ability": "drizzle",
+      "heldItem": [
+        "damp_rock"
+      ],
+      "moveset": [
+        "scald",
+        "hurricane",
+        "tailwind",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "def": 4
+      }
+    },
+    {
+      "species": "gyarados",
+      "gender": "MALE",
+      "level": 65,
+      "nature": "jolly",
+      "ability": "intimidate",
+      "heldItem": [
+        "mega_showdown:gyaradosite"
+      ],
       "moveset": [
         "waterfall",
         "crunch",
         "icefang",
-        "dragondance"
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
+        "hp": 4,
         "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "mystic_water"
-      ],
-      "species": "gyarados",
+        "spe": 252
+      }
+    },
+    {
+      "species": "barraskewda",
       "gender": "MALE",
       "level": 65,
       "nature": "adamant",
-      "ability": "intimidate"
+      "ability": "swiftswim",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "liquidation",
+        "closecombat",
+        "poisonjab",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "raichu",
+      "gender": "MALE",
+      "level": 65,
+      "nature": "timid",
+      "ability": "lightningrod",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "fakeout",
+        "thunderbolt",
+        "voltswitch",
+        "nuzzle"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "ferrothorn",
+      "gender": "MALE",
+      "level": 65,
+      "nature": "relaxed",
+      "ability": "ironbarbs",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "powerwhip",
+        "gyroball",
+        "bodypress",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "gastrodon",
+      "gender": "FEMALE",
+      "level": 65,
+      "nature": "quiet",
+      "ability": "stormdrain",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "muddywater",
+        "earthpower",
+        "recover",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spa": 128
+      }
     }
-  ],
-  "identity": "Team Galactic Recruit (1)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

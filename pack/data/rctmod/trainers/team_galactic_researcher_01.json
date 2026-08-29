@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Researcher"
   },
+  "identity": "Team Galactic Researcher (1)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,127 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 2
+      "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "recover",
-        "triattack",
-        "icebeam",
-        "toxic"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spd": 4,
-        "def": 252,
-        "hp": 252
-      },
+      "species": "porygon2",
+      "gender": "GENDERLESS",
+      "level": 63,
+      "nature": "sassy",
+      "ability": "download",
       "heldItem": [
         "eviolite"
       ],
-      "species": "porygon2",
-      "gender": "GENDERLESS",
-      "level": 62,
-      "nature": "bold",
-      "ability": "download"
-    },
-    {
       "moveset": [
-        "psychic",
-        "shadowball",
-        "dazzlinggleam",
-        "energyball"
+        "trickroom",
+        "triattack",
+        "icebeam",
+        "recover"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
       },
       "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "espeon",
+      "gender": "FEMALE",
+      "level": 62,
+      "nature": "timid",
+      "ability": "magicbounce",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "psychic",
+        "dazzlinggleam",
+        "shadowball",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "magnezone",
+      "gender": "GENDERLESS",
+      "level": 62,
+      "nature": "quiet",
+      "ability": "analytic",
+      "heldItem": [
+        "assault_vest"
+      ],
+      "moveset": [
+        "thunderbolt",
+        "flashcannon",
+        "electroweb",
+        "voltswitch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "alakazam",
+      "gender": "MALE",
+      "level": 63,
+      "nature": "timid",
+      "ability": "magicguard",
+      "heldItem": [
+        "mega_showdown:alakazite"
+      ],
+      "moveset": [
+        "psychic",
+        "focusblast",
+        "shadowball",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "reuniclus",
+      "gender": "MALE",
+      "level": 62,
+      "nature": "quiet",
+      "ability": "magicguard",
       "heldItem": [
         "life_orb"
       ],
-      "species": "kadabra",
-      "gender": "MALE",
-      "level": 61,
-      "nature": "timid",
-      "ability": "magicguard"
-    },
-    {
-      "moveset": [
-        "flashcannon",
-        "thunderbolt",
-        "triattack",
-        "hiddenpower"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spd": 4,
-        "spa": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "choice_specs"
-      ],
-      "species": "magneton",
-      "gender": "GENDERLESS",
-      "level": 62,
-      "nature": "modest",
-      "ability": "analytic"
-    },
-    {
       "moveset": [
         "psychic",
-        "shadowball",
-        "dazzlinggleam",
-        "morningsun"
+        "focusblast",
+        "energyball",
+        "trickroom"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
       },
       "evs": {
-        "spe": 252,
+        "hp": 252,
         "spa": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "leftovers"
-      ],
-      "species": "espeon",
-      "gender": "FEMALE",
-      "level": 63,
+        "spd": 4
+      }
+    },
+    {
+      "species": "electrode",
+      "gender": "GENDERLESS",
+      "level": 61,
       "nature": "timid",
-      "ability": "magicbounce"
+      "ability": "soundproof",
+      "heldItem": [
+        "air_balloon"
+      ],
+      "moveset": [
+        "voltswitch",
+        "thunderbolt",
+        "taunt",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
     }
-  ],
-  "identity": "Team Galactic Researcher (1)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

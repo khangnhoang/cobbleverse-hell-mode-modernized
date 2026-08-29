@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Grunt"
   },
+  "identity": "Team Galactic Grunt (3)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,60 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
-  "team": [
+  "battleRules": {
+    "maxItemUses": 2
+  },
+  "bag": [
     {
-      "moveset": [
-        "poisonjab",
-        "airslash",
-        "haze",
-        "meanlook"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "species": "golbat",
-      "gender": "FEMALE",
-      "level": 48,
-      "nature": "jolly",
-      "ability": "innerfocus"
-    },
-    {
-      "moveset": [
-        "poisonjab",
-        "nightslash",
-        "flamethrower",
-        "explosion"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spa": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "species": "skuntank",
-      "gender": "MALE",
-      "level": 50,
-      "nature": "naughty",
-      "ability": "aftermath"
+      "item": "cobblemon:hyper_potion",
+      "quantity": 2
     }
   ],
-  "battleFormat": "GEN_9_SINGLES"
+  "battleFormat": "GEN_9_DOUBLES",
+  "team": [
+    {
+      "species": "crobat",
+      "gender": "MALE",
+      "level": 50,
+      "nature": "jolly",
+      "ability": "infiltrator",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "tailwind",
+        "superfang",
+        "crosspoison",
+        "taunt"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "skuntank",
+      "gender": "FEMALE",
+      "level": 50,
+      "nature": "adamant",
+      "ability": "aftermath",
+      "heldItem": [
+        "black_sludge"
+      ],
+      "moveset": [
+        "suckerpunch",
+        "poisonjab",
+        "snarl",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "purugly",
+      "gender": "FEMALE",
+      "level": 49,
+      "nature": "jolly",
+      "ability": "defiant",
+      "heldItem": [
+        "silk_scarf"
+      ],
+      "moveset": [
+        "fakeout",
+        "doubleedge",
+        "knockoff",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "toxicroak",
+      "gender": "MALE",
+      "level": 49,
+      "nature": "adamant",
+      "ability": "dryskin",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "fakeout",
+        "gunkshot",
+        "drainpunch",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "magnezone",
+      "gender": "GENDERLESS",
+      "level": 48,
+      "nature": "modest",
+      "ability": "sturdy",
+      "heldItem": [
+        "air_balloon"
+      ],
+      "moveset": [
+        "thunderbolt",
+        "flashcannon",
+        "voltswitch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "drapion",
+      "gender": "MALE",
+      "level": 48,
+      "nature": "jolly",
+      "ability": "sniper",
+      "heldItem": [
+        "scope_lens"
+      ],
+      "moveset": [
+        "crosspoison",
+        "nightslash",
+        "stompingtantrum",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Grunt"
   },
+  "identity": "Team Galactic Grunt (9)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,36 +13,193 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 2
+  },
+  "bag": [
+    {
+      "item": "cobblemon:super_potion",
+      "quantity": 2
+    }
+  ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "facade",
-        "crunch",
-        "zenheadbutt",
-        "swordsdance"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "cobblemon:flame_orb"
-      ],
       "species": "raticate",
+      "aspects": [
+        "alolan"
+      ],
       "gender": "MALE",
       "level": 45,
       "nature": "adamant",
-      "ability": "guts"
+      "ability": "hustle",
+      "heldItem": [
+        "wide_lens"
+      ],
+      "moveset": [
+        "doubleedge",
+        "knockoff",
+        "suckerpunch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "purugly",
+      "gender": "FEMALE",
+      "level": 45,
+      "nature": "jolly",
+      "ability": "defiant",
+      "heldItem": [
+        "silk_scarf"
+      ],
+      "moveset": [
+        "fakeout",
+        "doubleedge",
+        "knockoff",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "skuntank",
+      "gender": "MALE",
+      "level": 45,
+      "nature": "adamant",
+      "ability": "aftermath",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "suckerpunch",
+        "poisonjab",
+        "snarl",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "crobat",
+      "gender": "FEMALE",
+      "level": 45,
+      "nature": "jolly",
+      "ability": "infiltrator",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "tailwind",
+        "superfang",
+        "crosspoison",
+        "taunt"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "toxicroak",
+      "gender": "MALE",
+      "level": 45,
+      "nature": "adamant",
+      "ability": "dryskin",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "fakeout",
+        "poisonjab",
+        "drainpunch",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "bronzong",
+      "gender": "GENDERLESS",
+      "level": 45,
+      "nature": "sassy",
+      "ability": "levitate",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "gyroball",
+        "bodypress",
+        "irondefense",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

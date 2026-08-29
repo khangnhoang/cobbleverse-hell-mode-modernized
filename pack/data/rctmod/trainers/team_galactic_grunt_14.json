@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Grunt"
   },
+  "identity": "Team Galactic Grunt (14)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,57 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
-  "team": [
+  "battleRules": {
+    "maxItemUses": 1
+  },
+  "bag": [
     {
-      "moveset": [
-        "acidspray",
-        "furyswipes",
-        "smokescreen",
-        "slash"
-      ],
-      "ivs": {
-        "spe": 15,
-        "spd": 15,
-        "spa": 15,
-        "def": 15,
-        "atk": 15,
-        "hp": 15
-      },
-      "evs": {
-        "spe": 100,
-        "atk": 100
-      },
-      "species": "stunky",
-      "gender": "FEMALE",
-      "level": 30,
-      "nature": "adamant",
-      "ability": "stench"
-    },
-    {
-      "moveset": [
-        "crunch",
-        "hyperfang",
-        "quickattack"
-      ],
-      "ivs": {
-        "spe": 15,
-        "spd": 15,
-        "spa": 15,
-        "def": 15,
-        "atk": 15,
-        "hp": 15
-      },
-      "evs": {
-        "spe": 100,
-        "atk": 100
-      },
-      "species": "rattata",
-      "gender": "MALE",
-      "level": 28,
-      "nature": "jolly",
-      "ability": "guts"
+      "item": "cobblemon:super_potion",
+      "quantity": 1
     }
   ],
-  "battleFormat": "GEN_9_SINGLES"
+  "battleFormat": "GEN_9_DOUBLES",
+  "team": [
+    {
+      "species": "stunky",
+      "gender": "MALE",
+      "level": 30,
+      "nature": "adamant",
+      "ability": "aftermath",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "poisonjab",
+        "bite",
+        "snarl",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "raticate",
+      "gender": "MALE",
+      "level": 29,
+      "nature": "jolly",
+      "ability": "guts",
+      "heldItem": [
+        "flame_orb"
+      ],
+      "moveset": [
+        "hyperfang",
+        "quickattack",
+        "crunch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "glameow",
+      "gender": "FEMALE",
+      "level": 29,
+      "nature": "jolly",
+      "ability": "limber",
+      "heldItem": [
+        "silk_scarf"
+      ],
+      "moveset": [
+        "fakeout",
+        "slash",
+        "bite",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "croagunk",
+      "gender": "MALE",
+      "level": 28,
+      "nature": "adamant",
+      "ability": "dryskin",
+      "heldItem": [
+        "black_belt"
+      ],
+      "moveset": [
+        "fakeout",
+        "drainpunch",
+        "poisonjab",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "golbat",
+      "gender": "MALE",
+      "level": 29,
+      "nature": "jolly",
+      "ability": "innerfocus",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "wingattack",
+        "poisonfang",
+        "confuseray",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "bronzor",
+      "gender": "GENDERLESS",
+      "level": 29,
+      "nature": "relaxed",
+      "ability": "levitate",
+      "heldItem": [
+        "eviolite"
+      ],
+      "moveset": [
+        "gyroball",
+        "confuseray",
+        "hypnosis",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
+    }
+  ]
 }

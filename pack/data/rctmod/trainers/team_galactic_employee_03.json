@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Employee"
   },
+  "identity": "Team Galactic Employee (3)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,98 +13,193 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 2
+      "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "chatter",
-        "boomburst",
-        "heatwave",
-        "uturn"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "focus_sash"
-      ],
-      "species": "chatot",
-      "gender": "MALE",
-      "level": 60,
-      "nature": "timid",
-      "ability": "keeneye"
-    },
-    {
-      "moveset": [
-        "fakeout",
-        "playrough",
-        "slash",
-        "suckerpunch"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
+      "species": "purugly",
+      "gender": "FEMALE",
+      "level": 61,
+      "nature": "jolly",
+      "ability": "defiant",
       "heldItem": [
         "silk_scarf"
       ],
-      "species": "glameow",
-      "gender": "FEMALE",
-      "level": 60,
-      "nature": "jolly",
-      "ability": "limber"
-    },
-    {
       "moveset": [
-        "gyroball",
-        "earthquake",
-        "explosion",
-        "spikes"
+        "fakeout",
+        "doubleedge",
+        "knockoff",
+        "protect"
       ],
       "ivs": {
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "def": 252,
-        "atk": 4,
-        "hp": 252
-      },
-      "heldItem": [
-        "rocky_helmet"
-      ],
-      "species": "forretress",
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "chatot",
       "gender": "MALE",
       "level": 61,
+      "nature": "timid",
+      "ability": "tangledfeet",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "boomburst",
+        "chatter",
+        "heatwave",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "forretress",
+      "gender": "MALE",
+      "level": 60,
       "nature": "relaxed",
-      "ability": "sturdy"
+      "ability": "sturdy",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "voltswitch",
+        "gyroball",
+        "bodypress",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "noivern",
+      "gender": "MALE",
+      "level": 61,
+      "nature": "timid",
+      "ability": "infiltrator",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "tailwind",
+        "dracometeor",
+        "airslash",
+        "taunt"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "rotom",
+      "aspects": [
+        "fan-appliance"
+      ],
+      "gender": "GENDERLESS",
+      "level": 60,
+      "nature": "timid",
+      "ability": "levitate",
+      "heldItem": [
+        "safety_goggles"
+      ],
+      "moveset": [
+        "airslash",
+        "voltswitch",
+        "thunderbolt",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 4,
+        "spa": 252
+      }
+    },
+    {
+      "species": "exploud",
+      "gender": "MALE",
+      "level": 60,
+      "nature": "modest",
+      "ability": "scrappy",
+      "heldItem": [
+        "choice_specs"
+      ],
+      "moveset": [
+        "boomburst",
+        "fireblast",
+        "icebeam",
+        "shadowball"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
     }
-  ],
-  "identity": "Team Galactic Employee (3)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Scientist"
   },
+  "identity": "Team Galactic Scientist (5)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,189 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 2
+      "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
+      "species": "roserade",
+      "gender": "FEMALE",
+      "level": 65,
+      "nature": "timid",
+      "ability": "naturalcure",
+      "heldItem": [
+        "focus_sash"
+      ],
       "moveset": [
-        "scald",
-        "toxicspikes",
         "sludgebomb",
-        "rapidspin"
+        "energyball",
+        "dazzlinggleam",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 252,
-        "def": 4,
-        "hp": 252
-      },
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "crobat",
+      "gender": "MALE",
+      "level": 64,
+      "nature": "jolly",
+      "ability": "infiltrator",
       "heldItem": [
-        "black_sludge"
+        "sitrus_berry"
       ],
+      "moveset": [
+        "tailwind",
+        "superfang",
+        "crosspoison",
+        "taunt"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "venusaur",
+      "gender": "MALE",
+      "level": 64,
+      "nature": "modest",
+      "ability": "chlorophyll",
+      "heldItem": [
+        "mega_showdown:venusaurite"
+      ],
+      "moveset": [
+        "sludgebomb",
+        "gigadrain",
+        "earthpower",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
       "species": "tentacruel",
       "gender": "MALE",
       "level": 63,
       "nature": "calm",
-      "ability": "liquidooze"
-    },
-    {
-      "moveset": [
-        "bravebird",
-        "confuseray",
-        "uturn",
-        "roost"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
+      "ability": "liquidooze",
       "heldItem": [
-        "sharp_beak"
+        "black_sludge"
       ],
-      "species": "crobat",
-      "gender": "FEMALE",
-      "level": 64,
-      "nature": "jolly",
-      "ability": "infiltrator"
-    },
-    {
-      "moveset": [
-        "crosspoison",
-        "nightslash",
-        "earthquake",
-        "swordsdance"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "def": 4,
-        "atk": 252
-      },
-      "heldItem": [
-        "scope_lens"
-      ],
-      "species": "drapion",
-      "gender": "MALE",
-      "level": 65,
-      "nature": "jolly",
-      "ability": "sniper"
-    },
-    {
-      "moveset": [
-        "toxicspikes",
-        "gigadrain",
-        "sleeppowder",
-        "synthesis"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spa": 4,
-        "def": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "eviolite"
-      ],
-      "species": "roselia",
-      "gender": "FEMALE",
-      "level": 62,
-      "nature": "bold",
-      "ability": "naturalcure"
-    },
-    {
       "moveset": [
         "scald",
-        "earthpower",
+        "sludgebomb",
+        "haze",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "drapion",
+      "gender": "FEMALE",
+      "level": 63,
+      "nature": "adamant",
+      "ability": "battlearmor",
+      "heldItem": [
+        "assault_vest"
+      ],
+      "moveset": [
+        "knockoff",
+        "poisonjab",
+        "stompingtantrum",
+        "aquatail"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    },
+    {
+      "species": "toxapex",
+      "gender": "MALE",
+      "level": 62,
+      "nature": "bold",
+      "ability": "regenerator",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "banefulbunker",
+        "scald",
         "recover",
         "toxic"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 4,
+        "hp": 252,
         "def": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "leftovers"
-      ],
-      "species": "gastrodon",
-      "gender": "MALE",
-      "level": 64,
-      "nature": "relaxed",
-      "ability": "stormdrain"
-    },
-    {
-      "moveset": [
-        "drainpunch",
-        "poisonjab",
-        "suckerpunch",
-        "bulkup"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "black_belt"
-      ],
-      "species": "toxicroak",
-      "gender": "MALE",
-      "level": 65,
-      "nature": "jolly",
-      "ability": "dryskin"
+        "spd": 4
+      }
     }
-  ],
-  "identity": "Team Galactic Scientist (5)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

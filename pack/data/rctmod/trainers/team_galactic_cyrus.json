@@ -21,185 +21,181 @@
       "quantity": 5
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "aircutter",
-        "nightslash",
-        "steelwing",
-        "suckerpunch"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "scope_lens"
-      ],
       "species": "honchkrow",
       "gender": "MALE",
       "level": 88,
-      "nature": "jolly",
-      "ability": "superluck"
-    },
-    {
+      "nature": "adamant",
+      "ability": "superluck",
+      "heldItem": [
+        "scope_lens"
+      ],
       "moveset": [
-        "crosspoison",
         "tailwind",
-        "aircutter",
-        "uturn"
+        "bravebird",
+        "suckerpunch",
+        "nightslash"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
+        "hp": 252,
         "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "sharp_beak"
-      ],
-      "species": "crobat",
-      "gender": "FEMALE",
-      "level": 85,
-      "nature": "jolly",
-      "ability": "infiltrator"
+        "spe": 4
+      }
     },
     {
-      "moveset": [
-        "icefang",
-        "waterfall",
-        "crunch",
-        "earthquake"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "leftovers"
-      ],
-      "species": "gyarados",
+      "species": "weavile",
       "gender": "MALE",
       "level": 86,
       "nature": "jolly",
-      "ability": "intimidate"
-    },
-    {
+      "ability": "pressure",
+      "heldItem": [
+        "focus_sash"
+      ],
       "moveset": [
-        "nightslash",
-        "iceshard",
-        "icepunch",
-        "lowkick"
+        "fakeout",
+        "tripleaxel",
+        "knockoff",
+        "iceshard"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
+        "hp": 4,
         "atk": 252,
-        "hp": 4
-      },
+        "spe": 252
+      }
+    },
+    {
+      "species": "houndoom",
+      "gender": "MALE",
+      "level": 87,
+      "nature": "timid",
+      "ability": "flashfire",
       "heldItem": [
         "life_orb"
       ],
-      "species": "weavile",
-      "gender": "MALE",
-      "level": 85,
-      "nature": "jolly",
-      "ability": "pickpocket"
-    },
-    {
       "moveset": [
-        "bodypress",
-        "uturn",
-        "roost",
-        "bravebird"
+        "darkpulse",
+        "heatwave",
+        "sludgebomb",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 124,
-        "def": 136,
-        "hp": 248
-      },
-      "heldItem": [
-        "leftovers"
-      ],
-      "gimmicks": {
-        "dynamax": true,
-        "gmax": true
-      },
-      "species": "corviknight",
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "gyarados",
       "gender": "MALE",
       "level": 87,
-      "nature": "impish",
-      "ability": "pressure"
-    },
-    {
+      "nature": "jolly",
+      "ability": "intimidate",
+      "heldItem": [
+        "mega_showdown:gyaradosite"
+      ],
       "moveset": [
-        "flamethrower",
-        "darkpulse",
-        "sludgebomb",
-        "taunt"
+        "waterfall",
+        "crunch",
+        "icefang",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "magnezone",
+      "gender": "GENDERLESS",
+      "level": 86,
+      "nature": "modest",
+      "ability": "sturdy",
       "heldItem": [
-        "life_orb",
-        "mega_showdown:houndoominite"
+        "air_balloon"
       ],
-      "species": "houndoom",
+      "moveset": [
+        "thunderbolt",
+        "flashcannon",
+        "voltswitch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "crobat",
       "gender": "MALE",
-      "level": 88,
-      "nature": "timid",
-      "ability": "flashfire"
+      "level": 86,
+      "nature": "jolly",
+      "ability": "infiltrator",
+      "heldItem": [
+        "black_sludge"
+      ],
+      "moveset": [
+        "superfang",
+        "crosspoison",
+        "haze",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 4,
+        "spe": 252
+      }
     }
-  ],
-  "battleFormat": "GEN_9_DOUBLES"
+  ]
 }

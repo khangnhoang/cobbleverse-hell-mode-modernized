@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Employee"
   },
+  "identity": "Team Galactic Employee (2)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,71 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 1
+      "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
+      "species": "weavile",
+      "gender": "FEMALE",
+      "level": 68,
+      "nature": "jolly",
+      "ability": "pressure",
+      "heldItem": [
+        "focus_sash"
+      ],
       "moveset": [
-        "gyroball",
-        "psychic",
-        "earthquake",
-        "irondefense"
+        "fakeout",
+        "tripleaxel",
+        "knockoff",
+        "iceshard"
       ],
       "ivs": {
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 128,
-        "def": 128,
-        "hp": 252
-      },
-      "heldItem": [
-        "leftovers"
-      ],
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
       "species": "bronzong",
       "gender": "GENDERLESS",
       "level": 68,
-      "nature": "relaxed",
-      "ability": "levitate"
-    },
-    {
+      "nature": "sassy",
+      "ability": "levitate",
+      "heldItem": [
+        "mental_herb"
+      ],
       "moveset": [
-        "iciclecrash",
-        "nightslash",
-        "iceshard",
-        "lowkick"
+        "gyroball",
+        "bodypress",
+        "trickroom",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "life_orb"
-      ],
-      "species": "weavile",
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "tyranitar",
       "gender": "MALE",
       "level": 68,
-      "nature": "jolly",
-      "ability": "pressure"
+      "nature": "brave",
+      "ability": "sandstream",
+      "heldItem": [
+        "mega_showdown:tyranitarite"
+      ],
+      "moveset": [
+        "rockslide",
+        "crunch",
+        "highhorsepower",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "gastrodon",
+      "gender": "MALE",
+      "level": 68,
+      "nature": "quiet",
+      "ability": "stormdrain",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "muddywater",
+        "earthpower",
+        "recover",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spa": 128
+      }
+    },
+    {
+      "species": "magnezone",
+      "gender": "GENDERLESS",
+      "level": 68,
+      "nature": "quiet",
+      "ability": "analytic",
+      "heldItem": [
+        "air_balloon"
+      ],
+      "moveset": [
+        "thunderbolt",
+        "flashcannon",
+        "electroweb",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "clefable",
+      "gender": "FEMALE",
+      "level": 68,
+      "nature": "bold",
+      "ability": "magicguard",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "followme",
+        "moonblast",
+        "helpinghand",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
     }
-  ],
-  "identity": "Team Galactic Employee (2)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

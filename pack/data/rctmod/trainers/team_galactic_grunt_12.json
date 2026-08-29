@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Grunt"
   },
+  "identity": "Team Galactic Grunt (12)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,81 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
-  "team": [
+  "battleRules": {
+    "maxItemUses": 1
+  },
+  "bag": [
     {
-      "moveset": [
-        "tackle",
-        "stringshot",
-        "bugbite",
-        "irondefense"
-      ],
-      "ivs": {
-        "spe": 10,
-        "spd": 10,
-        "spa": 10,
-        "def": 10,
-        "atk": 10,
-        "hp": 10
-      },
-      "evs": {
-        "def": 50,
-        "hp": 50
-      },
-      "species": "cascoon",
-      "gender": "FEMALE",
-      "level": 22,
-      "nature": "hardy",
-      "ability": "shedskin"
-    },
-    {
-      "moveset": [
-        "tackle",
-        "stringshot",
-        "bugbite",
-        "irondefense"
-      ],
-      "ivs": {
-        "spe": 10,
-        "spd": 10,
-        "spa": 10,
-        "def": 10,
-        "atk": 10,
-        "hp": 10
-      },
-      "evs": {
-        "def": 50,
-        "hp": 50
-      },
-      "species": "silcoon",
-      "gender": "MALE",
-      "level": 22,
-      "nature": "hardy",
-      "ability": "shedskin"
-    },
-    {
-      "moveset": [
-        "tackle",
-        "stringshot"
-      ],
-      "ivs": {
-        "spe": 10,
-        "spd": 10,
-        "spa": 10,
-        "def": 10,
-        "atk": 10,
-        "hp": 10
-      },
-      "evs": {
-        "atk": 20,
-        "hp": 20
-      },
-      "species": "wurmple",
-      "gender": "FEMALE",
-      "level": 20,
-      "nature": "docile",
-      "ability": "shielddust"
+      "item": "cobblemon:potion",
+      "quantity": 1
     }
   ],
-  "battleFormat": "GEN_9_SINGLES"
+  "battleFormat": "GEN_9_DOUBLES",
+  "team": [
+    {
+      "species": "dustox",
+      "gender": "MALE",
+      "level": 22,
+      "nature": "calm",
+      "ability": "shielddust",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "gust",
+        "poisonpowder",
+        "moonlight",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "beautifly",
+      "gender": "FEMALE",
+      "level": 22,
+      "nature": "modest",
+      "ability": "swarm",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "gust",
+        "absorb",
+        "poisonsting",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "glameow",
+      "gender": "FEMALE",
+      "level": 21,
+      "nature": "jolly",
+      "ability": "limber",
+      "heldItem": [
+        "silk_scarf"
+      ],
+      "moveset": [
+        "fakeout",
+        "quickattack",
+        "bite",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "zubat",
+      "gender": "MALE",
+      "level": 21,
+      "nature": "jolly",
+      "ability": "innerfocus",
+      "heldItem": [
+        "oran_berry"
+      ],
+      "moveset": [
+        "wingattack",
+        "confuseray",
+        "bite",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "croagunk",
+      "gender": "MALE",
+      "level": 20,
+      "nature": "adamant",
+      "ability": "dryskin",
+      "heldItem": [
+        "black_belt"
+      ],
+      "moveset": [
+        "fakeout",
+        "poisonsting",
+        "drainpunch",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "stunky",
+      "gender": "MALE",
+      "level": 21,
+      "nature": "adamant",
+      "ability": "aftermath",
+      "heldItem": [
+        "black_sludge"
+      ],
+      "moveset": [
+        "acid",
+        "bite",
+        "scratch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    }
+  ]
 }
