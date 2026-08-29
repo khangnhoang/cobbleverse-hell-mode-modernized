@@ -3,6 +3,7 @@ package com.cobbleverse.legendaryrule.mixin;
 import com.cobbleverse.legendaryrule.LegendaryPartyRule;
 import com.gitlab.srcmc.rctmod.world.entities.TrainerMob;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,15 +27,17 @@ public abstract class TrainerMobMixin {
         method = "replyTo",
         at = @At(
             value = "INVOKE",
-            target = "Lcom/gitlab/srcmc/rctmod/api/utils/ChatUtils;reply(Lcom/gitlab/srcmc/rctmod/world/entities/TrainerMob;Lnet/minecraft/server/network/ServerPlayerEntity;[Ljava/lang/String;)V",
+            target = "Lcom/gitlab/srcmc/rctmod/api/utils/ChatUtils;reply(Lcom/gitlab/srcmc/rctmod/world/entities/TrainerMob;Lnet/minecraft/entity/player/PlayerEntity;[Ljava/lang/String;)V",
             ordinal = 10
         ),
         cancellable = true
     )
-    private void onReplyUnknownReason(ServerPlayerEntity player, CallbackInfo ci) {
-        if (!LegendaryPartyRule.isAllowed(player)) {
-            LegendaryPartyRule.sendRejectionMessage(player);
-            ci.cancel();
+    private void onReplyUnknownReason(PlayerEntity player, CallbackInfo ci) {
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+            if (!LegendaryPartyRule.isAllowed(serverPlayer)) {
+                LegendaryPartyRule.sendRejectionMessage(serverPlayer);
+                ci.cancel();
+            }
         }
     }
 }
