@@ -1,6 +1,6 @@
 {
   "name": {
-    "literal": "Team Galactic Apiarits"
+    "literal": "Team Galactic Apiarist"
   },
   "ai": {
     "type": "rct",
@@ -12,155 +12,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
       "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "bugbite",
-        "gust",
-        "sweetscent",
-        "tailwind"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
+      "species": "ribombee",
+      "gender": "FEMALE",
+      "level": 66,
+      "nature": "timid",
+      "ability": "shielddust",
       "heldItem": [
         "focus_sash"
       ],
-      "species": "combee",
-      "gender": "FEMALE",
-      "level": 65,
-      "nature": "timid",
-      "ability": "honeygather"
-    },
-    {
       "moveset": [
-        "bugbite",
-        "gust",
+        "pollenpuff",
+        "moonblast",
         "tailwind",
-        "stringshot"
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
+        "hp": 4,
         "spa": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "bright_powder"
-      ],
-      "species": "combee",
-      "gender": "FEMALE",
-      "level": 65,
-      "nature": "timid",
-      "ability": "honeygather"
+        "spe": 252
+      }
     },
     {
-      "moveset": [
-        "solarblade",
-        "sunnyday",
-        "playrough",
-        "pollenpuff"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 4,
-        "hp": 252
-      },
-      "heldItem": [
-        "heat_rock"
-      ],
       "species": "cherrim",
       "gender": "FEMALE",
       "level": 66,
-      "nature": "jolly",
-      "ability": "flowergift"
+      "nature": "timid",
+      "ability": "flowergift",
+      "heldItem": [
+        "heat_rock"
+      ],
+      "moveset": [
+        "sunnyday",
+        "solarbeam",
+        "pollenpuff",
+        "helpinghand"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 4,
+        "spe": 252
+      }
     },
     {
+      "species": "vespiquen",
+      "gender": "FEMALE",
+      "level": 68,
+      "nature": "impish",
+      "ability": "pressure",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "attackorder",
+        "defendorder",
+        "roost",
+        "tailwind"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "scizor",
+      "gender": "MALE",
+      "level": 67,
+      "nature": "adamant",
+      "ability": "technician",
+      "heldItem": [
+        "mega_showdown:scizorite"
+      ],
+      "moveset": [
+        "bulletpunch",
+        "bugbite",
+        "swordsdance",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    },
+    {
+      "species": "heracross",
+      "gender": "MALE",
+      "level": 67,
+      "nature": "jolly",
+      "ability": "guts",
+      "heldItem": [
+        "flame_orb"
+      ],
+      "moveset": [
+        "closecombat",
+        "megahorn",
+        "rockslide",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "carnivine",
+      "gender": "MALE",
+      "level": 66,
+      "nature": "adamant",
+      "ability": "levitate",
+      "heldItem": [
+        "assault_vest"
+      ],
       "moveset": [
         "powerwhip",
         "crunch",
         "knockoff",
-        "sleeppowder"
+        "sludgebomb"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "def": 4,
+        "hp": 252,
         "atk": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "leftovers"
-      ],
-      "species": "carnivine",
-      "gender": "MALE",
-      "level": 67,
-      "nature": "adamant",
-      "ability": "levitate"
-    },
-    {
-      "moveset": [
-        "uturn",
-        "poisonjab",
-        "drillrun",
-        "fellstinger"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "leftovers",
-        "mega_showdown:beedrillite"
-      ],
-      "species": "beedrill",
-      "gender": "FEMALE",
-      "level": 68,
-      "nature": "jolly",
-      "ability": "swarm"
+        "spd": 4
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

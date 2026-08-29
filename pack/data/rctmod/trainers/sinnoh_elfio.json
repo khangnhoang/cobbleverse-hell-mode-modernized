@@ -21,171 +21,181 @@
       "quantity": 4
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "scald",
-        "roost",
-        "hurricane",
-        "uturn"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spd": 4,
-        "def": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "leftovers"
-      ],
       "species": "pelipper",
       "gender": "MALE",
       "level": 69,
-      "nature": "bold",
-      "ability": "drizzle"
-    },
-    {
+      "nature": "modest",
+      "ability": "drizzle",
+      "heldItem": [
+        "damp_rock"
+      ],
       "moveset": [
-        "liquidation",
-        "icepunch",
-        "aquajet",
-        "crunch"
+        "scald",
+        "hurricane",
+        "tailwind",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "life_orb"
-      ],
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
       "species": "floatzel",
       "gender": "MALE",
       "level": 69,
       "nature": "adamant",
-      "ability": "swiftswim"
-    },
-    {
+      "ability": "swiftswim",
+      "heldItem": [
+        "life_orb"
+      ],
       "moveset": [
-        "scald",
-        "earthpower",
-        "recover",
-        "toxic"
+        "wavecrash",
+        "icepunch",
+        "aquajet",
+        "protect"
       ],
       "ivs": {
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spa": 4,
-        "def": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "leftovers"
-      ],
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
       "species": "gastrodon",
       "gender": "FEMALE",
       "level": 69,
-      "nature": "relaxed",
-      "ability": "stormdrain"
-    },
-    {
+      "nature": "quiet",
+      "ability": "stormdrain",
+      "heldItem": [
+        "leftovers"
+      ],
       "moveset": [
-        "flashcannon",
-        "hydropump",
-        "icebeam",
-        "grassknot"
+        "muddywater",
+        "earthpower",
+        "recover",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 4,
-        "spa": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "assault_vest"
-      ],
+        "hp": 252,
+        "def": 128,
+        "spa": 128
+      }
+    },
+    {
       "species": "empoleon",
       "gender": "MALE",
       "level": 69,
       "nature": "modest",
-      "ability": "torrent"
-    },
-    {
+      "ability": "competitive",
+      "heldItem": [
+        "assault_vest"
+      ],
       "moveset": [
-        "scald",
-        "tailwind",
-        "uturn",
-        "defog"
+        "flashcannon",
+        "hydropump",
+        "icebeam",
+        "vacuumwave"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "def": 4,
-        "hp": 252
-      },
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
       "species": "lumineon",
       "gender": "FEMALE",
       "level": 69,
       "nature": "timid",
-      "ability": "swiftswim"
-    },
-    {
+      "ability": "swiftswim",
+      "heldItem": [
+        "focus_sash"
+      ],
       "moveset": [
-        "waterfall",
-        "earthquake",
-        "icefang",
-        "dragondance"
+        "scald",
+        "tailwind",
+        "helpinghand",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "mystic_water"
-      ],
+        "hp": 252,
+        "def": 4,
+        "spe": 252
+      }
+    },
+    {
       "species": "gyarados",
       "gender": "MALE",
       "level": 70,
       "nature": "jolly",
-      "ability": "intimidate"
+      "ability": "intimidate",
+      "heldItem": [
+        "mega_showdown:gyaradosite"
+      ],
+      "moveset": [
+        "waterfall",
+        "crunch",
+        "icefang",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

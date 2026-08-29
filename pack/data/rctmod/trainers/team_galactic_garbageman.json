@@ -13,131 +13,196 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 1
+    "maxItemUses": 3
   },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 1
+      "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "sludgebomb",
-        "willowisp",
-        "painsplit",
-        "toxicspikes"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spd": 4,
-        "def": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "black_sludge"
-      ],
       "species": "weezing",
       "gender": "MALE",
       "level": 69,
       "nature": "bold",
-      "ability": "levitate"
-    },
-    {
+      "ability": "neutralizinggas",
+      "heldItem": [
+        "black_sludge"
+      ],
       "moveset": [
-        "poisonjab",
-        "nightslash",
-        "suckerpunch",
-        "explosion"
+        "sludgebomb",
+        "willowisp",
+        "clearsmog",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 4,
-        "atk": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "rocky_helmet"
-      ],
-      "species": "skuntank",
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "salazzle",
       "gender": "FEMALE",
       "level": 69,
-      "nature": "adamant",
-      "ability": "aftermath"
-    },
-    {
+      "nature": "timid",
+      "ability": "corrosion",
+      "heldItem": [
+        "life_orb"
+      ],
       "moveset": [
-        "gunkshot",
-        "knockoff",
-        "firepunch",
-        "shadowsneak"
+        "fakeout",
+        "heatwave",
+        "sludgebomb",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 4,
-        "atk": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "assault_vest"
-      ],
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "muk",
       "aspects": [
         "alolan"
       ],
-      "species": "muk",
       "gender": "MALE",
       "level": 69,
       "nature": "adamant",
-      "ability": "powerofalchemy"
-    },
-    {
+      "ability": "poisontouch",
+      "heldItem": [
+        "assault_vest"
+      ],
       "moveset": [
-        "gunkshot",
-        "stompingtantrum",
-        "seedbomb",
+        "knockoff",
+        "poisonjab",
+        "shadowsneak",
         "drainpunch"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
+        "hp": 252,
         "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "focus_sash"
-      ],
+        "spd": 4
+      }
+    },
+    {
       "species": "garbodor",
       "gender": "FEMALE",
       "level": 69,
       "nature": "adamant",
-      "ability": "weakarmor"
+      "ability": "aftermath",
+      "heldItem": [
+        "rocky_helmet"
+      ],
+      "gimmicks": {
+        "dynamax": true,
+        "gmax": true
+      },
+      "moveset": [
+        "gunkshot",
+        "stompingtantrum",
+        "bodypress",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "def": 4
+      }
+    },
+    {
+      "species": "skuntank",
+      "gender": "FEMALE",
+      "level": 69,
+      "nature": "jolly",
+      "ability": "aftermath",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "suckerpunch",
+        "poisonjab",
+        "snarl",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "toxapex",
+      "gender": "MALE",
+      "level": 69,
+      "nature": "bold",
+      "ability": "regenerator",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "banefulbunker",
+        "scald",
+        "recover",
+        "haze"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

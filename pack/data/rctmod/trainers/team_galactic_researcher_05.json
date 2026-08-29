@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Researcher"
   },
+  "identity": "Team Galactic Researcher (5)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,183 +13,193 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 2
+      "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
+      "species": "clefable",
+      "gender": "FEMALE",
+      "level": 66,
+      "nature": "bold",
+      "ability": "magicguard",
+      "heldItem": [
+        "sitrus_berry"
+      ],
       "moveset": [
-        "stoneedge",
-        "acrobatics",
-        "earthquake",
-        "psychicfangs"
+        "followme",
+        "moonblast",
+        "helpinghand",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "reuniclus",
+      "gender": "MALE",
+      "level": 66,
+      "nature": "quiet",
+      "ability": "magicguard",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "gravity",
+        "trickroom",
+        "psychic",
+        "focusblast"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
       },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "minior",
+      "gender": "GENDERLESS",
+      "level": 65,
+      "nature": "adamant",
+      "ability": "shieldsdown",
+      "heldItem": [
+        "white_herb"
+      ],
+      "moveset": [
+        "shellsmash",
+        "acrobatics",
+        "rockslide",
+        "earthquake"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "chandelure",
+      "gender": "FEMALE",
+      "level": 66,
+      "nature": "modest",
+      "ability": "flashfire",
       "heldItem": [
         "focus_sash"
       ],
-      "species": "minior",
-      "gender": "GENDERLESS",
-      "level": 64,
-      "nature": "adamant",
-      "ability": "shieldsdown"
-    },
-    {
+      "gimmicks": {
+        "dynamax": true
+      },
       "moveset": [
-        "flashcannon",
-        "powergem",
-        "earthpower",
-        "discharge"
+        "heatwave",
+        "shadowball",
+        "fireblast",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 4,
+        "hp": 252,
         "spa": 252,
-        "hp": 252
-      },
+        "spd": 4
+      }
+    },
+    {
+      "species": "starmie",
+      "gender": "GENDERLESS",
+      "level": 67,
+      "nature": "timid",
+      "ability": "analytic",
       "heldItem": [
-        "assault_vest"
+        "expert_belt"
       ],
+      "moveset": [
+        "hydropump",
+        "blizzard",
+        "thunder",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
       "species": "probopass",
       "gender": "MALE",
       "level": 64,
       "nature": "modest",
-      "ability": "magnetpull"
-    },
-    {
-      "moveset": [
-        "shadowball",
-        "fireblast",
-        "energyball",
-        "psychic"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
+      "ability": "sturdy",
       "heldItem": [
-        "choice_scarf"
+        "air_balloon"
       ],
-      "species": "chandelure",
-      "gender": "FEMALE",
-      "level": 65,
-      "nature": "modest",
-      "ability": "flashfire"
-    },
-    {
       "moveset": [
-        "psyshock",
-        "focusblast",
-        "shadowball",
-        "recover"
+        "wideguard",
+        "powergem",
+        "flashcannon",
+        "earthpower"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spa": 4,
-        "def": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "leftovers"
-      ],
-      "species": "reuniclus",
-      "gender": "MALE",
-      "level": 66,
-      "nature": "bold",
-      "ability": "magicguard"
-    },
-    {
-      "moveset": [
-        "wildcharge",
-        "icepunch",
-        "crosschop",
-        "earthquake"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "expert_belt"
-      ],
-      "species": "electivire",
-      "gender": "MALE",
-      "level": 67,
-      "nature": "adamant",
-      "ability": "motordrive"
-    },
-    {
-      "moveset": [
-        "earthquake",
-        "dragonclaw",
-        "poisonjab",
-        "ironhead"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
         "def": 31,
-        "atk": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "life_orb"
-      ],
-      "species": "garchomp",
-      "gender": "FEMALE",
-      "level": 68,
-      "nature": "jolly",
-      "ability": "roughskin"
+        "hp": 252,
+        "def": 4,
+        "spa": 252
+      }
     }
-  ],
-  "identity": "Team Galactic Researcher (5)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }
