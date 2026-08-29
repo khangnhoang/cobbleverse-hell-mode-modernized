@@ -13,157 +13,189 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 1
+    "maxItemUses": 4
   },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 1
+      "quantity": 4
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "fireblast",
-        "thunderbolt",
-        "focusblast",
-        "psychic"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "expert_belt"
-      ],
       "species": "magmortar",
       "gender": "MALE",
       "level": 68,
       "nature": "modest",
-      "ability": "flamebody"
-    },
-    {
+      "ability": "flamebody",
+      "heldItem": [
+        "sitrus_berry"
+      ],
       "moveset": [
-        "wildcharge",
-        "icepunch",
-        "earthquake",
-        "crosschop"
+        "followme",
+        "heatwave",
+        "thunderbolt",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "life_orb"
-      ],
+        "hp": 252,
+        "def": 128,
+        "spa": 128
+      }
+    },
+    {
       "species": "electivire",
       "gender": "MALE",
       "level": 68,
       "nature": "adamant",
-      "ability": "motordrive"
-    },
-    {
+      "ability": "motordrive",
+      "heldItem": [
+        "life_orb"
+      ],
       "moveset": [
-        "hydropump",
-        "flashcannon",
-        "icebeam",
-        "grassknot"
+        "wildcharge",
+        "icepunch",
+        "crosschop",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 4,
-        "spa": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "assault_vest"
-      ],
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
       "species": "empoleon",
       "gender": "MALE",
       "level": 69,
       "nature": "modest",
-      "ability": "competitive"
-    },
-    {
+      "ability": "competitive",
+      "heldItem": [
+        "assault_vest"
+      ],
       "moveset": [
-        "crosspoison",
-        "nightslash",
-        "earthquake",
-        "icefang"
+        "flashcannon",
+        "hydropump",
+        "icebeam",
+        "vacuumwave"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "garchomp",
+      "gender": "MALE",
+      "level": 70,
+      "nature": "jolly",
+      "ability": "roughskin",
       "heldItem": [
-        "scope_lens"
+        "mega_showdown:garchompite"
       ],
+      "moveset": [
+        "dragonclaw",
+        "highhorsepower",
+        "rockslide",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
       "species": "drapion",
       "gender": "FEMALE",
       "level": 69,
       "nature": "jolly",
-      "ability": "sniper"
-    },
-    {
+      "ability": "sniper",
+      "heldItem": [
+        "scope_lens"
+      ],
       "moveset": [
-        "dracometeor",
+        "crosspoison",
+        "nightslash",
         "earthquake",
-        "stoneedge",
-        "fireblast"
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spa": 4,
-        "atk": 252
-      },
-      "heldItem": [
-        "leftovers",
-        "mega_showdown:garchompitez"
-      ],
-      "species": "garchomp",
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "gliscor",
       "gender": "MALE",
-      "level": 70,
-      "nature": "naughty",
-      "ability": "roughskin"
+      "level": 69,
+      "nature": "careful",
+      "ability": "poisonheal",
+      "heldItem": [
+        "toxic_orb"
+      ],
+      "moveset": [
+        "earthquake",
+        "toxic",
+        "tailwind",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 4,
+        "spd": 252
+      }
     }
-  ],
-  "battleFormat": "GEN_9_DOUBLES"
+  ]
 }

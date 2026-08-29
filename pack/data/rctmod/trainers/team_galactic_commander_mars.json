@@ -21,180 +21,181 @@
       "quantity": 4
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "fakeout",
-        "return",
-        "knockoff",
-        "protect"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "silk_scarf"
-      ],
       "species": "purugly",
       "gender": "FEMALE",
       "level": 75,
       "nature": "jolly",
-      "ability": "defiant"
-    },
-    {
+      "ability": "defiant",
+      "heldItem": [
+        "silk_scarf"
+      ],
       "moveset": [
         "fakeout",
-        "iceshard",
+        "doubleedge",
         "knockoff",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
+        "hp": 4,
         "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "life_orb"
-      ],
-      "species": "weavile",
-      "gender": "FEMALE",
-      "level": 74,
-      "nature": "jolly",
-      "ability": "pressure"
+        "spe": 252
+      }
     },
     {
+      "species": "crobat",
+      "gender": "MALE",
+      "level": 74,
+      "nature": "jolly",
+      "ability": "infiltrator",
+      "heldItem": [
+        "focus_sash"
+      ],
       "moveset": [
-        "doubleedge",
-        "earthquake",
-        "rockslide",
-        "protect"
+        "tailwind",
+        "superfang",
+        "crosspoison",
+        "taunt"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "leftovers",
-        "mega_showdown:salamencite"
-      ],
+        "hp": 252,
+        "def": 4,
+        "spe": 252
+      }
+    },
+    {
       "species": "salamence",
       "gender": "MALE",
       "level": 75,
       "nature": "jolly",
-      "ability": "intimidate"
-    },
-    {
-      "moveset": [
-        "tailwind",
-        "bravebird",
-        "superfang",
-        "taunt"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "def": 4,
-        "hp": 252
-      },
+      "ability": "intimidate",
       "heldItem": [
-        "sharp_beak"
+        "mega_showdown:salamencite"
       ],
-      "species": "crobat",
-      "gender": "MALE",
-      "level": 73,
-      "nature": "jolly",
-      "ability": "innerfocus"
-    },
-    {
       "moveset": [
-        "fakeout",
-        "nuzzle",
-        "electroball",
+        "doubleedge",
+        "dragonclaw",
+        "earthquake",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "weavile",
+      "gender": "FEMALE",
+      "level": 74,
+      "nature": "jolly",
+      "ability": "pickpocket",
       "heldItem": [
-        "focus_sash"
+        "life_orb"
       ],
+      "moveset": [
+        "fakeout",
+        "tripleaxel",
+        "knockoff",
+        "iceshard"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
       "species": "raichu",
       "gender": "MALE",
       "level": 74,
       "nature": "timid",
-      "ability": "lightningrod"
+      "ability": "lightningrod",
+      "heldItem": [
+        "air_balloon"
+      ],
+      "moveset": [
+        "fakeout",
+        "voltswitch",
+        "thunderbolt",
+        "nuzzle"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
     },
     {
+      "species": "bronzong",
+      "gender": "GENDERLESS",
+      "level": 75,
+      "nature": "sassy",
+      "ability": "levitate",
+      "heldItem": [
+        "leftovers"
+      ],
       "moveset": [
-        "psychic",
-        "dazzlinggleam",
-        "shadowball",
+        "gyroball",
+        "bodypress",
+        "trickroom",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
       },
       "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "life_orb"
-      ],
-      "species": "espeon",
-      "gender": "MALE",
-      "level": 75,
-      "nature": "timid",
-      "ability": "magicbounce"
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
     }
-  ],
-  "battleFormat": "GEN_9_DOUBLES"
+  ]
 }

@@ -21,187 +21,190 @@
       "quantity": 5
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "stoneaxe",
-        "xscissor",
-        "closecombat",
-        "stealthrock"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 4,
-        "atk": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "leftovers"
-      ],
-      "species": "kleavor",
-      "gender": "MALE",
+      "species": "glaceon",
+      "gender": "FEMALE",
       "level": 96,
-      "nature": "adamant",
-      "ability": "sharpness"
-    },
-    {
-      "moveset": [
-        "headsmash",
-        "flareblitz",
-        "wildcharge",
-        "extremespeed"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
+      "nature": "modest",
+      "ability": "icebody",
       "heldItem": [
-        "choice_scarf"
+        "focus_sash"
       ],
-      "aspects": [
-        "hisuian"
-      ],
-      "species": "arcanine",
-      "gender": "MALE",
-      "level": 96,
-      "nature": "adamant",
-      "ability": "rockhead"
-    },
-    {
-      "moveset": [
-        "avalanche",
-        "bodypress",
-        "rapidspin",
-        "recover"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
+      "gimmicks": {
+        "tera": "water"
       },
-      "evs": {
-        "spd": 4,
-        "def": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "heavy_duty_boots"
-      ],
-      "aspects": [
-        "hisuian"
-      ],
-      "species": "avalugg",
-      "gender": "MALE",
-      "level": 96,
-      "nature": "impish",
-      "ability": "sturdy"
-    },
-    {
       "moveset": [
-        "lastrespects",
-        "wavecrash",
-        "icefang",
+        "hail",
+        "blizzard",
+        "freezedry",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "choice_band"
-      ],
-      "species": "basculegion",
-      "gender": "MALE",
-      "level": 96,
-      "nature": "adamant",
-      "ability": "adaptability"
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
     },
     {
-      "moveset": [
-        "direclaw",
-        "closecombat",
-        "acrobatics",
-        "swordsdance"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "white_herb"
-      ],
       "species": "sneasler",
       "gender": "FEMALE",
       "level": 96,
       "nature": "jolly",
-      "ability": "unburden"
-    },
-    {
+      "ability": "pressure",
+      "heldItem": [
+        "life_orb"
+      ],
       "moveset": [
-        "snowscape",
-        "freezedry",
-        "calmmind",
-        "wish"
+        "fakeout",
+        "direclaw",
+        "closecombat",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spa": 4,
-        "def": 252,
-        "hp": 252
-      },
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "avalugg",
+      "aspects": [
+        "hisuian"
+      ],
+      "gender": "MALE",
+      "level": 96,
+      "nature": "impish",
+      "ability": "sturdy",
       "heldItem": [
         "leftovers"
       ],
-      "species": "glaceon",
-      "gender": "FEMALE",
+      "moveset": [
+        "wideguard",
+        "bodypress",
+        "avalanche",
+        "recover"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "kleavor",
+      "gender": "MALE",
       "level": 96,
-      "nature": "bold",
-      "ability": "icebody"
+      "nature": "adamant",
+      "ability": "sharpness",
+      "heldItem": [
+        "assault_vest"
+      ],
+      "moveset": [
+        "stoneaxe",
+        "xscissor",
+        "closecombat",
+        "nightslash"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    },
+    {
+      "species": "arcanine",
+      "aspects": [
+        "hisuian"
+      ],
+      "gender": "MALE",
+      "level": 96,
+      "nature": "adamant",
+      "ability": "rockhead",
+      "heldItem": [
+        "choice_band"
+      ],
+      "moveset": [
+        "headsmash",
+        "flareblitz",
+        "extremespeed",
+        "wildcharge"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "basculegion",
+      "gender": "MALE",
+      "level": 96,
+      "nature": "adamant",
+      "ability": "adaptability",
+      "heldItem": [
+        "mystic_water"
+      ],
+      "moveset": [
+        "wavecrash",
+        "lastrespects",
+        "aquajet",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

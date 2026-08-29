@@ -13,161 +13,195 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 3
+    "maxItemUses": 4
   },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 3
+      "quantity": 4
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
+      "species": "gengar",
+      "gender": "MALE",
+      "level": 69,
+      "nature": "timid",
+      "ability": "cursedbody",
+      "heldItem": [
+        "mega_showdown:gengarite"
+      ],
       "moveset": [
-        "bravebird",
-        "toxic",
-        "roost",
+        "shadowball",
+        "sludgebomb",
+        "icywind",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "def": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "rotom",
+      "aspects": [
+        "wash-appliance"
+      ],
+      "gender": "GENDERLESS",
+      "level": 68,
+      "nature": "modest",
+      "ability": "levitate",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "hydropump",
+        "voltswitch",
+        "willowisp",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spa": 128
+      }
+    },
+    {
+      "species": "rotom",
+      "aspects": [
+        "heat-appliance"
+      ],
+      "gender": "GENDERLESS",
+      "level": 68,
+      "nature": "modest",
+      "ability": "levitate",
+      "heldItem": [
+        "safety_goggles"
+      ],
+      "moveset": [
+        "overheat",
+        "voltswitch",
+        "thunderbolt",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spd": 128,
+        "spa": 128
+      }
+    },
+    {
+      "species": "crobat",
+      "gender": "MALE",
+      "level": 67,
+      "nature": "jolly",
+      "ability": "infiltrator",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "tailwind",
+        "superfang",
+        "crosspoison",
         "taunt"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 60,
-        "def": 196,
-        "hp": 252
-      },
+        "hp": 252,
+        "def": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "bronzong",
+      "gender": "GENDERLESS",
+      "level": 69,
+      "nature": "sassy",
+      "ability": "levitate",
       "heldItem": [
-        "eviolite"
+        "mental_herb"
       ],
-      "species": "golbat",
+      "moveset": [
+        "gyroball",
+        "bodypress",
+        "trickroom",
+        "irondefense"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "toxicroak",
       "gender": "MALE",
-      "level": 65,
+      "level": 68,
       "nature": "jolly",
-      "ability": "infiltrator"
-    },
-    {
-      "moveset": [
-        "shadowball",
-        "sludgewave",
-        "focusblast",
-        "substitute"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spd": 4,
-        "spa": 252
-      },
-      "heldItem": [
-        "mega_showdown:gengarite",
-        "leftovers"
-      ],
-      "species": "gengar",
-      "gender": "MALE",
-      "level": 66,
-      "nature": "timid",
-      "ability": "cursedbody"
-    },
-    {
-      "moveset": [
-        "swordsdance",
-        "gunkshot",
-        "drainpunch",
-        "suckerpunch"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spd": 4,
-        "atk": 252
-      },
+      "ability": "dryskin",
       "heldItem": [
         "life_orb"
       ],
-      "species": "toxicroak",
-      "gender": "MALE",
-      "level": 69,
-      "nature": "jolly",
-      "ability": "dryskin"
-    },
-    {
       "moveset": [
-        "voltswitch",
-        "thunderbolt",
-        "defog",
-        "hex"
+        "fakeout",
+        "drainpunch",
+        "gunkshot",
+        "suckerpunch"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spa": 8,
-        "hp": 248
-      },
-      "heldItem": [
-        "leftovers"
-      ],
-      "species": "rotom",
-      "gender": "MALE",
-      "level": 68,
-      "nature": "timid",
-      "ability": "levitate"
-    },
-    {
-      "moveset": [
-        "stealthrock",
-        "earthquake",
-        "psywave",
-        "gyroball"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spd": 252,
-        "spa": 252,
-        "def": 4
-      },
-      "heldItem": [
-        "leftovers"
-      ],
-      "species": "bronzong",
-      "gender": "MALE",
-      "level": 69,
-      "nature": "sassy",
-      "ability": "levitate"
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

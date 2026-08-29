@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Engineer"
   },
+  "identity": "Team Galactic Engineer (1)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,99 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 2
+      "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "thunderbolt",
-        "flashcannon",
-        "triattack",
-        "discharge"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spd": 4,
-        "spa": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "air_balloon"
-      ],
-      "species": "magnezone",
+      "species": "pincurchin",
       "gender": "GENDERLESS",
       "level": 65,
-      "nature": "modest",
-      "ability": "sturdy"
-    },
-    {
+      "nature": "quiet",
+      "ability": "electricsurge",
+      "heldItem": [
+        "focus_sash"
+      ],
       "moveset": [
-        "meteormash",
-        "zenheadbutt",
-        "earthquake",
-        "bulletpunch"
+        "discharge",
+        "zingzap",
+        "recover",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
       },
       "evs": {
-        "def": 4,
-        "atk": 252,
-        "hp": 252
-      },
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "ironhands",
+      "gender": "GENDERLESS",
+      "level": 68,
+      "nature": "brave",
+      "ability": "quarkdrive",
       "heldItem": [
         "assault_vest"
       ],
-      "species": "metagross",
-      "gender": "GENDERLESS",
-      "level": 66,
-      "nature": "adamant",
-      "ability": "clearbody"
-    },
-    {
       "moveset": [
-        "earthquake",
-        "ironhead",
+        "fakeout",
+        "drainpunch",
         "wildcharge",
-        "icespinner"
+        "heavyslam"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
       },
       "evs": {
-        "spe": 252,
+        "hp": 252,
         "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "leftovers"
-      ],
-      "species": "irontreads",
+        "spd": 4
+      }
+    },
+    {
+      "species": "ironthorns",
       "gender": "GENDERLESS",
       "level": 68,
       "nature": "jolly",
-      "ability": "quarkdrive"
+      "ability": "quarkdrive",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "rockslide",
+        "wildcharge",
+        "icepunch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "metagross",
+      "gender": "GENDERLESS",
+      "level": 67,
+      "nature": "adamant",
+      "ability": "clearbody",
+      "heldItem": [
+        "mega_showdown:metagrossite"
+      ],
+      "moveset": [
+        "meteormash",
+        "zenheadbutt",
+        "bulletpunch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    },
+    {
+      "species": "magnezone",
+      "gender": "GENDERLESS",
+      "level": 66,
+      "nature": "modest",
+      "ability": "sturdy",
+      "heldItem": [
+        "air_balloon"
+      ],
+      "moveset": [
+        "thunderbolt",
+        "flashcannon",
+        "voltswitch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "bronzong",
+      "gender": "GENDERLESS",
+      "level": 66,
+      "nature": "relaxed",
+      "ability": "levitate",
+      "heldItem": [
+        "light_clay"
+      ],
+      "moveset": [
+        "reflect",
+        "lightscreen",
+        "gyroball",
+        "trickroom"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
     }
-  ],
-  "identity": "Team Galactic Engineer (1)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }
