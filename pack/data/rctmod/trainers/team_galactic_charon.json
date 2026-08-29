@@ -157,8 +157,8 @@
       "moveset": [
         "gyroball",
         "bodypress",
-        "trickroom",
-        "irondefense"
+        "irondefense",
+        "protect"
       ],
       "ivs": {
         "hp": 31,

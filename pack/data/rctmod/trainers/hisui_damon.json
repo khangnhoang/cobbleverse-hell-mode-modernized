@@ -85,6 +85,9 @@
         "hp": 4,
         "atk": 252,
         "spe": 252
+      },
+      "gimmicks": {
+        "tera": "fighting"
       }
     },
     {
@@ -96,9 +99,6 @@
       "heldItem": [
         "miracle_seed"
       ],
-      "gimmicks": {
-        "tera": "fire"
-      },
       "moveset": [
         "solarblade",
         "leafblade",
