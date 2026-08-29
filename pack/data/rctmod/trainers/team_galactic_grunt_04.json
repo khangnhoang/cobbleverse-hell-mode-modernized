@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Grunt"
   },
+  "identity": "Team Galactic Grunt (4)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,34 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 2
+  },
+  "bag": [
+    {
+      "item": "cobblemon:hyper_potion",
+      "quantity": 2
+    }
+  ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "poisonjab",
-        "drainpunch",
-        "suckerpunch",
-        "bulkup"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 156,
-        "atk": 252,
-        "hp": 100
-      },
       "species": "toxicroak",
       "gender": "MALE",
       "level": 48,
       "nature": "adamant",
-      "ability": "dryskin"
+      "ability": "dryskin",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "fakeout",
+        "gunkshot",
+        "drainpunch",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "weavile",
+      "gender": "FEMALE",
+      "level": 48,
+      "nature": "jolly",
+      "ability": "pressure",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "fakeout",
+        "iciclecrash",
+        "knockoff",
+        "iceshard"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "crobat",
+      "gender": "MALE",
+      "level": 48,
+      "nature": "jolly",
+      "ability": "infiltrator",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "tailwind",
+        "superfang",
+        "crosspoison",
+        "taunt"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "bronzong",
+      "gender": "GENDERLESS",
+      "level": 48,
+      "nature": "sassy",
+      "ability": "levitate",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "gyroball",
+        "bodypress",
+        "irondefense",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "drapion",
+      "gender": "FEMALE",
+      "level": 48,
+      "nature": "jolly",
+      "ability": "sniper",
+      "heldItem": [
+        "scope_lens"
+      ],
+      "moveset": [
+        "crosspoison",
+        "nightslash",
+        "earthquake",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "abomasnow",
+      "gender": "MALE",
+      "level": 48,
+      "nature": "quiet",
+      "ability": "snowwarning",
+      "heldItem": [
+        "assault_vest"
+      ],
+      "moveset": [
+        "blizzard",
+        "woodhammer",
+        "iceshard",
+        "earthquake"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "atk": 4
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

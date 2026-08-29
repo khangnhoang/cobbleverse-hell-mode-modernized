@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Grunt"
   },
+  "identity": "Team Galactic Grunt (11)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,32 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 1
+  },
+  "bag": [
+    {
+      "item": "cobblemon:super_potion",
+      "quantity": 1
+    }
+  ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "thundershock",
-        "sonicboom",
-        "spark",
-        "magnetbomb"
-      ],
-      "ivs": {
-        "spe": 20,
-        "spd": 20,
-        "spa": 20,
-        "def": 20,
-        "hp": 20
-      },
-      "evs": {
-        "spa": 100,
-        "hp": 50
-      },
       "species": "magnemite",
       "gender": "GENDERLESS",
       "level": 28,
       "nature": "modest",
-      "ability": "magnetpull"
+      "ability": "sturdy",
+      "heldItem": [
+        "eviolite"
+      ],
+      "moveset": [
+        "thunderbolt",
+        "flashcannon",
+        "thunderwave",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "stunky",
+      "gender": "MALE",
+      "level": 28,
+      "nature": "adamant",
+      "ability": "aftermath",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "poisonjab",
+        "bite",
+        "screech",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    },
+    {
+      "species": "glameow",
+      "gender": "FEMALE",
+      "level": 28,
+      "nature": "jolly",
+      "ability": "limber",
+      "heldItem": [
+        "silk_scarf"
+      ],
+      "moveset": [
+        "fakeout",
+        "slash",
+        "bite",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "croagunk",
+      "gender": "MALE",
+      "level": 28,
+      "nature": "adamant",
+      "ability": "dryskin",
+      "heldItem": [
+        "black_belt"
+      ],
+      "moveset": [
+        "fakeout",
+        "drainpunch",
+        "poisonjab",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "golbat",
+      "gender": "MALE",
+      "level": 28,
+      "nature": "jolly",
+      "ability": "innerfocus",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "wingattack",
+        "poisonfang",
+        "confuseray",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "bronzor",
+      "gender": "GENDERLESS",
+      "level": 28,
+      "nature": "relaxed",
+      "ability": "levitate",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "gyroball",
+        "confuseray",
+        "hypnosis",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

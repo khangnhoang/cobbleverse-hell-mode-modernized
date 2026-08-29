@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Grunt"
   },
+  "identity": "Team Galactic Grunt (6)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,57 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 2
+  },
+  "bag": [
+    {
+      "item": "cobblemon:super_potion",
+      "quantity": 2
+    }
+  ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
+      "species": "croagunk",
+      "gender": "MALE",
+      "level": 35,
+      "nature": "adamant",
+      "ability": "dryskin",
+      "heldItem": [
+        "black_belt"
+      ],
       "moveset": [
-        "discharge",
-        "flashcannon",
-        "triattack",
-        "metalsound"
+        "fakeout",
+        "drainpunch",
+        "poisonjab",
+        "suckerpunch"
       ],
       "ivs": {
-        "spe": 25,
-        "spd": 25,
-        "spa": 25,
-        "def": 25,
-        "hp": 25
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 150,
-        "spa": 150
-      },
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
       "species": "magneton",
       "gender": "GENDERLESS",
       "level": 35,
-      "nature": "timid",
-      "ability": "magnetpull"
+      "nature": "modest",
+      "ability": "sturdy",
+      "heldItem": [
+        "eviolite"
+      ],
+      "moveset": [
+        "thunderbolt",
+        "flashcannon",
+        "voltswitch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
     },
     {
+      "species": "golbat",
+      "gender": "MALE",
+      "level": 34,
+      "nature": "jolly",
+      "ability": "innerfocus",
+      "heldItem": [
+        "sitrus_berry"
+      ],
       "moveset": [
-        "poisonjab",
-        "venoshock",
-        "mudbomb",
+        "wingattack",
+        "superfang",
+        "confuseray",
         "taunt"
       ],
       "ivs": {
-        "spe": 25,
-        "spd": 25,
-        "spa": 25,
-        "def": 25,
-        "atk": 25,
-        "hp": 25
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 150,
-        "atk": 150
+        "hp": 252,
+        "atk": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "bronzor",
+      "gender": "GENDERLESS",
+      "level": 34,
+      "nature": "relaxed",
+      "ability": "levitate",
+      "heldItem": [
+        "eviolite"
+      ],
+      "moveset": [
+        "gyroball",
+        "confuseray",
+        "hypnosis",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
       },
-      "species": "croagunk",
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "purugly",
+      "gender": "FEMALE",
+      "level": 34,
+      "nature": "jolly",
+      "ability": "defiant",
+      "heldItem": [
+        "silk_scarf"
+      ],
+      "moveset": [
+        "fakeout",
+        "slash",
+        "knockoff",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "stunky",
       "gender": "MALE",
       "level": 34,
-      "nature": "naughty",
-      "ability": "anticipation"
+      "nature": "adamant",
+      "ability": "aftermath",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "poisonjab",
+        "suckerpunch",
+        "snarl",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

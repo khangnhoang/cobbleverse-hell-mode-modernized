@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Grunt"
   },
+  "identity": "Team Galactic Grunt (10)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,58 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
-  "team": [
+  "battleRules": {
+    "maxItemUses": 1
+  },
+  "bag": [
     {
-      "moveset": [
-        "tackle",
-        "stringshot",
-        "poisonsting",
-        "bugbite"
-      ],
-      "ivs": {
-        "spe": 15,
-        "spd": 15,
-        "spa": 15,
-        "def": 15,
-        "atk": 15,
-        "hp": 15
-      },
-      "evs": {
-        "spe": 50,
-        "atk": 50
-      },
-      "species": "wurmple",
-      "gender": "MALE",
-      "level": 20,
-      "nature": "quirky",
-      "ability": "shielddust"
-    },
-    {
-      "moveset": [
-        "tackle",
-        "quickattack",
-        "bite",
-        "tailwhip"
-      ],
-      "ivs": {
-        "spe": 15,
-        "spd": 15,
-        "spa": 15,
-        "def": 15,
-        "atk": 15,
-        "hp": 15
-      },
-      "evs": {
-        "spe": 100,
-        "atk": 100
-      },
-      "species": "rattata",
-      "gender": "FEMALE",
-      "level": 21,
-      "nature": "hasty",
-      "ability": "runaway"
+      "item": "cobblemon:potion",
+      "quantity": 1
     }
   ],
-  "battleFormat": "GEN_9_SINGLES"
+  "battleFormat": "GEN_9_DOUBLES",
+  "team": [
+    {
+      "species": "beautifly",
+      "gender": "FEMALE",
+      "level": 21,
+      "nature": "timid",
+      "ability": "swarm",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "gust",
+        "absorb",
+        "poisonsting",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "rattata",
+      "gender": "MALE",
+      "level": 21,
+      "nature": "jolly",
+      "ability": "guts",
+      "heldItem": [
+        "silk_scarf"
+      ],
+      "moveset": [
+        "quickattack",
+        "bite",
+        "headbutt",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "dustox",
+      "gender": "MALE",
+      "level": 21,
+      "nature": "calm",
+      "ability": "shielddust",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "gust",
+        "poisonpowder",
+        "moonlight",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "glameow",
+      "gender": "FEMALE",
+      "level": 20,
+      "nature": "jolly",
+      "ability": "limber",
+      "heldItem": [
+        "silk_scarf"
+      ],
+      "moveset": [
+        "fakeout",
+        "quickattack",
+        "bite",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "zubat",
+      "gender": "MALE",
+      "level": 20,
+      "nature": "jolly",
+      "ability": "innerfocus",
+      "heldItem": [
+        "oran_berry"
+      ],
+      "moveset": [
+        "wingattack",
+        "confuseray",
+        "bite",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "magnemite",
+      "gender": "GENDERLESS",
+      "level": 20,
+      "nature": "modest",
+      "ability": "sturdy",
+      "heldItem": [
+        "eviolite"
+      ],
+      "moveset": [
+        "shockwave",
+        "thunderwave",
+        "supersonic",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    }
+  ]
 }
