@@ -94,8 +94,8 @@
       "moveset": [
         "scald",
         "psychic",
-        "trickroom",
-        "slackoff"
+        "slackoff",
+        "protect"
       ],
       "ivs": {
         "hp": 31,
@@ -123,7 +123,7 @@
       "moveset": [
         "crosspoison",
         "nightslash",
-        "earthquake",
+        "stompingtantrum",
         "protect"
       ],
       "ivs": {

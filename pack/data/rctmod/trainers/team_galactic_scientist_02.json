@@ -121,9 +121,9 @@
         "air_balloon"
       ],
       "moveset": [
-        "discharge",
+        "thunderbolt",
         "flashcannon",
-        "voltswitch",
+        "electroweb",
         "protect"
       ],
       "ivs": {
@@ -152,7 +152,7 @@
       "moveset": [
         "gyroball",
         "bodypress",
-        "trickroom",
+        "irondefense",
         "protect"
       ],
       "ivs": {

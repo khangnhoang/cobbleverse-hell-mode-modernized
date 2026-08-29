@@ -88,12 +88,12 @@
       "nature": "sassy",
       "ability": "levitate",
       "heldItem": [
-        "mental_herb"
+        "leftovers"
       ],
       "moveset": [
         "gyroball",
         "bodypress",
-        "trickroom",
+        "irondefense",
         "protect"
       ],
       "ivs": {
@@ -143,7 +143,7 @@
       "species": "octillery",
       "gender": "MALE",
       "level": 75,
-      "nature": "quiet",
+      "nature": "modest",
       "ability": "sniper",
       "heldItem": [
         "expert_belt"
@@ -160,12 +160,12 @@
         "def": 31,
         "spa": 31,
         "spd": 31,
-        "spe": 0
+        "spe": 31
       },
       "evs": {
         "hp": 252,
         "spa": 252,
-        "spd": 4
+        "spe": 4
       }
     },
     {

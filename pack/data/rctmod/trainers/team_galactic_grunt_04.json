@@ -152,7 +152,7 @@
       "moveset": [
         "crosspoison",
         "nightslash",
-        "earthquake",
+        "stompingtantrum",
         "protect"
       ],
       "ivs": {
@@ -182,7 +182,7 @@
         "blizzard",
         "woodhammer",
         "iceshard",
-        "earthquake"
+        "energyball"
       ],
       "ivs": {
         "hp": 31,

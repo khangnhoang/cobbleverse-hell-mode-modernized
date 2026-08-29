@@ -86,9 +86,9 @@
       "gender": "MALE",
       "level": 87,
       "nature": "timid",
-      "ability": "solarpower",
+      "ability": "flashfire",
       "heldItem": [
-        "mega_showdown:houndoominite"
+        "life_orb"
       ],
       "moveset": [
         "darkpulse",
@@ -117,7 +117,7 @@
       "nature": "jolly",
       "ability": "intimidate",
       "heldItem": [
-        "sitrus_berry"
+        "mega_showdown:gyaradosite"
       ],
       "moveset": [
         "waterfall",

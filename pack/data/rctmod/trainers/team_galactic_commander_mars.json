@@ -91,9 +91,9 @@
         "mega_showdown:salamencite"
       ],
       "moveset": [
-        "doubleedge",
+        "return",
         "dragonclaw",
-        "earthquake",
+        "roost",
         "protect"
       ],
       "ivs": {
@@ -180,7 +180,7 @@
       "moveset": [
         "gyroball",
         "bodypress",
-        "trickroom",
+        "irondefense",
         "protect"
       ],
       "ivs": {

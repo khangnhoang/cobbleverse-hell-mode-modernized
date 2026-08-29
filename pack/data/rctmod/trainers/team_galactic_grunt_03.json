@@ -60,15 +60,12 @@
       "nature": "adamant",
       "ability": "aftermath",
       "heldItem": [
-        "life_orb"
+        "focus_sash"
       ],
-      "gimmicks": {
-        "dynamax": true
-      },
       "moveset": [
+        "suckerpunch",
         "poisonjab",
-        "crunch",
-        "stompingtantrum",
+        "snarl",
         "protect"
       ],
       "ivs": {
@@ -184,7 +181,7 @@
       "moveset": [
         "crosspoison",
         "nightslash",
-        "earthquake",
+        "stompingtantrum",
         "protect"
       ],
       "ivs": {
