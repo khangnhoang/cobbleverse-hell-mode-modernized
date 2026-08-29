@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Researcher"
   },
+  "identity": "Team Galactic Researcher (4)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,184 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 2
+      "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "dracometeor",
-        "hurricane",
-        "boomburst",
-        "flamethrower"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "choice_specs"
-      ],
       "species": "noivern",
       "gender": "MALE",
-      "level": 61,
+      "level": 63,
       "nature": "timid",
-      "ability": "infiltrator"
-    },
-    {
+      "ability": "infiltrator",
+      "heldItem": [
+        "focus_sash"
+      ],
       "moveset": [
-        "meteormash",
-        "zenheadbutt",
-        "earthquake",
-        "bulletpunch"
+        "tailwind",
+        "dracometeor",
+        "airslash",
+        "taunt"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "def": 4,
-        "atk": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "assault_vest"
-      ],
-      "species": "metagross",
-      "gender": "GENDERLESS",
-      "level": 61,
-      "nature": "adamant",
-      "ability": "clearbody"
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
     },
     {
-      "moveset": [
-        "overdrive",
-        "boomburst",
-        "sludgebomb",
-        "snarl"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "throat_spray"
-      ],
       "species": "toxtricity",
       "gender": "MALE",
-      "level": 61,
+      "level": 63,
       "nature": "modest",
-      "ability": "punkrock"
-    },
-    {
+      "ability": "punkrock",
+      "heldItem": [
+        "life_orb"
+      ],
       "moveset": [
-        "originpulse",
-        "darkpulse",
-        "aurasphere",
-        "icebeam"
+        "boomburst",
+        "overdrive",
+        "sludgebomb",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 4,
+        "hp": 4,
         "spa": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "expert_belt"
-      ],
+        "spe": 252
+      }
+    },
+    {
       "species": "clawitzer",
       "gender": "MALE",
       "level": 62,
       "nature": "modest",
-      "ability": "megalauncher"
-    },
-    {
+      "ability": "megalauncher",
+      "heldItem": [
+        "expert_belt"
+      ],
       "moveset": [
-        "thunderbolt",
-        "hypervoice",
-        "surf",
-        "focusblast"
+        "waterpulse",
+        "darkpulse",
+        "aurasphere",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
+        "hp": 252,
         "spa": 252,
-        "hp": 4
-      },
+        "spd": 4
+      }
+    },
+    {
+      "species": "metagross",
+      "gender": "GENDERLESS",
+      "level": 62,
+      "nature": "adamant",
+      "ability": "clearbody",
       "heldItem": [
-        "focus_sash"
+        "mega_showdown:metagrossite"
       ],
-      "species": "heliolisk",
+      "moveset": [
+        "meteormash",
+        "zenheadbutt",
+        "bulletpunch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    },
+    {
+      "species": "chandelure",
       "gender": "FEMALE",
       "level": 61,
-      "nature": "timid",
-      "ability": "dryskin"
-    },
-    {
+      "nature": "modest",
+      "ability": "flashfire",
+      "heldItem": [
+        "sitrus_berry"
+      ],
       "moveset": [
-        "psychic",
+        "heatwave",
         "shadowball",
-        "focusblast",
-        "dazzlinggleam"
+        "energyball",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
+        "hp": 252,
         "spa": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "life_orb"
-      ],
-      "species": "alakazam",
+        "spd": 4
+      }
+    },
+    {
+      "species": "kommoo",
       "gender": "MALE",
-      "level": 63,
-      "nature": "timid",
-      "ability": "magicguard"
+      "level": 62,
+      "nature": "modest",
+      "ability": "soundproof",
+      "heldItem": [
+        "assault_vest"
+      ],
+      "moveset": [
+        "clangingscales",
+        "focusblast",
+        "flamethrower",
+        "flashcannon"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spe": 4
+      }
     }
-  ],
-  "identity": "Team Galactic Researcher (4)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

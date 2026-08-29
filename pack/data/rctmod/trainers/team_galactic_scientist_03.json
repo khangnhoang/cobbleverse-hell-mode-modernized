@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Scientist"
   },
+  "identity": "Team Galactic Scientist (3)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,127 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
       "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "spikes",
-        "bravebird",
-        "whirlwind",
-        "roost"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spd": 4,
-        "def": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "rocky_helmet"
-      ],
-      "species": "skarmory",
-      "gender": "MALE",
-      "level": 67,
-      "nature": "impish",
-      "ability": "sturdy"
-    },
-    {
-      "moveset": [
-        "triattack",
-        "shadowball",
-        "icebeam",
-        "nastyplot"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
+      "species": "weavile",
+      "gender": "FEMALE",
+      "level": 70,
+      "nature": "jolly",
+      "ability": "pressure",
       "heldItem": [
         "life_orb"
       ],
+      "moveset": [
+        "fakeout",
+        "tripleaxel",
+        "knockoff",
+        "iceshard"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "crobat",
+      "gender": "MALE",
+      "level": 69,
+      "nature": "jolly",
+      "ability": "infiltrator",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "tailwind",
+        "superfang",
+        "crosspoison",
+        "taunt"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "skarmory",
+      "gender": "MALE",
+      "level": 68,
+      "nature": "impish",
+      "ability": "sturdy",
+      "heldItem": [
+        "rocky_helmet"
+      ],
+      "moveset": [
+        "bravebird",
+        "bodypress",
+        "irondefense",
+        "roost"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
+    },
+    {
       "species": "porygonz",
       "gender": "GENDERLESS",
       "level": 69,
       "nature": "modest",
-      "ability": "adaptability"
-    },
-    {
+      "ability": "adaptability",
+      "heldItem": [
+        "choice_specs"
+      ],
       "moveset": [
-        "superfang",
-        "toxic",
-        "roost",
-        "uturn"
+        "triattack",
+        "icebeam",
+        "thunderbolt",
+        "shadowball"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 252,
-        "def": 4,
-        "hp": 252
-      },
-      "heldItem": [
-        "eviolite"
-      ],
-      "species": "golbat",
-      "gender": "FEMALE",
-      "level": 68,
-      "nature": "jolly",
-      "ability": "infiltrator"
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
     },
     {
-      "moveset": [
-        "iciclecrash",
-        "nightslash",
-        "iceshard",
-        "swordsdance"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "focus_sash"
-      ],
-      "species": "weavile",
+      "species": "abomasnow",
       "gender": "MALE",
-      "level": 70,
-      "nature": "jolly",
-      "ability": "pressure"
+      "level": 67,
+      "nature": "quiet",
+      "ability": "snowwarning",
+      "heldItem": [
+        "mega_showdown:abomasite"
+      ],
+      "moveset": [
+        "blizzard",
+        "woodhammer",
+        "iceshard",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "atk": 4
+      }
+    },
+    {
+      "species": "froslass",
+      "gender": "FEMALE",
+      "level": 67,
+      "nature": "timid",
+      "ability": "cursedbody",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "blizzard",
+        "shadowball",
+        "willowisp",
+        "destinybond"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 4,
+        "spe": 252
+      }
     }
-  ],
-  "identity": "Team Galactic Scientist (3)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

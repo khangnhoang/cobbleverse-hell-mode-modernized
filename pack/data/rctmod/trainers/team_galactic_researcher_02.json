@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Researcher"
   },
+  "identity": "Team Galactic Researcher (2)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,127 +13,193 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 3
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 2
+      "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "triattack",
-        "darkpulse",
-        "icebeam",
-        "trick"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "choice_scarf"
-      ],
       "species": "porygonz",
       "gender": "GENDERLESS",
-      "level": 66,
+      "level": 68,
       "nature": "modest",
-      "ability": "adaptability"
-    },
-    {
-      "moveset": [
-        "raindance",
-        "gyroball",
-        "zenheadbutt",
-        "explosion"
-      ],
-      "ivs": {
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spd": 4,
-        "def": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "damp_rock"
-      ],
-      "species": "bronzong",
-      "gender": "GENDERLESS",
-      "level": 66,
-      "nature": "relaxed",
-      "ability": "levitate"
-    },
-    {
-      "moveset": [
-        "hydropump",
-        "thunder",
-        "icebeam",
-        "psyshock"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
+      "ability": "adaptability",
       "heldItem": [
         "life_orb"
       ],
+      "moveset": [
+        "triattack",
+        "shadowball",
+        "thunderbolt",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "gallade",
+      "gender": "MALE",
+      "level": 67,
+      "nature": "jolly",
+      "ability": "sharpness",
+      "heldItem": [
+        "mega_showdown:galladite"
+      ],
+      "moveset": [
+        "sacredsword",
+        "psychocut",
+        "nightslash",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
       "species": "starmie",
       "gender": "GENDERLESS",
       "level": 67,
       "nature": "timid",
-      "ability": "analytic"
-    },
-    {
-      "moveset": [
-        "psychocut",
-        "sacredsword",
-        "nightslash",
-        "closecombat"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
+      "ability": "analytic",
       "heldItem": [
         "focus_sash"
       ],
-      "species": "gallade",
+      "moveset": [
+        "hydropump",
+        "icebeam",
+        "thunderbolt",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "bronzong",
+      "gender": "GENDERLESS",
+      "level": 66,
+      "nature": "sassy",
+      "ability": "levitate",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "gyroball",
+        "bodypress",
+        "trickroom",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "rotom",
+      "aspects": [
+        "wash-appliance"
+      ],
+      "gender": "GENDERLESS",
+      "level": 66,
+      "nature": "modest",
+      "ability": "levitate",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "hydropump",
+        "voltswitch",
+        "willowisp",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spa": 128
+      }
+    },
+    {
+      "species": "weavile",
       "gender": "MALE",
-      "level": 68,
+      "level": 67,
       "nature": "jolly",
-      "ability": "sharpness"
+      "ability": "pressure",
+      "heldItem": [
+        "assault_vest"
+      ],
+      "moveset": [
+        "fakeout",
+        "iciclecrash",
+        "knockoff",
+        "iceshard"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
     }
-  ],
-  "identity": "Team Galactic Researcher (2)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

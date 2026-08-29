@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Engineer"
   },
+  "identity": "Team Galactic Engineer (3)",
   "ai": {
     "type": "rct",
     "data": {
@@ -13,156 +14,189 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 1
+    "maxItemUses": 3
   },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 1
+      "quantity": 3
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "dazzlinggleam",
-        "flashcannon",
-        "foulplay",
-        "drainingkiss"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spd": 4,
-        "def": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "leftovers"
-      ],
       "species": "klefki",
       "gender": "FEMALE",
-      "level": 62,
+      "level": 64,
       "nature": "bold",
-      "ability": "prankster"
-    },
-    {
+      "ability": "prankster",
+      "heldItem": [
+        "light_clay"
+      ],
       "moveset": [
-        "ironhead",
-        "nightslash",
-        "suckerpunch",
-        "xscissor"
+        "reflect",
+        "lightscreen",
+        "thunderwave",
+        "dazzlinggleam"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "focus_sash"
-      ],
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
       "species": "bisharp",
       "gender": "MALE",
-      "level": 63,
+      "level": 64,
       "nature": "adamant",
-      "ability": "defiant"
-    },
-    {
+      "ability": "defiant",
+      "heldItem": [
+        "life_orb"
+      ],
       "moveset": [
+        "suckerpunch",
         "ironhead",
-        "highhorsepower",
-        "playrough",
-        "zenheadbutt"
+        "knockoff",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "def": 4,
+        "hp": 4,
         "atk": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "eviolite"
-      ],
-      "species": "cufant",
-      "gender": "MALE",
-      "level": 62,
-      "nature": "adamant",
-      "ability": "sheerforce"
+        "spe": 252
+      }
     },
     {
-      "moveset": [
-        "meteormash",
-        "zenheadbutt",
-        "earthquake",
-        "bulletpunch"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "def": 4,
-        "atk": 252,
-        "hp": 252
-      },
-      "heldItem": [
-        "assault_vest"
-      ],
       "species": "metagross",
-      "gender": "GENDERLESS",
-      "level": 63,
-      "nature": "adamant",
-      "ability": "clearbody"
-    },
-    {
-      "moveset": [
-        "stoneedge",
-        "earthquake",
-        "wildcharge",
-        "icepunch"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
-      },
-      "heldItem": [
-        "leftovers"
-      ],
-      "species": "ironthorns",
       "gender": "GENDERLESS",
       "level": 64,
       "nature": "adamant",
-      "ability": "quarkdrive"
+      "ability": "clearbody",
+      "heldItem": [
+        "mega_showdown:metagrossite"
+      ],
+      "moveset": [
+        "meteormash",
+        "zenheadbutt",
+        "bulletpunch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    },
+    {
+      "species": "copperajah",
+      "gender": "MALE",
+      "level": 63,
+      "nature": "brave",
+      "ability": "sheerforce",
+      "heldItem": [
+        "assault_vest"
+      ],
+      "moveset": [
+        "heavyslam",
+        "highhorsepower",
+        "rockslide",
+        "ironhead"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "lucario",
+      "gender": "MALE",
+      "level": 63,
+      "nature": "jolly",
+      "ability": "innerfocus",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "closecombat",
+        "extremespeed",
+        "flashcannon",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "bronzong",
+      "gender": "GENDERLESS",
+      "level": 62,
+      "nature": "sassy",
+      "ability": "levitate",
+      "heldItem": [
+        "mental_herb"
+      ],
+      "moveset": [
+        "gyroball",
+        "bodypress",
+        "trickroom",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
     }
-  ],
-  "identity": "Team Galactic Engineer (3)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }
