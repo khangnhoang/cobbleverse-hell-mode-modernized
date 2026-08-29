@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Recruit"
   },
+  "identity": "Team Galactic Recruit (5)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,70 +13,193 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 2
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 1
+      "quantity": 2
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "flail",
-        "bounce",
-        "tackle",
-        "splash"
+      "species": "dustox",
+      "gender": "FEMALE",
+      "level": 55,
+      "nature": "calm",
+      "ability": "shielddust",
+      "heldItem": [
+        "focus_sash"
       ],
-      "species": "magikarp",
-      "gender": "MALE",
-      "level": 55
+      "moveset": [
+        "tailwind",
+        "bugbuzz",
+        "sludgebomb",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
     },
     {
-      "moveset": [
-        "bugbite",
-        "poisonsting",
-        "stringshot",
-        "tackle"
+      "species": "raticate",
+      "aspects": [
+        "alolan"
       ],
-      "species": "wurmple",
       "gender": "MALE",
-      "level": 55
+      "level": 55,
+      "nature": "adamant",
+      "ability": "hustle",
+      "heldItem": [
+        "wide_lens"
+      ],
+      "moveset": [
+        "doubleedge",
+        "knockoff",
+        "suckerpunch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
     },
     {
+      "species": "gyarados",
+      "gender": "MALE",
+      "level": 55,
+      "nature": "jolly",
+      "ability": "intimidate",
+      "heldItem": [
+        "mega_showdown:gyaradosite"
+      ],
       "moveset": [
-        "hyperfang",
-        "quickattack",
+        "waterfall",
         "crunch",
-        "pursuit"
+        "icefang",
+        "protect"
       ],
-      "species": "rattata",
-      "gender": "MALE",
-      "level": 55
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
     },
     {
-      "moveset": [
-        "thundershock",
-        "sonicboom",
-        "supersonic",
-        "flash"
+      "species": "magnezone",
+      "gender": "GENDERLESS",
+      "level": 55,
+      "nature": "modest",
+      "ability": "sturdy",
+      "heldItem": [
+        "air_balloon"
       ],
-      "species": "magnemite",
-      "gender": "MALE",
-      "level": 55
+      "moveset": [
+        "thunderbolt",
+        "flashcannon",
+        "voltswitch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
     },
     {
-      "moveset": [
-        "wingattack",
-        "bite",
-        "confuseray",
-        "aircutter"
-      ],
-      "species": "zubat",
+      "species": "toxicroak",
       "gender": "MALE",
-      "level": 55
+      "level": 55,
+      "nature": "adamant",
+      "ability": "dryskin",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "fakeout",
+        "poisonjab",
+        "drainpunch",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "weavile",
+      "gender": "MALE",
+      "level": 55,
+      "nature": "jolly",
+      "ability": "pressure",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "fakeout",
+        "iciclecrash",
+        "knockoff",
+        "iceshard"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
     }
-  ],
-  "identity": "Team Galactic Recruit (5)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Recruit"
   },
+  "identity": "Team Galactic Recruit (2)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,65 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 2
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 1
+      "quantity": 2
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "playrough",
-        "shadowclaw",
-        "shadowsneak",
-        "swordsdance"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spd": 4,
-        "atk": 252
-      },
       "species": "mimikyu",
       "gender": "FEMALE",
       "level": 63,
       "nature": "jolly",
-      "ability": "disguise"
+      "ability": "disguise",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "playrough",
+        "shadowclaw",
+        "shadowsneak",
+        "trickroom"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
     },
     {
+      "species": "drapion",
+      "gender": "MALE",
+      "level": 63,
+      "nature": "jolly",
+      "ability": "sniper",
+      "heldItem": [
+        "scope_lens"
+      ],
       "moveset": [
         "crosspoison",
         "nightslash",
         "earthquake",
-        "poisonjab"
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "def": 4,
+        "hp": 4,
         "atk": 252,
-        "hp": 252
-      },
-      "species": "drapion",
+        "spe": 252
+      }
+    },
+    {
+      "species": "gengar",
       "gender": "MALE",
       "level": 63,
-      "nature": "adamant",
-      "ability": "battlearmor"
+      "nature": "timid",
+      "ability": "cursedbody",
+      "heldItem": [
+        "mega_showdown:gengarite"
+      ],
+      "moveset": [
+        "shadowball",
+        "sludgebomb",
+        "icywind",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "chandelure",
+      "gender": "FEMALE",
+      "level": 63,
+      "nature": "modest",
+      "ability": "flashfire",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "heatwave",
+        "shadowball",
+        "energyball",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "snorlax",
+      "gender": "MALE",
+      "level": 63,
+      "nature": "brave",
+      "ability": "thickfat",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "bodyslam",
+        "highhorsepower",
+        "crunch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "def": 4
+      }
+    },
+    {
+      "species": "grimmsnarl",
+      "gender": "MALE",
+      "level": 63,
+      "nature": "impish",
+      "ability": "prankster",
+      "heldItem": [
+        "light_clay"
+      ],
+      "moveset": [
+        "reflect",
+        "lightscreen",
+        "thunderwave",
+        "spiritbreak"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
     }
-  ],
-  "identity": "Team Galactic Recruit (2)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

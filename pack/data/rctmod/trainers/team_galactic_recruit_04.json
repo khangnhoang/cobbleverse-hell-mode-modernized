@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Recruit"
   },
+  "identity": "Team Galactic Recruit (4)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,112 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 2
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 1
+      "quantity": 2
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
+      "species": "staraptor",
+      "gender": "MALE",
+      "level": 58,
+      "nature": "jolly",
+      "ability": "intimidate",
+      "heldItem": [
+        "focus_sash"
+      ],
       "moveset": [
         "bravebird",
         "closecombat",
-        "quickattack",
-        "uturn"
+        "finalgambit",
+        "tailwind"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252
-      },
-      "species": "staraptor",
-      "gender": "FEMALE",
-      "level": 58,
-      "nature": "jolly",
-      "ability": "intimidate"
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
     },
     {
-      "moveset": [
-        "wildcharge",
-        "icefang",
-        "crunch",
-        "firefang"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "atk": 252,
-        "hp": 252
-      },
       "species": "luxray",
       "gender": "MALE",
       "level": 58,
       "nature": "adamant",
-      "ability": "rivalry"
-    },
-    {
+      "ability": "intimidate",
+      "heldItem": [
+        "assault_vest"
+      ],
       "moveset": [
-        "shadowball",
-        "sludgebomb",
-        "confuseray",
-        "dazzlinggleam"
+        "wildcharge",
+        "icefang",
+        "crunch",
+        "voltswitch"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spa": 252
-      },
-      "species": "gastly",
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    },
+    {
+      "species": "gengar",
       "gender": "MALE",
       "level": 58,
       "nature": "timid",
-      "ability": "levitate"
-    },
-    {
+      "ability": "cursedbody",
+      "heldItem": [
+        "mega_showdown:gengarite"
+      ],
       "moveset": [
-        "poisonjab",
-        "suckerpunch",
-        "revenge",
-        "fakeout"
+        "shadowball",
+        "sludgebomb",
+        "dazzlinggleam",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252
-      },
-      "species": "croagunk",
-      "gender": "FEMALE",
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "toxicroak",
+      "gender": "MALE",
       "level": 58,
       "nature": "adamant",
-      "ability": "dryskin"
+      "ability": "dryskin",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "fakeout",
+        "poisonjab",
+        "drainpunch",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "drapion",
+      "gender": "MALE",
+      "level": 58,
+      "nature": "jolly",
+      "ability": "sniper",
+      "heldItem": [
+        "scope_lens"
+      ],
+      "moveset": [
+        "crosspoison",
+        "nightslash",
+        "earthquake",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "gastrodon",
+      "gender": "FEMALE",
+      "level": 58,
+      "nature": "quiet",
+      "ability": "stormdrain",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "muddywater",
+        "earthpower",
+        "recover",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spa": 128
+      }
     }
-  ],
-  "identity": "Team Galactic Recruit (4)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

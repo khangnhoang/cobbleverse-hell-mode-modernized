@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Grunt"
   },
+  "identity": "Team Galactic Grunt (1)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,58 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 1
+  },
+  "bag": [
+    {
+      "item": "cobblemon:super_potion",
+      "quantity": 1
+    }
+  ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "wingattack",
-        "bite",
-        "confuseray",
-        "supersonic"
-      ],
-      "ivs": {
-        "spe": 20,
-        "spd": 20,
-        "spa": 20,
-        "def": 20,
-        "atk": 20,
-        "hp": 20
-      },
-      "evs": {
-        "spe": 100,
-        "atk": 100
-      },
-      "species": "zubat",
-      "gender": "MALE",
-      "level": 24,
-      "nature": "jolly",
-      "ability": "innerfocus"
-    },
-    {
-      "moveset": [
-        "fakeout",
-        "furyswipes",
-        "hypnosis",
-        "feintattack"
-      ],
-      "ivs": {
-        "spe": 20,
-        "spd": 20,
-        "spa": 20,
-        "def": 20,
-        "atk": 20,
-        "hp": 20
-      },
-      "evs": {
-        "spe": 100,
-        "atk": 100
-      },
       "species": "glameow",
       "gender": "FEMALE",
       "level": 26,
+      "nature": "jolly",
+      "ability": "limber",
+      "heldItem": [
+        "silk_scarf"
+      ],
+      "moveset": [
+        "fakeout",
+        "quickattack",
+        "bite",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "golbat",
+      "gender": "MALE",
+      "level": 26,
+      "nature": "jolly",
+      "ability": "innerfocus",
+      "heldItem": [
+        "eviolite"
+      ],
+      "moveset": [
+        "wingattack",
+        "poisonfang",
+        "bite",
+        "confuseray"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "houndour",
+      "gender": "MALE",
+      "level": 25,
+      "nature": "timid",
+      "ability": "earlybird",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "ember",
+        "snarl",
+        "smog",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "stunky",
+      "gender": "MALE",
+      "level": 25,
       "nature": "adamant",
-      "ability": "limber"
+      "ability": "aftermath",
+      "heldItem": [
+        "black_sludge"
+      ],
+      "moveset": [
+        "poisonjab",
+        "bite",
+        "screech",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    },
+    {
+      "species": "croagunk",
+      "gender": "MALE",
+      "level": 24,
+      "nature": "adamant",
+      "ability": "dryskin",
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "moveset": [
+        "fakeout",
+        "poisonsting",
+        "drainpunch",
+        "suckerpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "bronzor",
+      "gender": "GENDERLESS",
+      "level": 25,
+      "nature": "relaxed",
+      "ability": "levitate",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "gyroball",
+        "confuseray",
+        "hypnosis",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 252,
+        "spd": 4
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

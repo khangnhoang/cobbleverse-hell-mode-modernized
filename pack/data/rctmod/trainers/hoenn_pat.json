@@ -21,30 +21,181 @@
       "quantity": 4
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
+      "species": "ditto",
+      "gender": "GENDERLESS",
+      "level": 100,
+      "nature": "relaxed",
+      "ability": "imposter",
+      "heldItem": [
+        "choice_scarf"
+      ],
       "moveset": [
         "transform"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
       },
       "evs": {
-        "spe": 252,
-        "atk": 252,
-        "hp": 4
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "zoroark",
+      "gender": "MALE",
+      "level": 100,
+      "nature": "timid",
+      "ability": "illusion",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "nightdaze",
+        "flamethrower",
+        "sludgebomb",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
-      "species": "ditto",
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "zoroark",
+      "aspects": [
+        "hisuian"
+      ],
+      "gender": "MALE",
+      "level": 100,
+      "nature": "timid",
+      "ability": "illusion",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "shadowball",
+        "hypervoice",
+        "nastyplot",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "smeargle",
       "gender": "MALE",
       "level": 100,
       "nature": "jolly",
-      "ability": "thickfat"
+      "ability": "moody",
+      "heldItem": [
+        "mental_herb"
+      ],
+      "moveset": [
+        "fakeout",
+        "spore",
+        "followme",
+        "wideguard"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "porygon2",
+      "gender": "GENDERLESS",
+      "level": 100,
+      "nature": "sassy",
+      "ability": "trace",
+      "heldItem": [
+        "eviolite"
+      ],
+      "moveset": [
+        "trickroom",
+        "triattack",
+        "icebeam",
+        "recover"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
+    },
+    {
+      "species": "gardevoir",
+      "gender": "FEMALE",
+      "level": 100,
+      "nature": "timid",
+      "ability": "trace",
+      "heldItem": [
+        "mega_showdown:gardevoirite"
+      ],
+      "moveset": [
+        "hypervoice",
+        "psychic",
+        "shadowball",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "spa": 252,
+        "spe": 252
+      }
     }
-  ],
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }

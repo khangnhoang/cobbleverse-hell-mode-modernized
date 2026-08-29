@@ -2,6 +2,7 @@
   "name": {
     "literal": "Team Galactic Recruit"
   },
+  "identity": "Team Galactic Recruit (3)",
   "ai": {
     "type": "rct",
     "data": {
@@ -12,91 +13,190 @@
       "maxSelectMargin": 0.15
     }
   },
-  "battleRules": {},
+  "battleRules": {
+    "maxItemUses": 2
+  },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 1
+      "quantity": 2
     }
   ],
+  "battleFormat": "GEN_9_DOUBLES",
   "team": [
     {
-      "moveset": [
-        "aurasphere",
-        "extremespeed",
-        "flashcannon",
-        "dragonpulse"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spa": 128,
-        "atk": 128
-      },
       "species": "lucario",
       "gender": "MALE",
       "level": 60,
-      "nature": "hasty",
-      "ability": "innerfocus"
-    },
-    {
+      "nature": "jolly",
+      "ability": "innerfocus",
+      "heldItem": [
+        "mega_showdown:lucarionite"
+      ],
       "moveset": [
-        "discharge",
-        "flashcannon",
-        "thunderwave",
-        "lightscreen"
+        "closecombat",
+        "bulletpunch",
+        "meteormash",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spa": 252,
-        "hp": 4
-      },
-      "species": "magnemite",
+        "hp": 4,
+        "atk": 252,
+        "spe": 252
+      }
+    },
+    {
+      "species": "magnezone",
       "gender": "GENDERLESS",
       "level": 60,
       "nature": "modest",
-      "ability": "sturdy"
-    },
-    {
+      "ability": "sturdy",
+      "heldItem": [
+        "air_balloon"
+      ],
       "moveset": [
-        "crunch",
-        "superfang",
-        "suckerpunch",
-        "doubleedge"
+        "thunderbolt",
+        "flashcannon",
+        "voltswitch",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "atk": 252
-      },
-      "species": "rattata",
+        "hp": 252,
+        "spa": 252,
+        "spd": 4
+      }
+    },
+    {
+      "species": "crobat",
       "gender": "MALE",
       "level": 60,
       "nature": "jolly",
-      "ability": "hustle",
-      "variant": "alolan"
+      "ability": "infiltrator",
+      "heldItem": [
+        "focus_sash"
+      ],
+      "moveset": [
+        "tailwind",
+        "superfang",
+        "crosspoison",
+        "taunt"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "def": 4,
+        "spe": 252
+      }
+    },
+    {
+      "species": "scizor",
+      "gender": "MALE",
+      "level": 60,
+      "nature": "adamant",
+      "ability": "technician",
+      "heldItem": [
+        "life_orb"
+      ],
+      "moveset": [
+        "bulletpunch",
+        "bugbite",
+        "swordsdance",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    },
+    {
+      "species": "gallade",
+      "gender": "MALE",
+      "level": 60,
+      "nature": "adamant",
+      "ability": "sharpness",
+      "heldItem": [
+        "assault_vest"
+      ],
+      "moveset": [
+        "sacredsword",
+        "psychocut",
+        "nightslash",
+        "aquacutter"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "spe": 4
+      }
+    },
+    {
+      "species": "bronzong",
+      "gender": "GENDERLESS",
+      "level": 60,
+      "nature": "sassy",
+      "ability": "levitate",
+      "heldItem": [
+        "leftovers"
+      ],
+      "moveset": [
+        "gyroball",
+        "bodypress",
+        "trickroom",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "def": 128,
+        "spd": 128
+      }
     }
-  ],
-  "identity": "Team Galactic Recruit (3)",
-  "battleFormat": "GEN_9_SINGLES"
+  ]
 }
