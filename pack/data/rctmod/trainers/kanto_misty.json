@@ -3,7 +3,7 @@
     "literal": "Misty"
   },
   "ai": {
-    "type": "rct",
+    "type": "rb",
     "data": {
       "moveBias": 1,
       "switchBias": 0.65,
@@ -24,206 +24,195 @@
   "team": [
     {
       "moveset": [
-        "tailwind",
+        "muddywater",
         "hurricane",
-        "weatherball",
+        "tailwind",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spa": 8,
-        "def": 252,
-        "hp": 248
+        "hp": 252,
+        "atk": 0,
+        "def": 156,
+        "spa": 100,
+        "spd": 0,
+        "spe": 0
       },
       "heldItem": [
         "damp_rock"
       ],
-      "gimmicks": {
-        "tera": "water"
-      },
       "species": "pelipper",
-      "gender": "MALE",
+      "gender": "FEMALE",
       "level": 36,
       "nature": "bold",
       "ability": "drizzle"
     },
     {
       "moveset": [
-        "surgingstrikes",
-        "closecombat",
-        "detect",
-        "uturn"
+        "fakeout",
+        "hydropump",
+        "gigadrain",
+        "icebeam"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 252,
-        "spd": 92,
-        "def": 4,
-        "atk": 156,
-        "hp": 4
-      },
-      "heldItem": [
-        "mystic_water"
-      ],
-      "aspects": [
-        "rapid_strike-style"
-      ],
-      "gimmicks": {
-        "tera": "water"
-      },
-      "species": "urshifu",
-      "gender": "MALE",
-      "level": 36,
-      "nature": "adamant",
-      "ability": "unseenfist"
-    },
-    {
-      "moveset": [
-        "hypervoice",
-        "moonblast",
-        "haze",
-        "protect"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 196,
-        "spd": 4,
+        "hp": 100,
+        "atk": 0,
+        "def": 0,
         "spa": 252,
-        "def": 4,
-        "hp": 52
+        "spd": 0,
+        "spe": 156
       },
       "heldItem": [
-        "throat_spray"
+        "assault_vest"
       ],
-      "gimmicks": {
-        "tera": "water"
-      },
-      "species": "primarina",
-      "gender": "FEMALE",
+      "species": "ludicolo",
+      "gender": "MALE",
       "level": 36,
       "nature": "modest",
-      "ability": "liquidvoice"
+      "ability": "swiftswim"
     },
     {
       "moveset": [
-        "crabhammer",
-        "knockoff",
-        "metalclaw",
-        "protect"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 236,
-        "spd": 48,
-        "def": 24,
-        "atk": 52,
-        "hp": 148
-      },
-      "heldItem": [
-        "life_orb"
-      ],
-      "gimmicks": {
-        "tera": "water"
-      },
-      "species": "kingler",
-      "gender": "MALE",
-      "level": 36,
-      "nature": "adamant",
-      "ability": "sheerforce"
-    },
-    {
-      "moveset": [
-        "dragondance",
         "waterfall",
-        "crunch",
+        "powerwhip",
+        "dragondance",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 28,
-        "spd": 64,
-        "def": 96,
-        "atk": 164,
-        "hp": 156
+        "hp": 252,
+        "atk": 156,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 100
       },
       "heldItem": [
-        "mega_showdown:gyaradosite"
+        "wacan_berry"
       ],
-      "gimmicks": {
-        "tera": "water"
-      },
       "species": "gyarados",
       "gender": "MALE",
       "level": 36,
       "nature": "adamant",
-      "ability": "moldbreaker",
-      "shiny": true
+      "ability": "intimidate"
     },
     {
       "moveset": [
-        "lastrespects",
-        "wavecrash",
-        "flipturn",
+        "highhorsepower",
+        "scald",
+        "recover",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 124,
-        "spd": 40,
-        "def": 64,
-        "atk": 164,
-        "hp": 116
+        "hp": 252,
+        "atk": 0,
+        "def": 156,
+        "spa": 0,
+        "spd": 100,
+        "spe": 0
       },
       "heldItem": [
         "leftovers"
       ],
-      "gimmicks": {
-        "tera": "water"
+      "species": "quagsire",
+      "gender": "MALE",
+      "level": 36,
+      "nature": "relaxed",
+      "ability": "waterabsorb"
+    },
+    {
+      "moveset": [
+        "wavecrash",
+        "phantomforce",
+        "aquajet",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
+      "evs": {
+        "hp": 100,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 156
+      },
+      "heldItem": [
+        "mystic_water"
+      ],
       "species": "basculegion",
       "gender": "MALE",
       "level": 36,
       "nature": "adamant",
       "ability": "swiftswim"
+    },
+    {
+      "moveset": [
+        "liquidation",
+        "aquajet",
+        "psychocut",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
+      },
+      "heldItem": [
+        "zamega:starminite"
+      ],
+      "species": "starmie",
+      "gender": "GENDERLESS",
+      "level": 36,
+      "nature": "jolly",
+      "ability": "hugepower"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

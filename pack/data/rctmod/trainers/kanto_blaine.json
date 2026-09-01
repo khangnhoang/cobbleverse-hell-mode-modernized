@@ -3,7 +3,7 @@
     "literal": "Blaine"
   },
   "ai": {
-    "type": "rct",
+    "type": "rb",
     "data": {
       "moveBias": 1,
       "switchBias": 0.65,
@@ -13,108 +13,105 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 4
+    "maxItemUses": 2
   },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 4
+      "quantity": 2
     }
   ],
   "team": [
     {
       "moveset": [
         "flareblitz",
-        "protect",
-        "closecombat",
-        "flamecharge"
+        "extremespeed",
+        "willowisp",
+        "snarl"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spd": 4,
-        "atk": 252
+        "hp": 252,
+        "atk": 156,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 100
       },
       "heldItem": [
-        "life_orb"
+        "sitrus_berry"
       ],
-      "gimmicks": {
-        "tera": "fighting"
-      },
-      "species": "koraidon",
+      "species": "arcanine",
       "gender": "MALE",
       "level": 70,
       "nature": "jolly",
-      "ability": "orichalcumpulse"
+      "ability": "intimidate"
     },
     {
       "moveset": [
+        "heatwave",
         "solarbeam",
-        "fireblast",
-        "protect",
-        "ancientpower"
+        "willowisp",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 60,
-        "spd": 56,
-        "spa": 148,
-        "def": 72,
-        "hp": 172
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "charti_berry"
+        "heat_rock"
       ],
-      "gimmicks": {
-        "tera": "fire"
-      },
-      "species": "charizard",
-      "gender": "MALE",
+      "species": "ninetales",
+      "gender": "FEMALE",
       "level": 70,
-      "nature": "modest",
-      "ability": "solarpower",
-      "shiny": true
+      "nature": "timid",
+      "ability": "drought"
     },
     {
       "moveset": [
         "followme",
-        "protect",
         "fireblast",
-        "taunt"
+        "taunt",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 72,
-        "spd": 104,
-        "spa": 4,
-        "def": 76,
-        "hp": 252
+        "hp": 252,
+        "atk": 0,
+        "def": 156,
+        "spa": 0,
+        "spd": 100,
+        "spe": 0
       },
       "heldItem": [
         "eviolite"
       ],
-      "gimmicks": {
-        "tera": "fire"
-      },
       "species": "magmar",
       "gender": "MALE",
       "level": 70,
@@ -125,30 +122,28 @@
       "moveset": [
         "fakeout",
         "partingshot",
-        "willowisp",
-        "knockoff"
+        "knockoff",
+        "flareblitz"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 36,
-        "spd": 64,
-        "def": 44,
-        "atk": 116,
-        "hp": 248
+        "hp": 252,
+        "atk": 0,
+        "def": 100,
+        "spa": 0,
+        "spd": 156,
+        "spe": 0
       },
       "heldItem": [
         "rocky_helmet"
       ],
-      "gimmicks": {
-        "tera": "fire"
-      },
       "species": "incineroar",
       "gender": "MALE",
       "level": 70,
@@ -157,71 +152,67 @@
     },
     {
       "moveset": [
-        "breakingswipe",
-        "heatcrash",
-        "howl",
-        "burningbulwark"
+        "heatwave",
+        "solarbeam",
+        "airslash",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spd": 92,
-        "def": 4,
-        "atk": 68,
-        "hp": 92
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "mega_showdown:booster_energy"
+        "mega_showdown:charizardite_y"
       ],
-      "gimmicks": {
-        "tera": "fire"
-      },
-      "species": "gougingfire",
+      "species": "charizard",
       "gender": "MALE",
       "level": 70,
-      "nature": "jolly",
-      "ability": "protosynthesis"
+      "nature": "modest",
+      "ability": "drought"
     },
     {
       "moveset": [
-        "protect",
-        "coaching",
-        "flareblitz",
-        "closecombat"
+        "heatwave",
+        "airslash",
+        "tailwind",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 76,
-        "spd": 88,
-        "def": 68,
-        "atk": 160,
-        "hp": 116
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "mega_showdown:blazikenite"
+        "life_orb"
       ],
-      "gimmicks": {
-        "tera": "fire"
-      },
-      "species": "blaziken",
-      "gender": "MALE",
+      "species": "moltres",
+      "gender": "GENDERLESS",
       "level": 70,
-      "nature": "adamant",
-      "ability": "speedboost"
+      "nature": "timid",
+      "ability": "flamebody"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

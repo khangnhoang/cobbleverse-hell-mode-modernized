@@ -3,7 +3,7 @@
     "literal": "Erika"
   },
   "ai": {
-    "type": "rct",
+    "type": "rb",
     "data": {
       "moveBias": 1,
       "switchBias": 0.65,
@@ -13,41 +13,41 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 3
+    "maxItemUses": 2
   },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 3
+      "quantity": 2
     }
   ],
   "team": [
     {
       "moveset": [
         "eruption",
-        "lavaplume",
+        "flamethrower",
         "bodypress",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 40,
-        "spa": 136,
+        "hp": 252,
+        "atk": 0,
         "def": 156,
-        "hp": 176
+        "spa": 100,
+        "spd": 0,
+        "spe": 0
       },
       "heldItem": [
         "heat_rock"
       ],
-      "gimmicks": {
-        "tera": "fire"
-      },
       "species": "torkoal",
       "gender": "MALE",
       "level": 48,
@@ -56,167 +56,166 @@
     },
     {
       "moveset": [
-        "solarblade",
         "afteryou",
-        "protect",
-        "closecombat"
+        "solarblade",
+        "closecombat",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 156,
-        "spd": 88,
-        "atk": 200,
-        "hp": 64
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "covert_cloak"
+        "focus_sash"
       ],
-      "aspects": [
-        "hisuian"
-      ],
-      "gimmicks": {
-        "tera": "grass"
-      },
       "species": "lilligant",
       "gender": "FEMALE",
       "level": 48,
       "nature": "timid",
-      "ability": "chlorophyll"
+      "ability": "chlorophyll",
+      "aspects": [
+        "hisuian"
+      ]
     },
     {
       "moveset": [
-        "woodhammer",
-        "grassyglide",
-        "fakeout",
+        "solarbeam",
+        "sludgebomb",
+        "pollenpuff",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 44,
-        "spd": 64,
-        "def": 32,
-        "atk": 116,
-        "hp": 252
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "miracle_seed"
+        "life_orb"
       ],
-      "gimmicks": {
-        "tera": "grass"
-      },
-      "species": "rillaboom",
-      "gender": "MALE",
+      "species": "vileplume",
+      "gender": "FEMALE",
       "level": 48,
-      "nature": "adamant",
-      "ability": "grassysurge",
-      "shiny": true
+      "nature": "modest",
+      "ability": "chlorophyll"
     },
     {
       "moveset": [
         "spore",
         "ragepowder",
-        "sludgebomb",
+        "pollenpuff",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 116,
-        "def": 180,
-        "hp": 212
+        "hp": 252,
+        "atk": 0,
+        "def": 156,
+        "spa": 0,
+        "spd": 100,
+        "spe": 0
       },
       "heldItem": [
         "rocky_helmet"
       ],
-      "gimmicks": {
-        "tera": "grass"
-      },
       "species": "amoonguss",
       "gender": "MALE",
       "level": 48,
       "nature": "bold",
-      "ability": "effectspore"
+      "ability": "regenerator"
     },
     {
       "moveset": [
-        "followme",
-        "spikyshield",
-        "ivycudgel",
-        "hornleech"
-      ],
-      "evs": {
-        "spe": 120,
-        "spd": 36,
-        "def": 28,
-        "atk": 172,
-        "hp": 152
-      },
-      "heldItem": [
-        "mega_showdown:wellspring_mask"
-      ],
-      "aspects": [
-        "wellspring-mask"
-      ],
-      "gimmicks": {
-        "tera": "water"
-      },
-      "species": "ogerpon",
-      "gender": "FEMALE",
-      "level": 48,
-      "nature": "adamant",
-      "ability": "waterabsorb"
-    },
-    {
-      "moveset": [
-        "solarbeam",
-        "dragonpulse",
-        "energyball",
-        "detect"
+        "fakeout",
+        "grassyglide",
+        "woodhammer",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 80,
-        "spd": 20,
-        "spa": 156,
-        "def": 36,
-        "hp": 216
+        "hp": 252,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 4,
+        "spe": 0
       },
       "heldItem": [
-        "mega_showdown:sceptilite"
+        "miracle_seed"
       ],
-      "gimmicks": {
-        "tera": "grass"
-      },
-      "species": "sceptile",
+      "species": "rillaboom",
       "gender": "MALE",
       "level": 48,
-      "nature": "timid",
-      "ability": "lightningrod"
+      "nature": "adamant",
+      "ability": "grassysurge"
+    },
+    {
+      "moveset": [
+        "gigadrain",
+        "sludgebomb",
+        "earthpower",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 4,
+        "spe": 0
+      },
+      "heldItem": [
+        "mega_showdown:venusaurite"
+      ],
+      "species": "venusaur",
+      "gender": "MALE",
+      "level": 48,
+      "nature": "modest",
+      "ability": "thickfat"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

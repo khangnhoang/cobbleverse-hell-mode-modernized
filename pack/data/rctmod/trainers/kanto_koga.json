@@ -3,7 +3,7 @@
     "literal": "Koga"
   },
   "ai": {
-    "type": "rct",
+    "type": "rb",
     "data": {
       "moveBias": 1,
       "switchBias": 0.65,
@@ -13,173 +13,137 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 3
+    "maxItemUses": 2
   },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 3
+      "quantity": 2
     }
   ],
   "team": [
     {
       "moveset": [
-        "sunnyday",
-        "spore",
-        "ragepowder",
-        "sludgebomb"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 48,
-        "spd": 160,
-        "def": 156,
-        "hp": 144
-      },
-      "heldItem": [
-        "mental_herb"
-      ],
-      "gimmicks": {
-        "tera": "grass"
-      },
-      "species": "amoonguss",
-      "gender": "MALE",
-      "level": 55,
-      "nature": "bold",
-      "ability": "effectspore",
-      "shiny": true
-    },
-    {
-      "moveset": [
+        "tailwind",
         "taunt",
-        "willowisp",
-        "disable",
-        "shadowball"
+        "bravebird",
+        "crosspoison"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 156,
-        "spd": 24,
-        "spa": 4,
-        "def": 72,
-        "hp": 252
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "mega_showdown:gengarite"
+        "focus_sash"
       ],
-      "gimmicks": {
-        "tera": "ghost"
-      },
-      "species": "gengar",
+      "species": "crobat",
       "gender": "MALE",
       "level": 55,
-      "nature": "timid",
-      "ability": "shadowtag"
+      "nature": "jolly",
+      "ability": "infiltrator"
     },
     {
       "moveset": [
-        "toxic",
-        "venomdrench",
-        "dracometeor",
+        "sludgebomb",
+        "willowisp",
+        "clearsmog",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 128,
-        "spd": 36,
-        "spa": 180,
-        "def": 12,
-        "hp": 152
+        "hp": 252,
+        "atk": 0,
+        "def": 156,
+        "spa": 0,
+        "spd": 100,
+        "spe": 0
       },
       "heldItem": [
-        "life_orb"
+        "black_sludge"
       ],
-      "gimmicks": {
-        "tera": "poison"
-      },
-      "species": "naganadel",
-      "gender": "GENDERLESS",
+      "species": "weezing",
+      "gender": "MALE",
       "level": 55,
-      "nature": "modest",
-      "ability": "beastboost"
+      "nature": "bold",
+      "ability": "levitate"
     },
     {
       "moveset": [
-        "solarbeam",
-        "acidspray",
-        "sludgebomb",
-        "gigadrain"
+        "poisonjab",
+        "drillrun",
+        "uturn",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 36,
-        "spd": 60,
-        "spa": 204,
-        "def": 52,
-        "hp": 156
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "assault_vest"
+        "mega_showdown:beedrillite"
       ],
-      "gimmicks": {
-        "tera": "grass"
-      },
-      "species": "venusaur",
+      "species": "beedrill",
       "gender": "MALE",
       "level": 55,
-      "nature": "modest",
-      "ability": "chlorophyll"
+      "nature": "jolly",
+      "ability": "adaptability"
     },
     {
       "moveset": [
         "closecombat",
         "direclaw",
-        "coaching",
-        "acrobatics"
+        "acrobatics",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spd": 4,
-        "atk": 252
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
         "white_herb"
       ],
-      "gimmicks": {
-        "tera": "fighting"
-      },
       "species": "sneasler",
       "gender": "MALE",
       "level": 55,
@@ -190,35 +154,65 @@
       "moveset": [
         "barbbarrage",
         "aquatail",
-        "taunt",
+        "poisonjab",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 88,
-        "spd": 44,
-        "def": 12,
+        "hp": 252,
         "atk": 156,
-        "hp": 208
+        "def": 0,
+        "spa": 0,
+        "spd": 100,
+        "spe": 0
       },
       "heldItem": [
-        "black_sludge"
+        "sitrus_berry"
       ],
-      "gimmicks": {
-        "tera": "dark"
-      },
       "species": "overqwil",
       "gender": "MALE",
       "level": 55,
       "nature": "adamant",
       "ability": "intimidate"
+    },
+    {
+      "moveset": [
+        "spore",
+        "ragepowder",
+        "sludgebomb",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 0,
+        "def": 156,
+        "spa": 0,
+        "spd": 100,
+        "spe": 0
+      },
+      "heldItem": [
+        "rocky_helmet"
+      ],
+      "species": "amoonguss",
+      "gender": "MALE",
+      "level": 55,
+      "nature": "bold",
+      "ability": "regenerator"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

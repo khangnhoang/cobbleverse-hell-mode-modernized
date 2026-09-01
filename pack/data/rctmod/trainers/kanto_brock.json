@@ -3,7 +3,7 @@
     "literal": "Brock"
   },
   "ai": {
-    "type": "rct",
+    "type": "rb",
     "data": {
       "moveBias": 1,
       "switchBias": 0.65,
@@ -24,69 +24,62 @@
   "team": [
     {
       "moveset": [
+        "heavyslam",
+        "highhorsepower",
         "rockslide",
-        "extremespeed",
-        "flareblitz",
-        "closecombat"
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 64,
-        "spd": 48,
-        "def": 16,
-        "atk": 216,
-        "hp": 164
+        "hp": 252,
+        "atk": 156,
+        "def": 0,
+        "spa": 0,
+        "spd": 100,
+        "spe": 0
       },
       "heldItem": [
-        "choice_band"
+        "mega_showdown:steelixite"
       ],
-      "aspects": [
-        "hisuian"
-      ],
-      "gimmicks": {
-        "tera": "fire"
-      },
-      "species": "arcanine",
+      "species": "steelix",
       "gender": "MALE",
       "level": 30,
-      "nature": "jolly",
-      "ability": "intimidate"
+      "nature": "adamant",
+      "ability": "sandforce"
     },
     {
       "moveset": [
-        "highhorsepower",
-        "stoneedge",
-        "protect",
-        "knockoff"
+        "rockslide",
+        "crunch",
+        "breakingswipe",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 8,
-        "spd": 64,
-        "def": 84,
+        "hp": 252,
         "atk": 156,
-        "hp": 196
+        "def": 0,
+        "spa": 0,
+        "spd": 100,
+        "spe": 0
       },
       "heldItem": [
-        "mega_showdown:tyranitarite"
+        "smooth_rock"
       ],
-      "gimmicks": {
-        "tera": "rock"
-      },
       "species": "tyranitar",
       "gender": "MALE",
       "level": 30,
@@ -96,143 +89,134 @@
     },
     {
       "moveset": [
-        "psychocut",
-        "sacredsword",
-        "protect",
-        "mightycleave"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 104,
-        "spd": 40,
-        "def": 64,
-        "atk": 116,
-        "hp": 184
-      },
-      "heldItem": [
-        "mega_showdown:booster_energy"
-      ],
-      "gimmicks": {
-        "tera": "rock"
-      },
-      "species": "ironboulder",
-      "gender": "MALE",
-      "level": 30,
-      "nature": "adamant",
-      "ability": "quarkdrive"
-    },
-    {
-      "moveset": [
-        "earthpower",
-        "bodypress",
-        "flamethrower",
+        "gigadrain",
+        "ancientpower",
+        "recover",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 4,
-        "spd": 72,
-        "spa": 64,
-        "def": 116,
-        "hp": 252
+        "hp": 252,
+        "atk": 0,
+        "def": 128,
+        "spa": 0,
+        "spd": 128,
+        "spe": 0
       },
       "heldItem": [
-        "weakness_policy"
+        "leftovers"
       ],
-      "gimmicks": {
-        "tera": "rock"
+      "species": "cradily",
+      "gender": "FEMALE",
+      "level": 30,
+      "nature": "calm",
+      "ability": "stormdrain"
+    },
+    {
+      "moveset": [
+        "rockslide",
+        "flareblitz",
+        "willowisp",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
+      "evs": {
+        "hp": 164,
+        "atk": 216,
+        "def": 16,
+        "spa": 0,
+        "spd": 48,
+        "spe": 64
+      },
+      "heldItem": [
+        "sitrus_berry"
+      ],
+      "species": "arcanine",
+      "gender": "MALE",
+      "level": 30,
+      "nature": "jolly",
+      "ability": "intimidate",
+      "aspects": [
+        "hisuian"
+      ]
+    },
+    {
+      "moveset": [
+        "rockslide",
+        "tailwind",
+        "taunt",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
+      },
+      "heldItem": [
+        "focus_sash"
+      ],
+      "species": "aerodactyl",
+      "gender": "MALE",
+      "level": 30,
+      "nature": "jolly",
+      "ability": "unnerve"
+    },
+    {
+      "moveset": [
+        "flamethrower",
+        "bodypress",
+        "rockslide",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 0,
+        "def": 156,
+        "spa": 100,
+        "spd": 0,
+        "spe": 0
+      },
+      "heldItem": [
+        "passho_berry"
+      ],
       "species": "coalossal",
       "gender": "MALE",
       "level": 30,
       "nature": "bold",
       "ability": "steamengine"
-    },
-    {
-      "moveset": [
-        "followme",
-        "hornleech",
-        "ivycudgel",
-        "spikyshield"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 164,
-        "spd": 36,
-        "def": 68,
-        "atk": 116,
-        "hp": 124
-      },
-      "heldItem": [
-        "mega_showdown:cornerstone_mask"
-      ],
-      "aspects": [
-        "cornerstone-mask"
-      ],
-      "gimmicks": {
-        "tera": "rock"
-      },
-      "species": "ogerpon",
-      "gender": "FEMALE",
-      "level": 30,
-      "nature": "adamant",
-      "ability": "sturdy",
-      "shiny": true
-    },
-    {
-      "moveset": [
-        "irontail",
-        "stoneedge",
-        "thunderfang",
-        "protect"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 20,
-        "spd": 80,
-        "def": 56,
-        "atk": 104,
-        "hp": 248
-      },
-      "heldItem": [
-        "life_orb"
-      ],
-      "gimmicks": {
-        "tera": "steel"
-      },
-      "species": "steelix",
-      "gender": "MALE",
-      "level": 30,
-      "nature": "adamant",
-      "ability": "sheerforce"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

@@ -3,7 +3,7 @@
     "literal": "Bruno"
   },
   "ai": {
-    "type": "rct",
+    "type": "rb",
     "data": {
       "moveBias": 1,
       "switchBias": 0.65,
@@ -13,15 +13,47 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 4
+    "maxItemUses": 2
   },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 4
+      "quantity": 2
     }
   ],
   "team": [
+    {
+      "moveset": [
+        "dynamicpunch",
+        "stoneedge",
+        "knockoff",
+        "bulletpunch"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 4,
+        "spe": 0
+      },
+      "heldItem": [
+        "assault_vest"
+      ],
+      "species": "machamp",
+      "gender": "MALE",
+      "level": 100,
+      "nature": "adamant",
+      "ability": "noguard"
+    },
     {
       "moveset": [
         "drainpunch",
@@ -30,26 +62,24 @@
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 40,
-        "spd": 116,
-        "def": 76,
-        "atk": 120,
-        "hp": 156
+        "hp": 252,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 4,
+        "spe": 0
       },
       "heldItem": [
         "sitrus_berry"
       ],
-      "gimmicks": {
-        "tera": "fighting"
-      },
       "species": "annihilape",
       "gender": "MALE",
       "level": 100,
@@ -58,137 +88,97 @@
     },
     {
       "moveset": [
-        "closecombat",
-        "wildcharge",
-        "swordsdance",
-        "protect"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "atk": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 100,
-        "spd": 72,
-        "def": 92,
-        "atk": 100,
-        "hp": 144
-      },
-      "heldItem": [
-        "mega_showdown:booster_energy"
-      ],
-      "gimmicks": {
-        "tera": "fighting"
-      },
-      "species": "ironhands",
-      "gender": "MALE",
-      "level": 100,
-      "nature": "adamant",
-      "ability": "quarkdrive"
-    },
-    {
-      "moveset": [
         "wickedblow",
         "closecombat",
-        "uturn",
+        "suckerpunch",
         "detect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spd": 4,
-        "def": 4,
-        "atk": 152,
-        "hp": 96
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
         "black_glasses"
       ],
-      "aspects": [
-        "single_strike-style"
-      ],
-      "gimmicks": {
-        "tera": "fighting"
-      },
       "species": "urshifu",
       "gender": "MALE",
       "level": 100,
       "nature": "jolly",
-      "ability": "unseenfist"
+      "ability": "unseenfist",
+      "aspects": [
+        "single_strike-style"
+      ]
     },
     {
       "moveset": [
         "closecombat",
+        "drainpunch",
         "machpunch",
-        "knockoff",
-        "protect"
+        "knockoff"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 156,
-        "spd": 36,
-        "def": 36,
-        "atk": 84,
-        "hp": 196
+        "hp": 252,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 4,
+        "spe": 0
       },
       "heldItem": [
         "flame_orb"
       ],
-      "gimmicks": {
-        "tera": "fighting"
-      },
       "species": "conkeldurr",
       "gender": "MALE",
       "level": 100,
       "nature": "adamant",
-      "ability": "guts",
-      "shiny": true
+      "ability": "guts"
     },
     {
       "moveset": [
         "bodypress",
         "irondefense",
-        "snarl",
+        "heavyslam",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 112,
-        "spd": 84,
-        "spa": 16,
-        "def": 156,
-        "hp": 140
+        "hp": 252,
+        "atk": 0,
+        "def": 252,
+        "spa": 0,
+        "spd": 4,
+        "spe": 0
       },
       "heldItem": [
         "leftovers"
       ],
-      "gimmicks": {
-        "tera": "fighting"
-      },
       "species": "zamazenta",
       "gender": "GENDERLESS",
       "level": 100,
@@ -198,30 +188,29 @@
     {
       "moveset": [
         "aurasphere",
-        "darkpulse",
+        "flashcannon",
         "nastyplot",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 108,
-        "spd": 56,
-        "spa": 156,
-        "def": 72,
-        "hp": 116
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
         "mega_showdown:lucarionite"
       ],
-      "gimmicks": {
-        "tera": "fighting"
-      },
       "species": "lucario",
       "gender": "MALE",
       "level": 100,
