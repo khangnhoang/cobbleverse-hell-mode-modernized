@@ -3,7 +3,7 @@
     "literal": "Lt. Surge"
   },
   "ai": {
-    "type": "rct",
+    "type": "rb",
     "data": {
       "moveBias": 1,
       "switchBias": 0.65,
@@ -24,61 +24,62 @@
   "team": [
     {
       "moveset": [
-        "electrodrift",
-        "dracometeor",
-        "dazzlinggleam",
-        "voltswitch"
+        "fakeout",
+        "voltswitch",
+        "nuzzle",
+        "thunderbolt"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spd": 4,
-        "spa": 252
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "choice_specs"
+        "air_balloon"
       ],
-      "gimmicks": {
-        "tera": "electric"
-      },
-      "species": "miraidon",
-      "gender": "GENDERLESS",
+      "species": "raichu",
+      "gender": "MALE",
       "level": 42,
       "nature": "timid",
-      "ability": "hadronengine",
-      "shiny": true
+      "ability": "static"
     },
     {
       "moveset": [
         "tailwind",
         "airslash",
+        "electroweb",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 216,
-        "spa": 40,
-        "hp": 252
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "covert_cloak"
+        "focus_sash"
       ],
-      "gimmicks": {
-        "tera": "electric"
-      },
       "species": "kilowattrel",
       "gender": "MALE",
       "level": 42,
@@ -87,67 +88,30 @@
     },
     {
       "moveset": [
-        "psychicnoise",
-        "overdrive",
         "thunderbolt",
+        "flamethrower",
+        "voltswitch",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 136,
-        "spd": 36,
-        "spa": 220,
-        "def": 36,
-        "hp": 80
-      },
-      "heldItem": [
-        "throat_spray"
-      ],
-      "aspects": [
-        "low_key-form"
-      ],
-      "gimmicks": {
-        "tera": "electric"
-      },
-      "species": "toxtricity",
-      "gender": "MALE",
-      "level": 42,
-      "nature": "modest",
-      "ability": "punkrock"
-    },
-    {
-      "moveset": [
-        "thunderbolt",
-        "protect",
-        "voltswitch",
-        "roar"
-      ],
-      "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 124,
-        "spd": 28,
-        "spa": 156,
-        "def": 84,
-        "hp": 116
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
         "mega_showdown:manectite"
       ],
-      "gimmicks": {
-        "tera": "electric"
-      },
       "species": "manectric",
       "gender": "MALE",
       "level": 42,
@@ -156,74 +120,102 @@
     },
     {
       "moveset": [
-        "fakeout",
-        "closecombat",
-        "supercellslam",
-        "icepunch"
+        "thunderbolt",
+        "flashcannon",
+        "electroweb",
+        "bodypress"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 56,
-        "spd": 16,
-        "def": 64,
-        "atk": 156,
-        "hp": 216
+        "hp": 252,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 4,
+        "spe": 0
       },
       "heldItem": [
         "assault_vest"
       ],
-      "gimmicks": {
-        "tera": "fighting"
-      },
-      "species": "ironhands",
+      "species": "magnezone",
       "gender": "GENDERLESS",
       "level": 42,
-      "nature": "adamant",
-      "ability": "quarkdrive"
+      "nature": "modest",
+      "ability": "sturdy"
     },
     {
       "moveset": [
-        "psychicnoise",
-        "thunderbolt",
-        "surf",
-        "calmmind"
+        "wildcharge",
+        "icepunch",
+        "crosschop",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 108,
-        "spd": 48,
-        "spa": 104,
-        "def": 76,
-        "hp": 172
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "rocky_helmet"
+        "life_orb"
       ],
-      "aspects": [
-        "alolan"
-      ],
-      "gimmicks": {
-        "tera": "electric"
-      },
-      "species": "raichu",
+      "species": "electivire",
       "gender": "MALE",
       "level": 42,
-      "nature": "timid",
-      "ability": "surgesurfer"
+      "nature": "adamant",
+      "ability": "motordrive"
+    },
+    {
+      "moveset": [
+        "overdrive",
+        "sludgebomb",
+        "snarl",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 100,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 156
+      },
+      "heldItem": [
+        "throat_spray"
+      ],
+      "species": "toxtricity",
+      "gender": "MALE",
+      "level": 42,
+      "nature": "modest",
+      "ability": "punkrock",
+      "aspects": [
+        "low_key-form"
+      ]
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

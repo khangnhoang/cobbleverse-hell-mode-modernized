@@ -3,123 +3,115 @@
     "literal": "Giovanni"
   },
   "ai": {
-    "type": "rct",
+    "type": "rb",
     "data": {
       "moveBias": 1,
-      "switchBias": 0.7,
+      "switchBias": 0.65,
       "statMoveBias": 0.85,
       "itemBias": 0.85,
       "maxSelectMargin": 0.15
     }
   },
   "battleRules": {
-    "maxItemUses": 4
+    "maxItemUses": 2
   },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 4
+      "quantity": 2
     }
   ],
   "team": [
     {
       "moveset": [
-        "tailwind",
-        "dragoncheer",
-        "protect",
-        "uturn"
+        "earthpower",
+        "sludgebomb",
+        "icebeam",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 148,
-        "spd": 96,
-        "def": 64,
-        "atk": 4,
-        "hp": 196
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "yache_berry"
+        "life_orb"
       ],
-      "gimmicks": {
-        "tera": "ground"
-      },
-      "species": "flygon",
+      "species": "nidoking",
       "gender": "MALE",
       "level": 75,
-      "nature": "jolly",
-      "ability": "levitate"
-    },
-    {
-      "moveset": [
-        "protect",
-        "psystrike",
-        "fireblast",
-        "taunt"
-      ],
-      "ivs": {
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
-        "hp": 31
-      },
-      "evs": {
-        "spe": 20,
-        "spd": 100,
-        "spa": 124,
-        "def": 96,
-        "hp": 168
-      },
-      "heldItem": [
-        "mega_showdown:mewtwonite_y"
-      ],
-      "aspects": [
-        "mega_y"
-      ],
-      "gimmicks": {
-        "tera": "psychic"
-      },
-      "species": "mewtwo",
-      "gender": "GENDERLESS",
-      "level": 75,
       "nature": "modest",
-      "ability": "insomnia",
-      "shiny": true
+      "ability": "sheerforce"
     },
     {
       "moveset": [
-        "muddywater",
-        "protect",
-        "earthpower",
-        "icywind"
+        "highhorsepower",
+        "rockslide",
+        "heavyslam",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 84,
-        "spd": 68,
-        "spa": 156,
-        "def": 52,
-        "hp": 148
+        "hp": 252,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 4,
+        "spe": 0
       },
       "heldItem": [
-        "rindo_berry"
+        "weakness_policy"
       ],
-      "gimmicks": {
-        "tera": "water"
+      "species": "rhyperior",
+      "gender": "MALE",
+      "level": 75,
+      "nature": "adamant",
+      "ability": "solidrock"
+    },
+    {
+      "moveset": [
+        "earthpower",
+        "muddywater",
+        "recover",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
+      "evs": {
+        "hp": 252,
+        "atk": 0,
+        "def": 128,
+        "spa": 128,
+        "spd": 0,
+        "spe": 0
+      },
+      "heldItem": [
+        "leftovers"
+      ],
       "species": "gastrodon",
       "gender": "MALE",
       "level": 75,
@@ -128,37 +120,35 @@
     },
     {
       "moveset": [
-        "bodypress",
+        "tailwind",
+        "dragoncheer",
         "highhorsepower",
-        "protect",
-        "firefang"
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 20,
-        "spd": 96,
-        "def": 112,
-        "atk": 160,
-        "hp": 120
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "life_orb"
+        "yache_berry"
       ],
-      "gimmicks": {
-        "tera": "ground"
-      },
-      "species": "sandaconda",
+      "species": "flygon",
       "gender": "MALE",
       "level": 75,
-      "nature": "impish",
-      "ability": "sandspit"
+      "nature": "jolly",
+      "ability": "levitate"
     },
     {
       "moveset": [
@@ -168,69 +158,64 @@
         "vacuumwave"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 136,
-        "spa": 160,
-        "def": 80,
-        "hp": 132
+        "hp": 252,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 4,
+        "spe": 0
       },
       "heldItem": [
         "assault_vest"
       ],
-      "aspects": [
-        "bloodmoon"
-      ],
-      "gimmicks": {
-        "tera": "ground"
-      },
       "species": "ursaluna",
       "gender": "MALE",
       "level": 75,
       "nature": "modest",
-      "ability": "mindseye"
+      "ability": "mindseye",
+      "aspects": [
+        "bloodmoon"
+      ]
     },
     {
       "moveset": [
-        "thousandarrows",
-        "dragondance",
-        "protect",
-        "extremespeed"
+        "psystrike",
+        "fireblast",
+        "aurasphere",
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 56,
-        "spd": 96,
-        "def": 36,
-        "atk": 116,
-        "hp": 204
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "sitrus_berry"
+        "mega_showdown:mewtwonite_y"
       ],
-      "aspects": [
-        "complete-percent"
-      ],
-      "gimmicks": {
-        "tera": "dragon"
-      },
-      "species": "zygarde",
+      "species": "mewtwo",
       "gender": "GENDERLESS",
       "level": 75,
-      "nature": "adamant",
-      "ability": "powerconstruct"
+      "nature": "timid",
+      "ability": "insomnia"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

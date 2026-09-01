@@ -3,7 +3,7 @@
     "literal": "Lorelei"
   },
   "ai": {
-    "type": "rct",
+    "type": "rb",
     "data": {
       "moveBias": 1,
       "switchBias": 0.65,
@@ -13,12 +13,12 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 4
+    "maxItemUses": 2
   },
   "bag": [
     {
       "item": "cobblemon:full_restore",
-      "quantity": 4
+      "quantity": 2
     }
   ],
   "team": [
@@ -30,64 +30,59 @@
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 88,
-        "spd": 72,
-        "spa": 176,
-        "def": 80,
-        "hp": 92
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
         "light_clay"
       ],
-      "aspects": [
-        "alolan"
-      ],
-      "gimmicks": {
-        "tera": "ice"
-      },
       "species": "ninetales",
       "gender": "FEMALE",
       "level": 100,
       "nature": "timid",
       "ability": "snowwarning",
-      "shiny": true
+      "aspects": [
+        "alolan"
+      ]
     },
     {
       "moveset": [
-        "explosion",
+        "bodyslam",
+        "iciclecrash",
         "crunch",
-        "taunt",
-        "iciclecrash"
+        "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spd": 4,
-        "atk": 252
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
         "mega_showdown:glalitite"
       ],
-      "aspects": [
-        "mega"
-      ],
-      "gimmicks": {
-        "tera": "ice"
-      },
       "species": "glalie",
       "gender": "MALE",
       "level": 100,
@@ -96,59 +91,62 @@
     },
     {
       "moveset": [
-        "icebeam",
         "freezedry",
-        "chillingwater",
-        "ancientpower"
+        "hydropump",
+        "icebeam",
+        "chillingwater"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spd": 96,
-        "spa": 208,
-        "def": 92,
-        "hp": 76
+        "hp": 252,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 4,
+        "spe": 0
       },
       "heldItem": [
-        "choice_specs"
+        "assault_vest"
       ],
-      "gimmicks": {
-        "tera": "water"
-      },
       "species": "lapras",
       "gender": "FEMALE",
       "level": 100,
-      "nature": "quiet",
-      "ability": "shellarmor"
+      "nature": "modest",
+      "ability": "waterabsorb"
     },
     {
       "moveset": [
         "tailwind",
-        "airslash",
-        "ancientpower",
+        "blizzard",
+        "freezedry",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
+        "hp": 31,
+        "atk": 31,
         "def": 31,
-        "hp": 31
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spa": 188
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "heavy_duty_boots"
+        "charti_berry"
       ],
-      "gimmicks": {
-        "tera": "ice"
-      },
       "species": "articuno",
       "gender": "GENDERLESS",
       "level": 100,
@@ -157,69 +155,64 @@
     },
     {
       "moveset": [
-        "bodypress",
-        "rockslide",
-        "curse",
+        "highhorsepower",
+        "iciclecrash",
+        "iceshard",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 52,
-        "spd": 188,
-        "def": 92,
-        "atk": 60,
-        "hp": 116
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "chople_berry"
+        "life_orb"
       ],
-      "aspects": [
-        "hisuian"
-      ],
-      "gimmicks": {
-        "tera": "ice"
-      },
-      "species": "avalugg",
+      "species": "mamoswine",
       "gender": "MALE",
       "level": 100,
-      "nature": "impish",
-      "ability": "strongjaw"
+      "nature": "adamant",
+      "ability": "thickfat"
     },
     {
       "moveset": [
         "icespinner",
-        "taunt",
-        "psychicfangs",
+        "suckerpunch",
+        "sacredsword",
         "protect"
       ],
       "ivs": {
-        "spe": 31,
-        "spd": 31,
-        "spa": 31,
-        "def": 31,
+        "hp": 31,
         "atk": 31,
-        "hp": 31
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
       },
       "evs": {
-        "spe": 252,
-        "spd": 4,
-        "atk": 252
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
         "focus_sash"
       ],
-      "gimmicks": {
-        "tera": "dark"
-      },
       "species": "chienpao",
-      "gender": "MALE",
+      "gender": "GENDERLESS",
       "level": 100,
       "nature": "jolly",
       "ability": "swordofruin"
