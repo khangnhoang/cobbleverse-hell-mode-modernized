@@ -56,6 +56,27 @@ public final class LeadSelectionService {
             return Optional.empty();
         }
 
+        List<PlayerLeadTyping> playerLeads = PlayerLeadResolver.resolvePlayerLeads(player);
+        if (playerLeads.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return selectLead(trainerId, trainerTeam, playerLeads,
+                (slot, p) -> CobblemonLeadAdapter.toIdentity(p),
+                CobblemonLeadAdapter::toRosterMemberTyping);
+    }
+
+    static Optional<LeadSelectionResult> selectLead(
+            String trainerId,
+            Pokemon[] trainerTeam,
+            List<PlayerLeadTyping> playerLeads,
+            java.util.function.BiFunction<Integer, Pokemon, PokemonIdentity> identityFn,
+            java.util.function.BiFunction<Integer, Pokemon, RosterMemberTyping> typingFn
+    ) {
+        if (!isAvailable() || trainerId == null || trainerTeam == null || trainerTeam.length == 0 || playerLeads == null || playerLeads.isEmpty()) {
+            return Optional.empty();
+        }
+
         Optional<TrainerLeadConfig> optConfig = LeadSelectionConfig.getTrainerConfig(trainerId);
         if (optConfig.isEmpty()) {
             // Unconfigured trainer: native-path preservation with minimal interceptor overhead
@@ -82,12 +103,14 @@ public final class LeadSelectionService {
             // Semantic drift guard: verify expectedLeadMembers against actual PokemonIdentity
             List<ExpectedLeadMember> expected = attempt.expectedLeadMembers();
             if (expected != null && expected.size() == 2) {
-                PokemonIdentity actualA = CobblemonLeadAdapter.toIdentity(trainerTeam[slotA]);
-                PokemonIdentity actualB = CobblemonLeadAdapter.toIdentity(trainerTeam[slotB]);
+                PokemonIdentity actualA = identityFn.apply(slotA, trainerTeam[slotA]);
+                PokemonIdentity actualB = identityFn.apply(slotB, trainerTeam[slotB]);
 
                 if (!expected.get(0).matches(actualA) || !expected.get(1).matches(actualB)) {
                     LOGGER.warn("[HellMode-Lead] Trainer '{}' attempt '{}' failed semantic drift check. Expected: {}, Actual: [{}, {}]. Skipping attempt.",
-                            trainerId, attempt.id(), expected, actualA.species(), actualB.species());
+                            trainerId, attempt.id(), expected,
+                            actualA != null ? actualA.species() : null,
+                            actualB != null ? actualB.species() : null);
                     continue;
                 }
             }
@@ -100,17 +123,10 @@ public final class LeadSelectionService {
             return Optional.empty();
         }
 
-        // Effective player lead resolution: first two non-fainted Pokemon
-        List<PlayerLeadTyping> playerLeads = PlayerLeadResolver.resolvePlayerLeads(player);
-        if (playerLeads.isEmpty()) {
-            // Player has 0 conscious Pokemon: preserve native Cobblemon battle abort behavior
-            return Optional.empty();
-        }
-
         // Convert trainer team to domain typing representation
         List<RosterMemberTyping> npcRoster = new ArrayList<>(trainerTeam.length);
         for (int i = 0; i < trainerTeam.length; i++) {
-            npcRoster.add(CobblemonLeadAdapter.toRosterMemberTyping(i, trainerTeam[i]));
+            npcRoster.add(typingFn.apply(i, trainerTeam[i]));
         }
 
         // Invoke pure domain engine

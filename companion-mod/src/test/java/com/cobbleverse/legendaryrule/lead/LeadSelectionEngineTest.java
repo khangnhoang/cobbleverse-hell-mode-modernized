@@ -16,41 +16,8 @@ class LeadSelectionEngineTest {
 
     @BeforeAll
     static void setUp() {
-        Map<String, Map<String, Double>> matrix = new HashMap<>();
-
-        // Normal
-        matrix.put("normal", Map.of("ghost", 0.0, "rock", 0.5, "steel", 0.5));
-        // Fighting
-        matrix.put("fighting", Map.ofEntries(
-                Map.entry("normal", 2.0), Map.entry("rock", 2.0), Map.entry("steel", 2.0),
-                Map.entry("ice", 2.0), Map.entry("dark", 2.0), Map.entry("flying", 0.5),
-                Map.entry("poison", 0.5), Map.entry("bug", 0.5), Map.entry("psychic", 0.5),
-                Map.entry("fairy", 0.5), Map.entry("ghost", 0.0)
-        ));
-        // Ground
-        matrix.put("ground", Map.of("fire", 2.0, "electric", 2.0, "poison", 2.0, "rock", 2.0, "steel", 2.0,
-                "grass", 0.5, "bug", 0.5, "flying", 0.0));
-        // Psychic
-        matrix.put("psychic", Map.of("fighting", 2.0, "poison", 2.0,
-                "psychic", 0.5, "steel", 0.5, "dark", 0.0));
-        // Ghost
-        matrix.put("ghost", Map.of("psychic", 2.0, "ghost", 2.0, "dark", 0.5, "normal", 0.0));
-        // Dark
-        matrix.put("dark", Map.of("psychic", 2.0, "ghost", 2.0, "fighting", 0.5, "dark", 0.5, "fairy", 0.5));
-        // Steel
-        matrix.put("steel", Map.of("ice", 2.0, "rock", 2.0, "fairy", 2.0,
-                "fire", 0.5, "water", 0.5, "electric", 0.5, "steel", 0.5));
-        // Fairy
-        matrix.put("fairy", Map.of("fighting", 2.0, "dragon", 2.0, "dark", 2.0,
-                "fire", 0.5, "poison", 0.5, "steel", 0.5));
-        // Rock
-        matrix.put("rock", Map.of("fire", 2.0, "ice", 2.0, "flying", 2.0, "bug", 2.0,
-                "fighting", 0.5, "ground", 0.5, "steel", 0.5));
-        // Ice
-        matrix.put("ice", Map.of("grass", 2.0, "ground", 2.0, "flying", 2.0, "dragon", 2.0,
-                "fire", 0.5, "water", 0.5, "ice", 0.5, "steel", 0.5));
-
-        TypeChartData data = new TypeChartData(matrix);
+        TypeChartData data = TypeChartResourceLoader.load().orElseThrow(
+                () -> new IllegalStateException("Failed to load canonical Gen 9 type chart for tests"));
         scorer = new TypeMatchupScorer(data);
         engine = new LeadSelectionEngine(scorer);
     }
@@ -116,15 +83,21 @@ class LeadSelectionEngineTest {
 
     @Test
     void testDeterministicTieBreakingTotalScoreWins() {
-        // Preset A has higher total score than Preset B
+        // Preset A (Indeedee + Alakazam) vs Preset B (Farigiraf + Hatterene) against pure Fighting lead
         LeadAttempt attA = new LeadAttempt("attA", new int[]{0, 5}, 0, List.of(), "");
         LeadAttempt attB = new LeadAttempt("attB", new int[]{1, 2}, 0, List.of(), "");
 
         List<PlayerLeadTyping> player = List.of(new PlayerLeadTyping("machamp", List.of("fighting")));
+        // Declared with attA first:
         LeadSelectionResult result = engine.select(List.of(attA, attB), player, createSabrinaRoster());
 
-        // Total score difference dictates winner
-        assertNotNull(result.selectedAttempt());
+        // Prove attB is selected because its totalScore (6) > attA's totalScore (5)
+        assertEquals("attB", result.selectedAttempt().id());
+
+        AttemptScore scoreA = result.evaluatedScores().stream().filter(s -> s.attemptId().equals("attA")).findFirst().orElseThrow();
+        AttemptScore scoreB = result.evaluatedScores().stream().filter(s -> s.attemptId().equals("attB")).findFirst().orElseThrow();
+        assertEquals(5, scoreA.totalScore());
+        assertEquals(6, scoreB.totalScore());
     }
 
     @Test

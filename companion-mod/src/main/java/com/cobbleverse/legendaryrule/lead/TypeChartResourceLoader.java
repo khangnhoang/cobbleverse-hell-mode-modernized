@@ -20,6 +20,10 @@ public final class TypeChartResourceLoader {
 
     private TypeChartResourceLoader() {}
 
+    public static Optional<TypeChartData> load() {
+        return loadDefault();
+    }
+
     public static Optional<TypeChartData> loadDefault() {
         return loadFromClasspath(DEFAULT_RESOURCE_PATH);
     }
@@ -35,6 +39,8 @@ public final class TypeChartResourceLoader {
         return loadFromStream(in);
     }
 
+    private static final java.util.Set<Double> VALID_MULTIPLIERS = java.util.Set.of(0.0, 0.25, 0.5, 1.0, 2.0, 4.0);
+
     public static Optional<TypeChartData> loadFromStream(InputStream stream) {
         if (stream == null) {
             return Optional.empty();
@@ -45,28 +51,54 @@ public final class TypeChartResourceLoader {
                 return Optional.empty();
             }
             JsonObject rootObj = root.getAsJsonObject();
+
+            // Validate attack types: must match CANONICAL_TYPES exactly
+            java.util.Set<String> attackTypes = rootObj.keySet().stream()
+                    .map(s -> s.toLowerCase(java.util.Locale.ROOT))
+                    .collect(java.util.stream.Collectors.toSet());
+            if (!attackTypes.equals(TypeChartData.CANONICAL_TYPES)) {
+                return Optional.empty();
+            }
+
             Map<String, Map<String, Double>> table = new HashMap<>();
 
-            for (Map.Entry<String, JsonElement> attEntry : rootObj.entrySet()) {
-                String att = attEntry.getKey().toLowerCase();
-                if (!attEntry.getValue().isJsonObject()) {
-                    continue;
+            for (String att : TypeChartData.CANONICAL_TYPES) {
+                JsonElement defElem = rootObj.get(att);
+                if (defElem == null || !defElem.isJsonObject()) {
+                    return Optional.empty();
                 }
-                JsonObject defObj = attEntry.getValue().getAsJsonObject();
+                JsonObject defObj = defElem.getAsJsonObject();
+
+                // Validate defender types: must match CANONICAL_TYPES exactly
+                java.util.Set<String> defenderTypes = defObj.keySet().stream()
+                        .map(s -> s.toLowerCase(java.util.Locale.ROOT))
+                        .collect(java.util.stream.Collectors.toSet());
+                if (!defenderTypes.equals(TypeChartData.CANONICAL_TYPES)) {
+                    return Optional.empty();
+                }
+
                 Map<String, Double> inner = new HashMap<>();
-                for (Map.Entry<String, JsonElement> defEntry : defObj.entrySet()) {
-                    String def = defEntry.getKey().toLowerCase();
-                    try {
-                        double mult = defEntry.getValue().getAsDouble();
-                        inner.put(def, mult);
-                    } catch (Exception ignored) {}
+                for (String def : TypeChartData.CANONICAL_TYPES) {
+                    JsonElement valElem = defObj.get(def);
+                    if (valElem == null || !valElem.isJsonPrimitive() || !valElem.getAsJsonPrimitive().isNumber()) {
+                        return Optional.empty();
+                    }
+                    double mult = valElem.getAsDouble();
+                    boolean isValidMult = false;
+                    for (double valid : VALID_MULTIPLIERS) {
+                        if (Math.abs(valid - mult) < 1e-6) {
+                            isValidMult = true;
+                            break;
+                        }
+                    }
+                    if (!isValidMult) {
+                        return Optional.empty();
+                    }
+                    inner.put(def, mult);
                 }
                 table.put(att, inner);
             }
 
-            if (table.isEmpty()) {
-                return Optional.empty();
-            }
             return Optional.of(new TypeChartData(table));
         } catch (Exception e) {
             return Optional.empty();

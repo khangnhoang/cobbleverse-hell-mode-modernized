@@ -41,4 +41,27 @@ public record LeadAttempt(
     public LeadAttempt(String id, int[] leadSlots, int baseWeight, List<ExpectedLeadMember> expectedLeadMembers) {
         this(id, leadSlots, baseWeight, expectedLeadMembers, "");
     }
+
+    @Override
+    public int[] leadSlots() {
+        return leadSlots.clone();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LeadAttempt that)) return false;
+        return baseWeight == that.baseWeight
+                && Arrays.equals(leadSlots, that.leadSlots)
+                && Objects.equals(id, that.id)
+                && Objects.equals(expectedLeadMembers, that.expectedLeadMembers)
+                && Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, baseWeight, expectedLeadMembers, description);
+        result = 31 * result + Arrays.hashCode(leadSlots);
+        return result;
+    }
 }

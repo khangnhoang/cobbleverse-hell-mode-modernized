@@ -1,6 +1,7 @@
 package com.cobbleverse.legendaryrule.mixin;
 
 import com.cobblemon.mod.common.pokemon.Pokemon;
+import com.cobbleverse.legendaryrule.lead.DynamicLeadFallbackBoundary;
 import com.cobbleverse.legendaryrule.lead.LeadSelectionResult;
 import com.cobbleverse.legendaryrule.lead.LeadSelectionService;
 import com.cobbleverse.legendaryrule.lead.RosterOrderer;
@@ -33,17 +34,19 @@ public abstract class RCTModMakeBattleMixin {
             return original;
         }
 
-        Optional<LeadSelectionResult> optResult = LeadSelectionService.selectLead(trainerId, team, player);
-        if (optResult.isEmpty()) {
-            return original;
-        }
+        return DynamicLeadFallbackBoundary.execute(original, trainerId, () -> {
+            Optional<LeadSelectionResult> optResult = LeadSelectionService.selectLead(trainerId, team, player);
+            if (optResult.isEmpty()) {
+                return original;
+            }
 
-        LeadSelectionResult result = optResult.get();
-        // Clone TrainerNPC to ensure zero global mutation across battles and players
-        TrainerNPC perBattleNPC = new TrainerNPC(original);
-        Pokemon[] reordered = RosterOrderer.reorder(perBattleNPC.getTeam(), result.selectedAttempt().leadSlots(), Pokemon[]::new);
-        System.arraycopy(reordered, 0, perBattleNPC.getTeam(), 0, reordered.length);
+            LeadSelectionResult result = optResult.get();
+            // Clone TrainerNPC to ensure zero global mutation across battles and players
+            TrainerNPC perBattleNPC = new TrainerNPC(original);
+            Pokemon[] reordered = RosterOrderer.reorder(perBattleNPC.getTeam(), result.selectedAttempt().leadSlots(), Pokemon[]::new);
+            System.arraycopy(reordered, 0, perBattleNPC.getTeam(), 0, reordered.length);
 
-        return perBattleNPC;
+            return perBattleNPC;
+        });
     }
 }

@@ -4,9 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.fabricmc.loader.api.FabricLoader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.Reader;
 import java.nio.file.Files;
@@ -20,16 +17,18 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Runtime-independent configuration loader and structural validator.
- * Relies on standard Java and Gson (with runtime-safe fallback for FabricLoader).
+ * Runtime-independent configuration loader and strict structural validator.
+ * Relies exclusively on standard Java and Gson (no Fabric, Minecraft, or logging dependencies).
  */
 public final class LeadSelectionConfig {
-    private static final Logger LOGGER = LoggerFactory.getLogger("rct_legendary_rule");
     public static final String CONFIG_FILENAME = "cobbleverse-hell-mode-leads.json";
+
+    public record ConfigLoadResult(boolean success, int loadedTrainersCount, String errorMessage) {}
 
     private static volatile boolean enabled = true;
     private static volatile Map<String, TrainerLeadConfig> trainerConfigs = Collections.emptyMap();
-    private static Path configPath = null;
+
+    private LeadSelectionConfig() {}
 
     public static boolean isEnabled() {
         return enabled;
@@ -47,54 +46,38 @@ public final class LeadSelectionConfig {
         return Optional.ofNullable(config);
     }
 
-    public static Path getConfigPath() {
-        if (configPath == null) {
-            try {
-                configPath = FabricLoader.getInstance().getConfigDir().resolve(CONFIG_FILENAME);
-            } catch (Throwable t) {
-                // Fallback for tests running outside Fabric Loader
-                configPath = Path.of("config", CONFIG_FILENAME);
-            }
-        }
-        return configPath;
-    }
-
-    public static void setConfigPath(Path path) {
-        configPath = path;
-    }
-
-    public static synchronized void init() {
-        load(getConfigPath());
-    }
-
-    public static synchronized void load(Path path) {
+    public static synchronized ConfigLoadResult load(Path path) {
         if (path == null) {
             enabled = true;
             trainerConfigs = Collections.emptyMap();
-            return;
+            return new ConfigLoadResult(true, 0, "Null path provided");
         }
 
         if (!Files.exists(path)) {
-            LOGGER.info("Lead selection config file {} not found; dynamic lead presets inactive.", path);
             enabled = true;
             trainerConfigs = Collections.emptyMap();
-            return;
+            return new ConfigLoadResult(true, 0, "Config file not found");
         }
 
         try (Reader reader = Files.newBufferedReader(path)) {
             JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
             loadFromJson(root);
-            LOGGER.info("Loaded dynamic lead presets for {} trainers from {}", trainerConfigs.size(), path);
+            return new ConfigLoadResult(true, trainerConfigs.size(), null);
         } catch (Exception e) {
-            LOGGER.error("Failed to load lead selection config from {}: {}. Falling back to native ordering.", path, e.getMessage());
             enabled = false;
             trainerConfigs = Collections.emptyMap();
+            return new ConfigLoadResult(false, 0, e.getMessage());
         }
     }
 
     public static synchronized void loadFromJson(JsonObject root) {
         if (root.has("enabled")) {
-            enabled = root.get("enabled").getAsBoolean();
+            JsonElement enElem = root.get("enabled");
+            if (enElem.isJsonPrimitive() && enElem.getAsJsonPrimitive().isBoolean()) {
+                enabled = enElem.getAsBoolean();
+            } else {
+                enabled = true;
+            }
         } else {
             enabled = true;
         }
@@ -123,8 +106,8 @@ public final class LeadSelectionConfig {
                     try {
                         LeadAttempt attempt = parseAttempt(attObj);
                         validAttempts.add(attempt);
-                    } catch (Exception e) {
-                        LOGGER.warn("Skipping structurally invalid lead attempt in trainer '{}': {}", trainerId, e.getMessage());
+                    } catch (Exception ignored) {
+                        // Per-attempt isolation: skip malformed attempt, preserve valid siblings
                     }
                 }
 
@@ -136,11 +119,33 @@ public final class LeadSelectionConfig {
         trainerConfigs = Collections.unmodifiableMap(newConfigs);
     }
 
+    private static int parseExactInt(JsonElement elem, String fieldName) {
+        if (elem == null || !elem.isJsonPrimitive() || !elem.getAsJsonPrimitive().isNumber()) {
+            throw new IllegalArgumentException(fieldName + " must be a numeric integer, got: " + elem);
+        }
+        String raw = elem.getAsString();
+        if (raw.contains(".") || raw.contains("e") || raw.contains("E")) {
+            throw new IllegalArgumentException(fieldName + " must not contain fractional or floating-point components, got: " + raw);
+        }
+        try {
+            return elem.getAsBigDecimal().intValueExact();
+        } catch (ArithmeticException e) {
+            throw new IllegalArgumentException(fieldName + " must be an exact integer, got: " + raw);
+        }
+    }
+
+    private static String parseNonBlankString(JsonElement elem, String fieldName) {
+        if (elem == null || !elem.isJsonPrimitive() || !elem.getAsJsonPrimitive().isString() || elem.getAsString().isBlank()) {
+            throw new IllegalArgumentException(fieldName + " must be a non-blank string, got: " + elem);
+        }
+        return elem.getAsString().trim();
+    }
+
     private static LeadAttempt parseAttempt(JsonObject obj) {
-        if (!obj.has("id") || obj.get("id").getAsString().isBlank()) {
+        if (!obj.has("id")) {
             throw new IllegalArgumentException("Attempt missing required 'id'");
         }
-        String id = obj.get("id").getAsString().trim();
+        String id = parseNonBlankString(obj.get("id"), "Attempt id");
 
         if (!obj.has("leadSlots") || !obj.get("leadSlots").isJsonArray()) {
             throw new IllegalArgumentException("Attempt '" + id + "' missing required 'leadSlots' array");
@@ -150,8 +155,8 @@ public final class LeadSelectionConfig {
             throw new IllegalArgumentException("Attempt '" + id + "' leadSlots must contain exactly 2 indices, got: " + slotsArr.size());
         }
 
-        int slot0 = slotsArr.get(0).getAsInt();
-        int slot1 = slotsArr.get(1).getAsInt();
+        int slot0 = parseExactInt(slotsArr.get(0), "Attempt '" + id + "' leadSlots[0]");
+        int slot1 = parseExactInt(slotsArr.get(1), "Attempt '" + id + "' leadSlots[1]");
         if (slot0 < 0 || slot1 < 0) {
             throw new IllegalArgumentException("Attempt '" + id + "' leadSlots indices must be >= 0, got: [" + slot0 + ", " + slot1 + "]");
         }
@@ -160,8 +165,8 @@ public final class LeadSelectionConfig {
         }
 
         int baseWeight = 0;
-        if (obj.has("baseWeight")) {
-            baseWeight = obj.get("baseWeight").getAsInt();
+        if (obj.has("baseWeight") && !obj.get("baseWeight").isJsonNull()) {
+            baseWeight = parseExactInt(obj.get("baseWeight"), "Attempt '" + id + "' baseWeight");
             if (baseWeight < -2 || baseWeight > 2) {
                 throw new IllegalArgumentException("Attempt '" + id + "' baseWeight must be between -2 and +2, got: " + baseWeight);
             }
@@ -181,27 +186,35 @@ public final class LeadSelectionConfig {
                     throw new IllegalArgumentException("ExpectedLeadMember in '" + id + "' must be a JSON object");
                 }
                 JsonObject expObj = expElem.getAsJsonObject();
-                if (!expObj.has("species") || expObj.get("species").getAsString().isBlank()) {
+                if (!expObj.has("species")) {
                     throw new IllegalArgumentException("ExpectedLeadMember in '" + id + "' missing required 'species'");
                 }
-                String species = expObj.get("species").getAsString().trim().toLowerCase(Locale.ROOT);
-                String form = expObj.has("form") && !expObj.get("form").isJsonNull()
-                        ? expObj.get("form").getAsString().trim().toLowerCase(Locale.ROOT)
-                        : null;
+                String species = parseNonBlankString(expObj.get("species"), "ExpectedLeadMember species in '" + id + "'").toLowerCase(Locale.ROOT);
+                String form = null;
+                if (expObj.has("form") && !expObj.get("form").isJsonNull()) {
+                    form = parseNonBlankString(expObj.get("form"), "ExpectedLeadMember form in '" + id + "'").toLowerCase(Locale.ROOT);
+                }
 
                 List<String> aspects = new ArrayList<>();
-                if (expObj.has("requiredAspects") && expObj.get("requiredAspects").isJsonArray()) {
+                if (expObj.has("requiredAspects") && !expObj.get("requiredAspects").isJsonNull()) {
+                    if (!expObj.get("requiredAspects").isJsonArray()) {
+                        throw new IllegalArgumentException("ExpectedLeadMember in '" + id + "' requiredAspects must be an array");
+                    }
                     for (JsonElement aspElem : expObj.getAsJsonArray("requiredAspects")) {
-                        if (aspElem.isJsonPrimitive() && !aspElem.getAsString().isBlank()) {
-                            aspects.add(aspElem.getAsString().trim().toLowerCase(Locale.ROOT));
-                        }
+                        String aspect = parseNonBlankString(aspElem, "ExpectedLeadMember aspect in '" + id + "'").toLowerCase(Locale.ROOT);
+                        aspects.add(aspect);
                     }
                 }
                 expectedMembers.add(new ExpectedLeadMember(species, form, aspects));
             }
         }
 
-        String description = obj.has("description") ? obj.get("description").getAsString() : "";
+        String description = "";
+        if (obj.has("description") && !obj.get("description").isJsonNull()) {
+            if (obj.get("description").isJsonPrimitive() && obj.get("description").getAsJsonPrimitive().isString()) {
+                description = obj.get("description").getAsString().trim();
+            }
+        }
         return new LeadAttempt(id, new int[]{slot0, slot1}, baseWeight, expectedMembers, description);
     }
 }

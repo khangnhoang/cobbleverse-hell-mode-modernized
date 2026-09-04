@@ -29,17 +29,26 @@ public final class TypeChartData {
         this.table = Collections.unmodifiableMap(clean);
     }
 
+    public static final java.util.Set<String> CANONICAL_TYPES = java.util.Set.of(
+            "normal", "fire", "water", "grass", "electric", "ice",
+            "fighting", "poison", "ground", "flying", "psychic", "bug",
+            "rock", "ghost", "dragon", "dark", "steel", "fairy"
+    );
+
     public double getMultiplier(String attackType, String defenseType) {
         if (attackType == null || defenseType == null) {
-            return 1.0;
+            throw new IllegalArgumentException("Type arguments must not be null: attack=" + attackType + ", defense=" + defenseType);
         }
         String att = attackType.toLowerCase(Locale.ROOT);
         String def = defenseType.toLowerCase(Locale.ROOT);
         Map<String, Double> inner = table.get(att);
         if (inner == null) {
-            return 1.0;
+            throw new IllegalArgumentException("Unknown attack type in type chart: " + att);
         }
         Double mult = inner.get(def);
-        return mult != null ? mult : 1.0;
+        if (mult == null) {
+            throw new IllegalArgumentException("Missing canonical type matchup pair: (" + att + " -> " + def + ")");
+        }
+        return mult;
     }
 }

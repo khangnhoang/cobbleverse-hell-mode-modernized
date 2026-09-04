@@ -15,39 +15,8 @@ class TypeMatchupScorerTest {
 
     @BeforeAll
     static void setUp() {
-        Map<String, Map<String, Double>> matrix = new HashMap<>();
-
-        // Setup test type chart subset
-        // Normal
-        matrix.put("normal", Map.of("ghost", 0.0, "rock", 0.5, "steel", 0.5));
-        // Fighting
-        matrix.put("fighting", Map.ofEntries(
-                Map.entry("normal", 2.0), Map.entry("rock", 2.0), Map.entry("steel", 2.0),
-                Map.entry("ice", 2.0), Map.entry("dark", 2.0), Map.entry("flying", 0.5),
-                Map.entry("poison", 0.5), Map.entry("bug", 0.5), Map.entry("psychic", 0.5),
-                Map.entry("fairy", 0.5), Map.entry("ghost", 0.0)
-        ));
-        // Flying
-        matrix.put("flying", Map.of("grass", 2.0, "fighting", 2.0, "bug", 2.0,
-                "electric", 0.5, "rock", 0.5, "steel", 0.5));
-        // Ground
-        matrix.put("ground", Map.of("fire", 2.0, "electric", 2.0, "poison", 2.0, "rock", 2.0, "steel", 2.0,
-                "grass", 0.5, "bug", 0.5, "flying", 0.0));
-        // Psychic
-        matrix.put("psychic", Map.of("fighting", 2.0, "poison", 2.0,
-                "psychic", 0.5, "steel", 0.5, "dark", 0.0));
-        // Ghost
-        matrix.put("ghost", Map.of("psychic", 2.0, "ghost", 2.0, "dark", 0.5, "normal", 0.0));
-        // Dark
-        matrix.put("dark", Map.of("psychic", 2.0, "ghost", 2.0, "fighting", 0.5, "dark", 0.5, "fairy", 0.5));
-        // Steel
-        matrix.put("steel", Map.of("ice", 2.0, "rock", 2.0, "fairy", 2.0,
-                "fire", 0.5, "water", 0.5, "electric", 0.5, "steel", 0.5));
-        // Fairy
-        matrix.put("fairy", Map.of("fighting", 2.0, "dragon", 2.0, "dark", 2.0,
-                "fire", 0.5, "poison", 0.5, "steel", 0.5));
-
-        TypeChartData data = new TypeChartData(matrix);
+        TypeChartData data = TypeChartResourceLoader.load().orElseThrow(
+                () -> new IllegalStateException("Failed to load canonical Gen 9 type chart for tests"));
         scorer = new TypeMatchupScorer(data);
     }
 
@@ -69,6 +38,17 @@ class TypeMatchupScorerTest {
         assertEquals(1, scorer.mapDefensiveScore(0.5));
         assertEquals(2, scorer.mapDefensiveScore(0.25));
         assertEquals(4, scorer.mapDefensiveScore(0.0));
+    }
+
+    @Test
+    void testUnsupportedMultipliersRejected() {
+        double[] invalidValues = {3.2, 1.7, 0.7, 1.5, -1.0, 5.0, 0.1};
+        for (double inv : invalidValues) {
+            assertThrows(IllegalArgumentException.class, () -> scorer.mapOffensiveScore(inv),
+                    "Offensive mapping must throw for unsupported multiplier: " + inv);
+            assertThrows(IllegalArgumentException.class, () -> scorer.mapDefensiveScore(inv),
+                    "Defensive mapping must throw for unsupported multiplier: " + inv);
+        }
     }
 
     @Test

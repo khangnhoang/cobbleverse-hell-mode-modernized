@@ -183,7 +183,8 @@ class LeadSelectionConfigTest {
     @Test
     void testLoadFromNonExistentFileGracefullyDefaults(@TempDir Path tempDir) {
         Path missing = tempDir.resolve("non_existent.json");
-        LeadSelectionConfig.load(missing);
+        LeadSelectionConfig.ConfigLoadResult res = LeadSelectionConfig.load(missing);
+        assertTrue(res.success());
         assertTrue(LeadSelectionConfig.isEnabled());
         assertTrue(LeadSelectionConfig.getTrainerConfig("any").isEmpty());
     }
@@ -193,9 +194,115 @@ class LeadSelectionConfigTest {
         Path badFile = tempDir.resolve("bad.json");
         Files.writeString(badFile, "{ not valid json ]");
 
-        LeadSelectionConfig.load(badFile);
+        LeadSelectionConfig.ConfigLoadResult res = LeadSelectionConfig.load(badFile);
+        assertFalse(res.success());
         assertFalse(LeadSelectionConfig.isEnabled(), "Malformed JSON should disable config to prevent errors");
         assertTrue(LeadSelectionConfig.getTrainerConfig("any").isEmpty());
+    }
+
+    @Test
+    void testStrictSchemaParsingRegressions() {
+        String json = """
+        {
+          "trainers": {
+            "strict_test": {
+              "attempts": [
+                {
+                  "id": "valid_sibling",
+                  "leadSlots": [0, 1],
+                  "baseWeight": 1,
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "form": "f", "requiredAspects": ["female"] },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": "fractional_slots",
+                  "leadSlots": [0.0, 1.7]
+                },
+                {
+                  "id": "fractional_weight",
+                  "leadSlots": [0, 1],
+                  "baseWeight": 1.5
+                },
+                {
+                  "id": "string_weight",
+                  "leadSlots": [0, 1],
+                  "baseWeight": "2"
+                },
+                {
+                  "id": "string_slots",
+                  "leadSlots": ["0", 1]
+                },
+                {
+                  "id": "malformed_aspects_type",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "requiredAspects": "not-an-array" },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": "malformed_aspects_numeric_entry",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "requiredAspects": [123] },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": "malformed_aspects_blank_entry",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "requiredAspects": ["   "] },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": 123,
+                  "leadSlots": [0, 1]
+                },
+                {
+                  "id": "   ",
+                  "leadSlots": [0, 1]
+                },
+                {
+                  "id": "malformed_species_boolean",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": true },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": "blank_species",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "   " },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": "malformed_form_number",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "form": 42 },
+                    { "species": "alakazam" }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+        """;
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+        LeadSelectionConfig.loadFromJson(root);
+
+        Optional<TrainerLeadConfig> opt = LeadSelectionConfig.getTrainerConfig("strict_test");
+        assertTrue(opt.isPresent(), "Trainer must be registered because valid_sibling is valid");
+        List<LeadAttempt> attempts = opt.get().attempts();
+        assertEquals(1, attempts.size(), "Only the valid_sibling attempt should have survived strict parsing");
+        assertEquals("valid_sibling", attempts.get(0).id());
     }
 
     @Test

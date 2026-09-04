@@ -26,21 +26,23 @@ public final class TypeMatchupScorer {
     }
 
     public int mapOffensiveScore(double multiplier) {
-        if (multiplier >= 3.9) return 4;
-        if (multiplier >= 1.9) return 2;
-        if (multiplier >= 0.9) return 0;
-        if (multiplier >= 0.49) return -1;
-        if (multiplier > 0.01) return -2;
-        return -4;
+        if (Math.abs(multiplier - 4.0) < 1e-6) return 4;
+        if (Math.abs(multiplier - 2.0) < 1e-6) return 2;
+        if (Math.abs(multiplier - 1.0) < 1e-6) return 0;
+        if (Math.abs(multiplier - 0.5) < 1e-6) return -1;
+        if (Math.abs(multiplier - 0.25) < 1e-6) return -2;
+        if (Math.abs(multiplier - 0.0) < 1e-6) return -4;
+        throw new IllegalArgumentException("Unsupported offensive type multiplier: " + multiplier);
     }
 
     public int mapDefensiveScore(double incomingMultiplier) {
-        if (incomingMultiplier >= 3.9) return -4;
-        if (incomingMultiplier >= 1.9) return -2;
-        if (incomingMultiplier >= 0.9) return 0;
-        if (incomingMultiplier >= 0.49) return 1;
-        if (incomingMultiplier > 0.01) return 2;
-        return 4;
+        if (Math.abs(incomingMultiplier - 4.0) < 1e-6) return -4;
+        if (Math.abs(incomingMultiplier - 2.0) < 1e-6) return -2;
+        if (Math.abs(incomingMultiplier - 1.0) < 1e-6) return 0;
+        if (Math.abs(incomingMultiplier - 0.5) < 1e-6) return 1;
+        if (Math.abs(incomingMultiplier - 0.25) < 1e-6) return 2;
+        if (Math.abs(incomingMultiplier - 0.0) < 1e-6) return 4;
+        throw new IllegalArgumentException("Unsupported defensive type multiplier: " + incomingMultiplier);
     }
 
     public int scoreNpcVsPlayer(List<String> npcStabTypes, List<String> playerDefenderTypes) {

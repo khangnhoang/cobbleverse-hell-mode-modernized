@@ -125,4 +125,12 @@ class ExpectedLeadMemberTest {
         // 3 -> rejected
         assertThrows(IllegalArgumentException.class, () -> new LeadAttempt("att", new int[]{0, 1}, 0, List.of(m1, m2, m3)));
     }
+
+    @Test
+    void testLeadAttemptImmutabilityThroughAccessor() {
+        LeadAttempt attempt = new LeadAttempt("immutability_test", new int[]{0, 5}, 1, List.of());
+        int[] leaked = attempt.leadSlots();
+        leaked[0] = 999;
+        assertEquals(0, attempt.leadSlots()[0], "Mutating returned leadSlots array must not modify internal state");
+    }
 }
