@@ -1,0 +1,59 @@
+{
+  "enabled": true,
+  "trainers": {
+    "kanto_sabrina": {
+      "attempts": [
+        {
+          "id": "psychic_terrain_blitz",
+          "leadSlots": [0, 5],
+          "expectedLeadMembers": [
+            {
+              "species": "indeedee",
+              "form": "f",
+              "requiredAspects": [
+                "female"
+              ]
+            },
+            {
+              "species": "alakazam"
+            }
+          ],
+          "baseWeight": 1,
+          "description": "Psychic Surge + Follow Me with fast Mega Alakazam Expanding Force"
+        },
+        {
+          "id": "anti_dark_priority_block",
+          "leadSlots": [1, 2],
+          "expectedLeadMembers": [
+            {
+              "species": "farigiraf"
+            },
+            {
+              "species": "hatterene"
+            }
+          ],
+          "baseWeight": 0,
+          "description": "Armor Tail blocks priority moves; Hatterene Fairy typing counters Dark"
+        },
+        {
+          "id": "heavy_steel_offense",
+          "leadSlots": [0, 3],
+          "expectedLeadMembers": [
+            {
+              "species": "indeedee",
+              "form": "f",
+              "requiredAspects": [
+                "female"
+              ]
+            },
+            {
+              "species": "metagross"
+            }
+          ],
+          "baseWeight": -1,
+          "description": "Redirection + Assault Vest Metagross bulky physical coverage"
+        }
+      ]
+    }
+  }
+}

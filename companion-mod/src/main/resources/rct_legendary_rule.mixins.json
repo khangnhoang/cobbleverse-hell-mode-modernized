@@ -4,7 +4,8 @@
   "package": "com.cobbleverse.legendaryrule.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "TrainerMobMixin"
+    "TrainerMobMixin",
+    "RCTModMakeBattleMixin"
   ],
   "injectors": {
     "defaultRequire": 1
