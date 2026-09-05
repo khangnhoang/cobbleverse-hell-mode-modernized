@@ -9,7 +9,9 @@
       "switchBias": 0.65,
       "statMoveBias": 0.85,
       "itemBias": 0.85,
-      "maxSelectMargin": 0.15
+      "maxSelectMargin": 0.15,
+      "canTera": true,
+      "teraTarget": "toxtricity"
     }
   },
   "battleRules": {
@@ -24,10 +26,10 @@
   "team": [
     {
       "moveset": [
-        "fakeout",
-        "voltswitch",
-        "nuzzle",
-        "thunderbolt"
+        "zingzap",
+        "suckerpunch",
+        "recover",
+        "protect"
       ],
       "ivs": {
         "hp": 31,
@@ -38,28 +40,28 @@
         "spe": 31
       },
       "evs": {
-        "hp": 4,
-        "atk": 0,
-        "def": 0,
-        "spa": 252,
+        "hp": 252,
+        "atk": 252,
+        "def": 4,
+        "spa": 0,
         "spd": 0,
-        "spe": 252
+        "spe": 0
       },
       "heldItem": [
-        "air_balloon"
+        "terrain_extender"
       ],
-      "species": "raichu",
+      "species": "pincurchin",
       "gender": "MALE",
       "level": 42,
-      "nature": "timid",
-      "ability": "static"
+      "nature": "adamant",
+      "ability": "electricsurge"
     },
     {
       "moveset": [
-        "tailwind",
-        "airslash",
-        "electroweb",
-        "protect"
+        "fakeout",
+        "thunderbolt",
+        "psychic",
+        "grassknot"
       ],
       "ivs": {
         "hp": 31,
@@ -80,50 +82,21 @@
       "heldItem": [
         "focus_sash"
       ],
-      "species": "kilowattrel",
+      "species": "raichu",
       "gender": "MALE",
       "level": 42,
-      "nature": "timid",
-      "ability": "windpower"
+      "nature": "modest",
+      "ability": "surgesurfer",
+      "aspects": [
+        "alolan"
+      ]
     },
     {
       "moveset": [
-        "thunderbolt",
-        "flamethrower",
+        "hydropump",
         "voltswitch",
+        "willowisp",
         "protect"
-      ],
-      "ivs": {
-        "hp": 31,
-        "atk": 31,
-        "def": 31,
-        "spa": 31,
-        "spd": 31,
-        "spe": 31
-      },
-      "evs": {
-        "hp": 4,
-        "atk": 0,
-        "def": 0,
-        "spa": 252,
-        "spd": 0,
-        "spe": 252
-      },
-      "heldItem": [
-        "mega_showdown:manectite"
-      ],
-      "species": "manectric",
-      "gender": "MALE",
-      "level": 42,
-      "nature": "timid",
-      "ability": "intimidate"
-    },
-    {
-      "moveset": [
-        "thunderbolt",
-        "flashcannon",
-        "electroweb",
-        "bodypress"
       ],
       "ivs": {
         "hp": 31,
@@ -136,19 +109,22 @@
       "evs": {
         "hp": 252,
         "atk": 0,
-        "def": 0,
-        "spa": 252,
-        "spd": 4,
+        "def": 128,
+        "spa": 128,
+        "spd": 0,
         "spe": 0
       },
       "heldItem": [
-        "assault_vest"
+        "sitrus_berry"
       ],
-      "species": "magnezone",
+      "species": "rotom",
       "gender": "GENDERLESS",
       "level": 42,
       "nature": "modest",
-      "ability": "sturdy"
+      "ability": "levitate",
+      "aspects": [
+        "wash-appliance"
+      ]
     },
     {
       "moveset": [
@@ -174,7 +150,7 @@
         "spe": 252
       },
       "heldItem": [
-        "life_orb"
+        "wide_lens"
       ],
       "species": "electivire",
       "gender": "MALE",
@@ -186,7 +162,7 @@
       "moveset": [
         "overdrive",
         "sludgebomb",
-        "snarl",
+        "terablast",
         "protect"
       ],
       "ivs": {
@@ -215,7 +191,42 @@
       "ability": "punkrock",
       "aspects": [
         "low_key-form"
-      ]
+      ],
+      "gimmicks": {
+        "tera": "grass"
+      }
+    },
+    {
+      "moveset": [
+        "thunderbolt",
+        "flamethrower",
+        "voltswitch",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
+      },
+      "heldItem": [
+        "life_orb"
+      ],
+      "species": "manectric",
+      "gender": "MALE",
+      "level": 42,
+      "nature": "timid",
+      "ability": "static"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

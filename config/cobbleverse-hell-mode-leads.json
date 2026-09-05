@@ -54,6 +54,68 @@
           "description": "Redirection + Assault Vest Metagross bulky physical coverage"
         }
       ]
+    },
+    "kanto_ltsurge": {
+      "attempts": [
+        {
+          "id": "terrain_surfer",
+          "leadSlots": [0, 1],
+          "expectedLeadMembers": [
+            {
+              "species": "pincurchin"
+            },
+            {
+              "species": "raichu",
+              "form": "alola",
+              "requiredAspects": [
+                "alolan"
+              ]
+            }
+          ],
+          "baseWeight": 1,
+          "description": "Electric Surge + Surge Surfer doubles Raichu-Alola speed with fast Fake Out support"
+        },
+        {
+          "id": "terrain_punk",
+          "leadSlots": [0, 4],
+          "expectedLeadMembers": [
+            {
+              "species": "pincurchin"
+            },
+            {
+              "species": "toxtricity",
+              "form": "low-key",
+              "requiredAspects": [
+                "low_key-form"
+              ]
+            }
+          ],
+          "baseWeight": 0,
+          "description": "Electric Surge boosts Toxtricity-Low-Key Overdrive with Punk Rock and Throat Spray"
+        },
+        {
+          "id": "anti_ground",
+          "leadSlots": [2, 1],
+          "expectedLeadMembers": [
+            {
+              "species": "rotom",
+              "form": "wash",
+              "requiredAspects": [
+                "wash-appliance"
+              ]
+            },
+            {
+              "species": "raichu",
+              "form": "alola",
+              "requiredAspects": [
+                "alolan"
+              ]
+            }
+          ],
+          "baseWeight": 0,
+          "description": "Levitate Rotom-Wash Hydro Pump counters Ground leads alongside Surge Surfer Raichu-Alola"
+        }
+      ]
     }
   }
 }
