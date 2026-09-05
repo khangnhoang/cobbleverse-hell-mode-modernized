@@ -1,0 +1,121 @@
+{
+  "enabled": true,
+  "trainers": {
+    "kanto_sabrina": {
+      "attempts": [
+        {
+          "id": "psychic_terrain_blitz",
+          "leadSlots": [0, 5],
+          "expectedLeadMembers": [
+            {
+              "species": "indeedee",
+              "form": "f",
+              "requiredAspects": [
+                "female"
+              ]
+            },
+            {
+              "species": "alakazam"
+            }
+          ],
+          "baseWeight": 1,
+          "description": "Psychic Surge + Follow Me with fast Mega Alakazam Expanding Force"
+        },
+        {
+          "id": "anti_dark_priority_block",
+          "leadSlots": [1, 2],
+          "expectedLeadMembers": [
+            {
+              "species": "farigiraf"
+            },
+            {
+              "species": "hatterene"
+            }
+          ],
+          "baseWeight": 0,
+          "description": "Armor Tail blocks priority moves; Hatterene Fairy typing counters Dark"
+        },
+        {
+          "id": "heavy_steel_offense",
+          "leadSlots": [0, 3],
+          "expectedLeadMembers": [
+            {
+              "species": "indeedee",
+              "form": "f",
+              "requiredAspects": [
+                "female"
+              ]
+            },
+            {
+              "species": "metagross"
+            }
+          ],
+          "baseWeight": -1,
+          "description": "Redirection + Assault Vest Metagross bulky physical coverage"
+        }
+      ]
+    },
+    "kanto_ltsurge": {
+      "attempts": [
+        {
+          "id": "terrain_surfer",
+          "leadSlots": [0, 1],
+          "expectedLeadMembers": [
+            {
+              "species": "pincurchin"
+            },
+            {
+              "species": "raichu",
+              "form": "alola",
+              "requiredAspects": [
+                "alolan"
+              ]
+            }
+          ],
+          "baseWeight": 1,
+          "description": "Electric Surge + Surge Surfer doubles Raichu-Alola speed with fast Fake Out support"
+        },
+        {
+          "id": "terrain_punk",
+          "leadSlots": [0, 4],
+          "expectedLeadMembers": [
+            {
+              "species": "pincurchin"
+            },
+            {
+              "species": "toxtricity",
+              "form": "low-key",
+              "requiredAspects": [
+                "low_key-form"
+              ]
+            }
+          ],
+          "baseWeight": 0,
+          "description": "Electric Surge boosts Toxtricity-Low-Key Overdrive with Punk Rock and Throat Spray"
+        },
+        {
+          "id": "anti_ground",
+          "leadSlots": [2, 1],
+          "expectedLeadMembers": [
+            {
+              "species": "rotom",
+              "form": "wash",
+              "requiredAspects": [
+                "wash-appliance"
+              ]
+            },
+            {
+              "species": "raichu",
+              "form": "alola",
+              "requiredAspects": [
+                "alolan"
+              ]
+            }
+          ],
+          "baseWeight": 0,
+          "description": "Levitate Rotom-Wash Hydro Pump counters Ground leads alongside Surge Surfer Raichu-Alola"
+        }
+      ]
+    }
+  }
+}

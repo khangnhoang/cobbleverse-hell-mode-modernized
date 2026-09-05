@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.cobbleverse.legendaryrule.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "TrainerMobMixin",
+    "RCTModMakeBattleMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

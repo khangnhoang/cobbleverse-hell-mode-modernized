@@ -1,0 +1,463 @@
+package com.cobbleverse.legendaryrule.lead;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class LeadSelectionConfigTest {
+
+    @BeforeEach
+    void resetConfig() {
+        LeadSelectionConfig.setEnabled(true);
+    }
+
+    @Test
+    void testLoadValidConfigFromJson() {
+        String json = """
+        {
+          "enabled": true,
+          "trainers": {
+            "kanto_sabrina": {
+              "attempts": [
+                {
+                  "id": "psychic_terrain_blitz",
+                  "leadSlots": [0, 5],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "form": "f", "requiredAspects": ["female"] },
+                    { "species": "alakazam" }
+                  ],
+                  "baseWeight": 1,
+                  "description": "Psychic Surge blitz"
+                },
+                {
+                  "id": "anti_dark",
+                  "leadSlots": [1, 2],
+                  "baseWeight": -1
+                }
+              ]
+            }
+          }
+        }
+        """;
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+        LeadSelectionConfig.loadFromJson(root);
+
+        assertTrue(LeadSelectionConfig.isEnabled());
+        Optional<TrainerLeadConfig> opt = LeadSelectionConfig.getTrainerConfig("kanto_sabrina");
+        assertTrue(opt.isPresent());
+
+        // Case insensitivity check
+        assertTrue(LeadSelectionConfig.getTrainerConfig("KANTO_SABRINA").isPresent());
+
+        TrainerLeadConfig cfg = opt.get();
+        assertEquals(2, cfg.attempts().size());
+
+        LeadAttempt att0 = cfg.attempts().get(0);
+        assertEquals("psychic_terrain_blitz", att0.id());
+        assertArrayEquals(new int[]{0, 5}, att0.leadSlots());
+        assertEquals(1, att0.baseWeight());
+        assertEquals(2, att0.expectedLeadMembers().size());
+
+        ExpectedLeadMember exp0 = att0.expectedLeadMembers().get(0);
+        assertEquals("indeedee", exp0.species());
+        assertEquals("f", exp0.form());
+        assertEquals(List.of("female"), exp0.requiredAspects());
+
+        ExpectedLeadMember exp1 = att0.expectedLeadMembers().get(1);
+        assertEquals("alakazam", exp1.species());
+        assertNull(exp1.form());
+        assertTrue(exp1.requiredAspects().isEmpty());
+
+        LeadAttempt att1 = cfg.attempts().get(1);
+        assertEquals("anti_dark", att1.id());
+        assertArrayEquals(new int[]{1, 2}, att1.leadSlots());
+        assertEquals(-1, att1.baseWeight());
+        assertTrue(att1.expectedLeadMembers().isEmpty());
+    }
+
+    @Test
+    void testStructuralValidationFiltersInvalidAttemptsPreservesValid() {
+        String json = """
+        {
+          "trainers": {
+            "test_trainer": {
+              "attempts": [
+                {
+                  "id": "bad_weight_high",
+                  "leadSlots": [0, 1],
+                  "baseWeight": 3
+                },
+                {
+                  "id": "bad_weight_low",
+                  "leadSlots": [0, 1],
+                  "baseWeight": -3
+                },
+                {
+                  "id": "negative_slot",
+                  "leadSlots": [-1, 2]
+                },
+                {
+                  "id": "duplicate_slots",
+                  "leadSlots": [2, 2]
+                },
+                {
+                  "id": "wrong_slot_count",
+                  "leadSlots": [0, 1, 2]
+                },
+                {
+                  "leadSlots": [0, 1]
+                },
+                {
+                  "id": "valid_attempt",
+                  "leadSlots": [0, 1],
+                  "baseWeight": 2
+                }
+              ]
+            }
+          }
+        }
+        """;
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+        LeadSelectionConfig.loadFromJson(root);
+
+        Optional<TrainerLeadConfig> opt = LeadSelectionConfig.getTrainerConfig("test_trainer");
+        assertTrue(opt.isPresent(), "Trainer with at least one valid attempt should be present");
+        assertEquals(1, opt.get().attempts().size());
+        assertEquals("valid_attempt", opt.get().attempts().get(0).id());
+    }
+
+    @Test
+    void testTrainerWithOnlyInvalidAttemptsIsOmitted() {
+        String json = """
+        {
+          "trainers": {
+            "all_invalid": {
+              "attempts": [
+                {
+                  "id": "bad1",
+                  "leadSlots": [0, 0]
+                }
+              ]
+            }
+          }
+        }
+        """;
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+        LeadSelectionConfig.loadFromJson(root);
+
+        Optional<TrainerLeadConfig> opt = LeadSelectionConfig.getTrainerConfig("all_invalid");
+        assertTrue(opt.isEmpty());
+    }
+
+    @Test
+    void testDisabledConfigReturnsEmpty() {
+        String json = """
+        {
+          "enabled": false,
+          "trainers": {
+            "kanto_sabrina": {
+              "attempts": [
+                { "id": "blitz", "leadSlots": [0, 1] }
+              ]
+            }
+          }
+        }
+        """;
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+        LeadSelectionConfig.loadFromJson(root);
+
+        assertFalse(LeadSelectionConfig.isEnabled());
+        assertTrue(LeadSelectionConfig.getTrainerConfig("kanto_sabrina").isEmpty());
+    }
+
+    @Test
+    void testLoadFromNonExistentFileGracefullyDefaults(@TempDir Path tempDir) {
+        Path missing = tempDir.resolve("non_existent.json");
+        LeadSelectionConfig.ConfigLoadResult res = LeadSelectionConfig.load(missing);
+        assertTrue(res.success());
+        assertTrue(LeadSelectionConfig.isEnabled());
+        assertTrue(LeadSelectionConfig.getTrainerConfig("any").isEmpty());
+    }
+
+    @Test
+    void testLoadMalformedFileDisablesGracefully(@TempDir Path tempDir) throws IOException {
+        Path badFile = tempDir.resolve("bad.json");
+        Files.writeString(badFile, "{ not valid json ]");
+
+        LeadSelectionConfig.ConfigLoadResult res = LeadSelectionConfig.load(badFile);
+        assertFalse(res.success());
+        assertFalse(LeadSelectionConfig.isEnabled(), "Malformed JSON should disable config to prevent errors");
+        assertTrue(LeadSelectionConfig.getTrainerConfig("any").isEmpty());
+    }
+
+    @Test
+    void testStrictSchemaParsingRegressions() {
+        String json = """
+        {
+          "trainers": {
+            "strict_test": {
+              "attempts": [
+                {
+                  "id": "valid_sibling",
+                  "leadSlots": [0, 1],
+                  "baseWeight": 1,
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "form": "f", "requiredAspects": ["female"] },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": "fractional_slots",
+                  "leadSlots": [0.0, 1.7]
+                },
+                {
+                  "id": "fractional_weight",
+                  "leadSlots": [0, 1],
+                  "baseWeight": 1.5
+                },
+                {
+                  "id": "string_weight",
+                  "leadSlots": [0, 1],
+                  "baseWeight": "2"
+                },
+                {
+                  "id": "string_slots",
+                  "leadSlots": ["0", 1]
+                },
+                {
+                  "id": "malformed_aspects_type",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "requiredAspects": "not-an-array" },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": "malformed_aspects_numeric_entry",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "requiredAspects": [123] },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": "malformed_aspects_blank_entry",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "requiredAspects": ["   "] },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": 123,
+                  "leadSlots": [0, 1]
+                },
+                {
+                  "id": "   ",
+                  "leadSlots": [0, 1]
+                },
+                {
+                  "id": "malformed_species_boolean",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": true },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": "blank_species",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "   " },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": "malformed_form_number",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "form": 42 },
+                    { "species": "alakazam" }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+        """;
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+        LeadSelectionConfig.loadFromJson(root);
+
+        Optional<TrainerLeadConfig> opt = LeadSelectionConfig.getTrainerConfig("strict_test");
+        assertTrue(opt.isPresent(), "Trainer must be registered because valid_sibling is valid");
+        List<LeadAttempt> attempts = opt.get().attempts();
+        assertEquals(1, attempts.size(), "Only the valid_sibling attempt should have survived strict parsing");
+        assertEquals("valid_sibling", attempts.get(0).id());
+    }
+
+    @Test
+    void testExpectedLeadMembersSizeInvariants() {
+        String json = """
+        {
+          "trainers": {
+            "test_trainer": {
+              "attempts": [
+                {
+                  "id": "valid_size_2",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee" },
+                    { "species": "alakazam" }
+                  ]
+                },
+                {
+                  "id": "invalid_size_0",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": []
+                },
+                {
+                  "id": "invalid_size_1",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee" }
+                  ]
+                },
+                {
+                  "id": "invalid_size_3",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee" },
+                    { "species": "alakazam" },
+                    { "species": "metagross" }
+                  ]
+                },
+                {
+                  "id": "valid_no_expected",
+                  "leadSlots": [2, 3]
+                }
+              ]
+            }
+          }
+        }
+        """;
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+        LeadSelectionConfig.loadFromJson(root);
+
+        Optional<TrainerLeadConfig> opt = LeadSelectionConfig.getTrainerConfig("test_trainer");
+        assertTrue(opt.isPresent(), "Trainer with valid attempts must be registered");
+        List<LeadAttempt> attempts = opt.get().attempts();
+
+        // Exactly 2 attempts should be valid: valid_size_2 and valid_no_expected
+        // invalid_size_0, invalid_size_1, invalid_size_3 must be rejected without invalidating valid attempts
+        assertEquals(2, attempts.size());
+        assertEquals("valid_size_2", attempts.get(0).id());
+        assertEquals(2, attempts.get(0).expectedLeadMembers().size());
+        assertEquals("valid_no_expected", attempts.get(1).id());
+        assertTrue(attempts.get(1).expectedLeadMembers().isEmpty());
+    }
+
+    @Test
+    void testMathematicalExactIntegerParsing() {
+        String json = """
+        {
+          "trainers": {
+            "exact_int_test": {
+              "attempts": [
+                {
+                  "id": "exact_zero_point_zero",
+                  "leadSlots": [0.0, 1.0],
+                  "baseWeight": 2.0
+                },
+                {
+                  "id": "exact_scientific_notation",
+                  "leadSlots": [2e0, 3e0],
+                  "baseWeight": -1.0
+                },
+                {
+                  "id": "fractional_slot_2_1",
+                  "leadSlots": [0, 2.1]
+                },
+                {
+                  "id": "fractional_slot_1_5",
+                  "leadSlots": [1.5, 2]
+                },
+                {
+                  "id": "fractional_slot_1_7",
+                  "leadSlots": [0, 1.7]
+                },
+                {
+                  "id": "fractional_weight_1_5",
+                  "leadSlots": [0, 1],
+                  "baseWeight": 1.5
+                },
+                {
+                  "id": "numeric_string_weight",
+                  "leadSlots": [0, 1],
+                  "baseWeight": "2"
+                },
+                {
+                  "id": "numeric_string_slot",
+                  "leadSlots": ["0", 1]
+                },
+                {
+                  "id": "overflow_slot",
+                  "leadSlots": [0, 99999999999999999999999999999999]
+                },
+                {
+                  "id": "overflow_weight",
+                  "leadSlots": [0, 1],
+                  "baseWeight": 99999999999999999999999999999999
+                },
+                {
+                  "id": "base_weight_null",
+                  "leadSlots": [0, 1],
+                  "baseWeight": null
+                },
+                {
+                  "id": "required_aspects_null",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "requiredAspects": null },
+                    { "species": "alakazam" }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+        """;
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+        LeadSelectionConfig.loadFromJson(root);
+
+        Optional<TrainerLeadConfig> opt = LeadSelectionConfig.getTrainerConfig("exact_int_test");
+        assertTrue(opt.isPresent(), "Trainer must be registered because valid attempts exist");
+        List<LeadAttempt> attempts = opt.get().attempts();
+        assertEquals(3, attempts.size(), "Only exact_zero_point_zero, exact_scientific_notation, and required_aspects_null must survive");
+
+        LeadAttempt att0 = attempts.get(0);
+        assertEquals("exact_zero_point_zero", att0.id());
+        assertArrayEquals(new int[]{0, 1}, att0.leadSlots());
+        assertEquals(2, att0.baseWeight());
+
+        LeadAttempt att1 = attempts.get(1);
+        assertEquals("exact_scientific_notation", att1.id());
+        assertArrayEquals(new int[]{2, 3}, att1.leadSlots());
+        assertEquals(-1, att1.baseWeight());
+
+        LeadAttempt att2 = attempts.get(2);
+        assertEquals("required_aspects_null", att2.id());
+        assertArrayEquals(new int[]{0, 1}, att2.leadSlots());
+        assertEquals(0, att2.baseWeight());
+        assertTrue(att2.expectedLeadMembers().get(0).requiredAspects().isEmpty());
+    }
+}
