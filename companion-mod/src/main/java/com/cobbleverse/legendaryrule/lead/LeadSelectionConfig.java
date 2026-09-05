@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.Reader;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -121,16 +122,16 @@ public final class LeadSelectionConfig {
 
     private static int parseExactInt(JsonElement elem, String fieldName) {
         if (elem == null || !elem.isJsonPrimitive() || !elem.getAsJsonPrimitive().isNumber()) {
-            throw new IllegalArgumentException(fieldName + " must be a numeric integer, got: " + elem);
-        }
-        String raw = elem.getAsString();
-        if (raw.contains(".") || raw.contains("e") || raw.contains("E")) {
-            throw new IllegalArgumentException(fieldName + " must not contain fractional or floating-point components, got: " + raw);
+            throw new IllegalArgumentException(fieldName + " must be a numeric primitive, got: " + elem);
         }
         try {
-            return elem.getAsBigDecimal().intValueExact();
+            BigDecimal bd = elem.getAsBigDecimal().stripTrailingZeros();
+            if (bd.scale() > 0) {
+                throw new IllegalArgumentException(fieldName + " must be an exact integer, got fractional value: " + elem.getAsString());
+            }
+            return bd.intValueExact();
         } catch (ArithmeticException e) {
-            throw new IllegalArgumentException(fieldName + " must be an exact integer, got: " + raw);
+            throw new IllegalArgumentException(fieldName + " cannot be converted to exact integer (fractional or overflow): " + elem.getAsString());
         }
     }
 
@@ -165,7 +166,7 @@ public final class LeadSelectionConfig {
         }
 
         int baseWeight = 0;
-        if (obj.has("baseWeight") && !obj.get("baseWeight").isJsonNull()) {
+        if (obj.has("baseWeight")) {
             baseWeight = parseExactInt(obj.get("baseWeight"), "Attempt '" + id + "' baseWeight");
             if (baseWeight < -2 || baseWeight > 2) {
                 throw new IllegalArgumentException("Attempt '" + id + "' baseWeight must be between -2 and +2, got: " + baseWeight);

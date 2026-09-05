@@ -52,18 +52,46 @@ public final class LeadSelectionService {
             Pokemon[] trainerTeam,
             PlayerEntity player
     ) {
-        if (!isAvailable() || trainerId == null || trainerTeam == null || trainerTeam.length == 0 || player == null) {
-            return Optional.empty();
-        }
-
-        List<PlayerLeadTyping> playerLeads = PlayerLeadResolver.resolvePlayerLeads(player);
-        if (playerLeads.isEmpty()) {
-            return Optional.empty();
-        }
-
-        return selectLead(trainerId, trainerTeam, playerLeads,
+        return selectLead(trainerId, trainerTeam, player,
+                PlayerLeadResolver::resolvePlayerLeads,
                 (slot, p) -> CobblemonLeadAdapter.toIdentity(p),
                 CobblemonLeadAdapter::toRosterMemberTyping);
+    }
+
+    static <P> Optional<LeadSelectionResult> selectLead(
+            String trainerId,
+            Pokemon[] trainerTeam,
+            P player,
+            java.util.function.Function<P, List<PlayerLeadTyping>> playerResolver,
+            java.util.function.BiFunction<Integer, Pokemon, PokemonIdentity> identityFn,
+            java.util.function.BiFunction<Integer, Pokemon, RosterMemberTyping> typingFn
+    ) {
+        if (!isAvailable() || trainerId == null) {
+            return Optional.empty();
+        }
+
+        // Preflight: check trainer configuration BEFORE scanning/resolving player party
+        Optional<TrainerLeadConfig> optConfig = LeadSelectionConfig.getTrainerConfig(trainerId);
+        if (optConfig.isEmpty()) {
+            // Unconfigured trainer: native-path preservation with zero player resolution overhead
+            return Optional.empty();
+        }
+        TrainerLeadConfig config = optConfig.get();
+        if (config.attempts().isEmpty()) {
+            return Optional.empty();
+        }
+
+        if (trainerTeam == null || trainerTeam.length == 0 || player == null) {
+            return Optional.empty();
+        }
+
+        // Trainer is configured: now resolve player leads
+        List<PlayerLeadTyping> playerLeads = playerResolver.apply(player);
+        if (playerLeads == null || playerLeads.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return selectLeadWithConfig(trainerId, config, trainerTeam, playerLeads, identityFn, typingFn);
     }
 
     static Optional<LeadSelectionResult> selectLead(
@@ -79,11 +107,25 @@ public final class LeadSelectionService {
 
         Optional<TrainerLeadConfig> optConfig = LeadSelectionConfig.getTrainerConfig(trainerId);
         if (optConfig.isEmpty()) {
-            // Unconfigured trainer: native-path preservation with minimal interceptor overhead
+            return Optional.empty();
+        }
+        TrainerLeadConfig config = optConfig.get();
+        if (config.attempts().isEmpty()) {
             return Optional.empty();
         }
 
-        List<LeadAttempt> authoredAttempts = optConfig.get().attempts();
+        return selectLeadWithConfig(trainerId, config, trainerTeam, playerLeads, identityFn, typingFn);
+    }
+
+    private static Optional<LeadSelectionResult> selectLeadWithConfig(
+            String trainerId,
+            TrainerLeadConfig config,
+            Pokemon[] trainerTeam,
+            List<PlayerLeadTyping> playerLeads,
+            java.util.function.BiFunction<Integer, Pokemon, PokemonIdentity> identityFn,
+            java.util.function.BiFunction<Integer, Pokemon, RosterMemberTyping> typingFn
+    ) {
+        List<LeadAttempt> authoredAttempts = config.attempts();
         if (authoredAttempts.isEmpty()) {
             return Optional.empty();
         }

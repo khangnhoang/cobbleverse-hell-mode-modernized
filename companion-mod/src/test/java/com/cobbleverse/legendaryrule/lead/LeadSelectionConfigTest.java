@@ -365,4 +365,99 @@ class LeadSelectionConfigTest {
         assertEquals("valid_no_expected", attempts.get(1).id());
         assertTrue(attempts.get(1).expectedLeadMembers().isEmpty());
     }
+
+    @Test
+    void testMathematicalExactIntegerParsing() {
+        String json = """
+        {
+          "trainers": {
+            "exact_int_test": {
+              "attempts": [
+                {
+                  "id": "exact_zero_point_zero",
+                  "leadSlots": [0.0, 1.0],
+                  "baseWeight": 2.0
+                },
+                {
+                  "id": "exact_scientific_notation",
+                  "leadSlots": [2e0, 3e0],
+                  "baseWeight": -1.0
+                },
+                {
+                  "id": "fractional_slot_2_1",
+                  "leadSlots": [0, 2.1]
+                },
+                {
+                  "id": "fractional_slot_1_5",
+                  "leadSlots": [1.5, 2]
+                },
+                {
+                  "id": "fractional_slot_1_7",
+                  "leadSlots": [0, 1.7]
+                },
+                {
+                  "id": "fractional_weight_1_5",
+                  "leadSlots": [0, 1],
+                  "baseWeight": 1.5
+                },
+                {
+                  "id": "numeric_string_weight",
+                  "leadSlots": [0, 1],
+                  "baseWeight": "2"
+                },
+                {
+                  "id": "numeric_string_slot",
+                  "leadSlots": ["0", 1]
+                },
+                {
+                  "id": "overflow_slot",
+                  "leadSlots": [0, 99999999999999999999999999999999]
+                },
+                {
+                  "id": "overflow_weight",
+                  "leadSlots": [0, 1],
+                  "baseWeight": 99999999999999999999999999999999
+                },
+                {
+                  "id": "base_weight_null",
+                  "leadSlots": [0, 1],
+                  "baseWeight": null
+                },
+                {
+                  "id": "required_aspects_null",
+                  "leadSlots": [0, 1],
+                  "expectedLeadMembers": [
+                    { "species": "indeedee", "requiredAspects": null },
+                    { "species": "alakazam" }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+        """;
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+        LeadSelectionConfig.loadFromJson(root);
+
+        Optional<TrainerLeadConfig> opt = LeadSelectionConfig.getTrainerConfig("exact_int_test");
+        assertTrue(opt.isPresent(), "Trainer must be registered because valid attempts exist");
+        List<LeadAttempt> attempts = opt.get().attempts();
+        assertEquals(3, attempts.size(), "Only exact_zero_point_zero, exact_scientific_notation, and required_aspects_null must survive");
+
+        LeadAttempt att0 = attempts.get(0);
+        assertEquals("exact_zero_point_zero", att0.id());
+        assertArrayEquals(new int[]{0, 1}, att0.leadSlots());
+        assertEquals(2, att0.baseWeight());
+
+        LeadAttempt att1 = attempts.get(1);
+        assertEquals("exact_scientific_notation", att1.id());
+        assertArrayEquals(new int[]{2, 3}, att1.leadSlots());
+        assertEquals(-1, att1.baseWeight());
+
+        LeadAttempt att2 = attempts.get(2);
+        assertEquals("required_aspects_null", att2.id());
+        assertArrayEquals(new int[]{0, 1}, att2.leadSlots());
+        assertEquals(0, att2.baseWeight());
+        assertTrue(att2.expectedLeadMembers().get(0).requiredAspects().isEmpty());
+    }
 }

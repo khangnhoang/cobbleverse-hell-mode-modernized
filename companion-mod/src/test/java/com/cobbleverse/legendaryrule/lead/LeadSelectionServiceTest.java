@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -73,8 +74,23 @@ class LeadSelectionServiceTest {
 
         // Brock has no configuration in LeadSelectionConfig
         Pokemon[] dummyTeam = new Pokemon[1];
-        Optional<LeadSelectionResult> result = LeadSelectionService.selectLead("kanto_brock", dummyTeam, null);
+        Object dummyPlayer = new Object();
+        AtomicInteger resolverInvocations = new AtomicInteger(0);
+
+        Optional<LeadSelectionResult> result = LeadSelectionService.selectLead(
+                "kanto_brock",
+                dummyTeam,
+                dummyPlayer,
+                p -> {
+                    resolverInvocations.incrementAndGet();
+                    return List.of(new PlayerLeadTyping("pikachu", List.of("electric")));
+                },
+                (slot, p) -> new PokemonIdentity("geodude", "", Collections.emptySet()),
+                (slot, p) -> new RosterMemberTyping(slot, "geodude", List.of("rock", "ground"))
+        );
+
         assertTrue(result.isEmpty(), "Unconfigured trainer must immediately return empty to preserve native ordering");
+        assertEquals(0, resolverInvocations.get(), "Player lead resolution must NOT be invoked for unconfigured trainer");
     }
 
     @Test
@@ -174,7 +190,7 @@ class LeadSelectionServiceTest {
         slots1.add(0);
         slots1.add(99);
         att1.add("leadSlots", slots1);
-        att1.addProperty("baseWeight", 100);
+        att1.addProperty("baseWeight", 0);
         attempts.add(att1);
 
         JsonObject att2 = new JsonObject();
@@ -190,6 +206,10 @@ class LeadSelectionServiceTest {
         trainers.add("kanto_sabrina", sabrina);
         root.add("trainers", trainers);
         LeadSelectionConfig.loadFromJson(root);
+
+        Optional<TrainerLeadConfig> trainerCfg = LeadSelectionConfig.getTrainerConfig("kanto_sabrina");
+        assertTrue(trainerCfg.isPresent());
+        assertEquals(2, trainerCfg.get().attempts().size(), "Structural validation must accept both attempts");
 
         Pokemon[] dummyTeam = new Pokemon[6];
         List<PlayerLeadTyping> playerLeads = List.of(

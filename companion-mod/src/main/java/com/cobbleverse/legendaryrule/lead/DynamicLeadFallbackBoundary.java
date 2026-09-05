@@ -1,29 +1,30 @@
 package com.cobbleverse.legendaryrule.lead;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * Feature fallback boundary for dynamic lead selection at the Mixin composition seam.
- * Wraps the full dynamic pipeline (service invocation, adaptation, engine selection,
- * clone, reorder, arraycopy).
- * Catches {@link Exception} and logs trainer ID before returning the original unmodified object.
- * Fatal {@link Error} and JVM linkage failures are intentionally not caught.
+ * Pure generic exception fallback boundary for dynamic lead selection.
+ * Wraps dynamic computation, catches {@link Exception}, returns the original value,
+ * and passes any caught exception to an optional callback (e.g. for composition logging).
+ * Fatal {@link Error} and JVM linkage failures are intentionally NOT caught.
  */
 public final class DynamicLeadFallbackBoundary {
-    private static final Logger LOGGER = LoggerFactory.getLogger("rct_legendary_rule");
 
     private DynamicLeadFallbackBoundary() {}
 
-    public static <T> T execute(T original, String trainerId, Supplier<T> dynamicAction) {
+    public static <T> T execute(T original, Supplier<T> dynamicAction) {
+        return execute(original, dynamicAction, null);
+    }
+
+    public static <T> T execute(T original, Supplier<T> dynamicAction, Consumer<Exception> exceptionHandler) {
         try {
             T result = dynamicAction.get();
             return result != null ? result : original;
         } catch (Exception e) {
-            LOGGER.error("[HellMode-Lead] Unexpected error during dynamic lead selection for trainer '{}'. Falling back to original TrainerNPC.",
-                    trainerId != null ? trainerId : "unknown", e);
+            if (exceptionHandler != null) {
+                exceptionHandler.accept(e);
+            }
             return original;
         }
     }

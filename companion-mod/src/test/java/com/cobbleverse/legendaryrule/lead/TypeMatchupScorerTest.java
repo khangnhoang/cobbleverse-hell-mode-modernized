@@ -42,7 +42,7 @@ class TypeMatchupScorerTest {
 
     @Test
     void testUnsupportedMultipliersRejected() {
-        double[] invalidValues = {3.2, 1.7, 0.7, 1.5, -1.0, 5.0, 0.1};
+        double[] invalidValues = {3.2, 1.7, 0.7, 1.5, -1.0, 5.0, 0.1, 1.0000005, 2.0000001, 0.9999999};
         for (double inv : invalidValues) {
             assertThrows(IllegalArgumentException.class, () -> scorer.mapOffensiveScore(inv),
                     "Offensive mapping must throw for unsupported multiplier: " + inv);

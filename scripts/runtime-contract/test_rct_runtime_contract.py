@@ -124,23 +124,67 @@ def main():
 
     # 2. Companion mod mixin and refmap inspection
     mixins_json_path = repo_root / "companion-mod" / "src" / "main" / "resources" / "rct_legendary_rule.mixins.json"
+    has_mixin_entry = False
     if mixins_json_path.exists():
         with open(mixins_json_path, "r", encoding="utf-8") as mf:
             mixins_data = json.load(mf)
             has_mixin_entry = "RCTModMakeBattleMixin" in mixins_data.get("mixins", [])
-            checks.append(("rct_legendary_rule.mixins.json declares RCTModMakeBattleMixin", has_mixin_entry))
+    checks.append(("rct_legendary_rule.mixins.json declares RCTModMakeBattleMixin", has_mixin_entry))
 
-    refmap_candidates = [
-        repo_root / "companion-mod" / "build" / "classes" / "java" / "main" / "rct-legendary-rule-companion-refmap.json",
-        repo_root / "companion-mod" / "build" / "resources" / "main" / "rct-legendary-rule-companion-refmap.json",
-    ]
-    refmap_path = next((p for p in refmap_candidates if p.exists()), None)
-    if refmap_path:
-        with open(refmap_path, "r", encoding="utf-8") as rf:
-            refmap_data = json.load(rf)
-            mappings = refmap_data.get("mappings", {}).get("com/cobbleverse/legendaryrule/mixin/RCTModMakeBattleMixin", {})
-            has_mb_mapping = "makeBattle(Lcom/gitlab/srcmc/rctmod/world/entities/TrainerMob;Lnet/minecraft/entity/player/PlayerEntity;)Z" in mappings
-            checks.append(("Generated refmap maps makeBattle injection target for RCTModMakeBattleMixin", has_mb_mapping))
+    # Inspect refmap from built jar first, fallback to build directories
+    refmap_data = None
+    refmap_source_desc = None
+    built_jars = [p for p in (repo_root / "companion-mod" / "build" / "libs").glob("rct-legendary-rule-companion-*.jar")
+                  if not p.name.endswith("-sources.jar") and not p.name.endswith("-dev.jar")]
+    if built_jars:
+        built_jar = built_jars[0]
+        try:
+            with zipfile.ZipFile(built_jar, 'r') as z:
+                if "rct-legendary-rule-companion-refmap.json" in z.namelist():
+                    refmap_data = json.loads(z.read("rct-legendary-rule-companion-refmap.json").decode("utf-8"))
+                    refmap_source_desc = f"built JAR ({built_jar.name})"
+        except Exception as e:
+            print(f"Warning: Failed to read refmap from {built_jar}: {e}", file=sys.stderr)
+
+    if refmap_data is None:
+        refmap_candidates = [
+            repo_root / "companion-mod" / "build" / "classes" / "java" / "main" / "rct-legendary-rule-companion-refmap.json",
+            repo_root / "companion-mod" / "build" / "resources" / "main" / "rct-legendary-rule-companion-refmap.json",
+        ]
+        refmap_path = next((p for p in refmap_candidates if p.exists()), None)
+        if refmap_path:
+            with open(refmap_path, "r", encoding="utf-8") as rf:
+                refmap_data = json.load(rf)
+                refmap_source_desc = f"build tree ({refmap_path.relative_to(repo_root)})"
+
+    refmap_present = refmap_data is not None
+    checks.append((f"Generated refmap exists in {refmap_source_desc or 'built JAR / build output'}", refmap_present))
+
+    mixin_key = "com/cobbleverse/legendaryrule/mixin/RCTModMakeBattleMixin"
+    source_method = "makeBattle(Lcom/gitlab/srcmc/rctmod/world/entities/TrainerMob;Lnet/minecraft/entity/player/PlayerEntity;)Z"
+    expected_target = "Lcom/gitlab/srcmc/rctmod/api/RCTMod;makeBattle(Lcom/gitlab/srcmc/rctmod/world/entities/TrainerMob;Lnet/minecraft/class_1657;)Z"
+
+    if refmap_data is not None:
+        mappings = refmap_data.get("mappings", {}).get(mixin_key, {})
+        has_mixin = mixin_key in refmap_data.get("mappings", {})
+        checks.append(("Generated refmap declares RCTModMakeBattleMixin entry", has_mixin))
+
+        has_source_method = source_method in mappings
+        checks.append(("Generated refmap maps source makeBattle method key", has_source_method))
+
+        actual_target = mappings.get(source_method)
+        target_matches = (actual_target == expected_target)
+        checks.append((f"Generated refmap target equals expected intermediary ({expected_target})", target_matches))
+
+        # Check data section for named:intermediary
+        inter_mappings = refmap_data.get("data", {}).get("named:intermediary", {}).get(mixin_key, {})
+        data_target = inter_mappings.get(source_method)
+        checks.append((f"Generated refmap named:intermediary target equals expected intermediary", data_target == expected_target))
+    else:
+        checks.append(("Generated refmap declares RCTModMakeBattleMixin entry", False))
+        checks.append(("Generated refmap maps source makeBattle method key", False))
+        checks.append((f"Generated refmap target equals expected intermediary ({expected_target})", False))
+        checks.append(("Generated refmap named:intermediary target equals expected intermediary", False))
 
     # 3. RCTAPI: TrainerNPC copy constructor and getTeam
     trainer_npc_javap = get_class_javap(rctapi_jar, "com/gitlab/srcmc/rctapi/api/trainer/TrainerNPC.class")

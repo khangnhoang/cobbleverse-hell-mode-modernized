@@ -52,11 +52,8 @@ public final class TypeChartResourceLoader {
             }
             JsonObject rootObj = root.getAsJsonObject();
 
-            // Validate attack types: must match CANONICAL_TYPES exactly
-            java.util.Set<String> attackTypes = rootObj.keySet().stream()
-                    .map(s -> s.toLowerCase(java.util.Locale.ROOT))
-                    .collect(java.util.stream.Collectors.toSet());
-            if (!attackTypes.equals(TypeChartData.CANONICAL_TYPES)) {
+            // Validate attack types: raw keys must match CANONICAL_TYPES exactly (no case variants or extras)
+            if (!rootObj.keySet().equals(TypeChartData.CANONICAL_TYPES)) {
                 return Optional.empty();
             }
 
@@ -69,11 +66,8 @@ public final class TypeChartResourceLoader {
                 }
                 JsonObject defObj = defElem.getAsJsonObject();
 
-                // Validate defender types: must match CANONICAL_TYPES exactly
-                java.util.Set<String> defenderTypes = defObj.keySet().stream()
-                        .map(s -> s.toLowerCase(java.util.Locale.ROOT))
-                        .collect(java.util.stream.Collectors.toSet());
-                if (!defenderTypes.equals(TypeChartData.CANONICAL_TYPES)) {
+                // Validate defender types: raw keys must match CANONICAL_TYPES exactly (no case variants or extras)
+                if (!defObj.keySet().equals(TypeChartData.CANONICAL_TYPES)) {
                     return Optional.empty();
                 }
 
@@ -84,14 +78,7 @@ public final class TypeChartResourceLoader {
                         return Optional.empty();
                     }
                     double mult = valElem.getAsDouble();
-                    boolean isValidMult = false;
-                    for (double valid : VALID_MULTIPLIERS) {
-                        if (Math.abs(valid - mult) < 1e-6) {
-                            isValidMult = true;
-                            break;
-                        }
-                    }
-                    if (!isValidMult) {
+                    if (!VALID_MULTIPLIERS.contains(mult)) {
                         return Optional.empty();
                     }
                     inner.put(def, mult);

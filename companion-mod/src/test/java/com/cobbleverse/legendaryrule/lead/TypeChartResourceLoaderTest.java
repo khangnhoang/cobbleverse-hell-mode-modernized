@@ -146,4 +146,30 @@ class TypeChartResourceLoaderTest {
         Optional<TypeChartData> opt = TypeChartResourceLoader.loadFromStream(stream);
         assertTrue(opt.isEmpty(), "Empty JSON object should return Optional.empty()");
     }
+
+    @Test
+    void testRejectNearCanonicalMultiplier() {
+        Map<String, Map<String, Double>> matrix = createValid18x18Matrix();
+        matrix.get("fire").put("grass", 1.0000005);
+        Optional<TypeChartData> opt = TypeChartResourceLoader.loadFromStream(matrixToStream(matrix));
+        assertTrue(opt.isEmpty(), "Multiplier 1.0000005 must be rejected without epsilon tolerance");
+    }
+
+    @Test
+    void testRejectCaseVariantAttackKey() {
+        Map<String, Map<String, Double>> matrix = createValid18x18Matrix();
+        Map<String, Double> row = matrix.remove("fire");
+        matrix.put("Fire", row); // Cased attack key
+        Optional<TypeChartData> opt = TypeChartResourceLoader.loadFromStream(matrixToStream(matrix));
+        assertTrue(opt.isEmpty(), "Case-variant attack key 'Fire' must be rejected");
+    }
+
+    @Test
+    void testRejectCaseVariantDefenderKey() {
+        Map<String, Map<String, Double>> matrix = createValid18x18Matrix();
+        matrix.get("fire").remove("water");
+        matrix.get("fire").put("Water", 0.5); // Cased defender key
+        Optional<TypeChartData> opt = TypeChartResourceLoader.loadFromStream(matrixToStream(matrix));
+        assertTrue(opt.isEmpty(), "Case-variant defender key 'Water' must be rejected");
+    }
 }
