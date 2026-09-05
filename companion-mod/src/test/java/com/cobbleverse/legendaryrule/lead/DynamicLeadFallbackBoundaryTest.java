@@ -58,4 +58,30 @@ class DynamicLeadFallbackBoundaryTest {
             });
         }, "Fatal Error must propagate and never be swallowed by the fallback boundary");
     }
+
+    @Test
+    void testHandlerRuntimeExceptionDoesNotPreventFallbackToOriginal() {
+        String original = "original_trainer_npc";
+
+        String result = DynamicLeadFallbackBoundary.execute(original, () -> {
+            throw new RuntimeException("Selection failure");
+        }, e -> {
+            throw new RuntimeException("Logging failure in callback");
+        });
+
+        assertSame(original, result, "Handler exception must be swallowed and still return original TrainerNPC");
+    }
+
+    @Test
+    void testHandlerErrorPropagatesAndIsNotCaught() {
+        String original = "original_trainer_npc";
+
+        assertThrows(LinkageError.class, () -> {
+            DynamicLeadFallbackBoundary.execute(original, () -> {
+                throw new RuntimeException("Selection failure");
+            }, e -> {
+                throw new LinkageError("Fatal linkage error in handler");
+            });
+        }, "Error thrown by handler must propagate and never be swallowed");
+    }
 }

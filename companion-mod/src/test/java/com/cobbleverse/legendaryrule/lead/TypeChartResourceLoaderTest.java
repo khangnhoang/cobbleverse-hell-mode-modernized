@@ -172,4 +172,43 @@ class TypeChartResourceLoaderTest {
         Optional<TypeChartData> opt = TypeChartResourceLoader.loadFromStream(matrixToStream(matrix));
         assertTrue(opt.isEmpty(), "Case-variant defender key 'Water' must be rejected");
     }
+
+    @Test
+    void testRejectExactDecimalNearCanonicalMultipliers() {
+        String validJson = new Gson().toJson(createValid18x18Matrix());
+
+        // 1.00000000000000001: not canonical, but rounds to 1.0 in IEEE 754 double
+        String jsonBad1 = validJson.replaceFirst("\"grass\":1.0", "\"grass\":1.00000000000000001");
+        InputStream stream1 = new ByteArrayInputStream(jsonBad1.getBytes(StandardCharsets.UTF_8));
+        Optional<TypeChartData> opt1 = TypeChartResourceLoader.loadFromStream(stream1);
+        assertTrue(opt1.isEmpty(), "1.00000000000000001 must be rejected before lossy double conversion");
+
+        // 0.50000000000000001: not canonical
+        String jsonBad2 = validJson.replaceFirst("\"grass\":1.0", "\"grass\":0.50000000000000001");
+        InputStream stream2 = new ByteArrayInputStream(jsonBad2.getBytes(StandardCharsets.UTF_8));
+        Optional<TypeChartData> opt2 = TypeChartResourceLoader.loadFromStream(stream2);
+        assertTrue(opt2.isEmpty(), "0.50000000000000001 must be rejected before lossy double conversion");
+
+        // 2.0000000000000001: not canonical
+        String jsonBad3 = validJson.replaceFirst("\"grass\":1.0", "\"grass\":2.0000000000000001");
+        InputStream stream3 = new ByteArrayInputStream(jsonBad3.getBytes(StandardCharsets.UTF_8));
+        Optional<TypeChartData> opt3 = TypeChartResourceLoader.loadFromStream(stream3);
+        assertTrue(opt3.isEmpty(), "2.0000000000000001 must be rejected before lossy double conversion");
+    }
+
+    @Test
+    void testAcceptEquivalentMathematicalRepresentations() {
+        String validJson = new Gson().toJson(createValid18x18Matrix());
+
+        // Replace with equivalent mathematical representations: 1, 1.00, 1e0
+        String modJson = validJson
+                .replaceFirst("\"normal\":1.0", "\"normal\":1")
+                .replaceFirst("\"fire\":1.0", "\"fire\":1.00")
+                .replaceFirst("\"water\":1.0", "\"water\":1e0");
+
+        InputStream stream = new ByteArrayInputStream(modJson.getBytes(StandardCharsets.UTF_8));
+        Optional<TypeChartData> opt = TypeChartResourceLoader.loadFromStream(stream);
+        assertTrue(opt.isPresent(), "Mathematically equivalent representations (1, 1.00, 1e0) must be accepted");
+        assertEquals(1.0, opt.get().getMultiplier("normal", "normal"));
+    }
 }

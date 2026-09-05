@@ -23,7 +23,11 @@ public final class DynamicLeadFallbackBoundary {
             return result != null ? result : original;
         } catch (Exception e) {
             if (exceptionHandler != null) {
-                exceptionHandler.accept(e);
+                try {
+                    exceptionHandler.accept(e);
+                } catch (Exception ignored) {
+                    // Swallow handler exception; do NOT catch or swallow Error
+                }
             }
             return original;
         }

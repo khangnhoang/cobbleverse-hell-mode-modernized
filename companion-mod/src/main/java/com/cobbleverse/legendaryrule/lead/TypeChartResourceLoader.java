@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +40,24 @@ public final class TypeChartResourceLoader {
         return loadFromStream(in);
     }
 
-    private static final java.util.Set<Double> VALID_MULTIPLIERS = java.util.Set.of(0.0, 0.25, 0.5, 1.0, 2.0, 4.0);
+    private static final BigDecimal BD_0 = BigDecimal.ZERO;
+    private static final BigDecimal BD_0_25 = new BigDecimal("0.25");
+    private static final BigDecimal BD_0_5 = new BigDecimal("0.5");
+    private static final BigDecimal BD_1 = BigDecimal.ONE;
+    private static final BigDecimal BD_2 = new BigDecimal("2");
+    private static final BigDecimal BD_4 = new BigDecimal("4");
+
+    private static boolean isCanonicalMultiplier(BigDecimal bd) {
+        if (bd == null) {
+            return false;
+        }
+        return bd.compareTo(BD_0) == 0
+            || bd.compareTo(BD_0_25) == 0
+            || bd.compareTo(BD_0_5) == 0
+            || bd.compareTo(BD_1) == 0
+            || bd.compareTo(BD_2) == 0
+            || bd.compareTo(BD_4) == 0;
+    }
 
     public static Optional<TypeChartData> loadFromStream(InputStream stream) {
         if (stream == null) {
@@ -77,10 +95,16 @@ public final class TypeChartResourceLoader {
                     if (valElem == null || !valElem.isJsonPrimitive() || !valElem.getAsJsonPrimitive().isNumber()) {
                         return Optional.empty();
                     }
-                    double mult = valElem.getAsDouble();
-                    if (!VALID_MULTIPLIERS.contains(mult)) {
+                    BigDecimal bd;
+                    try {
+                        bd = valElem.getAsBigDecimal();
+                    } catch (Exception e) {
                         return Optional.empty();
                     }
+                    if (!isCanonicalMultiplier(bd)) {
+                        return Optional.empty();
+                    }
+                    double mult = bd.doubleValue();
                     inner.put(def, mult);
                 }
                 table.put(att, inner);
