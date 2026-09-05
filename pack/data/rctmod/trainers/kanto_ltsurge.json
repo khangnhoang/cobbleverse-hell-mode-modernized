@@ -11,7 +11,7 @@
       "itemBias": 0.85,
       "maxSelectMargin": 0.15,
       "canTera": true,
-      "teraTarget": "toxtricity"
+      "teraTarget": "toxtricitylowkey"
     }
   },
   "battleRules": {
