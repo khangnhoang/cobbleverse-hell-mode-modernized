@@ -5,12 +5,15 @@ import com.cobblemon.mod.common.battles.ActiveBattlePokemon;
 import com.cobblemon.mod.common.battles.BattleSide;
 import com.cobblemon.mod.common.battles.ShowdownActionResponse;
 import com.cobblemon.mod.common.battles.ShowdownMoveset;
+import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
 import com.cobbleverse.legendaryrule.strategy.spread.SpreadMoveValuationContext;
+import com.cobbleverse.legendaryrule.strategy.tera.TeraTargetResolver;
 import com.gitlab.surilexa.rbrctai.api.ai.RunBunAI;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -21,10 +24,14 @@ import java.util.List;
 
 /**
  * Mixin into RunBunAI.choose() to provide invocation-local board-value aggregation
- * for allAdjacentFoes spread moves in Doubles without mutating MoveEvaluation.damage.
+ * for allAdjacentFoes spread moves in Doubles without mutating MoveEvaluation.damage,
+ * and ensure alive Doubles active partner teraTarget reserves the side's Terastallization.
  */
 @Mixin(value = RunBunAI.class, remap = false)
 public abstract class RunBunAIChooseMixin {
+
+    @Shadow
+    private String teraTarget;
 
     /**
      * Precomputes invocation-local rankingDamage and normalizedPressure maps for allAdjacentFoes moves
@@ -94,5 +101,30 @@ public abstract class RunBunAIChooseMixin {
             return ctx.getNormalizedPressure(move.getMove(), percentChange);
         }
         return percentChange;
+    }
+
+    /**
+     * Resolves whether the configured teraTarget is present and alive across the actor's full Pokemon list.
+     * In Doubles, an active partner Pokemon has canBeSentOut() == false, which causes native
+     * aliveParty filtering to incorrectly assume the teraTarget is absent/fainted.
+     * This hook ensures active and benched targets both correctly reserve the team's Terastallization.
+     */
+    @ModifyVariable(
+        method = "choose(Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/cobblemon/mod/common/api/battles/model/PokemonBattle;Lcom/cobblemon/mod/common/battles/BattleSide;Lcom/cobblemon/mod/common/battles/ShowdownMoveset;Z)Lcom/cobblemon/mod/common/battles/ShowdownActionResponse;",
+        at = @At(value = "STORE"),
+        name = "teraMatch",
+        remap = false
+    )
+    private BattlePokemon cobbleverse$resolveAliveTeraTarget(
+        BattlePokemon originalTeraMatch,
+        ActiveBattlePokemon activeBattlePokemon
+    ) {
+        if (activeBattlePokemon == null || activeBattlePokemon.getActor() == null || this.teraTarget == null || this.teraTarget.isEmpty()) {
+            return originalTeraMatch;
+        }
+        return TeraTargetResolver.resolveAliveTeraTarget(
+            activeBattlePokemon.getActor().getPokemonList(),
+            this.teraTarget
+        );
     }
 }

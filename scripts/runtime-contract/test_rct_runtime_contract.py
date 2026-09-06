@@ -319,22 +319,36 @@ def main():
         percent_start = percent_entries[0]['start'] if percent_entries else None
         move_in_scope = any(e['start'] <= percent_start < e['start'] + e['length'] for e in move_entries) if percent_start is not None else False
         checks.append(("RunBunAI.choose LVT 'move' in scope at percentChange store site", move_in_scope))
+
+        # Hook 4: teraMatch exists in LVT and bytecode stores to slot 42
+        tera_entries = [e for e in choose_lvt if e['name'] == 'teraMatch']
+        tera_exists = len(tera_entries) > 0 and 'BattlePokemon' in tera_entries[0]['sig']
+        checks.append(("RunBunAI.choose LVT 'teraMatch' (BattlePokemon) exists", tera_exists))
+
+        tera_store = "astore        42" in choose_code or "astore_w      42" in choose_code
+        checks.append(("RunBunAI.choose bytecode contains astore 42 for teraMatch", tera_store))
     else:
         checks.append(("RunBunAI.choose contains exactly 4 MoveEvaluation.getDamage calls", False))
         checks.append(("RunBunAI.choose LVT 'evaluations' in scope at first getDamage call", False))
         checks.append(("RunBunAI.choose LVT 'percentChange' (double) exists", False))
         checks.append(("RunBunAI.choose LVT 'move' in scope at percentChange store site", False))
+        checks.append(("RunBunAI.choose LVT 'teraMatch' (BattlePokemon) exists", False))
+        checks.append(("RunBunAI.choose bytecode contains astore 42 for teraMatch", False))
 
-    # Explicit @Local name selectors in companion RunBunAIChooseMixin
+    checks.append(("RunBunAI contains private String teraTarget field", "private java.lang.String teraTarget;" in runbun_javap))
+
+    # Explicit @Local and @ModifyVariable name selectors in companion RunBunAIChooseMixin
     mixin_source_path = os.path.join(repo_root, "companion-mod", "src", "main", "java", "com", "cobbleverse", "legendaryrule", "mixin", "RunBunAIChooseMixin.java")
     if os.path.exists(mixin_source_path):
         with open(mixin_source_path, "r", encoding="utf-8") as f:
             mixin_src = f.read()
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"evaluations\")", '@Local(name = "evaluations")' in mixin_src))
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"move\")", '@Local(name = "move")' in mixin_src))
+        checks.append(('RunBunAIChooseMixin declares @ModifyVariable targeting name = "teraMatch"', 'name = "teraMatch"' in mixin_src and 'cobbleverse$resolveAliveTeraTarget' in mixin_src))
     else:
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"evaluations\")", False))
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"move\")", False))
+        checks.append(('RunBunAIChooseMixin declares @ModifyVariable targeting name = "teraMatch"', False))
 
     # d) RunBunAI$MoveEvaluation methods
     eval_javap = get_class_javap(rbrctai_jar, "com/gitlab/surilexa/rbrctai/api/ai/RunBunAI$MoveEvaluation.class")
