@@ -194,6 +194,30 @@ def main():
     checks.append(("TrainerNPC copy constructor TrainerNPC(TrainerNPC)", has_copy_ctor))
     checks.append(("TrainerNPC.getTeam() returning Pokemon[]", has_get_team))
 
+    # 3b. RCTAPI: TrainerNPC 7-arg constructor used by RCTModMakeBattleMixin for per-battle NPC with wrapped BattleAI
+    #     TrainerNPC(Text, Pokemon[], GimmicksMap, TrainerBag, Identifier, BattleAI, LivingEntity)
+    #     Descriptor derived from javap on installed rctapi-fabric jar bytecode, not from memory.
+    #     javap -v outputs descriptor on a separate line, so we match the descriptor string directly.
+    seven_arg_ctor_descriptor = (
+        "(Lcom/gitlab/srcmc/rctapi/api/util/Text;"
+        "[Lcom/cobblemon/mod/common/pokemon/Pokemon;"
+        "Lcom/gitlab/srcmc/rctapi/api/trainer/TrainerNPC$GimmicksMap;"
+        "Lcom/gitlab/srcmc/rctapi/api/trainer/TrainerBag;"
+        "Lnet/minecraft/class_2960;"
+        "Lcom/cobblemon/mod/common/api/battles/model/ai/BattleAI;"
+        "Lnet/minecraft/class_1309;)V"
+    )
+    has_seven_arg_ctor = seven_arg_ctor_descriptor in trainer_npc_javap
+    checks.append(("TrainerNPC 7-arg constructor (Text, Pokemon[], GimmicksMap, TrainerBag, Identifier, BattleAI, LivingEntity)", has_seven_arg_ctor))
+
+    # 3c. RCTAPI: Getter methods production calls to feed into the 7-arg constructor (RCTModMakeBattleMixin lines 64-70)
+    checks.append(("TrainerNPC.getName() returning Text", "getName()" in trainer_npc_javap and "com.gitlab.srcmc.rctapi.api.util.Text" in trainer_npc_javap))
+    checks.append(("TrainerNPC.getGimmicks() returning GimmicksMap", "getGimmicks()" in trainer_npc_javap and "GimmicksMap" in trainer_npc_javap))
+    checks.append(("TrainerNPC.getBag() returning TrainerBag", "getBag()" in trainer_npc_javap and "TrainerBag" in trainer_npc_javap))
+    checks.append(("TrainerNPC.getBattleTheme() returning Identifier", "getBattleTheme()" in trainer_npc_javap and "class_2960" in trainer_npc_javap))
+    checks.append(("TrainerNPC.getBattleAI() returning BattleAI", "getBattleAI()" in trainer_npc_javap and "BattleAI" in trainer_npc_javap))
+    checks.append(("TrainerNPC.getEntity() returning LivingEntity", "getEntity()" in trainer_npc_javap and "class_1309" in trainer_npc_javap))
+
     # 4. RCTAPI: BattleManager.startBattle
     battle_mgr_javap = get_class_javap(rctapi_jar, "com/gitlab/srcmc/rctapi/api/battle/BattleManager.class")
     has_start_battle = "startBattle(" in battle_mgr_javap
@@ -215,6 +239,19 @@ def main():
     checks.append(("Species.getName()", "getName()" in species_javap))
     checks.append(("FormData.getName()", "getName()" in form_javap))
     checks.append(("ElementalType.getName()", "getName()" in type_javap))
+
+    # 7. Cobblemon: EndItem Hook Contracts (CobblemonHeldItemManager.handleEndInstruction, BattleMessage.effectAt, Effect.getId)
+    item_mgr_javap = get_class_javap(cobblemon_jar, "com/cobblemon/mod/common/pokemon/helditem/CobblemonHeldItemManager.class")
+    handle_end_desc = "(Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/cobblemon/mod/common/api/battles/model/PokemonBattle;Lcom/cobblemon/mod/common/api/battles/interpreter/BattleMessage;)V"
+    checks.append(("CobblemonHeldItemManager.handleEndInstruction(BattlePokemon, PokemonBattle, BattleMessage)V", handle_end_desc in item_mgr_javap))
+
+    battle_msg_javap = get_class_javap(cobblemon_jar, "com/cobblemon/mod/common/api/battles/interpreter/BattleMessage.class")
+    effect_at_desc = "(I)Lcom/cobblemon/mod/common/api/battles/interpreter/Effect;"
+    checks.append(("BattleMessage.effectAt(int) returning Effect", effect_at_desc in battle_msg_javap))
+
+    effect_javap = get_class_javap(cobblemon_jar, "com/cobblemon/mod/common/api/battles/interpreter/Effect.class")
+    get_id_desc = "()Ljava/lang/String;"
+    checks.append(("Effect.getId() returning String", get_id_desc in effect_javap and "getId()" in effect_javap))
 
     # Evaluate checks
     failed = False

@@ -5,6 +5,10 @@ import com.cobbleverse.legendaryrule.lead.DynamicLeadFallbackBoundary;
 import com.cobbleverse.legendaryrule.lead.LeadSelectionResult;
 import com.cobbleverse.legendaryrule.lead.LeadSelectionService;
 import com.cobbleverse.legendaryrule.lead.RosterOrderer;
+import com.cobbleverse.legendaryrule.strategy.adapter.CobblemonTurnContextAdapter;
+import com.cobbleverse.legendaryrule.strategy.decorator.StrategicBattleAIDecorator;
+import com.cobbleverse.legendaryrule.strategy.domain.BattleStrategyPolicy;
+import com.cobbleverse.legendaryrule.strategy.registry.TrainerStrategyRegistry;
 import com.gitlab.srcmc.rctapi.api.trainer.TrainerNPC;
 import com.gitlab.srcmc.rctmod.api.RCTMod;
 import com.gitlab.srcmc.rctmod.world.entities.TrainerMob;
@@ -39,17 +43,35 @@ public abstract class RCTModMakeBattleMixin {
 
         return DynamicLeadFallbackBoundary.execute(original, () -> {
             Optional<LeadSelectionResult> optResult = LeadSelectionService.selectLead(trainerId, team, player);
-            if (optResult.isEmpty()) {
+            Optional<BattleStrategyPolicy> optStrategy = TrainerStrategyRegistry.getPolicy(trainerId);
+
+            if (optResult.isEmpty() && optStrategy.isEmpty()) {
                 return original;
             }
 
-            LeadSelectionResult result = optResult.get();
             // Clone TrainerNPC to ensure zero global mutation across battles and players
             TrainerNPC perBattleNPC = new TrainerNPC(original);
-            Pokemon[] reordered = RosterOrderer.reorder(perBattleNPC.getTeam(), result.selectedAttempt().leadSlots(), Pokemon[]::new);
-            System.arraycopy(reordered, 0, perBattleNPC.getTeam(), 0, reordered.length);
+
+            if (optResult.isPresent()) {
+                LeadSelectionResult result = optResult.get();
+                Pokemon[] reordered = RosterOrderer.reorder(perBattleNPC.getTeam(), result.selectedAttempt().leadSlots(), Pokemon[]::new);
+                System.arraycopy(reordered, 0, perBattleNPC.getTeam(), 0, reordered.length);
+            }
+
+            if (optStrategy.isPresent()) {
+                BattleStrategyPolicy policy = optStrategy.get();
+                perBattleNPC = new TrainerNPC(
+                    perBattleNPC.getName(),
+                    perBattleNPC.getTeam(),
+                    perBattleNPC.getGimmicks(),
+                    perBattleNPC.getBag(),
+                    perBattleNPC.getBattleTheme(),
+                    new StrategicBattleAIDecorator(perBattleNPC.getBattleAI(), policy, CobblemonTurnContextAdapter.INSTANCE),
+                    perBattleNPC.getEntity()
+                );
+            }
 
             return perBattleNPC;
-        }, e -> LOGGER.error("[HellMode-Lead] Unexpected error during dynamic lead selection for trainer '{}'. Falling back to original TrainerNPC.", trainerId, e));
+        }, e -> LOGGER.error("[HellMode-Customization] Unexpected error during trainer customization for trainer '{}'. Falling back to original TrainerNPC.", trainerId, e));
     }
 }
