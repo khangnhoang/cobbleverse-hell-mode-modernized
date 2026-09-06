@@ -14,6 +14,7 @@ import com.cobbleverse.legendaryrule.strategy.decorator.TurnContextExtractor;
 import com.cobbleverse.legendaryrule.strategy.domain.BattleTurnContext;
 import com.cobbleverse.legendaryrule.strategy.domain.StrategicMoveContext;
 import com.cobbleverse.legendaryrule.strategy.domain.StrategicOpponentContext;
+import com.cobbleverse.legendaryrule.strategy.tracker.BattleItemStateTracker;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -58,11 +59,7 @@ public class CobblemonTurnContextAdapter implements TurnContextExtractor {
         String activePokemonShowdownId = effectedPokemon.showdownId();
 
         // 2. Held Item Showdown ID
-        String heldItemShowdownId = null;
-        HeldItemManager itemManager = battlePokemon.getHeldItemManager();
-        if (itemManager != null) {
-            heldItemShowdownId = itemManager.showdownId(battlePokemon);
-        }
+        String heldItemShowdownId = resolveEffectiveHeldItemId(battlePokemon);
 
         // 3. Moves
         List<StrategicMoveContext> moves = new ArrayList<>();
@@ -157,5 +154,24 @@ public class CobblemonTurnContextAdapter implements TurnContextExtractor {
         }
 
         return false;
+    }
+
+    public String resolveEffectiveHeldItemId(@Nullable BattlePokemon battlePokemon) {
+        if (battlePokemon == null) {
+            return null;
+        }
+        HeldItemManager itemManager = battlePokemon.getHeldItemManager();
+        if (itemManager == null) {
+            return null;
+        }
+        String rawId = itemManager.showdownId(battlePokemon);
+        if ("throatspray".equalsIgnoreCase(rawId)) {
+            if (battlePokemon instanceof BattleItemStateTracker tracker && !tracker.cobbleverse$isThroatSprayEnded()) {
+                return rawId;
+            }
+            // Ended OR tracker missing: fail-safe to native AI
+            return null;
+        }
+        return rawId;
     }
 }

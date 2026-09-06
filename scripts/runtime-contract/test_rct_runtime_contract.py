@@ -240,6 +240,19 @@ def main():
     checks.append(("FormData.getName()", "getName()" in form_javap))
     checks.append(("ElementalType.getName()", "getName()" in type_javap))
 
+    # 7. Cobblemon: EndItem Hook Contracts (CobblemonHeldItemManager.handleEndInstruction, BattleMessage.effectAt, Effect.getId)
+    item_mgr_javap = get_class_javap(cobblemon_jar, "com/cobblemon/mod/common/pokemon/helditem/CobblemonHeldItemManager.class")
+    handle_end_desc = "(Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/cobblemon/mod/common/api/battles/model/PokemonBattle;Lcom/cobblemon/mod/common/api/battles/interpreter/BattleMessage;)V"
+    checks.append(("CobblemonHeldItemManager.handleEndInstruction(BattlePokemon, PokemonBattle, BattleMessage)V", handle_end_desc in item_mgr_javap))
+
+    battle_msg_javap = get_class_javap(cobblemon_jar, "com/cobblemon/mod/common/api/battles/interpreter/BattleMessage.class")
+    effect_at_desc = "(I)Lcom/cobblemon/mod/common/api/battles/interpreter/Effect;"
+    checks.append(("BattleMessage.effectAt(int) returning Effect", effect_at_desc in battle_msg_javap))
+
+    effect_javap = get_class_javap(cobblemon_jar, "com/cobblemon/mod/common/api/battles/interpreter/Effect.class")
+    get_id_desc = "()Ljava/lang/String;"
+    checks.append(("Effect.getId() returning String", get_id_desc in effect_javap and "getId()" in effect_javap))
+
     # Evaluate checks
     failed = False
     for desc, passed in checks:

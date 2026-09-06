@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "TrainerMobMixin",
-    "RCTModMakeBattleMixin"
+    "RCTModMakeBattleMixin",
+    "BattlePokemonMixin",
+    "CobblemonHeldItemManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

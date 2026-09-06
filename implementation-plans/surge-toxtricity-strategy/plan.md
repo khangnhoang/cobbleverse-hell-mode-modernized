@@ -138,10 +138,10 @@ Overdrive targets `MoveTarget.allAdjacentFoes`. In Cobblemon / Run & Bun convent
 Cobblemon serializes this as `"move $moveIndex"`, and Showdown applies damage to all adjacent foes without requiring a specific target slot.
 
 ### Contract 5: Authoritative Runtime Item State
-Throat Spray consumption is checked directly from:
-`activeBattlePokemon.getHeldItemManager().showdownId(activeBattlePokemon)`
-- `"throatspray"` $\rightarrow$ eligible for strategy.
-- `null` or other $\rightarrow$ ineligible, strategy drops out, 100% pass-through to Run & Bun AI.
+In-battle Throat Spray consumption is authoritative only when confirmed by Showdown's `|-enditem|` message (captured via `BattleItemStateTracker` on `BattlePokemon`). Entity-level `Pokemon.heldItem` is persistent inventory state and must not be used alone for post-consumption eligibility:
+- `HeldItemManager.showdownId()` exposes configured item (`"throatspray"`).
+- `BattleItemStateTracker.cobbleverse$isThroatSprayEnded() == false` $\rightarrow$ eligible for strategy.
+- When `cobbleverse$isThroatSprayEnded() == true` (or if tracker is absent) $\rightarrow$ adapter exposes `heldItemShowdownId = null`, strategy drops out, 100% pass-through to Run & Bun AI.
 
 ### Contract 6: Move Legality via Canonical In-Battle State
 Use the same canonical in-battle move-usability primitive used by the current Cobblemon/R&B decision path.
