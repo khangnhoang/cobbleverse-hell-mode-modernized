@@ -267,6 +267,8 @@ def main():
             declared_mixins = mixins_data.get("mixins", [])
             checks.append(("rct_legendary_rule.mixins.json declares PokeMathMaxMixin", "PokeMathMaxMixin" in declared_mixins))
             checks.append(("rct_legendary_rule.mixins.json declares RunBunAIChooseMixin", "RunBunAIChooseMixin" in declared_mixins))
+            checks.append(("rct_legendary_rule.mixins.json declares ActiveBattlePokemonMixin", "ActiveBattlePokemonMixin" in declared_mixins))
+            checks.append(("rct_legendary_rule.mixins.json declares RunBunAIFairLifecycleMixin", "RunBunAIFairLifecycleMixin" in declared_mixins))
 
     # b) PokeMathMax descriptors and slot 2 read
     pokemath_javap = get_class_javap(rbrctai_jar, "com/gitlab/surilexa/rbrctai/api/ai/utils/PokeMathMax.class")
@@ -348,10 +350,18 @@ def main():
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"evaluations\")", '@Local(name = "evaluations")' in mixin_src))
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"move\")", '@Local(name = "move")' in mixin_src))
         checks.append(('RunBunAIChooseMixin declares @ModifyVariable targeting name = "teraMatch"', 'name = "teraMatch"' in mixin_src and 'cobbleverse$resolveAliveTeraTarget' in mixin_src))
+        checks.append(('RunBunAIChooseMixin declares @WrapOperation recharge guard (cobbleverse$guardRechargeOppMovesGetFirst)', 'cobbleverse$guardRechargeOppMovesGetFirst' in mixin_src and 'generalSetupMoves' in mixin_src))
+        checks.append(('RunBunAIChooseMixin declares fallback @WrapOperation (cobbleverse$guardRechargeMoveGetName)', 'cobbleverse$guardRechargeMoveGetName' in mixin_src))
     else:
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"evaluations\")", False))
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"move\")", False))
         checks.append(('RunBunAIChooseMixin declares @ModifyVariable targeting name = "teraMatch"', False))
+        checks.append(('RunBunAIChooseMixin declares @WrapOperation recharge guard (cobbleverse$guardRechargeOppMovesGetFirst)', False))
+        checks.append(('RunBunAIChooseMixin declares fallback @WrapOperation (cobbleverse$guardRechargeMoveGetName)', False))
+
+    # Native RunBunAI.choose contains the unguarded getFirst() recharge check call
+    has_recharge_slice = 'String truant' in runbun_javap and 'String recharge' in runbun_javap and 'java/util/List.getFirst:()Ljava/lang/Object;' in runbun_javap
+    checks.append(("RunBunAI.choose bytecode contains recharge check slice (truant -> getFirst -> Move.getName -> recharge)", has_recharge_slice))
 
     # d) RunBunAI$MoveEvaluation methods
     eval_javap = get_class_javap(rbrctai_jar, "com/gitlab/surilexa/rbrctai/api/ai/RunBunAI$MoveEvaluation.class")
@@ -365,6 +375,25 @@ def main():
     movetarget_javap = get_class_javap(cobblemon_jar, "com/cobblemon/mod/common/battles/MoveTarget.class")
     checks.append(("MoveTarget.allAdjacentFoes exists", "allAdjacentFoes" in movetarget_javap))
     checks.append(("MoveTarget.allAdjacent exists", "allAdjacent" in movetarget_javap))
+
+    # 9. Fair Opponent Information Boundary Contracts
+    abp_javap = get_class_javap(cobblemon_jar, "com/cobblemon/mod/common/battles/ActiveBattlePokemon.class")
+    checks.append(("ActiveBattlePokemon.getBattlePokemon() returning BattlePokemon", "public final com.cobblemon.mod.common.battles.pokemon.BattlePokemon getBattlePokemon();" in abp_javap))
+    checks.append(("ActiveBattlePokemon.getSide() returning BattleSide", "public final com.cobblemon.mod.common.battles.BattleSide getSide();" in abp_javap))
+
+    bp_javap = get_class_javap(cobblemon_jar, "com/cobblemon/mod/common/battles/pokemon/BattlePokemon.class")
+    bp_ctor_found = any("BattlePokemon(com.cobblemon.mod.common.pokemon.Pokemon, com.cobblemon.mod.common.pokemon.Pokemon, java.util.List" in line for line in bp_javap.splitlines())
+    checks.append(("BattlePokemon 4-arg constructor", bp_ctor_found))
+    checks.append(("BattlePokemon.getStatChanges() returning Map", "getStatChanges();" in bp_javap))
+    checks.append(("BattlePokemon.getActor() returning BattleActor", "public final com.cobblemon.mod.common.api.battles.model.actor.BattleActor getActor();" in bp_javap))
+
+    checks.append(("Pokemon.setSpecies(Species)", "public final void setSpecies(com.cobblemon.mod.common.pokemon.Species);" in pokemon_javap))
+    checks.append(("Pokemon.setForm(FormData)", "public final void setForm(com.cobblemon.mod.common.pokemon.FormData);" in pokemon_javap))
+    checks.append(("Pokemon.setLevel(int)", "public final void setLevel(int);" in pokemon_javap))
+    checks.append(("Pokemon.setCurrentHealth(int)", "public final void setCurrentHealth(int);" in pokemon_javap))
+    checks.append(("Pokemon.setGender(Gender)", "public final void setGender(com.cobblemon.mod.common.pokemon.Gender);" in pokemon_javap))
+    checks.append(("Pokemon.setShiny(boolean)", "public final void setShiny(boolean);" in pokemon_javap))
+    checks.append(("Pokemon.getUuid() returning UUID", "public final java.util.UUID getUuid();" in pokemon_javap))
 
     # Evaluate checks
     failed = False
