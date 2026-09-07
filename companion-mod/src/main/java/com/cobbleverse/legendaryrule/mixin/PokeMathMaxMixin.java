@@ -1,20 +1,25 @@
 package com.cobbleverse.legendaryrule.mixin;
 
 import com.cobblemon.mod.common.api.moves.Move;
+import com.cobblemon.mod.common.api.types.ElementalType;
 import com.cobblemon.mod.common.battles.ActiveBattlePokemon;
 import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
+import com.cobbleverse.legendaryrule.strategy.guard.RedirectAbilityGuard;
 import com.gitlab.surilexa.rbrctai.api.ai.utils.PokeMathMax;
 import com.gitlab.surilexa.rbrctai.api.ai.utils.RBStatStages;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Fixes the Run & Bun AI spread damage calculation bug where spread damage
- * was multiplied twice by targets (0.75 * 0.75 = 0.5625).
- * Invokes private damage(...) with multiTarget=false so internal targets multiplier
- * remains 1.0, and applies the 0.75 spread multiplier exactly once.
+ * Mixin into PokeMathMax:
+ * 1. Fixes Run & Bun AI spread damage calculation bug where spread damage
+ *    was multiplied twice by targets (0.75 * 0.75 = 0.5625).
+ * 2. Vetoes redirected single-target moves (Storm Drain / Lightning Rod) by returning
+ *    0.0 damage and marking candidate immunity as true.
  */
 @Mixin(value = PokeMathMax.class, remap = false)
 public abstract class PokeMathMaxMixin {
@@ -38,7 +43,31 @@ public abstract class PokeMathMaxMixin {
         BattlePokemon defender, RBStatStages statStages, ActiveBattlePokemon activeBattlePokemon,
         boolean predictTera, boolean isAttacker
     ) {
+        if (RedirectAbilityGuard.isMoveRedirected(move, attacker, defender, activeBattlePokemon)) {
+            return 0.0d;
+        }
+
         double rawDamage = damage(move, physical, false, parentalBond, glaiveRush, burn, zmove, reflect, lightscreen, attacker, defender, statStages, activeBattlePokemon, predictTera, isAttacker);
         return multiTarget ? rawDamage * 0.75d : rawDamage;
+    }
+
+    @Inject(
+        method = "isImmuneCheck(Lcom/cobblemon/mod/common/api/moves/Move;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/cobblemon/mod/common/api/types/ElementalType;Z)Z",
+        at = @At("HEAD"),
+        cancellable = true,
+        remap = false
+    )
+    private static void cobbleverse$guardRedirectImmunity(
+        Move move,
+        BattlePokemon attacker,
+        BattlePokemon defender,
+        ActiveBattlePokemon abp,
+        ElementalType teraType,
+        boolean predictTera,
+        CallbackInfoReturnable<Boolean> cir
+    ) {
+        if (RedirectAbilityGuard.isMoveRedirected(move, attacker, defender, abp)) {
+            cir.setReturnValue(true);
+        }
     }
 }
