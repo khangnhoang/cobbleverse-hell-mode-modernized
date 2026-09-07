@@ -460,4 +460,67 @@ class LeadSelectionConfigTest {
         assertEquals(0, att2.baseWeight());
         assertTrue(att2.expectedLeadMembers().get(0).requiredAspects().isEmpty());
     }
+
+    @Test
+    void testFavoredAgainstAndSpeciesParsing() {
+        String json = """
+        {
+          "trainers": {
+            "kanto_erika": {
+              "attempts": [
+                {
+                  "id": "rain_swift_swim",
+                  "leadSlots": [0, 1],
+                  "baseWeight": 1,
+                  "favoredAgainst": ["FIRE"],
+                  "favoredAgainstSpecies": ["Charizard", "gastrodon"]
+                },
+                {
+                  "id": "bad_favored_against",
+                  "leadSlots": [0, 1],
+                  "favoredAgainst": "not_an_array"
+                }
+              ]
+            }
+          }
+        }
+        """;
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+        LeadSelectionConfig.loadFromJson(root);
+
+        Optional<TrainerLeadConfig> opt = LeadSelectionConfig.getTrainerConfig("kanto_erika");
+        assertTrue(opt.isPresent());
+        assertEquals(1, opt.get().attempts().size(), "Malformed favoredAgainst must drop bad_favored_against attempt");
+
+        LeadAttempt att = opt.get().attempts().get(0);
+        assertEquals("rain_swift_swim", att.id());
+        assertEquals(List.of("fire"), att.favoredAgainst());
+        assertEquals(List.of("charizard", "gastrodon"), att.favoredAgainstSpecies());
+    }
+
+    @Test
+    void testSetDatapackTrainerConfigsAtomicSwap() {
+        LeadAttempt attempt = new LeadAttempt("att1", new int[]{0, 1}, 0, List.of(), "desc");
+        TrainerLeadConfig config = new TrainerLeadConfig(List.of(attempt));
+
+        LeadSelectionConfig.setDatapackTrainerConfigs(java.util.Map.of("kanto_erika", config));
+
+        Optional<TrainerLeadConfig> opt = LeadSelectionConfig.getTrainerConfig("kanto_erika");
+        assertTrue(opt.isPresent());
+        assertEquals("att1", opt.get().attempts().get(0).id());
+
+        // Set to empty map
+        LeadSelectionConfig.setDatapackTrainerConfigs(java.util.Map.of());
+        assertFalse(LeadSelectionConfig.getTrainerConfig("kanto_erika").isPresent());
+    }
+
+    @Test
+    void testDynamicLeadEnabledDelegatesToCompanionConfig() {
+        com.cobbleverse.legendaryrule.CompanionConfig.setDynamicLeadEnabled(false);
+        assertFalse(LeadSelectionConfig.isEnabled());
+
+        LeadSelectionConfig.setEnabled(true);
+        assertTrue(com.cobbleverse.legendaryrule.CompanionConfig.isDynamicLeadEnabled());
+        assertTrue(LeadSelectionConfig.isEnabled());
+    }
 }

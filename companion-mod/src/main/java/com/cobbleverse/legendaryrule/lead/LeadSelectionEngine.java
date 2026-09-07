@@ -50,6 +50,10 @@ public final class LeadSelectionEngine {
 
             int offScore = 0;
             int defScore = 0;
+            int typeFavoredBonus = 0;
+            int speciesFavoredBonus = 0;
+            List<String> favoredTypes = attempt.favoredAgainst();
+            List<String> favoredSpecies = attempt.favoredAgainstSpecies();
 
             for (PlayerLeadTyping player : playerLeads) {
                 List<String> pTypes = player.types();
@@ -58,10 +62,26 @@ public final class LeadSelectionEngine {
 
                 defScore += scorer.scorePlayerVsNpc(pTypes, typesA);
                 defScore += scorer.scorePlayerVsNpc(pTypes, typesB);
+
+                if (favoredTypes != null && !favoredTypes.isEmpty()) {
+                    for (String pt : pTypes) {
+                        if (favoredTypes.contains(pt)) {
+                            typeFavoredBonus += 2;
+                            break;
+                        }
+                    }
+                }
+
+                if (favoredSpecies != null && !favoredSpecies.isEmpty()) {
+                    String pSpec = player.species();
+                    if (pSpec != null && favoredSpecies.contains(pSpec)) {
+                        speciesFavoredBonus += 2;
+                    }
+                }
             }
 
-            int total = offScore + defScore + attempt.baseWeight();
-            AttemptScore evidence = new AttemptScore(attempt.id(), offScore, defScore, attempt.baseWeight(), total);
+            int total = offScore + defScore + attempt.baseWeight() + typeFavoredBonus + speciesFavoredBonus;
+            AttemptScore evidence = new AttemptScore(attempt.id(), offScore, defScore, attempt.baseWeight(), typeFavoredBonus, speciesFavoredBonus, total);
             evidenceList.add(evidence);
             scoredList.add(new ScoredAttempt(attempt, total, attempt.baseWeight(), i));
         }

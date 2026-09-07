@@ -23,19 +23,9 @@ public class LegendaryRuleMod implements DedicatedServerModInitializer {
         CommandRegistrationCallback.EVENT.register(HellModeCommand::register);
         LOGGER.info("RCT Legendary Rule Companion initialized (active limit: {}).", CompanionConfig.getMaxLegendaryMythical());
 
-        // Initialize Dynamic Trainer Lead Selection Presets
-        try {
-            java.nio.file.Path configPath = net.fabricmc.loader.api.FabricLoader.getInstance()
-                    .getConfigDir().resolve(LeadSelectionConfig.CONFIG_FILENAME);
-            LeadSelectionConfig.ConfigLoadResult configResult = LeadSelectionConfig.load(configPath);
-            if (!configResult.success()) {
-                LOGGER.warn("Failed to load dynamic lead presets from {}: {}. Dynamic lead presets inactive.", configPath, configResult.errorMessage());
-            } else {
-                LOGGER.info("Loaded dynamic lead presets for {} trainers from {}", configResult.loadedTrainersCount(), configPath);
-            }
-        } catch (Exception e) {
-            LOGGER.error("Failed to initialize lead selection configuration: {}", e.getMessage(), e);
-        }
+        // Register Dynamic Trainer Lead Presets Datapack Reload Listener
+        net.fabricmc.fabric.api.resource.ResourceManagerHelper.get(net.minecraft.resource.ResourceType.SERVER_DATA)
+                .registerReloadListener(new com.cobbleverse.legendaryrule.lead.DynamicLeadResourceListener());
 
         Optional<TypeChartData> typeChartOpt = TypeChartResourceLoader.loadDefault();
         if (typeChartOpt.isPresent()) {

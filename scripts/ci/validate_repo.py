@@ -21,6 +21,12 @@ ALLOWED_STATUSES = {
     "NEEDS_RUNTIME_TEST"
 }
 
+VALID_TYPES = {
+    "normal", "fire", "water", "grass", "electric", "ice",
+    "fighting", "poison", "ground", "flying", "psychic", "bug",
+    "rock", "ghost", "dragon", "steel", "dark", "fairy"
+}
+
 EXPECTED_REPORTS = [
     "current-baseline.json",
     "trainer-inventory.json",
@@ -257,6 +263,12 @@ def validate_future_pack(repo_root):
             with open(asp_path, "r", encoding="utf-8") as f:
                 forbidden_aspects = {k.lower() for k, v in json.load(f).get("aspect_combinations", {}).items() if v.get("status") == "INVALID_UNIQUE_CANONICAL_MATCH"}
 
+        sp_path = os.path.join(compat_reports_dir, "species.json")
+        valid_species = set()
+        if os.path.exists(sp_path):
+            with open(sp_path, "r", encoding="utf-8") as f:
+                valid_species = {k.lower() for k in json.load(f).get("species", {}).keys()}
+
     # 4. trainer JSON syntax, structure & semantic validation
     count = 0
     errors = []
@@ -302,6 +314,94 @@ def validate_future_pack(repo_root):
 
                             if isinstance(p.get("gimmicks"), dict) and "mega" in p["gimmicks"]:
                                 errors.append(f"{f}: contains invalid 'mega' key in 'gimmicks' record")
+
+                        if "leadPresets" in d:
+                            presets = d["leadPresets"]
+                            if not isinstance(presets, list):
+                                errors.append(f"{f}: 'leadPresets' must be a list")
+                            else:
+                                team_len = len(d["team"])
+                                for p_idx, preset in enumerate(presets):
+                                    if not isinstance(preset, dict):
+                                        errors.append(f"{f}: leadPresets[{p_idx}] must be a dict")
+                                        continue
+                                    pid = preset.get("id")
+                                    if not pid or not isinstance(pid, str) or not pid.strip():
+                                        errors.append(f"{f}: leadPresets[{p_idx}] missing valid 'id'")
+
+                                    slots = preset.get("leadSlots")
+                                    if not isinstance(slots, list) or len(slots) != 2 or not all(isinstance(x, int) and not isinstance(x, bool) for x in slots):
+                                        errors.append(f"{f}: preset '{pid}' leadSlots must be a list of 2 integers")
+                                        continue
+
+                                    if slots[0] < 0 or slots[0] >= team_len or slots[1] < 0 or slots[1] >= team_len:
+                                        errors.append(f"{f}: preset '{pid}' leadSlots [{slots[0]}, {slots[1]}] out of bounds for team of size {team_len}")
+                                    if slots[0] == slots[1]:
+                                        errors.append(f"{f}: preset '{pid}' leadSlots must be distinct, got {slots}")
+
+                                    if "baseWeight" in preset:
+                                        bw = preset["baseWeight"]
+                                        if not isinstance(bw, int) or isinstance(bw, bool) or bw < -2 or bw > 2:
+                                            errors.append(f"{f}: preset '{pid}' baseWeight must be an integer in [-2, 2], got {bw}")
+
+                                    if "favoredAgainst" in preset:
+                                        fa = preset["favoredAgainst"]
+                                        if not isinstance(fa, list):
+                                            errors.append(f"{f}: preset '{pid}' favoredAgainst must be a list")
+                                        else:
+                                            for t in fa:
+                                                if not isinstance(t, str) or t.strip().lower() not in VALID_TYPES:
+                                                    errors.append(f"{f}: preset '{pid}' favoredAgainst contains invalid type '{t}'")
+
+                                    if "favoredAgainstSpecies" in preset:
+                                        fas = preset["favoredAgainstSpecies"]
+                                        if not isinstance(fas, list):
+                                            errors.append(f"{f}: preset '{pid}' favoredAgainstSpecies must be a list")
+                                        else:
+                                            for sp_item in fas:
+                                                if not isinstance(sp_item, str) or not sp_item.strip():
+                                                    errors.append(f"{f}: preset '{pid}' favoredAgainstSpecies contains empty or non-string entry")
+                                                elif valid_species and sp_item.strip().lower() not in valid_species:
+                                                    errors.append(f"{f}: preset '{pid}' favoredAgainstSpecies contains unknown species '{sp_item}'")
+
+                                    if "expectedLeadMembers" in preset:
+                                        exp = preset["expectedLeadMembers"]
+                                        if not isinstance(exp, list) or len(exp) != 2:
+                                            errors.append(f"{f}: preset '{pid}' expectedLeadMembers must be a list of 2 members")
+                                        else:
+                                            for idx, exp_m in enumerate(exp):
+                                                if not isinstance(exp_m, dict):
+                                                    errors.append(f"{f}: preset '{pid}' expectedLeadMembers[{idx}] must be a dict")
+                                                    continue
+                                                exp_sp = exp_m.get("species")
+                                                if not exp_sp or not isinstance(exp_sp, str):
+                                                    errors.append(f"{f}: preset '{pid}' expectedLeadMembers[{idx}] missing 'species'")
+                                                    continue
+                                                actual_slot = slots[idx]
+                                                if 0 <= actual_slot < team_len:
+                                                    actual_mon = d["team"][actual_slot]
+                                                    actual_sp = actual_mon.get("species", "").lower()
+                                                    if exp_sp.strip().lower() != actual_sp:
+                                                        errors.append(f"{f}: preset '{pid}' expected member {idx} species '{exp_sp}' does not match slot {actual_slot} '{actual_sp}'")
+
+                                                    if "form" in exp_m and exp_m["form"] is not None:
+                                                        exp_form = str(exp_m["form"]).strip().lower()
+                                                        if "form" in actual_mon and actual_mon["form"] is not None:
+                                                            actual_form = str(actual_mon.get("form", "")).strip().lower()
+                                                            if exp_form != actual_form:
+                                                                errors.append(f"{f}: preset '{pid}' expected member {idx} form '{exp_form}' does not match slot {actual_slot} '{actual_form}'")
+
+                                                    if "requiredAspects" in exp_m and exp_m["requiredAspects"] is not None:
+                                                        req_asp = exp_m["requiredAspects"]
+                                                        if not isinstance(req_asp, list):
+                                                            errors.append(f"{f}: preset '{pid}' expected member {idx} requiredAspects must be a list")
+                                                        else:
+                                                            actual_aspects = {str(a).strip().lower() for a in actual_mon.get("aspects", [])}
+                                                            if "gender" in actual_mon and actual_mon["gender"]:
+                                                                actual_aspects.add(str(actual_mon["gender"]).strip().lower())
+                                                            for a in req_asp:
+                                                                if str(a).strip().lower() not in actual_aspects:
+                                                                    errors.append(f"{f}: preset '{pid}' expected member {idx} aspect '{a}' missing on slot {actual_slot}")
                 except Exception as e:
                     errors.append(f"{f}: JSON parse error: {e}")
 

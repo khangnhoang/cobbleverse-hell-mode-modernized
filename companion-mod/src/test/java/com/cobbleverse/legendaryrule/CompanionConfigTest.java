@@ -86,5 +86,33 @@ public class CompanionConfigTest {
         Files.writeString(testConfigPath, "{\"maxLegendaryMythical\": 99}");
         CompanionConfig.load(testConfigPath);
         assertEquals(1, CompanionConfig.getMaxLegendaryMythical());
+        assertTrue(CompanionConfig.isDynamicLeadEnabled());
+    }
+
+    @Test
+    public void testDynamicLeadEnabledDefaultAndToggle() {
+        assertTrue(CompanionConfig.isDynamicLeadEnabled());
+        CompanionConfig.setDynamicLeadEnabled(false);
+        assertFalse(CompanionConfig.isDynamicLeadEnabled());
+        CompanionConfig.setDynamicLeadEnabled(true);
+        assertTrue(CompanionConfig.isDynamicLeadEnabled());
+    }
+
+    @Test
+    public void testDynamicLeadEnabledSaveAndLoad() {
+        CompanionConfig.setDynamicLeadEnabled(false);
+        CompanionConfig.save(testConfigPath);
+        assertTrue(Files.exists(testConfigPath));
+
+        CompanionConfig.setDynamicLeadEnabled(true);
+        CompanionConfig.load(testConfigPath);
+        assertFalse(CompanionConfig.isDynamicLeadEnabled());
+    }
+
+    @Test
+    public void testDynamicLeadEnabledMalformedJsonFallback() throws IOException {
+        Files.writeString(testConfigPath, "{\"dynamicLeadEnabled\": \"not_a_boolean\"}");
+        CompanionConfig.load(testConfigPath);
+        assertTrue(CompanionConfig.isDynamicLeadEnabled());
     }
 }

@@ -13,7 +13,7 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 2
+    "maxItemUses": 0
   },
   "bag": [
     {
@@ -24,9 +24,9 @@
   "team": [
     {
       "moveset": [
-        "eruption",
-        "flamethrower",
-        "bodypress",
+        "hydropump",
+        "ficklebeam",
+        "pollenpuff",
         "protect"
       ],
       "ivs": {
@@ -40,26 +40,58 @@
       "evs": {
         "hp": 252,
         "atk": 0,
-        "def": 156,
-        "spa": 100,
-        "spd": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 4,
         "spe": 0
       },
       "heldItem": [
-        "heat_rock"
+        "sitrus_berry"
       ],
-      "species": "torkoal",
+      "species": "hydrapple",
       "gender": "MALE",
       "level": 48,
-      "nature": "bold",
-      "ability": "drought"
+      "nature": "modest",
+      "ability": "drizzle"
     },
     {
       "moveset": [
-        "afteryou",
-        "solarblade",
-        "closecombat",
-        "protect"
+        "fakeout",
+        "gigadrain",
+        "hydropump",
+        "icebeam"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 0,
+        "atk": 4,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
+      },
+      "heldItem": [
+        "leftovers"
+      ],
+      "species": "ludicolo",
+      "gender": "MALE",
+      "level": 48,
+      "nature": "mild",
+      "ability": "swiftswim"
+    },
+    {
+      "moveset": [
+        "ivycudgel",
+        "followme",
+        "spikyshield",
+        "hornleech"
       ],
       "ivs": {
         "hp": 31,
@@ -78,23 +110,23 @@
         "spe": 252
       },
       "heldItem": [
-        "focus_sash"
+        "mega_showdown:wellspring_mask"
       ],
-      "species": "lilligant",
+      "aspects": [
+        "wellspring-mask"
+      ],
+      "species": "ogerpon",
       "gender": "FEMALE",
       "level": 48,
-      "nature": "timid",
-      "ability": "chlorophyll",
-      "aspects": [
-        "hisuian"
-      ]
+      "nature": "adamant",
+      "ability": "waterabsorb"
     },
     {
       "moveset": [
-        "solarbeam",
-        "sludgebomb",
-        "pollenpuff",
-        "protect"
+        "thunder",
+        "energyball",
+        "voltswitch",
+        "thunderbolt"
       ],
       "ivs": {
         "hp": 31,
@@ -113,52 +145,23 @@
         "spe": 252
       },
       "heldItem": [
-        "life_orb"
+        "choice_specs"
       ],
-      "species": "vileplume",
-      "gender": "FEMALE",
+      "aspects": [
+        "hisuian"
+      ],
+      "species": "electrode",
+      "gender": "GENDERLESS",
       "level": 48,
       "nature": "modest",
-      "ability": "chlorophyll"
-    },
-    {
-      "moveset": [
-        "spore",
-        "ragepowder",
-        "pollenpuff",
-        "protect"
-      ],
-      "ivs": {
-        "hp": 31,
-        "atk": 31,
-        "def": 31,
-        "spa": 31,
-        "spd": 31,
-        "spe": 31
-      },
-      "evs": {
-        "hp": 252,
-        "atk": 0,
-        "def": 156,
-        "spa": 0,
-        "spd": 100,
-        "spe": 0
-      },
-      "heldItem": [
-        "rocky_helmet"
-      ],
-      "species": "amoonguss",
-      "gender": "MALE",
-      "level": 48,
-      "nature": "bold",
-      "ability": "regenerator"
+      "ability": "soundproof"
     },
     {
       "moveset": [
         "fakeout",
         "grassyglide",
         "woodhammer",
-        "protect"
+        "uturn"
       ],
       "ivs": {
         "hp": 31,
@@ -177,7 +180,7 @@
         "spe": 0
       },
       "heldItem": [
-        "miracle_seed"
+        "assault_vest"
       ],
       "species": "rillaboom",
       "gender": "MALE",
@@ -187,10 +190,10 @@
     },
     {
       "moveset": [
-        "gigadrain",
-        "sludgebomb",
-        "earthpower",
-        "protect"
+        "solarbeam",
+        "weatherball",
+        "dazzlinggleam",
+        "earthpower"
       ],
       "ivs": {
         "hp": 31,
@@ -209,13 +212,149 @@
         "spe": 0
       },
       "heldItem": [
-        "mega_showdown:venusaurite"
+        "zamega:meganiumite"
       ],
-      "species": "venusaur",
-      "gender": "MALE",
+      "species": "meganium",
+      "gender": "FEMALE",
       "level": 48,
       "nature": "modest",
-      "ability": "thickfat"
+      "ability": "megasol"
+    }
+  ],
+  "leadPresets": [
+    {
+      "id": "rain_swift_swim",
+      "leadSlots": [
+        0,
+        1
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "hydrapple"
+        },
+        {
+          "species": "ludicolo"
+        }
+      ],
+      "baseWeight": 1,
+      "favoredAgainst": [
+        "fire"
+      ],
+      "description": "Hydrapple + Ludicolo (Drizzle + Swift Swim Rain core vs Fire)"
+    },
+    {
+      "id": "rain_redirection",
+      "leadSlots": [
+        0,
+        2
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "hydrapple"
+        },
+        {
+          "species": "ogerpon",
+          "requiredAspects": [
+            "wellspring-mask"
+          ]
+        }
+      ],
+      "baseWeight": 0,
+      "description": "Hydrapple + Ogerpon-Wellspring (Drizzle + Follow Me redirection / Water Absorb)"
+    },
+    {
+      "id": "fast_volt_switch",
+      "leadSlots": [
+        3,
+        1
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "electrode",
+          "requiredAspects": [
+            "hisuian"
+          ]
+        },
+        {
+          "species": "ludicolo"
+        }
+      ],
+      "baseWeight": 0,
+      "description": "Hisuian Electrode + Ludicolo (Choice Specs 150 Spe Thunder + Fake Out / Swift Swim)"
+    },
+    {
+      "id": "double_fake_out",
+      "leadSlots": [
+        1,
+        4
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "ludicolo"
+        },
+        {
+          "species": "rillaboom"
+        }
+      ],
+      "baseWeight": 0,
+      "description": "Ludicolo + Rillaboom (Double Fake Out control + Grassy Surge)"
+    },
+    {
+      "id": "mega_sol_sun",
+      "leadSlots": [
+        4,
+        5
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "rillaboom"
+        },
+        {
+          "species": "meganium"
+        }
+      ],
+      "baseWeight": 0,
+      "description": "Rillaboom + Mega Meganium (Grassy Surge + Mega Sol Solar Beam / Weather Ball Fire)"
+    },
+    {
+      "id": "grassy_glide_follow_me",
+      "leadSlots": [
+        4,
+        2
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "rillaboom"
+        },
+        {
+          "species": "ogerpon",
+          "requiredAspects": [
+            "wellspring-mask"
+          ]
+        }
+      ],
+      "baseWeight": 0,
+      "description": "Rillaboom + Ogerpon-Wellspring (Grassy Glide priority + Follow Me redirection)"
+    },
+    {
+      "id": "sun_specs_coverage",
+      "leadSlots": [
+        3,
+        5
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "electrode",
+          "requiredAspects": [
+            "hisuian"
+          ]
+        },
+        {
+          "species": "meganium"
+        }
+      ],
+      "baseWeight": -1,
+      "description": "Hisuian Electrode + Mega Meganium (Fast Volt Switch / Coverage offense)"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

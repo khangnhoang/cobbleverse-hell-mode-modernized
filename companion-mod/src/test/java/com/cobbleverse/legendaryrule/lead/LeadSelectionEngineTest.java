@@ -146,4 +146,100 @@ class LeadSelectionEngineTest {
         List<PlayerLeadTyping> player = List.of(new PlayerLeadTyping("snorlax", List.of("normal")));
         assertThrows(IllegalArgumentException.class, () -> engine.select(List.of(), player, createSabrinaRoster()));
     }
+
+    @Test
+    void testTypeFavoredBonusSingleAndDoubleMatch() {
+        LeadAttempt attNoBonus = new LeadAttempt("no_bonus", new int[]{0, 5}, 0, List.of(), "");
+        LeadAttempt attFireBonus = new LeadAttempt("fire_bonus", new int[]{0, 5}, 0, List.of(), "", List.of("fire"));
+
+        // Case 1: single fire mon
+        List<PlayerLeadTyping> singleFire = List.of(
+                new PlayerLeadTyping("arcanine", List.of("fire")),
+                new PlayerLeadTyping("snorlax", List.of("normal"))
+        );
+        LeadSelectionResult res1 = engine.select(List.of(attNoBonus, attFireBonus), singleFire, createSabrinaRoster());
+        AttemptScore score1 = res1.evaluatedScores().stream().filter(s -> s.attemptId().equals("fire_bonus")).findFirst().orElseThrow();
+        assertEquals(2, score1.typeFavoredBonus());
+        assertEquals(0, score1.speciesFavoredBonus());
+        assertEquals(score1.offensiveScore() + score1.defensiveScore() + score1.baseWeight() + 2, score1.totalScore());
+
+        // Case 2: double fire mons
+        List<PlayerLeadTyping> doubleFire = List.of(
+                new PlayerLeadTyping("arcanine", List.of("fire")),
+                new PlayerLeadTyping("charizard", List.of("fire", "flying"))
+        );
+        LeadSelectionResult res2 = engine.select(List.of(attNoBonus, attFireBonus), doubleFire, createSabrinaRoster());
+        AttemptScore score2 = res2.evaluatedScores().stream().filter(s -> s.attemptId().equals("fire_bonus")).findFirst().orElseThrow();
+        assertEquals(4, score2.typeFavoredBonus());
+        assertEquals(0, score2.speciesFavoredBonus());
+
+        // Case 3: dual-type match only counts once per conscious Pokémon
+        LeadAttempt attFireFlyingBonus = new LeadAttempt("fire_flying_bonus", new int[]{0, 5}, 0, List.of(), "", List.of("fire", "flying"));
+        List<PlayerLeadTyping> charizardOnly = List.of(
+                new PlayerLeadTyping("charizard", List.of("fire", "flying"))
+        );
+        LeadSelectionResult res3 = engine.select(List.of(attFireFlyingBonus), charizardOnly, createSabrinaRoster());
+        AttemptScore score3 = res3.evaluatedScores().get(0);
+        assertEquals(2, score3.typeFavoredBonus(), "A single dual-type matching multiple favored types must only grant +2 once");
+    }
+
+    @Test
+    void testSpeciesFavoredBonusMatching() {
+        LeadAttempt attGastrodonBonus = new LeadAttempt("gastro_counter", new int[]{0, 5}, 0, List.of(), "", List.of(), List.of("gastrodon"));
+
+        // Single gastrodon match
+        List<PlayerLeadTyping> singleGastro = List.of(
+                new PlayerLeadTyping("gastrodon", List.of("water", "ground")),
+                new PlayerLeadTyping("tyranitar", List.of("rock", "dark"))
+        );
+        LeadSelectionResult res1 = engine.select(List.of(attGastrodonBonus), singleGastro, createSabrinaRoster());
+        AttemptScore score1 = res1.evaluatedScores().get(0);
+        assertEquals(0, score1.typeFavoredBonus());
+        assertEquals(2, score1.speciesFavoredBonus());
+
+        // Double gastrodon match
+        List<PlayerLeadTyping> doubleGastro = List.of(
+                new PlayerLeadTyping("gastrodon", List.of("water", "ground")),
+                new PlayerLeadTyping("gastrodon", List.of("water", "ground"))
+        );
+        LeadSelectionResult res2 = engine.select(List.of(attGastrodonBonus), doubleGastro, createSabrinaRoster());
+        AttemptScore score2 = res2.evaluatedScores().get(0);
+        assertEquals(4, score2.speciesFavoredBonus());
+
+        // Mismatch species
+        List<PlayerLeadTyping> noGastro = List.of(
+                new PlayerLeadTyping("swampert", List.of("water", "ground")),
+                new PlayerLeadTyping("quagsire", List.of("water", "ground"))
+        );
+        LeadSelectionResult res3 = engine.select(List.of(attGastrodonBonus), noGastro, createSabrinaRoster());
+        AttemptScore score3 = res3.evaluatedScores().get(0);
+        assertEquals(0, score3.speciesFavoredBonus(), "Swampert and Quagsire must NOT trigger gastrodon species bonus");
+    }
+
+    @Test
+    void testIndependentTypeAndSpeciesBonusCombination() {
+        // Attempt with both type bonus (water) and species bonus (gastrodon)
+        LeadAttempt dualBonusAttempt = new LeadAttempt(
+                "dual_bonus",
+                new int[]{0, 5},
+                0,
+                List.of(),
+                "",
+                List.of("water"),
+                List.of("gastrodon")
+        );
+
+        // Player has Gastrodon (water/ground) and Arcanine (fire)
+        List<PlayerLeadTyping> playerLeads = List.of(
+                new PlayerLeadTyping("gastrodon", List.of("water", "ground")),
+                new PlayerLeadTyping("arcanine", List.of("fire"))
+        );
+
+        LeadSelectionResult res = engine.select(List.of(dualBonusAttempt), playerLeads, createSabrinaRoster());
+        AttemptScore score = res.evaluatedScores().get(0);
+        // Gastrodon gives +2 (water in favoredAgainst) and +2 (gastrodon in favoredAgainstSpecies) -> +4 total
+        assertEquals(2, score.typeFavoredBonus());
+        assertEquals(2, score.speciesFavoredBonus());
+        assertEquals(score.offensiveScore() + score.defensiveScore() + 4, score.totalScore());
+    }
 }
