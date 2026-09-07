@@ -15,14 +15,9 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 2
+    "maxItemUses": 0
   },
-  "bag": [
-    {
-      "item": "cobblemon:full_restore",
-      "quantity": 2
-    }
-  ],
+  "bag": [],
   "team": [
     {
       "moveset": [
@@ -95,7 +90,7 @@
       "moveset": [
         "hydropump",
         "voltswitch",
-        "willowisp",
+        "shadowball",
         "protect"
       ],
       "ivs": {

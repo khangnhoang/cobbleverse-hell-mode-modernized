@@ -276,6 +276,9 @@ def main():
     pokemath_priv_desc = "(Lcom/cobblemon/mod/common/api/moves/Move;ZZZZZZZZLcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/gitlab/surilexa/rbrctai/api/ai/utils/RBStatStages;Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;ZZ)D"
     checks.append(("PokeMathMax.damage private descriptor (15 params)D", pokemath_priv_desc in pokemath_javap))
 
+    pokemath_is_immune_desc = "(Lcom/cobblemon/mod/common/api/moves/Move;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/cobblemon/mod/common/api/types/ElementalType;Z)Z"
+    checks.append(("PokeMathMax.isImmuneCheck descriptor (6 params)Z", pokemath_is_immune_desc in pokemath_javap))
+
     # Verify slot 2 (multiTarget) in private damage is read exactly once
     priv_damage_match = re.search(r'private static double damage\(com\.cobblemon\.mod\.common\.api\.moves\.Move.*?\n\s+Code:.*?(?=\n\s+public |\n\s+private |\Z)', pokemath_javap, re.DOTALL)
     if priv_damage_match:
