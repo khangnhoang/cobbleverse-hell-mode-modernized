@@ -5,6 +5,7 @@ import com.cobblemon.mod.common.api.types.ElementalType;
 import com.cobblemon.mod.common.battles.ActiveBattlePokemon;
 import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
 import com.cobbleverse.legendaryrule.strategy.guard.RedirectAbilityGuard;
+import com.cobbleverse.legendaryrule.strategy.weather.MegaSolWeatherGuard;
 import com.gitlab.surilexa.rbrctai.api.ai.utils.PokeMathMax;
 import com.gitlab.surilexa.rbrctai.api.ai.utils.RBStatStages;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  *    was multiplied twice by targets (0.75 * 0.75 = 0.5625).
  * 2. Vetoes redirected single-target moves (Storm Drain / Lightning Rod) by returning
  *    0.0 damage and marking candidate immunity as true.
+ * 3. Resolves effective dynamic moves under personal weather (e.g. Mega Sol Weather Ball).
  */
 @Mixin(value = PokeMathMax.class, remap = false)
 public abstract class PokeMathMaxMixin {
@@ -43,11 +45,13 @@ public abstract class PokeMathMaxMixin {
         BattlePokemon defender, RBStatStages statStages, ActiveBattlePokemon activeBattlePokemon,
         boolean predictTera, boolean isAttacker
     ) {
-        if (RedirectAbilityGuard.isMoveRedirected(move, attacker, defender, activeBattlePokemon)) {
+        Move effectiveMove = MegaSolWeatherGuard.resolveEffectiveMove(move, attacker);
+
+        if (RedirectAbilityGuard.isMoveRedirected(effectiveMove, attacker, defender, activeBattlePokemon)) {
             return 0.0d;
         }
 
-        double rawDamage = damage(move, physical, false, parentalBond, glaiveRush, burn, zmove, reflect, lightscreen, attacker, defender, statStages, activeBattlePokemon, predictTera, isAttacker);
+        double rawDamage = damage(effectiveMove, physical, false, parentalBond, glaiveRush, burn, zmove, reflect, lightscreen, attacker, defender, statStages, activeBattlePokemon, predictTera, isAttacker);
         return multiTarget ? rawDamage * 0.75d : rawDamage;
     }
 
@@ -66,8 +70,15 @@ public abstract class PokeMathMaxMixin {
         boolean predictTera,
         CallbackInfoReturnable<Boolean> cir
     ) {
-        if (RedirectAbilityGuard.isMoveRedirected(move, attacker, defender, abp)) {
+        Move effectiveMove = MegaSolWeatherGuard.resolveEffectiveMove(move, attacker);
+
+        if (RedirectAbilityGuard.isMoveRedirected(effectiveMove, attacker, defender, abp)) {
             cir.setReturnValue(true);
+            return;
+        }
+
+        if (effectiveMove != move) {
+            cir.setReturnValue(PokeMathMax.isImmuneCheck(effectiveMove, attacker, defender, abp, teraType, predictTera));
         }
     }
 }
