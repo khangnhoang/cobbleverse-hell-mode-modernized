@@ -242,19 +242,19 @@ class TestCanonicalAuditReports(unittest.TestCase):
     def test_validate_future_pack_regression(self):
         """
         Tests validate_future_pack fail-closed behavior:
-        - When pack/ is absent, skips cleanly without error
-        - When pack/ exists but has missing or invalid pack.mcmeta, returns False
-        - When pack/ exists but has missing trainers dir or invalid trainer JSON, returns False
-        - When pack/ has valid structure and valid trainer JSON, returns True
+        - When datapacks/hell-mode/ is absent, skips cleanly without error
+        - When datapacks/hell-mode/ exists but has missing or invalid pack.mcmeta, returns False
+        - When datapacks/hell-mode/ exists but has missing trainers dir or invalid trainer JSON, returns False
+        - When datapacks/hell-mode/ has valid structure and valid trainer JSON, returns True
         """
         with tempfile.TemporaryDirectory() as temp_dir:
-            # 1. pack/ does not exist -> returns True (clean skip)
+            # 1. datapacks/hell-mode/ does not exist -> returns True (clean skip)
             self.assertTrue(validate_future_pack(temp_dir))
 
-            pack_path = os.path.join(temp_dir, "pack")
+            pack_path = os.path.join(temp_dir, "datapacks", "hell-mode")
             os.makedirs(pack_path)
 
-            # 2. pack/ exists but missing pack.mcmeta -> returns False
+            # 2. datapacks/hell-mode/ exists but missing pack.mcmeta -> returns False
             self.assertFalse(validate_future_pack(temp_dir))
 
             # Add pack.mcmeta
@@ -262,14 +262,14 @@ class TestCanonicalAuditReports(unittest.TestCase):
             with open(os.path.join(pack_path, "pack.mcmeta"), "w") as f:
                 json.dump(mcmeta, f)
 
-            # 3. pack/ exists with pack.mcmeta but missing trainers dir -> returns False
+            # 3. datapacks/hell-mode/ exists with pack.mcmeta but missing trainers dir -> returns False
             self.assertFalse(validate_future_pack(temp_dir))
 
             # Add trainers dir
             trainers_dir = os.path.join(pack_path, "data", "rctmod", "trainers")
             os.makedirs(trainers_dir)
 
-            # 4. pack/ trainers dir has 0 files -> returns False
+            # 4. datapacks/hell-mode/ trainers dir has 0 files -> returns False
             self.assertFalse(validate_future_pack(temp_dir))
 
             # 5. Add malformed trainer JSON -> returns False
@@ -369,15 +369,15 @@ class TestCanonicalAuditReports(unittest.TestCase):
         self.assertEqual(summary["trainers_pending_phase_e_redesign_count"], 54)
 
     def test_phase_c_pack_inventory(self):
-        """Verify modernized pack/ contains exactly 1,714 valid trainers and zero obsolete IDs."""
-        pack_trainers_dir = os.path.join(self.repo_root, "pack", "data", "rctmod", "trainers")
-        self.assertTrue(os.path.isdir(pack_trainers_dir), "pack trainers dir missing")
+        """Verify modernized datapacks/hell-mode contains exactly 1,714 valid trainers and zero obsolete IDs."""
+        pack_trainers_dir = os.path.join(self.repo_root, "datapacks", "hell-mode", "data", "rctmod", "trainers")
+        self.assertTrue(os.path.isdir(pack_trainers_dir), "datapacks/hell-mode trainers dir missing")
 
         trainers = [f for f in os.listdir(pack_trainers_dir) if f.endswith(".json")]
         self.assertEqual(len(trainers), 1714)
 
         obsolete_ids = {"galaxy_bobbo.json", "galaxy_ominorosso.json", "swimmer_gengar.json"}
-        self.assertEqual(set(trainers) & obsolete_ids, set(), "Obsolete IDs must be absent from pack/")
+        self.assertEqual(set(trainers) & obsolete_ids, set(), "Obsolete IDs must be absent from datapacks/hell-mode/")
 
     def test_phase_d_normalization_report(self):
         """Verify Phase D normalization report exists and reflects exact expected modification metrics."""
@@ -405,7 +405,7 @@ class TestCanonicalAuditReports(unittest.TestCase):
 
     def test_phase_d_pack_semantic_invariants(self):
         """Spot-check normalized trainer JSONs to verify semantic integrity."""
-        trainers_dir = os.path.join(self.repo_root, "pack", "data", "rctmod", "trainers")
+        trainers_dir = os.path.join(self.repo_root, "datapacks", "hell-mode", "data", "rctmod", "trainers")
 
         # 1. Apollo Sharpedo: gimmick mega removed
         with open(os.path.join(trainers_dir, "team_rocket_admin_apollo.json"), "r", encoding="utf-8") as f:
@@ -486,7 +486,7 @@ class TestCanonicalAuditReports(unittest.TestCase):
     def test_phase_d_validator_catches_reintroduced_invalid(self):
         """Verify that CI validator detects reintroduction of deterministic invalid items/moves/gimmicks."""
         with tempfile.TemporaryDirectory() as td:
-            pack_path = os.path.join(td, "pack")
+            pack_path = os.path.join(td, "datapacks", "hell-mode")
             trainers_dir = os.path.join(pack_path, "data", "rctmod", "trainers")
             os.makedirs(trainers_dir)
 
