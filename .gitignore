@@ -3,7 +3,6 @@
 build/
 out/
 bin/
-companion-mod/libs/
 
 # Minecraft Fabric runtime & logs
 run/
