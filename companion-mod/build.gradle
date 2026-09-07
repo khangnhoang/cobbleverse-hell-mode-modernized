@@ -37,6 +37,8 @@ dependencies {
     modImplementation files("${curseforgeMods}/Cobblemon-fabric-1.7.3+1.21.1.jar")
     modImplementation files("${curseforgeMods}/rctapi-fabric-1.21.1-0.15.2-beta.jar")
     modImplementation files("${curseforgeMods}/rctmod-fabric-1.21.1-0.18.1-beta.jar")
+    compileOnly files("${curseforgeMods}/rbrctai-fabric-1.21.1-0.15.4-beta.jar")
+    testImplementation files("${curseforgeMods}/rbrctai-fabric-1.21.1-0.15.4-beta.jar")
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

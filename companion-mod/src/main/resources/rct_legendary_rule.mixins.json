@@ -7,7 +7,9 @@
     "TrainerMobMixin",
     "RCTModMakeBattleMixin",
     "BattlePokemonMixin",
-    "CobblemonHeldItemManagerMixin"
+    "CobblemonHeldItemManagerMixin",
+    "PokeMathMaxMixin",
+    "RunBunAIChooseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

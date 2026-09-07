@@ -198,10 +198,10 @@
     },
     {
       "moveset": [
-        "thunderbolt",
-        "flamethrower",
+        "electroweb",
+        "energyball",
         "voltswitch",
-        "protect"
+        "thunderbolt"
       ],
       "ivs": {
         "hp": 31,
@@ -220,13 +220,16 @@
         "spe": 252
       },
       "heldItem": [
-        "life_orb"
+        "focus_sash"
       ],
-      "species": "manectric",
-      "gender": "MALE",
+      "species": "electrode",
+      "gender": "GENDERLESS",
       "level": 42,
-      "nature": "timid",
-      "ability": "static"
+      "nature": "modest",
+      "ability": "static",
+      "aspects": [
+        "hisuian"
+      ]
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

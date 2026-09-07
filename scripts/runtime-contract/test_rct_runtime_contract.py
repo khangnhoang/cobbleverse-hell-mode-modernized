@@ -51,6 +51,7 @@ def main():
     rctmod_jars = list(mods_dir.glob("rctmod-fabric-*.jar"))
     rctapi_jars = list(mods_dir.glob("rctapi-fabric-*.jar"))
     cobblemon_jars = list(mods_dir.glob("Cobblemon-fabric-*.jar"))
+    rbrctai_jars = list(mods_dir.glob("rbrctai-fabric-*.jar"))
 
     if not rctmod_jars:
         print("FAIL: rctmod jar not found", file=sys.stderr)
@@ -61,14 +62,19 @@ def main():
     if not cobblemon_jars:
         print("FAIL: Cobblemon jar not found", file=sys.stderr)
         sys.exit(1)
+    if not rbrctai_jars:
+        print("FAIL: rbrctai jar not found", file=sys.stderr)
+        sys.exit(1)
 
     rctmod_jar = rctmod_jars[0]
     rctapi_jar = rctapi_jars[0]
     cobblemon_jar = cobblemon_jars[0]
+    rbrctai_jar = rbrctai_jars[0]
 
     print(f"Inspecting RCTMod jar: {rctmod_jar.name}")
     print(f"Inspecting RCTAPI jar: {rctapi_jar.name}")
     print(f"Inspecting Cobblemon jar: {cobblemon_jar.name}")
+    print(f"Inspecting Run & Bun AI jar: {rbrctai_jar.name}")
 
     checks = []
 
@@ -252,6 +258,110 @@ def main():
     effect_javap = get_class_javap(cobblemon_jar, "com/cobblemon/mod/common/api/battles/interpreter/Effect.class")
     get_id_desc = "()Ljava/lang/String;"
     checks.append(("Effect.getId() returning String", get_id_desc in effect_javap and "getId()" in effect_javap))
+
+    # 8. Run & Bun AI and Spread Move Valuation Contracts
+    # a) Mixin registrations
+    if mixins_json_path.exists():
+        with open(mixins_json_path, "r", encoding="utf-8") as mf:
+            mixins_data = json.load(mf)
+            declared_mixins = mixins_data.get("mixins", [])
+            checks.append(("rct_legendary_rule.mixins.json declares PokeMathMaxMixin", "PokeMathMaxMixin" in declared_mixins))
+            checks.append(("rct_legendary_rule.mixins.json declares RunBunAIChooseMixin", "RunBunAIChooseMixin" in declared_mixins))
+
+    # b) PokeMathMax descriptors and slot 2 read
+    pokemath_javap = get_class_javap(rbrctai_jar, "com/gitlab/surilexa/rbrctai/api/ai/utils/PokeMathMax.class")
+    pokemath_pub_desc = "(Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/cobblemon/mod/common/api/moves/Move;Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;ZZLcom/gitlab/surilexa/rbrctai/api/ai/utils/RBStatStages;)I"
+    checks.append(("PokeMathMax.damage public descriptor (7 params)I", pokemath_pub_desc in pokemath_javap))
+
+    pokemath_priv_desc = "(Lcom/cobblemon/mod/common/api/moves/Move;ZZZZZZZZLcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/gitlab/surilexa/rbrctai/api/ai/utils/RBStatStages;Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;ZZ)D"
+    checks.append(("PokeMathMax.damage private descriptor (15 params)D", pokemath_priv_desc in pokemath_javap))
+
+    # Verify slot 2 (multiTarget) in private damage is read exactly once
+    priv_damage_match = re.search(r'private static double damage\(com\.cobblemon\.mod\.common\.api\.moves\.Move.*?\n\s+Code:.*?(?=\n\s+public |\n\s+private |\Z)', pokemath_javap, re.DOTALL)
+    if priv_damage_match:
+        priv_damage_code = priv_damage_match.group(0)
+        iload2_count = len(re.findall(r'\biload_2\b|\biload\s+2\b', priv_damage_code))
+        checks.append(("PokeMathMax.damage private helper reads multiTarget (slot 2) exactly once", iload2_count == 1))
+    else:
+        checks.append(("PokeMathMax.damage private helper reads multiTarget (slot 2) exactly once", False))
+
+    # c) RunBunAI.choose descriptor and MoveEvaluation.getDamage calls
+    runbun_javap = get_class_javap(rbrctai_jar, "com/gitlab/surilexa/rbrctai/api/ai/RunBunAI.class")
+    choose_desc = "(Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/cobblemon/mod/common/api/battles/model/PokemonBattle;Lcom/cobblemon/mod/common/battles/BattleSide;Lcom/cobblemon/mod/common/battles/ShowdownMoveset;Z)Lcom/cobblemon/mod/common/battles/ShowdownActionResponse;"
+    checks.append(("RunBunAI.choose method descriptor (5 params)ShowdownActionResponse", choose_desc in runbun_javap))
+
+    choose_match = re.search(r'public com\.cobblemon\.mod\.common\.battles\.ShowdownActionResponse choose\(.*?\n\s+Code:.*?(?=\n\s+public |\n\s+private |\Z)', runbun_javap, re.DOTALL)
+    if choose_match:
+        choose_code = choose_match.group(0)
+        get_damage_count = len(re.findall(r'Method com/gitlab/surilexa/rbrctai/api/ai/RunBunAI\$MoveEvaluation\.getDamage:\(\)I', choose_code))
+        checks.append(("RunBunAI.choose contains exactly 4 MoveEvaluation.getDamage calls", get_damage_count == 4))
+
+        # Parse LocalVariableTable of choose method
+        lvt_pattern = re.compile(r'^\s+(\d+)\s+(\d+)\s+(\d+)\s+(\S+)\s+(\S+)', re.MULTILINE)
+        choose_lvt = [
+            {'start': int(m.group(1)), 'length': int(m.group(2)), 'slot': int(m.group(3)), 'name': m.group(4), 'sig': m.group(5)}
+            for m in lvt_pattern.finditer(choose_code)
+        ]
+
+        # Hook 1: evaluations in scope at first getDamage() call
+        first_damage_match = re.search(r'(\d+):\s+invokevirtual\s+.*MoveEvaluation\.getDamage:\(\)I', choose_code)
+        first_damage_offset = int(first_damage_match.group(1)) if first_damage_match else None
+        eval_entries = [e for e in choose_lvt if e['name'] == 'evaluations']
+        eval_in_scope = any(e['start'] <= first_damage_offset < e['start'] + e['length'] for e in eval_entries) if first_damage_offset is not None else False
+        checks.append(("RunBunAI.choose LVT 'evaluations' in scope at first getDamage call", eval_in_scope))
+
+        # Hook 3: percentChange exists (type double) and 'move' in scope at percentChange store
+        percent_entries = [e for e in choose_lvt if e['name'] == 'percentChange']
+        percent_exists = len(percent_entries) > 0 and percent_entries[0]['sig'] == 'D'
+        checks.append(("RunBunAI.choose LVT 'percentChange' (double) exists", percent_exists))
+
+        move_entries = [e for e in choose_lvt if e['name'] == 'move']
+        percent_start = percent_entries[0]['start'] if percent_entries else None
+        move_in_scope = any(e['start'] <= percent_start < e['start'] + e['length'] for e in move_entries) if percent_start is not None else False
+        checks.append(("RunBunAI.choose LVT 'move' in scope at percentChange store site", move_in_scope))
+
+        # Hook 4: teraMatch exists in LVT and bytecode stores to slot 42
+        tera_entries = [e for e in choose_lvt if e['name'] == 'teraMatch']
+        tera_exists = len(tera_entries) > 0 and 'BattlePokemon' in tera_entries[0]['sig']
+        checks.append(("RunBunAI.choose LVT 'teraMatch' (BattlePokemon) exists", tera_exists))
+
+        tera_store = "astore        42" in choose_code or "astore_w      42" in choose_code
+        checks.append(("RunBunAI.choose bytecode contains astore 42 for teraMatch", tera_store))
+    else:
+        checks.append(("RunBunAI.choose contains exactly 4 MoveEvaluation.getDamage calls", False))
+        checks.append(("RunBunAI.choose LVT 'evaluations' in scope at first getDamage call", False))
+        checks.append(("RunBunAI.choose LVT 'percentChange' (double) exists", False))
+        checks.append(("RunBunAI.choose LVT 'move' in scope at percentChange store site", False))
+        checks.append(("RunBunAI.choose LVT 'teraMatch' (BattlePokemon) exists", False))
+        checks.append(("RunBunAI.choose bytecode contains astore 42 for teraMatch", False))
+
+    checks.append(("RunBunAI contains private String teraTarget field", "private java.lang.String teraTarget;" in runbun_javap))
+
+    # Explicit @Local and @ModifyVariable name selectors in companion RunBunAIChooseMixin
+    mixin_source_path = os.path.join(repo_root, "companion-mod", "src", "main", "java", "com", "cobbleverse", "legendaryrule", "mixin", "RunBunAIChooseMixin.java")
+    if os.path.exists(mixin_source_path):
+        with open(mixin_source_path, "r", encoding="utf-8") as f:
+            mixin_src = f.read()
+        checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"evaluations\")", '@Local(name = "evaluations")' in mixin_src))
+        checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"move\")", '@Local(name = "move")' in mixin_src))
+        checks.append(('RunBunAIChooseMixin declares @ModifyVariable targeting name = "teraMatch"', 'name = "teraMatch"' in mixin_src and 'cobbleverse$resolveAliveTeraTarget' in mixin_src))
+    else:
+        checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"evaluations\")", False))
+        checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"move\")", False))
+        checks.append(('RunBunAIChooseMixin declares @ModifyVariable targeting name = "teraMatch"', False))
+
+    # d) RunBunAI$MoveEvaluation methods
+    eval_javap = get_class_javap(rbrctai_jar, "com/gitlab/surilexa/rbrctai/api/ai/RunBunAI$MoveEvaluation.class")
+    checks.append(("RunBunAI$MoveEvaluation.getDamage()I", "public int getDamage();" in eval_javap))
+    checks.append(("RunBunAI$MoveEvaluation.getScore()I", "public int getScore();" in eval_javap))
+    checks.append(("RunBunAI$MoveEvaluation.setScore(int)V", "public void setScore(int);" in eval_javap))
+    checks.append(("RunBunAI$MoveEvaluation.getMove()", "public com.cobblemon.mod.common.api.moves.Move getMove();" in eval_javap))
+    checks.append(("RunBunAI$MoveEvaluation.getOpponent()", "public com.cobblemon.mod.common.battles.ActiveBattlePokemon getOpponent();" in eval_javap))
+
+    # e) MoveTarget enum constants
+    movetarget_javap = get_class_javap(cobblemon_jar, "com/cobblemon/mod/common/battles/MoveTarget.class")
+    checks.append(("MoveTarget.allAdjacentFoes exists", "allAdjacentFoes" in movetarget_javap))
+    checks.append(("MoveTarget.allAdjacent exists", "allAdjacent" in movetarget_javap))
 
     # Evaluate checks
     failed = False
