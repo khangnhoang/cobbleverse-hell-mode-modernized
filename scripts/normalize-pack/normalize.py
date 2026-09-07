@@ -2,7 +2,7 @@
 """
 Cobbleverse Hell Mode — Deterministic Content Normalization (Phase D)
 Applies approved, deterministic compatibility corrections from Phase B audit reports
-to the modernized pack/data/rctmod/trainers/ baseline.
+to the modernized datapacks/hell-mode/data/rctmod/trainers/ baseline.
 """
 
 import os
@@ -57,7 +57,7 @@ def normalize_pack(repo_root: str = None) -> dict:
         repo_root = os.path.abspath(os.path.join(script_dir, "..", ".."))
 
     reports_dir = os.path.join(repo_root, "reports", "compat-audit")
-    trainers_dir = os.path.join(repo_root, "pack", "data", "rctmod", "trainers")
+    trainers_dir = os.path.join(repo_root, "datapacks", "hell-mode", "data", "rctmod", "trainers")
 
     if not os.path.isdir(trainers_dir):
         raise FileNotFoundError(f"Pack trainers directory not found: {trainers_dir}")
@@ -216,7 +216,7 @@ def normalize_pack(repo_root: str = None) -> dict:
             "phase": "Phase D — Deterministic Content Normalization",
             "target_modpack": "COBBLEVERSE",
             "modpack_version": "1.7.42-CF",
-            "pack_path": "pack/data/rctmod/trainers/"
+            "pack_path": "datapacks/hell-mode/data/rctmod/trainers/"
         },
         "summary": {
             "total_pack_trainers": total_files,
@@ -253,7 +253,7 @@ def normalize_pack(repo_root: str = None) -> dict:
         summary_md = f"""# Phase D — Deterministic Content Normalization Report
 
 **Target Environment:** COBBLEVERSE 1.7.42-CF (Minecraft 1.21.1 Fabric)
-**Dataset:** Modernized `pack/data/rctmod/trainers/` ({total_files} trainers)
+**Dataset:** Modernized `datapacks/hell-mode/data/rctmod/trainers/` ({total_files} trainers)
 
 ---
 

@@ -6,7 +6,7 @@ Validates:
 - Complete JSON parseability across all legacy trainer files.
 - Report JSON parseability, schema invariants, and classification logic.
 - Ensures no ambiguous or unresolvable items claim approved auto-fixes.
-- Fail-closed validation of modernized pack/ if present (preventing false-green CI).
+- Fail-closed validation of modernized datapacks/hell-mode/ if present (preventing false-green CI).
 """
 
 import os
@@ -196,12 +196,12 @@ def validate_reports(repo_root):
 
 def validate_future_pack(repo_root):
     print("\n--- 4. Modernized Pack Validation (Phase C/D Preparation) ---")
-    pack_dir = os.path.join(repo_root, "pack")
+    pack_dir = os.path.join(repo_root, "datapacks", "hell-mode")
     if not os.path.exists(pack_dir):
-        log_pass("Modernized pack directory ('pack/') not present yet; skipping Phase C/D checks cleanly.")
+        log_pass("Modernized pack directory ('datapacks/hell-mode/') not present yet; skipping Phase C/D checks cleanly.")
         return True
 
-    log_pass("Modernized pack directory ('pack/') detected; executing fail-closed structure & syntax validation...")
+    log_pass("Modernized pack directory ('datapacks/hell-mode/') detected; executing fail-closed structure & syntax validation...")
 
     # 1. pack.mcmeta validation
     mcmeta_path = os.path.join(pack_dir, "pack.mcmeta")
@@ -214,11 +214,11 @@ def validate_future_pack(repo_root):
             meta = json.load(f)
         pack_sec = meta.get("pack")
         if not isinstance(pack_sec, dict) or "pack_format" not in pack_sec or "description" not in pack_sec:
-            log_fail("pack/pack.mcmeta must contain 'pack' object with 'pack_format' and 'description'")
+            log_fail("datapacks/hell-mode/pack.mcmeta must contain 'pack' object with 'pack_format' and 'description'")
             return False
-        log_pass(f"pack/pack.mcmeta valid (pack_format: {pack_sec.get('pack_format')})")
+        log_pass(f"datapacks/hell-mode/pack.mcmeta valid (pack_format: {pack_sec.get('pack_format')})")
     except Exception as e:
-        log_fail(f"Failed to parse pack/pack.mcmeta as JSON: {e}")
+        log_fail(f"Failed to parse datapacks/hell-mode/pack.mcmeta as JSON: {e}")
         return False
 
     # 2. trainers directory validation
