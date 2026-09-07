@@ -350,7 +350,7 @@ def main():
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"evaluations\")", '@Local(name = "evaluations")' in mixin_src))
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"move\")", '@Local(name = "move")' in mixin_src))
         checks.append(('RunBunAIChooseMixin declares @ModifyVariable targeting name = "teraMatch"', 'name = "teraMatch"' in mixin_src and 'cobbleverse$resolveAliveTeraTarget' in mixin_src))
-        checks.append(('RunBunAIChooseMixin declares @WrapOperation recharge guard (cobbleverse$guardRechargeOppMovesGetFirst)', 'cobbleverse$guardRechargeOppMovesGetFirst' in mixin_src and 'stringValue=recharge' in mixin_src))
+        checks.append(('RunBunAIChooseMixin declares @WrapOperation recharge guard (cobbleverse$guardRechargeOppMovesGetFirst)', 'cobbleverse$guardRechargeOppMovesGetFirst' in mixin_src and 'generalSetupMoves' in mixin_src))
         checks.append(('RunBunAIChooseMixin declares fallback @WrapOperation (cobbleverse$guardRechargeMoveGetName)', 'cobbleverse$guardRechargeMoveGetName' in mixin_src))
     else:
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"evaluations\")", False))

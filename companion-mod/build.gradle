@@ -40,6 +40,12 @@ dependencies {
     compileOnly files("${curseforgeMods}/rbrctai-fabric-1.21.1-0.15.4-beta.jar")
     testImplementation files("${curseforgeMods}/rbrctai-fabric-1.21.1-0.15.4-beta.jar")
 
+    modLocalRuntime files("${curseforgeMods}/architectury-13.0.8-fabric.jar")
+    modLocalRuntime files("${curseforgeMods}/ForgeConfigAPIPort-v21.1.6-1.21.1-Fabric.jar")
+    modLocalRuntime files("${curseforgeMods}/fabric-language-kotlin-1.13.13+kotlin.2.4.10.jar")
+    modLocalRuntime files("${curseforgeMods}/rbrctai-fabric-1.21.1-0.15.4-beta.jar")
+    localRuntime fileTree(dir: 'libs', include: ['*.jar'])
+
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

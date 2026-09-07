@@ -145,8 +145,8 @@ public abstract class RunBunAIChooseMixin {
     @WrapOperation(
         method = "choose(Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/cobblemon/mod/common/api/battles/model/PokemonBattle;Lcom/cobblemon/mod/common/battles/BattleSide;Lcom/cobblemon/mod/common/battles/ShowdownMoveset;Z)Lcom/cobblemon/mod/common/battles/ShowdownActionResponse;",
         slice = @Slice(
-            from = @At(value = "CONSTANT", args = "stringValue=truant"),
-            to = @At(value = "CONSTANT", args = "stringValue=recharge")
+            from = @At(value = "CONSTANT", args = "stringValue=truant", ordinal = 1),
+            to = @At(value = "FIELD", target = "Lcom/gitlab/surilexa/rbrctai/api/ai/RunBunAI;generalSetupMoves:Ljava/util/List;")
         ),
         at = @At(
             value = "INVOKE",
@@ -169,8 +169,8 @@ public abstract class RunBunAIChooseMixin {
     @WrapOperation(
         method = "choose(Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/cobblemon/mod/common/api/battles/model/PokemonBattle;Lcom/cobblemon/mod/common/battles/BattleSide;Lcom/cobblemon/mod/common/battles/ShowdownMoveset;Z)Lcom/cobblemon/mod/common/battles/ShowdownActionResponse;",
         slice = @Slice(
-            from = @At(value = "CONSTANT", args = "stringValue=truant"),
-            to = @At(value = "CONSTANT", args = "stringValue=recharge")
+            from = @At(value = "CONSTANT", args = "stringValue=truant", ordinal = 1),
+            to = @At(value = "FIELD", target = "Lcom/gitlab/surilexa/rbrctai/api/ai/RunBunAI;generalSetupMoves:Ljava/util/List;")
         ),
         at = @At(
             value = "INVOKE",
