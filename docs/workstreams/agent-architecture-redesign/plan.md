@@ -1,4 +1,4 @@
-# Workstream Plan: Agent Architecture Redesign (Phase 2 — Owner-Review Correction & Governance Hardening)
+# Workstream Plan: Agent Architecture Redesign (Phase 2 — Owner-Review Correction Iteration 2)
 
 ## Status & Ownership
 
@@ -13,34 +13,32 @@
 
 ---
 
-## 1. Context, Bootstrap Governance & The 9 Owner Correction Findings
+## 1. Context & Problem Statement
 
 In Phase 1 of this workstream, `cobbleverse-hell-mode-modernized` established `AGENTS.md` as the repository Single Source of Truth (SSOT), modularized the multi-agent workflow into specialized skills, and demonstrated execution on the `fix/weight-based-move-damage` canary (`2a329a5`, `8ee3d27`, `17c9e79`).
 
-Following Owner review of Architecture Phase 2 at commit `1fa1d58`, the Owner established this **Correction Gate** with nine [Required] Architectural Findings (Findings A through I).
+Following Owner review of Architecture Phase 2 at baseline commit `1fa1d58` and Correction Iteration 1, the Owner established this **Correction Iteration 2 Gate** identifying 7 Required Findings and 2 Suggestions:
+
+1. **[Required] Encode Counterexample / Falsification into Rubrics:** Rubrics currently permit passive checklist verification. Reviewers must actively attempt to falsify candidate claims and invariants using explicit counterexample scenarios and execution traces.
+2. **[Required] Operationalize `bootstrap_governance_manifest`:** Read-only reviewers cannot execute git commands to inspect commit history. The bootstrap baseline must be materialized as real files on disk (`scratch/bootstrap-governance/`) at task start, cited in prompt Partition 1, and verified via a mandatory `Proof of Authority Consumption` section in reviewer reports.
+3. **[Required] Resolve Main Ownership & Author Commit Contradictions:** Clarify that Main Controller's prohibition on assembling manifests applies strictly during `MODE_3_SELECTED` pre-planning discovery (Main Controller does assemble the Verification Evidence Manifest in Phase 5). Resolve contradiction in `reconciliation-protocol.md` where authors were instructed to commit artifacts.
+4. **[Required] Fix "SET not LADDER" Presentation & Layer 0 Authority Contradiction:** Remove the remaining ascending ladder diagram (`▲`) in `test-and-verification-strategy/SKILL.md`. Clarify that automated Layer 0 checks are authoritative solely for structural/syntactic integrity; semantic governance authority belongs exclusively to independent contract review.
+5. **[Required] Lean Root SSOT (`AGENTS.md` Line Budget):** Strip remaining procedural Git commands and detailed test command listings from `AGENTS.md`, delegating them to specialized skills to keep root policy lean (< 250 lines, target ~200–220 lines).
+6. **[Required] Generic Planning Checkpoint Decoupling:** Decouple rigid code checkpoints ("Core Logic", "Integration") in `workstream-plan-template.md` into task-specific implementation checkpoints derived from affected contracts.
+7. **[Required] Anti-Overclaim Audit in Plan & Candidate Files:** Purge hyperbolic and absolute claims ("100%", "fully", "Risk Level: Zero", "guarantees", "exhaustive") across the candidate plan and skill documents.
+- **Suggestion 1:** Align verification evidence path in `verification-layers-and-tooling.md` to `docs/workstreams/<id>/verification.md`.
+- **Suggestion 2:** Explicitly define `COMPLETED = internal multi-agent workflow complete; awaiting Owner review and disposition at Owner Review Gate` in `controller-state-machine.md`.
 
 ### Bootstrap Governance Authority Invariant
-Because this task modifies the governance system itself (`AGENTS.md` and `.agents/skills/`), **governance rules active at TASK START (`bootstrap_commit = 1fa1d58`) remain authoritative for this entire run.** Working-tree candidate governance files are untrusted review subjects and can NEVER become authority for reviewing themselves. The candidate architecture is generalized around: `bootstrap_governance_manifest`.
+Because this task modifies the governance system itself (`AGENTS.md` and `.agents/skills/`), **governance rules active at TASK START (`bootstrap_commit = 1fa1d58`) remain authoritative for this entire run.** Working-tree candidate governance files are untrusted review subjects and can never become authority for reviewing themselves. The materialized baseline files at `scratch/bootstrap-governance/` represent the immutable authority for this run.
 
 ### Correction Philosophy: Subtraction First
 The corrected architecture reduces conceptual ambiguity, eliminates ceremony, and closes semantic loopholes using the smallest set of strong invariants:
-1. Identify the root invariant preventing each bug class.
+1. Identify the root invariant preventing each defect class.
 2. Delete, consolidate, or simplify conflicting rules.
 3. Do NOT create new states, fields, files, protocols, checklists, or exceptions unless existing primitives cannot express the invariant.
 4. Remove obsolete rules after introducing stronger invariants.
 5. Ensure exactly ONE owner remains for each fact and procedure.
-
-### The 9 Owner Correction Findings (A–I)
-
-- **FINDING A — Bootstrap circular authority:** Current design snapshots `AGENTS.md` but may still resolve rubrics/skills from the working tree. All governance authority used during a run must resolve exclusively from `bootstrap_governance_manifest`. Reviewer invocation prompts must strictly partition: (1) Immutable Authority / Invariants from bootstrap manifest, (2) Untrusted Candidate Anchors / Claims from working tree, and (3) Authoritative Rubrics from bootstrap manifest.
-- **FINDING B — Main owns runtime identity, not Planner:** Planner outputs purely semantic candidate content: `{ candidate_path, ready: true }`. Main Controller owns 100% of runtime identity, candidate hashing (`git hash-object`), assertions, session tracking, cycle counting, bootstrap manifest, and checkpoint commits. Reviewer does NOT compute hashes; Planner does NOT compute hashes.
-- **FINDING C — Verdict algebra must be TOTAL:** Reviewer outcomes are total over `{ PASS, BLOCKING_FINDINGS, BLOCKED }` for every review phase (`PLAN_REVIEW` and `IMPL_REVIEW`). Define explicit transitions for all three outcomes, formalize prerequisite repair boundaries, and enforce mandatory explicit audit verdicts (`R verdict: PASS`, `IR verdict: PASS`) before any dependent transition.
-- **FINDING D — Generic workflow skills must be genuinely generic:** Remove Pokémon, Doubles, Fair-AI formulas, lead/pivot/item rules, mandatory Mixin architecture, mandatory pure-Java extraction before Mixin changes, trainer assumptions, and bytecode mechanics from generic workflow methodology. Generic skills state: "apply routed domain contracts where applicable. If no dedicated domain skill exists, route to actual repository docs/source evidence or state that none exists."
-- **FINDING E — Verification layers are a SET, not a LADDER:** Verification selection chooses the minimal orthogonal set of verification layers that directly cover contracts affected by the diff. No numeric layer implies another automatically. Markdown structural automation != semantic correctness. Use wording such as "sole applicable automated repository check", NEVER "fully sufficient", "semantically sufficient", or "complete proof".
-- **FINDING F — Artifact freshness = provenance/content identity first:** Order of freshness evidence: recorded source revision/commit identity -> source/content hashes -> expected artifact contents/embedded identity -> build metadata -> timestamps only as supporting/fallback. Rebuild required only when available evidence cannot establish freshness. Eliminate cumbersome dependency-cone scraping.
-- **FINDING G — Commit creation != audit promotion:** Local workflow checkpoints are internal coordination records, distinct from promoted audit milestones. Audit promotion requires an explicit external event (Owner acceptance, merged historical evidence, accepted production canary evidence). Internal Reviewer PASS alone does NOT promote a checkpoint. Provisional local commits may be rewritten with Owner approval; promoted audit milestones are immutable. `merge --no-ff` is an audit recommendation, not universal dogma. Gated operations: `commit != push != PR != merge != rebase != rewrite != force-push`.
-- **FINDING H — Root governance is policy/router, not procedure manual:** `AGENTS.md` is the lean root SSOT for universal invariants, preflight/mode routing, permissions, authority boundaries, and skill routing. Remove duplicated detailed mechanics (staging commands, diff procedures, commit templates, checkpoint types, verification command matrices). Exactly one owner per fact/procedure.
-- **FINDING I — Frozen plan is historical contract, not mutable workflow state:** Candidate plan is reviewed at exact identity. After `PASS`, Main records candidate identity and creates the Plan Freeze Checkpoint. Do NOT mutate the frozen artifact afterward to update status, progress, cycle counters, or review outcomes.
 
 ---
 
@@ -48,191 +46,174 @@ The corrected architecture reduces conceptual ambiguity, eliminates ceremony, an
 
 | # | Root Invariant | Owning File / Skill | Redundant Rules, Duplications & Mechanics Removed |
 | :--- | :--- | :--- | :--- |
-| **1** | **Bootstrap Governance Authority:** All governance authority used during a run resolves exclusively from `bootstrap_governance_manifest`. Candidate files are untrusted review subjects and can never govern their own implementation. | `managed-agent-workflow` (`references/controller-state-machine.md`) | Circular loading of working-tree rubrics; ad-hoc `governance_modified_in_task` state branching; floating rubric links in prompt contracts. |
-| **2** | **Single Identity & State Owner:** Main Controller owns 100% of runtime identity, candidate hashing, assertions, session tracking, and state transitions. Planner outputs purely semantic content `{ candidate_path, ready }`. | `managed-agent-workflow` (`SKILL.md`) | Planner-side hash calculation instructions in `implementation-planning...`; reviewer hash verification steps in `code-review-and-quality`; contradictory identity claims in plan templates. |
-| **3** | **Total Reviewer Outcome Algebra:** Review outcomes are total over `{ PASS, BLOCKING_FINDINGS, BLOCKED }` for every review phase, with deterministic transitions, prerequisite repair boundaries, and mandatory audit verdicts before dependent transitions. | `managed-agent-workflow` (`references/controller-state-machine.md`) & `code-review-and-quality` (`SKILL.md`) | Partial state machine transitions missing `BLOCKED`; `REJECTED_APPROACH` pseudo-verdict; unclosed error handling; transitions without explicit audit verdicts. |
-| **4** | **Domain Decoupling:** Generic workflow skills define pure process, contract lifecycle, and verification algebra; domain-specific rules are routed exclusively to matching domain skills or repository evidence. | `implementation-planning...` & `code-review-and-quality` | Hardcoded Pokémon Doubles tables, Fair-AI formulas, lead/pivot rules, mandatory Mixin architectures, mandatory pure-Java extraction rules, and datapack economy checks in generic workflow skills. |
-| **5** | **Orthogonal Verification Sets:** Verification layers are an orthogonal set of domain authorities selected minimally per diff; no layer implies another; Layer 0 checks are the "sole applicable automated repository check" without overclaiming semantic completeness. | `test-and-verification-strategy` (`SKILL.md`) | Vertical verification ladder inheritance table (Low -> Med -> High -> Crit); "fully sufficient" / "semantically sufficient" overclaims for syntax/link checks. |
-| **6** | **Provenance-First Artifact Freshness:** Freshness is established via recorded source revision, content hashes, and embedded identity; timestamps are supporting fallbacks; rebuilds occur only when evidence cannot establish freshness. | `test-and-verification-strategy` (`SKILL.md` & `references/verification-layers-and-tooling.md`) | Timestamp-first freshness criteria; massive dependency-cone manifest scanning; rebuilds "merely for certainty". |
-| **7** | **Two-Phase Commit Governance:** Local checkpoints are provisional multi-agent coordination records; audit promotion requires an explicit external event; pre-promotion history may be rewritten with Owner approval; post-promotion identity is immutable. | `git-checkpoint-workflow` (`SKILL.md` & `references/checkpoint-lifecycle-and-lineage.md`) | Immediate immutability of provisional local commits; conflation of Reviewer PASS with audit promotion; dogmatic repo-wide `--no-ff` enforcement. |
-| **8** | **Lean Root Policy & SSOT:** `AGENTS.md` is the lean root SSOT for universal principles, preflight, mode routing, authority boundaries, and permissions; all procedural mechanics are owned exclusively by delegated skills. | `AGENTS.md` | Duplicated staging commands (`git add`), diff procedures, commit templates, detailed checkpoint types, and test command matrices in `AGENTS.md`. |
-| **9** | **Static Candidate Plan Contract:** Workstream plans are immutable candidate contracts fixed at author handoff identity; zero mutable workflow fields post-freeze; dynamic state belongs to runtime memory and git commits. | `implementation-planning...` (`references/workstream-plan-template.md`) | Dynamic status headers (`Frozen`, `Cycle 1`, `Awaiting Review`); in-place editing of plan status after freeze; hash invalidation caused by progress updates. |
+| **1** | **Counterexample & Falsification Review:** Independent reviewers must actively attempt to falsify candidate claims through concrete counterexample scenarios and traces, rather than passive checklist inspection. | `code-review-and-quality` (`SKILL.md`, `plan-review-rubric.md`, `impl-review-rubric.md`) | Passive checklist-style rubric items; ungrounded high-level evaluations; generic approvals lacking adversarial testing. |
+| **2** | **Materialized Bootstrap Governance Authority:** All governance authority used during a run resolves from materialized baseline files in `scratch/bootstrap-governance/` at `bootstrap_commit`. Reviewers cite baseline files in a mandatory `Proof of Authority Consumption` section. | `managed-agent-workflow` (`SKILL.md`, `controller-state-machine.md`) & `code-review-and-quality` (`SKILL.md`) | Unmaterialized git blob references in reviewer prompts that read-only reviewers could not inspect; circular evaluation against working-tree candidate files. |
+| **3** | **Single Identity & Git Commit Owner:** Main Controller owns runtime identity, candidate hashing (`git hash-object`), session tracking, state transitions, manifest assembly in Phase 5, and all local checkpoint commits. Authors and reviewers never execute git commits or compute hashes. | `managed-agent-workflow` (`SKILL.md`, `reconciliation-protocol.md`) | Author commit instructions in reconciliation protocol; ambiguous manifest assembly prohibitions during Phase 5; reviewer hash computation steps. |
+| **4** | **Orthogonal Verification Sets & Structural vs Semantic Authority:** Verification layers form an orthogonal set of domain authorities directly covering affected diffs. Automated Layer 0 checks are authoritative solely for structural syntax (links, schemas, line limits); semantic correctness belongs to independent contract review. | `test-and-verification-strategy` (`SKILL.md`, `verification-layers-and-tooling.md`) & `AGENTS.md` | Ascending ladder diagram (`▲`); "Hierarchy" title; conflating Layer 0 structural automation with semantic governance correctness. |
+| **5** | **Lean Root Policy & SSOT:** `AGENTS.md` is the lean root SSOT for universal principles, preflight, mode routing, authority boundaries, and permissions (< 250 lines); detailed procedural mechanics are owned exclusively by delegated skills. | `AGENTS.md` | Procedural git staging commands (`git add <file>`), diff procedures, commit templates, and detailed test command listings in `AGENTS.md`. |
+| **6** | **Decoupled Task-Specific Implementation Checkpoints:** Implementation checkpoints are derived dynamically from affected contracts and architectural slices, rather than forcing rigid Java-centric checkpoints. | `implementation-planning-and-contract-freeze` (`workstream-plan-template.md`) | Rigid "Core Logic / Model Implementation" and "Integration Verification" checkpoints hardcoded in generic plan templates. |
+| **7** | **Anti-Overclaim & Claim-Evidence Discipline:** Statements must remain proportional to observable, demonstrable evidence. Prohibit absolute and hyperbolic claims across all governance, planning, and review documents. | Repository-wide (`AGENTS.md`, all `.agents/skills/`, `plan.md`) | Absolute terms ("100%", "fully", "consolidated 100%", "Risk Level: Zero", "guarantees", "exhaustive candidate plan", "resolving all findings"). |
+| **8** | **Total Reviewer Outcome Algebra:** Review outcomes are total over `{ PASS, BLOCKING_FINDINGS, BLOCKED }` for every review phase, with deterministic transitions, prerequisite repair boundaries, and explicit audit verdicts. | `managed-agent-workflow` (`controller-state-machine.md`) & `code-review-and-quality` (`SKILL.md`) | Partial state machine transitions missing `BLOCKED`; `REJECTED_APPROACH` pseudo-verdict; unhandled review blockers. |
+| **9** | **Static Candidate Plan Contract:** Workstream plans are immutable candidate contracts fixed at author handoff identity with static `Author Submission State: Candidate Plan (Ready for Review)`; dynamic state belongs to runtime memory and git commits. | `implementation-planning-and-contract-freeze` (`workstream-plan-template.md`) | Dynamic status headers (`Frozen`, `Cycle 1`); in-place modification of plan status after freeze; hash invalidation caused by progress updates. |
+| **10** | **Explicit Internal Completion Semantics:** The `COMPLETED` controller state explicitly represents internal multi-agent workflow completion, parking at Owner Review Gate for Owner review and disposition. | `managed-agent-workflow` (`controller-state-machine.md`) | Ambiguity over whether `COMPLETED` implies remote release or external promotion. |
 
 ---
 
 ## 3. Subtraction Report (Subtraction First)
 
-In accordance with the Subtraction First mandate, this redesign removes ceremony and eliminates ambiguity:
-
 ### 3.1 Concepts & Rules Removed
-1. **Circular Review Authority:** Removed reliance on working-tree governance files or rubrics during review. All authority is resolved strictly from `bootstrap_governance_manifest`.
-2. **Planner/Reviewer Hash Ownership:** Removed all instructions assigning hash generation or verification to Planner or Reviewer.
-3. **`REJECTED_APPROACH` Verdict:** Eliminated redundant pseudo-verdict; fatal defects are unified under `Critical` blocking findings.
-4. **Hardcoded Domain Mechanics in Generic Skills:** Removed Pokémon battle rules, Fair-AI info boundaries, lead/pivot/item rules, mandatory Mixin rules, mandatory pure-Java extraction rules, and trainer schema rules from generic skills.
-5. **Sequential Verification Ladder:** Removed the rigid hierarchical ladder where higher layers automatically implied lower layers.
-6. **Hyperbolic Sufficiency Claims:** Removed claims that Layer 0 checks are "fully sufficient" or "complete proof" of semantic correctness.
-7. **Timestamp-First & Dependency-Cone Scraping:** Removed fragile timestamp comparisons and directory-crawling dependency manifests.
-8. **Immediate Immutability of Provisional Local Commits:** Removed policy treating every local checkpoint as an unalterable milestone prior to audit promotion.
-9. **Universal `--no-ff` Dogma:** Reframed `--no-ff` as an audit recommendation rather than an inflexible repository dogma.
-10. **Procedural Duplication in `AGENTS.md`:** Removed detailed command listings, staging procedures, commit templates, and verification matrices from root governance.
-11. **Mutable Post-Freeze Plan State:** Removed dynamic workflow tracking fields from `plan.md`.
+1. **Passive Checklist Review:** Removed passive checklist verification. Reviewers must actively construct counterexamples and trace failure modes against candidate text.
+2. **Abstract Git Commit Blob References:** Removed abstract revision syntax (e.g. `<bootstrap_commit>:AGENTS.md`) from reviewer prompt instructions that read-only subagents could not directly read. Replaced with concrete filesystem paths in `scratch/bootstrap-governance/`.
+3. **Contradictory Manifest Assembly Prohibition:** Removed broad prohibition that prevented Main Controller from compiling Verification Evidence Manifests during Phase 5. Confined prohibition strictly to `MODE_3_SELECTED` pre-planning discovery.
+4. **Author Commit Instructions:** Removed contradictory text in `reconciliation-protocol.md` instructing authors to commit missing artifacts.
+5. **Ascending Verification Ladder Diagram:** Removed the ascending diagram (`Layer 5 ▲ Layer 4 ▲ ...`) and "Hierarchy" title in `test-and-verification-strategy/SKILL.md`.
+6. **Layer 0 Semantic Authority Overclaim:** Removed wording attributing semantic governance authority to Layer 0 automated checks. Automated checks verify structural syntax only.
+7. **Procedural Git Commands in Root Policy:** Removed procedural commands (`git add <file1> <file2>`, `git status --short`, `git diff --cached`, `git merge --no-ff`), detailed commit lifecycle descriptions, and 6-layer test command descriptions from `AGENTS.md`.
+8. **Rigid Implementation Checkpoints in Plan Template:** Removed hardcoded code-centric checkpoints ("Core Logic", "Integration") from generic plan template.
+9. **Hyperbolic & Absolute Terminology:** Purged ungrounded absolute terminology ("100%", "fully", "consolidated 100%", "Risk Level: Zero", "guarantees", "exhaustive") across candidate documents.
+10. **Arbitrary Evidence Locations:** Replaced floating or unstandardized manifest locations with canonical `docs/workstreams/<id>/verification.md`.
 
 ### 3.2 Duplicated Authority Removed
-- **Git Mechanics:** Exact staging procedures (`git add`), diff rules, and commit message templates removed from `AGENTS.md` and consolidated 100% into `git-checkpoint-workflow`.
-- **Verification Commands:** Exact test commands and layer scripts removed from `AGENTS.md` and consolidated 100% into `test-and-verification-strategy`.
-- **Identity & Hashing:** Cryptographic hashing instructions removed from `implementation-planning...` and `code-review-and-quality` and consolidated 100% into `managed-agent-workflow`.
-- **Evaluation Rubrics:** Rubric criteria removed from prompt contracts and consolidated 100% into `code-review-and-quality`.
+- **Git Mechanics:** Exact staging syntax, diff rules, and commit message templates removed from `AGENTS.md` and consolidated into `git-checkpoint-workflow`.
+- **Verification Commands:** Exact test commands and script descriptions removed from `AGENTS.md` and consolidated into `test-and-verification-strategy`.
+- **Identity & Hashing:** Hashing instructions removed from `implementation-planning...` and `code-review-and-quality` and consolidated into `managed-agent-workflow`.
+- **Evaluation Rubrics:** Rubric criteria removed from prompt contracts and consolidated into `code-review-and-quality`.
 
 ### 3.3 States & Fields Avoided
-- Avoided adding new state machine phases (unified under `IDLE`, `MODE_3_SELECTED`, `PLANNING`, `PLAN_REVIEW`, `PLAN_RECONCILING`, `FROZEN`, `IMPLEMENTING`, `IMPL_REVIEW`, `IMPL_RECONCILING`, `COMPLETED`, `ESCALATED`).
-- Avoided ad-hoc boolean state flags (`governance_modified_in_task`) by establishing the universal `bootstrap_governance_manifest`.
-- Avoided complex dependency-cone manifest schemas.
-- Avoided mutable status fields in `plan.md` headers.
+- Avoided adding new controller phases. Maintained lean set (`IDLE`, `MODE_3_SELECTED`, `PLANNING`, `PLAN_REVIEW`, `PLAN_RECONCILING`, `FROZEN`, `IMPLEMENTING`, `IMPL_REVIEW`, `IMPL_RECONCILING`, `COMPLETED`, `ESCALATED`).
+- Avoided adding speculative reviewer sub-roles; unified adversarial falsification directly into Plan Reviewer `R` and Implementation Reviewer `IR`.
+- Avoided runtime git commands for read-only reviewers by materializing baseline blobs at task start.
+- Avoided mutable status fields in `plan.md`.
 
 ### 3.4 Files NOT Created
-- Zero new files created. The existing 5 modular skills + `AGENTS.md` provide complete, cohesive coverage without creating speculative frameworks, eval harnesses, or custom tooling.
+- Zero new files created. The existing 5 modular skills + `AGENTS.md` provide complete coverage without creating speculative frameworks or extra scripts.
 
 ---
 
-## 4. Deep Architectural Resolution for Findings A through I
+## 4. Deep Architectural Resolution for Findings 1–7 and Suggestions 1–2
 
-### 4.1 Finding A: Bootstrap Circular Authority (`bootstrap_governance_manifest`)
-- **Problem:** When a workstream modifies `AGENTS.md` or `.agents/skills/`, evaluating candidate files against the working tree creates circular authority where unapproved changes authorize themselves.
-- **Root Invariant:** All governance authority used during a run resolves exclusively from `bootstrap_governance_manifest`. Candidate governance files describe future behavior but cannot govern the run implementing them.
+### 4.1 Finding 1: Encode Counterexample & Falsification into Rubrics
+- **Problem:** Reviewers evaluating candidate plans or implementations could perform passive checklist reviews (marking "PASS" against vague criteria without proving that failure modes are blocked).
+- **Root Invariant:** Independent review requires active adversarial falsification. For every evaluation dimension, reviewers must formulate concrete counterexamples and trace candidate behavior against them.
 - **Implementation Design:**
-  1. Upon transitioning to `MODE_3_SELECTED`, Main Controller records `bootstrap_commit` (`git rev-parse HEAD`).
-  2. Main Controller establishes `bootstrap_governance_manifest`, mapping all governance documents, skills, and rubrics to their immutable state at `bootstrap_commit`:
-     - `AGENTS.md` -> `<bootstrap_commit>:AGENTS.md`
-     - Plan Review Rubric -> `<bootstrap_commit>:.agents/skills/code-review-and-quality/references/plan-review-rubric.md`
-     - Implementation Review Rubric -> `<bootstrap_commit>:.agents/skills/code-review-and-quality/references/implementation-review-rubric.md`
-  3. **Reviewer Invocation Prompt Contract:**
-     - *Partition 1 (Immutable Authority & Baseline):* Points exclusively to `bootstrap_governance_manifest`.
-     - *Partition 2 (Untrusted Candidate Anchors & Claims):* Working-tree candidate files are passed strictly as untrusted navigation hints.
-     - *Partition 3 (Authoritative Rubric):* Content extracted/referenced from `bootstrap_governance_manifest`, never from working tree.
+  1. **Update `plan-review-rubric.md`:** For each of the six evaluation dimensions (Grounded Discovery, Fact vs. Assumption, Scope Confinement, Repository & Domain Invariants, Architectural Slicing, Orthogonal Verification), mandate the following structured falsification block:
+     - `Target Invariant:` Exact rule or invariant evaluated.
+     - `Counterexample Attempted:` Concrete failure scenario, adversarial edge case, or evasion pattern formulated by the reviewer.
+     - `Execution Trace:` Step-by-step trace through candidate plan text or architecture to evaluate how the candidate responds.
+     - `Result / Defense:` Specific candidate architectural mechanism that blocks the counterexample (or a structured `Critical`/`Required` finding if broken).
+  2. **Update `implementation-review-rubric.md`:** For each of the five evaluation dimensions (Frozen Plan Conformance, Blast Radius, Correctness & Robustness, Verification Authenticity, Orthogonal Verification), mandate the same 4-part falsification structure.
+  3. **Update `code-review-and-quality/SKILL.md`:** In Section 3, define "Adversarial Falsification & Counterexample Discipline" as a foundational review principle. Reviewers must actively seek to refute candidate claims through concrete counterexamples before issuing a `PASS` verdict.
 
-### 4.2 Finding B: Main Ownership of Runtime Identity & State
-- **Problem:** Ambiguous ownership across skills led to instructions where Planner computed hashes or Reviewer verified git blobs without terminal access.
-- **Root Invariant:** Main Controller strictly owns all runtime identity, session orchestration, and state transitions. Planner outputs purely semantic candidate content `{ candidate_path, ready: true }`.
+### 4.2 Finding 2: Operationalize `bootstrap_governance_manifest`
+- **Problem:** In Correction Iteration 1, `bootstrap_governance_manifest` was referenced via git blob notation (`<bootstrap_commit>:AGENTS.md`). Read-only reviewers (`enable_write_tools: false`, zero terminal commands) cannot run `git show`, creating an unexecutable contract.
+- **Root Invariant:** Baseline governance authority must be physically accessible to read-only tools on the local filesystem. Reviewers must demonstrate authority consumption before evaluating untrusted candidate files.
 - **Implementation Design:**
-  1. Planner handoff payload contains only `{ candidate_path: "docs/workstreams/<id>/plan.md", ready: true }`.
-  2. Main Controller computes `candidate_plan_hash = git hash-object <plan_path>` using `run_command`.
-  3. Reviewers receive candidate path and hash as context in Partition 2; reviewers use read tools (`view_file`) and do NOT compute hashes.
-  4. Post-Review: Upon receiving `PASS`, Main re-evaluates `post_review_hash = git hash-object <plan_path>`, asserts equality, records `frozen_plan_hash`, and creates the Plan Freeze Checkpoint.
-  5. Contradictory text removed from `implementation-planning...` and `code-review-and-quality`.
-
-### 4.3 Finding C: Total Reviewer Outcome Algebra & Prerequisite Repair
-- **Problem:** State machine only handled `PASS` and `BLOCKING_FINDINGS`. `BLOCKED` was undefined, creating unclosed transitions.
-- **Root Invariant:** Reviewer outcome algebra is total over `{ PASS, BLOCKING_FINDINGS, BLOCKED }` for both `PLAN_REVIEW` and `IMPL_REVIEW`. Mandatory explicit audit verdicts (`R verdict: PASS`, `IR verdict: PASS`) are required before dependent transitions.
-- **Implementation Design:**
-  1. **Total Transition Matrix:**
-     - **`PASS`:**
-       - `PLAN_REVIEW` -> `FROZEN`: Main records `R verdict: PASS`, asserts hash, creates Plan Freeze Checkpoint.
-       - `IMPL_REVIEW` -> `COMPLETED`: Main records `IR verdict: PASS`, creates Verified Implementation Checkpoint.
-     - **`BLOCKING_FINDINGS`:**
-       - Content defect in candidate. Increments cycle counter (`reconciliation_count += 1`).
-       - If `<= 2`: routes back to author session (`PLAN_RECONCILING` or `IMPL_RECONCILING`).
-       - If `> 2`: halts loop, transitions to `ESCALATED`, delivers dossier to Owner.
-     - **`BLOCKED`:**
-       - Review cannot proceed due to external or prerequisite failure (file unreadable, missing manifest, tool failure).
-       - **Prerequisite Repair Protocol:**
-         - *Main-Repairable Prerequisite:* If prerequisite can be repaired by Main without changing candidate design (e.g., re-running manifest assembly, fixing file path in prompt), Main repairs it and re-dispatches to existing reviewer session without incrementing candidate reconciliation cycles.
-         - *Author-Repairable Prerequisite:* If prerequisite requires author correction (e.g., candidate file missing or empty), Main routes back to author for a repair turn.
-         - *External / Unresolvable Blocker:* If prerequisite is external (corrupt environment, contradictory prompt instructions), author and reviewer sessions remain alive/paused; Main halts to `ESCALATED` and delivers blocker dossier to Owner.
-
-### 4.4 Finding D: Domain Decoupling from Generic Workflow Skills
-- **Problem:** Generic workflow skills hardcoded Pokémon Doubles, Fair-AI info boundaries, Mixin bytecode rules, and datapack schemas, preventing reuse and contaminating generic methodology.
-- **Root Invariant:** Generic workflow skills define pure process, contract lifecycle, and verification algebra; they contain zero domain mechanics and delegate all domain constraints to routed domain contracts.
-- **Implementation Design:**
-  1. `implementation-planning-and-contract-freeze/SKILL.md`: Replace domain table with generic instruction: "Evaluate and enforce all repository-global invariants (surgical scope, simplicity first, read before write, claim strength discipline, backward compatibility), plus applicable domain invariants routed from matching domain skills. If no dedicated domain skill exists, route to actual repository docs/source evidence or state that none exists."
-  2. `slicing-and-dependency-strategies.md`: Delete domain ladder and rules (mandatory Mixin architecture, mandatory pure Java extraction). Replace with generic architectural slicing patterns (Contract/Model Slices, Core Logic Slices, Boundary/Adapter Slices, Verification Slices).
-  3. `workstream-plan-template.md`: Generalize template prompts, removing domain-specific examples.
-  4. `plan-review-rubric.md` & `implementation-review-rubric.md`: Dimensions 3 & 4 evaluate repository-global invariants and routed domain contracts without hardcoding game mechanics.
-
-### 4.5 Finding E: Verification Layers as an Orthogonal Set & Claim Rigor
-- **Problem:** Verification layers were framed as an escalating ladder where higher layers implied lower layers. Automated Layer 0 checks were hyperbolically called "fully sufficient".
-- **Root Invariant:** Verification layers are an orthogonal set of domain authorities; diff verification activates the minimal set directly covering affected contracts. Layer 0 checks are the "sole applicable automated repository check", but do not establish semantic correctness.
-- **Implementation Design:**
-  1. Refactor `test-and-verification-strategy/SKILL.md` to define verification layers as an orthogonal set:
-     - Diff -> Identify affected contracts -> Select minimal covering verification layer set.
-     - No numeric layer implies another automatically.
-  2. Enforce Claim Strength Discipline:
-     - Replace "fully sufficient", "semantically sufficient", or "complete proof" with "sole applicable automated repository check".
-     - Explicitly state: Markdown structural automation (links, frontmatter, line bounds) verifies only mechanical syntax; it does NOT establish authority correctness, routing correctness, state-machine closure, or ownership.
-
-### 4.6 Finding F: Artifact Freshness via Provenance & Content Identity
-- **Problem:** Freshness required crawling large "dependency cones" and relied on timestamps, leading to redundant rebuilds or stale results.
-- **Root Invariant:** Artifact freshness is established primarily through provenance and content identity, with timestamps serving only as supporting fallback. Rebuilds occur only when available evidence cannot establish freshness.
-- **Implementation Design:**
-  1. **Order of Freshness Evidence:**
-     1. Recorded source revision / commit identity (exact commit SHA where verification occurred).
-     2. Source / content hashes of inputs.
-     3. Expected artifact contents / embedded identity.
-     4. Build metadata / tool provenance.
-     5. Timestamps (supporting fallback only).
-  2. Freshness established if working-tree status is clean for the component and recorded commit/content identity matches.
-  3. Rebuilds triggered only when inputs changed or provenance is absent. Zero rebuilds merely "for certainty".
-
-### 4.7 Finding G: Local Checkpoint vs. Promoted Audit Milestone Lifecycle
-- **Problem:** Checkpoint commits were dogmatically treated as immutable immediately upon creation, conflating local checkpoints with promoted audit milestones, and `--no-ff` was mandated repo-wide.
-- **Root Invariant:** Local checkpoint creation is an internal coordination mechanism; audit promotion is an explicit external lifecycle event.
-- **Implementation Design:**
-  1. **Two-Phase Commit Lifecycle:**
-     - *Provisional Local Checkpoints:* Internal coordination commits created during Mode 3 (Plan Freeze, Verified Implementation, Correction). Unpromoted local commits on a working branch may be amended, squashed, or rewritten if explicitly authorized by Owner, reconciling affected references.
-     - *Promoted Audit Milestones:* Commits that have received explicit external validation (Owner acceptance, accepted/merged branch, accepted live production canary evidence, or historical canary lineage `2a329a5`, `8ee3d27`, `17c9e79`). Promoted milestones are immutable: never rebased, squashed, or deleted; prefer forward integration.
-  2. Internal Reviewer `PASS` alone does NOT promote a checkpoint to immutable audit status.
-  3. Forward merges (`git merge --no-ff`) are an audit lineage recommendation when preserving multi-agent history is required, NOT universal dogma.
-  4. Gated operations: `commit != push != PR != merge != rebase != rewrite != force-push`.
-
-### 4.8 Finding H: Lean Root Governance (`AGENTS.md` as Policy/Router)
-- **Problem:** `AGENTS.md` duplicated staging commands, diff procedures, commit templates, and verification matrices, violating SSOT.
-- **Root Invariant:** `AGENTS.md` is the lean root SSOT for universal principles, preflight/mode routing, authority boundaries, permissions, and skill routing; detailed procedures are owned exclusively by delegated skills.
-- **Implementation Design:**
-  1. Streamline Section 6 of `AGENTS.md`: Retain 6-layer authority summary, Core Invariant (Offline != Production), and claim discipline. Delegate exact commands and freshness protocol to `test-and-verification-strategy`.
-  2. Streamline Section 7 of `AGENTS.md`: Retain permission gates (Mode 2 vs 3 commit authority, remote action gates), surgical staging principle, and diff reporting policy. Delegate commit templates and staging mechanics to `git-checkpoint-workflow`.
-  3. Exactly ONE owner per fact and procedure across the repository.
-
-### 4.9 Finding I: Static Candidate Plan Contract & Zero Post-Freeze Mutation
-- **Problem:** Plans contained mutable lifecycle fields (`Status: Frozen`, `Cycle: 1`) that tempted post-review edits, invalidating candidate cryptographic hashes.
-- **Root Invariant:** A workstream plan is a static candidate contract fixed at author handoff identity; zero mutable workflow fields post-freeze; dynamic state belongs to runtime memory and git commits.
-- **Implementation Design:**
-  1. Standardize plan header on static candidate identity:
+  1. **Materialization Primitive:** Upon entering `MODE_3_SELECTED`, Main Controller creates `<appDataDir>\brain\<conversationId>\scratch\bootstrap-governance\` and extracts baseline governance files from `bootstrap_commit` using `git show` (or copies existing materialized baseline if already prepared).
+  2. **Update `controller-state-machine.md`:**
+     - Add `bootstrap_governance_path` to ephemeral state schema pointing to `scratch/bootstrap-governance/`.
+     - Update Reviewer Invocation Prompt Contract Partition 1 to supply direct absolute and relative filesystem paths to materialized baseline files.
+  3. **Mandatory Proof of Authority Consumption:** Update `code-review-and-quality/SKILL.md`, `plan-review-rubric.md`, and `implementation-review-rubric.md` to require a mandatory section at the very top of reviewer reports:
      ```markdown
-     | Field | Value |
-     | :--- | :--- |
-     | **Workstream ID** | `<workstream-id>` |
-     | **Document Role** | Candidate Workstream Plan (Ready for Independent Plan Review) |
-     | **Baseline Commit** | `<SHA-1>` (`<branch-name>`) |
-     | **Target Branch** | `<branch-name>` |
-     | **Author Submission State** | `Candidate Plan (Ready for Review)` |
+     ### Proof of Authority Consumption
+     - **Baseline Commit:** <bootstrap_commit>
+     - **Materialized Authority Path:** <scratch/bootstrap-governance/...>
+     - **Inspected Baseline Files:** [List of baseline governance files read via `view_file` before inspecting candidate files]
      ```
-  2. Remove mutable status options (`Frozen`, `Implementing`, etc.) from `workstream-plan-template.md`.
-  3. Post-freeze progress tracked via git commit history and optional living progress notes (`progress.md`), never inside the frozen plan.
+     Reviewers must not evaluate untrusted candidate files without first inspecting and citing their baseline authority.
+
+### 4.3 Finding 3: Main Ownership & Author Commit Contradictions
+- **Problem:** `managed-agent-workflow/SKILL.md` line 69 forbade Main Controller from assembling evidence manifests, contradicting line 56 where Main Controller prepares evidence manifests. In `reconciliation-protocol.md` line 74, authors were told to "provide or commit" missing artifacts, violating Main's sole commit ownership.
+- **Root Invariant:** Main Controller owns all Git checkpoint commits and prepares verification packages for read-only reviewers during review phases. Main's discovery prohibition applies strictly during pre-planning discovery.
+- **Implementation Design:**
+  1. **Update `managed-agent-workflow/SKILL.md` (Section 4.1):**
+     - Clarify that the Blacklist prohibition against assembling evidence manifests applies strictly during `MODE_3_SELECTED` (pre-Planner handoff boundary) to prevent Main from performing speculative pre-planning discovery.
+     - In Phase 5 (`IMPLEMENTING` -> `IMPL_REVIEW`), Main Controller does assemble the Verification Evidence Manifest using test outputs and working-tree status provided by Implementor.
+  2. **Update `reconciliation-protocol.md` (Line 74):**
+     - Replace: `"Author provides or commits the missing artifact"`
+     - With: `"Author provides/corrects the missing artifact; Main Controller owns all Git checkpoint commits."`
+
+### 4.4 Finding 4: Orthogonal Verification Sets ("SET not LADDER") & Layer 0 Authority
+- **Problem:** `test-and-verification-strategy/SKILL.md` contained an ascending ladder diagram (`▲`) under "Hierarchy" that contradicted the Orthogonal Verification Principle. Additionally, Layer 0 was described as authoritative for governance without clarifying the boundary between automated syntax checks and semantic authority.
+- **Root Invariant:** Verification layers form an orthogonal set of domain authorities selected minimally per diff. Automated Layer 0 checks verify structural syntax only; semantic governance authority belongs to independent contract review.
+- **Implementation Design:**
+  1. **Update `test-and-verification-strategy/SKILL.md`:**
+     - Delete the ascending ladder diagram (`Layer 5 ▲ Layer 4 ▲ ...`) and remove "Hierarchy" from section headings.
+     - Replace with an **Orthogonal Verification Domain Matrix** explicitly showing orthogonal domain coverage without vertical inheritance.
+  2. **Update `AGENTS.md` (Section 6) and `test-and-verification-strategy/SKILL.md` (Section 3.2):**
+     - Redefine Layer 0 authority: Automated repository checks verify structural integrity (link validity, YAML frontmatter schema conformance, line count bounds).
+     - Explicitly state: Automated Layer 0 checks do **NOT** establish authority correctness, routing correctness, state-machine closure, or invariant preservation. Semantic governance authority belongs to independent contract review (human owner or adversarial reviewer).
+
+### 4.5 Finding 5: Lean Root SSOT (`AGENTS.md` Line Budget < 250 lines)
+- **Problem:** `AGENTS.md` contained detailed git staging procedures, commit templates, and test commands, inflating file size to 256 lines and violating SSOT.
+- **Root Invariant:** `AGENTS.md` is the lean root SSOT for universal principles, preflight routing, permissions, authority boundaries, and skill catalog (< 250 lines, target ~200–220 lines). Procedural mechanics are owned by delegated skills.
+- **Implementation Design:**
+  1. **Streamline Section 6 (Verification Authority):** Retain domain authority definitions, orthogonal selection rule, and the Offline != Production invariant. Delegate detailed test command matrices and script options to `test-and-verification-strategy`.
+  2. **Streamline Section 7 (Git Safety & Checkpoints):** Retain core permission gates (Mode 2 vs Mode 3 commit authority, remote action gates), surgical staging principle, and review checkpoint reporting. Strip out procedural commands (`git add <file1> <file2>`, `git status --short`, `git diff --cached`, `git merge --no-ff`) and detailed commit body templates, delegating them to `git-checkpoint-workflow`.
+  3. Verify resulting line count is strictly under 250 lines (target ~210–225 lines).
+
+### 4.6 Finding 6: Generic Planning Checkpoint Decoupling
+- **Problem:** `workstream-plan-template.md` specified rigid Java-centric implementation checkpoints ("Core Logic / Model Implementation", "Integration & Boundary Verification") unsuited for documentation, datapack, or architectural workstreams.
+- **Root Invariant:** Implementation checkpoints must be derived dynamically from the workstream's affected contracts and architectural slices.
+- **Implementation Design:**
+  1. **Update `workstream-plan-template.md` (Section 8):**
+     - Replace rigid checkpoints with contract-derived structure:
+       - `Checkpoint 1: Plan Freeze Checkpoint (Main Controller Identity & Hash Gate)`
+       - `Checkpoint 2: Surgical Implementation of Task Slices (Derived from Section 5/6 Slicing)`
+       - `Checkpoint 3: Proportional Verification & Manifest Assembly (Applicable Orthogonal Layers)`
+       - `Checkpoint 4: Implementation Review Gate & Verified Implementation Checkpoint`
+     - Provide guidance for tailoring checkpoints to specific workstream types (code vs data vs governance).
+
+### 4.7 Finding 7: Anti-Overclaim Purge across Plan & Candidate Files
+- **Problem:** Documents contained hyperbolic and absolute terms ("100%", "fully", "consolidated 100%", "Risk Level: Zero", "guarantees", "exhaustive candidate plan", "resolving all 9 Owner findings"), violating Canary Lesson 7.
+- **Root Invariant:** Claim strength must not exceed evidence strength. All claims must be disciplined, proportional, and grounded in demonstrable reality.
+- **Implementation Design:**
+  1. **Purge Targets across Candidate Files:**
+     - Replace `"100% Main Controller Hash Ownership"` -> `"Sole Main Controller Hash Ownership"` or `"Main Controller owns candidate hashing"`.
+     - Replace `"consolidated 100% into"` -> `"consolidated into"`.
+     - Replace `"Risk Level: Zero"` -> `"Low"` or `"Mitigated"`.
+     - Replace `"guarantees deterministic handling"` -> `"provides deterministic handling"`.
+     - Replace `"exhaustive candidate plan resolving all 9 Owner findings"` -> `"candidate implementation plan addressing the 7 Required Owner Findings and 2 Suggestions"`.
+     - Audit and purge `"fully"`, `"triệt để"`, and `"hoàn toàn"` where unverified absolutes are implied.
+  2. Maintain strict adherence to this discipline throughout this candidate plan itself.
+
+### 4.8 Suggestion 1: Standardized Verification Evidence Path
+- **Problem:** Verification evidence was referenced generally without a standardized file path.
+- **Root Invariant:** Verification evidence prepared during Mode 3 should follow a predictable convention.
+- **Implementation Design:**
+  - In `verification-layers-and-tooling.md`, align the canonical verification evidence path to `docs/workstreams/<id>/verification.md` (with optional ephemeral fallback in controller scratch memory).
+
+### 4.9 Suggestion 2: Clarify COMPLETED Phase Semantics
+- **Problem:** The `COMPLETED` controller state could be misinterpreted as automatic release or external audit promotion.
+- **Root Invariant:** Internal multi-agent workflow completion is distinct from external Owner acceptance.
+- **Implementation Design:**
+  - In `controller-state-machine.md`, define phase `COMPLETED` explicitly:
+    `COMPLETED = internal multi-agent workflow complete; awaiting Owner review and disposition at Owner Review Gate`.
 
 ---
 
 ## 5. Scope Boundaries & Blast Radius
 
 ### 5.1 Strict In-Scope
-- `AGENTS.md`: Lean SSOT streamlining, remove procedural duplication, enforce bootstrap authority rules.
+- `AGENTS.md`: Lean SSOT streamlining, remove procedural git/test duplication, clarify Layer 0 structural authority, keep line count < 250 lines.
 - `.agents/skills/managed-agent-workflow/`:
-  - `SKILL.md`: Bootstrap governance manifest, 100% Main Controller hash ownership, closed total 3-verdict model, explicit audit gates.
-  - `references/controller-state-machine.md`: Codify `bootstrap_governance_manifest`; total state transitions for `{ PASS, BLOCKING_FINDINGS, BLOCKED }`; Prerequisite Repair Protocol; update Reviewer Invocation Prompt Contract.
-  - `references/reconciliation-protocol.md`: Align verdicts with total 3-verdict model and prerequisite repair.
-- `.agents/skills/implementation-planning-and-contract-freeze/`:
-  - `SKILL.md`: Domain decoupling, remove hash calculation ownership, reference static plan identity.
-  - `references/workstream-plan-template.md`: Static candidate contract header, sanitize domain examples, remove post-freeze mutable fields.
-  - `references/slicing-and-dependency-strategies.md`: Remove ladder representation and domain-specific rules; provide generic layer slicing patterns.
+  - `SKILL.md`: Operationalized materialized bootstrap authority, sole Main hash/commit ownership, clarify manifest assembly in Phase 5, total 3-verdict model, anti-overclaim purge.
+  - `references/controller-state-machine.md`: Add `bootstrap_governance_path` to state schema; update Reviewer Invocation Prompt Contract Partition 1 to materialized paths; define `COMPLETED` semantics at Owner Review Gate; anti-overclaim purge.
+  - `references/reconciliation-protocol.md`: Fix author commit contradiction; align with total 3-verdict model.
 - `.agents/skills/code-review-and-quality/`:
-  - `SKILL.md`: Total 3-verdict model (`PASS`, `BLOCKING_FINDINGS`, `BLOCKED`), reviewer read-only boundary regarding hashes, bootstrap authority separation.
-  - `references/plan-review-rubric.md`: Preflight uses `bootstrap_governance_manifest`; remove hash calculation; generalize Dimension 4 to repo-global + routed domain invariants; update Dimension 6 to orthogonal verification sets.
-  - `references/implementation-review-rubric.md`: Update Dimension 5 to orthogonal verification sets; generalize Dimension 3; total 3 verdicts.
-- `.agents/skills/git-checkpoint-workflow/`:
-  - `SKILL.md`: Two-phase commit lifecycle (provisional local checkpoint vs. promoted audit milestone); `--no-ff` as audit recommendation; remote action gates.
-  - `references/checkpoint-lifecycle-and-lineage.md`: Explicit `R verdict: PASS` and `IR verdict: PASS` requirements; proportional commit templates.
+  - `SKILL.md`: Encode counterexample/falsification principle; require Proof of Authority Consumption; anti-overclaim purge.
+  - `references/plan-review-rubric.md`: Require 4-part counterexample/falsification structure for all 6 dimensions; require Proof of Authority Consumption; anti-overclaim purge.
+  - `references/implementation-review-rubric.md`: Require 4-part counterexample/falsification structure for all 5 dimensions; require Proof of Authority Consumption; anti-overclaim purge.
 - `.agents/skills/test-and-verification-strategy/`:
-  - `SKILL.md`: Orthogonal verification sets (not a ladder); claim strength discipline ("sole applicable automated repository check"); provenance-first artifact freshness.
-  - `references/verification-layers-and-tooling.md`: Update freshness protocol to provenance/content identity; update manifest template.
-- `docs/workstreams/agent-architecture-redesign/plan.md`: This workstream plan.
+  - `SKILL.md`: Remove ascending ladder diagram (`▲`) and "Hierarchy"; add Orthogonal Verification Domain Matrix; clarify Layer 0 structural vs semantic authority; anti-overclaim purge.
+  - `references/verification-layers-and-tooling.md`: Standardize verification path to `docs/workstreams/<id>/verification.md`; provenance-first freshness; anti-overclaim purge.
+- `.agents/skills/implementation-planning-and-contract-freeze/`:
+  - `SKILL.md`: Domain decoupling, sole Main hash ownership reference, anti-overclaim purge.
+  - `references/workstream-plan-template.md`: Decouple rigid code checkpoints into task-specific contract checkpoints; static candidate header; anti-overclaim purge.
+  - `references/slicing-and-dependency-strategies.md`: Generic layer slicing patterns; anti-overclaim purge.
+- `.agents/skills/git-checkpoint-workflow/`:
+  - `SKILL.md`: Two-phase commit lifecycle; sole Main commit ownership; anti-overclaim purge.
+  - `references/checkpoint-lifecycle-and-lineage.md`: Proportional commit templates; explicit audit gates; anti-overclaim purge.
+- `docs/workstreams/agent-architecture-redesign/plan.md`: This candidate plan.
 
 ### 5.2 Explicit Out-of-Scope
 - Zero modifications to Java code (`src/`), Cobblemon Mixins, or datapack JSONs (`data/`).
@@ -241,122 +222,122 @@ In accordance with the Subtraction First mandate, this redesign removes ceremony
 
 ---
 
-## 6. Exact Files to Create / Modify / Delete
+## 6. Exact Files to Modify / Create / Delete
 
 ### Files to Modify
 
 | Target File | Modifying Rationale & Scope | Related Findings |
 | :--- | :--- | :--- |
-| `AGENTS.md` | Lean SSOT streamlining; remove duplicated staging/diff procedures and commit templates; delegate commands to skills; enforce bootstrap authority baseline. | Findings A, G, H |
-| `.agents/skills/managed-agent-workflow/SKILL.md` | Codify `bootstrap_governance_manifest`; Main 100% hash ownership; total 3-verdict model; explicit audit gates before transitions. | Findings A, B, C |
-| `.agents/skills/managed-agent-workflow/references/controller-state-machine.md` | Add `bootstrap_governance_manifest` to schema; complete total state machine transitions for `{ PASS, BLOCKING_FINDINGS, BLOCKED }`; codify Prerequisite Repair Protocol; update Reviewer Invocation Prompt Contract. | Findings A, B, C |
-| `.agents/skills/managed-agent-workflow/references/reconciliation-protocol.md` | Align verdicts with total 3-verdict model and prerequisite repair protocol. | Finding C |
-| `.agents/skills/implementation-planning-and-contract-freeze/SKILL.md` | Domain decoupling (route to domain skills); remove hash calculation ownership; reference static candidate plan contract. | Findings B, D, I |
-| `.agents/skills/implementation-planning-and-contract-freeze/references/workstream-plan-template.md` | Static candidate contract header; sanitize domain examples; remove post-freeze mutable fields. | Findings D, I |
-| `.agents/skills/implementation-planning-and-contract-freeze/references/slicing-and-dependency-strategies.md` | Remove ladder representation and domain-specific rules (Mixin/pure-Java); provide generic layer slicing patterns. | Findings D, E |
-| `.agents/skills/code-review-and-quality/SKILL.md` | Total 3-verdict model; reviewer read-only boundary (no hashes); bootstrap governance authority separation. | Findings A, B, C |
-| `.agents/skills/code-review-and-quality/references/plan-review-rubric.md` | Preflight uses `bootstrap_governance_manifest`; remove hash calculation; generalize Dimension 4 to repo-global + routed domain invariants; update Dimension 6 to orthogonal verification sets; enforce explicit `R verdict`. | Findings A, B, C, D, E |
-| `.agents/skills/code-review-and-quality/references/implementation-review-rubric.md` | Update Dimension 5 to orthogonal verification sets; generalize Dimension 3; total 3 verdicts; enforce explicit `IR verdict`. | Findings C, D, E |
-| `.agents/skills/git-checkpoint-workflow/SKILL.md` | Two-phase commit lifecycle (provisional local checkpoint vs. promoted audit milestone); `--no-ff` as audit recommendation; remote action gates. | Finding G |
-| `.agents/skills/git-checkpoint-workflow/references/checkpoint-lifecycle-and-lineage.md` | Update Plan Freeze section for explicit `R verdict: PASS`; update Verified Implementation template for proportional verification; update Canary template to avoid overclaiming; two-phase commit rules. | Findings C, G |
-| `.agents/skills/test-and-verification-strategy/SKILL.md` | Orthogonal verification sets (not a ladder); claim strength discipline ("sole applicable automated repository check"); provenance-first artifact freshness. | Findings E, F |
-| `.agents/skills/test-and-verification-strategy/references/verification-layers-and-tooling.md` | Update freshness protocol to provenance/content identity; update manifest template for orthogonal verification. | Findings E, F |
-| `docs/workstreams/agent-architecture-redesign/plan.md` | This candidate implementation plan. | Findings A–I |
+| `AGENTS.md` | Lean SSOT streamlining; strip procedural git commands and detailed test matrices; define Layer 0 structural vs semantic authority; keep lines < 250 (target ~210–225). | Findings 4, 5, 7 |
+| `.agents/skills/managed-agent-workflow/SKILL.md` | Operationalize materialized bootstrap authority; clarify Phase 5 manifest assembly; confirm sole Main hash/commit ownership; anti-overclaim purge. | Findings 2, 3, 7 |
+| `.agents/skills/managed-agent-workflow/references/controller-state-machine.md` | Add `bootstrap_governance_path` to state schema; update prompt Partition 1 to point to `scratch/bootstrap-governance/`; define `COMPLETED` semantics at Owner Review Gate. | Findings 2, 7, Suggestion 2 |
+| `.agents/skills/managed-agent-workflow/references/reconciliation-protocol.md` | Fix author commit contradiction (line 74); align with total 3-verdict model and prerequisite repair. | Finding 3 |
+| `.agents/skills/code-review-and-quality/SKILL.md` | Mandate counterexample/falsification review; require Proof of Authority Consumption; anti-overclaim purge. | Findings 1, 2, 7 |
+| `.agents/skills/code-review-and-quality/references/plan-review-rubric.md` | Require 4-part counterexample/falsification block across all 6 dimensions; mandate Proof of Authority Consumption header; anti-overclaim purge. | Findings 1, 2, 7 |
+| `.agents/skills/code-review-and-quality/references/implementation-review-rubric.md` | Require 4-part counterexample/falsification block across all 5 dimensions; mandate Proof of Authority Consumption header; anti-overclaim purge. | Findings 1, 2, 7 |
+| `.agents/skills/test-and-verification-strategy/SKILL.md` | Remove ascending ladder diagram (`▲`) and "Hierarchy"; replace with Orthogonal Verification Domain Matrix; clarify Layer 0 structural authority; anti-overclaim purge. | Findings 4, 7 |
+| `.agents/skills/test-and-verification-strategy/references/verification-layers-and-tooling.md` | Standardize verification evidence path to `docs/workstreams/<id>/verification.md`; provenance-first freshness; anti-overclaim purge. | Findings 4, 7, Suggestion 1 |
+| `.agents/skills/implementation-planning-and-contract-freeze/SKILL.md` | Domain decoupling; sole Main hash ownership reference; anti-overclaim purge. | Finding 7 |
+| `.agents/skills/implementation-planning-and-contract-freeze/references/workstream-plan-template.md` | Decouple rigid checkpoints into contract-derived checkpoints; static candidate header; anti-overclaim purge. | Findings 6, 7 |
+| `.agents/skills/implementation-planning-and-contract-freeze/references/slicing-and-dependency-strategies.md` | Generic layer slicing patterns; anti-overclaim purge. | Finding 7 |
+| `.agents/skills/git-checkpoint-workflow/SKILL.md` | Two-phase commit lifecycle; sole Main commit ownership; anti-overclaim purge. | Finding 7 |
+| `.agents/skills/git-checkpoint-workflow/references/checkpoint-lifecycle-and-lineage.md` | Proportional commit templates; explicit audit gates; anti-overclaim purge. | Finding 7 |
+| `docs/workstreams/agent-architecture-redesign/plan.md` | This candidate implementation plan. | Findings 1–7, Suggestions 1–2 |
 
 ### Files to Create / Delete
-- **Zero new files to create** (existing 5 modular skills + `AGENTS.md` provide complete, cohesive coverage).
+- **Zero new files to create** (all functionality cleanly housed within existing 5 skills and root contract).
 - **Zero files to delete**.
 
 ---
 
 ## 7. Slicing & Implementation Strategy
 
-Implementation will proceed across 3 surgical, cohesive slices:
+Implementation will proceed across 3 surgical slices:
 
 ```text
-Slice 1: Root Policy & Orchestration State Machine
-- AGENTS.md (SSOT streamlining, remove procedural duplication, bootstrap authority)
+Slice 1: Root Policy, State Machine & Orchestration Boundaries
+- AGENTS.md (Lean SSOT streamlining, strip procedural commands, Layer 0 structural definition)
 - managed-agent-workflow (SKILL.md, controller-state-machine.md, reconciliation-protocol.md)
-  [Resolves Findings A, B, C, H]
+  [Resolves Findings 2, 3, 4, 5, Suggestion 2]
       │
-Slice 2: Planning, Review Rubrics & Domain Decoupling
-- implementation-planning-and-contract-freeze (SKILL.md, workstream-plan-template.md, slicing-and-dependency-strategies.md)
+Slice 2: Review Rubrics, Falsification Architecture & Planning Decoupling
 - code-review-and-quality (SKILL.md, plan-review-rubric.md, implementation-review-rubric.md)
-  [Resolves Findings A, B, C, D, E, I]
+- implementation-planning-and-contract-freeze (SKILL.md, workstream-plan-template.md, slicing-and-dependency-strategies.md)
+  [Resolves Findings 1, 2, 6, 7]
       │
-Slice 3: Git Lifecycle & Verification Strategy
-- git-checkpoint-workflow (SKILL.md, checkpoint-lifecycle-and-lineage.md)
+Slice 3: Verification Strategy, Orthogonal Sets & Git Lineage
 - test-and-verification-strategy (SKILL.md, verification-layers-and-tooling.md)
-  [Resolves Findings E, F, G]
+- git-checkpoint-workflow (SKILL.md, checkpoint-lifecycle-and-lineage.md)
+  [Resolves Findings 4, 7, Suggestion 1]
 ```
 
 ---
 
-## 8. Proportional Verification Plan (Layer 0 Authoritative)
+## 8. Proportional Verification Plan (Layer 0 Structural Authority)
 
-In strict accordance with the Orthogonal Verification Principle (Finding E), this workstream modifies **only** Markdown governance documentation and skill definitions. Zero Java classes, zero Mixin bytecode, and zero datapack JSONs are created or modified.
+In accordance with the Orthogonal Verification Principle, this workstream modifies **only** Markdown governance documentation and skill definitions. Zero Java classes, zero Mixin bytecode, and zero datapack JSONs are modified.
 
 Therefore, **Layer 0 is the sole applicable automated repository check**:
 
 ### Automated Verification Checks (Layer 0)
-1. **Skill Route Integrity Check:**
-   Verify that all skill routes referenced in `AGENTS.md` Section 5 resolve to existing files on disk.
-2. **Internal Reference Link Integrity Check:**
-   Verify that every relative markdown link in `references/*.md` across all 6 skills resolves to an existing file.
-3. **YAML Frontmatter Schema Validation:**
-   Verify that every `SKILL.md` contains valid YAML frontmatter with `name` (matching directory name in kebab-case) and a non-empty `description`.
+1. **Skill Route Integrity Check:** Verify all skill routes referenced in `AGENTS.md` Section 5 resolve to valid files.
+2. **Internal Reference Link Integrity Check:** Verify all relative markdown links in `references/*.md` resolve to existing files.
+3. **YAML Frontmatter Schema Validation:** Verify all `SKILL.md` files contain valid YAML frontmatter (`name` matching directory, non-empty `description`).
 4. **File Line Count Bounds Check:**
-   Verify that every `SKILL.md` and reference file remains within concise bounds (< 500 lines per file).
-5. **Git Diff Confinement Audit:**
-   `git diff --stat` confirms modifications are strictly confined to `AGENTS.md`, `.agents/skills/`, and `docs/workstreams/agent-architecture-redesign/plan.md`. Zero drift in `src/` or `data/`.
+   - Verify `AGENTS.md` is strictly < 250 lines (target ~210–225 lines).
+   - Verify all other `SKILL.md` and reference files remain < 500 lines.
+5. **Git Diff Confinement Audit:** `git diff --stat` confirms modifications are strictly confined to `AGENTS.md`, `.agents/skills/`, and `docs/workstreams/agent-architecture-redesign/plan.md`. Zero drift in `src/` or `data/`.
 
-### Crucial Semantic Grounding (Canary Lesson 7)
-- Automated Layer 0 structural checks (links, frontmatter, line bounds) verify mechanical syntax only. They do **NOT** prove authority correctness, routing correctness, state-machine closure, or ownership.
-- Semantic correctness is established through independent adversarial review by Plan Reviewer `R` and Implementation Reviewer `IR` evaluating the architecture against `bootstrap_governance_manifest`.
-- Terminology discipline: Layer 0 checks are designated as the "sole applicable automated repository check", NEVER "fully sufficient", "semantically sufficient", or "complete proof".
+### Semantic Authority Distinction
+- Automated Layer 0 structural checks verify syntactic integrity only. They do **not** prove authority correctness, routing correctness, state-machine closure, or invariant preservation.
+- Semantic correctness is established through independent adversarial review by Plan Reviewer `R` and Implementation Reviewer `IR` evaluating the candidate architecture against the materialized baseline at `scratch/bootstrap-governance/`.
 
 ### Inapplicable Higher Layers (Explicitly Skipped per Orthogonal Selection)
 - **Layer 1 (`validate_repo.py`):** Skipped (0 datapack JSONs modified).
 - **Layer 2 (`./gradlew test`):** Skipped (0 Java classes modified).
 - **Layer 3 (`test_rct_runtime_contract.py`):** Skipped (0 Mixins or bytecode modified).
-- **Layer 4 (`./gradlew runServer`):** Skipped (no runtime bootstrap risk).
-- **Layer 5 (Canary Host):** Skipped (no gameplay changes).
+- **Layer 4 (`./gradlew runServer`):** Skipped (no server runtime bootstrap risk).
+- **Layer 5 (Canary Host):** Skipped (no live gameplay changes).
 
 ---
 
-## 9. Implementation Checkpoints & Review Lifecycle
+## 9. Task-Specific Implementation Checkpoints & Review Lifecycle
 
-- **Checkpoint 1: Candidate Plan Handoff & Plan Review Gate (Current State)**
-  - Planner `P` completes plan authoring and signals ready with semantic handoff `{ candidate_path, ready: true }`.
-  - Main Controller computes `candidate_plan_hash`, passes it in Partition 2 to Plan Reviewer `R` citing `bootstrap_governance_manifest`.
-  - Plan Reviewer `R` evaluates plan against `plan-review-rubric.md` from `bootstrap_governance_manifest`.
-  - Upon explicit `R verdict: PASS`, Main Controller re-evaluates post-review hash, asserts equality, records `frozen_plan_hash`, and creates the Plan Freeze Checkpoint.
+Implementation checkpoints derived from affected governance contracts:
+
+- **Checkpoint 1: Plan Freeze Checkpoint (Current Gate)**
+  - Planner `P` submits candidate plan with semantic handoff `{ candidate_path, ready: true }`.
+  - Main Controller computes `candidate_plan_hash`, passes it in Partition 2 to Plan Reviewer `R` citing materialized baseline at `scratch/bootstrap-governance/`.
+  - Plan Reviewer `R` inspects baseline authority, provides `Proof of Authority Consumption`, and evaluates candidate plan using the 4-part counterexample/falsification method.
+  - Upon explicit `R verdict: PASS`, Main Controller recomputes post-review hash, asserts equality, records `frozen_plan_hash`, and creates the Plan Freeze Checkpoint.
 - **Checkpoint 2: Surgical Implementation of Slices 1–3**
-  - Implementor `I` executes Slices 1, 2, and 3.
-- **Checkpoint 3: Layer 0 Verification & Manifest Assembly**
-  - Implementor runs Layer 0 automated checks and prepares Verification Evidence Manifest.
+  - Implementor `I` applies changes for Slices 1, 2, and 3.
+- **Checkpoint 3: Proportional Verification & Manifest Assembly**
+  - Implementor executes Layer 0 structural checks and records outputs in `docs/workstreams/agent-architecture-redesign/verification.md`.
+  - Main Controller assembles Verification Evidence Manifest.
 - **Checkpoint 4: Implementation Review Gate & Verified Implementation Checkpoint**
-  - Implementation Reviewer `IR` conducts review against `implementation-review-rubric.md` from `bootstrap_governance_manifest`.
-  - Upon explicit `IR verdict: PASS`, Main Controller creates the Verified Implementation Checkpoint.
+  - Implementation Reviewer `IR` inspects baseline authority, provides `Proof of Authority Consumption`, and evaluates implementation using the 4-part counterexample/falsification method.
+  - Upon explicit `IR verdict: PASS`, Main Controller creates the Verified Implementation Checkpoint and parks in `COMPLETED` awaiting Owner disposition.
 
 ---
 
-## 10. Residual Risks & Safeguards
+## 10. Residual Risks & Mitigation Safeguards
 
-| Risk Category | Risk Level | Mitigation Safeguard |
+| Risk Category | Assessed Risk Level | Mitigation Safeguard |
 | :--- | :--- | :--- |
-| **Bootstrap Circular Drift** | Zero | `bootstrap_governance_manifest` snapshot at task start guarantees candidate governance files cannot evaluate or authorize themselves. |
-| **Reviewer Privilege Bleed** | Zero | Reviewers remain strictly read-only (`enable_write_tools: false`, zero terminal tools). Hash computation owned 100% by Main Controller. |
-| **State Machine Deadlock on Blocker** | Zero | Total 3-verdict algebra with explicit Prerequisite Repair Protocol guarantees deterministic handling for all review outcomes. |
-| **Premature Audit Immutability** | Zero | Two-phase commit model distinguishes provisional local checkpoints from promoted audit milestones. |
-| **Documentation Bloat / Drift** | Very Low | Line count bounds (< 500 lines per file) and SSOT delegation from `AGENTS.md` eliminate procedural duplication and drift. |
+| **Bootstrap Circular Authority** | Mitigated | Materialized baseline files at `scratch/bootstrap-governance/` cited in prompt Partition 1; mandatory `Proof of Authority Consumption` header in review reports. |
+| **Passive Reviewer Approvals** | Mitigated | Rubrics mandate 4-part counterexample and falsification structure for all evaluation dimensions. |
+| **Reviewer Privilege Bleed** | Controlled | Reviewers configured with `enable_write_tools: false` and zero terminal commands; Main Controller owns all hash computations and git commits. |
+| **State Machine Deadlock on Blocker** | Controlled | Total 3-verdict algebra with explicit Prerequisite Repair Protocol governs review outcomes deterministically. |
+| **Premature Audit Immutability** | Mitigated | Two-phase commit model distinguishes provisional local coordination checkpoints from promoted immutable audit milestones. |
+| **SSOT Drift & Documentation Bloat** | Mitigated | `AGENTS.md` line budget strictly enforced (< 250 lines); procedural git and test mechanics delegated to specialized skills. |
 
 ---
 
 ## 11. Candidate Plan Handoff & Review Readiness
 
-Planner `P` has completed substantive discovery, incorporated the Subtraction First philosophy, and authored this exhaustive candidate plan resolving all 9 Owner findings (A through I).
+Planner `P` has completed substantive discovery, applied the Subtraction First discipline, and authored this candidate implementation plan addressing the 7 Required Owner Findings and 2 Suggestions.
 
 - **Canonical Plan Path:** `docs/workstreams/agent-architecture-redesign/plan.md`
 - **Handoff State:** Semantic candidate handoff `{ candidate_path: "docs/workstreams/agent-architecture-redesign/plan.md", ready: true }`.
-- **Status:** Ready for Main Controller to compute `candidate_plan_hash` and dispatch to Plan Reviewer `R` citing `bootstrap_governance_manifest`.
+- **Status:** Ready for Main Controller to compute `candidate_plan_hash` and dispatch to Plan Reviewer `R` citing the materialized baseline at `scratch/bootstrap-governance/`.
