@@ -94,13 +94,19 @@ Route the request into exactly one of the following five modes:
 
 #### Mode 3 — Managed-Agent Workflow
 - **Trigger:** Activated IMMEDIATELY when there is at least one material risk or complexity signal:
-  - Behavior bug requiring deep multi-file discovery;
+  - Agent-architecture, workflow skill, or repository governance contract changes (`AGENTS.md`, `.agents/skills/`);
+  - Cross-repository workflow porting or workflow migrations;
+  - Explicit Owner instruction for independent review, plan freeze, or managed-agent workflow;
+  - Non-trivial behavior bug requiring deep multi-file discovery;
   - Multiple plausible implementation paths requiring comparative evaluation;
   - Companion mod Mixin, bytecode, or Fabric runtime contract changes;
   - Run & Bun AI scoring, state memory, or fair-information boundary changes;
   - Broad datapack changes with significant regression risk;
   - Implementation requiring an approved plan before execution.
-- **Behavior:** Main stops direct investigation immediately and activates [`.agents/skills/managed-agent-workflow/SKILL.md`](.agents/skills/managed-agent-workflow/SKILL.md). The main agent transitions to **Main Controller**, leaving substantive discovery and architecture design entirely to Planner `P`. Main Controller orchestrates Planner `P`, Plan Reviewer `R`, Implementor `I`, and Implementation Reviewer `IR` under strict finite reconciliation bounds.
+- **Behavior:** Main stops direct investigation immediately upon Mode 3 classification, transitions to `MODE_3_SELECTED`, and activates [`.agents/skills/managed-agent-workflow/SKILL.md`](.agents/skills/managed-agent-workflow/SKILL.md). The main agent transitions to **Main Controller**, leaving substantive discovery and architecture design entirely to Planner `P`. Main Controller orchestrates Planner `P`, Plan Reviewer `R`, Implementor `I`, and Implementation Reviewer `IR` under strict finite reconciliation bounds.
+- **`MODE_3_SELECTED` Action Boundary:**
+  - *Main Controller Whitelist (Permitted):* Snapshot `bootstrap_commit` (`git rev-parse HEAD`), check repository working branch and status (`git status --short`), read the governance contract at `bootstrap_commit`, transition to `PLANNING`, and invoke Planner `P` via `invoke_subagent`.
+  - *Main Controller Blacklist (Forbidden):* Main Controller MUST NOT search for external repositories, clone/locate external sources, inspect implementation directories, crawl files, or compile evidence manifests. Substantive discovery, external source mapping, and technical evidence preparation belong strictly to Planner `P`.
 
 #### Mode 4 — Stop / Escalate Before Execution
 - **Trigger:** Material ambiguity in owner intent; repository evidence contradicts requested changes; ungranted destructive or remote actions; missing critical prerequisites.
@@ -188,11 +194,13 @@ Before planning non-trivial work or modifying specialized domains, inspect the t
 
 Cobbleverse Hell Mode enforces six explicit layers of verification authority:
 - **Layer 0 (Markdown & Governance Authority):** Relative link integrity, YAML frontmatter schemas, and documentation cross-links. Authoritative for skill routing and repository governance.
-- **Layer 1 (Datapack & Trainer Schema Validation):** `python scripts/ci/validate_repo.py` and `scripts/ci/check_legacy_baseline.py`. Authoritative for 1,714 trainer JSON schemas, battle formats, and economy rules.
-- **Layer 2 (Java Unit & Boundary Tests):** `./gradlew test` (JUnit 5). Fast, isolated tests authoritative for pure algorithms, calculation formulas, and boundary math.
-- **Layer 3 (Bytecode & Shadow Runtime Contracts):** `python scripts/runtime-contract/test_rct_runtime_contract.py`. Authoritative for Fabric Mixin target classes, method descriptors, and shadow field offsets offline.
-- **Layer 4 (Headless Server Bootstrap Smoke):** `./gradlew runServer`. Startup/Mixin smoke only, verifying Knot bootstrap and Cobblemon mod initialization. **NOT authoritative** for battle AI logic or multiplayer gameplay.
-- **Layer 5 (Production Host Canary & Live Gameplay):** Dedicated live production host. The **only** authoritative verification for multiplayer stability, battle AI decisions, and player progression.
+- **Layer 1 (Datapack & Trainer Schema Validation):** Trainer JSON schemas, battle formats, and economy rules.
+- **Layer 2 (Java Unit & Boundary Tests):** Fast, isolated tests authoritative for pure algorithms, calculation formulas, and boundary math.
+- **Layer 3 (Bytecode & Shadow Runtime Contracts):** Offline contracts authoritative for Fabric Mixin target classes, method descriptors, and shadow field offsets.
+- **Layer 4 (Headless Server Bootstrap Smoke):** Startup/Mixin smoke only, verifying Knot bootstrap and Cobblemon mod initialization. Not authoritative for battle AI logic or multiplayer gameplay.
+- **Layer 5 (Production Host Canary & Live Gameplay):** Dedicated live production host. The only authoritative verification for multiplayer stability, battle AI decisions, and player progression.
+
+Detailed test suite commands, scripts, artifact freshness conditions, and evidence manifest formats are delegated to [`.agents/skills/test-and-verification-strategy/SKILL.md`](.agents/skills/test-and-verification-strategy/SKILL.md).
 
 ### Core Invariant: Offline PASS != Production Semantic PASS (Canary Lessons 6 & 7)
 - Automated test passes locally or in CI (Layers 0–4) are necessary but **never sufficient** to claim that gameplay integration is GREEN.
@@ -205,11 +213,7 @@ Cobbleverse Hell Mode enforces six explicit layers of verification authority:
 
 ### Local Checkpoint Permission Contract
 - **Mode 2 (Direct Bounded Tasks):** Do NOT create git commits unless the owner explicitly requests or approves a commit for the current task.
-- **Mode 3 (Managed-Agent Workflow):** When the owner has **explicitly authorized implementation through the managed-agent workflow**, Main Controller is authorized to create necessary **local checkpoint commits** without re-prompting the owner for every individual commit:
-  1. *Plan Freeze Checkpoint:* `docs(plan): freeze implementation plan for <scope>` (cryptographically recording the approved plan hash).
-  2. *Verified Implementation Checkpoint:* `feat(<scope>): <summary>` or `fix(<scope>): <summary>`.
-  3. *Correction Checkpoint (if needed):* `fix(<scope>): address review finding <id>`.
-  4. *Production Canary Checkpoint:* `docs(workstream): record observed production canary evidence for <scope>`.
+- **Mode 3 (Managed-Agent Workflow):** When the owner has **explicitly authorized implementation through the managed-agent workflow**, Main Controller is authorized to create necessary **local checkpoint commits** without re-prompting the owner for every individual commit (Plan Freeze Checkpoint, Verified Implementation Checkpoint, Correction Checkpoint, Production Canary Checkpoint). Exact commit message formats, body requirements, and lifecycle triggers are governed by [`.agents/skills/git-checkpoint-workflow/SKILL.md`](.agents/skills/git-checkpoint-workflow/SKILL.md).
 
 ### Surgical Staging Discipline
 - Stage only explicitly owned files using targeted paths (`git add <file1> <file2>`).
@@ -217,8 +221,9 @@ Cobbleverse Hell Mode enforces six explicit layers of verification authority:
 - Always run `git status --short` and `git diff --cached` before committing.
 
 ### Audit Lineage Preservation Protocol (Canary Lesson 10)
-- Commits that serve as audit milestones (e.g., canary lineage `2a329a5`, `8ee3d27`, `17c9e79`) must **never** be rebased, squashed, amended, or deleted.
-- Workstream branches must be integrated via forward merges (`git merge --no-ff`) to preserve historical commit SHAs as permanent cryptographic proof of multi-agent auditability.
+- Commits that serve as promoted audit milestones (e.g., Plan Freeze Checkpoints, Verified Implementation Checkpoints, and historical canary lineage `2a329a5`, `8ee3d27`, `17c9e79`) must **never** be rebased, squashed, amended, or deleted.
+- Provisional local commits on a working branch prior to audit promotion may be amended, squashed, or rewritten if explicitly requested or approved by the Owner.
+- Forward merges (`git merge --no-ff`) are recommended when preserving multi-agent audit lineage is required for the workstream, but are not an inflexible repo-wide dogma.
 
 ### Strict Remote Actions Gate
 Under NO circumstances may an agent perform the following without separate, explicit Owner authorization:

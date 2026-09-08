@@ -6,7 +6,12 @@ This reference defines the structured arbitration, finding verification, cycle t
 
 ## 1. The Reconciliation Lifecycle
 
-When a Reviewer (`R` or `IR`) returns `BLOCKING_FINDINGS`, Main Controller coordinates a bounded reconciliation cycle.
+When a Reviewer (`R` or `IR`) evaluates a candidate artifact, it issues one of three closed verdicts:
+- **`PASS`**: Zero `Critical` and zero `Required` findings. Candidate is approved for the next phase.
+- **`BLOCKING_FINDINGS`**: One or more `Critical` or `Required` findings. Main Controller coordinates a bounded reconciliation cycle (up to `MAX_CYCLES = 2`).
+- **`BLOCKED`**: Review cannot proceed due to missing prerequisite artifacts, unreadable files, or missing environment dependencies. Requires prerequisite resolution or immediate escalation.
+
+When a Reviewer returns `BLOCKING_FINDINGS`, Main Controller manages reconciliation as follows:
 
 ```mermaid
 sequenceDiagram

@@ -38,11 +38,17 @@ Verification effort must be scaled proportionally to the risk profile and blast 
 
 | Risk Tier | Change Types | Required Verification Layers |
 | :--- | :--- | :--- |
-| **Low Risk** | Documentation, skill definitions, markdown governance | **Layer 0:** Markdown link integrity, YAML frontmatter check. |
+| **Low Risk** | Documentation, skill definitions, markdown governance | **Layer 0:** Markdown link integrity, YAML frontmatter check, file bounds. |
 | **Medium Risk** | Datapack JSONs, trainer rosters, battle formats | **Layer 1:** `validate_repo.py` + `check_legacy_baseline.py`. |
 | **High Risk** | Java algorithms, battle AI scoring, damage math | **Layer 2:** `./gradlew test` (JUnit 5) + Layer 1. |
 | **Critical Risk** | Fabric Mixins, bytecode injection, shadow fields | **Layer 3:** `test_rct_runtime_contract.py` + Layer 2 + **Layer 4:** `./gradlew runServer`. |
 | **Live Balance** | Player progression, tournament balance, multiplayer | **Layer 5:** Production Canary Host live gameplay. |
+
+### 3.1 Layer 0 Sufficiency for Governance & Markdown Tasks
+When a task modifies exclusively Markdown files, agent documentation, or workflow skill configurations:
+- **Layer 0 is the SOLE authoritative verification layer.**
+- Passing Layer 0 automated checks (route resolution, relative link integrity, YAML frontmatter schemas, file line bounds < 500 lines) is **fully sufficient** for implementation verification.
+- Higher layer test suites (Layer 1 `validate_repo.py`, Layer 2 `./gradlew test`, Layer 3 `test_rct_runtime_contract.py`, Layer 4 `./gradlew runServer`, Layer 5 Canary) are **inapplicable** and must NOT be executed or mandated.
 
 ---
 
@@ -104,5 +110,6 @@ Because Implementation Reviewer `IR` is strictly read-only, Main Controller or I
 - Baseline commit and current branch;
 - Working-tree status (`git status --short`);
 - Tracked diff (`git diff <baseline>`);
-- Executed commands with raw exit codes and log excerpts;
-- Explicit list of unverified/skipped items requiring Layer 5 Canary testing.
+- Executed commands with raw exit codes and log excerpts for applicable layers;
+- Explicit statement of skipped/inapplicable layers with clear technical justification (e.g., Layer 1–5 skipped for pure Layer 0 governance changes);
+- Explicit list of unverified items requiring Layer 5 Canary testing (if applicable).

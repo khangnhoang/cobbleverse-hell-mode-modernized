@@ -19,12 +19,11 @@ Mode 3 workstream plans must follow this standardized section structure:
 | Field | Value |
 | :--- | :--- |
 | **Workstream ID** | `<workstream-id>` |
-| **Status** | `Draft` \| `Ready for Review` \| `Reconciled` \| `Frozen` |
-| **Source of Truth** | This document (`docs/workstreams/<id>/plan.md`) |
+| **Document Role** | Candidate Workstream Plan (Ready for Independent Plan Review) |
 | **Baseline Commit** | `<SHA-1>` (`<branch-name>`) |
-| **Canary Lineage** | `<SHA-1>` (if tracking prior verified lineage) |
 | **Target Branch** | `<branch-name>` |
-| **Reconciliation Cycle** | `Turn 0 (Initial)` \| `Cycle 1` \| `Cycle 2` |
+| **Canary Lineage** | `<SHA-1>` (if tracking prior verified lineage) |
+| **Author Submission State** | `Candidate Plan (Ready for Review)` |
 
 ---
 
@@ -55,9 +54,12 @@ Mode 3 workstream plans must follow this standardized section structure:
 ---
 
 ## 4. Architectural & Invariant Analysis
-- **Fair-AI Information Boundary:** Verification that no secret opponent state is leaked.
-- **Companion Fabric Mixin Safety:** Bytecode stability, target descriptors, `@Slice` or `@At` anchors.
-- **Datapack Format & Economy:** Cobbleverse 1.7.42 schema compliance, zero bag healing items.
+- **Repository-Global Invariants:** Surgical scope, simplicity first, read before write, zero opportunistic refactoring, public contract stability.
+- **Applicable Domain Invariants:**
+  - *Battle AI Tasks:* Fair-AI information boundary (no hidden state leaks).
+  - *Fabric Companion Tasks:* Mixin injection safety, stable descriptors, bytecode contracts.
+  - *Datapack Tasks:* Cobbleverse 1.7.42 schema compliance, zero bag healing items.
+  - *Team Design Tasks:* Doubles strategy coherence, Turn-1 gimmick safety.
 
 ---
 
@@ -118,11 +120,11 @@ Before notifying Main Controller that a plan is ready for review, Planner `P` mu
    - [ ] Out-of-scope boundaries are clearly defined.
    - [ ] No unrelated files or opportunistic cleanup are included.
 4. **Invariant Protections Addressed:**
-   - [ ] Fair-AI boundary evaluated (zero opponent secret leaks).
-   - [ ] Fabric Mixin stability and bytecode contracts evaluated.
-   - [ ] Datapack 1.7.42 schema and economy rules verified.
+   - [ ] Repository-global invariants evaluated (read before write, surgical scope, claim strength discipline, backward compatibility).
+   - [ ] Applicable domain invariants addressed (Fair-AI, Fabric Mixin, Datapack schemas, or Doubles team design per routing table).
 5. **Concrete Verification Commands:**
-   - [ ] Exact, runnable commands are specified for each applicable verification layer.
+   - [ ] Exact, runnable verification commands specified for each applicable verification layer.
+   - [ ] Verification suites are proportional to modified subsystems (pure Markdown/governance requires Layer 0; does not mandate inapplicable suites).
    - [ ] Expected pass criteria are clearly stated.
 6. **Line Count & Proportionality:**
    - [ ] Document is concise, structured, and avoids repetitive narration.

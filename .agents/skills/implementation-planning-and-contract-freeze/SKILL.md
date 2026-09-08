@@ -53,19 +53,23 @@ Every plan must explicitly categorize technical findings into a structured table
 
 ## 4. Architectural Invariant Protection
 
-Planner must explicitly evaluate and protect Cobbleverse Hell Mode's core runtime invariants:
+Planner must explicitly evaluate and enforce all **repository-global invariants**, plus applicable **domain invariants** routed from matching domain skills:
 
-1. **Fair-AI Information Boundary:**
-   - Run & Bun battle AI decisions must strictly respect fair-information rules.
-   - AI algorithms must NOT inspect hidden opponent information (unrevealed movesets, exact stat IVs/EVs, unrevealed held items, or secret team slots) unless revealed through legitimate gameplay interactions.
-2. **Companion Fabric Mixin Safety:**
-   - Target classes and method descriptors must match compiled Cobblemon/Minecraft bytecode exactly.
-   - Mixin injection points must use stable anchors (prefer `@Inject(at = @At("HEAD"))` or well-defined method calls; avoid fragile line-number slices unless validated by bytecode contract tests).
-   - Shadow fields and surrogate interfaces must preserve Loom and runtime remapping compatibility.
-3. **Datapack Format & Economy Integrity:**
-   - Trainer JSONs must conform to Cobbleverse 1.7.42 schema.
-   - In-battle bag healing items (Potions, Full Restores, Revives) are strictly prohibited on NPC trainers.
-   - Competitive Doubles lead pairs and movesets must conform to team design archetypes.
+### 4.1 Repository-Global Invariants
+1. **Read Before Write:** Inspect real repository source files, decompiled dependencies, and contracts before proposing design decisions. Never guess signatures or behaviors.
+2. **Surgical Scope & Simplicity First:** Deliver the minimal complete solution. Touch only files necessary for the task; zero opportunistic refactoring or speculative infrastructure.
+3. **Claim Strength Discipline (Canary Lesson 7):** "Claim strength must not exceed evidence strength." Avoid hyperbolic claims; cite concrete lines and evidence.
+4. **Public Contract & Backward Compatibility:** Preserve existing working trainer definitions, battle formats, and public APIs unless task explicitly dictates changes.
+
+### 4.2 Domain Invariant Routing Table
+Planner routes domain-specific invariant evaluation to the corresponding domain authority:
+
+| Domain Scope | Governing Invariants & Authority | Key Boundary Checks |
+| :--- | :--- | :--- |
+| **Battle AI Decisions** | Run & Bun AI scoring rules & fair-play contract | **Fair-AI Information Boundary:** Zero inspection of hidden opponent information (unrevealed movesets, exact IVs/EVs, unrevealed held items, secret team slots). |
+| **Fabric Companion Mod** | Fabric Mixin & Bytecode offline contract | **Companion Fabric Mixin Safety:** Target classes and descriptors match bytecode; stable injection anchors (`@At("HEAD")`, verified targets); Loom remapping compatibility. |
+| **Trainer Datapacks** | Cobbleverse 1.7.42 Schema & Economy rules | **Datapack Format & Economy Integrity:** Schema compliance; zero bag healing items on NPC trainers; battle format integrity. |
+| **Doubles Team Roster** | [`competitive-pokemon-doubles-team-design`](../competitive-pokemon-doubles-team-design/SKILL.md) | **Doubles Strategy & Gimmick Safety:** Weather/Trick Room/Tailwind coherence; Turn-1 gimmick safety for Run & Bun AI; held items and abilities. |
 
 ---
 
@@ -108,6 +112,6 @@ sequenceDiagram
 
 1. **Author Pre-Submission Self-Checklist:** Planner must self-audit against the checklist in `references/workstream-plan-template.md` before signaling completion.
 2. **Candidate Hashing:** Main Controller generates `candidate_plan_hash = git hash-object <plan_path>` before invoking Plan Reviewer `R`.
-3. **Identity Verification:** Plan Reviewer verifies the candidate hash matches the on-disk plan.
-4. **Post-Review Assertion:** Upon `PASS`, Main re-evaluates `post_review_plan_hash`. If hashes mismatch, the review is invalidated.
+3. **Independent Review:** Plan Reviewer `R` reads the plan at canonical path using read-only inspection tools (`view_file`), evaluates content against repository evidence and the review rubric, and issues an explicit closed verdict (`PASS`, `BLOCKING_FINDINGS`, `BLOCKED`). Reviewer does not run terminal commands or compute git hashes.
+4. **Post-Review Assertion:** Upon receiving `PASS`, Main re-evaluates `post_review_plan_hash = git hash-object <plan_path>`. Main asserts `candidate_plan_hash == post_review_plan_hash`. If hashes mismatch, the review is invalidated.
 5. **Implementor Handshake:** Implementor verifies that the on-disk plan hash matches `frozen_plan_hash` before modifying any files.

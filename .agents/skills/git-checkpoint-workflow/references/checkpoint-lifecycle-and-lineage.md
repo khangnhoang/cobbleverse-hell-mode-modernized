@@ -9,7 +9,7 @@ This reference details the mechanics of local checkpoint commits, English Conven
 Cobbleverse Hell Mode defines four canonical checkpoint commit types for Mode 3 workstreams:
 
 ### 1.1 Plan Freeze Checkpoint
-- **When:** Immediately after Plan Reviewer `R` issues an unconditioned `PASS` verdict, and Main Controller confirms that `candidate_plan_hash == post_review_plan_hash`.
+- **When:** Immediately after Plan Reviewer `R` issues an explicit `PASS` verdict (`R verdict: PASS`), and Main Controller confirms that `candidate_plan_hash == post_review_plan_hash`.
 - **Purpose:** Freezes the reviewed workstream plan into git history before any code is written.
 - **Commit Message Format:**
   ```text
@@ -21,14 +21,14 @@ Cobbleverse Hell Mode defines four canonical checkpoint commit types for Mode 3 
   ```
 
 ### 1.2 Verified Implementation Checkpoint
-- **When:** After Implementation Reviewer `IR` issues `PASS` and all required verification suites pass.
+- **When:** After Implementation Reviewer `IR` issues an explicit `PASS` verdict (`IR verdict: PASS`) and all applicable verification suites pass.
 - **Purpose:** Records the verified code and configuration changes.
 - **Commit Message Format:**
   ```text
   <type>(<scope>): <summary in lowercase imperative>
 
   - Implemented <component / feature details>
-  - Verification: validate_repo.py PASS, JUnit PASS, test_rct_runtime_contract.py PASS
+  - Verification: <applicable suites and exit codes per verification strategy>
   - Review Verdict: PASS (by Implementation Reviewer IR)
   - Plan Reference: docs/workstreams/<id>/plan.md@<frozen-hash>
   ```
@@ -45,15 +45,16 @@ Cobbleverse Hell Mode defines four canonical checkpoint commit types for Mode 3 
   ```
 
 ### 1.4 Production Canary Checkpoint
-- **When:** After live dedicated server canary testing confirms gameplay stability.
-- **Purpose:** Records empirical production evidence and runtime performance observations.
+- **When:** After live dedicated server canary testing records observed runtime performance and telemetry.
+- **Purpose:** Records empirical production evidence and runtime performance observations without unverified absolute claims.
 - **Commit Message Format:**
   ```text
   docs(workstream): record observed production canary evidence for <feature>
 
   - Server: dedicated canary host
-  - Observed behavior: <battle AI decisions, progression, telemetry>
-  - Canary status: STABLE
+  - Canary scope: <scenarios and battle formats tested>
+  - Observed telemetry: <concrete observed metrics, player interactions, ticks without crash>
+  - Observed limitations: <untested edge cases or remaining risks>
   ```
 
 ---
@@ -78,12 +79,7 @@ All commit messages must adhere to the Conventional Commits specification:
 
 The integrity of multi-agent development depends on traceable, immutable commit history:
 
-1. **Lineage Invariant:** Once a commit is referenced as an audit milestone (such as canary lineage `2a329a5`, `8ee3d27`, `17c9e79`), its SHA must never be altered.
-2. **No Interactive Rebasing:** Do NOT run `git rebase -i` or squash audit commits on workstream branches.
-3. **Merge-Forward Strategy:** Integrate branches using standard non-fast-forward merges:
-   ```powershell
-   git checkout target-branch
-   git merge --no-ff feat/workstream-branch
-   ```
-   This creates a merge commit while preserving the full individual checkpoint history and their cryptographic SHAs.
+1. **Promoted Audit Milestones (Immutable):** Once a commit is promoted or referenced as an audit milestone (such as canary lineage `2a329a5`, `8ee3d27`, `17c9e79`, or Plan Freeze and Verified Implementation Checkpoints), its SHA must never be altered. Do NOT run `git rebase -i` or squash promoted audit commits.
+2. **Provisional Local Commits (Permitted Rewrites):** Local, unpromoted commits on a working branch prior to audit promotion may be amended, squashed, or rewritten if explicitly requested or approved by the Owner.
+3. **Merge-Forward Strategy:** When integrating workstream branches where preserving multi-agent audit lineage is required, forward merges (`git merge --no-ff`) are recommended to preserve historical commit SHAs intact. However, `--no-ff` is an audit lineage recommendation rather than an inflexible repo-wide dogma.
 4. **Working-Tree Reset Protection:** Never run `git reset --hard` across checkpoint commits without explicit Owner directive.

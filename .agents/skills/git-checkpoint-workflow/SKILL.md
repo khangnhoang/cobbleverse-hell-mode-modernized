@@ -75,9 +75,10 @@ When the Owner has authorized implementation under Mode 3, Main Controller is au
 ## 6. Audit Lineage & SHA Preservation (Canary Lesson 10)
 
 In Cobbleverse Hell Mode, checkpoint commits serve as durable cryptographic audit trails:
-1. **Never Rewrite Audit History:** Commits establishing plan freezes, verified implementations, or production canary records (e.g., canary lineage `2a329a5`, `8ee3d27`, `17c9e79`) must **NEVER** be rebased, squashed, amended, or deleted.
-2. **Merge-Forward Strategy:** When integrating workstream branches into long-lived branches, use forward merges (`git merge --no-ff`) to preserve historical commit SHAs intact.
-3. **Auditability:** Anyone inspecting git history must be able to trace the exact sequence of plan freeze -> implementation -> verification.
+1. **Promoted Audit Milestones (Immutable):** Commits that have been promoted or referenced as audit evidence (e.g., Plan Freeze Checkpoints referenced in implementation prompts, Verified Implementation Checkpoints referenced in review reports, or historical canary commits `2a329a5`, `8ee3d27`, `17c9e79`) must **never** be rebased, squashed, amended, or deleted.
+2. **Provisional Local Commits (Permitted Rewrites):** Local, unpromoted commits on a working branch prior to audit promotion may be amended, squashed, or rewritten if explicitly requested or approved by the Owner.
+3. **Merge-Forward Strategy:** When integrating workstream branches where preserving multi-agent audit lineage is required, forward merges (`git merge --no-ff`) are recommended to preserve historical commit SHAs intact. However, `--no-ff` is an audit lineage recommendation rather than an inflexible repo-wide dogma.
+4. **Auditability:** Anyone inspecting git history must be able to trace the exact sequence of plan freeze -> implementation -> verification.
 
 ---
 

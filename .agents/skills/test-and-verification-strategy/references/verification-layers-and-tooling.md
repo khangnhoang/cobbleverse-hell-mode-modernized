@@ -7,9 +7,11 @@ This reference provides exact commands, execution procedures, artifact freshness
 ## 1. Tooling & Commands by Verification Layer
 
 ### Layer 0: Markdown & Governance Authority
-Validates skill definitions, YAML frontmatters, and documentation cross-links:
+Authoritative for skill definitions, governance documents, YAML frontmatters, and documentation cross-links:
 - **Link & Route Verification:** Verify that all skill routes referenced in `AGENTS.md` and relative links in `references/*.md` resolve to valid files on disk.
 - **YAML Frontmatter Integrity:** Verify `name` matches folder name (kebab-case) and `description` is non-empty.
+- **File Line Count Bounds:** Verify that skill definitions and references remain concise (< 500 lines per file).
+- **Proportional Sufficiency:** For pure Markdown, governance, and skill changes, Layer 0 is the sole required and authoritative verification layer. Higher layer suites are inapplicable and not required.
 
 ### Layer 1: Datapack & Trainer Schema Validation
 Validates all 1,714 trainer JSON files, battle formats, and item restrictions:
@@ -73,7 +75,7 @@ A fresh test run must be executed immediately whenever:
 
 ## 3. Verification Evidence Manifest Template
 
-When preparing evidence for Implementation Reviewer `IR`, Main Controller formats the manifest as follows:
+When preparing evidence for Implementation Reviewer `IR`, Main Controller formats the manifest proportionally based on affected layers:
 
 ```markdown
 ## Verification Evidence Manifest
@@ -81,7 +83,7 @@ When preparing evidence for Implementation Reviewer `IR`, Main Controller format
 - **Workstream ID:** `<workstream-id>`
 - **Baseline Commit:** `<SHA-1>`
 - **Current Branch:** `<branch-name>`
-- **Candidate Hash:** `<SHA-1>`
+- **Candidate Hash:** `<SHA-1>` (if applicable)
 
 ### Working-Tree Status
 ```text
@@ -93,31 +95,37 @@ When preparing evidence for Implementation Reviewer `IR`, Main Controller format
 <Output of git diff --stat <baseline-commit>>
 ```
 
-### Verification Suite Results
+### Verification Suite Results (Proportional to Scope)
 
-#### Layer 0: Markdown & Governance
-- **Command:** Route & link check
+#### Executed Applicable Layers:
+[Include only the layers applicable to the change]
+
+##### Layer 0: Markdown & Governance
+- **Checks:** Route integrity, relative links, YAML frontmatter, line count bounds (< 500 lines)
 - **Exit Code:** 0
-- **Result:** All routes and links verified.
+- **Result:** All routes and links verified; schema valid.
 
-#### Layer 1: Datapack Schema Validation
+##### Layer 1: Datapack Schema Validation [If applicable]
 - **Command:** `python scripts/ci/validate_repo.py`
 - **Exit Code:** 0
 - **Log Excerpt:** `PASSED (1714 trainers validated, 0 errors)`
 
-#### Layer 2: Java Unit Tests
+##### Layer 2: Java Unit Tests [If applicable]
 - **Command:** `./gradlew test --info`
 - **Exit Code:** 0
-- **Log Excerpt:** `BUILD SUCCESSFUL - 18 tests completed, 0 failed`
+- **Log Excerpt:** `BUILD SUCCESSFUL`
 
-#### Layer 3: Bytecode Runtime Contracts
+##### Layer 3: Bytecode Runtime Contracts [If applicable]
 - **Command:** `python scripts/runtime-contract/test_rct_runtime_contract.py`
 - **Exit Code:** 0
 - **Log Excerpt:** `41/41 bytecode invariants verified`
 
+#### Inapplicable / Skipped Layers:
+- **Layer [X]:** Skipped (Justification: e.g., 0 datapack JSONs / 0 Java classes / 0 Mixin bytecode modified; Layer 0 authoritative).
+
 ### Freshness Status
 - **Evaluation:** Freshly executed on current working tree.
 
-### Unverified / Skipped Items
-- **Layer 5 Live Canary:** Requires live server canary deployment.
+### Unverified / Skipped Items Requiring Live Verification
+- **Layer 5 Live Canary:** Requires dedicated server canary testing (if applicable).
 ```

@@ -44,19 +44,23 @@ When designing implementations, Planner must adhere to strict ordering invariant
 
 ## 3. Slicing Patterns for Complex Tasks
 
-### Pattern A: The Surrogate / Adapter Pattern
-When modifying Cobblemon internal mechanics (e.g., dynamic move damage, weight calculations, AI scoring):
-1. **Slice 1 (Pure Logic):** Create a dedicated Resolver/Calculator class (e.g., `WeightDependentMoveResolver`) handling all formulas, clamping, and edge cases with exhaustive unit tests.
-2. **Slice 2 (Surrogate Interface):** Create an adapter interface (e.g., `WeightDependentMoveSurrogate`) allowing game objects to provide needed attributes without invasive class hierarchy mutations.
-3. **Slice 3 (Mixin Injection):** Write surgical Mixin injection hooks that delegate immediately to the Resolver/Surrogate.
-4. **Slice 4 (Contract Verification):** Validate bytecode stability via runtime contract test scripts.
+### Pattern A: Layer-Ascending Pipeline
+For multi-layer features bridging data, core logic, and external interfaces:
+1. **Slice 1 (Data & Models):** Define data structures, schemas, and static fixtures (Layers 1/2).
+2. **Slice 2 (Pure Core Logic):** Implement standalone algorithmic calculations, decision rules, or state machines with exhaustive unit tests (Layer 2).
+3. **Slice 3 (Adapter / Surrogate Interface):** Create boundary adapters, surrogate interfaces, or hooks decoupling internal logic from external runtime systems (Layers 2/3).
+4. **Slice 4 (Contract Verification):** Validate offline bytecode, schema, or integration contracts (Layer 3 / Layer 0).
+5. **Slice 5 (Consumer Integration):** Wire components into runtime entry points or consumer listeners.
 
-### Pattern B: Vertical Slices by Battle Domain
-For multi-trainer or multi-archetype balance updates:
-1. **Slice 1 (Lead Pairs & Archetype Foundation):** Define core leads, weather/Trick Room setters, and primary synergy lines.
-2. **Slice 2 (Mid-Game & Pivot Coverage):** Implement defensive pivots, redirectors, and switch-in answers.
-3. **Slice 3 (Endgame Cleaners & Held Items):** Assign specific damage-boosting or survival items (Focus Sash, Choice items).
-4. **Slice 4 (Datapack Batch Validation):** Validate all affected JSONs in batch using repo validators.
+### Pattern B: Subsystem Component Slicing
+For horizontal architectural refactorings or multi-module upgrades:
+1. **Slice 1 (Core Contracts & Invariants):** Define or update core governance, interface definitions, and base schemas.
+2. **Slice 2 (Isolated Component Slices):** Implement changes across modular subsystems independently, ensuring each module compiles and validates in isolation.
+3. **Slice 3 (Inter-Module Contract Verification):** Execute integration tests and cross-component consistency validators.
+4. **Slice 4 (Tooling & Verification Manifest):** Finalize verification manifests, CI/CD checks, and audit documentation.
+
+> [!NOTE]
+> **Domain Team Composition Slicing:** For competitive NPC Doubles team design (weather setters, pivots, Trick Room, lead pairs, held items), refer to the domain skill: [`competitive-pokemon-doubles-team-design/references/`](../../competitive-pokemon-doubles-team-design/references/).
 
 ---
 
