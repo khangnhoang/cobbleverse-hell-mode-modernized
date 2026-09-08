@@ -9,9 +9,7 @@
     "BattlePokemonMixin",
     "CobblemonHeldItemManagerMixin",
     "PokeMathMaxMixin",
-    "RunBunAIChooseMixin",
-    "ActiveBattlePokemonMixin",
-    "RunBunAIFairLifecycleMixin"
+    "RunBunAIChooseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

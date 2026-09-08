@@ -63,20 +63,4 @@ class RunBunAICallSiteContractTest {
         assertTrue(Modifier.isPublic(chooseMethod.getModifiers()), "RunBunAI.choose must be public");
         assertEquals(ShowdownActionResponse.class, chooseMethod.getReturnType());
     }
-
-    @Test
-    @DisplayName("Runtime contract: Move.getName() exists and returns String")
-    void testMoveGetNameContract() throws NoSuchMethodException {
-        Method getName = Move.class.getDeclaredMethod("getName");
-        assertTrue(Modifier.isPublic(getName.getModifiers()), "Move.getName must be public");
-        assertEquals(String.class, getName.getReturnType(), "Move.getName must return String");
-    }
-
-    @Test
-    @DisplayName("Runtime contract: List.getFirst() exists on java.util.List in runtime Java environment")
-    void testListGetFirstContract() throws NoSuchMethodException {
-        Method getFirst = java.util.List.class.getMethod("getFirst");
-        assertNotNull(getFirst, "List.getFirst must exist on java.util.List");
-        assertEquals(Object.class, getFirst.getReturnType());
-    }
 }

@@ -13,7 +13,9 @@ public record LeadAttempt(
         int[] leadSlots,
         int baseWeight,
         List<ExpectedLeadMember> expectedLeadMembers,
-        String description
+        String description,
+        List<String> favoredAgainst,
+        List<String> favoredAgainstSpecies
 ) {
     public LeadAttempt {
         Objects.requireNonNull(id, "id must not be null");
@@ -35,11 +37,29 @@ public record LeadAttempt(
         }
         expectedLeadMembers = expectedLeadMembers != null ? List.copyOf(expectedLeadMembers) : Collections.emptyList();
         description = description != null ? description : "";
+        favoredAgainst = favoredAgainst != null ? normalizeStringList(favoredAgainst) : Collections.emptyList();
+        favoredAgainstSpecies = favoredAgainstSpecies != null ? normalizeStringList(favoredAgainstSpecies) : Collections.emptyList();
         leadSlots = leadSlots.clone();
     }
 
+    private static List<String> normalizeStringList(List<String> list) {
+        return list.stream()
+                .filter(s -> s != null && !s.isBlank())
+                .map(s -> s.trim().toLowerCase(java.util.Locale.ROOT))
+                .distinct()
+                .toList();
+    }
+
+    public LeadAttempt(String id, int[] leadSlots, int baseWeight, List<ExpectedLeadMember> expectedLeadMembers, String description, List<String> favoredAgainst) {
+        this(id, leadSlots, baseWeight, expectedLeadMembers, description, favoredAgainst, Collections.emptyList());
+    }
+
+    public LeadAttempt(String id, int[] leadSlots, int baseWeight, List<ExpectedLeadMember> expectedLeadMembers, String description) {
+        this(id, leadSlots, baseWeight, expectedLeadMembers, description, Collections.emptyList(), Collections.emptyList());
+    }
+
     public LeadAttempt(String id, int[] leadSlots, int baseWeight, List<ExpectedLeadMember> expectedLeadMembers) {
-        this(id, leadSlots, baseWeight, expectedLeadMembers, "");
+        this(id, leadSlots, baseWeight, expectedLeadMembers, "", Collections.emptyList(), Collections.emptyList());
     }
 
     @Override
@@ -55,12 +75,14 @@ public record LeadAttempt(
                 && Arrays.equals(leadSlots, that.leadSlots)
                 && Objects.equals(id, that.id)
                 && Objects.equals(expectedLeadMembers, that.expectedLeadMembers)
-                && Objects.equals(description, that.description);
+                && Objects.equals(description, that.description)
+                && Objects.equals(favoredAgainst, that.favoredAgainst)
+                && Objects.equals(favoredAgainstSpecies, that.favoredAgainstSpecies);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, baseWeight, expectedLeadMembers, description);
+        int result = Objects.hash(id, baseWeight, expectedLeadMembers, description, favoredAgainst, favoredAgainstSpecies);
         result = 31 * result + Arrays.hashCode(leadSlots);
         return result;
     }

@@ -26,21 +26,24 @@ public final class LeadSelectionConfig {
 
     public record ConfigLoadResult(boolean success, int loadedTrainersCount, String errorMessage) {}
 
-    private static volatile boolean enabled = true;
     private static volatile Map<String, TrainerLeadConfig> trainerConfigs = Collections.emptyMap();
 
     private LeadSelectionConfig() {}
 
     public static boolean isEnabled() {
-        return enabled;
+        return com.cobbleverse.legendaryrule.CompanionConfig.isDynamicLeadEnabled();
     }
 
     public static void setEnabled(boolean value) {
-        enabled = value;
+        com.cobbleverse.legendaryrule.CompanionConfig.setDynamicLeadEnabled(value);
+    }
+
+    public static synchronized void setDatapackTrainerConfigs(Map<String, TrainerLeadConfig> newConfigs) {
+        trainerConfigs = newConfigs != null ? Collections.unmodifiableMap(new HashMap<>(newConfigs)) : Collections.emptyMap();
     }
 
     public static Optional<TrainerLeadConfig> getTrainerConfig(String trainerId) {
-        if (!enabled || trainerId == null) {
+        if (!isEnabled() || trainerId == null) {
             return Optional.empty();
         }
         TrainerLeadConfig config = trainerConfigs.get(trainerId.toLowerCase(Locale.ROOT));
@@ -49,13 +52,13 @@ public final class LeadSelectionConfig {
 
     public static synchronized ConfigLoadResult load(Path path) {
         if (path == null) {
-            enabled = true;
+            setEnabled(true);
             trainerConfigs = Collections.emptyMap();
             return new ConfigLoadResult(true, 0, "Null path provided");
         }
 
         if (!Files.exists(path)) {
-            enabled = true;
+            setEnabled(true);
             trainerConfigs = Collections.emptyMap();
             return new ConfigLoadResult(true, 0, "Config file not found");
         }
@@ -65,7 +68,7 @@ public final class LeadSelectionConfig {
             loadFromJson(root);
             return new ConfigLoadResult(true, trainerConfigs.size(), null);
         } catch (Exception e) {
-            enabled = false;
+            setEnabled(false);
             trainerConfigs = Collections.emptyMap();
             return new ConfigLoadResult(false, 0, e.getMessage());
         }
@@ -75,12 +78,12 @@ public final class LeadSelectionConfig {
         if (root.has("enabled")) {
             JsonElement enElem = root.get("enabled");
             if (enElem.isJsonPrimitive() && enElem.getAsJsonPrimitive().isBoolean()) {
-                enabled = enElem.getAsBoolean();
+                setEnabled(enElem.getAsBoolean());
             } else {
-                enabled = true;
+                setEnabled(true);
             }
         } else {
-            enabled = true;
+            setEnabled(true);
         }
 
         Map<String, TrainerLeadConfig> newConfigs = new HashMap<>();
@@ -97,20 +100,7 @@ public final class LeadSelectionConfig {
                 }
 
                 JsonArray attemptsArr = trainerObj.getAsJsonArray("attempts");
-                List<LeadAttempt> validAttempts = new ArrayList<>();
-
-                for (JsonElement attemptElem : attemptsArr) {
-                    if (!attemptElem.isJsonObject()) {
-                        continue;
-                    }
-                    JsonObject attObj = attemptElem.getAsJsonObject();
-                    try {
-                        LeadAttempt attempt = parseAttempt(attObj);
-                        validAttempts.add(attempt);
-                    } catch (Exception ignored) {
-                        // Per-attempt isolation: skip malformed attempt, preserve valid siblings
-                    }
-                }
+                List<LeadAttempt> validAttempts = parseAttemptsArray(attemptsArr);
 
                 if (!validAttempts.isEmpty()) {
                     newConfigs.put(trainerId, new TrainerLeadConfig(validAttempts));
@@ -118,6 +108,26 @@ public final class LeadSelectionConfig {
             }
         }
         trainerConfigs = Collections.unmodifiableMap(newConfigs);
+    }
+
+    public static List<LeadAttempt> parseAttemptsArray(JsonArray attemptsArr) {
+        if (attemptsArr == null) {
+            return Collections.emptyList();
+        }
+        List<LeadAttempt> validAttempts = new ArrayList<>();
+        for (JsonElement attemptElem : attemptsArr) {
+            if (!attemptElem.isJsonObject()) {
+                continue;
+            }
+            JsonObject attObj = attemptElem.getAsJsonObject();
+            try {
+                LeadAttempt attempt = parseAttempt(attObj);
+                validAttempts.add(attempt);
+            } catch (Exception ignored) {
+                // Per-attempt isolation: skip malformed attempt, preserve valid siblings
+            }
+        }
+        return validAttempts;
     }
 
     private static int parseExactInt(JsonElement elem, String fieldName) {
@@ -216,6 +226,29 @@ public final class LeadSelectionConfig {
                 description = obj.get("description").getAsString().trim();
             }
         }
-        return new LeadAttempt(id, new int[]{slot0, slot1}, baseWeight, expectedMembers, description);
+
+        List<String> favoredAgainst = new ArrayList<>();
+        if (obj.has("favoredAgainst") && !obj.get("favoredAgainst").isJsonNull()) {
+            if (!obj.get("favoredAgainst").isJsonArray()) {
+                throw new IllegalArgumentException("Attempt '" + id + "' favoredAgainst must be an array");
+            }
+            for (JsonElement faElem : obj.getAsJsonArray("favoredAgainst")) {
+                String type = parseNonBlankString(faElem, "favoredAgainst type in '" + id + "'").toLowerCase(Locale.ROOT);
+                favoredAgainst.add(type);
+            }
+        }
+
+        List<String> favoredAgainstSpecies = new ArrayList<>();
+        if (obj.has("favoredAgainstSpecies") && !obj.get("favoredAgainstSpecies").isJsonNull()) {
+            if (!obj.get("favoredAgainstSpecies").isJsonArray()) {
+                throw new IllegalArgumentException("Attempt '" + id + "' favoredAgainstSpecies must be an array");
+            }
+            for (JsonElement fsElem : obj.getAsJsonArray("favoredAgainstSpecies")) {
+                String species = parseNonBlankString(fsElem, "favoredAgainstSpecies in '" + id + "'").toLowerCase(Locale.ROOT);
+                favoredAgainstSpecies.add(species);
+            }
+        }
+
+        return new LeadAttempt(id, new int[]{slot0, slot1}, baseWeight, expectedMembers, description, favoredAgainst, favoredAgainstSpecies);
     }
 }

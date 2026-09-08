@@ -179,7 +179,9 @@ public final class LeadSelectionService {
                 trainerId,
                 playerLeads.stream().map(PlayerLeadTyping::species).toList(),
                 result.selectedAttempt().id(),
-                result.evaluatedScores().stream().map(s -> s.attemptId() + "=" + s.totalScore()).toList());
+                result.evaluatedScores().stream().map(s -> s.attemptId() + "=" + s.totalScore()
+                        + "(off=" + s.offensiveScore() + ",def=" + s.defensiveScore() + ",bw=" + s.baseWeight()
+                        + ",type=" + s.typeFavoredBonus() + ",spec=" + s.speciesFavoredBonus() + ")").toList());
 
         return Optional.of(result);
     }
