@@ -2,17 +2,17 @@ package com.cobbleverse.legendaryrule.strategy.weather;
 
 import com.cobblemon.mod.common.api.moves.Move;
 import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
+import com.cobbleverse.legendaryrule.strategy.dynamic.DynamicMoveResolver;
 import com.gitlab.surilexa.rbrctai.api.ai.utils.PokeMathMax;
 
 /**
  * Canonical guard and resolver for Mega Sol personal weather interactions in Run & Bun AI.
  *
  * Provides a single point of truth to evaluate whether an attacker has active Mega Sol
- * and to resolve dynamic moves like Weather Ball to their true battle mechanics state.
+ * and delegates dynamic move resolution to DynamicMoveResolver for unified battle mechanics.
  */
 public final class MegaSolWeatherGuard {
 
-    private static final String WEATHER_BALL_NAME = "weatherball";
     private static final String MEGA_SOL_ABILITY = "megasol";
 
     private MegaSolWeatherGuard() {
@@ -34,27 +34,14 @@ public final class MegaSolWeatherGuard {
 
     /**
      * Resolves the effective Move instance for scoring calculations.
-     * If the move is Weather Ball and the attacker has active Mega Sol, returns a
-     * MegaSolWeatherBallSurrogate (Fire type, 100 Base Power).
-     * Otherwise, returns the original Move unchanged.
+     * Delegates to {@link DynamicMoveResolver#resolveEffectiveMove(Move, BattlePokemon)}
+     * for unified dynamic move resolution.
      *
      * @param move the original Move
      * @param attacker the attacking BattlePokemon
      * @return the effective Move for AI calculation
      */
     public static Move resolveEffectiveMove(Move move, BattlePokemon attacker) {
-        if (move == null || attacker == null) {
-            return move;
-        }
-        if (move instanceof MegaSolWeatherBallSurrogate) {
-            return move;
-        }
-        if (!WEATHER_BALL_NAME.equalsIgnoreCase(move.getName())) {
-            return move;
-        }
-        if (!hasMegaSol(attacker)) {
-            return move;
-        }
-        return new MegaSolWeatherBallSurrogate(move);
+        return DynamicMoveResolver.resolveEffectiveMove(move, attacker);
     }
 }
