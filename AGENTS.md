@@ -1,6 +1,6 @@
 # Agent Engineering Guidelines & System Contract
 
-These engineering principles and operational rules guide all autonomous and interactive AI agent development in `khangnhoang/cobbleverse-hell-mode-modernized`.
+These engineering principles and operational rules guide all autonomous and interactive AI agent development in `khangnhoang/cobbleverse-hell-mode-modernized`. `AGENTS.md` is the Single Source of Truth (SSOT) for global agent behavior, preflight routing, and repository safety boundaries.
 
 ---
 
@@ -35,25 +35,144 @@ These engineering principles and operational rules guide all autonomous and inte
 
 ---
 
-## 2. Communication & Reporting Rules
+## 2. Universal Lightweight Preflight
 
-- **Vietnamese Reporting:** When the owner communicates in Vietnamese, deliver all explanations, summaries, and checkpoint reports in Vietnamese.
-- **Preserve Technical Literals:** Keep code identifiers, class names, method signatures, file paths, and technical terms in their exact English forms (e.g., `ActiveBattlePokemon`, `FairBattleContext`, `choose()`, `recharge`).
+Before activating any managed-agent workflow, modifying files, or spawning subagents, the agent must perform an ephemeral **Universal Lightweight Preflight**. This preflight applies to every repository-related prompt to determine the appropriate execution depth without imposing bureaucratic ceremony on routine requests.
+
+The agent must evaluate five core facets:
+
+### 2.1 Owner Intent
+Classify what the owner is asking:
+- Asking for information or status;
+- Requesting an explanation or codebase walkthrough;
+- Brainstorming, architectural analysis, or design critique;
+- Reviewing an existing diff, commit, or pull request;
+- Discovery, reverse engineering, or failure triage;
+- Requesting repository code/data modifications;
+- Requesting Git or remote delivery actions.
+
+### 2.2 Action Permission
+Determine what permissions are explicitly granted in the current prompt:
+- Read-only inspection;
+- Implementation planning;
+- Local file modification;
+- Local checkpoint commit (see Section 7);
+- Push / PR / Merge (strictly gated);
+- Production deployment or destructive action.
+*Rule:* Never infer action permissions beyond what the owner explicitly instructed or what this contract grants.
+
+### 2.3 Repository Evidence Requirement
+- Can the request be answered directly from existing conversation context?
+- Does it require targeted reads of specific repository files?
+- Read strictly what is required to answer accurately; do not perform speculative directory crawling.
+
+### 2.4 Applicable Skill Routing
+- Activate domain skills only when the prompt intent strictly matches the skill's activation scope.
+- Mentioning a Pokémon, trainer, or companion Mixin does not automatically warrant loading every related skill.
+- Never preload bundled `references/` before their specific `Read condition` matches.
+
+### 2.5 Execution Depth Routing
+Route the request into exactly one of the following five modes:
+
+#### Mode 0 — Conversational / Informational
+- **Trigger:** Owner asks for information, facts, explanation, or status (e.g., *"What is Misty's team composition?"*, *"Where is Storm Drain handled?"*).
+- **Behavior:** Answer directly with minimal targeted reads. Do not write plans, do not create durable artifacts, and do not spawn subagents.
+
+#### Mode 1 — Lightweight Analysis / Recommendation
+- **Trigger:** Owner asks for evaluation, trade-off analysis, or architectural recommendations without implementation authorization (e.g., *"Is this team over-engineered?"*, *"What is the minimal fix path for Throat Spray?"*).
+- **Behavior:** Conduct bounded, targeted discovery; activate domain skills/references if helpful; provide reasoning and actionable recommendations. Do not modify repository files. Default to single-agent execution; subagents are reserved for rare, genuinely disconnected parallel spikes.
+
+#### Mode 2 — Direct Bounded Execution
+- **Trigger:** Owner requests implementation with clear scope, unambiguous expected behavior, low blast radius, established patterns, and bounded direct verification (e.g., *"Update trainer moveset X to Y and run validator"*, *"Fix typo in config"*, *"Add a trainer lead tag"*).
+- **Behavior:** The agent performs targeted discovery → surgical edits → proportional verification → review checkpoint report. No multi-agent ceremony or heavy planning artifacts.
+- **Escalation Trigger:** If during Mode 2 execution, the agent discovers unexpected cross-module coupling, architectural ambiguity, or invariant risks, it must halt direct edits and **promote the task to Mode 3**.
+
+#### Mode 3 — Managed-Agent Workflow
+- **Trigger:** Activated ONLY when there is at least one material risk or complexity signal:
+  - Behavior bug requiring deep multi-file discovery;
+  - Multiple plausible implementation paths requiring comparative evaluation;
+  - Companion mod Mixin, bytecode, or Fabric runtime contract changes;
+  - Run & Bun AI scoring, state memory, or fair-information boundary changes;
+  - Broad datapack changes with significant regression risk;
+  - Implementation requiring an approved plan before execution.
+- **Behavior:** Activate [`.agents/skills/managed-agent-workflow/SKILL.md`](.agents/skills/managed-agent-workflow/SKILL.md). The main agent becomes the **Main Controller**, orchestrating Planner `P`, Plan Reviewer `R`, Implementor `I`, and Implementation Reviewer `IR` under strict finite reconciliation bounds.
+
+#### Mode 4 — Stop / Escalate Before Execution
+- **Trigger:** Material ambiguity in owner intent; repository evidence contradicts requested changes; ungranted destructive or remote actions; missing critical prerequisites.
+- **Behavior:** Stop and report the specific blocker or ambiguity with cited evidence. Do not guess and do not ask about facts the repository can self-verify.
 
 ---
 
-## 3. Skill Routing
+## 3. Communication & Progress Reporting
+
+- **Vietnamese Reporting:** When the owner communicates in Vietnamese, deliver all explanations, summaries, and checkpoint reports in Vietnamese.
+- **Preserve Technical Literals:** Keep code identifiers, class names, method signatures, file paths, and technical terms in their exact English forms (e.g., `ActiveBattlePokemon`, `FairBattleContext`, `choose()`, `recharge`, `git hash-object`).
+
+### Interactive Progress Reporting Contract
+Agent narration must communicate investigation progress in terms of problem boundaries, hypotheses, established evidence, and key findings—never as a raw activity log.
+
+1. **Investigation Stage Framing:**
+   Preface significant discovery or migration stages with:
+   - The specific question being resolved;
+   - The evidence scopes partitioning the investigation;
+   - What concrete evidence will resolve or narrow that question.
+2. **Milestone Findings & Semantic Synthesis:**
+   When a finding changes or narrows the investigation path, surface it immediately via a concise update explaining what the evidence means, not merely that a command ran.
+3. **Event-Driven Updates (No Cadence Filler):**
+   Provide updates only upon state transitions (knowledge changes, hypothesis confirmed/eliminated, blocker encountered, next boundary identified). Avoid anti-patterns like *"Ran 3 commands"*, *"Opened 2 files"*.
+
+---
+
+## 4. Tool Usage Policy
+
+Agents must use the most direct repository-supported or installed dedicated tool for standard inspection, search, transformation, archive, version-control, and reverse-engineering tasks.
+
+### Preferred Tooling Map
+- **Text & Code Search:** `rg`
+- **File Discovery:** `fd`
+- **JSON Inspection & Transformation:** `jq`
+- **Archive Inspection & Extraction:** `7z` or JDK `jar`
+- **Version Control & GitHub CLI:** `git`, `gh`
+- **Java Bytecode, Archive & Dependency Inspection:** `jar`, `javap`, `jdeps`
+- **Java Decompilation:** Repository-approved decompiler (CFR or Vineflower when configured)
+
+### Dedicated Tooling First & Anti-Patterns
+Do not create ad-hoc Python scratch scripts to reproduce functionality already provided by dedicated CLI tools. Avoid:
+- Python `os.walk` or directory crawlers when `fd` is available.
+- Python regex/grep search scripts when `rg` is available.
+- Python `json.load` / dump scripts for basic inspection when `jq` is available.
+- Python `zipfile` scripts when `jar` or `7z` is available.
+- Python bytecode/string scrapers when `javap` or a decompiler is appropriate.
+
+### Pre-Workaround Verification Protocol
+Before creating any workaround under the assumption that a standard tool is missing:
+1. **Verify Availability:** Test whether the tool actually exists on PATH.
+2. **Check Repo Contracts:** Check if the repository provides an existing wrapper or script.
+3. **Report Tooling Gaps:** If genuinely missing, report the gap explicitly.
+4. **Use Approved Fallbacks:** Use established repository fallback tooling if defined.
+
+### Legitimate Python Usage
+Python is appropriate when a task genuinely requires:
+- Non-trivial custom analysis across heterogeneous data sources;
+- Task-specific algorithmic data transformation;
+- Canonical repository scripts maintained for CI or verification (`scripts/ci/validate_repo.py`, `scripts/runtime-contract/test_rct_runtime_contract.py`).
+
+---
+
+## 5. Skill Routing Catalog
 
 Before planning non-trivial work or modifying specialized domains, inspect the task scope and route to the corresponding skill:
 
+- **Managed-Agent Workflow:**
+  Activate [`.agents/skills/managed-agent-workflow/SKILL.md`](.agents/skills/managed-agent-workflow/SKILL.md) whenever a task is classified as **Mode 3**, requiring multi-agent orchestration across Planner, Plan Reviewer, Implementor, and Implementation Reviewer.
 - **Competitive Pokémon Doubles Team Design:**
   Activate [`.agents/skills/competitive-pokemon-doubles-team-design/SKILL.md`](.agents/skills/competitive-pokemon-doubles-team-design/SKILL.md) whenever creating, modernizing, reviewing, or balancing 6-mon NPC Doubles rosters, assigning held items/moves/abilities, establishing weather/Trick Room/Tailwind strategies, or evaluating turn-1 gimmick safety for Run & Bun AI.
 
 ---
 
-## 4. Verification Authority & Environment Reality
+## 6. Verification Authority & Environment Reality
 
-Always respect the distinction between local verification and production host reality:
+Respect the strict distinction between local verification and production reality:
 - **Local Authoritative:** Unit tests (`./gradlew test`), repository data validation (`scripts/ci/validate_repo.py`), baseline checks (`scripts/ci/check_legacy_baseline.py`), and offline bytecode contracts (`scripts/runtime-contract/test_rct_runtime_contract.py`). Authoritative only for the explicit invariants they test.
 - **Local Dev Server Smoke:** `./gradlew runServer` is startup/Mixin smoke only, useful for verifying Mixin application and headless server bootstrap, but is **NOT authoritative** for gameplay integration.
 - **Production Host Canary:** Real trainer battle gameplay, player progression, and multiplayer stability can **only** be verified via manual canary testing on the live dedicated production host.
@@ -61,12 +180,31 @@ Always respect the distinction between local verification and production host re
 
 ---
 
-## 5. Git Safety & Review Checkpoint Contract
+## 7. Git Safety & Local Checkpoint Contract
 
-- **No Unauthorized Commits:** Do not create git commits unless the owner explicitly requests or approves a commit for the current task.
-- **No Push / PR / Merge:** Never run `git push`, open a pull request, or merge branches unless explicitly commanded by the owner.
-- **Review Checkpoint Report:** Each completed implementation task must conclude with a structured review checkpoint containing:
-  1. Changed / created files.
-  2. Concrete verification commands run and their exact outputs.
-  3. Residual gaps, risks, or unverified assumptions.
-  4. Recommended English Conventional Commit message (e.g., `feat(ai): ...`, `fix(companion): ...`).
+### Local Checkpoint Permission Contract
+- **Mode 2 (Direct Bounded Tasks):** Do NOT create git commits unless the owner explicitly requests or approves a commit for the current task.
+- **Mode 3 (Managed-Agent Workflow):** When the owner has **explicitly authorized implementation through the managed-agent workflow**, Main Controller is authorized to create necessary **local checkpoint commits** (such as the frozen-plan checkpoint and the verified implementation checkpoint) without re-prompting the owner for every individual commit.
+- **Strict Remote Actions Gate:** Under NO circumstances may an agent perform the following without separate, explicit Owner authorization:
+  - `git push` to any remote;
+  - Pull request creation, update, or comment;
+  - Branch merge or rebase;
+  - Force-push (`--force`);
+  - Branch deletion;
+  - Production deployment or remote mutation.
+
+### Review Checkpoint Report
+Each completed implementation task must conclude with a structured review checkpoint containing:
+1. Changed / created files and modified sections.
+2. Semantic change summary (behavior, contract, or design decisions changed).
+3. Concrete verification commands run and their exact outputs.
+4. Residual gaps, risks, or unverified assumptions.
+5. Git state (uncommitted changes, branch status).
+6. Recommended English Conventional Commit message (e.g., `feat(ai): ...`, `fix(companion): ...`).
+
+### Diff & Change Reporting Policy
+- **No Full Diff Dumps:** Do not paste the complete repository diff into user-facing reports by default.
+- **Core Invariant:** *"User-facing reports summarize the change; Git diff remains the review artifact."*
+- **Agent Self-Review vs. User Report:** Agents must still run and inspect `git diff` internally to verify modifications before finalizing, but the raw diff output must not be mirrored wholesale into the report.
+- **High-Level Change Metrics:** When helpful, provide concise scope metrics such as `git diff --stat`, changed file lists, or hunk line counts.
+- **Selective Snippets Only:** Include focused diff hunks or exact code snippets only when concise and materially useful for user review, or when explicitly requested.
