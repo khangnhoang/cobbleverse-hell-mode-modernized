@@ -9,7 +9,7 @@ This reference details the mechanics of local checkpoint commits, English Conven
 Cobbleverse Hell Mode defines four canonical checkpoint commit types for Mode 3 workstreams:
 
 ### 1.1 Plan Freeze Checkpoint
-- **When:** Immediately after Plan Reviewer `R` issues an explicit `PASS` verdict (`R verdict: PASS`), and Main Controller confirms that `candidate_plan_hash == post_review_plan_hash`.
+- **When:** Immediately after Plan Reviewer `R` report satisfies observable gate execution (`audit_review_gate.py` exits 0), Main Controller visibly emits the provenance block in the transcript, explicit verdict is `R verdict: PASS`, and `candidate_plan_hash == post_review_plan_hash`.
 - **Purpose:** Freezes the reviewed workstream plan into git history before any code is written.
 - **Commit Message Format:**
   ```text
@@ -21,7 +21,7 @@ Cobbleverse Hell Mode defines four canonical checkpoint commit types for Mode 3 
   ```
 
 ### 1.2 Verified Implementation Checkpoint
-- **When:** After Implementation Reviewer `IR` issues an explicit `PASS` verdict (`IR verdict: PASS`) and all applicable minimal orthogonal verification suites pass.
+- **When:** After Implementation Reviewer `IR` report satisfies observable gate execution (`audit_review_gate.py` exits 0), Main Controller visibly emits the provenance block in the transcript, explicit verdict is `IR verdict: PASS`, and all applicable minimal orthogonal verification suites pass.
 - **Purpose:** Records the verified code and configuration changes.
 - **Commit Message Format:**
   ```text

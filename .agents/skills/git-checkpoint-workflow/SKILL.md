@@ -57,11 +57,11 @@ Before staging any file or creating a commit, the agent must inspect the reposit
 When the Owner has authorized implementation under Mode 3, Main Controller is authorized to create necessary local checkpoint commits without re-prompting for every individual commit:
 
 1. **Plan Freeze Checkpoint:**
-   - **Trigger:** Plan Reviewer `R` issues an explicit `PASS` (`R verdict: PASS`) and candidate hash matches post-review hash.
+   - **Trigger:** Script `audit_review_gate.py` exits 0, Main Controller visibly emits the provenance block into the transcript, explicit verdict is `R verdict: PASS`, and candidate hash matches post-review hash.
    - **Format:** `docs(plan): freeze implementation plan for <feature>`
    - **Significance:** Cryptographically records the reviewed specification.
 2. **Verified Implementation Checkpoint:**
-   - **Trigger:** Implementation Reviewer `IR` issues an explicit `PASS` (`IR verdict: PASS`) following successful test verification.
+   - **Trigger:** Script `audit_review_gate.py` exits 0, Main Controller visibly emits the provenance block into the transcript, explicit verdict is `IR verdict: PASS`, and all applicable minimal orthogonal verification suites pass.
    - **Format:** `feat(<scope>): <summary>` or `fix(<scope>): <summary>`
 3. **Correction Checkpoint (if needed):**
    - **Trigger:** Applying verified fixes during a reconciliation cycle.

@@ -6,9 +6,9 @@ This reference defines the structured arbitration, finding verification, cycle t
 
 ## 1. The Reconciliation Lifecycle
 
-When a Reviewer (`R` or `IR`) evaluates a candidate artifact, it issues one of three closed verdicts:
-- **`PASS`**: Zero `Critical` and zero `Required` findings. An explicit audit verdict (`R verdict: PASS` or `IR verdict: PASS`) is recorded, authorizing transition to the next phase.
-- **`BLOCKING_FINDINGS`**: One or more `Critical` or `Required` findings. Main Controller coordinates a bounded reconciliation cycle (up to `MAX_CYCLES = 2`).
+When a Reviewer (`R` or `IR`) evaluates a candidate artifact, it issues one of three closed verdicts, evaluated deterministically by Main Controller via `audit_review_gate.py`:
+- **`PASS`**: Zero `Critical` and zero `Required` findings. Script `audit_review_gate.py` exits 0. An explicit audit verdict (`R verdict: PASS` or `IR verdict: PASS`) is recorded, authorizing transition to the next phase after visible provenance emission.
+- **`BLOCKING_FINDINGS`**: One or more `Critical` or `Required` findings. If `audit_review_gate.py` exits 0, Main Controller coordinates a bounded reconciliation cycle (up to `MAX_CYCLES = 2`). If `audit_review_gate.py` exits non-zero, the report is declared `INVALID` and rejected without consuming a cycle.
 - **`BLOCKED`**: Review cannot proceed due to missing prerequisite artifacts, unreadable files, or environment/tool failures. Handled via the Prerequisite Repair Protocol.
 
 When a Reviewer returns `BLOCKING_FINDINGS`, Main Controller manages reconciliation as follows:
@@ -53,6 +53,15 @@ sequenceDiagram
 2. **Cycle Increment Trigger:** The cycle counter increments by 1 each time Main Controller dispatches blocking findings to the author for correction and submits the corrected candidate for re-review.
 3. **Rebuttal Inclusion:** A cycle is consumed regardless of whether the author confirms findings with code fixes or rejects findings with counter-evidence. There are no "free" correction turns.
 4. **Hard Stop at Cycle 2:** If blocking findings remain unresolved after completing 2 reconciliation cycles, the loop halts immediately and transitions to `ESCALATED`.
+5. **Report-Only Defect Repair Exclusion:** When the mechanical gate script `audit_review_gate.py` exits non-zero due to report formatting, missing sections, incomplete 4-part blocks, or detected proscribed phrases (and not substantive candidate plan/code defects):
+   - Main Controller declares the report `INVALID` and holds current controller phase (`PLAN_REVIEW` or `IMPL_REVIEW`).
+   - Main sends a defect notice to the SAME reviewer session via `send_message` specifying the exact failure.
+   - The reviewer corrects the report in-session and re-emits the report.
+   - **Cycle Counter:** `reconciliation_count` is **NOT** incremented. Report formatting and phrasing repairs do not consume the reconciliation cycle budget.
+6. **Oracle Defect Invalidation Exclusion:** If an oracle defect is discovered after a report evaluation (e.g. a regex false positive on valid markdown):
+   - The previous gate evaluation is marked `INVALIDATED (Oracle Defect)`.
+   - The oracle is repaired in scratch, re-calibrated against Fixtures A–F and Cases A–D, frozen under a new hash, and the report is re-evaluated.
+   - **Cycle Counter:** `reconciliation_count` is **NOT** incremented, because candidate and report semantics did not change.
 
 ---
 

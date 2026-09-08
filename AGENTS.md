@@ -113,7 +113,7 @@ Route the request into exactly one of the following five modes:
 
 - **Vietnamese Reporting:** When the owner communicates in Vietnamese, deliver all explanations, summaries, and checkpoint reports in Vietnamese.
 - **Preserve Technical Literals:** Keep code identifiers, class names, method signatures, file paths, and technical terms in their exact English forms (e.g., `ActiveBattlePokemon`, `FairBattleContext`, `choose()`, `recharge`, `git hash-object`).
-- **Claim Strength Discipline (Canary Lesson 7):** *"Claim strength must not exceed evidence strength."* Agents must strictly avoid hyperbolic or unverified absolute terms ("100%", "fully", "triệt để", "hoàn toàn", "flawless"). Statements must be strictly proportional to observable, demonstrable evidence.
+- **Claim Strength Discipline (Canary Lesson 7):** *"Claim strength must not exceed evidence strength."* Agents must strictly avoid hyperbolic or unverified semantic absolute terms (`"hoàn toàn"`, `"triệt để"`, `"guarantees"`, `"flawless"`, `"không có rủi ro"`, `"zero risk"`, `"tuyệt đối"`, `"completely closes"`, or unmeasured claims like `"100% tuân thủ"`). Verifiable numeric counts and ratios with explicit denominators (e.g., `14/14 (100%)`) are permitted. Statements must be strictly proportional to observable, demonstrable evidence.
 
 ### Interactive Progress Reporting Contract
 Agent narration must communicate investigation progress in terms of problem boundaries, hypotheses, established evidence, and key findings—never as a raw activity log.
@@ -199,7 +199,7 @@ Cobbleverse Hell Mode enforces six explicit layers of verification authority:
 ### Core Invariant: Offline PASS != Production Semantic PASS (Canary Lessons 6 & 7)
 - Automated test passes locally or in CI (Layers 0–4) are necessary but **never sufficient** to claim that gameplay integration is GREEN.
 - Never refer to a local CurseForge instance or development client as "production".
-- Statements regarding test results must be strictly proportional to observable evidence without hyperbolic claims ("100%", "fully", "triệt để").
+- Statements regarding test results must be strictly proportional to observable evidence without unverified semantic absolutes (`"hoàn toàn"`, `"triệt để"`, `"guarantees"`, `"flawless"`).
 
 ---
 

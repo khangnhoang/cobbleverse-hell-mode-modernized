@@ -75,15 +75,32 @@ Main Controller
    Re-reviews always route back to the existing reviewer session (`R` or `IR`) via `send_message`.
 5. **Hard Reviewer Read-Only Boundary:**
    Reviewers (`R` and `IR`) must be configured with `enable_write_tools: false` and have zero terminal command access. Main Controller compiles and passes evidence packages.
-6. **Reviewer Invocation Prompt Contract (Canary Lessons 2 & 3):**
-   Main Controller structures reviewer prompts into 3 distinct partitions: (1) Immutable Authority & Invariants resolved from `bootstrap_governance_manifest` pointing to materialized baseline files in `scratch/bootstrap-governance/`, (2) Untrusted Candidate Anchors & Claims, and (3) Authoritative Evaluation Rubric resolved from `bootstrap_governance_manifest`. Candidate claims are explicit untrusted navigation hints.
+6. **Two-Phase Reviewer Boot Handshake (Canary Lessons 2 & 3):**
+   Subagents inherit workspace read access; true capability-level sandbox isolation does not exist. The architecture enforces temporal ordering through honest contractual information withholding and observable protocol verification:
+   - **Phase 1 (`REVIEWER_BOOT`):** Main Controller invokes Reviewer (`R` or `IR`) with Partition 1 (materialized authority closure in `scratch/bootstrap-governance/` derived dynamically from `bootstrap_governance_manifest.entries`) and Partition 3 (authoritative rubric). **Partition 2 (Candidate Anchors & Claims) is contractually WITHHELD.** The prompt contract strictly forbids the reviewer from searching, listing, or reading repository working-tree candidate files prior to emitting `AUTHORITY_LOADED`. Reviewer reads all baseline files in `bootstrap_governance_manifest.entries`, verifies integrity against `manifest.json`, and emits an explicit `## AUTHORITY_LOADED` handshake message via `send_message` listing all consumed baseline files and `bootstrap_commit`.
+   - **Phase 2 (`REVIEW_ACTIVE`):** Main Controller audits the emitted `AUTHORITY_LOADED` handshake against `bootstrap_governance_manifest.entries`. Upon verification, Main sends Partition 2 to the SAME reviewer session via `send_message`. Reviewer evaluates candidate against baseline authority and emits the review report. Candidate anchors cannot precede authority consumption, and tool calls in subagent transcripts are auditable.
 7. **Exact Cryptographic Artifact Freeze (Canary Lesson 5):**
    - Sole Main Controller Hash Ownership: Planner outputs purely semantic handoff `{ candidate_path, ready: true }`. Hard read-only reviewers have zero command tools and cannot compute hashes. Main Controller computes `candidate_plan_hash = git hash-object <plan_path>` before review, passes it in Partition 2, recomputes `post_review_plan_hash` after `PASS`, asserts `candidate_plan_hash == post_review_plan_hash`, and records `frozen_plan_hash`.
    - Implementor verifies on-disk plan hash before modifying any files.
-8. **Closed 3-Verdict Model & Explicit Audit Gates:**
-   - Standardized closed verdicts: `PASS`, `BLOCKING_FINDINGS`, `BLOCKED`.
-   - Mandatory explicit audit verdicts: Main Controller requires an explicit `R verdict: PASS` recorded before committing Plan Freeze Checkpoint or spawning Implementor, and an explicit `IR verdict: PASS` recorded before committing Verified Implementation Checkpoint or completing task.
-   - **Observable Transition Contract Invariant:** Main Controller MUST visibly emit the explicit reviewer verdict header and summary into the user conversation BEFORE executing any state transition commands, commits, or subagent spawns. It is not sufficient for the verdict to exist only in background logs.
+8. **Closed 3-Verdict Model, Standalone Oracle & Observable Mechanical Gate:**
+   - Standardized closed verdicts: `PASS`, `BLOCKING_FINDINGS`, `BLOCKED` (and `REVISE`).
+   - **Standalone Executable Gate Script (`audit_review_gate.py`):**
+     Acceptance of a review report is determined strictly by the execution output and exit code of `.agents/skills/managed-agent-workflow/scripts/audit_review_gate.py`. Main Controller NEVER self-attests gate booleans from intuition.
+     The script deterministically evaluates 8 predicates:
+     1. `session_handshake_verified`: Reviewer emitted `## AUTHORITY_LOADED` with matching commit SHA.
+     2. `authority_closure_tool_audit`: `view_file` tool calls in `transcript_full.jsonl` covered all manifest baseline entries BEFORE handshake with non-trivial ranges (>= 10 lines). Report markdown claims are rejected as proof.
+     3. `verdict_in_closed_algebra`: Verdict matches closed algebra `## (R|IR) verdict: (PASS|REVISE|BLOCKING_FINDINGS|BLOCKED)`.
+     4. `required_sections_present`: All required sections present per rubric (`Summary`, `Falsification / Dimension Evaluations`, `verdict:`).
+     5. `has_4part_falsification_structure`: Complete 4-part falsification blocks (`Target Invariant`, `Counterexample Attempted`, `Execution Trace`, `Result / Defense`) across all evaluated dimensions.
+     6. `mechanical_scan_clean`: Zero unmeasured semantic absolutes (`"hoàn toàn"`, `"triệt để"`, `"guarantees"`, `"flawless"`, `"không có rủi ro"`, `"zero risk"`, `"tuyệt đối"`, `"completely closes"`, or unsupported `"100% tuân thủ"`). Verifiable numeric counts and ratios with explicit denominators (e.g. `14/14 (100%)`) are permitted. Self-attestation checkboxes are ignored.
+     7. `plan_hash_parity`: Candidate hash verified on disk and cited in report text.
+     8. `review_candidate_binding`: Authoritative candidate dispatch preceded the report (`dispatch_index < report_index`), and report explicitly binds to candidate hash.
+   - **Frozen Review Oracle Lifecycle:**
+     The acceptance oracle identity is calibrated against report-independent fixtures (Fixtures A–F and Cases A–D) and frozen (`review_oracle_hash = git hash-object <oracle_path>`) BEFORE evaluating governed review reports. Main Controller operates the scratch oracle during runtime orchestration; Implementor authors the repository oracle script.
+   - **Observable Gate Execution & Visible Provenance Contract:**
+     Main Controller visibly executes `audit_review_gate.py` and emits the full 8-field provenance block (Candidate Hash, Reviewer Session, Dispatch Index, Report Index, Candidate Binding Result, Reviewer Verdict, Gate Result, Oracle Hash) in the conversation transcript strictly BEFORE executing any state transition tool calls, git commits, or subagent terminations.
+   - **Failure Enforcement:**
+     If `audit_review_gate.py` exits non-zero, the report verdict is `INVALID`. Controller state holds, zero git commits are executed, and reviewer repairs report defects in session without consuming a reconciliation cycle.
 9. **Finite Reconciliation Bound (Max 2 Cycles):**
    - `MAX_PLAN_RECONCILIATION_CYCLES = 2`
    - `MAX_IMPLEMENTATION_RECONCILIATION_CYCLES = 2`
@@ -91,5 +108,5 @@ Main Controller
    - If blocking findings remain after cycle 2, the loop halts immediately and escalates to Owner.
 10. **Clean Subagent Termination:**
     Main Controller terminates subagent pairs at phase boundaries (Phase 3 terminates `P` & `R`; Phase 5 terminates `I` & `IR`).
-11. **Self-Modifying Governance Bootstrap Protocol:**
-    When a task modifies `AGENTS.md` or `.agents/skills/`, working-tree governance files are untrusted candidate claims. All governance authority, rubrics, and skills used during the run resolve exclusively from `bootstrap_governance_manifest` materialized into `scratch/bootstrap-governance/` at task start (`bootstrap_commit`). Main Controller passes absolute and relative paths to these materialized baseline files in Reviewer Invocation Prompt Partition 1. Reviewers must inspect baseline files and include a mandatory `Proof of Authority Consumption` section before evaluating candidate files.
+11. **Manifest-Derived Authority Closure Enforcement:**
+    When a task modifies `AGENTS.md` or `.agents/skills/`, working-tree governance files are untrusted candidate claims. All governance authority, rubrics, and skills used during the run resolve exclusively from `bootstrap_governance_manifest` materialized into `scratch/bootstrap-governance/` at task start (`bootstrap_commit`). Expected authority closure is dynamically defined: `expected_authority_closure := [entry.path for entry in bootstrap_governance_manifest.entries]`. Both the `AUTHORITY_LOADED` handshake and report `Proof of Authority Consumption` must enumerate and confirm all manifest entries without omission (14 baseline files for this bootstrap commit). Omitting any manifest entry invalidates the review.

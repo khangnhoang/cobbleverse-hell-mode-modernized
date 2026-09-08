@@ -44,14 +44,16 @@ Reviewers are independent in **judgment** but **evidence-guided** in execution:
 - The reviewer must independently verify material claims against real repository files, bytecode contracts, and documentation.
 - Broad speculative codebase discovery by reviewers is reserved only for missing, ambiguous, or conflicting evidence.
 
-### 3.3 Separation of Invariants, Claims, and Rubric (Canary Lesson 3 & Finding A)
-Main Controller prompts partition inputs into three distinct layers:
-1. **Immutable Invariants & Governance Baseline:** Resolved exclusively from `bootstrap_governance_manifest` pointing to materialized baseline files at `scratch/bootstrap-governance/` extracted from `bootstrap_commit`. When a task modifies `AGENTS.md` or `.agents/skills/`, working-tree governance files are UNTRUSTED candidate artifacts under evaluation and cannot self-authorize deviations from baseline authority.
-2. **Untrusted Candidate Anchors:** The author's claims, which the reviewer must independently verify or refute against repository reality. Reviewers do not run terminal commands or compute git hashes.
-3. **Authoritative Evaluation Rubric:** The objective criteria resolved exclusively from `bootstrap_governance_manifest`.
+### 3.3 Two-Phase Reviewer Boot Handshake (Honest Protocol & Observable Gate)
+Subagents inherit workspace read access; true capability-level sandbox isolation does not exist. The architecture enforces sequential authority loading through honest contractual withholding and observable protocol verification:
+- **Phase 1 (`REVIEWER_BOOT`):** Main Controller invokes Reviewer (`R` or `IR`) with Partition 1 (Materialized Authority Closure in `scratch/bootstrap-governance/` derived dynamically from `bootstrap_governance_manifest.entries`) and Partition 3 (Authoritative Rubric). **Partition 2 (Candidate Anchors & Claims) is contractually WITHHELD.** The prompt contract strictly forbids the reviewer from searching, listing, or reading repository working-tree candidate files prior to emitting `AUTHORITY_LOADED`. Reviewer reads all baseline files in `bootstrap_governance_manifest.entries`, verifies integrity against `manifest.json`, and emits an explicit `## AUTHORITY_LOADED` handshake message via `send_message` back to Main Controller.
+- **Phase 2 (`REVIEW_ACTIVE`):** Main Controller verifies the handshake against `bootstrap_governance_manifest.entries`. Upon verification, Main sends Partition 2 to the SAME reviewer session via `send_message`. Reviewer evaluates candidate text or diff against baseline authority and emits the review report. Candidate anchors cannot precede authority consumption, and tool calls in subagent transcripts are auditable.
 
-### 3.4 Mandatory Proof of Authority Consumption
-Review reports MUST begin with a mandatory `### Proof of Authority Consumption` header citing the baseline commit, materialized baseline path in `scratch/bootstrap-governance/`, and list of baseline files inspected via read tools before examining untrusted candidate files. Reviewers must not evaluate untrusted candidate files without first inspecting and citing their baseline authority.
+### 3.4 Manifest-Derived Authority Closure Enforcement
+When a task modifies `AGENTS.md` or `.agents/skills/`, working-tree governance files are untrusted review subjects. Baseline files at `scratch/bootstrap-governance/` represent the immutable authority closure. Expected authority closure is dynamically defined from `bootstrap_governance_manifest.entries`:
+`expected_authority_closure := [entry.path for entry in bootstrap_governance_manifest.entries]`
+
+Both `## AUTHORITY_LOADED` and the report's `### Proof of Authority Consumption` must enumerate and verify all manifest entries without omission (for this run, all 14 baseline files). Omitting any manifest entry causes immediate mechanical gate rejection by Main Controller via `audit_review_gate.py`.
 
 ### 3.5 Adversarial Falsification & Counterexample Discipline
 Independent review requires active adversarial falsification rather than passive checklist inspection. For every evaluation dimension, reviewers must formulate concrete counterexamples, trace execution through candidate text or diffs, and evaluate defenses:
@@ -59,20 +61,21 @@ Independent review requires active adversarial falsification rather than passive
 - **Counterexample Attempted:** Concrete failure scenario, adversarial edge case, or evasion pattern formulated by the reviewer.
 - **Execution Trace:** Step-by-step trace through candidate plan text or implementation diff evaluating the candidate's response.
 - **Result / Defense:**
-  - *In Plan Review (R):* Evaluates specification: The plan specifies a mechanism that, if implemented as written, would block this counterexample.
-  - *In Implementation Review (IR):* Evaluates concrete evidence: The implementation demonstrably blocks this counterexample.
+  - *In Plan Review (`R`):* Evaluates specification: "The plan specifies a mechanism that, if implemented as written, would block this counterexample."
+  - *In Implementation Review (`IR`):* Evaluates concrete evidence: "The implementation demonstrably blocks this counterexample."
   If the defense fails, the reviewer must raise a structured `Critical` or `Required` finding.
 
-### 3.6 Findings as Verifiable Claims (Canary Lesson 4)
+### 3.6 Calibrated Claim Discipline & Independent Mechanical Gate Check
+Canary Lesson 7 applies to review reports as strictly as to code and plans:
+- **Proscribed Narrow Absolute Phrases:** The following phrases are strictly forbidden in reviewer reports: `"hoàn toàn"`, `"triệt để"`, `"guarantees"`, `"flawless"`, `"không có rủi ro"`, `"zero risk"`, `"tuyệt đối"`, `"completely closes"`, or unsupported semantic perfection claims (e.g., `"100% tuân thủ"`).
+- **Calibrated Claim Exception:** Verifiable numeric counts and ratios with explicit denominators (e.g. `14/14 (100%)`, `0 broken links`, `5/5 tests passing`) are permitted.
+- **Independent Mechanical Evaluation:** Main Controller mechanically scans report text via `audit_review_gate.py`. Reviewer self-attestation lines (e.g., `zero_proscribed_absolutes: TRUE/FALSE`) or self-audit checkboxes are completely ignored. Statements must be strictly proportional to observable, demonstrable evidence. Reports containing forbidden absolutes fail the mechanical gate and are rejected.
+
+### 3.7 Findings as Verifiable Claims (Canary Lesson 4)
 - A review finding is an assertion backed by cited repository evidence.
 - The author (Planner or Implementor) must independently verify each finding:
   - **CONFIRM:** Author acknowledges the defect and applies a minimal surgical fix.
   - **REJECT:** Author refutes the finding with cited counter-evidence from the repository. Authors must never modify working code merely to appease a reviewer.
-
-### 3.7 Claim Strength Discipline (Canary Lesson 7)
-- **"Claim strength must not exceed evidence strength."**
-- Reviewers and authors must strictly avoid hyperbolic or unverified absolute terms ("100%", "fully", "triệt để", "hoàn toàn", "flawless").
-- Every statement must be strictly proportional to observable, demonstrable evidence.
 
 ---
 

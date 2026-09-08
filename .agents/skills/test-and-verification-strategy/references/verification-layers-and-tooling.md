@@ -11,6 +11,7 @@ Authoritative solely for structural and syntactic integrity of skill definitions
 - **Link & Route Verification:** Verify that all skill routes referenced in `AGENTS.md` and relative links in `references/*.md` resolve to valid files on disk.
 - **YAML Frontmatter Integrity:** Verify `name` matches folder name (kebab-case) and `description` is non-empty.
 - **File Line Count Bounds:** Verify that skill definitions and references remain concise (< 500 lines per file; `AGENTS.md` strictly < 250 lines).
+- **Proscribed Absolute Phrase Scan:** Verify zero occurrences of forbidden narrow absolutes (`"hoàn toàn"`, `"triệt để"`, `"guarantees"`, `"flawless"`, `"không có rủi ro"`, `"zero risk"`, `"tuyệt đối"`, `"completely closes"`, or unsupported `"100% tuân thủ"`) outside explicit definition blocks. Calibrated claim exception permits verified numeric counts and ratios with explicit denominators (e.g., `14/14 (100%)`, `0 broken links`).
 - **Sole Applicable Automated Repository Check:** For pure Markdown, governance, and skill changes, Layer 0 is the sole applicable automated repository check. Higher layer suites are inapplicable and skipped. Automated structural checks verify syntax only and do not establish semantic correctness. Semantic governance authority belongs exclusively to independent contract review. Never claim Layer 0 checks are "fully sufficient" or "complete proof".
 
 ### Layer 1: Datapack & Trainer Schema Validation

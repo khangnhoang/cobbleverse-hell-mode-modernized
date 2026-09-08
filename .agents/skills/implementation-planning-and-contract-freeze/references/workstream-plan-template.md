@@ -23,6 +23,7 @@ Mode 3 workstream plans must follow this standardized section structure:
 | **Baseline Commit** | `<SHA-1>` (`<branch-name>`) |
 | **Target Branch** | `<branch-name>` |
 | **Canary Lineage** | `<SHA-1>` (if tracking prior verified lineage) |
+| **Authority Closure** | Dynamic closure from `bootstrap_governance_manifest.entries` (for governance tasks) |
 | **Author Submission State** | `Candidate Plan (Ready for Review)` |
 
 ---
@@ -89,10 +90,10 @@ Mode 3 workstream plans must follow this standardized section structure:
 
 ## 8. Implementation Checkpoints (Task-Derived)
 Implementation checkpoints are derived dynamically from the workstream's affected contracts and architectural slices (tailored for code, datapack, or governance tasks):
-- **Checkpoint 1: Plan Freeze Checkpoint** (Main Controller Identity & Hash Gate).
+- **Checkpoint 1: Plan Freeze Checkpoint** (Main Controller Identity & Hash Gate; Two-Phase Reviewer Boot Handshake; acceptance predicate `audit_review_gate.py` exit 0, visible provenance block emission, and verdict `PASS`).
 - **Checkpoint 2: Surgical Implementation of Task Slices** (Derived dynamically from Section 5/6 architectural slicing).
 - **Checkpoint 3: Proportional Verification & Manifest Assembly** (Execution of applicable minimal orthogonal layers and evidence assembly in `docs/workstreams/<id>/verification.md`).
-- **Checkpoint 4: Implementation Review Gate & Verified Implementation Checkpoint** (Independent review verdict `PASS` and local checkpoint commit).
+- **Checkpoint 4: Implementation Review Gate & Verified Implementation Checkpoint** (Two-Phase Reviewer Boot Handshake, independent review verdict `PASS` accepted under `audit_review_gate.py` exit 0 and visible provenance block emission, and local checkpoint commit).
 
 ---
 
