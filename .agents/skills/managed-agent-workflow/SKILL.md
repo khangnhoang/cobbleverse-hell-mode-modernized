@@ -19,6 +19,10 @@ Activate this skill **only** when the Universal Lightweight Preflight classifies
 - High regression risk across trainer battle formats or datapack dependencies;
 - Implementation requiring an authoritative implementation plan before coding.
 
+**Immediate Hand-Off & Zero Main Pre-Discovery Invariant:**
+- If the owner prompt or preflight surfaces a Mode 3 signal, Main Controller must NOT perform substantive technical discovery (decompilation, bytecode tracing, call-path exploration). Main Controller terminates direct probing immediately upon classifying Mode 3.
+- Substantive discovery and solution exploration belong exclusively to Planner `P`. Main Controller's role during planning is to spawn `P`, track reconciliation, and prepare reviewer evidence.
+
 **Exclusions:** Do NOT activate this skill for Mode 0 (informational questions), Mode 1 (architectural analysis without coding), or Mode 2 (direct bounded implementation fixes).
 
 This skill owns the multi-agent session lifecycle, reconciliation protocol, candidate hashing, and evidence preparation contracts. Global behavior, preflight routing, and repository permissions remain owned by `AGENTS.md`.
@@ -48,8 +52,8 @@ Main Controller
 └── Implementation Reviewer IR (hard read-only, fresh session relative to I, persistent across code re-reviews)
 ```
 
-1. **Main Controller:** Orchestrator. Maintains ephemeral state, prepares evidence for read-only reviewers, enforces state machine transitions, and executes local checkpoint commits. Keeps its own context window thin.
-2. **Planner (`P`):** Fresh session spawned via `invoke_subagent` (`Workspace: inherit`, `enable_write_tools: true`). Discovers codebase, designs solution, writes plan. Remains `idle` across plan reconciliation.
+1. **Main Controller:** Orchestrator. Maintains ephemeral state, prepares evidence for read-only reviewers, enforces state machine transitions, and executes local checkpoint commits. Keeps its own context window thin. Does not perform substantive code, bytecode, or runtime discovery; delegates domain investigation to `P`.
+2. **Planner (`P`):** Fresh session spawned via `invoke_subagent` (`Workspace: inherit`, `enable_write_tools: true`). Conducts substantive technical discovery (decompilation, bytecode/runtime tracing, cross-module call paths), designs solution, writes plan. Remains `idle` across plan reconciliation.
 3. **Plan Reviewer (`R`):** Fresh session spawned via `define_subagent` (`enable_write_tools: false`). Reviews candidate plan against repository evidence. Strictly read-only. Remains `idle` across plan re-reviews.
 4. **Implementor (`I`):** Fresh session spawned after plan freeze (`Workspace: inherit`, `enable_write_tools: true`). Reads exact frozen plan, verifies blob hash, executes changes, runs local verifications. Remains `idle` across code reconciliation.
 5. **Implementation Reviewer (`IR`):** Fresh session spawned via `define_subagent` (`enable_write_tools: false`). Evaluates working-tree diff, status, and test logs against frozen plan. Strictly read-only. Remains `idle` across code re-reviews.

@@ -37,7 +37,7 @@ These engineering principles and operational rules guide all autonomous and inte
 
 ## 2. Universal Lightweight Preflight
 
-Before activating any managed-agent workflow, modifying files, or spawning subagents, the agent must perform an ephemeral **Universal Lightweight Preflight**. This preflight applies to every repository-related prompt to determine the appropriate execution depth without imposing bureaucratic ceremony on routine requests.
+Before activating any managed-agent workflow, modifying files, or spawning subagents, the agent must perform an ephemeral **Universal Lightweight Preflight**. This preflight applies to every repository-related prompt to determine the appropriate execution depth without imposing bureaucratic ceremony on routine requests. Preflight discovery is strictly limited to the minimal targeted checks necessary to classify execution depth.
 
 The agent must evaluate five core facets:
 
@@ -61,10 +61,10 @@ Determine what permissions are explicitly granted in the current prompt:
 - Production deployment or destructive action.
 *Rule:* Never infer action permissions beyond what the owner explicitly instructed or what this contract grants.
 
-### 2.3 Repository Evidence Requirement
-- Can the request be answered directly from existing conversation context?
-- Does it require targeted reads of specific repository files?
-- Read strictly what is required to answer accurately; do not perform speculative directory crawling.
+### 2.3 Repository Evidence & Discovery Boundaries
+- **Classification Discovery Only:** Preflight discovery is strictly limited to minimal targeted checks needed to classify the request (e.g., checking file existence, inspecting a specific config key when intent is ambiguous).
+- **Substantive Discovery Prohibited in Preflight:** Decompilation (`cfr`, `javap`), bytecode/runtime tracing, cross-module call-path tracing, implementation-path exploration, and domain-specific diagnostic commands are substantive technical discovery. They do **not** belong to Universal Preflight.
+- **Zero Directory Crawling:** Never perform speculative directory crawling or broad repository scans during preflight.
 
 ### 2.4 Applicable Skill Routing
 - Activate domain skills only when the prompt intent strictly matches the skill's activation scope.
@@ -73,6 +73,11 @@ Determine what permissions are explicitly granted in the current prompt:
 
 ### 2.5 Execution Depth Routing
 Route the request into exactly one of the following five modes:
+
+#### Mode 3 Fast-Path & Anti-Pattern Rule
+- **Immediate Routing on Prompt Signal:** If the owner prompt *itself* already contains a Mode 3 material signal (e.g., Run & Bun AI scoring, companion Mixin, bytecode/runtime contracts, non-trivial behavior bug triage), Main must **not** perform domain investigation before routing.
+- **Immediate Stop & Hand-Off:** As soon as a Mode 3 signal is known (either evident in the prompt or surfaced during minimal classification preflight), Main must immediately halt direct investigation, activate `managed-agent-workflow`, and spawn Planner `P`. Substantive discovery belongs exclusively to Planner `P`.
+- **Anti-Pattern Proscription:** Main must never "discover first, then decide Mode 3" when Mode 3 already has sufficient evidence to classify.
 
 #### Mode 0 — Conversational / Informational
 - **Trigger:** Owner asks for information, facts, explanation, or status (e.g., *"What is Misty's team composition?"*, *"Where is Storm Drain handled?"*).
@@ -85,17 +90,17 @@ Route the request into exactly one of the following five modes:
 #### Mode 2 — Direct Bounded Execution
 - **Trigger:** Owner requests implementation with clear scope, unambiguous expected behavior, low blast radius, established patterns, and bounded direct verification (e.g., *"Update trainer moveset X to Y and run validator"*, *"Fix typo in config"*, *"Add a trainer lead tag"*).
 - **Behavior:** The agent performs targeted discovery → surgical edits → proportional verification → review checkpoint report. No multi-agent ceremony or heavy planning artifacts.
-- **Escalation Trigger:** If during Mode 2 execution, the agent discovers unexpected cross-module coupling, architectural ambiguity, or invariant risks, it must halt direct edits and **promote the task to Mode 3**.
+- **Escalation Trigger:** If during Mode 2 execution, the agent discovers unexpected cross-module coupling, architectural ambiguity, or invariant risks, it must halt direct edits immediately without further exploratory investigation and **promote the task to Mode 3**.
 
 #### Mode 3 — Managed-Agent Workflow
-- **Trigger:** Activated ONLY when there is at least one material risk or complexity signal:
+- **Trigger:** Activated IMMEDIATELY when there is at least one material risk or complexity signal:
   - Behavior bug requiring deep multi-file discovery;
   - Multiple plausible implementation paths requiring comparative evaluation;
   - Companion mod Mixin, bytecode, or Fabric runtime contract changes;
   - Run & Bun AI scoring, state memory, or fair-information boundary changes;
   - Broad datapack changes with significant regression risk;
   - Implementation requiring an approved plan before execution.
-- **Behavior:** Activate [`.agents/skills/managed-agent-workflow/SKILL.md`](.agents/skills/managed-agent-workflow/SKILL.md). The main agent becomes the **Main Controller**, orchestrating Planner `P`, Plan Reviewer `R`, Implementor `I`, and Implementation Reviewer `IR` under strict finite reconciliation bounds.
+- **Behavior:** Main stops direct investigation immediately and activates [`.agents/skills/managed-agent-workflow/SKILL.md`](.agents/skills/managed-agent-workflow/SKILL.md). The main agent transitions to **Main Controller**, leaving substantive discovery and architecture design entirely to Planner `P`. Main Controller orchestrates Planner `P`, Plan Reviewer `R`, Implementor `I`, and Implementation Reviewer `IR` under strict finite reconciliation bounds.
 
 #### Mode 4 — Stop / Escalate Before Execution
 - **Trigger:** Material ambiguity in owner intent; repository evidence contradicts requested changes; ungranted destructive or remote actions; missing critical prerequisites.

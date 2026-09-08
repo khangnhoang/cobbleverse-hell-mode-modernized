@@ -41,6 +41,7 @@ Every prompt passes through an ephemeral 5-facet preflight routing into exactly 
 - **Mode 2 (Direct Bounded Execution):** Clear scope, low blast radius, single path. Direct edit → verify → report. Escalates to Mode 3 if hidden complexity emerges.
 - **Mode 3 (Managed-Agent Workflow):** High-risk/complexity tasks (Mixins, RunBun AI, cross-module behavior, runtime contracts). Activates managed multi-agent orchestration.
 - **Mode 4 (Stop / Escalate):** Material ambiguity, ungranted destructive actions, or conflicting repository evidence.
+- **Discovery Boundary & Fast-Path Invariant:** Preflight is strictly limited to classification discovery. Decompilation, bytecode tracing, cross-module call paths, and domain diagnostics are substantive discovery prohibited during preflight. If a prompt contains Mode 3 signals, Main stops direct investigation immediately and activates managed workflow without pre-discovery.
 
 ### Architectural Decision 2: Bounded Managed-Agent Topology (Mode 3)
 ```text
