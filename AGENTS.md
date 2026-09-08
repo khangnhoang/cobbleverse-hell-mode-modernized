@@ -23,8 +23,8 @@ These engineering principles and operational rules guide all autonomous and inte
 
 4. **Goal-Driven Execution & Proportional Verification:**
    - Define concrete, testable success criteria before making changes.
-   - Verify changes using authoritative repository tooling (`scripts/ci/validate_repo.py`, unit tests, offline bytecode contracts).
-   - Scale validation effort proportionally to the risk profile of the change.
+    - Verify changes using authoritative repository tooling across applicable orthogonal layers.
+    - Scale validation effort proportionally to the risk profile of the change.
 
 5. **Read Before Write:**
    - Always inspect the existing code, contracts, refmaps, and relevant documentation before editing.
@@ -43,22 +43,17 @@ The agent must evaluate five core facets:
 
 ### 2.1 Owner Intent
 Classify what the owner is asking:
-- Asking for information or status;
-- Requesting an explanation or codebase walkthrough;
+- Asking for information, status, explanation, or codebase walkthrough;
 - Brainstorming, architectural analysis, or design critique;
 - Reviewing an existing diff, commit, or pull request;
 - Discovery, reverse engineering, or failure triage;
-- Requesting repository code/data modifications;
-- Requesting Git or remote delivery actions.
+- Requesting repository code/data modifications or Git/remote delivery actions.
 
 ### 2.2 Action Permission
 Determine what permissions are explicitly granted in the current prompt:
-- Read-only inspection;
-- Implementation planning;
-- Local file modification;
+- Read-only inspection; implementation planning; local file modification;
 - Local checkpoint commit (see Section 7);
-- Push / PR / Merge (strictly gated);
-- Production deployment or destructive action.
+- Push / PR / Merge (strictly gated); production deployment or destructive action.
 *Rule:* Never infer action permissions beyond what the owner explicitly instructed or what this contract grants.
 
 ### 2.3 Repository Evidence & Discovery Boundaries
@@ -105,7 +100,7 @@ Route the request into exactly one of the following five modes:
   - Implementation requiring an approved plan before execution.
 - **Behavior:** Main stops direct investigation immediately upon Mode 3 classification, transitions to `MODE_3_SELECTED`, and activates [`.agents/skills/managed-agent-workflow/SKILL.md`](.agents/skills/managed-agent-workflow/SKILL.md). The main agent transitions to **Main Controller**, leaving substantive discovery and architecture design entirely to Planner `P`. Main Controller orchestrates Planner `P`, Plan Reviewer `R`, Implementor `I`, and Implementation Reviewer `IR` under strict finite reconciliation bounds.
 - **`MODE_3_SELECTED` Action Boundary:**
-  - *Main Controller Whitelist (Permitted):* Snapshot `bootstrap_commit` (`git rev-parse HEAD`), establish `bootstrap_governance_manifest` (snapshotting governance contracts, skills, and rubrics at `bootstrap_commit` for authoritative self-governance), check repository working branch and status (`git status --short`), transition to `PLANNING`, and invoke Planner `P` via `invoke_subagent`.
+  - *Main Controller Whitelist (Permitted):* Snapshot `bootstrap_commit`, establish `bootstrap_governance_manifest` (snapshotting governance contracts, skills, and rubrics at `bootstrap_commit` for authoritative self-governance), check repository working branch and status, transition to `PLANNING`, and invoke Planner `P` via `invoke_subagent`.
   - *Main Controller Blacklist (Forbidden):* Main Controller MUST NOT search for external repositories, clone/locate external sources, inspect implementation directories, crawl files, or compile evidence manifests. Substantive discovery, external source mapping, and technical evidence preparation belong strictly to Planner `P`.
 
 #### Mode 4 — Stop / Escalate Before Execution
@@ -140,13 +135,9 @@ Agent narration must communicate investigation progress in terms of problem boun
 Agents must use the most direct repository-supported or installed dedicated tool for standard inspection, search, transformation, archive, version-control, and reverse-engineering tasks.
 
 ### Preferred Tooling Map
-- **Text & Code Search:** `rg`
-- **File Discovery:** `fd`
-- **JSON Inspection & Transformation:** `jq`
-- **Archive Inspection & Extraction:** `7z` or JDK `jar`
-- **Version Control & GitHub CLI:** `git`, `gh`
-- **Java Bytecode, Archive & Dependency Inspection:** `jar`, `javap`, `jdeps`
-- **Java Decompilation:** Repository-approved decompiler (CFR or Vineflower when configured)
+- **Text & Code Search:** `rg` | **File Discovery:** `fd` | **JSON Inspection:** `jq`
+- **Archives:** `7z` or JDK `jar` | **Version Control:** `git`, `gh`
+- **Java Bytecode & Decompilation:** `jar`, `javap`, `jdeps`, CFR / Vineflower
 
 ### Dedicated Tooling First & Anti-Patterns
 Do not create ad-hoc Python scratch scripts to reproduce functionality already provided by dedicated CLI tools. Avoid:
@@ -193,18 +184,17 @@ Before planning non-trivial work or modifying specialized domains, inspect the t
 ## 6. Verification Authority & Environment Reality
 
 Cobbleverse Hell Mode enforces six explicit layers of verification authority:
-- **Layer 0 (Markdown & Governance Authority):** Relative link integrity, YAML frontmatter schemas, and documentation cross-links. Authoritative for skill routing and repository governance.
+- **Layer 0 (Markdown Structural Authority):** Relative link integrity, YAML frontmatter schemas, file bounds, and documentation cross-links. Authoritative solely for structural syntax; semantic governance authority belongs to independent contract review.
 - **Layer 1 (Datapack & Trainer Schema Validation):** Trainer JSON schemas, battle formats, and economy rules.
 - **Layer 2 (Java Unit & Boundary Tests):** Fast, isolated tests authoritative for pure algorithms, calculation formulas, and boundary math.
 - **Layer 3 (Bytecode & Shadow Runtime Contracts):** Offline contracts authoritative for Fabric Mixin target classes, method descriptors, and shadow field offsets.
 - **Layer 4 (Headless Server Bootstrap Smoke):** Startup/Mixin smoke only, verifying Knot bootstrap and Cobblemon mod initialization. Not authoritative for battle AI logic or multiplayer gameplay.
 - **Layer 5 (Production Host Canary & Live Gameplay):** Dedicated live production host. The only authoritative verification for multiplayer stability, battle AI decisions, and player progression.
 
-### Orthogonal Verification Sets (Finding E)
+### Orthogonal Verification Sets
 - Verification layers form an **orthogonal set** of domain authorities directly covering affected contracts; no layer implies another automatically.
-- For pure Markdown, governance, and skill modifications, Layer 0 is the **sole applicable automated repository check**. Automated structural checks verify syntax only and do not establish semantic correctness. Never claim Layer 0 checks are "fully sufficient" or "complete proof".
-
-Detailed test suite commands, scripts, artifact freshness conditions, and evidence manifest formats are delegated to [`.agents/skills/test-and-verification-strategy/SKILL.md`](.agents/skills/test-and-verification-strategy/SKILL.md).
+- For pure Markdown, governance, and skill modifications, Layer 0 is the **sole applicable automated repository check**. Automated structural checks verify syntax only and do not establish semantic correctness. Semantic governance authority belongs exclusively to independent contract review.
+- Verification commands, freshness rules, and manifest formats are delegated to [`.agents/skills/test-and-verification-strategy/SKILL.md`](.agents/skills/test-and-verification-strategy/SKILL.md).
 
 ### Core Invariant: Offline PASS != Production Semantic PASS (Canary Lessons 6 & 7)
 - Automated test passes locally or in CI (Layers 0–4) are necessary but **never sufficient** to claim that gameplay integration is GREEN.
@@ -215,23 +205,23 @@ Detailed test suite commands, scripts, artifact freshness conditions, and eviden
 
 ## 7. Git Safety & Local Checkpoint Contract
 
-### Two-Phase Commit Lifecycle (Finding G)
+### Two-Phase Commit Lifecycle
 - **Commit Creation != Audit Promotion:** Local checkpoint commits are internal multi-agent coordination records, distinct from promoted audit milestones.
-- **Audit Promotion Boundary:** A checkpoint is promoted to an immutable audit milestone only through an explicit external event (Owner acceptance, merged historical evidence, or accepted live production canary evidence). Internal Reviewer `PASS` alone does NOT promote a commit to an immutable audit milestone.
+- **Audit Promotion Boundary:** A checkpoint is promoted to an immutable audit milestone only through an explicit external event (Owner acceptance, merged historical evidence, or accepted live production canary evidence). Internal Reviewer `PASS` alone does not promote a commit to an immutable audit milestone.
 - **Provisional Local Commits:** Unpromoted local commits on a working branch may be amended, squashed, or rewritten if explicitly authorized by Owner.
-- **Promoted Audit Milestones:** Commits promoted to audit status must never be rebased, squashed, amended, or deleted. Forward merges (`git merge --no-ff`) are recommended when preserving multi-agent audit lineage is required, but are not an inflexible repo-wide dogma.
+- **Promoted Audit Milestones:** Commits promoted to audit status must never be rebased, squashed, amended, or deleted. Forward merges are recommended when preserving multi-agent audit lineage is required. Detailed lifecycle rules and commit templates are delegated to [`.agents/skills/git-checkpoint-workflow/SKILL.md`](.agents/skills/git-checkpoint-workflow/SKILL.md).
 
 ### Local Checkpoint Permission Contract
 - **Mode 2 (Direct Bounded Tasks):** Do NOT create git commits unless the owner explicitly requests or approves a commit for the current task.
-- **Mode 3 (Managed-Agent Workflow):** When the owner has **explicitly authorized implementation through the managed-agent workflow**, Main Controller is authorized to create necessary **local checkpoint commits** without re-prompting the owner for every individual commit (Plan Freeze, Verified Implementation, Correction, Production Canary). Detailed commit formats and body templates are delegated to [`.agents/skills/git-checkpoint-workflow/SKILL.md`](.agents/skills/git-checkpoint-workflow/SKILL.md).
+- **Mode 3 (Managed-Agent Workflow):** When the owner has **explicitly authorized implementation through the managed-agent workflow**, Main Controller is authorized to create necessary **local checkpoint commits** without re-prompting the owner for every individual commit (Plan Freeze, Verified Implementation, Correction, Production Canary).
 
 ### Surgical Staging Discipline
-- Stage only explicitly owned files using targeted paths (`git add <file1> <file2>`). NEVER use blind staging (`git add .`, `git add -A`, or `git commit -a`). Always run `git status --short` and `git diff --cached` before committing.
+- Stage only explicitly owned files using targeted paths. NEVER use blind staging. Always inspect status and staged diffs before committing.
 
 ### Strict Remote Actions Gate
 Under NO circumstances may an agent perform the following without separate, explicit Owner authorization:
 - `commit != push != PR != merge != rebase != rewrite != force-push`
-- `git push` to any remote (origin, upstream);
+- Remote push to any repository (`origin`, `upstream`);
 - Pull request creation, update, or comment via GitHub CLI;
 - Branch merge or rebase onto base branches;
 - Force-push (`--force`);
@@ -250,7 +240,7 @@ Each completed implementation task must conclude with a structured review checkp
 ### Diff & Change Reporting Policy
 - **No Full Diff Dumps:** Do not paste the complete repository diff into user-facing reports by default.
 - **Core Invariant:** *"User-facing reports summarize the change; Git diff remains the review artifact."*
-- **Agent Self-Review vs. User Report:** Agents must still run and inspect `git diff` internally to verify modifications before finalizing, but the raw diff output must not be mirrored wholesale into the report.
-- **High-Level Change Metrics:** Provide concise scope metrics such as `git diff --stat`, changed file lists, or hunk line counts.
+- **Agent Self-Review vs. User Report:** Agents must still run and inspect diffs internally to verify modifications before finalizing, but the raw diff output must not be mirrored wholesale into the report.
+- **High-Level Change Metrics:** Provide concise scope metrics such as diff stat, changed file lists, or hunk line counts.
 - **Selective Snippets Only:** Include focused diff hunks or exact code snippets only when concise and materially useful for user review, or when explicitly requested.
 

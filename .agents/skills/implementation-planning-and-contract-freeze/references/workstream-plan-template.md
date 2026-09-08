@@ -87,11 +87,12 @@ Mode 3 workstream plans must follow this standardized section structure:
 
 ---
 
-## 8. Implementation Checkpoints
-- Checkpoint 1: Planning Freeze & Candidate Hash Verification (Main Controller).
-- Checkpoint 2: Core Logic / Model Implementation & Isolated Unit Tests.
-- Checkpoint 3: Integration & Boundary Verification.
-- Checkpoint 4: Verification Manifest Assembly & Review Report.
+## 8. Implementation Checkpoints (Task-Derived)
+Implementation checkpoints are derived dynamically from the workstream's affected contracts and architectural slices (tailored for code, datapack, or governance tasks):
+- **Checkpoint 1: Plan Freeze Checkpoint** (Main Controller Identity & Hash Gate).
+- **Checkpoint 2: Surgical Implementation of Task Slices** (Derived dynamically from Section 5/6 architectural slicing).
+- **Checkpoint 3: Proportional Verification & Manifest Assembly** (Execution of applicable minimal orthogonal layers and evidence assembly in `docs/workstreams/<id>/verification.md`).
+- **Checkpoint 4: Implementation Review Gate & Verified Implementation Checkpoint** (Independent review verdict `PASS` and local checkpoint commit).
 
 ---
 

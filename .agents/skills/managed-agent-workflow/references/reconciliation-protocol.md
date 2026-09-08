@@ -71,7 +71,7 @@ When a Reviewer issues a `BLOCKED` verdict, Main Controller triages the blocker 
 - **Condition:** The blocker stems from an author omission (e.g., candidate file missing, file empty, or referenced artifact not committed to candidate path).
 - **Protocol:**
   1. Main Controller routes the blocker notice back to the active author session (`P` or `I`) via `send_message`.
-  2. Author provides or commits the missing artifact.
+  2. Author provides/corrects the missing artifact; Main Controller owns all Git checkpoint commits.
   3. If the fix is purely mechanical prerequisite provision without altering reviewed architecture or code logic, it does not count as a design correction cycle. If substantive changes are introduced, cycle counter increments upon re-submission.
 
 ### Category 3: External / Unresolvable Blocker

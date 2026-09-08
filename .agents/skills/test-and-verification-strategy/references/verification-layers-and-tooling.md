@@ -6,12 +6,12 @@ This reference provides exact commands, execution procedures, artifact freshness
 
 ## 1. Tooling & Commands by Verification Layer
 
-### Layer 0: Markdown & Governance Authority
-Authoritative for skill definitions, governance documents, YAML frontmatters, and documentation cross-links:
+### Layer 0: Markdown Structural Authority
+Authoritative solely for structural and syntactic integrity of skill definitions, governance documents, YAML frontmatters, file line bounds, and documentation cross-links:
 - **Link & Route Verification:** Verify that all skill routes referenced in `AGENTS.md` and relative links in `references/*.md` resolve to valid files on disk.
 - **YAML Frontmatter Integrity:** Verify `name` matches folder name (kebab-case) and `description` is non-empty.
-- **File Line Count Bounds:** Verify that skill definitions and references remain concise (< 500 lines per file).
-- **Sole Applicable Automated Repository Check (Finding E):** For pure Markdown, governance, and skill changes, Layer 0 is the sole applicable automated repository check. Higher layer suites are inapplicable and skipped. Automated structural checks verify syntax only and do not prove semantic correctness. Never claim Layer 0 checks are "fully sufficient" or "complete proof".
+- **File Line Count Bounds:** Verify that skill definitions and references remain concise (< 500 lines per file; `AGENTS.md` strictly < 250 lines).
+- **Sole Applicable Automated Repository Check:** For pure Markdown, governance, and skill changes, Layer 0 is the sole applicable automated repository check. Higher layer suites are inapplicable and skipped. Automated structural checks verify syntax only and do not establish semantic correctness. Semantic governance authority belongs exclusively to independent contract review. Never claim Layer 0 checks are "fully sufficient" or "complete proof".
 
 ### Layer 1: Datapack & Trainer Schema Validation
 Validates all 1,714 trainer JSON files, battle formats, and item restrictions:
@@ -81,7 +81,7 @@ To avoid redundant rebuilds while preventing stale test results, artifact freshn
 
 ## 3. Verification Evidence Manifest Template
 
-When preparing evidence for Implementation Reviewer `IR`, Main Controller formats the manifest based on the minimal orthogonal set of affected layers:
+When preparing evidence for Implementation Reviewer `IR`, the Verification Evidence Manifest is canonically documented in `docs/workstreams/<workstream-id>/verification.md` (or maintained in ephemeral scratch memory if uncommitted):
 
 ```markdown
 ## Verification Evidence Manifest

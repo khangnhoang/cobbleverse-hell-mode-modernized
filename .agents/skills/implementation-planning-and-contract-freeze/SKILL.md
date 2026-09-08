@@ -18,7 +18,7 @@ Activate this skill when:
 
 **Ownership Boundary:**
 - **Owns:** Substantive discovery methodology, separating Facts vs. Assumptions vs. Conflicts, architecture invariant enforcement, architectural slicing strategies, canonical workstream plan documents, author pre-submission self-checklists, and semantic candidate handoff (`{ candidate_path, ready: true }`).
-- **Does NOT Own:** Subagent session orchestration, runtime identity ownership, candidate hashing (`git hash-object`), or plan freeze assertions (owned 100% by `managed-agent-workflow`); defining authoritative review rubrics or issuing review verdicts (owned by `code-review-and-quality`); executing git staging and commits (owned by `git-checkpoint-workflow`); or executing test verification suites (owned by `test-and-verification-strategy`).
+- **Does NOT Own:** Subagent session orchestration, runtime identity ownership, candidate hashing (`git hash-object`), or plan freeze assertions (owned by `managed-agent-workflow`); defining authoritative review rubrics or issuing review verdicts (owned by `code-review-and-quality`); executing git staging and commits (owned by `git-checkpoint-workflow`); or executing test verification suites (owned by `test-and-verification-strategy`).
 
 ---
 
@@ -80,7 +80,7 @@ Evaluate and enforce all repository-global invariants, plus applicable domain in
 
 ## 6. Cryptographic Plan Freeze Protocol
 
-To guarantee that implementation matches reviewed design byte-for-byte (Canary Lesson 5):
+To ensure that implementation matches reviewed design byte-for-byte (Canary Lesson 5):
 
 ```mermaid
 sequenceDiagram

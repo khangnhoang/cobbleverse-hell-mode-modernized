@@ -1,11 +1,11 @@
 ---
 name: test-and-verification-strategy
-description: Proportional verification, Hell 6-layer authority hierarchy, offline vs production reality distinction, false-green prevention, and artifact freshness discipline in Cobbleverse Hell Mode.
+description: Proportional verification, Hell 6 orthogonal verification domains, offline vs production reality distinction, false-green prevention, and artifact freshness discipline in Cobbleverse Hell Mode.
 ---
 
 # Test & Verification Strategy
 
-This skill defines the verification authority hierarchy, proportional test allocation, false-green prevention, artifact freshness protocol, and evidence manifest assembly for Cobbleverse Hell Mode.
+This skill defines the orthogonal verification domains, proportional test allocation, false-green prevention, artifact freshness protocol, and evidence manifest assembly for Cobbleverse Hell Mode.
 
 ---
 
@@ -17,7 +17,7 @@ Activate this skill when:
 - Auditing test coverage, evaluating artifact freshness, or verifying repository contracts.
 
 **Ownership Boundary:**
-- **Owns:** Proportional verification principle, Hell 6-Layer Authority Hierarchy, offline PASS vs. production semantic PASS distinction, false-green prevention, regression reproduction, assembling Verification Evidence Manifests for hard read-only reviewers, and the Artifact Freshness Protocol.
+- **Owns:** Proportional verification principle, Hell 6 Orthogonal Verification Domains, offline PASS vs. production semantic PASS distinction, false-green prevention, regression reproduction, assembling Verification Evidence Manifests for hard read-only reviewers, and the Artifact Freshness Protocol.
 - **Does NOT Own:** Subagent session orchestration (owned by `managed-agent-workflow`); code review rubrics (owned by `code-review-and-quality`); or git staging and commits (owned by `git-checkpoint-workflow`).
 
 ---
@@ -42,7 +42,7 @@ Verification layers are an **orthogonal set of domain authorities**, NOT a hiera
 
 | Modified Subsystem / Contract | Governing Authority | Applicable Verification Checks |
 | :--- | :--- | :--- |
-| **Governance, Markdown, Skills** | Layer 0 (Markdown & Governance) | Route resolution, relative links, YAML frontmatter schemas, file bounds (< 500 lines). |
+| **Governance, Markdown, Skills** | Layer 0 (Markdown Structural Authority) | Route resolution, relative links, YAML frontmatter schemas, file bounds (< 500 lines; `AGENTS.md` < 250 lines). (Structural syntax only; semantic governance belongs to independent review). |
 | **Datapacks & Trainer Schemas** | Layer 1 (Datapack & Trainer Schema) | `python scripts/ci/validate_repo.py` + `check_legacy_baseline.py`. |
 | **Pure Java Logic & Boundary Math** | Layer 2 (Java Unit & Boundary Tests) | `./gradlew test --info` (JUnit 5 isolated tests). |
 | **Fabric Mixins & Shadow Bytecode** | Layer 3 (Bytecode & Shadow Contracts) | `python scripts/runtime-contract/test_rct_runtime_contract.py`. |
@@ -53,28 +53,29 @@ Verification layers are an **orthogonal set of domain authorities**, NOT a hiera
 When a task modifies exclusively Markdown files, agent documentation, or workflow skill configurations:
 - Layer 0 is the **sole applicable automated repository check**.
 - Passing Layer 0 automated checks verifies structural and syntactic integrity (valid links, well-formed YAML frontmatter, line count bounds).
-- **Claim Strength Discipline (Canary Lesson 7):** Markdown structural automation does **NOT** establish authority correctness, routing correctness, state-machine closure, or ownership. Never describe Layer 0 checks as "fully sufficient", "semantically sufficient", or "complete proof". Semantic validity is established exclusively through independent adversarial review.
+- **Claim Strength Discipline (Canary Lesson 7):** Automated Layer 0 checks verify structural syntax only and do **NOT** establish semantic governance correctness, authority validity, routing correctness, or invariant preservation. Semantic governance authority belongs exclusively to independent contract review.
 - Inapplicable layers (Layers 1–5) are skipped because no datapacks, Java source, Mixins, or gameplay systems are modified.
 
 ---
 
-## 4. The Hell 6-Layer Authority Hierarchy
+## 4. The Hell 6 Orthogonal Verification Domains
 
-Cobbleverse Hell Mode enforces six explicit layers of verification authority:
+Cobbleverse Hell Mode enforces six explicit, orthogonal domains of verification authority:
 
 ```text
-Layer 5: Production Canary Host (Live Dedicated Server, Battle Telemetry)
-   ▲  [Authoritative ONLY for live multiplayer, progression, real-time AI]
-Layer 4: Headless Server Bootstrap Smoke (./gradlew runServer)
-   ▲  [Smoke ONLY: Knot bootstrap, Mixin transform, Cobblemon mod init]
-Layer 3: Bytecode & Shadow Runtime Contracts (test_rct_runtime_contract.py)
-   ▲  [Authoritative for Mixin targets, method descriptors, shadow fields]
-Layer 2: Java Unit & Boundary Tests (./gradlew test)
-   ▲  [Authoritative for pure algorithmic calculations and isolated math]
-Layer 1: Datapack & Trainer Schema Validation (validate_repo.py)
-   ▲  [Authoritative for 1,714 trainer JSON schemas and economy rules]
-Layer 0: Markdown & Governance Authority (Relative links, YAML frontmatter)
-      [Authoritative for skill routing, links, and documentation integrity]
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                       ORTHOGONAL VERIFICATION DOMAINS                       │
+│    (Selected minimally per diff — no vertical ladder or auto-inheritance)    │
+├─────────┬──────────────────────────────────┬────────────────────────────────┤
+│ Domain  │ Authority Scope                  │ Verification Target / Tool     │
+├─────────┼──────────────────────────────────┼────────────────────────────────┤
+│ Layer 0 │ Markdown Structural Authority    │ Links, YAML Frontmatter, Bounds│
+│ Layer 1 │ Datapack & Trainer Schema        │ validate_repo.py, baseline.py  │
+│ Layer 2 │ Java Unit & Boundary Math        │ ./gradlew test (Isolated JUnit)│
+│ Layer 3 │ Bytecode & Shadow Contracts      │ test_rct_runtime_contract.py   │
+│ Layer 4 │ Headless Server Bootstrap Smoke  │ ./gradlew runServer (Smoke)    │
+│ Layer 5 │ Production Host Canary           │ Live Dedicated Host Telemetry  │
+└─────────┴──────────────────────────────────┴────────────────────────────────┘
 ```
 
 ---

@@ -23,7 +23,7 @@ Activate this skill **only** when the Universal Lightweight Preflight classifies
 - Implementation requiring an authoritative implementation plan before coding.
 
 **Orchestration Ownership Boundary:**
-- **Owns:** Ephemeral controller state machine (`IDLE` -> `MODE_3_SELECTED` -> `PLANNING` -> ...), `bootstrap_commit` snapshot, `bootstrap_governance_manifest` establishment, Reviewer Invocation Prompt Contract (3-part partition), 100% ownership of cryptographic candidate hashing handshake and assertion, closed 3-verdict model (`PASS`, `BLOCKING_FINDINGS`, `BLOCKED`), explicit audit verdicts before dependent transitions, finite reconciliation counting (`MAX_CYCLES = 2`), subagent termination, and Owner escalation dossiers.
+- **Owns:** Ephemeral controller state machine (`IDLE` -> `MODE_3_SELECTED` -> `PLANNING` -> ...), `bootstrap_commit` snapshot, `bootstrap_governance_manifest` establishment, Reviewer Invocation Prompt Contract (3-part partition), sole ownership of cryptographic candidate hashing handshake and assertion, closed 3-verdict model (`PASS`, `BLOCKING_FINDINGS`, `BLOCKED`), explicit audit verdicts before dependent transitions, finite reconciliation counting (`MAX_CYCLES = 2`), subagent termination, and Owner escalation dossiers.
 - **Delegates to Specialized Skills:**
   - Substantive technical discovery and workstream plan authoring: [`implementation-planning-and-contract-freeze`](../implementation-planning-and-contract-freeze/SKILL.md)
   - Independent adversarial review rubrics and finding verification: [`code-review-and-quality`](../code-review-and-quality/SKILL.md)
@@ -53,7 +53,7 @@ Main Controller
 └── Implementation Reviewer IR (hard read-only, fresh session relative to I, persistent across code re-reviews)
 ```
 
-1. **Main Controller:** Pure state machine orchestrator. Maintains ephemeral state, snapshots `bootstrap_commit`, establishes `bootstrap_governance_manifest`, prepares evidence manifests for read-only reviewers, enforces state machine transitions, owns 100% of runtime identity, computes and asserts cryptographic hashes (`git hash-object`), records explicit audit verdicts (`PASS`), and executes local checkpoint commits. Keeps its own context window thin. Does not perform substantive discovery.
+1. **Main Controller:** Pure state machine orchestrator. Maintains ephemeral state, snapshots `bootstrap_commit`, establishes `bootstrap_governance_manifest`, prepares evidence manifests for read-only reviewers, enforces state machine transitions, sole owner of runtime identity, computes and asserts cryptographic hashes (`git hash-object`), records explicit audit verdicts (`PASS`), and executes local checkpoint commits. Keeps its own context window thin. Does not perform substantive discovery.
 2. **Planner (`P`):** Session spawned via `invoke_subagent` (`enable_write_tools: true`). Governed by `implementation-planning-and-contract-freeze`. Performs substantive discovery, designs solution, writes plan. Outputs purely semantic candidate content `{ candidate_path, ready: true }` without computing hashes. Remains `idle` across plan reconciliation.
 3. **Plan Reviewer (`R`):** Session spawned via `define_subagent` (`enable_write_tools: false`). Governed by `code-review-and-quality`. Evaluates candidate plan against repository evidence and `bootstrap_governance_manifest`. Strictly read-only; does NOT compute hashes. Remains `idle` across plan re-reviews.
 4. **Implementor (`I`):** Fresh session spawned after plan freeze (`enable_write_tools: true`). Verifies blob hash, executes changes, runs local verifications governed by `test-and-verification-strategy`. Remains `idle` across code reconciliation.
@@ -66,7 +66,7 @@ Main Controller
 1. **Immediate Hand-Off & Zero Main Pre-Discovery (Canary Lesson 1):**
    Main Controller terminates direct probing immediately upon classifying Mode 3 and enters `MODE_3_SELECTED`.
    - *Whitelist (Permitted):* Snapshot `bootstrap_commit` (`git rev-parse HEAD`), establish `bootstrap_governance_manifest`, check git status and branch (`git status --short`, `git branch --show-current`), transition to `PLANNING`, and invoke Planner `P`.
-   - *Blacklist (Forbidden):* Main Controller MUST NOT search external repositories, clone/locate external sources, inspect implementation directories, crawl files, or assemble evidence manifests. Substantive discovery belongs strictly to Planner `P`.
+   - *Blacklist (Forbidden during MODE_3_SELECTED):* Main Controller MUST NOT search external repositories, clone/locate external sources, inspect implementation directories, crawl files, or assemble evidence manifests. Substantive discovery belongs strictly to Planner `P`. (In Phase 5, Main Controller does assemble the Verification Evidence Manifest from verification outputs provided by Implementor.)
 2. **Separation of Author & Reviewer:**
    A reviewer is always a fresh session independent of the author. An author never reviews its own work.
 3. **Persistent Author Context:**
@@ -76,19 +76,20 @@ Main Controller
 5. **Hard Reviewer Read-Only Boundary:**
    Reviewers (`R` and `IR`) must be configured with `enable_write_tools: false` and have zero terminal command access. Main Controller compiles and passes evidence packages.
 6. **Reviewer Invocation Prompt Contract (Canary Lessons 2 & 3):**
-   Main Controller structures reviewer prompts into 3 distinct partitions: (1) Immutable Authority & Invariants resolved from `bootstrap_governance_manifest`, (2) Untrusted Candidate Anchors & Claims, and (3) Authoritative Evaluation Rubric resolved from `bootstrap_governance_manifest`. Candidate claims are explicit untrusted navigation hints.
+   Main Controller structures reviewer prompts into 3 distinct partitions: (1) Immutable Authority & Invariants resolved from `bootstrap_governance_manifest` pointing to materialized baseline files in `scratch/bootstrap-governance/`, (2) Untrusted Candidate Anchors & Claims, and (3) Authoritative Evaluation Rubric resolved from `bootstrap_governance_manifest`. Candidate claims are explicit untrusted navigation hints.
 7. **Exact Cryptographic Artifact Freeze (Canary Lesson 5):**
-   - 100% Main Controller Hash Ownership: Planner outputs purely semantic handoff `{ candidate_path, ready: true }`. Hard read-only reviewers have zero command tools and cannot compute hashes. Main Controller computes `candidate_plan_hash = git hash-object <plan_path>` before review, passes it in Partition 2, recomputes `post_review_plan_hash` after `PASS`, asserts `candidate_plan_hash == post_review_plan_hash`, and records `frozen_plan_hash`.
+   - Sole Main Controller Hash Ownership: Planner outputs purely semantic handoff `{ candidate_path, ready: true }`. Hard read-only reviewers have zero command tools and cannot compute hashes. Main Controller computes `candidate_plan_hash = git hash-object <plan_path>` before review, passes it in Partition 2, recomputes `post_review_plan_hash` after `PASS`, asserts `candidate_plan_hash == post_review_plan_hash`, and records `frozen_plan_hash`.
    - Implementor verifies on-disk plan hash before modifying any files.
 8. **Closed 3-Verdict Model & Explicit Audit Gates:**
    - Standardized closed verdicts: `PASS`, `BLOCKING_FINDINGS`, `BLOCKED`.
    - Mandatory explicit audit verdicts: Main Controller requires an explicit `R verdict: PASS` recorded before committing Plan Freeze Checkpoint or spawning Implementor, and an explicit `IR verdict: PASS` recorded before committing Verified Implementation Checkpoint or completing task.
-9. **Finite Loop Guarantee (Max 2 Cycles):**
+   - **Observable Transition Contract Invariant:** Main Controller MUST visibly emit the explicit reviewer verdict header and summary into the user conversation BEFORE executing any state transition commands, commits, or subagent spawns. It is not sufficient for the verdict to exist only in background logs.
+9. **Finite Reconciliation Bound (Max 2 Cycles):**
    - `MAX_PLAN_RECONCILIATION_CYCLES = 2`
    - `MAX_IMPLEMENTATION_RECONCILIATION_CYCLES = 2`
    - Initial review is Turn 0 (not counted as a cycle). Cycle increments on correction-and-re-review turns.
    - If blocking findings remain after cycle 2, the loop halts immediately and escalates to Owner.
 10. **Clean Subagent Termination:**
     Main Controller terminates subagent pairs at phase boundaries (Phase 3 terminates `P` & `R`; Phase 5 terminates `I` & `IR`).
-11. **Self-Modifying Governance Bootstrap Protocol (Finding A):**
-    When a task modifies `AGENTS.md` or `.agents/skills/`, working-tree governance files are untrusted candidate claims. All governance authority, rubrics, and skills used during the run resolve exclusively from `bootstrap_governance_manifest` established at `bootstrap_commit`.
+11. **Self-Modifying Governance Bootstrap Protocol:**
+    When a task modifies `AGENTS.md` or `.agents/skills/`, working-tree governance files are untrusted candidate claims. All governance authority, rubrics, and skills used during the run resolve exclusively from `bootstrap_governance_manifest` materialized into `scratch/bootstrap-governance/` at task start (`bootstrap_commit`). Main Controller passes absolute and relative paths to these materialized baseline files in Reviewer Invocation Prompt Partition 1. Reviewers must inspect baseline files and include a mandatory `Proof of Authority Consumption` section before evaluating candidate files.

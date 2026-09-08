@@ -15,12 +15,14 @@ Main Controller maintains orchestration state purely within session memory (or a
 {
   "phase": "IDLE | MODE_3_SELECTED | PLANNING | PLAN_REVIEW | PLAN_RECONCILING | FROZEN | IMPLEMENTING | IMPL_REVIEW | IMPL_RECONCILING | COMPLETED | ESCALATED",
   "bootstrap_commit": "<SHA-1>",
+  "bootstrap_governance_path": "<appDataDir>/brain/<conversationId>/scratch/bootstrap-governance/",
   "bootstrap_governance_manifest": {
     "bootstrap_commit": "<SHA-1>",
-    "agents_md": "<bootstrap_commit>:AGENTS.md",
-    "plan_review_rubric": "<bootstrap_commit>:.agents/skills/code-review-and-quality/references/plan-review-rubric.md",
-    "impl_review_rubric": "<bootstrap_commit>:.agents/skills/code-review-and-quality/references/implementation-review-rubric.md",
-    "governance_skills": "<bootstrap_commit>:.agents/skills/"
+    "base_path": "<appDataDir>/brain/<conversationId>/scratch/bootstrap-governance/",
+    "agents_md": "<scratch>/bootstrap-governance/AGENTS.md",
+    "plan_review_rubric": "<scratch>/bootstrap-governance/.agents/skills/code-review-and-quality/references/plan-review-rubric.md",
+    "impl_review_rubric": "<scratch>/bootstrap-governance/.agents/skills/code-review-and-quality/references/implementation-review-rubric.md",
+    "governance_skills": "<scratch>/bootstrap-governance/.agents/skills/"
   },
   "plan_path": "docs/workstreams/<id>/plan.md",
   
@@ -44,18 +46,18 @@ Main Controller maintains orchestration state purely within session memory (or a
 
 | Current Phase | Event / Signal | Target Phase | Actions Executed by Main Controller |
 | :--- | :--- | :--- | :--- |
-| `IDLE` | Task classified as Mode 3 | `MODE_3_SELECTED` | Snapshot `bootstrap_commit = git rev-parse HEAD`. Establish `bootstrap_governance_manifest`. Verify repo status (`git status --short`, `git branch --show-current`). |
-| `MODE_3_SELECTED` | Main completes preflight setup | `PLANNING` | Enforce Whitelist: read governance contract from `bootstrap_governance_manifest`, spawn Planner `P` via `invoke_subagent` (`enable_write_tools: true`) governed by `implementation-planning-and-contract-freeze`. Enforce Blacklist: zero external probing/crawling. Store `planner_id`. |
-| `PLANNING` | Planner reports ready `{ candidate_path, ready: true }` | `PLAN_REVIEW` | Compute `candidate_plan_hash = git hash-object <plan_path>` via `run_command`. Format 3-part review prompt (citing `bootstrap_governance_manifest` and `candidate_plan_hash`). Spawn Plan Reviewer `R` (`enable_write_tools: false`). Store `plan_reviewer_id`. |
-| `PLAN_REVIEW` | Reviewer issues `PASS` | `FROZEN` | Record explicit `R verdict: PASS` in controller state. Recompute `post_review_hash = git hash-object <plan_path>`. Assert `post_review_hash == candidate_plan_hash`. Store `frozen_plan_hash`. Create Plan Freeze Checkpoint via `git-checkpoint-workflow`. Terminate `planner_id` and `plan_reviewer_id`. |
-| `PLAN_REVIEW` | Reviewer issues `BLOCKING_FINDINGS` | `PLAN_RECONCILING` | Increment `plan_reconciliation_count += 1`. If `> 2`, halt to `ESCALATED`. Else dispatch findings to `planner_id` via `send_message`. |
+| `IDLE` | Task classified as Mode 3 | `MODE_3_SELECTED` | Snapshot `bootstrap_commit = git rev-parse HEAD`. Materialize baseline governance files to `scratch/bootstrap-governance/`. Establish `bootstrap_governance_manifest`. Verify repo status (`git status --short`, `git branch --show-current`). |
+| `MODE_3_SELECTED` | Main completes preflight setup | `PLANNING` | Enforce Whitelist: read governance contract from materialized baseline, spawn Planner `P` via `invoke_subagent` (`enable_write_tools: true`) governed by `implementation-planning-and-contract-freeze`. Enforce Blacklist: zero external probing/crawling. Store `planner_id`. |
+| `PLANNING` | Planner reports ready `{ candidate_path, ready: true }` | `PLAN_REVIEW` | Compute `candidate_plan_hash = git hash-object <plan_path>`. Format 3-part review prompt (citing materialized baseline in `scratch/bootstrap-governance/` and `candidate_plan_hash`). Spawn Plan Reviewer `R` (`enable_write_tools: false`). Store `plan_reviewer_id`. |
+| `PLAN_REVIEW` | Reviewer issues `PASS` | `FROZEN` | Record explicit `R verdict: PASS` in controller state. **Observable Transition Contract:** Visibly emit the explicit reviewer verdict header and summary into user conversation BEFORE executing transition commands, commits, or subagent spawns. Recompute `post_review_hash = git hash-object <plan_path>`. Assert `post_review_hash == candidate_plan_hash`. Store `frozen_plan_hash`. Create Plan Freeze Checkpoint via `git-checkpoint-workflow`. Terminate `planner_id` and `plan_reviewer_id`. |
+| `PLAN_REVIEW` | Reviewer issues `BLOCKING_FINDINGS` | `PLAN_RECONCILING` | Visibly emit reviewer findings into user conversation. Increment `plan_reconciliation_count += 1`. If `> 2`, halt to `ESCALATED`. Else dispatch findings to `planner_id` via `send_message`. |
 | `PLAN_RECONCILING` | Planner updates plan | `PLAN_REVIEW` | Recompute `candidate_plan_hash = git hash-object <plan_path>`. Dispatch updated candidate and author response to `plan_reviewer_id` via `send_message`. |
 | `PLAN_REVIEW` | Reviewer issues `BLOCKED` | `PLAN_REVIEW` / `PLAN_RECONCILING` / `ESCALATED` | Triage blocker: (1) Main-repairable prerequisite: Main repairs without candidate design changes and re-dispatches to `plan_reviewer_id` (`plan_reconciliation_count` unchanged, phase remains `PLAN_REVIEW`); (2) Author-repairable prerequisite: dispatch to `planner_id` via `send_message` (transitions to `PLAN_RECONCILING`, cycle not incremented unless design changes); (3) External/unresolvable blocker: halt to `ESCALATED` and deliver blocker dossier to Owner. |
 | `PLAN_REVIEW` / `PLAN_RECONCILING` | `plan_reconciliation_count > 2` with blocking findings | `ESCALATED` | Halt loop immediately. Compile and deliver structured finding dossier to Owner. Do not spawn additional agents. |
 | `FROZEN` | Implementation authorized | `IMPLEMENTING` | Spawn Implementor `I` (`enable_write_tools: true`) with frozen plan path and `frozen_plan_hash`. Store `implementor_id`. |
-| `IMPLEMENTING` | Implementor reports ready | `IMPL_REVIEW` | Assemble Verification Evidence Manifest via `test-and-verification-strategy`. Format 3-part review prompt citing `bootstrap_governance_manifest`. Spawn Implementation Reviewer `IR` (`enable_write_tools: false`). Store `impl_reviewer_id`. |
-| `IMPL_REVIEW` | Reviewer issues `PASS` | `COMPLETED` | Record explicit `IR verdict: PASS` in controller state. Create Verified Implementation Checkpoint via `git-checkpoint-workflow`. Terminate `implementor_id` and `impl_reviewer_id`. Deliver review checkpoint report to Owner. |
-| `IMPL_REVIEW` | Reviewer issues `BLOCKING_FINDINGS` | `IMPL_RECONCILING` | Increment `impl_reconciliation_count += 1`. If `> 2`, halt to `ESCALATED`. Else dispatch findings to `implementor_id` via `send_message`. |
+| `IMPLEMENTING` | Implementor reports ready | `IMPL_REVIEW` | Assemble Verification Evidence Manifest via `test-and-verification-strategy`. Format 3-part review prompt citing materialized baseline in `scratch/bootstrap-governance/`. Spawn Implementation Reviewer `IR` (`enable_write_tools: false`). Store `impl_reviewer_id`. |
+| `IMPL_REVIEW` | Reviewer issues `PASS` | `COMPLETED` | Record explicit `IR verdict: PASS` in controller state. **Observable Transition Contract:** Visibly emit the explicit reviewer verdict header and summary into user conversation BEFORE executing transition commands, commits, or subagent spawns. `COMPLETED` = internal multi-agent workflow complete; awaiting Owner review and disposition at Owner Review Gate. Create Verified Implementation Checkpoint via `git-checkpoint-workflow`. Terminate `implementor_id` and `impl_reviewer_id`. Deliver review checkpoint report to Owner. |
+| `IMPL_REVIEW` | Reviewer issues `BLOCKING_FINDINGS` | `IMPL_RECONCILING` | Visibly emit reviewer findings into user conversation. Increment `impl_reconciliation_count += 1`. If `> 2`, halt to `ESCALATED`. Else dispatch findings to `implementor_id` via `send_message`. |
 | `IMPL_RECONCILING` | Implementor corrects code | `IMPL_REVIEW` | Refresh Verification Evidence Manifest. Dispatch updated evidence to `impl_reviewer_id` via `send_message`. |
 | `IMPL_REVIEW` | Reviewer issues `BLOCKED` | `IMPL_REVIEW` / `IMPL_RECONCILING` / `ESCALATED` | Triage blocker: (1) Main-repairable prerequisite: Main repairs manifest/evidence and re-dispatches to `impl_reviewer_id` (`impl_reconciliation_count` unchanged, phase remains `IMPL_REVIEW`); (2) Author-repairable prerequisite: dispatch to `implementor_id` via `send_message` (transitions to `IMPL_RECONCILING`); (3) External/unresolvable blocker: halt to `ESCALATED` and deliver blocker dossier to Owner. |
 | `IMPL_REVIEW` / `IMPL_RECONCILING` | `impl_reconciliation_count > 2` with blocking findings | `ESCALATED` | Halt loop immediately. Deliver structured implementation dossier to Owner. |
@@ -70,10 +72,10 @@ When invoking or dispatching review requests to Plan Reviewer `R` or Implementat
 # Review Request: [Candidate Plan | Implementation Diff]
 
 ## Partition 1: Immutable Authority & Baseline Invariants
-- Repository Governance Baseline: Resolved exclusively from `bootstrap_governance_manifest` at `<bootstrap_commit>` (e.g. `<bootstrap_commit>:AGENTS.md`).
+- Repository Governance Baseline: Resolved exclusively from materialized baseline files at `bootstrap_governance_path` (`<scratch>/bootstrap-governance/`) extracted from `<bootstrap_commit>` (e.g., `<scratch>/bootstrap-governance/AGENTS.md`).
 - Operating under Mode 3 Managed-Agent Workflow.
 - Role: Independent adversarial reviewer with hard read-only tools (`enable_write_tools: false`, zero terminal commands).
-- Discipline: Claim strength must not exceed evidence strength. Prohibit unverified absolute statements.
+- Discipline: Claim strength must not exceed evidence strength. Formulate concrete counterexamples and execution traces. Prohibit unverified absolute statements.
 
 ## Partition 2: Untrusted Candidate Anchors & Claims
 - Candidate Artifact: `<path/to/plan.md>` (Candidate Hash: `<candidate_plan_hash>` computed by Main Controller) | Working-Tree Diff & Evidence Manifest.
@@ -84,10 +86,20 @@ When invoking or dispatching review requests to Plan Reviewer `R` or Implementat
 
 ## Partition 3: Authoritative Evaluation Rubric
 - Evaluate strictly against the criteria resolved from `bootstrap_governance_manifest`:
-  - For Plan Reviewer R: `bootstrap_governance_manifest.plan_review_rubric`
-  - For Implementation Reviewer IR: `bootstrap_governance_manifest.impl_review_rubric`
+  - For Plan Reviewer R: `bootstrap_governance_manifest.plan_review_rubric` (materialized path in scratch)
+  - For Implementation Reviewer IR: `bootstrap_governance_manifest.impl_review_rubric` (materialized path in scratch)
 - Issue an explicit closed verdict: `PASS` | `BLOCKING_FINDINGS` | `BLOCKED`.
 - Structure any findings using the Standard Finding Schema (Critical, Required, Suggestion, Nit, FYI).
+
+> [!IMPORTANT]
+> **Mandatory Proof of Authority Consumption Header:** Reviewer reports MUST begin with:
+> ```markdown
+> ### Proof of Authority Consumption
+> - **Baseline Commit:** <bootstrap_commit>
+> - **Materialized Authority Path:** <scratch/bootstrap-governance/...>
+> - **Inspected Baseline Files:** [List of baseline files read via `view_file` before inspecting candidate files]
+> ```
+> Reviewers must not evaluate untrusted candidate files without first inspecting and citing their baseline authority.
 ```
 
 ---
