@@ -57,11 +57,11 @@ Before staging any file or creating a commit, the agent must inspect the reposit
 When the Owner has authorized implementation under Mode 3, Main Controller is authorized to create necessary local checkpoint commits without re-prompting for every individual commit:
 
 1. **Plan Freeze Checkpoint:**
-   - **Trigger:** Plan Reviewer `R` issues `PASS` and candidate hash matches post-review hash.
+   - **Trigger:** Plan Reviewer `R` issues an explicit `PASS` (`R verdict: PASS`) and candidate hash matches post-review hash.
    - **Format:** `docs(plan): freeze implementation plan for <feature>`
-   - **Significance:** Cryptographically records the reviewed specification. The commit SHA becomes permanent audit evidence.
+   - **Significance:** Cryptographically records the reviewed specification.
 2. **Verified Implementation Checkpoint:**
-   - **Trigger:** Implementation Reviewer `IR` issues `PASS` following successful test verification.
+   - **Trigger:** Implementation Reviewer `IR` issues an explicit `PASS` (`IR verdict: PASS`) following successful test verification.
    - **Format:** `feat(<scope>): <summary>` or `fix(<scope>): <summary>`
 3. **Correction Checkpoint (if needed):**
    - **Trigger:** Applying verified fixes during a reconciliation cycle.
@@ -72,23 +72,26 @@ When the Owner has authorized implementation under Mode 3, Main Controller is au
 
 ---
 
-## 6. Audit Lineage & SHA Preservation (Canary Lesson 10)
+## 6. Two-Phase Commit Lifecycle & Audit Lineage (Finding G)
 
-In Cobbleverse Hell Mode, checkpoint commits serve as durable cryptographic audit trails:
-1. **Promoted Audit Milestones (Immutable):** Commits that have been promoted or referenced as audit evidence (e.g., Plan Freeze Checkpoints referenced in implementation prompts, Verified Implementation Checkpoints referenced in review reports, or historical canary commits `2a329a5`, `8ee3d27`, `17c9e79`) must **never** be rebased, squashed, amended, or deleted.
-2. **Provisional Local Commits (Permitted Rewrites):** Local, unpromoted commits on a working branch prior to audit promotion may be amended, squashed, or rewritten if explicitly requested or approved by the Owner.
-3. **Merge-Forward Strategy:** When integrating workstream branches where preserving multi-agent audit lineage is required, forward merges (`git merge --no-ff`) are recommended to preserve historical commit SHAs intact. However, `--no-ff` is an audit lineage recommendation rather than an inflexible repo-wide dogma.
-4. **Auditability:** Anyone inspecting git history must be able to trace the exact sequence of plan freeze -> implementation -> verification.
+In Cobbleverse Hell Mode, commit creation is decoupled from audit promotion:
+
+1. **Commit Creation != Audit Promotion:** Local checkpoint commits are internal multi-agent coordination records, distinct from promoted audit milestones. An internal Reviewer `PASS` verdict alone does **not** promote a checkpoint to an immutable audit milestone.
+2. **Audit Promotion Boundary:** A checkpoint is promoted to an immutable audit milestone only through an explicit external event (Owner acceptance, accepted PR / merge, accepted live production canary evidence, or explicitly promoted historical audit lineage).
+3. **Provisional Local Commits (Permitted Rewrites):** Local, unpromoted commits on a working branch prior to audit promotion may be amended, squashed, or rewritten if explicitly requested or approved by the Owner, reconciling affected references.
+4. **Promoted Audit Milestones (Immutable):** Once a commit is promoted to audit status, its SHA must **never** be rebased, squashed, amended, or deleted.
+5. **Merge-Forward Strategy:** When integrating workstream branches where preserving multi-agent audit lineage is required, forward merges (`git merge --no-ff`) are recommended to preserve historical commit SHAs intact. However, `--no-ff` is an audit lineage recommendation rather than an inflexible repo-wide dogma.
 
 ---
 
 ## 7. Strict Remote Actions Gate
 
-Creating local commits does NOT grant permission to mutate remote repositories:
-- **`commit != push != PR != merge`**
+Creating local commits does NOT grant permission to mutate remote repositories or base lineage:
+- **`commit != push != PR != merge != rebase != rewrite != force-push`**
 - Under NO circumstances may an agent execute the following without separate, explicit Owner authorization:
   - `git push` to any remote (origin, upstream);
   - Pull request creation, update, or merging via GitHub CLI (`gh pr`);
-  - Fast-forward or rebase merges on base branches;
+  - Fast-forward, rebase, or merge onto base branches;
+  - Rebase, squash, or history rewriting on promoted audit commits;
   - Force-pushing (`--force`, `+<branch>`);
-  - Branch deletion on remotes.
+  - Branch deletion on local base or remotes.

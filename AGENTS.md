@@ -19,7 +19,7 @@ These engineering principles and operational rules guide all autonomous and inte
 3. **Surgical Scope:**
    - Touch only the files and lines required to accomplish the stated task.
    - Zero opportunistic refactoring: do not perform unrelated reformatting, cosmetic cleanup, bulk renames, or style modernization outside the requested scope.
-   - Preserve working content: retain existing working trainer definitions, battle formats, and configurations unless there is a verified gameplay, runtime, or task reason to alter them.
+   - Preserve working content: retain existing working code, configurations, schemas, and assets unless there is a verified task or runtime reason to alter them.
 
 4. **Goal-Driven Execution & Proportional Verification:**
    - Define concrete, testable success criteria before making changes.
@@ -68,27 +68,27 @@ Determine what permissions are explicitly granted in the current prompt:
 
 ### 2.4 Applicable Skill Routing
 - Activate domain skills only when the prompt intent strictly matches the skill's activation scope.
-- Mentioning a Pokémon, trainer, or companion Mixin does not automatically warrant loading every related skill.
+- Mentioning a domain concept does not automatically warrant loading every related skill.
 - Never preload bundled `references/` before their specific `Read condition` matches.
 
 ### 2.5 Execution Depth Routing
 Route the request into exactly one of the following five modes:
 
 #### Mode 3 Fast-Path & Anti-Pattern Rule
-- **Immediate Routing on Prompt Signal:** If the owner prompt *itself* already contains a Mode 3 material signal (e.g., Run & Bun AI scoring, companion Mixin, bytecode/runtime contracts, non-trivial behavior bug triage), Main must **not** perform domain investigation before routing.
+- **Immediate Routing on Prompt Signal:** If the owner prompt *itself* already contains a Mode 3 material signal (e.g., high-risk architectural changes, runtime contracts, multi-file behavior bug triage, governance contract changes), Main must **not** perform domain investigation before routing.
 - **Immediate Stop & Hand-Off:** As soon as a Mode 3 signal is known (either evident in the prompt or surfaced during minimal classification preflight), Main must immediately halt direct investigation, activate `managed-agent-workflow`, and spawn Planner `P`. Substantive discovery belongs exclusively to Planner `P`.
 - **Anti-Pattern Proscription:** Main must never "discover first, then decide Mode 3" when Mode 3 already has sufficient evidence to classify.
 
 #### Mode 0 — Conversational / Informational
-- **Trigger:** Owner asks for information, facts, explanation, or status (e.g., *"What is Misty's team composition?"*, *"Where is Storm Drain handled?"*).
+- **Trigger:** Owner asks for information, facts, explanation, or status (e.g., *"What is the active battle format?"*, *"Where is damage calculation handled?"*).
 - **Behavior:** Answer directly with minimal targeted reads. Do not write plans, do not create durable artifacts, and do not spawn subagents.
 
 #### Mode 1 — Lightweight Analysis / Recommendation
-- **Trigger:** Owner asks for evaluation, trade-off analysis, or architectural recommendations without implementation authorization (e.g., *"Is this team over-engineered?"*, *"What is the minimal fix path for Throat Spray?"*).
+- **Trigger:** Owner asks for evaluation, trade-off analysis, or architectural recommendations without implementation authorization (e.g., *"Is this subsystem over-engineered?"*, *"What is the minimal fix path for move power scaling?"*).
 - **Behavior:** Conduct bounded, targeted discovery; activate domain skills/references if helpful; provide reasoning and actionable recommendations. Do not modify repository files. Default to single-agent execution; subagents are reserved for rare, genuinely disconnected parallel spikes.
 
 #### Mode 2 — Direct Bounded Execution
-- **Trigger:** Owner requests implementation with clear scope, unambiguous expected behavior, low blast radius, established patterns, and bounded direct verification (e.g., *"Update trainer moveset X to Y and run validator"*, *"Fix typo in config"*, *"Add a trainer lead tag"*).
+- **Trigger:** Owner requests implementation with clear scope, unambiguous expected behavior, low blast radius, established patterns, and bounded direct verification (e.g., *"Update moveset X to Y and run validator"*, *"Fix typo in config"*, *"Add trainer tag"*).
 - **Behavior:** The agent performs targeted discovery → surgical edits → proportional verification → review checkpoint report. No multi-agent ceremony or heavy planning artifacts.
 - **Escalation Trigger:** If during Mode 2 execution, the agent discovers unexpected cross-module coupling, architectural ambiguity, or invariant risks, it must halt direct edits immediately without further exploratory investigation and **promote the task to Mode 3**.
 
@@ -99,13 +99,13 @@ Route the request into exactly one of the following five modes:
   - Explicit Owner instruction for independent review, plan freeze, or managed-agent workflow;
   - Non-trivial behavior bug requiring deep multi-file discovery;
   - Multiple plausible implementation paths requiring comparative evaluation;
-  - Companion mod Mixin, bytecode, or Fabric runtime contract changes;
-  - Run & Bun AI scoring, state memory, or fair-information boundary changes;
-  - Broad datapack changes with significant regression risk;
+  - Core runtime contract, bytecode injection, or platform boundary changes;
+  - Non-trivial algorithmic decision logic, scoring matrices, or state memory changes;
+  - Broad data schema or configuration changes with significant regression risk;
   - Implementation requiring an approved plan before execution.
 - **Behavior:** Main stops direct investigation immediately upon Mode 3 classification, transitions to `MODE_3_SELECTED`, and activates [`.agents/skills/managed-agent-workflow/SKILL.md`](.agents/skills/managed-agent-workflow/SKILL.md). The main agent transitions to **Main Controller**, leaving substantive discovery and architecture design entirely to Planner `P`. Main Controller orchestrates Planner `P`, Plan Reviewer `R`, Implementor `I`, and Implementation Reviewer `IR` under strict finite reconciliation bounds.
 - **`MODE_3_SELECTED` Action Boundary:**
-  - *Main Controller Whitelist (Permitted):* Snapshot `bootstrap_commit` (`git rev-parse HEAD`), check repository working branch and status (`git status --short`), read the governance contract at `bootstrap_commit`, transition to `PLANNING`, and invoke Planner `P` via `invoke_subagent`.
+  - *Main Controller Whitelist (Permitted):* Snapshot `bootstrap_commit` (`git rev-parse HEAD`), establish `bootstrap_governance_manifest` (snapshotting governance contracts, skills, and rubrics at `bootstrap_commit` for authoritative self-governance), check repository working branch and status (`git status --short`), transition to `PLANNING`, and invoke Planner `P` via `invoke_subagent`.
   - *Main Controller Blacklist (Forbidden):* Main Controller MUST NOT search for external repositories, clone/locate external sources, inspect implementation directories, crawl files, or compile evidence manifests. Substantive discovery, external source mapping, and technical evidence preparation belong strictly to Planner `P`.
 
 #### Mode 4 — Stop / Escalate Before Execution
@@ -200,6 +200,10 @@ Cobbleverse Hell Mode enforces six explicit layers of verification authority:
 - **Layer 4 (Headless Server Bootstrap Smoke):** Startup/Mixin smoke only, verifying Knot bootstrap and Cobblemon mod initialization. Not authoritative for battle AI logic or multiplayer gameplay.
 - **Layer 5 (Production Host Canary & Live Gameplay):** Dedicated live production host. The only authoritative verification for multiplayer stability, battle AI decisions, and player progression.
 
+### Orthogonal Verification Sets (Finding E)
+- Verification layers form an **orthogonal set** of domain authorities directly covering affected contracts; no layer implies another automatically.
+- For pure Markdown, governance, and skill modifications, Layer 0 is the **sole applicable automated repository check**. Automated structural checks verify syntax only and do not establish semantic correctness. Never claim Layer 0 checks are "fully sufficient" or "complete proof".
+
 Detailed test suite commands, scripts, artifact freshness conditions, and evidence manifest formats are delegated to [`.agents/skills/test-and-verification-strategy/SKILL.md`](.agents/skills/test-and-verification-strategy/SKILL.md).
 
 ### Core Invariant: Offline PASS != Production Semantic PASS (Canary Lessons 6 & 7)
@@ -211,23 +215,22 @@ Detailed test suite commands, scripts, artifact freshness conditions, and eviden
 
 ## 7. Git Safety & Local Checkpoint Contract
 
+### Two-Phase Commit Lifecycle (Finding G)
+- **Commit Creation != Audit Promotion:** Local checkpoint commits are internal multi-agent coordination records, distinct from promoted audit milestones.
+- **Audit Promotion Boundary:** A checkpoint is promoted to an immutable audit milestone only through an explicit external event (Owner acceptance, merged historical evidence, or accepted live production canary evidence). Internal Reviewer `PASS` alone does NOT promote a commit to an immutable audit milestone.
+- **Provisional Local Commits:** Unpromoted local commits on a working branch may be amended, squashed, or rewritten if explicitly authorized by Owner.
+- **Promoted Audit Milestones:** Commits promoted to audit status must never be rebased, squashed, amended, or deleted. Forward merges (`git merge --no-ff`) are recommended when preserving multi-agent audit lineage is required, but are not an inflexible repo-wide dogma.
+
 ### Local Checkpoint Permission Contract
 - **Mode 2 (Direct Bounded Tasks):** Do NOT create git commits unless the owner explicitly requests or approves a commit for the current task.
-- **Mode 3 (Managed-Agent Workflow):** When the owner has **explicitly authorized implementation through the managed-agent workflow**, Main Controller is authorized to create necessary **local checkpoint commits** without re-prompting the owner for every individual commit (Plan Freeze Checkpoint, Verified Implementation Checkpoint, Correction Checkpoint, Production Canary Checkpoint). Exact commit message formats, body requirements, and lifecycle triggers are governed by [`.agents/skills/git-checkpoint-workflow/SKILL.md`](.agents/skills/git-checkpoint-workflow/SKILL.md).
+- **Mode 3 (Managed-Agent Workflow):** When the owner has **explicitly authorized implementation through the managed-agent workflow**, Main Controller is authorized to create necessary **local checkpoint commits** without re-prompting the owner for every individual commit (Plan Freeze, Verified Implementation, Correction, Production Canary). Detailed commit formats and body templates are delegated to [`.agents/skills/git-checkpoint-workflow/SKILL.md`](.agents/skills/git-checkpoint-workflow/SKILL.md).
 
 ### Surgical Staging Discipline
-- Stage only explicitly owned files using targeted paths (`git add <file1> <file2>`).
-- NEVER use blind staging (`git add .`, `git add -A`, or `git commit -a`).
-- Always run `git status --short` and `git diff --cached` before committing.
-
-### Audit Lineage Preservation Protocol (Canary Lesson 10)
-- Commits that serve as promoted audit milestones (e.g., Plan Freeze Checkpoints, Verified Implementation Checkpoints, and historical canary lineage `2a329a5`, `8ee3d27`, `17c9e79`) must **never** be rebased, squashed, amended, or deleted.
-- Provisional local commits on a working branch prior to audit promotion may be amended, squashed, or rewritten if explicitly requested or approved by the Owner.
-- Forward merges (`git merge --no-ff`) are recommended when preserving multi-agent audit lineage is required for the workstream, but are not an inflexible repo-wide dogma.
+- Stage only explicitly owned files using targeted paths (`git add <file1> <file2>`). NEVER use blind staging (`git add .`, `git add -A`, or `git commit -a`). Always run `git status --short` and `git diff --cached` before committing.
 
 ### Strict Remote Actions Gate
 Under NO circumstances may an agent perform the following without separate, explicit Owner authorization:
-- `commit != push != PR != merge`
+- `commit != push != PR != merge != rebase != rewrite != force-push`
 - `git push` to any remote (origin, upstream);
 - Pull request creation, update, or comment via GitHub CLI;
 - Branch merge or rebase onto base branches;
@@ -248,6 +251,6 @@ Each completed implementation task must conclude with a structured review checkp
 - **No Full Diff Dumps:** Do not paste the complete repository diff into user-facing reports by default.
 - **Core Invariant:** *"User-facing reports summarize the change; Git diff remains the review artifact."*
 - **Agent Self-Review vs. User Report:** Agents must still run and inspect `git diff` internally to verify modifications before finalizing, but the raw diff output must not be mirrored wholesale into the report.
-- **High-Level Change Metrics:** When helpful, provide concise scope metrics such as `git diff --stat`, changed file lists, or hunk line counts.
+- **High-Level Change Metrics:** Provide concise scope metrics such as `git diff --stat`, changed file lists, or hunk line counts.
 - **Selective Snippets Only:** Include focused diff hunks or exact code snippets only when concise and materially useful for user review, or when explicitly requested.
 

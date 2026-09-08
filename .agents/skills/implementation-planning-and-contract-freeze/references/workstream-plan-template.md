@@ -3,7 +3,7 @@
 This reference defines the authoritative structure for Mode 3 workstream plans in `docs/workstreams/<id>/plan.md` and provides the author pre-submission self-checklist.
 
 > [!NOTE]
-> **Ownership Boundary:** This document defines the canonical document structure and the author's internal self-check before submitting for review. The authoritative evaluation rubric used by independent reviewers is owned exclusively by [`code-review-and-quality/references/plan-review-rubric.md`](../../code-review-and-quality/references/plan-review-rubric.md).
+> **Ownership Boundary & Static Candidate Contract (Finding I):** This document defines the canonical document structure and the author's internal self-check before submitting for review. The workstream plan is an immutable historical contract at author handoff identity with static `Author Submission State: Candidate Plan (Ready for Review)`. Eliminate post-freeze mutable fields (`Plan Status: Frozen`, dynamic cycle counters, implementation progress). Dynamic state belongs to runtime memory and git commits. The authoritative evaluation rubric used by independent reviewers is owned exclusively by [`code-review-and-quality/references/plan-review-rubric.md`](../../code-review-and-quality/references/plan-review-rubric.md).
 
 ---
 
@@ -36,11 +36,11 @@ Mode 3 workstream plans must follow this standardized section structure:
 
 | Category | Item Description | Evidence / Citation | Impact / Resolution |
 | :--- | :--- | :--- | :--- |
-| **Confirmed Fact** | Target method exists with descriptor | `net/fabricmc/.../Foo.class:42` | Anchor for Mixin injection |
-| **Confirmed Fact** | Datapack requires schema v1.7.42 | `data/cobblemon/trainers/` | Must pass validate_repo.py |
-| **Assumption** | Shadow variable retains value across ticks | Needs test verification | Add test in Layer 2 or Layer 3 |
-| **Conflict** | Cobblemon event fires after AI scoring | Decompiled `Battle.java:120` | Must inject at action selection |
-| **Open Question** | Target IV spread for Gym 4 leader | Pending Owner decision | Default to standard 31 IVs |
+| **Confirmed Fact** | Target method or class exists with descriptor | `path/to/Source.java:42` | Concrete anchor for implementation |
+| **Confirmed Fact** | Configuration or schema version requirement | `path/to/schema.json:10` | Must satisfy repository validators |
+| **Assumption** | Runtime state persists across invocation boundary | Needs test verification | Add test in isolated test suite |
+| **Conflict** | Upstream event order differs from requirement | Decompiled source / log | Address in boundary adapter slice |
+| **Open Question** | Configuration default value | Pending Owner decision | Default to safe established baseline |
 
 ---
 
@@ -49,22 +49,21 @@ Mode 3 workstream plans must follow this standardized section structure:
 - Minimal set of files, classes, and configurations to modify.
 
 ### 3.2 Explicit Out-of-Scope
-- Cosmetic cleanup, unrelated refactoring, other battle formats, or unrequested trainers.
+- Cosmetic cleanup, unrelated refactoring, unrequested subsystems, or speculative abstractions.
 
 ---
 
 ## 4. Architectural & Invariant Analysis
-- **Repository-Global Invariants:** Surgical scope, simplicity first, read before write, zero opportunistic refactoring, public contract stability.
+- **Repository-Global Invariants:** Surgical scope, simplicity first, read before write, zero opportunistic refactoring, public contract stability, claim strength discipline.
 - **Applicable Domain Invariants:**
-  - *Battle AI Tasks:* Fair-AI information boundary (no hidden state leaks).
-  - *Fabric Companion Tasks:* Mixin injection safety, stable descriptors, bytecode contracts.
-  - *Datapack Tasks:* Cobbleverse 1.7.42 schema compliance, zero bag healing items.
-  - *Team Design Tasks:* Doubles strategy coherence, Turn-1 gimmick safety.
+  - Route to matching domain skills where applicable (e.g., `competitive-pokemon-doubles-team-design`).
+  - If no dedicated domain skill exists, route to actual repository documentation/source evidence or state that none exists.
+  - Zero hardcoding of domain-specific mechanics in generic architecture sections.
 
 ---
 
 ## 5. Target Architecture & Slicing Strategy
-[Component breakdown, dependency order across Hell's 6 layers, and design patterns (e.g., surrogate, adapter).]
+[Component breakdown, architectural slicing patterns (Contract/Model Slices, Core Logic Slices, Boundary/Adapter Slices, Verification Slices), and dependency ordering.]
 
 ---
 
@@ -80,22 +79,18 @@ Mode 3 workstream plans must follow this standardized section structure:
 
 ---
 
-## 7. Verification Strategy across Hell's 6 Layers
-- **Layer 0 (Markdown & Governance):** Route checks, link integrity, frontmatter schema.
-- **Layer 1 (Datapack & Trainers):** `python scripts/ci/validate_repo.py`, `check_legacy_baseline.py`.
-- **Layer 2 (Java Logic & Boundary Math):** `./gradlew test` (JUnit 5 unit tests).
-- **Layer 3 (Bytecode & Shadow Contracts):** `python scripts/runtime-contract/test_rct_runtime_contract.py`.
-- **Layer 4 (Headless Smoke):** `./gradlew runServer` (Mixin bootstrap and initialization).
-- **Layer 5 (Production Host Canary):** Live dedicated server verification (telemetry, progression).
-- **Offline != Production Invariant:** Explicit acknowledgement of verification limits.
-- **Artifact Freshness Rules:** Criteria for timestamp/hash validity vs. mandatory re-run.
+## 7. Orthogonal Verification Strategy (Finding E)
+- **Minimal Covering Verification Set:** Specify the minimal orthogonal set of verification layers directly covering affected contracts.
+- **Verification Commands:** Exact, runnable commands for each selected layer.
+- **Offline != Production Invariant:** Explicit acknowledgement of offline test limits vs live environment reality.
+- **Provenance-First Artifact Freshness (Finding F):** Criteria for establishing freshness via source revision and content hashes without redundant rebuilds.
 
 ---
 
 ## 8. Implementation Checkpoints
-- Checkpoint 1: Planning Freeze & Hash Verification.
-- Checkpoint 2: Core Algorithm / Model Implementation & Unit Tests.
-- Checkpoint 3: Integration / Mixin Binding & Bytecode Contracts.
+- Checkpoint 1: Planning Freeze & Candidate Hash Verification (Main Controller).
+- Checkpoint 2: Core Logic / Model Implementation & Isolated Unit Tests.
+- Checkpoint 3: Integration & Boundary Verification.
 - Checkpoint 4: Verification Manifest Assembly & Review Report.
 
 ---
@@ -110,22 +105,22 @@ Mode 3 workstream plans must follow this standardized section structure:
 
 Before notifying Main Controller that a plan is ready for review, Planner `P` must audit the draft against this self-checklist:
 
-1. **Grounded Signatures:**
-   - [ ] Every Java class name, method signature, and bytecode descriptor cited has been verified via repository files, `javap`, or decompiler output.
-   - [ ] No methods or APIs have been assumed from memory.
+1. **Grounded Signatures & Contracts:**
+   - [ ] Every class name, method signature, descriptor, or schema path cited has been verified via repository files, documentation, or decompiler output.
+   - [ ] No methods, APIs, or behaviors have been assumed from memory.
 2. **Fact vs. Assumption Discipline:**
    - [ ] Every substantive assertion has an accompanying file path, line number, or contract test reference.
    - [ ] Unverified hypotheses are explicitly labeled as `Assumption` or `Open Question`.
 3. **Surgical Scope & Non-Goals:**
-   - [ ] Out-of-scope boundaries are clearly defined.
-   - [ ] No unrelated files or opportunistic cleanup are included.
+   - [ ] Out-of-Scope boundaries are clearly defined.
+   - [ ] No unrelated files, bulk reformatting, or speculative infrastructure are included.
 4. **Invariant Protections Addressed:**
-   - [ ] Repository-global invariants evaluated (read before write, surgical scope, claim strength discipline, backward compatibility).
-   - [ ] Applicable domain invariants addressed (Fair-AI, Fabric Mixin, Datapack schemas, or Doubles team design per routing table).
-5. **Concrete Verification Commands:**
-   - [ ] Exact, runnable verification commands specified for each applicable verification layer.
-   - [ ] Verification suites are proportional to modified subsystems (pure Markdown/governance requires Layer 0; does not mandate inapplicable suites).
-   - [ ] Expected pass criteria are clearly stated.
+   - [ ] Repository-global invariants evaluated (read before write, surgical scope, simplicity first, claim strength discipline, backward compatibility).
+   - [ ] Applicable domain invariants addressed via routed domain skills or repository evidence without contaminating generic planning rules.
+5. **Concrete Orthogonal Verification Commands:**
+   - [ ] Minimal orthogonal verification set selected covering affected contracts directly.
+   - [ ] Exact, runnable verification commands specified for each selected layer.
+   - [ ] Expected pass criteria are clearly stated without hyperbolic sufficiency claims ("sole applicable automated repository check").
 6. **Line Count & Proportionality:**
    - [ ] Document is concise, structured, and avoids repetitive narration.
    - [ ] Meets repository line bounds (< 500 lines per file where applicable).

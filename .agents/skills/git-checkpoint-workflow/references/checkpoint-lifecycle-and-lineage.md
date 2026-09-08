@@ -21,14 +21,14 @@ Cobbleverse Hell Mode defines four canonical checkpoint commit types for Mode 3 
   ```
 
 ### 1.2 Verified Implementation Checkpoint
-- **When:** After Implementation Reviewer `IR` issues an explicit `PASS` verdict (`IR verdict: PASS`) and all applicable verification suites pass.
+- **When:** After Implementation Reviewer `IR` issues an explicit `PASS` verdict (`IR verdict: PASS`) and all applicable minimal orthogonal verification suites pass.
 - **Purpose:** Records the verified code and configuration changes.
 - **Commit Message Format:**
   ```text
   <type>(<scope>): <summary in lowercase imperative>
 
   - Implemented <component / feature details>
-  - Verification: <applicable suites and exit codes per verification strategy>
+  - Verification: <applicable minimal orthogonal suites and exit codes>
   - Review Verdict: PASS (by Implementation Reviewer IR)
   - Plan Reference: docs/workstreams/<id>/plan.md@<frozen-hash>
   ```
@@ -52,8 +52,8 @@ Cobbleverse Hell Mode defines four canonical checkpoint commit types for Mode 3 
   docs(workstream): record observed production canary evidence for <feature>
 
   - Server: dedicated canary host
-  - Canary scope: <scenarios and battle formats tested>
-  - Observed telemetry: <concrete observed metrics, player interactions, ticks without crash>
+  - Canary scope: <scenarios tested>
+  - Observed telemetry: <concrete observed metrics, player interactions, uptime without crash>
   - Observed limitations: <untested edge cases or remaining risks>
   ```
 
@@ -63,23 +63,25 @@ Cobbleverse Hell Mode defines four canonical checkpoint commit types for Mode 3 
 
 All commit messages must adhere to the Conventional Commits specification:
 - **Types:**
-  - `feat`: New gameplay mechanic, AI algorithm, or datapack capability.
+  - `feat`: New capability, algorithm, or data asset.
   - `fix`: Bug fix, calculation correction, or contract alignment.
   - `docs`: Workstream plans, governance docs, or architecture documentation.
   - `test`: Unit tests, contract test suites, or CI scripts.
   - `refactor`: Structural changes without behavioral modifications.
   - `chore`: Maintenance, dependency bumps, or tooling adjustments.
-- **Scope:** Kebab-case subsystem identifier (e.g., `ai`, `companion`, `trainer`, `datapack`, `plan`, `workstream`).
+- **Scope:** Kebab-case subsystem identifier (e.g., `ai`, `companion`, `trainer`, `datapack`, `plan`, `workstream`, `governance`).
 - **Subject:** Imperative mood, lowercase, no ending period, maximum 72 characters (e.g., `resolve dynamic base power for weight-dependent moves`).
 - **Body:** Separated from subject by a blank line; details context, verification results, and audit references.
 
 ---
 
-## 3. Audit Lineage Preservation Protocol (Canary Lesson 10)
+## 3. Two-Phase Commit Lifecycle & Audit Lineage (Finding G)
 
-The integrity of multi-agent development depends on traceable, immutable commit history:
+The integrity of multi-agent development depends on traceable, immutable commit history while preserving working branch flexibility:
 
-1. **Promoted Audit Milestones (Immutable):** Once a commit is promoted or referenced as an audit milestone (such as canary lineage `2a329a5`, `8ee3d27`, `17c9e79`, or Plan Freeze and Verified Implementation Checkpoints), its SHA must never be altered. Do NOT run `git rebase -i` or squash promoted audit commits.
-2. **Provisional Local Commits (Permitted Rewrites):** Local, unpromoted commits on a working branch prior to audit promotion may be amended, squashed, or rewritten if explicitly requested or approved by the Owner.
-3. **Merge-Forward Strategy:** When integrating workstream branches where preserving multi-agent audit lineage is required, forward merges (`git merge --no-ff`) are recommended to preserve historical commit SHAs intact. However, `--no-ff` is an audit lineage recommendation rather than an inflexible repo-wide dogma.
-4. **Working-Tree Reset Protection:** Never run `git reset --hard` across checkpoint commits without explicit Owner directive.
+1. **Commit Creation != Audit Promotion:** Local checkpoint commits are internal multi-agent coordination records, distinct from promoted audit milestones. An internal Reviewer `PASS` verdict alone does **not** promote a checkpoint to an immutable audit milestone.
+2. **Audit Promotion Boundary:** A checkpoint is promoted to an immutable audit milestone only through an explicit external event (Owner acceptance, accepted PR / merge, accepted live production canary evidence, or explicitly promoted historical audit lineage).
+3. **Provisional Local Commits (Permitted Rewrites):** Local, unpromoted commits on a working branch prior to audit promotion may be amended, squashed, or rewritten if explicitly requested or approved by the Owner, reconciling affected references.
+4. **Promoted Audit Milestones (Immutable):** Once a commit is promoted to audit status (e.g., historical canary lineage `2a329a5`, `8ee3d27`, `17c9e79`), its SHA must never be altered, rebased, squashed, or deleted.
+5. **Merge-Forward Strategy:** When integrating workstream branches where preserving multi-agent audit lineage is required, forward merges (`git merge --no-ff`) are recommended to preserve historical commit SHAs intact. However, `--no-ff` is an audit lineage recommendation rather than an inflexible repo-wide dogma.
+6. **Strict Gating Operations:** `commit != push != PR != merge != rebase != rewrite != force-push`. Working-tree resets (`git reset --hard`) and remote pushes remain strictly gated behind explicit Owner directive.

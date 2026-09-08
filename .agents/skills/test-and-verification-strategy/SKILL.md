@@ -32,23 +32,29 @@ Read bundled references strictly when their conditions match:
 
 ---
 
-## 3. Proportional Verification Principle
+## 3. Orthogonal Verification Selection (Finding E)
 
-Verification effort must be scaled proportionally to the risk profile and blast radius of the change:
+Verification layers are an **orthogonal set of domain authorities**, NOT a hierarchical ladder where higher layers inherit lower layers.
+- **Selection Principle:** Diff -> Identify affected contracts -> Select the minimal orthogonal set of verification layers that directly cover those contracts.
+- **No Hierarchical Inheritance:** Running Layer 3 does not automatically mandate Layer 2 or Layer 1 unless bytecode, pure logic, and datapack schemas are each modified in the diff. No numeric layer implies another automatically.
 
-| Risk Tier | Change Types | Required Verification Layers |
+### 3.1 Orthogonal Verification Mapping Table
+
+| Modified Subsystem / Contract | Governing Authority | Applicable Verification Checks |
 | :--- | :--- | :--- |
-| **Low Risk** | Documentation, skill definitions, markdown governance | **Layer 0:** Markdown link integrity, YAML frontmatter check, file bounds. |
-| **Medium Risk** | Datapack JSONs, trainer rosters, battle formats | **Layer 1:** `validate_repo.py` + `check_legacy_baseline.py`. |
-| **High Risk** | Java algorithms, battle AI scoring, damage math | **Layer 2:** `./gradlew test` (JUnit 5) + Layer 1. |
-| **Critical Risk** | Fabric Mixins, bytecode injection, shadow fields | **Layer 3:** `test_rct_runtime_contract.py` + Layer 2 + **Layer 4:** `./gradlew runServer`. |
-| **Live Balance** | Player progression, tournament balance, multiplayer | **Layer 5:** Production Canary Host live gameplay. |
+| **Governance, Markdown, Skills** | Layer 0 (Markdown & Governance) | Route resolution, relative links, YAML frontmatter schemas, file bounds (< 500 lines). |
+| **Datapacks & Trainer Schemas** | Layer 1 (Datapack & Trainer Schema) | `python scripts/ci/validate_repo.py` + `check_legacy_baseline.py`. |
+| **Pure Java Logic & Boundary Math** | Layer 2 (Java Unit & Boundary Tests) | `./gradlew test --info` (JUnit 5 isolated tests). |
+| **Fabric Mixins & Shadow Bytecode** | Layer 3 (Bytecode & Shadow Contracts) | `python scripts/runtime-contract/test_rct_runtime_contract.py`. |
+| **Server Bootstrap & Mixin Smoke** | Layer 4 (Headless Server Smoke) | `./gradlew runServer` (Mixin initialization smoke). |
+| **Multiplayer Gameplay & Live Progression** | Layer 5 (Production Host Canary) | Dedicated live production canary testing. |
 
-### 3.1 Layer 0 Sufficiency for Governance & Markdown Tasks
+### 3.2 Layer 0 Claim Rigor for Governance & Documentation
 When a task modifies exclusively Markdown files, agent documentation, or workflow skill configurations:
-- **Layer 0 is the SOLE authoritative verification layer.**
-- Passing Layer 0 automated checks (route resolution, relative link integrity, YAML frontmatter schemas, file line bounds < 500 lines) is **fully sufficient** for implementation verification.
-- Higher layer test suites (Layer 1 `validate_repo.py`, Layer 2 `./gradlew test`, Layer 3 `test_rct_runtime_contract.py`, Layer 4 `./gradlew runServer`, Layer 5 Canary) are **inapplicable** and must NOT be executed or mandated.
+- Layer 0 is the **sole applicable automated repository check**.
+- Passing Layer 0 automated checks verifies structural and syntactic integrity (valid links, well-formed YAML frontmatter, line count bounds).
+- **Claim Strength Discipline (Canary Lesson 7):** Markdown structural automation does **NOT** establish authority correctness, routing correctness, state-machine closure, or ownership. Never describe Layer 0 checks as "fully sufficient", "semantically sufficient", or "complete proof". Semantic validity is established exclusively through independent adversarial review.
+- Inapplicable layers (Layers 1–5) are skipped because no datapacks, Java source, Mixins, or gameplay systems are modified.
 
 ---
 
@@ -90,17 +96,25 @@ Layer 0: Markdown & Governance Authority (Relative links, YAML frontmatter)
 
 ---
 
-## 7. Artifact Freshness Protocol (Canary Lesson 9)
+## 7. Artifact Freshness Protocol (Finding F)
 
-To avoid redundant rebuilds while preventing stale test results:
-- **Freshness Criteria:** A test result or artifact is fresh without re-execution ONLY when:
-  1. Cryptographic hashes of all input files in the subsystem cone are unchanged;
-  2. `git status --short` confirms zero uncommitted modifications in the subsystem;
-  3. Output test report timestamps are strictly newer than all constituent source files.
-- **Mandatory Re-Execution Triggers:** Immediate re-execution is mandatory whenever:
-  1. Any source code, Mixin, trainer JSON, or test fixture in the dependency cone has changed;
-  2. Working-tree modifications invalidate previous test evidence;
-  3. An author applies fixes during a Reconciliation Cycle.
+To avoid redundant rebuilds while preventing stale test results, artifact freshness is established primarily through **provenance and content identity**, with timestamps serving only as supporting fallback:
+
+### 7.1 Hierarchy of Freshness Evidence
+1. **Recorded Source Revision / Commit Identity:** Exact commit SHA where verification occurred. If the working tree is clean for the component and recorded commit matches, the result is fresh.
+2. **Source / Content Hashes of Inputs:** Hash of constituent source files matches recorded execution hashes.
+3. **Expected Artifact Contents / Embedded Identity:** Artifact contains embedded version, hash, or build identifier matching source revision.
+4. **Build Metadata / Tool Provenance:** Build tool records matching execution metadata.
+5. **Timestamps (Supporting Fallback Only):** Artifact timestamp is strictly newer than constituent source files (used only when cryptographic provenance is unavailable).
+
+### 7.2 Freshness Evaluation & Re-Execution Triggers
+- **Freshness Established:** If available provenance/identity evidence confirms the artifact matches current sources, reuse existing results without re-execution.
+- **Mandatory Re-Execution Triggers:** Re-execution is required ONLY when:
+  1. Input source files or contracts in the component have changed;
+  2. Recorded commit/content identity does not match current state;
+  3. Working-tree modifications invalidate prior test evidence;
+  4. An author applies fixes during a Reconciliation Cycle.
+- **Proscription:** Rebuilds merely "for certainty" are prohibited. Rebuild only when evidence cannot establish freshness.
 
 ---
 

@@ -11,7 +11,7 @@ Authoritative for skill definitions, governance documents, YAML frontmatters, an
 - **Link & Route Verification:** Verify that all skill routes referenced in `AGENTS.md` and relative links in `references/*.md` resolve to valid files on disk.
 - **YAML Frontmatter Integrity:** Verify `name` matches folder name (kebab-case) and `description` is non-empty.
 - **File Line Count Bounds:** Verify that skill definitions and references remain concise (< 500 lines per file).
-- **Proportional Sufficiency:** For pure Markdown, governance, and skill changes, Layer 0 is the sole required and authoritative verification layer. Higher layer suites are inapplicable and not required.
+- **Sole Applicable Automated Repository Check (Finding E):** For pure Markdown, governance, and skill changes, Layer 0 is the sole applicable automated repository check. Higher layer suites are inapplicable and skipped. Automated structural checks verify syntax only and do not prove semantic correctness. Never claim Layer 0 checks are "fully sufficient" or "complete proof".
 
 ### Layer 1: Datapack & Trainer Schema Validation
 Validates all 1,714 trainer JSON files, battle formats, and item restrictions:
@@ -57,25 +57,31 @@ The sole authoritative layer for multiplayer stability, battle AI decisions, and
 
 ---
 
-## 2. Artifact Freshness Protocol (Canary Lesson 9)
+## 2. Artifact Freshness Protocol (Canary Lesson 9 & Finding F)
 
-### Freshness Evaluation Criteria
-An agent may reuse existing verification output without re-running tests ONLY when all three conditions are met:
-1. **Source Hash Stability:** `git hash-object` on every source file in the subsystem's dependency cone matches the recorded test run.
-2. **Clean Status in Subsystem:** `git status --short <subsystem-path>` returns zero modified or untracked files.
-3. **Artifact Timestamps:** The timestamp of the test report or log file is strictly newer than the newest source file modified in the subsystem.
+To avoid redundant rebuilds while preventing stale test results, artifact freshness is established primarily through **provenance and content identity**, with timestamps serving only as supporting fallback:
 
-### Mandatory Re-Execution Triggers
-A fresh test run must be executed immediately whenever:
-1. Any Java source, Mixin class, trainer JSON, or test fixture in the dependency cone is created or edited;
-2. `git diff` shows modifications relative to the last verified commit;
-3. An author applies a correction in response to a review finding during a Reconciliation Cycle.
+### 2.1 Hierarchy of Freshness Evidence
+1. **Recorded Source Revision / Commit Identity:** Exact commit SHA where verification occurred. If the working tree is clean for the component and recorded commit matches, the result is fresh.
+2. **Source / Content Hashes of Inputs:** Hash of constituent source files matches recorded execution hashes.
+3. **Expected Artifact Contents / Embedded Identity:** Artifact contains embedded version, hash, or build identifier matching source revision.
+4. **Build Metadata / Tool Provenance:** Build tool records matching execution metadata.
+5. **Timestamps (Supporting Fallback Only):** Artifact timestamp is strictly newer than constituent source files (used only when cryptographic provenance is unavailable).
+
+### 2.2 Freshness Evaluation & Re-Execution Triggers
+- **Freshness Established:** If available provenance/identity evidence confirms the artifact matches current sources, reuse existing results without re-execution.
+- **Mandatory Re-Execution Triggers:** Re-execution is required ONLY when:
+  1. Input source files or contracts in the component have changed;
+  2. Recorded commit/content identity does not match current state;
+  3. Working-tree modifications invalidate prior test evidence;
+  4. An author applies fixes during a Reconciliation Cycle.
+- **Proscription:** Rebuilds merely "for certainty" are prohibited. Rebuild only when evidence cannot establish freshness. Eliminate cumbersome dependency-cone directory crawling.
 
 ---
 
 ## 3. Verification Evidence Manifest Template
 
-When preparing evidence for Implementation Reviewer `IR`, Main Controller formats the manifest proportionally based on affected layers:
+When preparing evidence for Implementation Reviewer `IR`, Main Controller formats the manifest based on the minimal orthogonal set of affected layers:
 
 ```markdown
 ## Verification Evidence Manifest
@@ -95,15 +101,15 @@ When preparing evidence for Implementation Reviewer `IR`, Main Controller format
 <Output of git diff --stat <baseline-commit>>
 ```
 
-### Verification Suite Results (Proportional to Scope)
+### Verification Suite Results (Minimal Orthogonal Set)
 
 #### Executed Applicable Layers:
-[Include only the layers applicable to the change]
+[Include only the layers directly covering affected contracts]
 
-##### Layer 0: Markdown & Governance
+##### Layer 0: Markdown & Governance (Sole Applicable Automated Check)
 - **Checks:** Route integrity, relative links, YAML frontmatter, line count bounds (< 500 lines)
 - **Exit Code:** 0
-- **Result:** All routes and links verified; schema valid.
+- **Result:** All routes and links verified; schema valid. Note: structural automation verifies syntax only; does not establish semantic correctness.
 
 ##### Layer 1: Datapack Schema Validation [If applicable]
 - **Command:** `python scripts/ci/validate_repo.py`
@@ -121,10 +127,10 @@ When preparing evidence for Implementation Reviewer `IR`, Main Controller format
 - **Log Excerpt:** `41/41 bytecode invariants verified`
 
 #### Inapplicable / Skipped Layers:
-- **Layer [X]:** Skipped (Justification: e.g., 0 datapack JSONs / 0 Java classes / 0 Mixin bytecode modified; Layer 0 authoritative).
+- **Layer [X]:** Skipped (Justification: e.g., 0 datapack JSONs / 0 Java classes / 0 Mixin bytecode modified; Layer 0 sole applicable automated check).
 
 ### Freshness Status
-- **Evaluation:** Freshly executed on current working tree.
+- **Evaluation:** Freshly executed on current working tree via provenance/content identity.
 
 ### Unverified / Skipped Items Requiring Live Verification
 - **Layer 5 Live Canary:** Requires dedicated server canary testing (if applicable).
