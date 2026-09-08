@@ -6,6 +6,7 @@ import com.cobblemon.mod.common.battles.ActiveBattlePokemon;
 import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
 import com.cobbleverse.legendaryrule.strategy.dynamic.DynamicMoveResolver;
 import com.cobbleverse.legendaryrule.strategy.guard.RedirectAbilityGuard;
+import com.cobbleverse.legendaryrule.strategy.weight.WeightDependentMoveResolver;
 import com.gitlab.surilexa.rbrctai.api.ai.utils.PokeMathMax;
 import com.gitlab.surilexa.rbrctai.api.ai.utils.RBStatStages;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,6 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * 2. Vetoes redirected single-target moves (Storm Drain / Lightning Rod) by returning
  *    0.0 damage and marking candidate immunity as true.
  * 3. Resolves effective dynamic moves (Ivy Cudgel, Raging Bull, Weather Ball, Tera Blast, Revelation Dance).
+ * 4. Resolves dynamic base power for weight-dependent moves (Low Kick, Grass Knot, Heavy Slam, Heat Crash).
  */
 @Mixin(value = PokeMathMax.class, remap = false)
 public abstract class PokeMathMaxMixin {
@@ -46,6 +48,7 @@ public abstract class PokeMathMaxMixin {
         boolean predictTera, boolean isAttacker
     ) {
         Move effectiveMove = DynamicMoveResolver.resolveEffectiveMove(move, attacker, activeBattlePokemon, predictTera);
+        effectiveMove = WeightDependentMoveResolver.resolveEffectiveMove(effectiveMove, attacker, defender);
 
         if (RedirectAbilityGuard.isMoveRedirected(effectiveMove, attacker, defender, activeBattlePokemon)) {
             return 0.0d;

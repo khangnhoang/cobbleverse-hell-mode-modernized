@@ -245,6 +245,8 @@ def main():
     checks.append(("Species.getName()", "getName()" in species_javap))
     checks.append(("FormData.getName()", "getName()" in form_javap))
     checks.append(("ElementalType.getName()", "getName()" in type_javap))
+    checks.append(("FormData.getWeight() returning float (descriptor ()F)", "getWeight" in form_javap and "()F" in form_javap))
+    checks.append(("Species.getStandardForm() returning FormData", "getStandardForm" in species_javap and "()Lcom/cobblemon/mod/common/pokemon/FormData;" in species_javap))
 
     # 7. Cobblemon: EndItem Hook Contracts (CobblemonHeldItemManager.handleEndInstruction, BattleMessage.effectAt, Effect.getId)
     item_mgr_javap = get_class_javap(cobblemon_jar, "com/cobblemon/mod/common/pokemon/helditem/CobblemonHeldItemManager.class")
