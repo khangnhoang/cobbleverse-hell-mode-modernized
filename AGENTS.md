@@ -112,6 +112,7 @@ Route the request into exactly one of the following five modes:
 
 - **Vietnamese Reporting:** When the owner communicates in Vietnamese, deliver all explanations, summaries, and checkpoint reports in Vietnamese.
 - **Preserve Technical Literals:** Keep code identifiers, class names, method signatures, file paths, and technical terms in their exact English forms (e.g., `ActiveBattlePokemon`, `FairBattleContext`, `choose()`, `recharge`, `git hash-object`).
+- **Claim Strength Discipline (Canary Lesson 7):** *"Claim strength must not exceed evidence strength."* Agents must strictly avoid hyperbolic or unverified absolute terms ("100%", "fully", "triệt để", "hoàn toàn", "flawless"). Statements must be strictly proportional to observable, demonstrable evidence.
 
 ### Interactive Progress Reporting Contract
 Agent narration must communicate investigation progress in terms of problem boundaries, hypotheses, established evidence, and key findings—never as a raw activity log.
@@ -170,6 +171,14 @@ Before planning non-trivial work or modifying specialized domains, inspect the t
 
 - **Managed-Agent Workflow:**
   Activate [`.agents/skills/managed-agent-workflow/SKILL.md`](.agents/skills/managed-agent-workflow/SKILL.md) whenever a task is classified as **Mode 3**, requiring multi-agent orchestration across Planner, Plan Reviewer, Implementor, and Implementation Reviewer.
+- **Implementation Planning & Contract Freeze:**
+  Activate [`.agents/skills/implementation-planning-and-contract-freeze/SKILL.md`](.agents/skills/implementation-planning-and-contract-freeze/SKILL.md) when operating as Planner `P` in Mode 3, conducting substantive discovery, designing solutions, structuring workstream plans, or preparing candidate plan identities.
+- **Code Review & Quality Assurance:**
+  Activate [`.agents/skills/code-review-and-quality/SKILL.md`](.agents/skills/code-review-and-quality/SKILL.md) when operating as Plan Reviewer `R` or Implementation Reviewer `IR`, evaluating candidate plans or code implementations under independent adversarial review.
+- **Git Checkpoint Workflow & Lineage Governance:**
+  Activate [`.agents/skills/git-checkpoint-workflow/SKILL.md`](.agents/skills/git-checkpoint-workflow/SKILL.md) whenever inspecting working-tree status, surgically staging files, executing local checkpoint commits, formatting Conventional Commits, or preserving audit commit lineage.
+- **Test & Verification Strategy:**
+  Activate [`.agents/skills/test-and-verification-strategy/SKILL.md`](.agents/skills/test-and-verification-strategy/SKILL.md) whenever designing verification plans, executing test suites across Hell's 6 layers, evaluating artifact freshness, or assembling Verification Evidence Manifests.
 - **Competitive Pokémon Doubles Team Design:**
   Activate [`.agents/skills/competitive-pokemon-doubles-team-design/SKILL.md`](.agents/skills/competitive-pokemon-doubles-team-design/SKILL.md) whenever creating, modernizing, reviewing, or balancing 6-mon NPC Doubles rosters, assigning held items/moves/abilities, establishing weather/Trick Room/Tailwind strategies, or evaluating turn-1 gimmick safety for Run & Bun AI.
 
@@ -177,11 +186,18 @@ Before planning non-trivial work or modifying specialized domains, inspect the t
 
 ## 6. Verification Authority & Environment Reality
 
-Respect the strict distinction between local verification and production reality:
-- **Local Authoritative:** Unit tests (`./gradlew test`), repository data validation (`scripts/ci/validate_repo.py`), baseline checks (`scripts/ci/check_legacy_baseline.py`), and offline bytecode contracts (`scripts/runtime-contract/test_rct_runtime_contract.py`). Authoritative only for the explicit invariants they test.
-- **Local Dev Server Smoke:** `./gradlew runServer` is startup/Mixin smoke only, useful for verifying Mixin application and headless server bootstrap, but is **NOT authoritative** for gameplay integration.
-- **Production Host Canary:** Real trainer battle gameplay, player progression, and multiplayer stability can **only** be verified via manual canary testing on the live dedicated production host.
-- **Never Claim Parity:** Never refer to a local CurseForge instance as "production," and never claim gameplay integration is GREEN solely based on local automated test passes.
+Cobbleverse Hell Mode enforces six explicit layers of verification authority:
+- **Layer 0 (Markdown & Governance Authority):** Relative link integrity, YAML frontmatter schemas, and documentation cross-links. Authoritative for skill routing and repository governance.
+- **Layer 1 (Datapack & Trainer Schema Validation):** `python scripts/ci/validate_repo.py` and `scripts/ci/check_legacy_baseline.py`. Authoritative for 1,714 trainer JSON schemas, battle formats, and economy rules.
+- **Layer 2 (Java Unit & Boundary Tests):** `./gradlew test` (JUnit 5). Fast, isolated tests authoritative for pure algorithms, calculation formulas, and boundary math.
+- **Layer 3 (Bytecode & Shadow Runtime Contracts):** `python scripts/runtime-contract/test_rct_runtime_contract.py`. Authoritative for Fabric Mixin target classes, method descriptors, and shadow field offsets offline.
+- **Layer 4 (Headless Server Bootstrap Smoke):** `./gradlew runServer`. Startup/Mixin smoke only, verifying Knot bootstrap and Cobblemon mod initialization. **NOT authoritative** for battle AI logic or multiplayer gameplay.
+- **Layer 5 (Production Host Canary & Live Gameplay):** Dedicated live production host. The **only** authoritative verification for multiplayer stability, battle AI decisions, and player progression.
+
+### Core Invariant: Offline PASS != Production Semantic PASS (Canary Lessons 6 & 7)
+- Automated test passes locally or in CI (Layers 0–4) are necessary but **never sufficient** to claim that gameplay integration is GREEN.
+- Never refer to a local CurseForge instance or development client as "production".
+- Statements regarding test results must be strictly proportional to observable evidence without hyperbolic claims ("100%", "fully", "triệt để").
 
 ---
 
@@ -189,14 +205,30 @@ Respect the strict distinction between local verification and production reality
 
 ### Local Checkpoint Permission Contract
 - **Mode 2 (Direct Bounded Tasks):** Do NOT create git commits unless the owner explicitly requests or approves a commit for the current task.
-- **Mode 3 (Managed-Agent Workflow):** When the owner has **explicitly authorized implementation through the managed-agent workflow**, Main Controller is authorized to create necessary **local checkpoint commits** (such as the frozen-plan checkpoint and the verified implementation checkpoint) without re-prompting the owner for every individual commit.
-- **Strict Remote Actions Gate:** Under NO circumstances may an agent perform the following without separate, explicit Owner authorization:
-  - `git push` to any remote;
-  - Pull request creation, update, or comment;
-  - Branch merge or rebase;
-  - Force-push (`--force`);
-  - Branch deletion;
-  - Production deployment or remote mutation.
+- **Mode 3 (Managed-Agent Workflow):** When the owner has **explicitly authorized implementation through the managed-agent workflow**, Main Controller is authorized to create necessary **local checkpoint commits** without re-prompting the owner for every individual commit:
+  1. *Plan Freeze Checkpoint:* `docs(plan): freeze implementation plan for <scope>` (cryptographically recording the approved plan hash).
+  2. *Verified Implementation Checkpoint:* `feat(<scope>): <summary>` or `fix(<scope>): <summary>`.
+  3. *Correction Checkpoint (if needed):* `fix(<scope>): address review finding <id>`.
+  4. *Production Canary Checkpoint:* `docs(workstream): record observed production canary evidence for <scope>`.
+
+### Surgical Staging Discipline
+- Stage only explicitly owned files using targeted paths (`git add <file1> <file2>`).
+- NEVER use blind staging (`git add .`, `git add -A`, or `git commit -a`).
+- Always run `git status --short` and `git diff --cached` before committing.
+
+### Audit Lineage Preservation Protocol (Canary Lesson 10)
+- Commits that serve as audit milestones (e.g., canary lineage `2a329a5`, `8ee3d27`, `17c9e79`) must **never** be rebased, squashed, amended, or deleted.
+- Workstream branches must be integrated via forward merges (`git merge --no-ff`) to preserve historical commit SHAs as permanent cryptographic proof of multi-agent auditability.
+
+### Strict Remote Actions Gate
+Under NO circumstances may an agent perform the following without separate, explicit Owner authorization:
+- `commit != push != PR != merge`
+- `git push` to any remote (origin, upstream);
+- Pull request creation, update, or comment via GitHub CLI;
+- Branch merge or rebase onto base branches;
+- Force-push (`--force`);
+- Branch deletion;
+- Production deployment or remote server mutation.
 
 ### Review Checkpoint Report
 Each completed implementation task must conclude with a structured review checkpoint containing:
@@ -213,3 +245,4 @@ Each completed implementation task must conclude with a structured review checkp
 - **Agent Self-Review vs. User Report:** Agents must still run and inspect `git diff` internally to verify modifications before finalizing, but the raw diff output must not be mirrored wholesale into the report.
 - **High-Level Change Metrics:** When helpful, provide concise scope metrics such as `git diff --stat`, changed file lists, or hunk line counts.
 - **Selective Snippets Only:** Include focused diff hunks or exact code snippets only when concise and materially useful for user review, or when explicitly requested.
+

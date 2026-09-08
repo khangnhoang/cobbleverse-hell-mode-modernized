@@ -4,9 +4,9 @@ This reference defines the structured arbitration, finding verification, cycle t
 
 ---
 
-## 1. The Core Reconciliation Loop
+## 1. The Reconciliation Lifecycle
 
-When a Reviewer (`R` or `IR`) returns `BLOCKING_FINDINGS`, Main Controller initiates a bounded reconciliation cycle.
+When a Reviewer (`R` or `IR`) returns `BLOCKING_FINDINGS`, Main Controller coordinates a bounded reconciliation cycle.
 
 ```mermaid
 sequenceDiagram
@@ -15,71 +15,94 @@ sequenceDiagram
     participant Reviewer as Reviewer (R or IR)
     participant Owner as Repository Owner
 
-    Main->>Main: plan_reconciliation_count += 1
+    Note over Reviewer: Initial Review (Turn 0 - Cycle Count = 0)
+    Reviewer-->>Main: BLOCKING_FINDINGS
+    Main->>Main: Increment reconciliation_count += 1
     alt count > MAX_CYCLES (2)
-        Main->>Owner: Escalate unresolved findings & halt
+        Main->>Owner: Escalate dossier & halt automated loop
     else count <= MAX_CYCLES (2)
         Main->>Author: send_message(findings)
-        Note over Author: Verify findings vs. repo evidence
+        Note over Author: Independently verify findings vs. repo evidence
         alt Finding Confirmed
-            Author->>Author: Apply surgical correction
+            Author->>Author: Apply minimal surgical fix
         else Finding Rejected
-            Author->>Author: Prepare technical counter-evidence
+            Author->>Author: Compile cited counter-evidence
         end
-        Author-->>Main: Correction summary + counter-evidence
-        Main->>Main: Compute updated artifact hash
-        Main->>Reviewer: send_message(updated artifact + author rebuttal)
-        Note over Reviewer: Independent re-review
+        Author-->>Main: send_message(correction summary + rebuttal)
+        Main->>Main: Recompute candidate artifact hash / refresh evidence
+        Main->>Reviewer: send_message(updated candidate + author response)
+        Note over Reviewer: Independent re-review (Cycle count evaluated)
         Reviewer-->>Main: PASS or BLOCKING_FINDINGS
     end
 ```
 
 ---
 
-## 2. Hard Cycle Limits
+## 2. Hard Cycle Limits & Cycle Counting Rules
 
 - `MAX_PLAN_RECONCILIATION_CYCLES = 2`
 - `MAX_IMPLEMENTATION_RECONCILIATION_CYCLES = 2`
 
-A reconciliation cycle is incremented whenever:
-1. Reviewer issues blocking findings.
-2. Main dispatches findings to the author.
-3. Author responds with corrections or rebuttals.
-4. Reviewer conducts a re-review.
-
-**Rule:** A cycle counts regardless of whether the author accepts the finding or successfully rejects it. There are no "free" correction turns.
+### Cycle Counting Rules (Canary Lesson 4)
+1. **Turn 0 Exclusion:** The initial review submission and subsequent review verdict is **Turn 0**. It establishes the baseline review state and does **not** consume a reconciliation cycle.
+2. **Cycle Increment Trigger:** The cycle counter increments by 1 each time Main Controller dispatches blocking findings to the author for correction and submits the corrected candidate for re-review.
+3. **Rebuttal Inclusion:** A cycle is consumed regardless of whether the author confirms findings with code fixes or rejects findings with counter-evidence. There are no "free" correction turns.
+4. **Hard Stop at Cycle 2:** If blocking findings remain unresolved after completing 2 reconciliation cycles, the loop halts immediately.
 
 ---
 
 ## 3. Author Finding Verification Rules
 
-Authors (Planner or Implementor) must **verify each finding independently** rather than blindly accepting reviewer feedback:
+Authors (Planner or Implementor) must **independently evaluate every finding** rather than blindly accepting reviewer feedback:
 
 ### Case A: Confirmed Finding
-- The reviewer's evidence is factual, reproduces an actual bug, or identifies a genuine omission.
-- **Action:**
-  - Author applies a minimal, surgical correction to the plan or code.
-  - Author documents the fix with exact line numbers and logic changes.
-  - Author explicitly avoids expanding scope beyond the finding.
+- **Condition:** The reviewer's cited evidence identifies a genuine defect, omission, or contract violation.
+- **Author Action:**
+  - Apply a minimal surgical fix strictly bounded to the identified issue.
+  - Document the exact changes with line citations and rationale.
+  - Do NOT expand scope into unrelated files or refactoring.
 
 ### Case B: Rejected Finding
-- The reviewer's finding is based on an incorrect assumption, misinterpretation of an external mod/API, or hallucinated requirement.
-- **Action:**
-  - Author MUST NOT modify working code or valid plans merely to appease the reviewer.
-  - Author compiles concrete repository evidence (bytecode contracts, existing tests, class signatures, or architecture documentation) refuting the finding.
-  - Author formulates a structured rebuttal explaining why the existing design is correct and safe.
+- **Condition:** The reviewer's finding is based on an incorrect assumption, misinterpretation of an external mod/API, or hallucinated requirement.
+- **Author Action:**
+  - Authors must **NEVER** modify working code or valid architecture merely to appease a reviewer.
+  - Compile concrete, verifiable repository evidence (bytecode signatures, decompiler output, existing unit tests, or architecture documentation) refuting the finding.
+  - Formulate an objective rebuttal detailing why the existing design is correct and safe.
 
 ---
 
-## 4. Escalation Protocol upon Cycle Exhaustion
+## 4. Owner Escalation Protocol upon Cycle Exhaustion
 
-If blocking findings remain unresolved after 2 completed reconciliation cycles:
-1. **HARD STOP:** Main Controller halts the automated loop immediately.
-2. **DO NOT SPAWN:** Main must NOT spawn a fresh Planner, Reviewer, or Implementor to "try again".
-3. **DO NOT GUESS:** Main must NOT unilaterally decide between conflicting technical opinions.
-4. **OWNER ESCALATION:** Main Controller delivers an objective, structured dossier to the Owner containing:
-   - List of unresolved Finding IDs.
-   - Reviewer's claims and cited evidence.
-   - Author's rebuttal, corrections, and cited evidence.
-   - Root cause of the impasse (e.g., conflicting API interpretation, ambiguous design requirement, runtime limitation).
-   - Concrete proposed options for the Owner to decide.
+When reconciliation reaches the 2-cycle limit without reaching `PASS`:
+1. **Automated Loop Halt:** Main Controller stops all automated correction cycles immediately.
+2. **No Speculative Spawns:** Main Controller must NOT spawn new subagents to "retry" or bypass the impasse.
+3. **No Unilateral Decisions:** Main Controller must NOT guess or arbitrarily pick a side between author and reviewer.
+4. **Deliver Structured Escalation Dossier:** Main Controller compiles and presents an objective dossier to the Owner:
+
+```markdown
+# Escalation Dossier: Unresolved Blocking Findings
+
+## Context & Workstream
+- **Workstream ID:** `<workstream-id>`
+- **Phase:** `PLAN_RECONCILING` | `IMPL_RECONCILING`
+- **Completed Cycles:** 2 / 2 (Limit Reached)
+
+## Unresolved Finding Summary
+
+### Finding [<ID>]: <Title>
+- **Reviewer Assertion:**
+  - Severity: `Critical` | `Required`
+  - Cited Evidence: `<path>:<lines>` / `<log excerpt>`
+  - Reviewer Argument: <Core concern>
+- **Author Rebuttal / Fix Attempt:**
+  - Author Position: Confirmed (partial fix) | Rejected (counter-evidence)
+  - Cited Counter-Evidence: `<path>:<lines>` / `<bytecode signature>`
+  - Author Argument: <Why existing approach is intentional or proposed change is unsafe>
+- **Root Cause of Impasse:**
+  - [e.g., Ambiguous upstream Cobblemon contract, conflicting design goals, runtime limitation]
+
+## Actionable Options for Owner Decision
+1. **Option A:** Approve reviewer's recommendation (Author will apply requested change).
+2. **Option B:** Overrule reviewer finding (Proceed with author's existing design).
+3. **Option C:** Redefine task requirements or abort workstream.
+```
