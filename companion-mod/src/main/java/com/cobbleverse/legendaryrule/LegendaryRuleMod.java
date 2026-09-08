@@ -6,6 +6,7 @@ import com.cobbleverse.legendaryrule.lead.LeadSelectionService;
 import com.cobbleverse.legendaryrule.lead.TypeChartData;
 import com.cobbleverse.legendaryrule.lead.TypeChartResourceLoader;
 import com.cobbleverse.legendaryrule.lead.TypeMatchupScorer;
+import com.cobbleverse.legendaryrule.mega.OutsideMegaBattleNormalizer;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ public class LegendaryRuleMod implements DedicatedServerModInitializer {
     public void onInitializeServer() {
         CompanionConfig.init();
         CommandRegistrationCallback.EVENT.register(HellModeCommand::register);
+        OutsideMegaBattleNormalizer.register();
         LOGGER.info("RCT Legendary Rule Companion initialized (active limit: {}).", CompanionConfig.getMaxLegendaryMythical());
 
         // Register Dynamic Trainer Lead Presets Datapack Reload Listener
