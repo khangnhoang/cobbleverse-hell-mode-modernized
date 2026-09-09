@@ -1,0 +1,66 @@
+{
+  "workstream": "agent-architecture-redesign",
+  "base_commit": "5406b2c",
+  "candidate_files": [
+    {
+      "path": ".agents/skills/code-review-and-quality/SKILL.md",
+      "blob_hash": "39e2c75cad83bb1042acc078f95bf90cb540a2ec"
+    },
+    {
+      "path": ".agents/skills/code-review-and-quality/references/implementation-review-rubric.md",
+      "blob_hash": "3eed2ed779f56dd1a98e6966265ac69be3e97550"
+    },
+    {
+      "path": ".agents/skills/code-review-and-quality/references/plan-review-rubric.md",
+      "blob_hash": "3d7cb938bc12cffe8262b94a38b149ddca51b325"
+    },
+    {
+      "path": ".agents/skills/git-checkpoint-workflow/SKILL.md",
+      "blob_hash": "51d1461c35240b014fe646b6ea028c02419adef4"
+    },
+    {
+      "path": ".agents/skills/git-checkpoint-workflow/references/checkpoint-lifecycle-and-lineage.md",
+      "blob_hash": "f1e51050fc6dab46b9fcced2eab0cf7792c6af76"
+    },
+    {
+      "path": ".agents/skills/implementation-planning-and-contract-freeze/references/workstream-plan-template.md",
+      "blob_hash": "1c783ad9b7e2ab1eed590170785f2adab8989c0a"
+    },
+    {
+      "path": ".agents/skills/managed-agent-workflow/SKILL.md",
+      "blob_hash": "72ec82708f543d4e455eaf56f05bf3025201b970"
+    },
+    {
+      "path": ".agents/skills/managed-agent-workflow/references/controller-state-machine.md",
+      "blob_hash": "b30a86cd1ee1807deb7488aa21dc267e5b171ac1"
+    },
+    {
+      "path": ".agents/skills/managed-agent-workflow/references/reconciliation-protocol.md",
+      "blob_hash": "65178616477d94d3c78db0372ea6abe1e51f8cb1"
+    },
+    {
+      "path": ".agents/skills/managed-agent-workflow/scripts/audit_review_gate.py",
+      "blob_hash": "3dd2ed7dace5cbf55463d8e908ca8cc84c8a1dd5"
+    },
+    {
+      "path": ".agents/skills/test-and-verification-strategy/references/verification-layers-and-tooling.md",
+      "blob_hash": "b8b5f89e310aab499b0911d42284f09ab5d7b176"
+    },
+    {
+      "path": "AGENTS.md",
+      "blob_hash": "c2e1cef0c61e8e7f5f41068133e8275fdaf3fe48"
+    },
+    {
+      "path": "docs/workstreams/agent-architecture-redesign/as-built-scope-closure.md",
+      "blob_hash": "a5985f5da06fd3e7cf0ab1ebf980251bf731dbcf"
+    },
+    {
+      "path": "docs/workstreams/agent-architecture-redesign/plan.md",
+      "blob_hash": "2a72716698f16ba1887f7607eff2f79a31830546"
+    },
+    {
+      "path": "docs/workstreams/agent-architecture-redesign/verification.md",
+      "blob_hash": "13c02916f7424e45b88072f40da9986f3f7cf913"
+    }
+  ]
+}
