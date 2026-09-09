@@ -1,54 +1,22 @@
 {
   "workstream": "ai-damage-weather-and-dynamic-types",
-  "base_commit": "b9f21512a76ac6bc1f4e046446c498594a0f0d74",
+  "base_commit": "2b7c493",
   "candidate_files": [
     {
-      "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/mixin/ContextManagerMixin.java",
-      "blob_hash": "54668fc2e4511a79dbb6a14369f173a0fa9acb87"
+      "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/mixin/RunBunAIChooseMixin.java",
+      "blob_hash": "dd3a69fef8c45c976d58ab8c9a0f80b47b0a8ff1"
     },
     {
-      "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/mixin/PokeMathMaxMixin.java",
-      "blob_hash": "1cafa8610f40c7238522795fa37e002b9d123eff"
+      "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/strategy/weather/WeatherAccuracyValuationStrategy.java",
+      "blob_hash": "7b5028b8ce06fed7cc03c5db0e2be4e147cd04a6"
     },
     {
-      "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/strategy/dynamic/DynamicMoveResolver.java",
-      "blob_hash": "6bd12f62e07e306ff876e3fd37f2dabf734f2e33"
-    },
-    {
-      "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/strategy/dynamic/DynamicMoveSurrogate.java",
-      "blob_hash": "fdc9f2248602acad69c1767ce290fe0483001e8b"
-    },
-    {
-      "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/strategy/weather/MegaSolWeatherBallSurrogate.java",
-      "blob_hash": "e7404d122d3303445e64f513b8e6e5963e0e7bb9"
-    },
-    {
-      "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/strategy/weather/MegaSolWeatherGuard.java",
-      "blob_hash": "f917334c856760009331e75403d1fd631dc17010"
-    },
-    {
-      "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/strategy/weather/WeatherContextNormalizer.java",
-      "blob_hash": "23651e34522e370dcfaf9467c73b8f9d81cc98a2"
-    },
-    {
-      "path": "companion-mod/src/main/resources/rct_legendary_rule.mixins.json",
-      "blob_hash": "e373c946d75ec3d1fc02c9ed4030d3954c9d99c6"
-    },
-    {
-      "path": "companion-mod/src/test/java/com/cobbleverse/legendaryrule/strategy/dynamic/DynamicMoveResolverTest.java",
-      "blob_hash": "451a54adb54517f41411bf75765aa39e82518459"
-    },
-    {
-      "path": "companion-mod/src/test/java/com/cobbleverse/legendaryrule/strategy/weather/WaterDamageUnderSunContractTest.java",
-      "blob_hash": "fed6c5d4eb660ff41665fd0df52033c02e1577a1"
-    },
-    {
-      "path": "companion-mod/src/test/java/com/cobbleverse/legendaryrule/strategy/weather/WeatherContextNormalizerTest.java",
-      "blob_hash": "fd417b8606cd9cad75c11449b87cc78c5eca307a"
+      "path": "companion-mod/src/test/java/com/cobbleverse/legendaryrule/strategy/weather/ThunderUnderRainValuationTest.java",
+      "blob_hash": "7be30aa84ca799aa8c966217406fbf31341e1135"
     },
     {
       "path": "docs/workstreams/ai-damage-weather-and-dynamic-types/verification.md",
-      "blob_hash": "2a697ee35006bf7c6aef2363dc8ad76bdf1d02b2"
+      "blob_hash": "5ec8770d231559cc31c1599afa6efacfc51fb614"
     }
   ]
 }
