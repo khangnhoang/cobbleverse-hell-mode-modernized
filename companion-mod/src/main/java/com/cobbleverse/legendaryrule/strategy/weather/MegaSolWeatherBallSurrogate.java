@@ -1,8 +1,8 @@
 package com.cobbleverse.legendaryrule.strategy.weather;
 
 import com.cobblemon.mod.common.api.moves.Move;
-import com.cobblemon.mod.common.api.moves.MoveTemplate;
 import com.cobblemon.mod.common.api.types.ElementalTypes;
+import com.cobbleverse.legendaryrule.strategy.dynamic.DynamicMoveSurrogate;
 
 /**
  * Surrogate Move instance representing Weather Ball resolved to Fire with 100 Base Power
@@ -18,32 +18,18 @@ import com.cobblemon.mod.common.api.types.ElementalTypes;
  * - elementalType: ElementalTypes.FIRE
  * - power: 100.0d
  */
-public class MegaSolWeatherBallSurrogate extends Move {
+public class MegaSolWeatherBallSurrogate extends DynamicMoveSurrogate {
 
     public static final String RESOLVED_MOVE_NAME = "weatherball_fire_resolved";
     public static final double RESOLVED_BASE_POWER = 100.0d;
 
     public MegaSolWeatherBallSurrogate(Move original) {
         super(
-            createSurrogateTemplate(original.getTemplate()),
-            original.getCurrentPp(),
-            original.getRaisedPpStages()
-        );
-    }
-
-    private static MoveTemplate createSurrogateTemplate(MoveTemplate original) {
-        return new MoveTemplate(
+            original,
             RESOLVED_MOVE_NAME,
-            original.getNum(),
             ElementalTypes.FIRE,
-            original.getDamageCategory(),
             RESOLVED_BASE_POWER,
-            original.getTarget(),
-            original.getAccuracy(),
-            original.getPp(),
-            original.getPriority(),
-            original.getCritRatio(),
-            original.getEffectChances()
+            original != null ? original.getDamageCategory() : null
         );
     }
 }

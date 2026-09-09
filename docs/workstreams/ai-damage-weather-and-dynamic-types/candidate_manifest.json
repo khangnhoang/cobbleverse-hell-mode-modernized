@@ -1,0 +1,22 @@
+{
+  "workstream": "ai-damage-weather-and-dynamic-types",
+  "base_commit": "2b7c493",
+  "candidate_files": [
+    {
+      "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/mixin/RunBunAIChooseMixin.java",
+      "blob_hash": "dd3a69fef8c45c976d58ab8c9a0f80b47b0a8ff1"
+    },
+    {
+      "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/strategy/weather/WeatherAccuracyValuationStrategy.java",
+      "blob_hash": "7b5028b8ce06fed7cc03c5db0e2be4e147cd04a6"
+    },
+    {
+      "path": "companion-mod/src/test/java/com/cobbleverse/legendaryrule/strategy/weather/ThunderUnderRainValuationTest.java",
+      "blob_hash": "7be30aa84ca799aa8c966217406fbf31341e1135"
+    },
+    {
+      "path": "docs/workstreams/ai-damage-weather-and-dynamic-types/verification.md",
+      "blob_hash": "5ec8770d231559cc31c1599afa6efacfc51fb614"
+    }
+  ]
+}

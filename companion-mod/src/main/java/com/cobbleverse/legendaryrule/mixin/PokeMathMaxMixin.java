@@ -4,8 +4,8 @@ import com.cobblemon.mod.common.api.moves.Move;
 import com.cobblemon.mod.common.api.types.ElementalType;
 import com.cobblemon.mod.common.battles.ActiveBattlePokemon;
 import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
+import com.cobbleverse.legendaryrule.strategy.dynamic.DynamicMoveResolver;
 import com.cobbleverse.legendaryrule.strategy.guard.RedirectAbilityGuard;
-import com.cobbleverse.legendaryrule.strategy.weather.MegaSolWeatherGuard;
 import com.gitlab.surilexa.rbrctai.api.ai.utils.PokeMathMax;
 import com.gitlab.surilexa.rbrctai.api.ai.utils.RBStatStages;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  *    was multiplied twice by targets (0.75 * 0.75 = 0.5625).
  * 2. Vetoes redirected single-target moves (Storm Drain / Lightning Rod) by returning
  *    0.0 damage and marking candidate immunity as true.
- * 3. Resolves effective dynamic moves under personal weather (e.g. Mega Sol Weather Ball).
+ * 3. Resolves effective dynamic moves (Ivy Cudgel, Raging Bull, Weather Ball, Tera Blast, Revelation Dance).
  */
 @Mixin(value = PokeMathMax.class, remap = false)
 public abstract class PokeMathMaxMixin {
@@ -45,7 +45,7 @@ public abstract class PokeMathMaxMixin {
         BattlePokemon defender, RBStatStages statStages, ActiveBattlePokemon activeBattlePokemon,
         boolean predictTera, boolean isAttacker
     ) {
-        Move effectiveMove = MegaSolWeatherGuard.resolveEffectiveMove(move, attacker);
+        Move effectiveMove = DynamicMoveResolver.resolveEffectiveMove(move, attacker, activeBattlePokemon, predictTera);
 
         if (RedirectAbilityGuard.isMoveRedirected(effectiveMove, attacker, defender, activeBattlePokemon)) {
             return 0.0d;
@@ -70,7 +70,7 @@ public abstract class PokeMathMaxMixin {
         boolean predictTera,
         CallbackInfoReturnable<Boolean> cir
     ) {
-        Move effectiveMove = MegaSolWeatherGuard.resolveEffectiveMove(move, attacker);
+        Move effectiveMove = DynamicMoveResolver.resolveEffectiveMove(move, attacker, abp, predictTera);
 
         if (RedirectAbilityGuard.isMoveRedirected(effectiveMove, attacker, defender, abp)) {
             cir.setReturnValue(true);

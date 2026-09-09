@@ -8,6 +8,7 @@ import com.cobblemon.mod.common.battles.ShowdownMoveset;
 import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
 import com.cobbleverse.legendaryrule.strategy.spread.SpreadMoveValuationContext;
 import com.cobbleverse.legendaryrule.strategy.tera.TeraTargetResolver;
+import com.cobbleverse.legendaryrule.strategy.weather.WeatherAccuracyValuationStrategy;
 import com.gitlab.surilexa.rbrctai.api.ai.RunBunAI;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
@@ -126,5 +127,36 @@ public abstract class RunBunAIChooseMixin {
             activeBattlePokemon.getActor().getPokemonList(),
             this.teraTarget
         );
+    }
+
+    /**
+     * Intercepts candidate move ranking in RunBunAI.choose() right before best move selection
+     * (at Comparator.comparingInt(MoveEvaluation::getScore)) to apply weather accuracy valuation,
+     * ensuring weather-boosted moves (e.g. Thunder in Rain) dominate alternatives, receive the missing
+     * weather bonus, and eliminate independent RNG inversion in killingMoves.
+     */
+    @Inject(
+        method = "choose(Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/cobblemon/mod/common/api/battles/model/PokemonBattle;Lcom/cobblemon/mod/common/battles/BattleSide;Lcom/cobblemon/mod/common/battles/ShowdownMoveset;Z)Lcom/cobblemon/mod/common/battles/ShowdownActionResponse;",
+        at = @At(
+            value = "INVOKE",
+            target = "Ljava/util/Comparator;comparingInt(Ljava/util/function/ToIntFunction;)Ljava/util/Comparator;",
+            ordinal = 0
+        ),
+        remap = false
+    )
+    private void cobbleverse$applyWeatherAccuracyValuation(
+        ActiveBattlePokemon activeBattlePokemon,
+        PokemonBattle battle,
+        BattleSide side,
+        ShowdownMoveset moveset,
+        boolean forceSwitch,
+        CallbackInfoReturnable<ShowdownActionResponse> cir,
+        @Local(name = "evaluations") List<RunBunAI.MoveEvaluation> evaluations
+    ) {
+        if (evaluations == null || evaluations.isEmpty() || activeBattlePokemon == null) {
+            return;
+        }
+        BattlePokemon attacker = activeBattlePokemon.getBattlePokemon();
+        WeatherAccuracyValuationStrategy.adjustMoveValuations(evaluations, attacker, activeBattlePokemon, battle);
     }
 }
