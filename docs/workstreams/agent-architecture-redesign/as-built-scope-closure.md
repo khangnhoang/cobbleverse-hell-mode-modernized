@@ -19,7 +19,7 @@
 | `.agents/skills/managed-agent-workflow/SKILL.md` | Added | +112, -0 | Mode 3 multi-agent orchestration specification. |
 | `.agents/skills/managed-agent-workflow/references/controller-state-machine.md` | Added | +261, -0 | Formal controller states, transitions, and action boundaries. |
 | `.agents/skills/managed-agent-workflow/references/reconciliation-protocol.md` | Added | +149, -0 | 2-cycle finite reconciliation protocol between agents. |
-| `.agents/skills/managed-agent-workflow/scripts/audit_review_gate.py` | Added | +945, -0 | Executable review gate oracle (9 evaluated predicates, 15 test fixtures). |
+| `.agents/skills/managed-agent-workflow/scripts/audit_review_gate.py` | Added | +982, -0 | Executable review gate oracle (9 evaluated predicates, 17 test fixtures). |
 | `.agents/skills/code-review-and-quality/SKILL.md` | Added | +117, -0 | Independent review standards, severity classification, and obligations. |
 | `.agents/skills/code-review-and-quality/references/plan-review-rubric.md` | Added | +115, -0 | 5-dimension rubric for Plan Reviewer `R`. |
 | `.agents/skills/code-review-and-quality/references/implementation-review-rubric.md` | Added | +134, -0 | 5-dimension rubric for Implementation Reviewer `IR` (completeness rule). |
@@ -38,7 +38,7 @@
 | `.agents/skills/competitive-pokemon-doubles-team-design/references/trainer-audit-checklist.md` | Added | +43, -0 | Extracted audit checklist for 6-mon NPC rosters. |
 | `docs/workstreams/README.md` | Modified | +1, -0 | Master index table entry registering `agent-architecture-redesign`. |
 | `docs/workstreams/agent-architecture-redesign/plan.md` | Added | +686, -0 | Mode 3 plan dossier covering Phase 1, Phase 2, and Corrections 1–5. |
-| `docs/workstreams/agent-architecture-redesign/candidate_manifest.json` | Added | +62, -0 | Manifest of Git blob hashes sealing 14 candidate files for Iteration 5. |
+| `docs/workstreams/agent-architecture-redesign/candidate_manifest.json` | Added | +62, -0 | Manifest of Git blob hashes sealing candidate files. |
 | `docs/workstreams/agent-architecture-redesign/verification.md` | Added | +248, -0 | Verification evidence manifest recording Layer 0 outputs and gate passes. |
 
 ### 1.2 Unmodified Areas (Zero-Touch Invariants)
@@ -49,7 +49,7 @@
 ### 1.3 Concrete Verification Measurements
 - `python scripts/ci/validate_repo.py --check markdown-links frontmatter`: Exit code 0 (1663 legacy + 1714 modernized trainers verified, markdown relative links and frontmatters valid).
 - `(Get-Content AGENTS.md).Count`: 246 lines (budget: strictly < 250 lines).
-- `python .agents/skills/managed-agent-workflow/scripts/audit_review_gate.py --test`: Exit code 0 (15/15 regression fixtures passed: Fixtures A–F, Binding Cases A–D, Scope Cases A–D, Review Completeness Case).
+- `python .agents/skills/managed-agent-workflow/scripts/audit_review_gate.py --test`: Exit code 0 (17/17 regression fixtures passed: Fixtures A–F, Binding Cases A–D, Scope Cases A–D, Review Completeness Case, IMPL_REVIEW Scope Case, Phase-Role Binding Case).
 
 ---
 

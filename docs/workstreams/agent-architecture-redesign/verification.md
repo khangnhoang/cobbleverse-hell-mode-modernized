@@ -7,7 +7,7 @@
 - **Materialized Baseline Authority:** `scratch/bootstrap-governance/` (at `1fa1d58`)
 - **Author Role:** Implementor (`I`)
 - **Candidate Manifest Path:** `docs/workstreams/agent-architecture-redesign/candidate_manifest.json`
-- **Candidate Identity Definition:** Cryptographic Merkelized candidate manifest over all 14 candidate files
+- **Candidate Identity Definition:** Manifest of Git blob hashes over all 15 candidate files
 
 ---
 
@@ -28,6 +28,7 @@
  M docs/workstreams/agent-architecture-redesign/plan.md
  M docs/workstreams/agent-architecture-redesign/verification.md
 ?? .agents/skills/managed-agent-workflow/scripts/audit_review_gate.py
+?? docs/workstreams/agent-architecture-redesign/as-built-scope-closure.md
 ?? docs/workstreams/agent-architecture-redesign/candidate_manifest.json
 ?? scratch/
 ```
@@ -111,7 +112,7 @@ RUNNING REPORT-INDEPENDENT ORACLE REGRESSION FIXTURES
 ================================================================================
   [PASS] Fixture A: Golden Valid Report (Exit 0)
   [PASS] Fixture B: Missing Falsification Block Detected (Exit non-zero)
-  [PASS] Fixture C: Invalid Verdict Rejected (Exit non-zero)
+  [PASS] Fixture C: Invalid Verdict Rejected (MAYBE_PASS and stale REVISE) (Exit non-zero)
   [PASS] Fixture D: Missing Authority Closure Entry Detected (Exit non-zero)
   [PASS] Fixture E: Self-Attested PASS with Actual Violation Rejected (Exit non-zero)
   [PASS] Fixture F: Evidence-Backed Measurement Ratio Permitted (Exit 0)
@@ -124,8 +125,10 @@ RUNNING REPORT-INDEPENDENT ORACLE REGRESSION FIXTURES
   [PASS] Scope Case C: Out-of-scope / nonexistent manifest member rejected
   [PASS] Scope Case D: Member mutation after identity creation rejected
   [PASS] Review Completeness Case: Early termination on Defect A without evaluating Defect B rejected
+  [PASS] IMPL_REVIEW Scope Case: Missing candidate identity inputs rejected (Exit non-zero)
+  [PASS] Phase-Role Binding Case: R report rejected in IMPL_REVIEW and IR report rejected in PLAN_REVIEW
 --------------------------------------------------------------------------------
-REGRESSION FIXTURES RESULT: 15/15 PASSED
+REGRESSION FIXTURES RESULT: 17/17 PASSED
 ```
 - **Exit Code:** 0 (PASS)
 

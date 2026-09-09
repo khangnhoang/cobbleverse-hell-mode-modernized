@@ -32,7 +32,7 @@
     },
     {
       "path": ".agents/skills/managed-agent-workflow/references/controller-state-machine.md",
-      "blob_hash": "afed7614b9ed1ac73d1b482b8aa3712aa1f51ebf"
+      "blob_hash": "b30a86cd1ee1807deb7488aa21dc267e5b171ac1"
     },
     {
       "path": ".agents/skills/managed-agent-workflow/references/reconciliation-protocol.md",
@@ -40,7 +40,7 @@
     },
     {
       "path": ".agents/skills/managed-agent-workflow/scripts/audit_review_gate.py",
-      "blob_hash": "323e5aca1183bff092e477bfa75c81d2d2df1b47"
+      "blob_hash": "3dd2ed7dace5cbf55463d8e908ca8cc84c8a1dd5"
     },
     {
       "path": ".agents/skills/test-and-verification-strategy/references/verification-layers-and-tooling.md",
@@ -51,12 +51,16 @@
       "blob_hash": "c2e1cef0c61e8e7f5f41068133e8275fdaf3fe48"
     },
     {
+      "path": "docs/workstreams/agent-architecture-redesign/as-built-scope-closure.md",
+      "blob_hash": "a5985f5da06fd3e7cf0ab1ebf980251bf731dbcf"
+    },
+    {
       "path": "docs/workstreams/agent-architecture-redesign/plan.md",
       "blob_hash": "2a72716698f16ba1887f7607eff2f79a31830546"
     },
     {
       "path": "docs/workstreams/agent-architecture-redesign/verification.md",
-      "blob_hash": "6a9f4db1b27cf83cebf1f7206d96b8af19112cd3"
+      "blob_hash": "13c02916f7424e45b88072f40da9986f3f7cf913"
     }
   ]
 }
