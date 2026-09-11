@@ -1,13 +1,26 @@
 package com.cobbleverse.legendaryrule.strategy.switchai;
 
 import com.cobblemon.mod.common.Cobblemon;
+import com.cobblemon.mod.common.api.abilities.Ability;
+import com.cobblemon.mod.common.api.abilities.AbilityTemplate;
 import com.cobblemon.mod.common.api.moves.Move;
+import com.cobblemon.mod.common.api.moves.MoveSet;
 import com.cobblemon.mod.common.api.moves.MoveTemplate;
+import com.cobblemon.mod.common.api.moves.categories.DamageCategories;
+import com.cobblemon.mod.common.api.moves.categories.DamageCategory;
+import com.cobblemon.mod.common.api.pokemon.helditem.HeldItemManager;
 import com.cobblemon.mod.common.api.pokemon.stats.StatProvider;
+import com.cobblemon.mod.common.api.types.ElementalType;
+import com.cobblemon.mod.common.api.types.ElementalTypes;
 import com.cobblemon.mod.common.battles.ActiveBattlePokemon;
+import com.cobblemon.mod.common.battles.MoveTarget;
 import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
+import com.cobblemon.mod.common.pokemon.FormData;
 import com.cobblemon.mod.common.pokemon.Pokemon;
 import com.gitlab.surilexa.rbrctai.api.ai.RunBunAI;
+import com.gitlab.surilexa.rbrctai.api.ai.utils.RBStatStages;
+import kotlin.Lazy;
+import kotlin.LazyKt;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -65,6 +78,17 @@ class DeadMatchupDetectorTest {
         healthField.setAccessible(true);
         healthField.setInt(pokemon, currentHp);
 
+        FormData form = new FormData();
+        Field formNameField = FormData.class.getDeclaredField("name");
+        formNameField.setAccessible(true);
+        formNameField.set(form, "normal");
+        Field formPrimaryTypeField = FormData.class.getDeclaredField("_primaryType");
+        formPrimaryTypeField.setAccessible(true);
+        formPrimaryTypeField.set(form, ElementalTypes.NORMAL);
+        Field pokemonFormField = Pokemon.class.getDeclaredField("form");
+        pokemonFormField.setAccessible(true);
+        pokemonFormField.set(pokemon, form);
+
         BattlePokemon battlePokemon = (BattlePokemon) unsafe.allocateInstance(BattlePokemon.class);
         Field effectedField = BattlePokemon.class.getDeclaredField("effectedPokemon");
         effectedField.setAccessible(true);
@@ -101,6 +125,138 @@ class DeadMatchupDetectorTest {
         eval.setDamage(damage);
         eval.setScore(initialScore);
         return eval;
+    }
+
+    private Move createMove(String name, double power, MoveTarget target, DamageCategory category) throws Exception {
+        MoveTemplate template = (MoveTemplate) unsafe.allocateInstance(MoveTemplate.class);
+        Field nameField = MoveTemplate.class.getDeclaredField("name");
+        nameField.setAccessible(true);
+        nameField.set(template, name);
+
+        Field powerField = MoveTemplate.class.getDeclaredField("power");
+        powerField.setAccessible(true);
+        powerField.setDouble(template, power);
+
+        Field targetField = MoveTemplate.class.getDeclaredField("target");
+        targetField.setAccessible(true);
+        targetField.set(template, target != null ? target : MoveTarget.normal);
+
+        Field categoryField = MoveTemplate.class.getDeclaredField("damageCategory");
+        categoryField.setAccessible(true);
+        categoryField.set(template, category != null ? category : DamageCategories.INSTANCE.getPHYSICAL());
+
+        Field effectChancesField = MoveTemplate.class.getDeclaredField("effectChances");
+        effectChancesField.setAccessible(true);
+        effectChancesField.set(template, new Double[0]);
+
+        Move move = (Move) unsafe.allocateInstance(Move.class);
+        Field templateField = Move.class.getDeclaredField("template");
+        templateField.setAccessible(true);
+        templateField.set(move, template);
+
+        return move;
+    }
+
+    private RunBunAI.MoveEvaluation createEval(String moveName, ActiveBattlePokemon opponent, int damage, int initialScore) throws Exception {
+        DamageCategory cat = (damage > 0) ? DamageCategories.INSTANCE.getSPECIAL() : DamageCategories.INSTANCE.getSTATUS();
+        Move move = createMove(moveName, damage > 0 ? 90.0 : 0.0, MoveTarget.normal, cat);
+
+        RunBunAI.MoveEvaluation eval = (RunBunAI.MoveEvaluation) unsafe.allocateInstance(RunBunAI.MoveEvaluation.class);
+        eval.setMove(move);
+        eval.setOpponent(opponent);
+        eval.setDamage(damage);
+        eval.setScore(initialScore);
+        return eval;
+    }
+
+    private ActiveBattlePokemon createActiveBattlePokemon(
+        int maxHp,
+        int currentHp,
+        ElementalType primaryType,
+        ElementalType secondaryType,
+        String abilityName,
+        String heldItemId,
+        List<Move> moves
+    ) throws Exception {
+        Pokemon pokemon = (Pokemon) unsafe.allocateInstance(Pokemon.class);
+        pokemon.setUuid(UUID.randomUUID());
+        pokemonHpMap.put(pokemon, maxHp);
+
+        Field healthField = Pokemon.class.getDeclaredField("currentHealth");
+        healthField.setAccessible(true);
+        healthField.setInt(pokemon, currentHp);
+
+        FormData form = new FormData();
+        Field formNameField = FormData.class.getDeclaredField("name");
+        formNameField.setAccessible(true);
+        formNameField.set(form, "normal");
+
+        Field ptField = FormData.class.getDeclaredField("_primaryType");
+        ptField.setAccessible(true);
+        ptField.set(form, primaryType != null ? primaryType : ElementalTypes.NORMAL);
+
+        Field stField = FormData.class.getDeclaredField("_secondaryType");
+        stField.setAccessible(true);
+        stField.set(form, secondaryType);
+
+        Field formField = Pokemon.class.getDeclaredField("form");
+        formField.setAccessible(true);
+        formField.set(pokemon, form);
+
+        if (abilityName != null) {
+            AbilityTemplate at = (AbilityTemplate) unsafe.allocateInstance(AbilityTemplate.class);
+            Field atNameField = AbilityTemplate.class.getDeclaredField("name");
+            atNameField.setAccessible(true);
+            atNameField.set(at, abilityName);
+
+            Ability ability = (Ability) unsafe.allocateInstance(Ability.class);
+            Field aTemplateField = Ability.class.getDeclaredField("template");
+            aTemplateField.setAccessible(true);
+            aTemplateField.set(ability, at);
+
+            Field abField = Pokemon.class.getDeclaredField("ability");
+            abField.setAccessible(true);
+            abField.set(pokemon, ability);
+        }
+
+        BattlePokemon bp = (BattlePokemon) unsafe.allocateInstance(BattlePokemon.class);
+        Field effectedField = BattlePokemon.class.getDeclaredField("effectedPokemon");
+        effectedField.setAccessible(true);
+        effectedField.set(bp, pokemon);
+
+        if (moves != null) {
+            MoveSet ms = (MoveSet) unsafe.allocateInstance(MoveSet.class);
+            Field movesArrayField = MoveSet.class.getDeclaredField("moves");
+            movesArrayField.setAccessible(true);
+            movesArrayField.set(ms, moves.toArray(new Move[0]));
+
+            Field pmsField = Pokemon.class.getDeclaredField("moveSet");
+            pmsField.setAccessible(true);
+            pmsField.set(pokemon, ms);
+        }
+
+        if (heldItemId != null) {
+            HeldItemManager manager = (HeldItemManager) Proxy.newProxyInstance(
+                HeldItemManager.class.getClassLoader(),
+                new Class<?>[]{HeldItemManager.class},
+                (proxy, method, args) -> {
+                    if ("showdownId".equals(method.getName())) {
+                        return heldItemId;
+                    }
+                    return null;
+                }
+            );
+            Field himField = BattlePokemon.class.getDeclaredField("heldItemManager$delegate");
+            himField.setAccessible(true);
+            himField.set(bp, LazyKt.lazyOf(manager));
+        }
+
+        ActiveBattlePokemon activePokemon = (ActiveBattlePokemon) unsafe.allocateInstance(ActiveBattlePokemon.class);
+        Field bpField = ActiveBattlePokemon.class.getDeclaredField("battlePokemon");
+        bpField.setAccessible(true);
+        bpField.set(activePokemon, bp);
+
+        return activePokemon;
     }
 
     @Test
@@ -377,6 +533,25 @@ class DeadMatchupDetectorTest {
         double percentHp,
         boolean partySurvivabilityPass
     ) {
+        return simulateIsSwitchingFlow(
+            evaluations, null, Collections.emptyList(), opponents, null, null,
+            nativeHasLowScore, criticalThreat, rawRng, percentHp, partySurvivabilityPass
+        );
+    }
+
+    public static boolean simulateIsSwitchingFlow(
+        List<RunBunAI.MoveEvaluation> evaluations,
+        BattlePokemon self,
+        List<ActiveBattlePokemon> allies,
+        List<ActiveBattlePokemon> opponents,
+        ActiveBattlePokemon activeBattlePokemon,
+        RBStatStages stages,
+        boolean nativeHasLowScore,
+        boolean criticalThreat,
+        double rawRng,
+        double percentHp,
+        boolean partySurvivabilityPass
+    ) {
         // Gate 1: Meaningful stay veto
         boolean meaningfulStay = evaluations.stream().anyMatch(DeadMatchupDetector::isMeaningfulOffensiveMove);
         if (meaningfulStay) {
@@ -384,11 +559,11 @@ class DeadMatchupDetectorTest {
         }
 
         // Gate 2: Adjust hasLowScore
-        boolean lowPressure = DeadMatchupDetector.isLowOffensivePressure(evaluations, opponents);
-        boolean hasLowScore = nativeHasLowScore || lowPressure || criticalThreat;
+        boolean deadPosition = DeadMatchupDetector.isDeadPosition(evaluations, self, allies, opponents, activeBattlePokemon, stages);
+        boolean hasLowScore = nativeHasLowScore || deadPosition || criticalThreat;
 
-        // Gate 3: Random Gate with lowPressure bypass
-        double effectiveRng = DeadMatchupDetector.resolveGate3RandomValue(rawRng, lowPressure);
+        // Gate 3: Random Gate with deadPosition bypass
+        double effectiveRng = DeadMatchupDetector.resolveGate3RandomValue(rawRng, deadPosition);
         if (effectiveRng >= 0.75d) {
             return false;
         }
@@ -502,5 +677,266 @@ class DeadMatchupDetectorTest {
             0.50, 100.0, true
         );
         assertTrue(passWithLowRngAndNativeLowScore, "Gray zone with nativeHasLowScore and RNG < 0.75 passes");
+    }
+
+    // ==========================================
+    // Section 8: Support-Stay Utility Regression Suite (Cases 8A - 8G)
+    // ==========================================
+
+    @Test
+    @DisplayName("Case 8A: Indeedee live repro — low pressure, high ally value, Follow Me + Helping Hand -> stay")
+    void testCase8A_IndeedeeLiveRepro() throws Exception {
+        // Opponents: Tyranitar and Sneasel (100 HP each)
+        ActiveBattlePokemon tyranitar = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getROCK(), ElementalTypes.INSTANCE.getDARK(), "sandstream", null, List.of(createMove("crunch", 80.0, MoveTarget.normal, DamageCategories.INSTANCE.getPHYSICAL())));
+        ActiveBattlePokemon sneasel = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getDARK(), ElementalTypes.INSTANCE.getICE(), "innerfocus", null, List.of(createMove("knockoff", 65.0, MoveTarget.normal, DamageCategories.INSTANCE.getPHYSICAL())));
+        List<ActiveBattlePokemon> opponents = List.of(tyranitar, sneasel);
+
+        // Ally: Mega Alakazam with Focus Blast (120 power, lethal KO)
+        Move focusBlast = createMove("focusblast", 120.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL());
+        ActiveBattlePokemon megaAlakazam = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getPSYCHIC(), null, "trace", null, List.of(focusBlast));
+        List<ActiveBattlePokemon> allies = List.of(megaAlakazam);
+
+        // Indeedee-F: Follow Me, Helping Hand, Psychic, Protect
+        Move followMe = createMove("followme", 0.0, MoveTarget.self, DamageCategories.INSTANCE.getSTATUS());
+        Move helpingHand = createMove("helpinghand", 0.0, MoveTarget.adjacentAlly, DamageCategories.INSTANCE.getSTATUS());
+        Move psychic = createMove("psychic", 90.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL());
+        Move protect = createMove("protect", 0.0, MoveTarget.self, DamageCategories.INSTANCE.getSTATUS());
+        ActiveBattlePokemon indeedee = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getPSYCHIC(), ElementalTypes.INSTANCE.getNORMAL(), "psychicsurge", null, List.of(followMe, helpingHand, psychic, protect));
+
+        // Evaluations for Indeedee-F:
+        // Psychic -> Tyranitar: score -50, damage 0
+        // Psychic -> Sneasel: score -50, damage 0
+        // Follow Me: score 6, damage 0
+        // Helping Hand: score 6, damage 0
+        // Protect: score 6, damage 0
+        RunBunAI.MoveEvaluation evalPsychicTtar = createEval("psychic", tyranitar, 0, -50);
+        RunBunAI.MoveEvaluation evalPsychicSneasel = createEval("psychic", sneasel, 0, -50);
+        RunBunAI.MoveEvaluation evalFollowMe = createEval("followme", tyranitar, 0, 6);
+        RunBunAI.MoveEvaluation evalHelpingHand = createEval("helpinghand", megaAlakazam, 0, 6);
+        RunBunAI.MoveEvaluation evalProtect = createEval("protect", tyranitar, 0, 6);
+        List<RunBunAI.MoveEvaluation> evals = List.of(evalPsychicTtar, evalPsychicSneasel, evalFollowMe, evalHelpingHand, evalProtect);
+
+        // 1. Low offensive pressure must be true (< 20% max HP on all opponents)
+        assertTrue(DeadMatchupDetector.isLowOffensivePressure(evals, opponents), "Indeedee must have low offensive pressure");
+
+        // 2. Meaningful support utility must be true
+        assertTrue(DeadMatchupDetector.hasMeaningfulSupportUtility(evals, indeedee.getBattlePokemon(), allies, opponents, indeedee, null), "Indeedee must have meaningful support utility");
+
+        // 3. Dead position must be FALSE (lowPressure && !support)
+        assertFalse(DeadMatchupDetector.isDeadPosition(evals, indeedee.getBattlePokemon(), allies, opponents, indeedee, null), "Indeedee must NOT be classified as dead position");
+
+        // 4. In Phase 1 simulation:
+        // nativeHasLowScore = false (in doubles, failCount = 2, total = 5, 5 - 2 = 3 > 2)
+        // HP > 50%, party pass
+        boolean switchResult = simulateIsSwitchingFlow(
+            evals, indeedee.getBattlePokemon(), allies, opponents, indeedee, null,
+            false /* nativeHasLowScore */, false /* criticalThreat */,
+            0.50 /* rawRng */, 100.0 /* percentHp */, true /* partySurvivabilityPass */
+        );
+        assertFalse(switchResult, "Indeedee-F must NOT switch out; stay justification must be preserved");
+    }
+
+    @Test
+    @DisplayName("Case 8B: Protect-only regression — low damage + Protect available does NOT justify staying")
+    void testCase8B_ProtectOnlyRegression() throws Exception {
+        ActiveBattlePokemon opp = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getNORMAL(), null, null, null, List.of(createMove("tackle", 40.0, MoveTarget.normal, DamageCategories.INSTANCE.getPHYSICAL())));
+        List<ActiveBattlePokemon> opponents = List.of(opp);
+
+        Move protect = createMove("protect", 0.0, MoveTarget.self, DamageCategories.INSTANCE.getSTATUS());
+        Move weakTackle = createMove("tackle", 10.0, MoveTarget.normal, DamageCategories.INSTANCE.getPHYSICAL());
+        ActiveBattlePokemon self = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getNORMAL(), null, null, null, List.of(protect, weakTackle));
+
+        RunBunAI.MoveEvaluation evalProtect = createEval("protect", opp, 0, 6);
+        RunBunAI.MoveEvaluation evalWeak = createEval("tackle", opp, 10, -5); // 10% < 20%
+        List<RunBunAI.MoveEvaluation> evals = List.of(evalProtect, evalWeak);
+
+        // Protect must NOT create support stay justification
+        assertFalse(DeadMatchupDetector.hasMeaningfulSupportUtility(evals, self.getBattlePokemon(), Collections.emptyList(), opponents, self, null));
+        assertTrue(DeadMatchupDetector.isDeadPosition(evals, self.getBattlePokemon(), Collections.emptyList(), opponents, self, null));
+
+        // Gate 3 RNG veto must be bypassed for dead position
+        double effectiveRng = DeadMatchupDetector.resolveGate3RandomValue(0.85, true);
+        assertEquals(0.0d, effectiveRng);
+
+        // Phase 1 must allow switch when HP > 50% and party pass
+        boolean switchResult = simulateIsSwitchingFlow(
+            evals, self.getBattlePokemon(), Collections.emptyList(), opponents, self, null,
+            false, false, 0.85, 100.0, true
+        );
+        assertTrue(switchResult, "Protect-only dead position must switch out");
+    }
+
+    @Test
+    @DisplayName("Case 8C: Helping Hand without useful ally offense — ally has no meaningful attack -> dead position")
+    void testCase8C_HelpingHandWithoutUsefulAllyOffense() throws Exception {
+        ActiveBattlePokemon opp = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getROCK(), null, null, null, List.of(createMove("tackle", 40.0, MoveTarget.normal, DamageCategories.INSTANCE.getPHYSICAL())));
+        List<ActiveBattlePokemon> opponents = List.of(opp);
+
+        // Ally has only 0 power / status move (e.g. splash)
+        Move splash = createMove("splash", 0.0, MoveTarget.self, DamageCategories.INSTANCE.getSTATUS());
+        ActiveBattlePokemon ally = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getWATER(), null, null, null, List.of(splash));
+        List<ActiveBattlePokemon> allies = List.of(ally);
+
+        Move helpingHand = createMove("helpinghand", 0.0, MoveTarget.adjacentAlly, DamageCategories.INSTANCE.getSTATUS());
+        Move weakTackle = createMove("tackle", 5.0, MoveTarget.normal, DamageCategories.INSTANCE.getPHYSICAL());
+        ActiveBattlePokemon self = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getNORMAL(), null, null, null, List.of(helpingHand, weakTackle));
+
+        RunBunAI.MoveEvaluation evalHH = createEval("helpinghand", ally, 0, 6);
+        RunBunAI.MoveEvaluation evalWeak = createEval("tackle", opp, 5, -5);
+        List<RunBunAI.MoveEvaluation> evals = List.of(evalHH, evalWeak);
+
+        assertFalse(DeadMatchupDetector.hasMeaningfulAllyOffense(ally.getBattlePokemon(), opponents, self, null), "Ally with splash must have no meaningful offense");
+        assertFalse(DeadMatchupDetector.hasMeaningfulSupportUtility(evals, self.getBattlePokemon(), allies, opponents, self, null), "Helping Hand with useless ally must NOT justify stay");
+        assertTrue(DeadMatchupDetector.isDeadPosition(evals, self.getBattlePokemon(), allies, opponents, self, null), "Must be classified as dead position");
+    }
+
+    @Test
+    @DisplayName("Case 8D: Follow Me meaningful — ally has high-value offense and redirectable threat exists -> support utility true")
+    void testCase8D_FollowMeMeaningful() throws Exception {
+        ActiveBattlePokemon opp = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getNORMAL(), null, null, null, List.of(createMove("tackle", 40.0, MoveTarget.normal, DamageCategories.INSTANCE.getPHYSICAL())));
+        List<ActiveBattlePokemon> opponents = List.of(opp);
+
+        Move hyperBeam = createMove("hyperbeam", 150.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL());
+        ActiveBattlePokemon ally = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getNORMAL(), null, null, null, List.of(hyperBeam));
+        List<ActiveBattlePokemon> allies = List.of(ally);
+
+        Move followMe = createMove("followme", 0.0, MoveTarget.self, DamageCategories.INSTANCE.getSTATUS());
+        Move weakTackle = createMove("tackle", 5.0, MoveTarget.normal, DamageCategories.INSTANCE.getPHYSICAL());
+        ActiveBattlePokemon self = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getNORMAL(), null, null, null, List.of(followMe, weakTackle));
+
+        RunBunAI.MoveEvaluation evalFollowMe = createEval("followme", opp, 0, 6);
+        RunBunAI.MoveEvaluation evalWeak = createEval("tackle", opp, 5, -5);
+        List<RunBunAI.MoveEvaluation> evals = List.of(evalFollowMe, evalWeak);
+
+        assertTrue(DeadMatchupDetector.hasMeaningfulSupportUtility(evals, self.getBattlePokemon(), allies, opponents, self, null), "Follow Me with high value ally must be meaningful support");
+        assertFalse(DeadMatchupDetector.isDeadPosition(evals, self.getBattlePokemon(), allies, opponents, self, null));
+    }
+
+    @Test
+    @DisplayName("Case 8E: Rage Powder versus normal redirectable threats -> support utility true")
+    void testCase8E_RagePowderVsNormalRedirectableThreats() throws Exception {
+        ActiveBattlePokemon normalOpp = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getFIRE(), null, null, null, List.of(createMove("flamethrower", 90.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL())));
+        List<ActiveBattlePokemon> opponents = List.of(normalOpp);
+
+        Move hydroPump = createMove("hydropump", 110.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL());
+        ActiveBattlePokemon ally = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getWATER(), null, null, null, List.of(hydroPump));
+        List<ActiveBattlePokemon> allies = List.of(ally);
+
+        Move ragePowder = createMove("ragepowder", 0.0, MoveTarget.self, DamageCategories.INSTANCE.getSTATUS());
+        Move weakMove = createMove("absorb", 10.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL());
+        ActiveBattlePokemon self = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getBUG(), null, null, null, List.of(ragePowder, weakMove));
+
+        RunBunAI.MoveEvaluation evalRP = createEval("ragepowder", normalOpp, 0, 6);
+        RunBunAI.MoveEvaluation evalWeak = createEval("absorb", normalOpp, 10, -5);
+        List<RunBunAI.MoveEvaluation> evals = List.of(evalRP, evalWeak);
+
+        assertTrue(DeadMatchupDetector.canRedirectOpponent(normalOpp.getBattlePokemon(), true), "Fire-type opponent must be redirectable by Rage Powder");
+        assertTrue(DeadMatchupDetector.hasMeaningfulSupportUtility(evals, self.getBattlePokemon(), allies, opponents, self, null), "Rage Powder against normal threat must be meaningful");
+        assertFalse(DeadMatchupDetector.isDeadPosition(evals, self.getBattlePokemon(), allies, opponents, self, null));
+    }
+
+    @Test
+    @DisplayName("Case 8F: Rage Powder versus Grass-type threat(s) -> Grass immune to powder, support utility false")
+    void testCase8F_RagePowderVsGrassTypeThreats() throws Exception {
+        // Both opponents are Grass-type (Venusaur and Amoonguss)
+        ActiveBattlePokemon venusaur = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getGRASS(), ElementalTypes.INSTANCE.getPOISON(), "overgrow", null, List.of(createMove("sludgebomb", 90.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL())));
+        ActiveBattlePokemon amoonguss = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getGRASS(), ElementalTypes.INSTANCE.getPOISON(), "effectspore", null, List.of(createMove("energyball", 90.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL())));
+        List<ActiveBattlePokemon> opponents = List.of(venusaur, amoonguss);
+
+        // Grass type check
+        assertTrue(DeadMatchupDetector.isGrassType(venusaur.getBattlePokemon()), "Venusaur must be Grass type");
+        assertTrue(DeadMatchupDetector.isGrassType(amoonguss.getBattlePokemon()), "Amoonguss must be Grass type");
+
+        // Neither can be redirected by Rage Powder
+        assertFalse(DeadMatchupDetector.canRedirectOpponent(venusaur.getBattlePokemon(), true), "Venusaur must be immune to Rage Powder redirection");
+        assertFalse(DeadMatchupDetector.canRedirectOpponent(amoonguss.getBattlePokemon(), true), "Amoonguss must be immune to Rage Powder redirection");
+
+        // Ally has strong offense
+        Move psychic = createMove("psychic", 90.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL());
+        ActiveBattlePokemon ally = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getPSYCHIC(), null, null, null, List.of(psychic));
+        List<ActiveBattlePokemon> allies = List.of(ally);
+
+        // User has only Rage Powder
+        Move ragePowder = createMove("ragepowder", 0.0, MoveTarget.self, DamageCategories.INSTANCE.getSTATUS());
+        Move weakMove = createMove("tackle", 5.0, MoveTarget.normal, DamageCategories.INSTANCE.getPHYSICAL());
+        ActiveBattlePokemon self = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getBUG(), null, null, null, List.of(ragePowder, weakMove));
+
+        RunBunAI.MoveEvaluation evalRP = createEval("ragepowder", venusaur, 0, 6);
+        RunBunAI.MoveEvaluation evalWeak1 = createEval("tackle", venusaur, 5, -5);
+        RunBunAI.MoveEvaluation evalWeak2 = createEval("tackle", amoonguss, 5, -5);
+        List<RunBunAI.MoveEvaluation> evals = List.of(evalRP, evalWeak1, evalWeak2);
+
+        // Rage Powder alone must NOT create meaningful support utility when all opponents are Grass-type
+        assertFalse(DeadMatchupDetector.hasMeaningfulSupportUtility(evals, self.getBattlePokemon(), allies, opponents, self, null), "Rage Powder against 100% Grass opponents must NOT provide support utility");
+        assertTrue(DeadMatchupDetector.isDeadPosition(evals, self.getBattlePokemon(), allies, opponents, self, null), "Must be classified as dead position");
+    }
+
+    @Test
+    @DisplayName("Case 8G: Existing Rotom dead-matchup regression — Swampert + Gastrodon vs Rotom-W remains dead position")
+    void testCase8G_ExistingRotomDeadMatchupRegression() throws Exception {
+        ActiveBattlePokemon swampert = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getWATER(), ElementalTypes.INSTANCE.getGROUND(), "torrent", null, List.of(createMove("earthquake", 100.0, MoveTarget.allAdjacent, DamageCategories.INSTANCE.getPHYSICAL())));
+        ActiveBattlePokemon gastrodon = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getWATER(), ElementalTypes.INSTANCE.getGROUND(), "stormdrain", null, List.of(createMove("earthpower", 90.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL())));
+        List<ActiveBattlePokemon> opponents = List.of(swampert, gastrodon);
+
+        // Rotom-W: Hydro Pump, Thunderbolt, Volt Switch, Will-O-Wisp (all 0 damage)
+        Move hydroPump = createMove("hydropump", 110.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL());
+        Move thunderbolt = createMove("thunderbolt", 90.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL());
+        ActiveBattlePokemon rotom = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getELECTRIC(), ElementalTypes.INSTANCE.getWATER(), "levitate", null, List.of(hydroPump, thunderbolt));
+
+        RunBunAI.MoveEvaluation evalTBoltSwampert = createEval("thunderbolt", swampert, 0, -50);
+        RunBunAI.MoveEvaluation evalTBoltGastrodon = createEval("thunderbolt", gastrodon, 0, -50);
+        RunBunAI.MoveEvaluation evalHydroSwampert = createEval("hydropump", swampert, 0, -50);
+        RunBunAI.MoveEvaluation evalHydroGastrodon = createEval("hydropump", gastrodon, 0, -50);
+        List<RunBunAI.MoveEvaluation> evals = List.of(evalTBoltSwampert, evalTBoltGastrodon, evalHydroSwampert, evalHydroGastrodon);
+
+        assertTrue(DeadMatchupDetector.isLowOffensivePressure(evals, opponents), "Rotom-W must have low offensive pressure");
+        assertFalse(DeadMatchupDetector.hasMeaningfulSupportUtility(evals, rotom.getBattlePokemon(), Collections.emptyList(), opponents, rotom, null), "Rotom-W has no support moves");
+        assertTrue(DeadMatchupDetector.isDeadPosition(evals, rotom.getBattlePokemon(), Collections.emptyList(), opponents, rotom, null), "Rotom-W must be dead position");
+
+        // Gate 3 RNG bypass preserved
+        double effectiveRng = DeadMatchupDetector.resolveGate3RandomValue(0.8111489023246552, true);
+        assertEquals(0.0d, effectiveRng, "Gate 3 random veto must be bypassed for dead position");
+
+        // Phase 1 switch preserved
+        boolean switchResult = simulateIsSwitchingFlow(
+            evals, rotom.getBattlePokemon(), Collections.emptyList(), opponents, rotom, null,
+            false, false, 0.8111489023246552, 100.0, true
+        );
+        assertTrue(switchResult, "Rotom-W must switch out");
+    }
+
+    @Test
+    @DisplayName("Case 8H: Disabled/Taunted support move — evaluated with score <= -5 must NOT fall through to raw moveset")
+    void testCase8H_DisabledSupportMoveDoesNotFallThroughToMoveset() throws Exception {
+        ActiveBattlePokemon opp = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getNORMAL(), null, null, null, List.of(createMove("tackle", 40.0, MoveTarget.normal, DamageCategories.INSTANCE.getPHYSICAL())));
+        List<ActiveBattlePokemon> opponents = List.of(opp);
+
+        // High-value offensive ally
+        Move hyperBeam = createMove("hyperbeam", 150.0, MoveTarget.normal, DamageCategories.INSTANCE.getSPECIAL());
+        ActiveBattlePokemon ally = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getNORMAL(), null, null, null, List.of(hyperBeam));
+        List<ActiveBattlePokemon> allies = List.of(ally);
+
+        // Self knows Follow Me in raw moveset, plus weak attack
+        Move followMe = createMove("followme", 0.0, MoveTarget.self, DamageCategories.INSTANCE.getSTATUS());
+        Move weakTackle = createMove("tackle", 5.0, MoveTarget.normal, DamageCategories.INSTANCE.getPHYSICAL());
+        ActiveBattlePokemon self = createActiveBattlePokemon(100, 100, ElementalTypes.INSTANCE.getNORMAL(), null, null, null, List.of(followMe, weakTackle));
+
+        // Follow Me was evaluated by AI but scored -50 (e.g. Taunt / Torment / Disable / Choice-locked)
+        RunBunAI.MoveEvaluation evalFollowMeTaunted = createEval("followme", opp, 0, -50);
+        RunBunAI.MoveEvaluation evalWeak = createEval("tackle", opp, 5, -5);
+        List<RunBunAI.MoveEvaluation> evals = List.of(evalFollowMeTaunted, evalWeak);
+
+        // Evaluated unusable support move must NOT count as available support utility
+        assertFalse(DeadMatchupDetector.hasMeaningfulSupportUtility(evals, self.getBattlePokemon(), allies, opponents, self, null),
+            "Taunted/disabled Follow Me (score <= -5) must NOT grant support utility despite raw moveset presence");
+        assertTrue(DeadMatchupDetector.isDeadPosition(evals, self.getBattlePokemon(), allies, opponents, self, null),
+            "Pokemon with only unusable support moves and low damage must be classified as dead position");
+
+        // Phase 1 switch preserved when HP > 50% and party pass
+        boolean switchResult = simulateIsSwitchingFlow(
+            evals, self.getBattlePokemon(), allies, opponents, self, null,
+            false, false, 0.85, 100.0, true
+        );
+        assertTrue(switchResult, "Taunted dead-position support Pokemon must switch out");
     }
 }
