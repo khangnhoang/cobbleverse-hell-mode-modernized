@@ -101,6 +101,11 @@ public final class Turn1DamageCalculator {
         int atkStage = attackerSlot != null ? state.getStatStage(attackerSlot, statKeyAtk) : 0;
         int defStage = defenderSlot != null ? state.getStatStage(defenderSlot, statKeyDef) : 0;
 
+        // Sacred Sword ignores defender's positive defense stages
+        if ("sacredsword".equals(move.id())) {
+            defStage = Math.min(0, defStage);
+        }
+
         double effectiveAtk = attackStat * getStatStageMultiplier(atkStage);
         double effectiveDef = defenseStat * getStatStageMultiplier(defStage);
 
@@ -150,13 +155,29 @@ public final class Turn1DamageCalculator {
             stabMod = attacker.hasAbility("adaptability") ? 2.0 : 1.5;
         }
 
+        // Sharpness modifier: 1.5x for slicing moves
+        double sharpnessMod = 1.0;
+        if (attacker.hasAbility("sharpness") && isSlicingMove(move.id())) {
+            sharpnessMod = 1.5;
+        }
+
+        // Type-boosting item modifier (e.g. Soft Sand for Ground moves, Black Glasses for Dark moves)
+        double itemTypeMod = 1.0;
+        if (attacker.hasItem("soft_sand") && "ground".equals(moveType)) {
+            itemTypeMod = 1.2;
+        } else if (attacker.hasItem("black_glasses") && "dark".equals(moveType)) {
+            itemTypeMod = 1.2;
+        } else if (attacker.hasItem("charcoal") && "fire".equals(moveType)) {
+            itemTypeMod = 1.2;
+        }
+
         // Helping Hand: 1.5x
         double helpingHandMod = (attackerSlot != null && state.isHelpingHandBoosted(attackerSlot)) ? 1.5 : 1.0;
 
         // Life Orb: 1.3x
         double lifeOrbMod = attacker.hasItem("life_orb") ? 1.3 : 1.0;
 
-        double finalPreRoll = baseDamage * spreadMod * weatherMod * terrainMod * stabMod * typeMultiplier * helpingHandMod * lifeOrbMod;
+        double finalPreRoll = baseDamage * spreadMod * weatherMod * terrainMod * stabMod * sharpnessMod * itemTypeMod * typeMultiplier * helpingHandMod * lifeOrbMod;
 
         // 6. Min and Max bounds (0.85 to 1.00)
         int minDamage = Math.max(1, (int) Math.floor(finalPreRoll * 0.85));
@@ -206,5 +227,15 @@ public final class Turn1DamageCalculator {
             return 2.0 / (2.0 - stage);
         }
         return 1.0;
+    }
+
+    public static boolean isSlicingMove(String moveId) {
+        if (moveId == null) return false;
+        return switch (moveId.toLowerCase(Locale.ROOT)) {
+            case "sacredsword", "psychocut", "nightslash", "leafblade", "kowtowcleave",
+                 "xscissor", "airslash", "aquacutter", "crosspoison", "slash",
+                 "aerialace", "solarblade", "bitterblade", "ceaselessedge", "stoneaxe", "tachyoncutter" -> true;
+            default -> false;
+        };
     }
 }

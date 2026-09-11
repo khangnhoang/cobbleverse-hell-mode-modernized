@@ -105,6 +105,7 @@ public final class ThreatPoolCompetitiveProfiles {
 
         // Neutral / Control
         REGISTRY.put("rillaboom", ThreatPoolCompetitiveProfiles::rillaboom);
+        REGISTRY.put("pincurchin", ThreatPoolCompetitiveProfiles::pincurchin);
         REGISTRY.put("lucario", ThreatPoolCompetitiveProfiles::lucario);
         REGISTRY.put("rotom", ThreatPoolCompetitiveProfiles::rotomWash);
         REGISTRY.put("metagross", ThreatPoolCompetitiveProfiles::metagross);
@@ -760,5 +761,14 @@ public final class ThreatPoolCompetitiveProfiles {
 
     public static CompetitivePokemonProfile venusaur() {
         return KogaCompetitiveProfiles.venusaur();
+    }
+
+    public static CompetitivePokemonProfile pincurchin() {
+        return build("pincurchin", List.of("electric"), "electricsurge", "terrain_extender", "quiet",
+                Map.of(Stat.HP, 48, Stat.ATK, 101, Stat.DEF, 95, Stat.SPA, 91, Stat.SPD, 85, Stat.SPE, 15),
+                Map.of(Stat.HP, 252, Stat.ATK, 0, Stat.DEF, 0, Stat.SPA, 252, Stat.SPD, 4, Stat.SPE, 0), null,
+                List.of(new MoveProfile("risingvoltage", "electric", MoveProfile.Category.SPECIAL, 70, 0, MoveProfile.Target.SINGLE_OPPONENT, false, false),
+                        new MoveProfile("thunderbolt", "electric", MoveProfile.Category.SPECIAL, 90, 0, MoveProfile.Target.SINGLE_OPPONENT, false, false))
+        );
     }
 }

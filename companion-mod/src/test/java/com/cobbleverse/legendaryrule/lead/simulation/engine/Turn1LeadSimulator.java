@@ -3,6 +3,7 @@ package com.cobbleverse.legendaryrule.lead.simulation.engine;
 import com.cobbleverse.legendaryrule.lead.simulation.calculator.Turn1DamageCalculator;
 import com.cobbleverse.legendaryrule.lead.simulation.calculator.Turn1DamageCalculator.DamageRange;
 import com.cobbleverse.legendaryrule.lead.simulation.fixtures.KogaCompetitiveProfiles;
+import com.cobbleverse.legendaryrule.lead.simulation.fixtures.SabrinaCompetitiveProfiles;
 import com.cobbleverse.legendaryrule.lead.simulation.model.*;
 import com.cobbleverse.legendaryrule.lead.simulation.resolver.Turn1ActionResolver;
 import com.cobbleverse.legendaryrule.lead.simulation.resolver.Turn1EntryResolver;
@@ -67,6 +68,15 @@ public class Turn1LeadSimulator {
     ) {
         List<CompetitivePokemonProfile> kogaLeads = KogaCompetitiveProfiles.getPreset(presetId);
         return simulate(playerLeads, kogaLeads, playerPairName, presetId);
+    }
+
+    public Turn1EvaluationResult simulateSabrinaPreset(
+            List<CompetitivePokemonProfile> playerLeads,
+            String presetId,
+            String playerPairName
+    ) {
+        List<CompetitivePokemonProfile> sabrinaLeads = SabrinaCompetitiveProfiles.getPreset(presetId);
+        return simulate(playerLeads, sabrinaLeads, playerPairName, presetId);
     }
 
     public Turn1EvaluationResult simulateSpecificLine(
@@ -302,11 +312,17 @@ public class Turn1LeadSimulator {
         int speed = Turn1SpeedResolver.calculateEffectiveSpeed(mon, state, slot);
 
         // 1. Redirection / Support
-        if ("amoonguss".equals(mon.species())) {
-            MoveProfile ragePowder = mon.getMove("ragepowder");
-            if (ragePowder != null) {
-                list.add(new Turn1Action(slot, ragePowder, slot, ragePowder.priority(), speed));
-            }
+        MoveProfile followMe = mon.getMove("followme");
+        if (followMe != null) {
+            list.add(new Turn1Action(slot, followMe, slot, followMe.priority(), speed));
+        }
+        MoveProfile ragePowder = mon.getMove("ragepowder");
+        if (ragePowder != null) {
+            list.add(new Turn1Action(slot, ragePowder, slot, ragePowder.priority(), speed));
+        }
+        MoveProfile helpingHand = mon.getMove("helpinghand");
+        if (helpingHand != null) {
+            list.add(new Turn1Action(slot, helpingHand, "ally", helpingHand.priority(), speed));
         }
 
         // 2. Attacks
@@ -343,10 +359,14 @@ public class Turn1LeadSimulator {
 
         // First action execution simulation
         int score = 0;
+        boolean helpingHandBoosted = false;
         if (first.move().isStatus()) {
-            score += 300; // Value for support moves like Rage Powder
+            score += 300; // Value for support moves like Rage Powder / Follow Me / Helping Hand
+            if ("helpinghand".equals(first.move().id())) {
+                helpingHandBoosted = true;
+            }
         } else {
-            score += evaluateActionAgainstHps(state, first, hp0, hp1);
+            score += evaluateActionAgainstHps(state, first, hp0, hp1, false);
             hp0 = applySimulatedDamage(state, first, "player_0", hp0);
             hp1 = applySimulatedDamage(state, first, "player_1", hp1);
         }
@@ -355,13 +375,13 @@ public class Turn1LeadSimulator {
         if (second.move().isStatus()) {
             score += 300;
         } else {
-            score += evaluateActionAgainstHps(state, second, hp0, hp1);
+            score += evaluateActionAgainstHps(state, second, hp0, hp1, helpingHandBoosted);
         }
 
         return score;
     }
 
-    private int evaluateActionAgainstHps(Turn1BattleState state, Turn1Action action, int hp0, int hp1) {
+    private int evaluateActionAgainstHps(Turn1BattleState state, Turn1Action action, int hp0, int hp1, boolean isHelpingHand) {
         CompetitivePokemonProfile attacker = state.getProfileBySlot(action.actorSlot());
         MoveProfile move = action.move();
         int score = 0;
@@ -372,12 +392,14 @@ public class Turn1LeadSimulator {
                 if (currentHp <= 0) continue;
                 CompetitivePokemonProfile def = state.getProfileBySlot(tSlot);
                 DamageRange r = Turn1DamageCalculator.calculateDamage(attacker, def, move, state, action.actorSlot(), tSlot);
-                int dmg = Math.min(currentHp, r.maxDamage());
+                int maxDmg = isHelpingHand ? (int)(r.maxDamage() * 1.5) : r.maxDamage();
+                int minDmg = isHelpingHand ? (int)(r.minDamage() * 1.5) : r.minDamage();
+                int dmg = Math.min(currentHp, maxDmg);
                 score += dmg;
-                score += (r.minDamage() + r.maxDamage()) / 4;
-                if (r.maxDamage() >= currentHp) {
+                score += (minDmg + maxDmg) / 4;
+                if (maxDmg >= currentHp) {
                     score += 1000;
-                    if (r.minDamage() >= currentHp) score += 200;
+                    if (minDmg >= currentHp) score += 200;
                 }
             }
         } else {
@@ -388,12 +410,14 @@ public class Turn1LeadSimulator {
             }
             CompetitivePokemonProfile def = state.getProfileBySlot(tSlot);
             DamageRange r = Turn1DamageCalculator.calculateDamage(attacker, def, move, state, action.actorSlot(), tSlot);
-            int dmg = Math.min(currentHp, r.maxDamage());
+            int maxDmg = isHelpingHand ? (int)(r.maxDamage() * 1.5) : r.maxDamage();
+            int minDmg = isHelpingHand ? (int)(r.minDamage() * 1.5) : r.minDamage();
+            int dmg = Math.min(currentHp, maxDmg);
             score += dmg;
-            score += (r.minDamage() + r.maxDamage()) / 4;
-            if (r.maxDamage() >= currentHp) {
+            score += (minDmg + maxDmg) / 4;
+            if (maxDmg >= currentHp) {
                 score += 1000;
-                if (r.minDamage() >= currentHp) score += 200;
+                if (minDmg >= currentHp) score += 200;
             }
         }
 
@@ -409,6 +433,12 @@ public class Turn1LeadSimulator {
         CompetitivePokemonProfile attacker = state.getProfileBySlot(action.actorSlot());
         CompetitivePokemonProfile def = state.getProfileBySlot(targetSlot);
         DamageRange r = Turn1DamageCalculator.calculateDamage(attacker, def, move, state, action.actorSlot(), targetSlot);
+
+        // Account for Disguise
+        if (def.hasAbility("disguise") && currentHp == def.actualStats().hp() && r.maxDamage() > 0) {
+            int disguiseDmg = Math.max(1, def.actualStats().hp() / 8);
+            return Math.max(0, currentHp - disguiseDmg);
+        }
 
         // Account for Focus Sash if defender is at full HP
         boolean hasFocusSash = def.hasItem("focus_sash") && currentHp == def.actualStats().hp();
