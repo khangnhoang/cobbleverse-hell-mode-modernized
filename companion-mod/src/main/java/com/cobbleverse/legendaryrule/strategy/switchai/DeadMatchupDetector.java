@@ -106,6 +106,19 @@ public final class DeadMatchupDetector {
     }
 
     /**
+     * Resolves the effective random value for Gate 3:
+     * If low offensive pressure is detected (< 20%), the 25% random veto is bypassed (returns 0.0d).
+     * If low offensive pressure is false (including critical threat alone, native hasLowScore alone,
+     * or gray zone 20-33%), preserves native random value untouched.
+     */
+    public static double resolveGate3RandomValue(double nativeVal, boolean lowPressure) {
+        if (!(nativeVal < 0.75d) && lowPressure) {
+            return 0.0d;
+        }
+        return nativeVal;
+    }
+
+    /**
      * True if there is at least one eligible opponent and EVERY eligible opponent can OHKO self.
      * Reuses native RunBunAI.isOHKO(oppMoves, oppBP, self, activeBattlePokemon, stages).
      */

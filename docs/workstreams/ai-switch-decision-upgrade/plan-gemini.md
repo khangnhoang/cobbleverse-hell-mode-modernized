@@ -19,7 +19,8 @@ Workstream này nâng cấp logic quyết định switch của AI trong Cobbleve
      - Gỡ false veto (`hasLowScore = true`) khi AI rơi vào thế trận bế tắc tấn công (`isLowOffensivePressure < 20%` trên mọi đối thủ hợp lệ, bao gồm status moves và weak chip moves).
      - Cho phép switch (`hasLowScore = true`) khi AI chịu nguy hiểm cận kề (`isUnderCriticalThreat`: cả 2 đối thủ đều có khả năng OHKO AI).
      - Reconciled Contract: `hasLowScore = nativeHasLowScore || lowPressure || criticalThreat;` (khắc phục điểm nghẽn điều kiện `criticalThreat && lowPressure` quá hẹp khiến matchup bế tắc không bị OHKO bị kẹt).
-   - Giữ nguyên toàn bộ các native gates khác (random 75% gate, HP 50% gate, party survivability traversal).
+   - **Gate 3 (Random Veto Bypass — Reconciled Live Canary Run 3):** Nếu AI rơi vào thế trận bế tắc tấn công (`lowPressure == true`), bypass 25% random veto bản địa bằng cách trả về `0.0d` (< 0.75d) để cho phép đi tiếp vào Gate 4 (HP) và Gate 5 (Party). Nếu `lowPressure == false` (bao gồm `nativeHasLowScore == true` đơn thuần, `criticalThreat == true` đơn thuần, hoặc vùng xám [20%, 33%)), giữ nguyên 100% giá trị RNG bản địa.
+   - Giữ nguyên Gate 4 (HP > 50% gate) và Gate 5 (party survivability traversal).
 
 2. **Phase 2 (Scoring Switch Candidate & Doubles Survivability):**
    - Thay thế điểm `switchScore` tại thời điểm put vào `switchingScores` map trong `RunBunAI.choose()` (bytecode offset 1618) bằng packed score đa tầng lexicographical:
@@ -97,6 +98,13 @@ Workstream này nâng cấp logic quyết định switch của AI trong Cobbleve
     Kiểm tra `RunBunAI.isOHKO(oppMoves, opp.getBattlePokemon(), self, activeBattlePokemon, stages)`.
   - Trả về `true` **CHỈ KHI MỌI** eligible opponent đều có thể OHKO `self` (Critical Threat đồng thời từ cả 2 phía trong Doubles).
 
+- **Phương thức 4: `resolveGate3RandomValue` (Gate 3 Random Veto Bypass — Reconciled Live Canary Run 3)**
+  ```java
+  public static double resolveGate3RandomValue(double nativeVal, boolean lowPressure)
+  ```
+  - Nếu `lowPressure == true` và `nativeVal >= 0.75d`: trả về `0.0d` (< 0.75d) để bypass 25% random veto bản địa.
+  - Ngược lại: trả về nguyên vẹn `nativeVal` (bảo toàn 100% native RNG khi không ở trạng thái low pressure).
+
 ### 3.2 [`IsSwitchingOverrideMixin.java`](file:///c:/Users/khang/Downloads/Doctors%20Cobblemon/companion-mod/src/main/java/com/cobbleverse/legendaryrule/mixin/IsSwitchingOverrideMixin.java)
 - **Target Class:** `com.gitlab.surilexa.rbrctai.api.ai.RunBunAI`
 - **Target Method:**
@@ -163,7 +171,34 @@ Workstream này nâng cấp logic quyết định switch của AI trong Cobbleve
   }
   ```
 
-### 3.3 Khung Xác minh 6 Required Regression Cases
+- **Hook 3 (`@WrapOperation` trên Gate 3 `Random.nextDouble()` - Reconciled Live Canary Run 3):**
+  Bytecode xác minh: gọi `Random.nextDouble()` tại offset 106.
+  > [!IMPORTANT]
+  > Khi `lowPressure == true`, Hook 3 gọi `DeadMatchupDetector.resolveGate3RandomValue(val, lowPressure)`. Nếu `val >= 0.75d`, giá trị được chuẩn hóa về `0.0d` (< 0.75d) để gỡ bỏ random veto 25% cho AI bế tắc tấn công. Khi `lowPressure == false`, giá trị RNG của native được giữ nguyên 100%.
+
+  ```java
+  @WrapOperation(
+      method = "isSwitching(Ljava/util/List;Ljava/util/List;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Ljava/util/List;Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/gitlab/surilexa/rbrctai/api/ai/utils/RBStatStages;Z)Z",
+      at = @At(
+          value = "INVOKE",
+          target = "Ljava/util/Random;nextDouble()D"
+      ),
+      require = 1,
+      remap = false
+  )
+  private static double cobbleverse$wrapRandomNextDouble(
+      Random rng,
+      Operation<Double> original,
+      @Local(name = "evaluations", index = 0, argsOnly = true) List<RunBunAI.MoveEvaluation> evaluations,
+      @Local(name = "opponents", index = 3, argsOnly = true) List<ActiveBattlePokemon> opponents
+  ) {
+      double val = original.call(rng);
+      boolean lowPressure = DeadMatchupDetector.isLowOffensivePressure(evaluations, opponents);
+      return DeadMatchupDetector.resolveGate3RandomValue(val, lowPressure);
+  }
+  ```
+
+### 3.3 Khung Xác minh 7 Required Regression Cases
 1. **Case A (Status False Veto):**
    - Moveset: Protect (score 6, damage 0), các move còn lại fail/0.
    - Gate 1: `isMeaningfulOffensiveMove` trả về `false` (damage = 0).
@@ -191,10 +226,12 @@ Workstream này nâng cấp logic quyết định switch của AI trong Cobbleve
    - Cả 2 opponent OHKO: Nếu AI không có strong move, `criticalThreat = true` $\rightarrow$ `hasLowScore = true` (mở switch eligibility để tránh chết oan).
    - Chỉ 1 opponent OHKO: `criticalThreat = false`. Nếu `lowPressure = true` $\rightarrow$ switch eligible; nếu có strong move $\rightarrow$ Gate 1 veto (ở lại chiến đấu).
    - Không opponent nào OHKO: `criticalThreat = false`. Nếu `lowPressure = true` (Rotom-W live case) $\rightarrow$ switch eligible.
-6. **Case F (Preserve Native Gates):**
-   - Native Random 75% gate (offset 106) giữ nguyên.
-   - Native HP > 50% gate (offset 122) giữ nguyên.
-   - Native Party Survivability traversal (offset 123-353) giữ nguyên: chỉ switch khi có bench ally sống sót.
+6. **Case F (Preserve Native Gates when lowPressure is false):**
+   - Khi `lowPressure == false` (ví dụ gray zone 25% damage hoặc chỉ có `criticalThreat`): Gate 3 Random 75% gate giữ nguyên 100% giá trị RNG native.
+   - Native HP > 50% gate (offset 122) luôn giữ nguyên.
+   - Native Party Survivability traversal (offset 123-353) luôn giữ nguyên: chỉ switch khi có bench ally sống sót.
+7. **Case G (Gate 3 Bypass under lowPressure — Live Canary Run 3):**
+   - Khi `lowPressure == true` và RNG native >= 0.75d (ví dụ 0.8855 trong live run 3): Hook 3 chuyển đổi giá trị thành `0.0d` (< 0.75d), bypass random veto và chuyển giao quyền quyết định cho Gate 4 (HP) và Gate 5 (Party).
 
 ---
 
@@ -236,6 +273,16 @@ Workstream này nâng cấp logic quyết định switch của AI trong Cobbleve
 > **Reconciled F-REV-02 (Không bão hòa sớm sát thương phòng thủ):**
 > Để `defenseRank` phân định được các candidate Tier 2 (ví dụ candidate ăn 101% sát thương phải thắng candidate ăn 200% sát thương khi có cùng offensive coverage), ta **không bão hòa** $D_{\text{combined}}$ tại `currentHP`.
 > $D_{\text{combined}}$ dùng cho tính toán tỷ lệ phòng thủ được tích lũy đầy đủ giá trị thực tế lên tới trần $10 \times \text{currentHP}$ (1000.0%).
+
+#### Candidate Offensive Coverage Calculation (Reconciled F-P2-02):
+- **Actual-Damage Metric vs Type-Chart Pre-Screening:** `calculateCoverage` đánh giá năng lực tấn công của candidate bằng giá trị sát thương thực tế cao nhất ($\max(\text{damage})$) từ các đòn đánh damaging hợp lệ thông qua `evaluateDamage`, thay vì phân loại rời rạc theo hệ số hiệu quả type-chart (`RBTypeChart.getEffectiveness`).
+- **Competitive Rationale:** Trong đấu trường VGC / Doubles, chỉ số tấn công cơ bản (Base Stats), EV/IV, STAB (Same-Type Attack Bonus), bối cảnh thời tiết/terrain, và item có thể khiến một đòn đánh bị kháng (resisted - 0.5x, ví dụ Choice Specs STAB Draco Meteor gây 85 damage) gây sát thương thực tế vượt trội so với một đòn đánh trung tính (neutral - 1.0x, ví dụ Tackle không đầu tư gây 25 damage). Việc dùng trực tiếp damage calculation đã resolve dynamic moves và ability immunity phản ánh chính xác áp lực sát thương (offensive pressure) thực chiến lên đối thủ.
+- **Quy trình tính Coverage:**
+  1. Với mỗi eligible opponent $i$, duyệt toàn bộ đòn đánh của candidate: bỏ qua status moves (`category.equalsIgnoreCase("status")`).
+  2. Tính damage thông qua `evaluateDamage` (đã bao gồm `DynamicMoveResolver` và `AbilityImmunityTable`).
+  3. Lấy sát thương cao nhất $D_{\text{best}, i} = \max(\text{damage})$.
+  4. Chuẩn hóa theo máu tối đa của mục tiêu: $C_i = \min(1000, \lceil 1000.0 \times D_{\text{best}, i} / \text{opponentMaxHP} \rceil)$ (mỗi mục tiêu tối đa 1000 đơn vị, tức 100.0%).
+  5. Tổng coverage: $C_{\text{total}} = \sum_i C_i$ (trong Doubles tối đa 2000 đơn vị cho 2 mục tiêu).
 
 #### Determinate Packed Lexicographical Score (Reconciled F-REV-02, F-REV-04):
 Điểm số được đóng gói thành số nguyên `int` 32-bit tương thích với `Map<BattlePokemon, Integer> switchingScores`:

@@ -11,7 +11,8 @@
     "PokeMathMaxMixin",
     "RunBunAIChooseMixin",
     "ContextManagerMixin",
-    "IsSwitchingOverrideMixin"
+    "IsSwitchingOverrideMixin",
+    "SwitchCandidateScoringMixin"
   ],
   "injectors": {
     "defaultRequire": 1

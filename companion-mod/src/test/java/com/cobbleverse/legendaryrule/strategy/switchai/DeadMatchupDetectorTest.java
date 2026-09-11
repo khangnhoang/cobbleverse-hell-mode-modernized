@@ -363,4 +363,144 @@ class DeadMatchupDetectorTest {
         boolean adjustedHasLowScore = nativeHasLowScore || lowPressure || criticalThreat;
         assertTrue(adjustedHasLowScore, "Rotom-W switch consideration must be opened (hasLowScore = true)");
     }
+
+    // ==========================================
+    // Phase 1 Gate 3 & Full Flow Behavioral Tests (Cases A - G)
+    // ==========================================
+
+    public static boolean simulateIsSwitchingFlow(
+        List<RunBunAI.MoveEvaluation> evaluations,
+        List<ActiveBattlePokemon> opponents,
+        boolean nativeHasLowScore,
+        boolean criticalThreat,
+        double rawRng,
+        double percentHp,
+        boolean partySurvivabilityPass
+    ) {
+        // Gate 1: Meaningful stay veto
+        boolean meaningfulStay = evaluations.stream().anyMatch(DeadMatchupDetector::isMeaningfulOffensiveMove);
+        if (meaningfulStay) {
+            return false;
+        }
+
+        // Gate 2: Adjust hasLowScore
+        boolean lowPressure = DeadMatchupDetector.isLowOffensivePressure(evaluations, opponents);
+        boolean hasLowScore = nativeHasLowScore || lowPressure || criticalThreat;
+
+        // Gate 3: Random Gate with lowPressure bypass
+        double effectiveRng = DeadMatchupDetector.resolveGate3RandomValue(rawRng, lowPressure);
+        if (effectiveRng >= 0.75d) {
+            return false;
+        }
+
+        // Gate 4: HP Gate (> 50%)
+        if (Math.ceil(percentHp) <= 50.0d) {
+            return false;
+        }
+
+        // Gate 5: Party Survivability Gate
+        if (partySurvivabilityPass) {
+            return hasLowScore;
+        }
+        return false;
+    }
+
+    @Test
+    @DisplayName("Case A: Live regression — lowPressure=true and rng=0.8111489023246552 bypasses Gate 3 random veto")
+    void testCaseALiveRegressionGate3Bypass() {
+        double liveRng = 0.8111489023246552;
+        double effectiveRng = DeadMatchupDetector.resolveGate3RandomValue(liveRng, true);
+        assertTrue(effectiveRng < 0.75d, "Gate 3 random veto must be bypassed for lowPressure=true");
+        assertEquals(0.0d, effectiveRng);
+    }
+
+    @Test
+    @DisplayName("Case B: Preserve native RNG outside dead offense — lowPressure=false and rng>=0.75 returns native veto")
+    void testCaseBPreserveNativeRngOutsideDeadOffense() {
+        double liveRng = 0.8111489023246552;
+        double effectiveRng = DeadMatchupDetector.resolveGate3RandomValue(liveRng, false);
+        assertTrue(effectiveRng >= 0.75d, "Native random veto must be preserved when lowPressure is false");
+        assertEquals(liveRng, effectiveRng, 1e-9);
+    }
+
+    @Test
+    @DisplayName("Case C: HP gate preserved — lowPressure=true, rng=0.811, but HP <= 50% rejects switch")
+    void testCaseCHpGatePreserved() throws Exception {
+        ActiveBattlePokemon opp = createOpponent(100, false);
+        RunBunAI.MoveEvaluation weakEval = createEval(opp, 15, 6); // 15% < 20%
+        List<RunBunAI.MoveEvaluation> evals = List.of(weakEval);
+
+        boolean switchResult = simulateIsSwitchingFlow(
+            evals, List.of(opp), false, false,
+            0.8111489023246552, 45.0 /* HP <= 50% */, true
+        );
+        assertFalse(switchResult, "HP <= 50% must reject switch even when lowPressure bypasses Gate 3");
+    }
+
+    @Test
+    @DisplayName("Case D: Party gate preserved — lowPressure=true, HP > 50%, but no survivable candidate rejects switch")
+    void testCaseDPartyGatePreserved() throws Exception {
+        ActiveBattlePokemon opp = createOpponent(100, false);
+        RunBunAI.MoveEvaluation weakEval = createEval(opp, 15, 6);
+        List<RunBunAI.MoveEvaluation> evals = List.of(weakEval);
+
+        boolean switchResult = simulateIsSwitchingFlow(
+            evals, List.of(opp), false, false,
+            0.8111489023246552, 100.0 /* HP > 50% */, false /* party fail */
+        );
+        assertFalse(switchResult, "Party gate failure must reject switch even when lowPressure bypasses Gate 3");
+    }
+
+    @Test
+    @DisplayName("Case E: Successful dead-matchup switch — lowPressure=true, HP > 50%, party pass -> switch true")
+    void testCaseESuccessfulDeadMatchupSwitch() throws Exception {
+        ActiveBattlePokemon opp = createOpponent(100, false);
+        RunBunAI.MoveEvaluation weakEval = createEval(opp, 15, 6);
+        List<RunBunAI.MoveEvaluation> evals = List.of(weakEval);
+
+        boolean switchResult = simulateIsSwitchingFlow(
+            evals, List.of(opp), false, false,
+            0.8111489023246552, 100.0, true
+        );
+        assertTrue(switchResult, "Low pressure with HP>50% and party pass must successfully switch");
+    }
+
+    @Test
+    @DisplayName("Case F: Strong offense regression — move >= 33% or lethal vetoes switch at Gate 1 before Gate 3")
+    void testCaseFStrongOffenseVetoesAtGate1() throws Exception {
+        ActiveBattlePokemon opp = createOpponent(100, false);
+        RunBunAI.MoveEvaluation strongEval = createEval(opp, 40, 9); // 40% >= 33%
+        List<RunBunAI.MoveEvaluation> evals = List.of(strongEval);
+
+        boolean switchResult = simulateIsSwitchingFlow(
+            evals, List.of(opp), false, false,
+            0.50 /* rng pass */, 100.0, true
+        );
+        assertFalse(switchResult, "Strong move >= 33% must veto switch at Gate 1");
+    }
+
+    @Test
+    @DisplayName("Case G: Gray zone (20-33% offense) — lowPressure=false, not meaningful stay, native RNG preserved")
+    void testCaseGGrayZonePreservesNativeRng() throws Exception {
+        ActiveBattlePokemon opp = createOpponent(100, false);
+        RunBunAI.MoveEvaluation grayEval = createEval(opp, 25, 6); // 25% is in [20%, 33%)
+        List<RunBunAI.MoveEvaluation> evals = List.of(grayEval);
+
+        assertFalse(DeadMatchupDetector.isLowOffensivePressure(evals, List.of(opp)), "25% must NOT be low pressure");
+        assertFalse(DeadMatchupDetector.isMeaningfulOffensiveMove(grayEval), "25% must NOT be meaningful stay");
+
+        // When RNG >= 0.75, native veto applies
+        boolean rejectWithHighRng = simulateIsSwitchingFlow(
+            evals, List.of(opp), false, false,
+            0.80, 100.0, true
+        );
+        assertFalse(rejectWithHighRng, "Gray zone with RNG >= 0.75 must be rejected by native random gate");
+
+        // If nativeHasLowScore was true (e.g. status hole) and RNG < 0.75, passes
+        boolean passWithLowRngAndNativeLowScore = simulateIsSwitchingFlow(
+            evals, List.of(opp), true, false,
+            0.50, 100.0, true
+        );
+        assertTrue(passWithLowRngAndNativeLowScore, "Gray zone with nativeHasLowScore and RNG < 0.75 passes");
+    }
 }

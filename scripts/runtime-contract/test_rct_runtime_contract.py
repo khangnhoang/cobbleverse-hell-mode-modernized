@@ -448,6 +448,66 @@ def main():
         checks.append(("IsSwitchingOverrideMixin declares @ModifyVariable targeting hasLowScore at index 12", False))
         checks.append(("IsSwitchingOverrideMixin @ModifyVariable omits ordinal (F-REV-01 invariant)", False))
 
+    # 10. Switch Candidate Scoring Upgrade (Phase 2) Bytecode & Mixin Contracts
+    # a) Mixin registration
+    if mixins_json_path.exists():
+        with open(mixins_json_path, "r", encoding="utf-8") as mf:
+            mixins_data = json.load(mf)
+            declared_mixins = mixins_data.get("mixins", [])
+            checks.append(("rct_legendary_rule.mixins.json declares SwitchCandidateScoringMixin", "SwitchCandidateScoringMixin" in declared_mixins))
+
+    # b) RunBunAI.choose contains Map.put call site for switchingScores
+    choose_match = re.search(r'public com\.cobblemon\.mod\.common\.battles\.ShowdownActionResponse choose\(.*?\n\s+Code:.*?(?=\n\s+public |\n\s+private |\Z)', runbun_javap, re.DOTALL)
+    if choose_match:
+        choose_code = choose_match.group(0)
+        has_map_put = bool(re.search(r'invokeinterface\s+#\d+,\s+3\s+//\s+InterfaceMethod\s+java/util/Map\.put:\(Ljava/lang/Object;Ljava/lang/Object;\)Ljava/lang/Object;', choose_code))
+        checks.append(("RunBunAI.choose invokes Map.put for switchingScores at offset ~1618", has_map_put))
+
+        # Parse LVT of choose covering Map.put
+        choose_lvt = [
+            {'start': int(m.group(1)), 'length': int(m.group(2)), 'slot': int(m.group(3)), 'name': m.group(4), 'sig': m.group(5)}
+            for m in local_lvt_pattern.finditer(choose_code)
+        ]
+        checks.append(("RunBunAI.choose LVT maps slot 38 to possibleSwitch at offset 1618", any(e['slot'] == 38 and e['name'] == 'possibleSwitch' and e['start'] <= 1618 < e['start'] + e['length'] for e in choose_lvt)))
+        checks.append(("RunBunAI.choose LVT maps slot 26 to allOpponentActiveBattlePokemon at offset 1618", any(e['slot'] == 26 and e['name'] == 'allOpponentActiveBattlePokemon' and e['start'] <= 1618 < e['start'] + e['length'] for e in choose_lvt)))
+        checks.append(("RunBunAI.choose LVT maps slot 1 to activeBattlePokemon at offset 1618", any(e['slot'] == 1 and e['name'] == 'activeBattlePokemon' and e['start'] <= 1618 < e['start'] + e['length'] for e in choose_lvt)))
+        checks.append(("RunBunAI.choose LVT maps slot 13 to battlePokemon at offset 1618", any(e['slot'] == 13 and e['name'] == 'battlePokemon' and e['start'] <= 1618 < e['start'] + e['length'] for e in choose_lvt)))
+        checks.append(("RunBunAI.choose LVT maps slot 32 to switchScore at offset 1618", any(e['slot'] == 32 and e['name'] == 'switchScore' and e['start'] <= 1618 < e['start'] + e['length'] for e in choose_lvt)))
+        checks.append(("RunBunAI.choose LVT maps slot 31 to switchingScores at offset 1618", any(e['slot'] == 31 and e['name'] == 'switchingScores' and e['start'] <= 1618 < e['start'] + e['length'] for e in choose_lvt)))
+    else:
+        checks.append(("RunBunAI.choose invokes Map.put for switchingScores at offset ~1618", False))
+        checks.append(("RunBunAI.choose LVT maps slot 38 to possibleSwitch at offset 1618", False))
+        checks.append(("RunBunAI.choose LVT maps slot 26 to allOpponentActiveBattlePokemon at offset 1618", False))
+        checks.append(("RunBunAI.choose LVT maps slot 1 to activeBattlePokemon at offset 1618", False))
+        checks.append(("RunBunAI.choose LVT maps slot 13 to battlePokemon at offset 1618", False))
+        checks.append(("RunBunAI.choose LVT maps slot 32 to switchScore at offset 1618", False))
+        checks.append(("RunBunAI.choose LVT maps slot 31 to switchingScores at offset 1618", False))
+
+    # c) BattleStates.getTransformationOrEffected in RCTAPI
+    battle_states_javap = get_class_javap(rctapi_jars[0], "com/gitlab/srcmc/rctapi/api/ai/utils/BattleStates.class")
+    checks.append(("BattleStates.getTransformationOrEffected method exists in RCTAPI", "getTransformationOrEffected(com.cobblemon.mod.common.battles.pokemon.BattlePokemon)" in battle_states_javap))
+
+    # d) SwitchCandidateScoringMixin source verification
+    candidate_mixin_source_path = os.path.join(repo_root, "companion-mod", "src", "main", "java", "com", "cobbleverse", "legendaryrule", "mixin", "SwitchCandidateScoringMixin.java")
+    if os.path.exists(candidate_mixin_source_path):
+        with open(candidate_mixin_source_path, "r", encoding="utf-8") as f:
+            candidate_mixin_src = f.read()
+        checks.append(("SwitchCandidateScoringMixin targets RunBunAI", "RunBunAI.class" in candidate_mixin_src or "com.gitlab.surilexa.rbrctai.api.ai.RunBunAI" in candidate_mixin_src))
+        checks.append(("SwitchCandidateScoringMixin declares @WrapOperation on Map.put", "@WrapOperation" in candidate_mixin_src and "Map;put" in candidate_mixin_src))
+        checks.append(("SwitchCandidateScoringMixin declares @Shadow battleStatStages", "@Shadow" in candidate_mixin_src and "battleStatStages" in candidate_mixin_src))
+        checks.append(("SwitchCandidateScoringMixin captures possibleSwitch at index 38", '@Local' in candidate_mixin_src and 'name = "possibleSwitch"' in candidate_mixin_src and 'index = 38' in candidate_mixin_src))
+        checks.append(("SwitchCandidateScoringMixin captures allOpponentActiveBattlePokemon at index 26", '@Local' in candidate_mixin_src and 'name = "allOpponentActiveBattlePokemon"' in candidate_mixin_src and 'index = 26' in candidate_mixin_src))
+        checks.append(("SwitchCandidateScoringMixin captures switchScore at index 32", '@Local' in candidate_mixin_src and 'name = "switchScore"' in candidate_mixin_src and 'index = 32' in candidate_mixin_src))
+        checks.append(("SwitchCandidateScoringMixin enforces fail-loud IllegalStateException (F-REV-05)", "IllegalStateException" in candidate_mixin_src and "assert " not in candidate_mixin_src))
+    else:
+        checks.append(("SwitchCandidateScoringMixin targets RunBunAI", False))
+        checks.append(("SwitchCandidateScoringMixin declares @WrapOperation on Map.put", False))
+        checks.append(("SwitchCandidateScoringMixin declares @Shadow battleStatStages", False))
+        checks.append(("SwitchCandidateScoringMixin captures possibleSwitch at index 38", False))
+        checks.append(("SwitchCandidateScoringMixin captures allOpponentActiveBattlePokemon at index 26", False))
+        checks.append(("SwitchCandidateScoringMixin captures switchScore at index 32", False))
+        checks.append(("SwitchCandidateScoringMixin enforces fail-loud IllegalStateException (F-REV-05)", False))
+
     # Evaluate checks
     failed = False
     for desc, passed in checks:
