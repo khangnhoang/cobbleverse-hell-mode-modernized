@@ -368,6 +368,86 @@ def main():
     checks.append(("MoveTarget.allAdjacentFoes exists", "allAdjacentFoes" in movetarget_javap))
     checks.append(("MoveTarget.allAdjacent exists", "allAdjacent" in movetarget_javap))
 
+    # 9. Switch Decision Upgrade (Phase 1) Bytecode & Mixin Contracts
+    # a) Mixin registration
+    if mixins_json_path.exists():
+        with open(mixins_json_path, "r", encoding="utf-8") as mf:
+            mixins_data = json.load(mf)
+            declared_mixins = mixins_data.get("mixins", [])
+            checks.append(("rct_legendary_rule.mixins.json declares IsSwitchingOverrideMixin", "IsSwitchingOverrideMixin" in declared_mixins))
+
+    # b) RunBunAI.isSwitching descriptor and bytecode structure
+    is_switching_desc = "(Ljava/util/List;Ljava/util/List;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Ljava/util/List;Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/gitlab/surilexa/rbrctai/api/ai/utils/RBStatStages;Z)Z"
+    checks.append(("RunBunAI.isSwitching method descriptor (7 params)Z", is_switching_desc in runbun_javap))
+
+    is_switching_match = re.search(r'public static boolean isSwitching\(.*?\n\s+Code:.*?(?=\n\s+public |\n\s+private |\Z)', runbun_javap, re.DOTALL)
+    if is_switching_match:
+        is_switching_code = is_switching_match.group(0)
+
+        # Gate 1: Stream.anyMatch invocation at offset 11
+        has_stream_anymatch = bool(re.search(r'invokeinterface\s+#\d+,\s+2\s+//\s+InterfaceMethod\s+java/util/stream/Stream\.anyMatch:\(Ljava/util/function/Predicate;\)Z', is_switching_code))
+        checks.append(("RunBunAI.isSwitching invokes Stream.anyMatch at Gate 1", has_stream_anymatch))
+
+        # Gate 2: istore 12 instruction for hasLowScore
+        has_istore12 = bool(re.search(r'\bistore\s+12\b', is_switching_code))
+        checks.append(("RunBunAI.isSwitching stores hasLowScore into local slot 12 (istore 12)", has_istore12))
+
+        # Parse LVT of isSwitching
+        local_lvt_pattern = re.compile(r'^\s+(\d+)\s+(\d+)\s+(\d+)\s+(\S+)\s+(\S+)', re.MULTILINE)
+        is_switching_lvt = [
+            {'start': int(m.group(1)), 'length': int(m.group(2)), 'slot': int(m.group(3)), 'name': m.group(4), 'sig': m.group(5)}
+            for m in local_lvt_pattern.finditer(is_switching_code)
+        ]
+
+        has_lvt_haslowscore = any(e['slot'] == 12 and e['name'] == 'hasLowScore' and e['sig'] == 'Z' for e in is_switching_lvt)
+        checks.append(("RunBunAI.isSwitching LVT maps slot 12 to hasLowScore (Z)", has_lvt_haslowscore))
+
+        has_lvt_evals = any(e['slot'] == 0 and e['name'] == 'evaluations' for e in is_switching_lvt)
+        checks.append(("RunBunAI.isSwitching LVT maps slot 0 to evaluations", has_lvt_evals))
+
+        has_lvt_self = any(e['slot'] == 2 and e['name'] == 'self' for e in is_switching_lvt)
+        checks.append(("RunBunAI.isSwitching LVT maps slot 2 to self", has_lvt_self))
+
+        has_lvt_opponents = any(e['slot'] == 3 and e['name'] == 'opponents' for e in is_switching_lvt)
+        checks.append(("RunBunAI.isSwitching LVT maps slot 3 to opponents", has_lvt_opponents))
+
+        has_lvt_active_bp = any(e['slot'] == 4 and e['name'] == 'activeBattlePokemon' for e in is_switching_lvt)
+        checks.append(("RunBunAI.isSwitching LVT maps slot 4 to activeBattlePokemon", has_lvt_active_bp))
+
+        has_lvt_stat_stages = any(e['slot'] == 5 and e['name'] == 'battleStatStages' for e in is_switching_lvt)
+        checks.append(("RunBunAI.isSwitching LVT maps slot 5 to battleStatStages", has_lvt_stat_stages))
+    else:
+        checks.append(("RunBunAI.isSwitching invokes Stream.anyMatch at Gate 1", False))
+        checks.append(("RunBunAI.isSwitching stores hasLowScore into local slot 12 (istore 12)", False))
+        checks.append(("RunBunAI.isSwitching LVT maps slot 12 to hasLowScore (Z)", False))
+        checks.append(("RunBunAI.isSwitching LVT maps slot 0 to evaluations", False))
+        checks.append(("RunBunAI.isSwitching LVT maps slot 2 to self", False))
+        checks.append(("RunBunAI.isSwitching LVT maps slot 3 to opponents", False))
+        checks.append(("RunBunAI.isSwitching LVT maps slot 4 to activeBattlePokemon", False))
+        checks.append(("RunBunAI.isSwitching LVT maps slot 5 to battleStatStages", False))
+
+    # c) RunBunAI.isOHKO descriptor (used by DeadMatchupDetector.isUnderCriticalThreat)
+    is_ohko_desc = "(Ljava/util/List;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/gitlab/surilexa/rbrctai/api/ai/utils/RBStatStages;)Z"
+    checks.append(("RunBunAI.isOHKO method descriptor (5 params)Z", is_ohko_desc in runbun_javap))
+
+    # d) IsSwitchingOverrideMixin source verification (F-REV-01: no ordinal = 0)
+    switching_mixin_source_path = os.path.join(repo_root, "companion-mod", "src", "main", "java", "com", "cobbleverse", "legendaryrule", "mixin", "IsSwitchingOverrideMixin.java")
+    if os.path.exists(switching_mixin_source_path):
+        with open(switching_mixin_source_path, "r", encoding="utf-8") as f:
+            switching_mixin_src = f.read()
+        checks.append(("IsSwitchingOverrideMixin targets RunBunAI", "RunBunAI.class" in switching_mixin_src or "com.gitlab.surilexa.rbrctai.api.ai.RunBunAI" in switching_mixin_src))
+        checks.append(("IsSwitchingOverrideMixin declares @WrapOperation on Stream.anyMatch", "@WrapOperation" in switching_mixin_src and "Stream;anyMatch" in switching_mixin_src))
+        checks.append(("IsSwitchingOverrideMixin declares @ModifyVariable targeting hasLowScore at index 12", '@ModifyVariable' in switching_mixin_src and 'name = "hasLowScore"' in switching_mixin_src and 'index = 12' in switching_mixin_src))
+        # Critical regression check F-REV-01: ensure NO ordinal is specified in @ModifyVariable
+        modify_var_match = re.search(r'@ModifyVariable\s*\((.*?)\)', switching_mixin_src, re.DOTALL)
+        has_no_ordinal = modify_var_match is not None and "ordinal" not in modify_var_match.group(1)
+        checks.append(("IsSwitchingOverrideMixin @ModifyVariable omits ordinal (F-REV-01 invariant)", has_no_ordinal))
+    else:
+        checks.append(("IsSwitchingOverrideMixin targets RunBunAI", False))
+        checks.append(("IsSwitchingOverrideMixin declares @WrapOperation on Stream.anyMatch", False))
+        checks.append(("IsSwitchingOverrideMixin declares @ModifyVariable targeting hasLowScore at index 12", False))
+        checks.append(("IsSwitchingOverrideMixin @ModifyVariable omits ordinal (F-REV-01 invariant)", False))
+
     # Evaluate checks
     failed = False
     for desc, passed in checks:

@@ -10,7 +10,8 @@
     "CobblemonHeldItemManagerMixin",
     "PokeMathMaxMixin",
     "RunBunAIChooseMixin",
-    "ContextManagerMixin"
+    "ContextManagerMixin",
+    "IsSwitchingOverrideMixin"
   ],
   "injectors": {
     "defaultRequire": 1

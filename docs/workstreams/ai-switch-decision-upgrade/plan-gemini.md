@@ -12,11 +12,13 @@
 
 Workstream này nâng cấp logic quyết định switch của AI trong Cobbleverse Hell Mode (`rbrctai` 0.15.4-beta) tại đúng hai injection seam đã được chứng minh qua bytecode:
 
-1. **Phase 1 (Gỡ Switch Veto Giả & Bổ sung Incoming Threat):**
-   - **Gate 1:** Thay predicate của `Stream.anyMatch()` để các status move (Protect, Will-O-Wisp, Thunder Wave...) có score $\ge 6$ nhưng `damage == 0` không veto quyền switch của AI. Chỉ các đòn tấn công có sát thương thực tế (`damage > 0`) và score $\ge 6$ mới veto.
-   - **Gate 2 (Status-move hole & Critical Threat):** Sửa biến `hasLowScore` tại bytecode offset 82 (`istore 12`).
-     - *FIX A:* Nếu tất cả các đòn non-fail (`score > -5`) đều là đòn không gây sát thương (`damage == 0`), AI không có offensive pressure $\rightarrow$ gỡ false veto (`hasLowScore = true`).
-     - *FIX B:* Nếu AI đang chịu nguy hiểm cận kề (`isUnderCriticalThreat`: cả 2 đối thủ đều có khả năng OHKO AI) đồng thời áp lực tấn công của AI quá yếu (`isLowOffensivePressure < 20%`), cho phép AI switch (`hasLowScore = true`).
+1. **Phase 1 (Gỡ Switch Veto Giả & Bổ sung Incoming Threat — Reconciled Live Canary):**
+   - **Gate 1 (Offensive Justification to Stay):** Thay predicate của `Stream.anyMatch()` tại offset 11. Thay thế assumption `score >= 6 && damage > 0` (vốn bị live canary bác bỏ do Shadow Ball 36 dmg có score 6 đã false-veto switch). Chỉ các đòn tấn công có sát thương thực chất (`isMeaningfulOffensiveMove`: `score >= 6 && damage > 0` VÀ gây $\ge 20\%$ max HP của mục tiêu hoặc kết liễu KO mục tiêu còn sống) mới veto quyền switch để ở lại tấn công. Các đòn status (Protect, Will-O-Wisp... damage 0) và đòn tấn công yếu (Shadow Ball 36 dmg, ratio $< 20\%$) không được veto switch.
+   - **Gate 2 (Dead Matchup & Threat Eligibility):** Sửa biến `hasLowScore` tại bytecode offset 82 (`istore 12`).
+     - Giữ nguyên nếu native `hasLowScore == true`.
+     - Gỡ false veto (`hasLowScore = true`) khi AI rơi vào thế trận bế tắc tấn công (`isLowOffensivePressure < 20%` trên mọi đối thủ hợp lệ, bao gồm status moves và weak chip moves).
+     - Cho phép switch (`hasLowScore = true`) khi AI chịu nguy hiểm cận kề (`isUnderCriticalThreat`: cả 2 đối thủ đều có khả năng OHKO AI).
+     - Reconciled Contract: `hasLowScore = nativeHasLowScore || lowPressure || criticalThreat;` (khắc phục điểm nghẽn điều kiện `criticalThreat && lowPressure` quá hẹp khiến matchup bế tắc không bị OHKO bị kẹt).
    - Giữ nguyên toàn bộ các native gates khác (random 75% gate, HP 50% gate, party survivability traversal).
 
 2. **Phase 2 (Scoring Switch Candidate & Doubles Survivability):**
@@ -40,6 +42,7 @@ Workstream này nâng cấp logic quyết định switch của AI trong Cobbleve
 | **5** | Ability table dễ fork semantic nếu tự zero damage | **XÁC NHẬN (CONFIRMED)** | Bytecode `PokeMathMax` và `RedirectAbilityGuard.java:101-124` chứng minh `isSuppressed` (Neutralizing Gas), `ignoreAbilities` (Mold Breaker, Teravolt, Turboblaze), và `Ability Shield` tương tác đa tầng. Nếu table tự trả về 0 damage sẽ bỏ qua bypass của Mold Breaker hoặc suppression. **Giải pháp:** `AbilityImmunityTable` là data-only (mapping ability ID $\rightarrow$ immune `ElementalType`). `SwitchCandidateScorer` chịu trách nhiệm gọi `BattleStates.getTransformationOrEffected` và thực thi guard order hiện hữu trước khi short-circuit damage = 0. |
 | **6** | Type-first dùng raw `move.getType()` với dynamic move | **BÁC BỎ LÀ LỖI HIỆN TẠI; BẢO TOÀN LÀM INVARIANT** | Mã nguồn hiện tại đã có `DynamicMoveResolver`. Bất biến: Mọi bước type evaluation trong scorer phải gọi `DynamicMoveResolver.resolveEffectiveMove(move, attacker, activeBattlePokemon, false)` đồng bộ với `PokeMathMaxMixin`. |
 | **7** | Hook 1 không cần capture `evaluations` qua `@Local` | **BÁC BỎ LÀ LỖI CỦA HOOK 1; BẢO TOÀN SIGNATURE TỐI THIỂU** | Signature đề xuất ban đầu đã không thêm `@Local`. Tại call site `Stream.anyMatch` (offset 11), receiver `Stream` và argument `Predicate` đã nằm sẵn trên stack. Việc thay predicate được thực hiện trực tiếp qua `original.call(stream, newPredicate)` với signature tối thiểu `(Stream<MoveEvaluation>, Predicate<MoveEvaluation>, Operation<Boolean>)`. |
+| **8** | Live Canary RED: Weak damaging move false veto & Gate 2 contract narrowness | **XÁC NHẬN (CONFIRMED QUA LIVE CANARY)** | Live canary Rotom-W vs Swampert + Gastrodon cho thấy: Shadow Ball chỉ gây 36 dmg ($< 20\%$ HP) nhưng có native score 6 $\rightarrow$ trigger Gate 1 `score >= 6 && damage > 0`, hard-veto switch ngay tại offset 20 khiến Gate 2 không bao giờ chạy. Đồng thời, Hook 2 `criticalThreat && lowPressure` quá hẹp vì cả 2 đối thủ không OHKO Rotom-W nên nếu lọt qua Gate 1 thì Gate 2 vẫn veto. **Giải pháp:** Tách bạch 2 ngưỡng: Gate 1 chỉ veto khi đòn đánh có sát thương thực chất $\ge 33\%$ max HP hoặc KO (`STAY_JUSTIFICATION_THRESHOLD = 0.33`). Gate 2 mở switch eligibility khi `nativeHasLowScore || lowPressure (< 20%) || criticalThreat`. |
 
 ---
 
@@ -47,7 +50,23 @@ Workstream này nâng cấp logic quyết định switch của AI trong Cobbleve
 
 ### 3.1 [`DeadMatchupDetector.java`](file:///c:/Users/khang/Downloads/Doctors%20Cobblemon/companion-mod/src/main/java/com/cobbleverse/legendaryrule/strategy/switchai/DeadMatchupDetector.java)
 - **Package:** `com.cobbleverse.legendaryrule.strategy.switchai`
-- **Phương thức 1: `isLowOffensivePressure`**
+- **Ngưỡng tách biệt (Decoupled Thresholds):**
+  - `LOW_PRESSURE_THRESHOLD = 0.20`: Ngưỡng áp lực thấp (< 20%), dùng tại Gate 2 để mở switch consideration.
+  - `STAY_JUSTIFICATION_THRESHOLD = 0.33`: Ngưỡng biện minh ở lại (>= 33%, tương đương 3HKO), dùng tại Gate 1 để hard-veto tactical switch.
+  - Vùng trung gian [20%, 33%): Không hard-veto tại Gate 1; không tự động kích hoạt lowPressure tại Gate 2; defer cho native Gate 2 + random + HP + survivability logic.
+- **Phương thức 1: `isMeaningfulOffensiveMove` (Gate 1 Stay Justification)**
+  ```java
+  public static boolean isMeaningfulOffensiveMove(RunBunAI.MoveEvaluation eval)
+  ```
+  - Kiểm tra tính hợp lệ cơ bản: `eval != null && eval.getScore() >= 6 && eval.getDamage() > 0`.
+  - Lấy thông tin mục tiêu: `opp = eval.getOpponent()`, `oppBP = opp != null ? opp.getBattlePokemon() : null`.
+  - Nếu mục tiêu không hợp lệ hoặc đã ngất (`opp == null || opp.isGone() || oppBP == null || oppBP.getMaxHealth() <= 0 || oppBP.getHealth() <= 0`): trả về `false` (tránh false veto khi target đã ngất nhưng chưa unmount - REV-P1-01).
+  - Kiểm tra sát thương có ý nghĩa (đảm bảo `oppBP.getHealth() > 0`):
+    - **Lethal KO:** `eval.getDamage() >= oppBP.getHealth()` $\rightarrow$ `true` (đòn kết liễu mục tiêu còn sống luôn biện minh cho việc ở lại).
+    - **Sát thương áp lực cao:** $\text{ratio} = \frac{\text{(double) eval.getDamage()}}{\text{(double) oppBP.getMaxHealth()}} \ge 0.33$ (strict $\ge 33\%$, ép kiểu `double` tránh integer truncation - REV-P1-02) $\rightarrow$ `true`.
+  - Trường hợp status move (Protect: damage 0) hoặc weak chip move (Shadow Ball: 36 dmg, ratio $< 33\%$): trả về `false` $\rightarrow$ KHÔNG hard-veto switch.
+
+- **Phương thức 2: `isLowOffensivePressure`**
   ```java
   public static boolean isLowOffensivePressure(
       List<RunBunAI.MoveEvaluation> evaluations,
@@ -63,7 +82,7 @@ Workstream này nâng cấp logic quyết định switch của AI trong Cobbleve
   - $\text{maxRatio} = \max(\text{ratio})$. Trả về `true` khi $\text{maxRatio} < 0.20$ (strict).
   - Nếu `evaluations` hoặc `opponents` rỗng/không có target hợp lệ: trả về `false` (không tạo false evidence). Nếu tất cả damage đều bằng 0: $\text{maxRatio} = 0 < 0.20 \rightarrow \text{true}$.
 
-- **Phương thức 2: `isUnderCriticalThreat`**
+- **Phương thức 3: `isUnderCriticalThreat`**
   ```java
   public static boolean isUnderCriticalThreat(
       BattlePokemon self,
@@ -83,7 +102,7 @@ Workstream này nâng cấp logic quyết định switch của AI trong Cobbleve
 - **Target Method:**
   `isSwitching(Ljava/util/List;Ljava/util/List;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Ljava/util/List;Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/gitlab/surilexa/rbrctai/api/ai/utils/RBStatStages;Z)Z`
 
-- **Hook 1 (`@WrapOperation` trên Gate 1 `anyMatch`):**
+- **Hook 1 (`@WrapOperation` trên Gate 1 `anyMatch` - Reconciled):**
   ```java
   @WrapOperation(
       method = "isSwitching(Ljava/util/List;Ljava/util/List;Lcom/cobblemon/mod/common/battles/pokemon/BattlePokemon;Ljava/util/List;Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/gitlab/surilexa/rbrctai/api/ai/utils/RBStatStages;Z)Z",
@@ -99,16 +118,15 @@ Workstream này nâng cấp logic quyết định switch của AI trong Cobbleve
       Predicate<RunBunAI.MoveEvaluation> nativePredicate,
       Operation<Boolean> original
   ) {
-      return original.call(stream, (Predicate<RunBunAI.MoveEvaluation>) eval -> 
-          eval != null && eval.getScore() >= 6 && eval.getDamage() > 0
-      );
+      return original.call(stream, (Predicate<RunBunAI.MoveEvaluation>) DeadMatchupDetector::isMeaningfulOffensiveMove);
   }
   ```
 
-- **Hook 2 (`@ModifyVariable` trên Gate 2 `hasLowScore` - Reconciled F-REV-01):**
+- **Hook 2 (`@ModifyVariable` trên Gate 2 `hasLowScore` - Reconciled F-REV-01 & Live Canary):**
   Bytecode xác minh: LVT slot 12, instruction `istore 12` tại offset 82.
   > [!IMPORTANT]
-  > **Reconciled F-REV-01:** Tuyệt đối **không** dùng `ordinal = 0`! Trong `isSwitching()`, `isDoubles` (slot 6) là boolean ordinal 0, còn `hasLowScore` (slot 12) là boolean ordinal 1. Sử dụng `ordinal = 0` sẽ khiến Mixin chọn nhầm slot 6, không khớp với lệnh `istore 12` và gây crash server ngay tại Layer 4 bootstrap (`InvalidInjectionException`). Ta bỏ `ordinal` và dùng `name = "hasLowScore"` cùng `index = 12`.
+  > **Reconciled F-REV-01:** Tuyệt đối **không** dùng `ordinal = 0`! Trong `isSwitching()`, `isDoubles` (slot 6) là boolean ordinal 0, còn `hasLowScore` (slot 12) là boolean ordinal 1. Ta bỏ `ordinal` và dùng `name = "hasLowScore"` cùng `index = 12`.
+  > **Reconciled Contract:** Không dùng `criticalThreat && lowPressure` vì sẽ chặn đứng các dead matchup mà đối thủ không thể OHKO AI (như Rotom-W vs Swampert + Gastrodon). Thay vào đó, cho phép switch khi: `nativeHasLowScore || lowPressure || criticalThreat`.
 
   ```java
   @ModifyVariable(
@@ -127,25 +145,56 @@ Workstream này nâng cấp logic quyết định switch của AI trong Cobbleve
       @Local(name = "activeBattlePokemon", index = 4, argsOnly = true) ActiveBattlePokemon activeBattlePokemon,
       @Local(name = "battleStatStages", index = 5, argsOnly = true) RBStatStages battleStatStages
   ) {
-      if (nativeHasLowScore) return true;
-
-      // FIX A: Toàn bộ đòn non-fail đều là non-damaging (status move hole)
-      if (evaluations != null && !evaluations.isEmpty()) {
-          boolean allNonFailAreNonDamaging = evaluations.stream()
-              .filter(e -> e != null && e.getScore() > -5)
-              .allMatch(e -> e.getDamage() == 0);
-          if (allNonFailAreNonDamaging) return true;
+      if (nativeHasLowScore) {
+          return true;
       }
 
-      // FIX B: Critical Threat từ cả hai opponent + Offensive Pressure < 20%
+      // Reconciled: Áp lực tấn công yếu (< 20% max damage trên mọi đối thủ, bao gồm status moves và chip moves)
+      boolean lowPressure = DeadMatchupDetector.isLowOffensivePressure(evaluations, opponents);
+      if (lowPressure) {
+          return true;
+      }
+
+      // Nguy hiểm cận kề: toàn bộ đối thủ đều có khả năng OHKO self
       boolean criticalThreat = DeadMatchupDetector.isUnderCriticalThreat(
           self, opponents, activeBattlePokemon, battleStatStages
       );
-      boolean lowPressure = DeadMatchupDetector.isLowOffensivePressure(evaluations, opponents);
-
-      return criticalThreat && lowPressure;
+      return criticalThreat;
   }
   ```
+
+### 3.3 Khung Xác minh 6 Required Regression Cases
+1. **Case A (Status False Veto):**
+   - Moveset: Protect (score 6, damage 0), các move còn lại fail/0.
+   - Gate 1: `isMeaningfulOffensiveMove` trả về `false` (damage = 0).
+   - Gate 2: `isLowOffensivePressure` trả về `true` (maxRatio = 0.0 < 0.20) $\rightarrow$ `hasLowScore = true`.
+   - Kết quả: Không bị hard-veto; mở switch eligibility.
+2. **Case B (Weak Damaging Move False Veto — Live Rotom-W Reproduction):**
+   - Moveset: Shadow Ball (score 6, damage 36/185 = 19.4% trên Swampert, 38/200 = 19% trên Gastrodon), Volt Switch (fail), Hydro Pump (fail), Protect (0 dmg).
+   - Gate 1: Shadow Ball có ratio $< 33\%$ và không KO $\rightarrow$ `isMeaningfulOffensiveMove` trả về `false` $\rightarrow$ không hard-veto.
+   - Gate 2: `isLowOffensivePressure` trả về `true` ($< 20\%$) $\rightarrow$ `hasLowScore = true`.
+   - Kết quả: Gỡ bỏ thành công false veto; AI được phép xét switch.
+3. **Case C (Strong Damaging Move Regression):**
+   - Moveset: Volt Switch -> Talonflame (score 9, damage 118/150 = 78.6%).
+   - Gate 1: `score >= 6 && ratio = 0.786 >= 0.33` $\rightarrow$ `isMeaningfulOffensiveMove` trả về `true`.
+   - Kết quả: Gate 1 hard-veto switch $\rightarrow$ AI ở lại và tấn công. Không bị switch addiction.
+4. **Case D (Decoupled Thresholds Boundaries):**
+   - 19.9% damage: no stay justification (Gate 1 không veto) + low pressure (Gate 2 `lowPressure = true`) $\rightarrow$ switch eligible.
+   - 20.0% damage: no stay justification (Gate 1 không veto) + NOT low pressure (Gate 2 không tự bật `lowPressure`) $\rightarrow$ defer cho native logic.
+   - 25.0% damage: no stay justification + NOT low pressure $\rightarrow$ defer cho native logic.
+   - 32.9% damage: no stay justification + NOT low pressure $\rightarrow$ defer cho native logic.
+   - 33.0% damage: stay justification (Gate 1 veto, ở lại tấn công).
+   - >33% damage (ví dụ 35% hay 78.6%): stay justification (Gate 1 veto, ở lại tấn công).
+   - Lethal KO nhưng damage $< 20\%$ max HP: stay justification (Gate 1 veto, ở lại dứt điểm mục tiêu còn sống).
+5. **Case E (Threat Semantics):**
+   - Lưu ý tính chi phối của Gate 1: Gate 2 (`criticalThreat`) chỉ được kích hoạt khi Gate 1 không veto (AI không có đòn score $\ge 6$ và ratio $\ge 33\%$ hoặc KO - REV-P1-03).
+   - Cả 2 opponent OHKO: Nếu AI không có strong move, `criticalThreat = true` $\rightarrow$ `hasLowScore = true` (mở switch eligibility để tránh chết oan).
+   - Chỉ 1 opponent OHKO: `criticalThreat = false`. Nếu `lowPressure = true` $\rightarrow$ switch eligible; nếu có strong move $\rightarrow$ Gate 1 veto (ở lại chiến đấu).
+   - Không opponent nào OHKO: `criticalThreat = false`. Nếu `lowPressure = true` (Rotom-W live case) $\rightarrow$ switch eligible.
+6. **Case F (Preserve Native Gates):**
+   - Native Random 75% gate (offset 106) giữ nguyên.
+   - Native HP > 50% gate (offset 122) giữ nguyên.
+   - Native Party Survivability traversal (offset 123-353) giữ nguyên: chỉ switch khi có bench ally sống sót.
 
 ---
 

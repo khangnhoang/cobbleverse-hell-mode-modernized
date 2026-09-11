@@ -27,6 +27,9 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:2.0.0"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:2.0.0"
+    runtimeOnly "com.electronwill.night-config:core:3.8.0"
+    runtimeOnly "com.electronwill.night-config:toml:3.8.0"
 
     // Cobbleverse local mods directory (Cobblemon, RCT, RCT API)
     def curseforgeMods = providers.gradleProperty('cobbleverseModsDir')
@@ -39,6 +42,9 @@ dependencies {
     modImplementation files("${curseforgeMods}/rctmod-fabric-1.21.1-0.18.1-beta.jar")
     compileOnly files("${curseforgeMods}/rbrctai-fabric-1.21.1-0.15.4-beta.jar")
     testImplementation files("${curseforgeMods}/rbrctai-fabric-1.21.1-0.15.4-beta.jar")
+    modLocalRuntime files("${curseforgeMods}/architectury-13.0.8-fabric.jar")
+    modLocalRuntime files("${curseforgeMods}/ForgeConfigAPIPort-v21.1.6-1.21.1-Fabric.jar")
+    modLocalRuntime files("${curseforgeMods}/rbrctai-fabric-1.21.1-0.15.4-beta.jar")
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
