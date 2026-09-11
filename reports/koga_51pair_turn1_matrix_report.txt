@@ -1,0 +1,438 @@
+========================================================================================
+KOGA 51-PAIR TURN-1 CALIBRATION REPORT (CURRENT PRESETS)
+========================================================================================
+
+Case #01 [Psychic] indeedee + armarouge
+  Engine Pick: anti_psychic | Sim Preferred: anti_psychic | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 0, Loss: 2 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: CATASTROPHIC | KOs: 0, Loss: 2 | Min HP:   0.0%
+  Decisive Reason: Psychic Terrain blocks priority; Fighting leads face heavy Psychic pressure unless single-target redirection is overwhelmed
+
+Case #02 [Psychic] indeedee + hatterene
+  Engine Pick: anti_psychic | Sim Preferred: anti_psychic | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 0 | Min HP: 100.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 0, Loss: 0 | Min HP:  62.3%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:   0.0%
+  Decisive Reason: Trick Room setter uninterrupted vs default_sun; anti_dark_steel offers immediate offensive pressure or anti_psychic bug STAB
+
+Case #03 [Psychic/Steel] farigiraf + heatran
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #04 [Psychic/Steel] cresselia + heatran
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:  85.7%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  87.1%
+  Decisive Reason: Trick Room setter uninterrupted vs default_sun; anti_dark_steel offers immediate offensive pressure or anti_psychic bug STAB
+
+Case #05 [Psychic] ironcrown + indeedee
+  Engine Pick: anti_psychic | Sim Preferred: default_sun | Status: ACCEPTABLE_TIE
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: CATASTROPHIC | KOs: 0, Loss: 2 | Min HP:   0.0%
+  Decisive Reason: Psychic Terrain blocks priority; Fighting leads face heavy Psychic pressure unless single-target redirection is overwhelmed
+
+Case #06 [Psychic/Ghost] alakazam + gholdengo
+  Engine Pick: anti_psychic | Sim Preferred: anti_psychic | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 1, Loss: 2 | Min HP:   0.0%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #07 [Dark/Ghost] chiyu + fluttermane
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_psychic | Status: ACCEPTABLE_TIE
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 2 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #08 [Dark/Flying] chienpao + dragonite
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: ACCEPTABLE_TIE
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #09 [Dark/Ghost] incineroar + gholdengo
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:   0.0%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #10 [Dark/Psychic] kingambit + cresselia
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP: 100.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  87.1%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #11 [Ghost/Dark] gholdengo + chiyu
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 2 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 2 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #12 [Steel/Ground] heatran + landorus
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 2 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  15.3%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #13 [Steel/Ground] gholdengo + landorus
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  15.3%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #14 [Steel/Rain] archaludon + pelipper
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: SUBOPTIMAL
+    - default_sun      -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:   1.8%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:  25.4%
+  Decisive Reason: Weather war: Galarian Slowking (34 Spe) Drought overrides Drizzle, enabling Sun Venusaur (288 Spe)
+
+Case #15 [Steel/Psychic] kingambit + indeedee
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP: 100.0%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 0 | Min HP:  57.9%
+  Decisive Reason: Psychic Terrain blocks priority; Fighting leads face heavy Psychic pressure unless single-target redirection is overwhelmed
+
+Case #16 [Steel/Flying] ironcrown + tornadus
+  Engine Pick: anti_psychic | Sim Preferred: default_sun | Status: SUBOPTIMAL
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 0, Loss: 0 | Min HP:  20.6%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #17 [Steel] magnezone + heatran
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 0, Loss: 2 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 2, Loss: 0 | Min HP: 100.0%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #18 [Steel] corviknight + archaludon
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: SUBOPTIMAL
+    - default_sun      -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:   8.6%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:  32.5%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #19 [Steel] skarmory + gholdengo
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  36.8%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #20 [Ground] garchomp + greattusk
+  Engine Pick: default_sun | Sim Preferred: default_sun | Status: AGREED
+    - default_sun      -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:   7.7%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: CATASTROPHIC | KOs: 0, Loss: 2 | Min HP:   0.0%
+  Decisive Reason: Ground weakness on Okidogi/Sneasler exploited; default_sun provides Grass STAB and Chlorophyll speed advantage
+
+Case #21 [Ground/Steel] gliscor + heatran
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 0, Loss: 2 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:  32.5%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:   7.6%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #22 [Ground/Ice] mamoswine + chienpao
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 2, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 1, Loss: 2 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 2, Loss: 0 | Min HP:  64.1%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #23 [Ground/Ghost] tinglu + fluttermane
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_psychic | Status: ACCEPTABLE_TIE
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  22.1%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  11.0%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #24 [Ground/Sand] excadrill + tyranitar
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: SUBOPTIMAL
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 2 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 1, Loss: 2 | Min HP:   0.0%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #25 [Ground/Rain] gastrodon + pelipper
+  Engine Pick: default_sun | Sim Preferred: default_sun | Status: AGREED
+    - default_sun      -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  59.3%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 0 | Min HP:  25.4%
+  Decisive Reason: Weather war: Galarian Slowking (34 Spe) Drought overrides Drizzle, enabling Sun Venusaur (288 Spe)
+
+Case #26 [Ground/Rain] swampert + pelipper
+  Engine Pick: default_sun | Sim Preferred: anti_psychic | Status: ACCEPTABLE_TIE
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 2 | Min HP:  25.4%
+  Decisive Reason: Weather war: Galarian Slowking (34 Spe) Drought overrides Drizzle, enabling Sun Venusaur (288 Spe)
+
+Case #27 [Ground/TrickRoom] ursaluna + cresselia
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:  87.1%
+  Decisive Reason: Trick Room setter uninterrupted vs default_sun; anti_dark_steel offers immediate offensive pressure or anti_psychic bug STAB
+
+Case #28 [Ground] garchomp + tinglu
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_psychic | Status: SUBOPTIMAL
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 2 | Min HP:   0.0%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #29 [Flying/Ground] talonflame + garchomp
+  Engine Pick: anti_psychic | Sim Preferred: anti_psychic | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: CATASTROPHIC | KOs: 0, Loss: 2 | Min HP:   0.0%
+  Decisive Reason: Ground weakness on Okidogi/Sneasler exploited; default_sun provides Grass STAB and Chlorophyll speed advantage
+
+Case #30 [Flying/Fire] charizard + venusaur
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:   8.1%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #31 [Flying/Dark] dragonite + chienpao
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: ACCEPTABLE_TIE
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #32 [Flying/Dark] salamence + incineroar
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 0 | Min HP:  33.5%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #33 [Flying/Ghost] tornadus + gholdengo
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:   6.5%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #34 [Flying/Fire] talonflame + charizard
+  Engine Pick: anti_psychic | Sim Preferred: anti_psychic | Status: AGREED
+    - default_sun      -> Verdict: CATASTROPHIC | KOs: 0, Loss: 2 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #35 [Weather/Rain] pelipper + archaludon
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: SUBOPTIMAL
+    - default_sun      -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:   1.8%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:  25.4%
+  Decisive Reason: Weather war: Galarian Slowking (34 Spe) Drought overrides Drizzle, enabling Sun Venusaur (288 Spe)
+
+Case #36 [Weather/Rain] politoed + urshifu
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: SUBOPTIMAL
+    - default_sun      -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  74.2%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 0 | Min HP:  12.9%
+  Decisive Reason: Weather war: Galarian Slowking (34 Spe) Drought overrides Drizzle, enabling Sun Venusaur (288 Spe)
+
+Case #37 [Weather/Sand] tyranitar + excadrill
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: SUBOPTIMAL
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 2 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 1, Loss: 2 | Min HP:   0.0%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #38 [Weather/Sand] hippowdon + garchomp
+  Engine Pick: default_sun | Sim Preferred: default_sun | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 0, Loss: 2 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 2 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 2 | Min HP:   0.0%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #39 [Weather/Snow] abomasnow + ironcrown
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: SUBOPTIMAL
+    - default_sun      -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  68.3%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #40 [Weather/Snow] ninetales + baxcalibur
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 2, Loss: 0 | Min HP:  53.5%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #41 [Weather/Sun] torkoal + lilligant
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: ACCEPTABLE_TIE
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #42 [Weather/Rain] pelipper + swampert
+  Engine Pick: default_sun | Sim Preferred: anti_psychic | Status: ACCEPTABLE_TIE
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 2 | Min HP:  25.4%
+  Decisive Reason: Weather war: Galarian Slowking (34 Spe) Drought overrides Drizzle, enabling Sun Venusaur (288 Spe)
+
+Case #43 [Neutral] rillaboom + incineroar
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 0, Loss: 0 | Min HP:  23.1%
+    - anti_psychic     -> Verdict: CATASTROPHIC | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 0 | Min HP:  44.0%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #44 [Neutral] lucario + rotom
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: ACCEPTABLE_TIE
+    - default_sun      -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  64.3%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:  26.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  60.8%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #45 [Neutral] metagross + milotic
+  Engine Pick: default_sun | Sim Preferred: default_sun | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:  79.4%
+  Decisive Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #46 [Neutral] amoonguss + arcanine
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: SUBOPTIMAL
+    - default_sun      -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  24.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 0 | Min HP:  56.0%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #47 [Neutral] raichu + gyarados
+  Engine Pick: anti_dark_steel | Sim Preferred: default_sun | Status: SUBOPTIMAL
+    - default_sun      -> Verdict: GOOD         | KOs: 0, Loss: 0 | Min HP:  72.4%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: QUESTIONABLE | KOs: 0, Loss: 0 | Min HP:  52.6%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #48 [Neutral] clefable + arcanine
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  26.7%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  59.3%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #49 [Neutral] snorlax + gengar
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 0, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 2, Loss: 0 | Min HP:  69.4%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #50 [Neutral] lapras + machamp
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 0, Loss: 0 | Min HP:  30.3%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  74.2%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+Case #51 [Neutral] togekiss + dragapult
+  Engine Pick: anti_dark_steel | Sim Preferred: anti_dark_steel | Status: AGREED
+    - default_sun      -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_psychic     -> Verdict: QUESTIONABLE | KOs: 1, Loss: 1 | Min HP:   0.0%
+    - anti_dark_steel  -> Verdict: GOOD         | KOs: 1, Loss: 0 | Min HP:  39.2%
+  Decisive Reason: Type matchup and base damage output determine board control
+
+========================================================================================
+CALIBRATION SUMMARY METRICS
+========================================================================================
+Total Cases:                 51
+Strict Agreement:            31 (60.8%)
+Acceptable Tie:              9 (17.6%)
+Combined Viable Rate:        40 (78.4%)
+Suboptimal Selections:       11 (21.6%)
+Catastrophic Selections:     0 (0.0%)
+
+--- PRESET SELECTION COUNTS ---
+  default_sun     : Engine =  6 picks | Sim = 19 picks
+  anti_psychic    : Engine =  7 picks | Sim = 10 picks
+  anti_dark_steel : Engine = 38 picks | Sim = 22 picks
+
+--- PRESET VERDICT DISTRIBUTIONS ---
+  default_sun     : GOOD = 11 | QUESTIONABLE = 21 | CATASTROPHIC = 19
+  anti_psychic    : GOOD =  1 | QUESTIONABLE = 36 | CATASTROPHIC = 14
+  anti_dark_steel : GOOD = 17 | QUESTIONABLE = 28 | CATASTROPHIC =  6
+
+========================================================================================
+PROBLEMATIC CASES (SUBOPTIMAL OR CATASTROPHIC SELECTION)
+========================================================================================
+Case #14 [Steel/Rain] archaludon + pelipper:
+  Engine picked [anti_dark_steel] (QUESTIONABLE, 0 KOs, 1 loss, 25.4% HP)
+  Better option [default_sun] (GOOD, 1 KOs, 0 loss, 1.8% HP)
+  Status: SUBOPTIMAL | Reason: Weather war: Galarian Slowking (34 Spe) Drought overrides Drizzle, enabling Sun Venusaur (288 Spe)
+
+Case #16 [Steel/Flying] ironcrown + tornadus:
+  Engine picked [anti_psychic] (QUESTIONABLE, 1 KOs, 1 loss, 0.0% HP)
+  Better option [default_sun] (QUESTIONABLE, 0 KOs, 0 loss, 20.6% HP)
+  Status: SUBOPTIMAL | Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #18 [Steel] corviknight + archaludon:
+  Engine picked [anti_dark_steel] (QUESTIONABLE, 0 KOs, 1 loss, 32.5% HP)
+  Better option [default_sun] (GOOD, 1 KOs, 0 loss, 8.6% HP)
+  Status: SUBOPTIMAL | Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #24 [Ground/Sand] excadrill + tyranitar:
+  Engine picked [anti_dark_steel] (QUESTIONABLE, 1 KOs, 2 loss, 0.0% HP)
+  Better option [default_sun] (QUESTIONABLE, 1 KOs, 1 loss, 0.0% HP)
+  Status: SUBOPTIMAL | Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #28 [Ground] garchomp + tinglu:
+  Engine picked [anti_dark_steel] (QUESTIONABLE, 0 KOs, 2 loss, 0.0% HP)
+  Better option [anti_psychic] (QUESTIONABLE, 0 KOs, 1 loss, 0.0% HP)
+  Status: SUBOPTIMAL | Reason: Type matchup and base damage output determine board control
+
+Case #35 [Weather/Rain] pelipper + archaludon:
+  Engine picked [anti_dark_steel] (QUESTIONABLE, 0 KOs, 1 loss, 25.4% HP)
+  Better option [default_sun] (GOOD, 1 KOs, 0 loss, 1.8% HP)
+  Status: SUBOPTIMAL | Reason: Weather war: Galarian Slowking (34 Spe) Drought overrides Drizzle, enabling Sun Venusaur (288 Spe)
+
+Case #36 [Weather/Rain] politoed + urshifu:
+  Engine picked [anti_dark_steel] (QUESTIONABLE, 0 KOs, 0 loss, 12.9% HP)
+  Better option [default_sun] (GOOD, 1 KOs, 0 loss, 74.2% HP)
+  Status: SUBOPTIMAL | Reason: Weather war: Galarian Slowking (34 Spe) Drought overrides Drizzle, enabling Sun Venusaur (288 Spe)
+
+Case #37 [Weather/Sand] tyranitar + excadrill:
+  Engine picked [anti_dark_steel] (QUESTIONABLE, 1 KOs, 2 loss, 0.0% HP)
+  Better option [default_sun] (QUESTIONABLE, 1 KOs, 1 loss, 0.0% HP)
+  Status: SUBOPTIMAL | Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #39 [Weather/Snow] abomasnow + ironcrown:
+  Engine picked [anti_dark_steel] (QUESTIONABLE, 1 KOs, 1 loss, 0.0% HP)
+  Better option [default_sun] (GOOD, 1 KOs, 0 loss, 68.3% HP)
+  Status: SUBOPTIMAL | Reason: Steel typing resists Poison STAB; Okidogi/Sneasler provide Close Combat/Drain Punch Fighting answers
+
+Case #46 [Neutral] amoonguss + arcanine:
+  Engine picked [anti_dark_steel] (QUESTIONABLE, 0 KOs, 0 loss, 56.0% HP)
+  Better option [default_sun] (GOOD, 1 KOs, 0 loss, 24.0% HP)
+  Status: SUBOPTIMAL | Reason: Type matchup and base damage output determine board control
+
+Case #47 [Neutral] raichu + gyarados:
+  Engine picked [anti_dark_steel] (QUESTIONABLE, 0 KOs, 0 loss, 52.6% HP)
+  Better option [default_sun] (GOOD, 0 KOs, 0 loss, 72.4% HP)
+  Status: SUBOPTIMAL | Reason: Type matchup and base damage output determine board control

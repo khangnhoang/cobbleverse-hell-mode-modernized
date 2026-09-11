@@ -35,6 +35,8 @@ $RECYCLE.BIN/
 *.swp
 *~
 *.zip
+scratch/
+tmp/
 
 # Python cache files
 __pycache__/

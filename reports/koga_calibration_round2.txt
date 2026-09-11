@@ -1,0 +1,328 @@
+======================================================================
+KOGA DYNAMIC LEAD CALIBRATION: ROUND 2 (Dropped P3, BW=-1 on P2, Removed Archaludon)
+Presets count: 3
+  [default_sun] slots=[5, 1] bw=1 speciesFavored=[]
+  [anti_psychic] slots=[0, 5] bw=0 speciesFavored=[indeedee, armarouge, hatterene, alakazam, farigiraf, espathra, cresselia, ironcrown]
+  [anti_dark_steel] slots=[2, 3] bw=-1 speciesFavored=[heatran, kingambit, chiyu, chienpao, incineroar]
+======================================================================
+
+CASE #01 [Psychic] PLAYER: indeedee (psychic/normal) + armarouge (fire/psychic)
+  [1] anti_psychic         total=+2 (off=+2, def=-4, bw=+0, type=+0, spec=+4)
+  [2] default_sun          total=-3 (off=+0, def=-4, bw=+1, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-17 (off=+0, def=-16, bw=-1, type=+0, spec=+0)
+  -> WINNER: anti_psychic (margin=+5)
+
+CASE #02 [Psychic] PLAYER: indeedee (psychic/normal) + hatterene (psychic/fairy)
+  [1] anti_psychic         total=+6 (off=+6, def=-4, bw=+0, type=+0, spec=+4)
+  [2] default_sun          total=+1 (off=+4, def=-4, bw=+1, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-13 (off=+4, def=-16, bw=-1, type=+0, spec=+0)
+  -> WINNER: anti_psychic (margin=+5)
+
+CASE #03 [Psychic/Steel] PLAYER: farigiraf (normal/psychic) + heatran (fire/steel)
+  [1] anti_psychic         total=-3 (off=-1, def=-4, bw=+0, type=+0, spec=+2)
+  [2] anti_dark_steel      total=-3 (off=+4, def=-8, bw=-1, type=+0, spec=+2)
+  [3] default_sun          total=-6 (off=-3, def=-4, bw=+1, type=+0, spec=+0)
+  -> WINNER: anti_psychic (margin=+0)
+
+CASE #04 [Psychic/Steel] PLAYER: cresselia (psychic) + heatran (fire/steel)
+  [1] anti_psychic         total=-3 (off=-1, def=-4, bw=+0, type=+0, spec=+2)
+  [2] anti_dark_steel      total=-3 (off=+4, def=-8, bw=-1, type=+0, spec=+2)
+  [3] default_sun          total=-6 (off=-3, def=-4, bw=+1, type=+0, spec=+0)
+  -> WINNER: anti_psychic (margin=+0)
+
+CASE #05 [Psychic] PLAYER: ironcrown (steel/psychic) + indeedee (psychic/normal)
+  [1] anti_psychic         total=+0 (off=+0, def=-4, bw=+0, type=+0, spec=+4)
+  [2] default_sun          total=-6 (off=-3, def=-4, bw=+1, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-17 (off=+0, def=-16, bw=-1, type=+0, spec=+0)
+  -> WINNER: anti_psychic (margin=+6)
+
+CASE #06 [Psychic/Ghost] PLAYER: alakazam (psychic) + gholdengo (steel/ghost)
+  [1] anti_psychic         total=-3 (off=-1, def=-4, bw=+0, type=+0, spec=+2)
+  [2] default_sun          total=-5 (off=-2, def=-4, bw=+1, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-17 (off=-8, def=-8, bw=-1, type=+0, spec=+0)
+  -> WINNER: anti_psychic (margin=+2)
+
+CASE #07 [Dark/Ghost] PLAYER: chiyu (dark/fire) + fluttermane (ghost/fairy)
+  [1] anti_dark_steel      total=+5 (off=+4, def=+0, bw=-1, type=+0, spec=+2)
+  [2] default_sun          total=-5 (off=+0, def=-6, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-6 (off=+0, def=-6, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+10)
+
+CASE #08 [Dark/Flying] PLAYER: chienpao (dark/ice) + dragonite (dragon/flying)
+  [1] anti_dark_steel      total=+5 (off=+8, def=-4, bw=-1, type=+0, spec=+2)
+  [2] anti_psychic         total=-2 (off=+2, def=-4, bw=+0, type=+0, spec=+0)
+  [3] default_sun          total=-5 (off=+0, def=-6, bw=+1, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+7)
+
+CASE #09 [Dark/Ghost] PLAYER: incineroar (fire/dark) + gholdengo (steel/ghost)
+  [1] anti_dark_steel      total=-3 (off=-4, def=+0, bw=-1, type=+0, spec=+2)
+  [2] default_sun          total=-7 (off=-2, def=-6, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-9 (off=-3, def=-6, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+4)
+
+CASE #10 [Dark/Psychic] PLAYER: kingambit (dark/steel) + cresselia (psychic)
+  [1] anti_dark_steel      total=+1 (off=+8, def=-8, bw=-1, type=+0, spec=+2)
+  [2] anti_psychic         total=-4 (off=-2, def=-4, bw=+0, type=+0, spec=+2)
+  [3] default_sun          total=-8 (off=-5, def=-4, bw=+1, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+5)
+
+CASE #11 [Ghost/Dark] PLAYER: gholdengo (steel/ghost) + chiyu (dark/fire)
+  [1] anti_dark_steel      total=-3 (off=-4, def=+0, bw=-1, type=+0, spec=+2)
+  [2] default_sun          total=-7 (off=-2, def=-6, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-9 (off=-3, def=-6, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+4)
+
+CASE #12 [Steel/Ground] PLAYER: heatran (fire/steel) + landorus (ground/flying)
+  [1] anti_dark_steel      total=-1 (off=+2, def=-4, bw=-1, type=+0, spec=+2)
+  [2] default_sun          total=-8 (off=-3, def=-6, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-10 (off=-4, def=-6, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+7)
+
+CASE #13 [Steel/Ground] PLAYER: gholdengo (steel/ghost) + landorus (ground/flying)
+  [1] default_sun          total=-7 (off=-2, def=-6, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-10 (off=-4, def=-6, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-15 (off=-10, def=-4, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+3)
+
+CASE #14 [Steel/Rain] PLAYER: archaludon (steel/dragon) + pelipper (water/flying)
+  [1] anti_dark_steel      total=-1 (off=+4, def=-4, bw=-1, type=+0, spec=+0)
+  [2] default_sun          total=-4 (off=-3, def=-2, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-4 (off=-2, def=-2, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+3)
+
+CASE #15 [Steel/Psychic] PLAYER: kingambit (dark/steel) + indeedee (psychic/normal)
+  [1] anti_dark_steel      total=+1 (off=+8, def=-8, bw=-1, type=+0, spec=+2)
+  [2] anti_psychic         total=-4 (off=-2, def=-4, bw=+0, type=+0, spec=+2)
+  [3] default_sun          total=-8 (off=-5, def=-4, bw=+1, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+5)
+
+CASE #16 [Steel/Flying] PLAYER: ironcrown (steel/psychic) + tornadus (flying)
+  [1] anti_psychic         total=-4 (off=-2, def=-4, bw=+0, type=+0, spec=+2)
+  [2] default_sun          total=-6 (off=-3, def=-4, bw=+1, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-13 (off=+0, def=-12, bw=-1, type=+0, spec=+0)
+  -> WINNER: anti_psychic (margin=+2)
+
+CASE #17 [Steel] PLAYER: magnezone (electric/steel) + heatran (fire/steel)
+  [1] anti_dark_steel      total=+9 (off=+8, def=+0, bw=-1, type=+0, spec=+2)
+  [2] default_sun          total=-6 (off=-5, def=-2, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-7 (off=-5, def=-2, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+15)
+
+CASE #18 [Steel] PLAYER: corviknight (flying/steel) + archaludon (steel/dragon)
+  [1] anti_dark_steel      total=-1 (off=+4, def=-4, bw=-1, type=+0, spec=+0)
+  [2] default_sun          total=-7 (off=-6, def=-2, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-7 (off=-5, def=-2, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+6)
+
+CASE #19 [Steel] PLAYER: skarmory (steel/flying) + gholdengo (steel/ghost)
+  [1] default_sun          total=-8 (off=-5, def=-4, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-10 (off=-6, def=-4, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-13 (off=-8, def=-4, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+2)
+
+CASE #20 [Ground] PLAYER: garchomp (dragon/ground) + greattusk (ground/fighting)
+  [1] default_sun          total=+1 (off=+4, def=-4, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-3 (off=+1, def=-4, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-9 (off=+0, def=-8, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+4)
+
+CASE #21 [Ground/Steel] PLAYER: gliscor (ground/flying) + heatran (fire/steel)
+  [1] anti_dark_steel      total=-1 (off=+2, def=-4, bw=-1, type=+0, spec=+2)
+  [2] default_sun          total=-8 (off=-3, def=-6, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-10 (off=-4, def=-6, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+7)
+
+CASE #22 [Ground/Ice] PLAYER: mamoswine (ice/ground) + chienpao (dark/ice)
+  [1] anti_dark_steel      total=+9 (off=+12, def=-4, bw=-1, type=+0, spec=+2)
+  [2] anti_psychic         total=-2 (off=+2, def=-4, bw=+0, type=+0, spec=+0)
+  [3] default_sun          total=-5 (off=+2, def=-8, bw=+1, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+11)
+
+CASE #23 [Ground/Ghost] PLAYER: tinglu (dark/ground) + fluttermane (ghost/fairy)
+  [1] anti_dark_steel      total=-1 (off=+4, def=-4, bw=-1, type=+0, spec=+0)
+  [2] default_sun          total=-2 (off=+1, def=-4, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-3 (off=+1, def=-4, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+1)
+
+CASE #24 [Ground/Sand] PLAYER: excadrill (ground/steel) + tyranitar (rock/dark)
+  [1] anti_dark_steel      total=+9 (off=+12, def=-2, bw=-1, type=+0, spec=+0)
+  [2] default_sun          total=-3 (off=+0, def=-4, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-7 (off=-1, def=-6, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+12)
+
+CASE #25 [Ground/Rain] PLAYER: gastrodon (water/ground) + pelipper (water/flying)
+  [1] default_sun          total=+1 (off=+4, def=-4, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-4 (off=+0, def=-4, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-9 (off=+0, def=-8, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+5)
+
+CASE #26 [Ground/Rain] PLAYER: swampert (water/ground) + pelipper (water/flying)
+  [1] default_sun          total=+1 (off=+4, def=-4, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-4 (off=+0, def=-4, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-9 (off=+0, def=-8, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+5)
+
+CASE #27 [Ground/TrickRoom] PLAYER: ursaluna (ground/normal) + cresselia (psychic)
+  [1] anti_psychic         total=+0 (off=+2, def=-4, bw=+0, type=+0, spec=+2)
+  [2] default_sun          total=-1 (off=+2, def=-4, bw=+1, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-9 (off=+4, def=-12, bw=-1, type=+0, spec=+0)
+  -> WINNER: anti_psychic (margin=+1)
+
+CASE #28 [Ground] PLAYER: garchomp (dragon/ground) + tinglu (dark/ground)
+  [1] default_sun          total=-2 (off=+1, def=-4, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-3 (off=+1, def=-4, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-5 (off=+4, def=-8, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+1)
+
+CASE #29 [Flying/Ground] PLAYER: talonflame (fire/flying) + garchomp (dragon/ground)
+  [1] default_sun          total=-3 (off=+0, def=-4, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-4 (off=+0, def=-4, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-9 (off=+0, def=-8, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+1)
+
+CASE #30 [Flying/Fire] PLAYER: charizard (fire/flying) + venusaur (grass/poison)
+  [1] default_sun          total=+2 (off=+2, def=-1, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=+2 (off=+2, def=+0, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-3 (off=+0, def=-2, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+0)
+
+CASE #31 [Flying/Dark] PLAYER: dragonite (dragon/flying) + chienpao (dark/ice)
+  [1] anti_dark_steel      total=+5 (off=+8, def=-4, bw=-1, type=+0, spec=+2)
+  [2] anti_psychic         total=-2 (off=+2, def=-4, bw=+0, type=+0, spec=+0)
+  [3] default_sun          total=-5 (off=+0, def=-6, bw=+1, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+7)
+
+CASE #32 [Flying/Dark] PLAYER: salamence (dragon/flying) + incineroar (fire/dark)
+  [1] anti_dark_steel      total=+1 (off=+4, def=-4, bw=-1, type=+0, spec=+2)
+  [2] default_sun          total=-5 (off=+0, def=-6, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-6 (off=+0, def=-6, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+6)
+
+CASE #33 [Flying/Ghost] PLAYER: tornadus (flying) + gholdengo (steel/ghost)
+  [1] default_sun          total=-5 (off=-2, def=-4, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-7 (off=-3, def=-4, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-13 (off=-8, def=-4, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+2)
+
+CASE #34 [Flying/Fire] PLAYER: talonflame (fire/flying) + charizard (fire/flying)
+  [1] default_sun          total=-3 (off=+0, def=-4, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-4 (off=+0, def=-4, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-9 (off=+0, def=-8, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+1)
+
+CASE #35 [Weather/Rain] PLAYER: pelipper (water/flying) + archaludon (steel/dragon)
+  [1] anti_dark_steel      total=-1 (off=+4, def=-4, bw=-1, type=+0, spec=+0)
+  [2] default_sun          total=-4 (off=-3, def=-2, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-4 (off=-2, def=-2, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+3)
+
+CASE #36 [Weather/Rain] PLAYER: politoed (water) + urshifu (fighting/dark)
+  [1] anti_dark_steel      total=+5 (off=+4, def=+2, bw=-1, type=+0, spec=+0)
+  [2] default_sun          total=+2 (off=+2, def=-1, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-2 (off=+0, def=-2, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+3)
+
+CASE #37 [Weather/Sand] PLAYER: tyranitar (rock/dark) + excadrill (ground/steel)
+  [1] anti_dark_steel      total=+9 (off=+12, def=-2, bw=-1, type=+0, spec=+0)
+  [2] default_sun          total=-3 (off=+0, def=-4, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=-7 (off=-1, def=-6, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+12)
+
+CASE #38 [Weather/Sand] PLAYER: hippowdon (ground) + garchomp (dragon/ground)
+  [1] default_sun          total=-1 (off=+2, def=-4, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-4 (off=+0, def=-4, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-9 (off=+0, def=-8, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+3)
+
+CASE #39 [Weather/Snow] PLAYER: abomasnow (grass/ice) + ironcrown (steel/psychic)
+  [1] anti_psychic         total=+2 (off=+2, def=-2, bw=+0, type=+0, spec=+2)
+  [2] default_sun          total=-2 (off=+1, def=-4, bw=+1, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-5 (off=+4, def=-8, bw=-1, type=+0, spec=+0)
+  -> WINNER: anti_psychic (margin=+4)
+
+CASE #40 [Weather/Snow] PLAYER: ninetales (ice/fairy) + baxcalibur (dragon/ice)
+  [1] anti_dark_steel      total=+7 (off=+8, def=+0, bw=-1, type=+0, spec=+0)
+  [2] anti_psychic         total=+4 (off=+4, def=+0, bw=+0, type=+0, spec=+0)
+  [3] default_sun          total=+1 (off=+4, def=-4, bw=+1, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+3)
+
+CASE #41 [Weather/Sun] PLAYER: torkoal (fire) + lilligant (grass)
+  [1] default_sun          total=+6 (off=+4, def=+1, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=+5 (off=+4, def=+1, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=+5 (off=+4, def=+2, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+1)
+
+CASE #42 [Weather/Rain] PLAYER: pelipper (water/flying) + swampert (water/ground)
+  [1] default_sun          total=+1 (off=+4, def=-4, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-4 (off=+0, def=-4, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-9 (off=+0, def=-8, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+5)
+
+CASE #43 [Neutral] PLAYER: rillaboom (grass) + incineroar (fire/dark)
+  [1] anti_dark_steel      total=+11 (off=+8, def=+2, bw=-1, type=+0, spec=+2)
+  [2] default_sun          total=+4 (off=+4, def=-1, bw=+1, type=+0, spec=+0)
+  [3] anti_psychic         total=+3 (off=+4, def=-1, bw=+0, type=+0, spec=+0)
+  -> WINNER: anti_dark_steel (margin=+7)
+
+CASE #44 [Neutral] PLAYER: lucario (fighting/steel) + rotom (electric/water)
+  [1] default_sun          total=+3 (off=+1, def=+1, bw=+1, type=+0, spec=+0)
+  [2] anti_dark_steel      total=+3 (off=+4, def=+0, bw=-1, type=+0, spec=+0)
+  [3] anti_psychic         total=-2 (off=-2, def=+0, bw=+0, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+0)
+
+CASE #45 [Neutral] PLAYER: metagross (steel/psychic) + milotic (water)
+  [1] default_sun          total=-1 (off=-1, def=-1, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-4 (off=-2, def=-2, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-9 (off=+0, def=-8, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+3)
+
+CASE #46 [Neutral] PLAYER: amoonguss (grass/poison) + arcanine (fire)
+  [1] default_sun          total=+2 (off=+2, def=-1, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=+2 (off=+2, def=+0, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=+1 (off=+0, def=+2, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+0)
+
+CASE #47 [Neutral] PLAYER: raichu (electric) + gyarados (water/flying)
+  [1] default_sun          total=+0 (off=+0, def=-1, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-2 (off=+0, def=-2, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-5 (off=+0, def=-4, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+2)
+
+CASE #48 [Neutral] PLAYER: clefable (fairy) + arcanine (fire)
+  [1] default_sun          total=+5 (off=+4, def=+0, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=+4 (off=+4, def=+0, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=+3 (off=+4, def=+0, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+1)
+
+CASE #49 [Neutral] PLAYER: snorlax (normal) + gengar (ghost/poison)
+  [1] default_sun          total=+0 (off=+1, def=-2, bw=+1, type=+0, spec=+0)
+  [2] anti_dark_steel      total=-1 (off=+0, def=+0, bw=-1, type=+0, spec=+0)
+  [3] anti_psychic         total=-2 (off=+0, def=-2, bw=+0, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+1)
+
+CASE #50 [Neutral] PLAYER: lapras (water/ice) + machamp (fighting)
+  [1] default_sun          total=+6 (off=+4, def=+1, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=+6 (off=+2, def=+4, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=+5 (off=+4, def=+2, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+0)
+
+CASE #51 [Neutral] PLAYER: togekiss (fairy/flying) + dragapult (dragon/ghost)
+  [1] default_sun          total=+0 (off=+3, def=-4, bw=+1, type=+0, spec=+0)
+  [2] anti_psychic         total=-1 (off=+3, def=-4, bw=+0, type=+0, spec=+0)
+  [3] anti_dark_steel      total=-3 (off=+2, def=-4, bw=-1, type=+0, spec=+0)
+  -> WINNER: default_sun (margin=+1)
+
+======================================================================
+CALIBRATION SUMMARY METRICS: ROUND 2 (Dropped P3, BW=-1 on P2, Removed Archaludon)
+======================================================================
+Total cases:           51
+Default wins:          21 (41.2%)
+Specialized wins:      30 (58.8%)
+Wins by preset:
+  - default_sun         : 21
+  - anti_psychic        : 9
+  - anti_dark_steel     : 21
+Tie count (raw score): 6
+Average winner margin: 4.00
+Minimum winner margin: 0
+======================================================================

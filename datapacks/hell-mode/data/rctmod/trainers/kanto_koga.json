@@ -24,74 +24,10 @@
   "team": [
     {
       "moveset": [
-        "tailwind",
-        "taunt",
-        "bravebird",
-        "crosspoison"
-      ],
-      "ivs": {
-        "hp": 31,
-        "atk": 31,
-        "def": 31,
-        "spa": 31,
-        "spd": 31,
-        "spe": 31
-      },
-      "evs": {
-        "hp": 4,
-        "atk": 252,
-        "def": 0,
-        "spa": 0,
-        "spd": 0,
-        "spe": 252
-      },
-      "heldItem": [
-        "focus_sash"
-      ],
-      "species": "crobat",
-      "gender": "MALE",
-      "level": 55,
-      "nature": "jolly",
-      "ability": "infiltrator"
-    },
-    {
-      "moveset": [
-        "sludgebomb",
-        "willowisp",
-        "clearsmog",
-        "protect"
-      ],
-      "ivs": {
-        "hp": 31,
-        "atk": 31,
-        "def": 31,
-        "spa": 31,
-        "spd": 31,
-        "spe": 31
-      },
-      "evs": {
-        "hp": 252,
-        "atk": 0,
-        "def": 156,
-        "spa": 0,
-        "spd": 100,
-        "spe": 0
-      },
-      "heldItem": [
-        "black_sludge"
-      ],
-      "species": "weezing",
-      "gender": "MALE",
-      "level": 55,
-      "nature": "bold",
-      "ability": "levitate"
-    },
-    {
-      "moveset": [
         "poisonjab",
-        "drillrun",
         "uturn",
-        "protect"
+        "knockoff",
+        "drillrun"
       ],
       "ivs": {
         "hp": 31,
@@ -120,10 +56,10 @@
     },
     {
       "moveset": [
-        "closecombat",
-        "direclaw",
-        "acrobatics",
-        "protect"
+        "weatherball",
+        "gigadrain",
+        "growth",
+        "sludgebomb"
       ],
       "ivs": {
         "hp": 31,
@@ -134,11 +70,75 @@
         "spe": 31
       },
       "evs": {
-        "hp": 4,
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 4,
+        "spe": 252
+      },
+      "heldItem": [
+        "leftovers"
+      ],
+      "species": "venusaur",
+      "gender": "MALE",
+      "level": 55,
+      "nature": "modest",
+      "ability": "chlorophyll"
+    },
+    {
+      "moveset": [
+        "knockoff",
+        "drainpunch",
+        "poisonjab",
+        "highhorsepower"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 220,
+        "atk": 108,
+        "def": 4,
+        "spa": 0,
+        "spd": 60,
+        "spe": 116
+      },
+      "heldItem": [
+        "assault_vest"
+      ],
+      "species": "okidogi",
+      "gender": "MALE",
+      "level": 55,
+      "nature": "adamant",
+      "ability": "guarddog"
+    },
+    {
+      "moveset": [
+        "closecombat",
+        "direclaw",
+        "swordsdance",
+        "throatchop"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 0,
         "atk": 252,
         "def": 0,
         "spa": 0,
-        "spd": 0,
+        "spd": 4,
         "spe": 252
       },
       "heldItem": [
@@ -152,41 +152,9 @@
     },
     {
       "moveset": [
-        "barbbarrage",
-        "aquatail",
-        "poisonjab",
-        "protect"
-      ],
-      "ivs": {
-        "hp": 31,
-        "atk": 31,
-        "def": 31,
-        "spa": 31,
-        "spd": 31,
-        "spe": 31
-      },
-      "evs": {
-        "hp": 252,
-        "atk": 156,
-        "def": 0,
-        "spa": 0,
-        "spd": 100,
-        "spe": 0
-      },
-      "heldItem": [
-        "sitrus_berry"
-      ],
-      "species": "overqwil",
-      "gender": "MALE",
-      "level": 55,
-      "nature": "adamant",
-      "ability": "intimidate"
-    },
-    {
-      "moveset": [
         "spore",
         "ragepowder",
-        "sludgebomb",
+        "pollenpuff",
         "protect"
       ],
       "ivs": {
@@ -198,11 +166,11 @@
         "spe": 31
       },
       "evs": {
-        "hp": 252,
+        "hp": 236,
         "atk": 0,
-        "def": 156,
+        "def": 236,
         "spa": 0,
-        "spd": 100,
+        "spd": 36,
         "spe": 0
       },
       "heldItem": [
@@ -213,6 +181,121 @@
       "level": 55,
       "nature": "bold",
       "ability": "regenerator"
+    },
+    {
+      "moveset": [
+        "sludgebomb",
+        "flamethrower",
+        "psychic",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 0
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 0,
+        "def": 132,
+        "spa": 0,
+        "spd": 124,
+        "spe": 0
+      },
+      "heldItem": [
+        "heat_rock"
+      ],
+      "aspects": [
+        "galarian"
+      ],
+      "species": "slowking",
+      "gender": "MALE",
+      "level": 55,
+      "nature": "relaxed",
+      "ability": "drought"
+    }
+  ],
+  "leadPresets": [
+    {
+      "id": "default_sun",
+      "leadSlots": [
+        5,
+        1
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "slowking",
+          "requiredAspects": [
+            "galarian"
+          ]
+        },
+        {
+          "species": "venusaur"
+        }
+      ],
+      "baseWeight": -2,
+      "favoredAgainstSpecies": [
+        "pelipper",
+        "politoed"
+      ],
+      "description": "Default Sun core: Galarian Slowking (Drought) + Venusaur (Chlorophyll)"
+    },
+    {
+      "id": "anti_psychic",
+      "leadSlots": [
+        0,
+        5
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "beedrill"
+        },
+        {
+          "species": "slowking",
+          "requiredAspects": [
+            "galarian"
+          ]
+        }
+      ],
+      "baseWeight": -2,
+      "favoredAgainstSpecies": [
+        "indeedee",
+        "armarouge",
+        "hatterene",
+        "alakazam",
+        "farigiraf",
+        "talonflame"
+      ],
+      "description": "Anti-Psychic/Psyspam core: Mega Beedrill (Bug STAB / Knock Off) + Galarian Slowking"
+    },
+    {
+      "id": "anti_dark_steel",
+      "leadSlots": [
+        2,
+        3
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "okidogi"
+        },
+        {
+          "species": "sneasler"
+        }
+      ],
+      "baseWeight": 2,
+      "favoredAgainstSpecies": [
+        "heatran",
+        "kingambit",
+        "chiyu",
+        "chienpao",
+        "incineroar",
+        "gholdengo",
+        "cresselia"
+      ],
+      "description": "Anti-Dark/Steel core: Okidogi + Sneasler (Dual Fighting STAB / CC / Drain Punch / Knock Off)"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

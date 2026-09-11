@@ -160,6 +160,11 @@ Python is appropriate when a task genuinely requires:
 - Task-specific algorithmic data transformation;
 - Canonical repository scripts maintained for CI or verification (`scripts/ci/validate_repo.py`, `scripts/runtime-contract/test_rct_runtime_contract.py`).
 
+### Repository Hygiene & Intermediate Artifact Containment
+- **Intermediate Artifacts Isolation:** All decompilation outputs, scratch scripts, temporary extracts, or transient analytical artifacts MUST be placed in the agent scratch directory (`<appDataDir>/brain/<conversation-id>/scratch/`) or an external temporary directory outside the repository.
+- **Zero In-Repo Transient Artifacts:** Never create ad-hoc scratch, cache, decompiled output, or analysis directories (e.g., `scratch/`, `tmp/`, `decompiled/`, `analysis/`) directly inside the repository root or its source trees unless the user prompt or repository contract explicitly designates that path as a repository output.
+- **Working-Tree Purity:** The repository working tree must only contain canonical source code, configs, datapacks, tests, and documentation intended for version control.
+
 ---
 
 ## 5. Skill Routing Catalog

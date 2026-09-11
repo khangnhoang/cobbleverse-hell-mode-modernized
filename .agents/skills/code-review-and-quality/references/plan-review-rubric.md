@@ -36,10 +36,10 @@ Plan Reviewer must evaluate the candidate plan against six core dimensions. Pass
 - **Counterexample Focus:** Unverified signatures, hallucinated methods, guessed bytecode offsets, or APIs assumed from memory without repository citations.
 - **Specification Defense Standard:** The plan cites concrete repository files, decompiled class descriptors, or schema lines establishing each referenced symbol.
 
-### Dimension 2: Fact vs. Assumption Discipline
-- **Target Invariant:** Confirmed Facts must be explicitly separated from Assumptions and Open Questions.
-- **Counterexample Focus:** Hypotheses about runtime behavior masquerading as facts, unstated dependencies, or unverified environment assumptions.
-- **Specification Defense Standard:** The plan explicitly categorizes items and provides test-driven validation steps for all assumptions.
+### Dimension 2: Fact vs. Assumption Discipline & Executable Derived Facts
+- **Target Invariant:** Confirmed Facts must be explicitly separated from Assumptions and Open Questions. Material derived claims must be backed by executable evidence or authoritative source evidence; handwritten arithmetic or memory-based mechanic claims are not sufficient.
+- **Counterexample Focus:** Unbacked derived stats, copied stats from a different battle level, manual damage estimates, hypotheses about runtime behavior masquerading as facts, or mechanic claims not bound to executable/source evidence.
+- **Specification Defense Standard:** The plan explicitly categorizes items and identifies the authoritative source or executable check for each material derived claim. The reviewer verifies claim-to-evidence consistency and independently recomputes only when executable evidence is absent, ambiguous, or unverified.
 
 ### Dimension 3: Scope Confinement & Anti-Speculation
 - **Target Invariant:** Minimal complete solution strictly confined to approved scope; zero opportunistic refactoring or speculative abstractions.
