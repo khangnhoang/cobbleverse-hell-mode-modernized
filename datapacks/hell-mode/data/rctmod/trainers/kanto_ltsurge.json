@@ -298,29 +298,30 @@
     {
       "id": "anti_gastrodon",
       "leadSlots": [
-        5,
-        1
+        2,
+        5
       ],
       "expectedLeadMembers": [
+        {
+          "species": "rotom",
+          "form": "wash",
+          "requiredAspects": [
+            "wash-appliance"
+          ]
+        },
         {
           "species": "electrode",
           "requiredAspects": [
             "hisuian"
           ]
-        },
-        {
-          "species": "raichu",
-          "form": "alola",
-          "requiredAspects": [
-            "alolan"
-          ]
         }
       ],
       "baseWeight": 0,
       "favoredAgainstSpecies": [
+        "swampert",
         "gastrodon"
       ],
-      "description": "Hisuian Electrode + Alolan Raichu (Grass STAB vs Storm Drain Gastrodon)"
+      "description": "Rotom-Wash + Hisuian Electrode (Levitate + Grass STAB vs Swampert and Gastrodon)"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

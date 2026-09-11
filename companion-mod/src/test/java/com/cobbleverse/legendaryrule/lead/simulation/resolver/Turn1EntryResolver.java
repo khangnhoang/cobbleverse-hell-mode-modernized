@@ -47,6 +47,16 @@ public final class Turn1EntryResolver {
             }
         }
 
+        // 1.5. Terrain Seed item activations
+        if (state.getTerrain() == Turn1BattleState.Terrain.PSYCHIC) {
+            for (EntryMon entry : entries) {
+                if (entry.profile.hasItem("psychic_seed") && !state.isItemConsumed(entry.slot)) {
+                    state.modifyStatStage(entry.slot, "spd", 1);
+                    state.consumeItem(entry.slot);
+                }
+            }
+        }
+
         // 2. Intimidate activations
         for (EntryMon entry : entries) {
             if ("intimidate".equals(entry.profile.ability())) {

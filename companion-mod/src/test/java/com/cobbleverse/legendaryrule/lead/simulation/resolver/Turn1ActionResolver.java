@@ -321,12 +321,22 @@ public final class Turn1ActionResolver {
     ) {
         DamageRange range = Turn1DamageCalculator.calculateDamage(attacker, defender, move, state, attackerSlot, defenderSlot);
         int damage = useMaxDamageRoll ? range.maxDamage() : range.minDamage();
+        int defenderMaxHp = defender.actualStats().hp();
+
+        // Disguise ability: absorbs first hit, dealing 1/8 max HP
+        if (defender.hasAbility("disguise") && !state.isItemConsumed(defenderSlot + "_disguise") && damage > 0) {
+            state.consumeItem(defenderSlot + "_disguise");
+            int disguiseDmg = Math.max(1, defenderMaxHp / 8);
+            state.applyDamage(defenderSlot, disguiseDmg);
+            log.add(String.format("%s's Disguise absorbed %s! Took %d damage (%d/%d HP remaining)",
+                    defender.species(), move.id(), disguiseDmg, state.getHp(defenderSlot), defenderMaxHp));
+            return;
+        }
 
         state.applyDamage(defenderSlot, damage);
         String classification = range.guaranteedOhko() ? "guaranteed OHKO"
                 : (range.possibleOhko() ? "possible OHKO" : "survives");
 
-        int defenderMaxHp = defender.actualStats().hp();
         int remainingHp = state.getHp(defenderSlot);
 
         log.add(String.format("%s used %s on %s dealing %d damage [range: %d-%d / %d HP, %.1f%%-%.1f%%] (%s, %d/%d HP remaining)",

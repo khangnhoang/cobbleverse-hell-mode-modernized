@@ -13,7 +13,7 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 2
+    "maxItemUses": 0
   },
   "bag": [
     {
@@ -26,23 +26,23 @@
       "moveset": [
         "followme",
         "helpinghand",
-        "dazzlinggleam",
+        "psychic",
         "protect"
       ],
       "ivs": {
         "hp": 31,
-        "atk": 31,
+        "atk": 0,
         "def": 31,
         "spa": 31,
         "spd": 31,
-        "spe": 31
+        "spe": 0
       },
       "evs": {
         "hp": 252,
         "atk": 0,
-        "def": 156,
+        "def": 252,
         "spa": 0,
-        "spd": 100,
+        "spd": 4,
         "spe": 0
       },
       "heldItem": [
@@ -51,14 +51,17 @@
       "species": "indeedee",
       "gender": "FEMALE",
       "level": 60,
-      "nature": "bold",
-      "ability": "psychicsurge"
+      "nature": "relaxed",
+      "ability": "psychicsurge",
+      "aspects": [
+        "female"
+      ]
     },
     {
       "moveset": [
-        "helpinghand",
-        "expandingforce",
-        "hypervoice",
+        "sacredsword",
+        "psychocut",
+        "nightslash",
         "protect"
       ],
       "ivs": {
@@ -70,27 +73,27 @@
         "spe": 31
       },
       "evs": {
-        "hp": 252,
-        "atk": 0,
-        "def": 128,
-        "spa": 128,
+        "hp": 4,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
         "spd": 0,
-        "spe": 0
+        "spe": 252
       },
       "heldItem": [
-        "sitrus_berry"
+        "focus_sash"
       ],
-      "species": "farigiraf",
+      "species": "gallade",
       "gender": "MALE",
       "level": 60,
-      "nature": "modest",
-      "ability": "armortail"
+      "nature": "jolly",
+      "ability": "sharpness"
     },
     {
       "moveset": [
-        "expandingforce",
-        "dazzlinggleam",
-        "mysticalfire",
+        "earthquake",
+        "rockslide",
+        "dragonclaw",
         "protect"
       ],
       "ivs": {
@@ -102,28 +105,28 @@
         "spe": 31
       },
       "evs": {
-        "hp": 252,
-        "atk": 0,
+        "hp": 4,
+        "atk": 252,
         "def": 0,
-        "spa": 252,
-        "spd": 4,
-        "spe": 0
+        "spa": 0,
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "life_orb"
+        "soft_sand"
       ],
-      "species": "hatterene",
+      "species": "garchomp",
       "gender": "FEMALE",
       "level": 60,
-      "nature": "modest",
-      "ability": "magicbounce"
+      "nature": "jolly",
+      "ability": "roughskin"
     },
     {
       "moveset": [
         "meteormash",
-        "zenheadbutt",
+        "psychicfangs",
         "stompingtantrum",
-        "icepunch"
+        "protect"
       ],
       "ivs": {
         "hp": 31,
@@ -134,64 +137,35 @@
         "spe": 31
       },
       "evs": {
-        "hp": 252,
+        "hp": 4,
         "atk": 252,
         "def": 0,
         "spa": 0,
-        "spd": 4,
-        "spe": 0
+        "spd": 0,
+        "spe": 252
       },
       "heldItem": [
-        "assault_vest"
+        "weakness_policy"
       ],
       "species": "metagross",
       "gender": "GENDERLESS",
       "level": 60,
       "nature": "adamant",
-      "ability": "clearbody"
+      "ability": "toughclaws",
+      "aspects": [
+        "mega"
+      ]
     },
     {
       "moveset": [
-        "expandingforce",
-        "armorcannon",
-        "wideguard",
+        "voltswitch",
+        "thunderbolt",
+        "hydropump",
         "protect"
       ],
       "ivs": {
         "hp": 31,
-        "atk": 31,
-        "def": 31,
-        "spa": 31,
-        "spd": 31,
-        "spe": 31
-      },
-      "evs": {
-        "hp": 252,
         "atk": 0,
-        "def": 0,
-        "spa": 252,
-        "spd": 4,
-        "spe": 0
-      },
-      "heldItem": [
-        "covert_cloak"
-      ],
-      "species": "armarouge",
-      "gender": "MALE",
-      "level": 60,
-      "nature": "modest",
-      "ability": "flashfire"
-    },
-    {
-      "moveset": [
-        "expandingforce",
-        "dazzlinggleam",
-        "shadowball",
-        "protect"
-      ],
-      "ivs": {
-        "hp": 31,
-        "atk": 31,
         "def": 31,
         "spa": 31,
         "spd": 31,
@@ -206,18 +180,56 @@
         "spe": 252
       },
       "heldItem": [
-        "mega_showdown:alakazite"
+        "sitrus_berry"
+      ],
+      "species": "rotom",
+      "gender": "GENDERLESS",
+      "level": 60,
+      "nature": "timid",
+      "ability": "levitate",
+      "aspects": [
+        "wash-appliance"
+      ]
+    },
+    {
+      "moveset": [
+        "expandingforce",
+        "focusblast",
+        "shadowball",
+        "protect"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 0,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 4,
+        "atk": 0,
+        "def": 0,
+        "spa": 252,
+        "spd": 0,
+        "spe": 252
+      },
+      "heldItem": [
+        "life_orb"
       ],
       "species": "alakazam",
       "gender": "MALE",
       "level": 60,
       "nature": "timid",
-      "ability": "trace"
+      "ability": "disguise",
+      "aspects": [
+        "mega"
+      ]
     }
   ],
   "leadPresets": [
     {
-      "id": "psychic_terrain_blitz",
+      "id": "default_psychic",
       "leadSlots": [
         0,
         5
@@ -238,27 +250,10 @@
       "description": "Psychic Surge + Follow Me with fast Mega Alakazam Expanding Force"
     },
     {
-      "id": "anti_dark_priority_block",
-      "leadSlots": [
-        1,
-        2
-      ],
-      "expectedLeadMembers": [
-        {
-          "species": "farigiraf"
-        },
-        {
-          "species": "hatterene"
-        }
-      ],
-      "baseWeight": 0,
-      "description": "Armor Tail blocks priority moves; Hatterene Fairy typing counters Dark"
-    },
-    {
-      "id": "heavy_steel_offense",
+      "id": "anti_dark_steel",
       "leadSlots": [
         0,
-        3
+        1
       ],
       "expectedLeadMembers": [
         {
@@ -269,11 +264,41 @@
           ]
         },
         {
-          "species": "metagross"
+          "species": "gallade"
         }
       ],
-      "baseWeight": -1,
-      "description": "Redirection + Assault Vest Metagross bulky physical coverage"
+      "baseWeight": 0,
+      "favoredAgainst": [
+        "dark",
+        "steel"
+      ],
+      "description": "Psychic Terrain blocks priority; Follow Me supports Sharpness Gallade against Dark- and Steel-types"
+    },
+    {
+      "id": "field_independent",
+      "leadSlots": [
+        2,
+        4
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "garchomp"
+        },
+        {
+          "species": "rotom",
+          "form": "wash",
+          "requiredAspects": [
+            "wash-appliance"
+          ]
+        }
+      ],
+      "baseWeight": 0,
+      "favoredAgainstSpecies": [
+        "rillaboom",
+        "pincurchin",
+        "scizor"
+      ],
+      "description": "Field-independent Ground- and Water-type coverage with Garchomp and Rotom-Wash"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

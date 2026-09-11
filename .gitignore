@@ -42,3 +42,6 @@ tmp/
 __pycache__/
 *.pyc
 *.pyo
+
+# Generated simulation and calibration reports
+reports/*.txt
