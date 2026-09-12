@@ -1,0 +1,7 @@
+{
+  "notify_alert": {
+    "sounds": [
+      "rct_legendary_rule:notify_alert"
+    ]
+  }
+}

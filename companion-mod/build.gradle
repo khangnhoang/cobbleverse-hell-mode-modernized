@@ -41,6 +41,11 @@ dependencies {
     modImplementation files("${curseforgeMods}/rctapi-fabric-1.21.1-0.15.2-beta.jar")
     modImplementation files("${curseforgeMods}/rctmod-fabric-1.21.1-0.18.1-beta.jar")
     modImplementation files("${curseforgeMods}/rbrctai-fabric-1.21.1-0.15.4-beta.jar")
+    modCompileOnly files("${curseforgeMods}/spawnnotification-fabric-1.7.3-2.3.0.jar")
+    modCompileOnly files("${curseforgeMods}/timcore-fabric-1.7.3-1.32.0.jar")
+    modLocalRuntime files("${curseforgeMods}/spawnnotification-fabric-1.7.3-2.3.0.jar")
+    modLocalRuntime files("${curseforgeMods}/timcore-fabric-1.7.3-1.32.0.jar")
+    modLocalRuntime files("${curseforgeMods}/fabric-language-kotlin-1.13.13+kotlin.2.4.10.jar")
     modLocalRuntime files("${curseforgeMods}/architectury-13.0.8-fabric.jar")
     modLocalRuntime files("${curseforgeMods}/ForgeConfigAPIPort-v21.1.6-1.21.1-Fabric.jar")
 
