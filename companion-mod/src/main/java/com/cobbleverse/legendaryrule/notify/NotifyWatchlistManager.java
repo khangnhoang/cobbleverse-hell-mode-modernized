@@ -56,6 +56,12 @@ public class NotifyWatchlistManager {
         return Collections.unmodifiableMap(WATCHLIST);
     }
 
+    public static int clearAll() {
+        int count = WATCHLIST.size();
+        WATCHLIST.clear();
+        return count;
+    }
+
     public static void handleBroadcast(BroadcastContext broadcastContext, Identifier trigger) {
         if (broadcastContext == null || trigger == null) {
             return;

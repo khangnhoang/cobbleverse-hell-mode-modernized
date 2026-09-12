@@ -35,6 +35,9 @@ public class NotifyWatchlistCommand {
                 )
             )
             .then(CommandManager.literal("remove")
+                .then(CommandManager.literal("all")
+                    .executes(NotifyWatchlistCommand::executeRemoveAll)
+                )
                 .then(CommandManager.argument("species", SpeciesArgumentType.Companion.species())
                     .executes(NotifyWatchlistCommand::executeRemove)
                 )
@@ -87,6 +90,22 @@ public class NotifyWatchlistCommand {
             );
             return 0;
         }
+    }
+
+    private static int executeRemoveAll(CommandContext<ServerCommandSource> context) {
+        int count = NotifyWatchlistManager.clearAll();
+        if (count > 0) {
+            context.getSource().sendFeedback(
+                () -> Text.literal("§6[Notify]§r Cleared all §e" + count + "§r Pokémon from watchlist."),
+                false
+            );
+        } else {
+            context.getSource().sendFeedback(
+                () -> Text.literal("§6[Notify]§r Watchlist was already empty."),
+                false
+            );
+        }
+        return count;
     }
 
     private static int executeList(CommandContext<ServerCommandSource> context) {
