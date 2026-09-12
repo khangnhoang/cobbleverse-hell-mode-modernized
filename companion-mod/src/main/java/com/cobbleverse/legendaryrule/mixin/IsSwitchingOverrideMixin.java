@@ -57,7 +57,8 @@ public abstract class IsSwitchingOverrideMixin {
      * Disambiguates explicitly via name = "hasLowScore" and index = 12.
      *
      * Reconciled Contract:
-     * Opens switch consideration if native hasLowScore is true, if offensive pressure is low (< 20%),
+     * Opens switch consideration if native hasLowScore is true, if active position is dead
+     * (low offensive pressure < 20% AND no meaningful support utility),
      * or if active Pokemon is under critical incoming threat from all opponents.
      */
     @ModifyVariable(
@@ -76,19 +77,21 @@ public abstract class IsSwitchingOverrideMixin {
         @Local(name = "activeBattlePokemon", index = 4, argsOnly = true) ActiveBattlePokemon activeBattlePokemon,
         @Local(name = "battleStatStages", index = 5, argsOnly = true) RBStatStages battleStatStages
     ) {
-        boolean lowPressure = DeadMatchupDetector.isLowOffensivePressure(evaluations, opponents);
+        boolean deadPosition = DeadMatchupDetector.isDeadPosition(
+            evaluations, self, opponents, activeBattlePokemon, battleStatStages
+        );
         boolean criticalThreat = DeadMatchupDetector.isUnderCriticalThreat(
             self, opponents, activeBattlePokemon, battleStatStages
         );
-        return nativeHasLowScore || lowPressure || criticalThreat;
+        return nativeHasLowScore || deadPosition || criticalThreat;
     }
 
     /**
      * Hook 3: Wraps native Random.nextDouble() at Gate 3.
-     * If low offensive pressure is active (lowPressure == true), bypasses the 25% random veto
+     * If dead position is active (deadPosition == true), bypasses the 25% random veto
      * by returning 0.0d (< 0.75d), proceeding to Gate 4 (HP) and Gate 5 (Party).
-     * If low offensive pressure is false (including criticalThreat alone, nativeHasLowScore alone,
-     * or gray zone 20-33%), preserves native RNG 100% without modification.
+     * If dead position is false (including criticalThreat alone, nativeHasLowScore alone,
+     * support position, or gray zone 20-33%), preserves native RNG 100% without modification.
      * Consumes native RNG exactly once.
      */
     @WrapOperation(
@@ -104,10 +107,15 @@ public abstract class IsSwitchingOverrideMixin {
         Random rng,
         Operation<Double> original,
         @Local(name = "evaluations", index = 0, argsOnly = true) List<RunBunAI.MoveEvaluation> evaluations,
-        @Local(name = "opponents", index = 3, argsOnly = true) List<ActiveBattlePokemon> opponents
+        @Local(name = "self", index = 2, argsOnly = true) BattlePokemon self,
+        @Local(name = "opponents", index = 3, argsOnly = true) List<ActiveBattlePokemon> opponents,
+        @Local(name = "activeBattlePokemon", index = 4, argsOnly = true) ActiveBattlePokemon activeBattlePokemon,
+        @Local(name = "battleStatStages", index = 5, argsOnly = true) RBStatStages battleStatStages
     ) {
         double val = original.call(rng);
-        boolean lowPressure = DeadMatchupDetector.isLowOffensivePressure(evaluations, opponents);
-        return DeadMatchupDetector.resolveGate3RandomValue(val, lowPressure);
+        boolean deadPosition = DeadMatchupDetector.isDeadPosition(
+            evaluations, self, opponents, activeBattlePokemon, battleStatStages
+        );
+        return DeadMatchupDetector.resolveGate3RandomValue(val, deadPosition);
     }
 }
