@@ -24,9 +24,7 @@ public class NotifyWatchlistManagerTest {
     @BeforeEach
     void setUp() {
         // Clean up watchlist between tests
-        NotifyWatchlistManager.remove(UXIE);
-        NotifyWatchlistManager.remove(BAGON);
-        NotifyWatchlistManager.remove(DIALGA);
+        NotifyWatchlistManager.clearAll();
     }
 
     @Test
@@ -177,5 +175,48 @@ public class NotifyWatchlistManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> {
             view.put(BAGON, WatchMode.ANY);
         }, "Watchlist map view must be unmodifiable to protect internal state");
+    }
+
+    @Test
+    @DisplayName("Test 9: clearAll with mixed ONE and ANY entries")
+    void testClearAllWithMixedModes() {
+        NotifyWatchlistManager.add(UXIE, WatchMode.ONE);
+        NotifyWatchlistManager.add(BAGON, WatchMode.ANY);
+        NotifyWatchlistManager.add(DIALGA, WatchMode.ONE);
+
+        assertEquals(3, NotifyWatchlistManager.getWatchlist().size());
+
+        int cleared = NotifyWatchlistManager.clearAll();
+        assertEquals(3, cleared, "clearAll should return the exact number of cleared entries");
+        assertTrue(NotifyWatchlistManager.getWatchlist().isEmpty(), "Watchlist must be empty after clearAll");
+        assertNull(NotifyWatchlistManager.get(UXIE));
+        assertNull(NotifyWatchlistManager.get(BAGON));
+        assertNull(NotifyWatchlistManager.get(DIALGA));
+    }
+
+    @Test
+    @DisplayName("Test 10: clearAll on empty watchlist returns 0")
+    void testClearAllEmpty() {
+        assertTrue(NotifyWatchlistManager.getWatchlist().isEmpty());
+        int cleared = NotifyWatchlistManager.clearAll();
+        assertEquals(0, cleared, "clearAll on empty watchlist must return 0");
+        assertTrue(NotifyWatchlistManager.getWatchlist().isEmpty());
+    }
+
+    @Test
+    @DisplayName("Test 11: Single species remove still works correctly alongside clearAll")
+    void testSingleSpeciesRemovePreserved() {
+        NotifyWatchlistManager.add(UXIE, WatchMode.ONE);
+        NotifyWatchlistManager.add(BAGON, WatchMode.ANY);
+
+        WatchMode removed = NotifyWatchlistManager.remove(UXIE);
+        assertEquals(WatchMode.ONE, removed);
+        assertNull(NotifyWatchlistManager.get(UXIE));
+        assertEquals(WatchMode.ANY, NotifyWatchlistManager.get(BAGON));
+        assertEquals(1, NotifyWatchlistManager.getWatchlist().size());
+
+        int cleared = NotifyWatchlistManager.clearAll();
+        assertEquals(1, cleared);
+        assertTrue(NotifyWatchlistManager.getWatchlist().isEmpty());
     }
 }
