@@ -12,7 +12,8 @@
     "RunBunAIChooseMixin",
     "ContextManagerMixin",
     "IsSwitchingOverrideMixin",
-    "SwitchCandidateScoringMixin"
+    "SwitchCandidateScoringMixin",
+    "BroadcasterMixin"
   ],
   "injectors": {
     "defaultRequire": 1
