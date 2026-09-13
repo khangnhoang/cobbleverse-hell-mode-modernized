@@ -215,13 +215,13 @@
         "spe": 252
       },
       "heldItem": [
-        "life_orb"
+        "wise_glasses"
       ],
       "species": "alakazam",
       "gender": "MALE",
       "level": 60,
       "nature": "timid",
-      "ability": "disguise",
+      "ability": "shadowshield",
       "aspects": [
         "mega"
       ]
