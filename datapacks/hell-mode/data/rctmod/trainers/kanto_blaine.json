@@ -312,11 +312,11 @@
       ],
       "baseWeight": 0,
       "minFastOpponents": 2,
-      "fastSpeedThreshold": 100,
       "description": "Mega Charizard Y + Moltres (Prankster Tailwind speed control vs fast threats)"
     },
     {
       "id": "default_sun_intimidate",
+      "default": true,
       "leadSlots": [
         1,
         0
