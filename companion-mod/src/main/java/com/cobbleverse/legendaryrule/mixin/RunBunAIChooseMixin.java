@@ -3,13 +3,18 @@ package com.cobbleverse.legendaryrule.mixin;
 import com.cobblemon.mod.common.api.battles.model.PokemonBattle;
 import com.cobblemon.mod.common.battles.ActiveBattlePokemon;
 import com.cobblemon.mod.common.battles.BattleSide;
+import com.cobblemon.mod.common.battles.MoveActionResponse;
 import com.cobblemon.mod.common.battles.ShowdownActionResponse;
 import com.cobblemon.mod.common.battles.ShowdownMoveset;
 import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
+import com.cobbleverse.legendaryrule.strategy.diagnostic.AIDecisionDiagnostics;
+import com.cobbleverse.legendaryrule.strategy.spread.SpreadFriendlyFireValuationStrategy;
 import com.cobbleverse.legendaryrule.strategy.spread.SpreadMoveValuationContext;
 import com.cobbleverse.legendaryrule.strategy.tera.TeraTargetResolver;
 import com.cobbleverse.legendaryrule.strategy.weather.WeatherAccuracyValuationStrategy;
 import com.gitlab.surilexa.rbrctai.api.ai.RunBunAI;
+import com.gitlab.surilexa.rbrctai.api.ai.utils.RBSlotInformation;
+import com.gitlab.surilexa.rbrctai.api.ai.utils.RBStatStages;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
@@ -22,6 +27,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Mixin into RunBunAI.choose() to provide invocation-local board-value aggregation
@@ -33,6 +39,12 @@ public abstract class RunBunAIChooseMixin {
 
     @Shadow
     private String teraTarget;
+
+    @Shadow(remap = false)
+    private RBStatStages battleStatStages;
+
+    @Shadow(remap = false)
+    private RBSlotInformation selfInfo;
 
     /**
      * Precomputes invocation-local rankingDamage and normalizedPressure maps for allAdjacentFoes moves
@@ -151,12 +163,65 @@ public abstract class RunBunAIChooseMixin {
         ShowdownMoveset moveset,
         boolean forceSwitch,
         CallbackInfoReturnable<ShowdownActionResponse> cir,
-        @Local(name = "evaluations") List<RunBunAI.MoveEvaluation> evaluations
+        @Local(name = "evaluations") List<RunBunAI.MoveEvaluation> evaluations,
+        @Share("finalEvaluations") LocalRef<List<RunBunAI.MoveEvaluation>> evaluationsRef
     ) {
         if (evaluations == null || evaluations.isEmpty() || activeBattlePokemon == null) {
             return;
         }
         BattlePokemon attacker = activeBattlePokemon.getBattlePokemon();
         WeatherAccuracyValuationStrategy.adjustMoveValuations(evaluations, attacker, activeBattlePokemon, battle);
+        SpreadFriendlyFireValuationStrategy.adjustFriendlyFireValuations(evaluations, attacker, activeBattlePokemon, battle, this.battleStatStages);
+
+        // Observability: Log post-adjustment candidate snapshot [AI-FINAL]
+        AIDecisionDiagnostics.logFinalCandidates(evaluations, attacker);
+        evaluationsRef.set(evaluations);
+    }
+
+    /**
+     * Intercepts RunBunAI.choose() return to log tie diagnostics ([AI-TIE]) if multiple candidates
+     * share the highest score, and logs the final chosen move ([AI-CHOSEN]).
+     */
+    @Inject(
+        method = "choose(Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/cobblemon/mod/common/api/battles/model/PokemonBattle;Lcom/cobblemon/mod/common/battles/BattleSide;Lcom/cobblemon/mod/common/battles/ShowdownMoveset;Z)Lcom/cobblemon/mod/common/battles/ShowdownActionResponse;",
+        at = @At("RETURN"),
+        remap = false
+    )
+    private void cobbleverse$logChosenAndTieDiagnostics(
+        ActiveBattlePokemon activeBattlePokemon,
+        PokemonBattle battle,
+        BattleSide side,
+        ShowdownMoveset moveset,
+        boolean forceSwitch,
+        CallbackInfoReturnable<ShowdownActionResponse> cir,
+        @Share("finalEvaluations") LocalRef<List<RunBunAI.MoveEvaluation>> evaluationsRef
+    ) {
+        if (cir == null || !(cir.getReturnValue() instanceof MoveActionResponse moveResp)) {
+            return;
+        }
+        if (activeBattlePokemon == null) {
+            return;
+        }
+        List<RunBunAI.MoveEvaluation> evaluations = evaluationsRef.get();
+        if (evaluations == null || evaluations.isEmpty()) {
+            return;
+        }
+
+        RunBunAI.MoveEvaluation chosen = this.selfInfo != null ? this.selfInfo.getChosenMove() : null;
+        if (chosen == null) {
+            int maxScore = evaluations.stream()
+                .filter(Objects::nonNull)
+                .mapToInt(RunBunAI.MoveEvaluation::getScore)
+                .max()
+                .orElse(Integer.MIN_VALUE);
+            chosen = evaluations.stream()
+                .filter(Objects::nonNull)
+                .filter(e -> e.getScore() == maxScore && e.getMove() != null && moveResp.getMoveName().equalsIgnoreCase(e.getMove().getName()))
+                .findFirst()
+                .orElse(null);
+        }
+
+        BattlePokemon attacker = activeBattlePokemon.getBattlePokemon();
+        AIDecisionDiagnostics.logChosenAndTie(evaluations, chosen, attacker);
     }
 }
