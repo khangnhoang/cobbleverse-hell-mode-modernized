@@ -49,36 +49,71 @@ public final class CobblemonLeadAdapter {
         return types;
     }
 
+    public static int resolveSpeed(Pokemon pokemon) {
+        if (pokemon == null) {
+            return 0;
+        }
+        int speed = 0;
+        try {
+            speed = pokemon.getSpeed();
+        } catch (Throwable ignored) {
+        }
+        if (speed <= 0) {
+            try {
+                if (pokemon.getForm() != null && pokemon.getForm().getBaseStats() != null) {
+                    Integer spe = pokemon.getForm().getBaseStats().get(com.cobblemon.mod.common.api.pokemon.stats.Stats.SPEED);
+                    if (spe != null) {
+                        speed = spe;
+                    }
+                } else if (pokemon.getSpecies() != null && pokemon.getSpecies().getBaseStats() != null) {
+                    Integer spe = pokemon.getSpecies().getBaseStats().get(com.cobblemon.mod.common.api.pokemon.stats.Stats.SPEED);
+                    if (spe != null) {
+                        speed = spe;
+                    }
+                }
+            } catch (Throwable ignored) {
+            }
+        }
+        if (isHoldingChoiceScarf(pokemon)) {
+            speed = (int) Math.floor(speed * 1.5);
+        }
+        return Math.max(0, speed);
+    }
+
+    public static boolean isHoldingChoiceScarf(Pokemon pokemon) {
+        if (pokemon == null) {
+            return false;
+        }
+        try {
+            net.minecraft.item.ItemStack stack = pokemon.heldItem();
+            if (stack == null || stack.isEmpty()) {
+                return false;
+            }
+            net.minecraft.util.Identifier id = net.minecraft.registry.Registries.ITEM.getId(stack.getItem());
+            if (id != null) {
+                String path = id.getPath().toLowerCase(Locale.ROOT);
+                return path.equals("choice_scarf") || path.equals("choicescarf");
+            }
+        } catch (Throwable ignored) {
+        }
+        return false;
+    }
+
     public static PlayerLeadTyping toPlayerLeadTyping(Pokemon pokemon) {
         if (pokemon == null || pokemon.getSpecies() == null) {
             return new PlayerLeadTyping("unknown", Collections.emptyList(), 0);
         }
         String species = pokemon.getSpecies().getName().toLowerCase(Locale.ROOT);
-        int baseSpeed = 0;
-        try {
-            Integer spe = pokemon.getSpecies().getBaseStats().get(com.cobblemon.mod.common.api.pokemon.stats.Stats.SPEED);
-            if (spe != null) {
-                baseSpeed = spe;
-            }
-        } catch (Throwable ignored) {
-        }
-        if (pokemon.getAbility() != null) {
-            try {
-                String ability = pokemon.getAbility().getName().toLowerCase(Locale.ROOT);
-                if (ability.equals("swiftswim") || ability.equals("chlorophyll") || ability.equals("sandrush") || ability.equals("slushrush") || ability.equals("surgesurfer")) {
-                    baseSpeed *= 2;
-                }
-            } catch (Throwable ignored) {
-            }
-        }
-        return new PlayerLeadTyping(species, extractTypes(pokemon), baseSpeed);
+        int speed = resolveSpeed(pokemon);
+        return new PlayerLeadTyping(species, extractTypes(pokemon), speed);
     }
 
     public static RosterMemberTyping toRosterMemberTyping(int slot, Pokemon pokemon) {
         if (pokemon == null || pokemon.getSpecies() == null) {
-            return new RosterMemberTyping(slot, "unknown", Collections.emptyList());
+            return new RosterMemberTyping(slot, "unknown", Collections.emptyList(), 0);
         }
         String species = pokemon.getSpecies().getName().toLowerCase(Locale.ROOT);
-        return new RosterMemberTyping(slot, species, extractTypes(pokemon));
+        int speed = resolveSpeed(pokemon);
+        return new RosterMemberTyping(slot, species, extractTypes(pokemon), speed);
     }
 }

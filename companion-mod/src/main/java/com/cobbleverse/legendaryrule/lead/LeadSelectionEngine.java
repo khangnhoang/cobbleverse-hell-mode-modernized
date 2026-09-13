@@ -34,6 +34,18 @@ public final class LeadSelectionEngine {
         Map<Integer, RosterMemberTyping> rosterBySlot = npcRoster.stream()
                 .collect(Collectors.toMap(RosterMemberTyping::slot, r -> r, (a, b) -> a));
 
+        LeadAttempt defaultAttempt = resolveDefaultAttempt(attempts);
+        int dynamicThreatSpeed = 0;
+        if (defaultAttempt != null) {
+            int defaultSlotA = defaultAttempt.leadSlots()[0];
+            int defaultSlotB = defaultAttempt.leadSlots()[1];
+            RosterMemberTyping memA = rosterBySlot.get(defaultSlotA);
+            RosterMemberTyping memB = rosterBySlot.get(defaultSlotB);
+            int speedA = memA != null ? memA.speed() : 0;
+            int speedB = memB != null ? memB.speed() : 0;
+            dynamicThreatSpeed = Math.max(speedA, speedB);
+        }
+
         List<ScoredAttempt> scoredList = new ArrayList<>();
         List<AttemptScore> evidenceList = new ArrayList<>();
 
@@ -82,10 +94,12 @@ public final class LeadSelectionEngine {
 
             int fastBonus = 0;
             if (attempt.minFastOpponents() > 0) {
-                int threshold = attempt.fastSpeedThreshold() > 0 ? attempt.fastSpeedThreshold() : 100;
+                boolean isDynamic = attempt.fastSpeedThreshold() <= 0 && dynamicThreatSpeed > 0;
+                int threshold = isDynamic ? dynamicThreatSpeed : (attempt.fastSpeedThreshold() > 0 ? attempt.fastSpeedThreshold() : 100);
                 int fastCount = 0;
                 for (PlayerLeadTyping player : playerLeads) {
-                    if (player.baseSpeed() >= threshold) {
+                    boolean isFast = isDynamic ? (player.speed() > threshold) : (player.speed() >= threshold);
+                    if (isFast) {
                         fastCount++;
                     }
                 }
@@ -109,6 +123,22 @@ public final class LeadSelectionEngine {
 
         LeadAttempt winner = scoredList.get(0).attempt();
         return new LeadSelectionResult(winner, evidenceList);
+    }
+
+    private static LeadAttempt resolveDefaultAttempt(List<LeadAttempt> attempts) {
+        for (LeadAttempt attempt : attempts) {
+            if (attempt.isDefault()) {
+                return attempt;
+            }
+        }
+        for (LeadAttempt attempt : attempts) {
+            if (attempt.minFastOpponents() == 0
+                    && attempt.favoredAgainst().isEmpty()
+                    && attempt.favoredAgainstSpecies().isEmpty()) {
+                return attempt;
+            }
+        }
+        return attempts.get(0);
     }
 
     private record ScoredAttempt(LeadAttempt attempt, int totalScore, int baseWeight, int declarationIndex) {}

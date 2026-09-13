@@ -321,6 +321,9 @@ def validate_future_pack(repo_root):
                                 errors.append(f"{f}: 'leadPresets' must be a list")
                             else:
                                 team_len = len(d["team"])
+                                default_presets = [p.get("id") for p in presets if isinstance(p, dict) and p.get("default") is True]
+                                if len(default_presets) > 1:
+                                    errors.append(f"{f}: cannot declare multiple default lead presets, found: {default_presets}")
                                 for p_idx, preset in enumerate(presets):
                                     if not isinstance(preset, dict):
                                         errors.append(f"{f}: leadPresets[{p_idx}] must be a dict")
@@ -328,6 +331,9 @@ def validate_future_pack(repo_root):
                                     pid = preset.get("id")
                                     if not pid or not isinstance(pid, str) or not pid.strip():
                                         errors.append(f"{f}: leadPresets[{p_idx}] missing valid 'id'")
+
+                                    if "default" in preset and not isinstance(preset["default"], bool):
+                                        errors.append(f"{f}: preset '{pid}' 'default' must be a boolean")
 
                                     slots = preset.get("leadSlots")
                                     if not isinstance(slots, list) or len(slots) != 2 or not all(isinstance(x, int) and not isinstance(x, bool) for x in slots):
