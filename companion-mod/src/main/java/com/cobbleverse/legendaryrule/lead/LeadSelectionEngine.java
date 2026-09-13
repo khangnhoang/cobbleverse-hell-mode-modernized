@@ -80,8 +80,22 @@ public final class LeadSelectionEngine {
                 }
             }
 
-            int total = offScore + defScore + attempt.baseWeight() + typeFavoredBonus + speciesFavoredBonus;
-            AttemptScore evidence = new AttemptScore(attempt.id(), offScore, defScore, attempt.baseWeight(), typeFavoredBonus, speciesFavoredBonus, total);
+            int fastBonus = 0;
+            if (attempt.minFastOpponents() > 0) {
+                int threshold = attempt.fastSpeedThreshold() > 0 ? attempt.fastSpeedThreshold() : 100;
+                int fastCount = 0;
+                for (PlayerLeadTyping player : playerLeads) {
+                    if (player.baseSpeed() >= threshold) {
+                        fastCount++;
+                    }
+                }
+                if (fastCount >= attempt.minFastOpponents()) {
+                    fastBonus = 4;
+                }
+            }
+
+            int total = offScore + defScore + attempt.baseWeight() + typeFavoredBonus + speciesFavoredBonus + fastBonus;
+            AttemptScore evidence = new AttemptScore(attempt.id(), offScore, defScore, attempt.baseWeight(), typeFavoredBonus, speciesFavoredBonus, fastBonus, total);
             evidenceList.add(evidence);
             scoredList.add(new ScoredAttempt(attempt, total, attempt.baseWeight(), i));
         }

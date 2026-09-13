@@ -51,10 +51,27 @@ public final class CobblemonLeadAdapter {
 
     public static PlayerLeadTyping toPlayerLeadTyping(Pokemon pokemon) {
         if (pokemon == null || pokemon.getSpecies() == null) {
-            return new PlayerLeadTyping("unknown", Collections.emptyList());
+            return new PlayerLeadTyping("unknown", Collections.emptyList(), 0);
         }
         String species = pokemon.getSpecies().getName().toLowerCase(Locale.ROOT);
-        return new PlayerLeadTyping(species, extractTypes(pokemon));
+        int baseSpeed = 0;
+        try {
+            Integer spe = pokemon.getSpecies().getBaseStats().get(com.cobblemon.mod.common.api.pokemon.stats.Stats.SPEED);
+            if (spe != null) {
+                baseSpeed = spe;
+            }
+        } catch (Throwable ignored) {
+        }
+        if (pokemon.getAbility() != null) {
+            try {
+                String ability = pokemon.getAbility().getName().toLowerCase(Locale.ROOT);
+                if (ability.equals("swiftswim") || ability.equals("chlorophyll") || ability.equals("sandrush") || ability.equals("slushrush") || ability.equals("surgesurfer")) {
+                    baseSpeed *= 2;
+                }
+            } catch (Throwable ignored) {
+            }
+        }
+        return new PlayerLeadTyping(species, extractTypes(pokemon), baseSpeed);
     }
 
     public static RosterMemberTyping toRosterMemberTyping(int slot, Pokemon pokemon) {

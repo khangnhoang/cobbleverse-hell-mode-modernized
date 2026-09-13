@@ -13,7 +13,7 @@
     }
   },
   "battleRules": {
-    "maxItemUses": 2
+    "maxItemUses": 0
   },
   "bag": [
     {
@@ -26,8 +26,8 @@
       "moveset": [
         "flareblitz",
         "extremespeed",
-        "willowisp",
-        "snarl"
+        "wildcharge",
+        "protect"
       ],
       "ivs": {
         "hp": 31,
@@ -57,13 +57,13 @@
     {
       "moveset": [
         "heatwave",
+        "weatherball",
         "solarbeam",
-        "willowisp",
         "protect"
       ],
       "ivs": {
         "hp": 31,
-        "atk": 31,
+        "atk": 0,
         "def": 31,
         "spa": 31,
         "spd": 31,
@@ -78,109 +78,16 @@
         "spe": 252
       },
       "heldItem": [
-        "heat_rock"
-      ],
-      "species": "ninetales",
-      "gender": "FEMALE",
-      "level": 70,
-      "nature": "timid",
-      "ability": "drought"
-    },
-    {
-      "moveset": [
-        "followme",
-        "fireblast",
-        "taunt",
-        "protect"
-      ],
-      "ivs": {
-        "hp": 31,
-        "atk": 31,
-        "def": 31,
-        "spa": 31,
-        "spd": 31,
-        "spe": 31
-      },
-      "evs": {
-        "hp": 252,
-        "atk": 0,
-        "def": 156,
-        "spa": 0,
-        "spd": 100,
-        "spe": 0
-      },
-      "heldItem": [
-        "eviolite"
-      ],
-      "species": "magmar",
-      "gender": "MALE",
-      "level": 70,
-      "nature": "bold",
-      "ability": "flamebody"
-    },
-    {
-      "moveset": [
-        "fakeout",
-        "partingshot",
-        "knockoff",
-        "flareblitz"
-      ],
-      "ivs": {
-        "hp": 31,
-        "atk": 31,
-        "def": 31,
-        "spa": 31,
-        "spd": 31,
-        "spe": 31
-      },
-      "evs": {
-        "hp": 252,
-        "atk": 0,
-        "def": 100,
-        "spa": 0,
-        "spd": 156,
-        "spe": 0
-      },
-      "heldItem": [
-        "rocky_helmet"
-      ],
-      "species": "incineroar",
-      "gender": "MALE",
-      "level": 70,
-      "nature": "careful",
-      "ability": "intimidate"
-    },
-    {
-      "moveset": [
-        "heatwave",
-        "solarbeam",
-        "airslash",
-        "protect"
-      ],
-      "ivs": {
-        "hp": 31,
-        "atk": 31,
-        "def": 31,
-        "spa": 31,
-        "spd": 31,
-        "spe": 31
-      },
-      "evs": {
-        "hp": 4,
-        "atk": 0,
-        "def": 0,
-        "spa": 252,
-        "spd": 0,
-        "spe": 252
-      },
-      "heldItem": [
-        "mega_showdown:charizardite_y"
+        "charti_berry"
       ],
       "species": "charizard",
       "gender": "MALE",
       "level": 70,
       "nature": "modest",
-      "ability": "drought"
+      "ability": "megasol",
+      "aspects": [
+        "mega_y"
+      ]
     },
     {
       "moveset": [
@@ -191,7 +98,7 @@
       ],
       "ivs": {
         "hp": 31,
-        "atk": 31,
+        "atk": 0,
         "def": 31,
         "spa": 31,
         "spd": 31,
@@ -212,7 +119,221 @@
       "gender": "GENDERLESS",
       "level": 70,
       "nature": "timid",
-      "ability": "flamebody"
+      "ability": "prankster"
+    },
+    {
+      "moveset": [
+        "woodhammer",
+        "grassyglide",
+        "knockoff",
+        "highhorsepower"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 0,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 4,
+        "spe": 0
+      },
+      "heldItem": [
+        "assault_vest"
+      ],
+      "species": "rillaboom",
+      "gender": "MALE",
+      "level": 70,
+      "nature": "adamant",
+      "ability": "grassysurge"
+    },
+    {
+      "moveset": [
+        "firstimpression",
+        "leechlife",
+        "ironhead",
+        "drillrun"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 0,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 252,
+        "atk": 252,
+        "def": 0,
+        "spa": 0,
+        "spd": 4,
+        "spe": 0
+      },
+      "heldItem": [
+        "clear_amulet"
+      ],
+      "species": "golisopod",
+      "gender": "MALE",
+      "level": 70,
+      "nature": "adamant",
+      "ability": "toughclaws",
+      "aspects": [
+        "mega"
+      ]
+    },
+    {
+      "moveset": [
+        "plasmafists",
+        "closecombat",
+        "knockoff",
+        "grassknot"
+      ],
+      "ivs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      },
+      "evs": {
+        "hp": 0,
+        "atk": 252,
+        "def": 0,
+        "spa": 4,
+        "spd": 0,
+        "spe": 252
+      },
+      "heldItem": [
+        "covert_cloak"
+      ],
+      "species": "zeraora",
+      "gender": "GENDERLESS",
+      "level": 70,
+      "nature": "naive",
+      "ability": "unseenfist"
+    }
+  ],
+  "leadPresets": [
+    {
+      "id": "anti_rain_core",
+      "leadSlots": [
+        5,
+        3
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "zeraora"
+        },
+        {
+          "species": "rillaboom"
+        }
+      ],
+      "baseWeight": 2,
+      "favoredAgainst": [
+        "water"
+      ],
+      "favoredAgainstSpecies": [
+        "pelipper",
+        "politoed",
+        "swampert",
+        "barraskewda",
+        "kingdra",
+        "basculegion",
+        "ludicolo",
+        "urshifu",
+        "archaludon"
+      ],
+      "description": "Zeraora + Rillaboom (Unseen Fist Electric + Grassy Surge / Grass STAB anti-Rain core)"
+    },
+    {
+      "id": "anti_water_ground",
+      "leadSlots": [
+        1,
+        3
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "charizard",
+          "requiredAspects": [
+            "mega_y"
+          ]
+        },
+        {
+          "species": "rillaboom"
+        }
+      ],
+      "baseWeight": 1,
+      "favoredAgainst": [
+        "ground",
+        "rock"
+      ],
+      "favoredAgainstSpecies": [
+        "gastrodon",
+        "quagsire",
+        "swampert",
+        "landorus",
+        "garchomp",
+        "gliscor",
+        "ursaluna",
+        "mamoswine",
+        "excadrill",
+        "hippowdon",
+        "seismitoad",
+        "whiscash",
+        "donphan",
+        "rhyperior"
+      ],
+      "description": "Mega Charizard Y + Rillaboom (Mega Sol Solar Beam + Grassy Surge anti-Water/Ground core)"
+    },
+    {
+      "id": "anti_fast_threats",
+      "leadSlots": [
+        1,
+        2
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "charizard",
+          "requiredAspects": [
+            "mega_y"
+          ]
+        },
+        {
+          "species": "moltres"
+        }
+      ],
+      "baseWeight": 0,
+      "minFastOpponents": 2,
+      "fastSpeedThreshold": 100,
+      "description": "Mega Charizard Y + Moltres (Prankster Tailwind speed control vs fast threats)"
+    },
+    {
+      "id": "default_sun_intimidate",
+      "leadSlots": [
+        1,
+        0
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "charizard",
+          "requiredAspects": [
+            "mega_y"
+          ]
+        },
+        {
+          "species": "arcanine"
+        }
+      ],
+      "baseWeight": 1,
+      "description": "Mega Charizard Y + Arcanine (Default Mega Sol Fire STAB + Intimidate core)"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

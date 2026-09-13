@@ -249,6 +249,16 @@ public final class LeadSelectionConfig {
             }
         }
 
-        return new LeadAttempt(id, new int[]{slot0, slot1}, baseWeight, expectedMembers, description, favoredAgainst, favoredAgainstSpecies);
+        int minFastOpponents = 0;
+        if (obj.has("minFastOpponents") && !obj.get("minFastOpponents").isJsonNull()) {
+            minFastOpponents = parseExactInt(obj.get("minFastOpponents"), "Attempt '" + id + "' minFastOpponents");
+        }
+
+        int fastSpeedThreshold = 0;
+        if (obj.has("fastSpeedThreshold") && !obj.get("fastSpeedThreshold").isJsonNull()) {
+            fastSpeedThreshold = parseExactInt(obj.get("fastSpeedThreshold"), "Attempt '" + id + "' fastSpeedThreshold");
+        }
+
+        return new LeadAttempt(id, new int[]{slot0, slot1}, baseWeight, expectedMembers, description, favoredAgainst, favoredAgainstSpecies, minFastOpponents, fastSpeedThreshold);
     }
 }
