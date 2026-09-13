@@ -236,7 +236,7 @@
           "species": "rillaboom"
         }
       ],
-      "baseWeight": 2,
+      "baseWeight": -2,
       "favoredAgainst": [
         "water"
       ],
@@ -270,7 +270,7 @@
           "species": "rillaboom"
         }
       ],
-      "baseWeight": 1,
+      "baseWeight": -2,
       "favoredAgainst": [
         "ground",
         "rock"
@@ -332,7 +332,7 @@
           "species": "arcanine"
         }
       ],
-      "baseWeight": 1,
+      "baseWeight": 2,
       "description": "Mega Charizard Y + Arcanine (Default Mega Sol Fire STAB + Intimidate core)"
     }
   ],

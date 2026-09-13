@@ -87,11 +87,33 @@ class BlaineLeadSelectionTest {
     }
 
     @Test
-    void test1_PelipperRainCoreSelectsZeraoraRillaboom() throws Exception {
+    void test1_LiveRegression_MiraidonIronHandsSelectsDefaultSunIntimidate() throws Exception {
+        List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
+        List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
+
+        // Live regression: Player leads Miraidon (electric/dragon) + Iron Hands (fighting/electric)
+        // Neither matches water nor ground/rock. Neither is in favoredAgainstSpecies.
+        // Speeds: Miraidon (base 135, lvl 70 ~205 < 210), Iron Hands (base 50, lvl 70 ~80 < 210)
+        List<PlayerLeadTyping> liveLeads = List.of(
+                new PlayerLeadTyping("miraidon", List.of("electric", "dragon"), 205),
+                new PlayerLeadTyping("ironhands", List.of("fighting", "electric"), 80)
+        );
+
+        LeadSelectionResult result = engine.select(presets, liveLeads, roster);
+        assertEquals("default_sun_intimidate", result.selectedAttempt().id(),
+                "Miraidon + Iron Hands MUST select default_sun_intimidate (Mega Charizard Y + Arcanine), NOT anti_rain_core");
+        assertArrayEquals(new int[]{1, 0}, result.selectedAttempt().leadSlots(),
+                "Lead slots must be [1, 0] for Mega Charizard Y + Arcanine");
+    }
+
+    @Test
+    void test2_TrueRainCoreSelectsZeraoraRillaboom() throws Exception {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
         List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
 
         // Player leads Pelipper (water/flying) + Swampert (water/ground)
+        // Both match water type (+2 each) and species (+2 each). Total matchup bonus = +8.
+        // anti_rain_core total = -2 (base) + 8 (favored) + 1 (type chart) = 7 > default -3.
         List<PlayerLeadTyping> rainLeads = List.of(
                 new PlayerLeadTyping("pelipper", List.of("water", "flying"), 65),
                 new PlayerLeadTyping("swampert", List.of("water", "ground"), 60)
@@ -99,22 +121,42 @@ class BlaineLeadSelectionTest {
 
         LeadSelectionResult result = engine.select(presets, rainLeads, roster);
         assertEquals("anti_rain_core", result.selectedAttempt().id(),
-                "Rule A (anti_rain_core: Zeraora + Rillaboom) MUST be selected against Rain core");
+                "True Rain core (Pelipper + Swampert) MUST select anti_rain_core (Zeraora + Rillaboom)");
         assertArrayEquals(new int[]{5, 3}, result.selectedAttempt().leadSlots(),
                 "Lead slots must be [5, 3] for Zeraora + Rillaboom");
 
         AttemptScore rainScore = result.evaluatedScores().stream()
                 .filter(s -> s.attemptId().equals("anti_rain_core"))
                 .findFirst().orElseThrow();
-        assertTrue(rainScore.totalScore() > 0, "Rain core score must be strongly positive");
+        assertEquals(7, rainScore.totalScore(), "Rain core score must be 7 (-2 base + 8 matchup bonus + 1 type chart)");
     }
 
     @Test
-    void test2_WaterGroundNonRainSelectsMegaCharizardRillaboom() throws Exception {
+    void test3_SingleWaterThreatWithNonRainPartnerSelectsDefaultSunIntimidate() throws Exception {
+        List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
+        List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
+
+        // Single water threat: Pelipper (water/flying) + Scizor (bug/steel)
+        // Against Scizor, default Fire STAB scores heavily (+7), while anti_rain_core scores 0.
+        List<PlayerLeadTyping> singleWaterLeads = List.of(
+                new PlayerLeadTyping("pelipper", List.of("water", "flying"), 65),
+                new PlayerLeadTyping("scizor", List.of("bug", "steel"), 65)
+        );
+
+        LeadSelectionResult result = engine.select(presets, singleWaterLeads, roster);
+        assertEquals("default_sun_intimidate", result.selectedAttempt().id(),
+                "Single water threat with non-rain partner MUST defer to default_sun_intimidate");
+        assertArrayEquals(new int[]{1, 0}, result.selectedAttempt().leadSlots());
+    }
+
+    @Test
+    void test4_TrueWaterGroundPressurePairSelectsMegaCharizardRillaboom() throws Exception {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
         List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
 
         // Player leads Gastrodon (water/ground) + Landorus (ground/flying)
+        // Both match ground type (+2 each) and species (+2 each). Total matchup bonus = +8.
+        // anti_water_ground total = -2 (base) + 8 (favored) + 1 (type chart) = 7 > default -2.
         List<PlayerLeadTyping> waterGroundLeads = List.of(
                 new PlayerLeadTyping("gastrodon", List.of("water", "ground"), 39),
                 new PlayerLeadTyping("landorus", List.of("ground", "flying"), 101)
@@ -122,39 +164,109 @@ class BlaineLeadSelectionTest {
 
         LeadSelectionResult result = engine.select(presets, waterGroundLeads, roster);
         assertEquals("anti_water_ground", result.selectedAttempt().id(),
-                "Rule B (anti_water_ground: Mega Charizard Y + Rillaboom) MUST be selected against Water+Ground threat");
+                "True Water/Ground pressure pair MUST select anti_water_ground (Mega Charizard Y + Rillaboom)");
         assertArrayEquals(new int[]{1, 3}, result.selectedAttempt().leadSlots(),
                 "Lead slots must be [1, 3] for Mega Charizard Y + Rillaboom");
+
+        AttemptScore wgScore = result.evaluatedScores().stream()
+                .filter(s -> s.attemptId().equals("anti_water_ground"))
+                .findFirst().orElseThrow();
+        assertEquals(7, wgScore.totalScore(), "Water/Ground score must be 7 (-2 base + 8 matchup bonus + 1 type chart)");
     }
 
     @Test
-    void test3_DynamicThreatSpeedDerivationFromAuthoritativeDefault() throws Exception {
+    void test5_SingleGroundThreatWithNonGroundPartnerSelectsDefaultSunIntimidate() throws Exception {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
         List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
 
-        LeadAttempt defaultAttempt = presets.stream()
-                .filter(LeadAttempt::isDefault)
-                .findFirst()
-                .orElseThrow(() -> new AssertionError("Blaine must have a preset marked default: true"));
-        assertEquals("default_sun_intimidate", defaultAttempt.id());
-        assertArrayEquals(new int[]{1, 0}, defaultAttempt.leadSlots());
+        // Single ground threat: Gastrodon (water/ground) + Scizor (bug/steel)
+        // Scizor vulnerability to Fire allows default_sun_intimidate (score 7) to beat anti_water_ground (score 6).
+        List<PlayerLeadTyping> singleGroundLeads = List.of(
+                new PlayerLeadTyping("gastrodon", List.of("water", "ground"), 39),
+                new PlayerLeadTyping("scizor", List.of("bug", "steel"), 65)
+        );
 
-        int charizardSpeed = roster.get(1).speed();
-        int arcanineSpeed = roster.get(0).speed();
-        int expectedThreatSpeed = Math.max(charizardSpeed, arcanineSpeed);
-
-        // Verify speeds derived from JSON match expectations (Charizard Modest 252 EV = 210; Arcanine Jolly 100 EV = 194)
-        assertEquals(210, charizardSpeed, "Charizard actual speed must be 210 at Level 70 Modest 252 EV");
-        assertEquals(194, arcanineSpeed, "Arcanine actual speed must be 194 at Level 70 Jolly 100 EV");
-        assertEquals(210, expectedThreatSpeed, "threatSpeed must equal max(210, 194) = 210");
+        LeadSelectionResult result = engine.select(presets, singleGroundLeads, roster);
+        assertEquals("default_sun_intimidate", result.selectedAttempt().id(),
+                "Single ground threat with non-ground partner MUST defer to default_sun_intimidate");
+        assertArrayEquals(new int[]{1, 0}, result.selectedAttempt().leadSlots());
     }
 
     @Test
-    void test4_DoubleFastThreatsFasterThanThreatSpeedSelectsMegaCharizardMoltres() throws Exception {
+    void test6_NeutralMatchupSelectsDefaultSunIntimidate() throws Exception {
+        List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
+        List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
+
+        // Completely neutral matchup: Corviknight + Clefable (non-fast)
+        List<PlayerLeadTyping> neutralLeads = List.of(
+                new PlayerLeadTyping("corviknight", List.of("steel", "flying"), 67),
+                new PlayerLeadTyping("clefable", List.of("fairy"), 60)
+        );
+
+        LeadSelectionResult result = engine.select(presets, neutralLeads, roster);
+        assertEquals("default_sun_intimidate", result.selectedAttempt().id(),
+                "Neutral matchup MUST select default_sun_intimidate");
+        assertArrayEquals(new int[]{1, 0}, result.selectedAttempt().leadSlots());
+    }
+
+    @Test
+    void test6b_TieBreakRule_DefaultWinsAgainstTiedSpecializedPreset() {
+        // Direct proof of tie-break semantics:
+        // Specialized preset has baseWeight = -2.
+        // Single threat match gives typeFavored (+2) + speciesFavored (+2) = +4. Total = -2 + 4 = 2.
+        // Default preset has baseWeight = 2, 0 bonuses. Total = 2.
+        // Tie-breaker: default baseWeight (2) > specialized baseWeight (-2).
+        LeadAttempt specialized = new LeadAttempt(
+                "specialized_core",
+                new int[]{1, 2},
+                -2,
+                List.of(),
+                "Specialized preset",
+                List.of("water"),
+                List.of("pelipper"),
+                0,
+                0,
+                false
+        );
+
+        LeadAttempt defaultLead = new LeadAttempt(
+                "default_core",
+                new int[]{0, 1},
+                2,
+                List.of(),
+                "Default preset",
+                List.of(),
+                List.of(),
+                0,
+                0,
+                true
+        );
+
+        // Neutral leads with no type interactions (e.g. normal vs normal)
+        List<RosterMemberTyping> mockRoster = List.of(
+                new RosterMemberTyping(0, "mon_a", List.of("normal"), 100),
+                new RosterMemberTyping(1, "mon_b", List.of("normal"), 100),
+                new RosterMemberTyping(2, "mon_c", List.of("normal"), 100)
+        );
+
+        List<PlayerLeadTyping> singleThreatLeads = List.of(
+                new PlayerLeadTyping("pelipper", List.of("water"), 65),
+                new PlayerLeadTyping("dummy", List.of("normal"), 50)
+        );
+
+        LeadSelectionResult result = engine.select(List.of(specialized, defaultLead), singleThreatLeads, mockRoster);
+        assertEquals("default_core", result.selectedAttempt().id(),
+                "When specialized preset ties default at score 2, default MUST win via baseWeight tie-breaker (2 > -2)");
+    }
+
+
+    @Test
+    void test7_DoubleFastThreatsFasterThanThreatSpeedSelectsMegaCharizardMoltres() throws Exception {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
         List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
 
         // Both opponents have actual speed strictly greater than threatSpeed (210)
+        // anti_fast_threats has baseWeight = 0, fastBonus = 4 => total = 4 > default 2.
         List<PlayerLeadTyping> fastLeads = List.of(
                 new PlayerLeadTyping("fluttermane", List.of("ghost", "fairy"), 293),
                 new PlayerLeadTyping("dragapult", List.of("dragon", "ghost"), 304)
@@ -162,7 +274,7 @@ class BlaineLeadSelectionTest {
 
         LeadSelectionResult result = engine.select(presets, fastLeads, roster);
         assertEquals("anti_fast_threats", result.selectedAttempt().id(),
-                "Rule C (anti_fast_threats: Mega Charizard Y + Moltres) MUST be selected when both opponents exceed threatSpeed");
+                "Double fast threats exceeding threatSpeed MUST select anti_fast_threats (Mega Charizard Y + Moltres)");
         assertArrayEquals(new int[]{1, 2}, result.selectedAttempt().leadSlots(),
                 "Lead slots must be [1, 2] for Mega Charizard Y + Moltres");
 
@@ -170,14 +282,16 @@ class BlaineLeadSelectionTest {
                 .filter(s -> s.attemptId().equals("anti_fast_threats"))
                 .findFirst().orElseThrow();
         assertEquals(4, fastScore.fastBonus(), "Fast bonus of 4 must be awarded when both leads exceed dynamic threatSpeed");
+        assertEquals(4, fastScore.totalScore(), "Total score must be 4 (0 base + 4 fastBonus) beating default 2");
     }
 
     @Test
-    void test5_SingleFastThreatDoesNotTriggerAntiFastThreats() throws Exception {
+    void test8_SingleFastThreatDoesNotTriggerAntiFastThreats() throws Exception {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
         List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
 
         // Only 1 opponent faster than threatSpeed (210): Dragapult (304), Clefable (100)
+        // anti_fast_threats: base 0, fastBonus 0 => total = 0 < default 2.
         List<PlayerLeadTyping> mixedLeads = List.of(
                 new PlayerLeadTyping("dragapult", List.of("dragon", "ghost"), 304),
                 new PlayerLeadTyping("clefable", List.of("fairy"), 100)
@@ -186,10 +300,11 @@ class BlaineLeadSelectionTest {
         LeadSelectionResult result = engine.select(presets, mixedLeads, roster);
         assertEquals("default_sun_intimidate", result.selectedAttempt().id(),
                 "Only 1 fast threat must NOT trigger anti_fast_threats (requires minFastOpponents=2)");
+        assertArrayEquals(new int[]{1, 0}, result.selectedAttempt().leadSlots());
     }
 
     @Test
-    void test6_OpponentsBetweenSlowerAndFasterDefaultMembersAreNotFastThreats() throws Exception {
+    void test9_OpponentsBetweenSlowerAndFasterDefaultMembersAreNotFastThreats() throws Exception {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
         List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
 
@@ -211,7 +326,30 @@ class BlaineLeadSelectionTest {
     }
 
     @Test
-    void test7_WeatherAbilityFalsePositiveRegression() throws Exception {
+    void test10_DynamicThreatSpeedDerivationFromAuthoritativeDefault() throws Exception {
+        List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
+        List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
+
+        LeadAttempt defaultAttempt = presets.stream()
+                .filter(LeadAttempt::isDefault)
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("Blaine must have a preset marked default: true"));
+        assertEquals("default_sun_intimidate", defaultAttempt.id());
+        assertArrayEquals(new int[]{1, 0}, defaultAttempt.leadSlots());
+        assertEquals(2, defaultAttempt.baseWeight(), "default_sun_intimidate baseWeight must be calibrated to 2");
+
+        int charizardSpeed = roster.get(1).speed();
+        int arcanineSpeed = roster.get(0).speed();
+        int expectedThreatSpeed = Math.max(charizardSpeed, arcanineSpeed);
+
+        // Verify speeds derived from JSON match expectations (Charizard Modest 252 EV = 210; Arcanine Jolly 100 EV = 194)
+        assertEquals(210, charizardSpeed, "Charizard actual speed must be 210 at Level 70 Modest 252 EV");
+        assertEquals(194, arcanineSpeed, "Arcanine actual speed must be 194 at Level 70 Jolly 100 EV");
+        assertEquals(210, expectedThreatSpeed, "threatSpeed must equal max(210, 194) = 210");
+    }
+
+    @Test
+    void test11_WeatherAbilityFalsePositiveRegression() throws Exception {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
         List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
 
@@ -226,11 +364,11 @@ class BlaineLeadSelectionTest {
         assertNotEquals("anti_fast_threats", result.selectedAttempt().id(),
                 "Swift Swim must NOT receive unconditional x2 multiplier pre-battle to falsely trigger anti_fast_threats");
         assertEquals("anti_water_ground", result.selectedAttempt().id(),
-                "Matchup should be handled by anti_water_ground based on typing");
+                "Matchup should be handled by anti_water_ground based on typing and species");
     }
 
     @Test
-    void test8_ChoiceScarfPlayerLeadExceedingThreatSpeed() throws Exception {
+    void test12_ChoiceScarfPlayerLeadExceedingThreatSpeed() throws Exception {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
         List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
 
@@ -248,7 +386,7 @@ class BlaineLeadSelectionTest {
     }
 
     @Test
-    void test9_ExplicitLegacyThresholdCompatibility() {
+    void test13_ExplicitLegacyThresholdCompatibility() {
         // Preset with explicit fastSpeedThreshold: 100 takes precedence over dynamic derivation
         LeadAttempt legacyPreset = new LeadAttempt(
                 "legacy_fast",
@@ -266,7 +404,7 @@ class BlaineLeadSelectionTest {
         LeadAttempt defaultPreset = new LeadAttempt(
                 "default_lead",
                 new int[]{0, 1},
-                1,
+                2,
                 List.of(),
                 "Default preset",
                 List.of(),
@@ -294,7 +432,7 @@ class BlaineLeadSelectionTest {
     }
 
     @Test
-    void test10_SingleDefaultLeadContractEnforced() {
+    void test14_SingleDefaultLeadContractEnforced() {
         JsonObject att1 = new JsonObject();
         att1.addProperty("id", "def_1");
         JsonArray slots1 = new JsonArray();
@@ -322,7 +460,7 @@ class BlaineLeadSelectionTest {
     }
 
     @Test
-    void test11_ExpectedLeadMemberValidationMatchesActualBlaineRoster() throws Exception {
+    void test15_ExpectedLeadMemberValidationMatchesActualBlaineRoster() throws Exception {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
         assertEquals(4, presets.size(), "Blaine must have exactly 4 authored presets");
 
