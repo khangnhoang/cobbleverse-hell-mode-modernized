@@ -157,12 +157,13 @@ public abstract class RunBunAIChooseMixin {
     )
     private int cobbleverse$normalizeSolarScoringDamage(
         int dmg,
-        @Local(name = "m") Move m,
-        @Local(name = "battlePokemon") BattlePokemon battlePokemon,
         ActiveBattlePokemon activeBattlePokemon,
-        PokemonBattle battle
+        PokemonBattle battle,
+        @Local(name = "m") Move m,
+        @Local(name = "battlePokemon") BattlePokemon battlePokemon
     ) {
-        return SolarMoveValuationStrategy.resolveImmediateScoringDamage(dmg, m, battlePokemon, activeBattlePokemon, battle);
+        BattlePokemon attacker = battlePokemon != null ? battlePokemon : (activeBattlePokemon != null ? activeBattlePokemon.getBattlePokemon() : null);
+        return SolarMoveValuationStrategy.resolveImmediateScoringDamage(dmg, m, attacker, activeBattlePokemon, battle);
     }
 
     /**
