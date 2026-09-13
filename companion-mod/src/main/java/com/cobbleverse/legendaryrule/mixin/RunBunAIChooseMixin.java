@@ -6,10 +6,12 @@ import com.cobblemon.mod.common.battles.BattleSide;
 import com.cobblemon.mod.common.battles.ShowdownActionResponse;
 import com.cobblemon.mod.common.battles.ShowdownMoveset;
 import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
+import com.cobbleverse.legendaryrule.strategy.spread.SpreadFriendlyFireValuationStrategy;
 import com.cobbleverse.legendaryrule.strategy.spread.SpreadMoveValuationContext;
 import com.cobbleverse.legendaryrule.strategy.tera.TeraTargetResolver;
 import com.cobbleverse.legendaryrule.strategy.weather.WeatherAccuracyValuationStrategy;
 import com.gitlab.surilexa.rbrctai.api.ai.RunBunAI;
+import com.gitlab.surilexa.rbrctai.api.ai.utils.RBStatStages;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
@@ -33,6 +35,9 @@ public abstract class RunBunAIChooseMixin {
 
     @Shadow
     private String teraTarget;
+
+    @Shadow(remap = false)
+    private RBStatStages battleStatStages;
 
     /**
      * Precomputes invocation-local rankingDamage and normalizedPressure maps for allAdjacentFoes moves
@@ -158,5 +163,6 @@ public abstract class RunBunAIChooseMixin {
         }
         BattlePokemon attacker = activeBattlePokemon.getBattlePokemon();
         WeatherAccuracyValuationStrategy.adjustMoveValuations(evaluations, attacker, activeBattlePokemon, battle);
+        SpreadFriendlyFireValuationStrategy.adjustFriendlyFireValuations(evaluations, attacker, activeBattlePokemon, battle, this.battleStatStages);
     }
 }
