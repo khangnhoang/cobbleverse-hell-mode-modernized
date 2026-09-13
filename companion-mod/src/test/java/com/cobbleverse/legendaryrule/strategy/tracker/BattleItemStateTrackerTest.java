@@ -20,6 +20,7 @@ class BattleItemStateTrackerTest {
 
     static class TestTrackedBattlePokemon extends BattlePokemon implements BattleItemStateTracker {
         private boolean ended = false;
+        private boolean powerHerbEnded = false;
 
         @SuppressWarnings("unused")
         public TestTrackedBattlePokemon() {
@@ -34,6 +35,16 @@ class BattleItemStateTrackerTest {
         @Override
         public void cobbleverse$markThroatSprayEnded() {
             ended = true;
+        }
+
+        @Override
+        public boolean cobbleverse$isPowerHerbEnded() {
+            return powerHerbEnded;
+        }
+
+        @Override
+        public void cobbleverse$markPowerHerbEnded() {
+            powerHerbEnded = true;
         }
     }
 
@@ -142,5 +153,36 @@ class BattleItemStateTrackerTest {
         boolean marked = BattleItemStateTracker.markEndedIfThroatSpray(pokemon, msg);
 
         assertFalse(marked, "Untracked pokemon should return false gracefully");
+    }
+
+    @Test
+    @DisplayName("T20a: Default Power Herb state is unended")
+    void testDefaultPowerHerbUnended() throws Exception {
+        TestTrackedBattlePokemon pokemon = createTrackedPokemon();
+        assertFalse(pokemon.cobbleverse$isPowerHerbEnded());
+    }
+
+    @Test
+    @DisplayName("T20b: EndItem Power Herb marks target BattlePokemon tracker as ended")
+    void testEndItemPowerHerbMarksTarget() throws Exception {
+        TestTrackedBattlePokemon charizard = createTrackedPokemon();
+        BattleMessage msg = new BattleMessage("|-enditem|p1a: Charizard|Power Herb");
+
+        boolean marked = BattleItemStateTracker.markEndedIfPowerHerb(charizard, msg);
+
+        assertTrue(marked, "Helper should return true for Power Herb enditem");
+        assertTrue(charizard.cobbleverse$isPowerHerbEnded(), "Charizard tracker must be marked ended");
+    }
+
+    @Test
+    @DisplayName("T20c: EndItem other item does NOT mark Power Herb ended")
+    void testEndItemOtherItemDoesNotMarkPowerHerb() throws Exception {
+        TestTrackedBattlePokemon charizard = createTrackedPokemon();
+        BattleMessage msg = new BattleMessage("|-enditem|p1a: Charizard|Leftovers");
+
+        boolean marked = BattleItemStateTracker.markEndedIfPowerHerb(charizard, msg);
+
+        assertFalse(marked, "Helper should return false for non-Power-Herb item");
+        assertFalse(charizard.cobbleverse$isPowerHerbEnded(), "Charizard tracker must remain unended");
     }
 }

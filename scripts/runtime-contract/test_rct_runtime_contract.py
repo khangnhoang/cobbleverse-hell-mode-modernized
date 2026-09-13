@@ -269,6 +269,8 @@ def main():
             declared_mixins = mixins_data.get("mixins", [])
             checks.append(("rct_legendary_rule.mixins.json declares PokeMathMaxMixin", "PokeMathMaxMixin" in declared_mixins))
             checks.append(("rct_legendary_rule.mixins.json declares RunBunAIChooseMixin", "RunBunAIChooseMixin" in declared_mixins))
+            checks.append(("rct_legendary_rule.mixins.json declares BattlePokemonMixin", "BattlePokemonMixin" in declared_mixins))
+            checks.append(("rct_legendary_rule.mixins.json declares CobblemonHeldItemManagerMixin", "CobblemonHeldItemManagerMixin" in declared_mixins))
 
     # b) PokeMathMax descriptors and slot 2 read
     pokemath_javap = get_class_javap(rbrctai_jar, "com/gitlab/surilexa/rbrctai/api/ai/utils/PokeMathMax.class")
@@ -332,6 +334,22 @@ def main():
 
         tera_store = "astore        42" in choose_code or "astore_w      42" in choose_code
         checks.append(("RunBunAI.choose bytecode contains astore 42 for teraMatch", tera_store))
+
+        # Hook 5: dmg and m in scope for solar move scoring normalization
+        dmg_entries = [e for e in choose_lvt if e['name'] == 'dmg']
+        dmg_exists = len(dmg_entries) > 0 and dmg_entries[0]['sig'] == 'I'
+        checks.append(("RunBunAI.choose LVT 'dmg' (int) exists", dmg_exists))
+
+        m_entries = [e for e in choose_lvt if e['name'] == 'm']
+        m_exists = len(m_entries) > 0 and 'Move' in m_entries[0]['sig']
+        checks.append(("RunBunAI.choose LVT 'm' (Move) exists", m_exists))
+
+        dmg_start = dmg_entries[0]['start'] if dmg_entries else None
+        m_in_scope_at_dmg = any(e['start'] <= dmg_start < e['start'] + e['length'] for e in m_entries) if dmg_start is not None else False
+        checks.append(("RunBunAI.choose LVT 'm' in scope at dmg store site", m_in_scope_at_dmg))
+
+        istore_dmg = "istore        58" in choose_code or "istore_w      58" in choose_code
+        checks.append(("RunBunAI.choose bytecode contains istore 58 for dmg", istore_dmg))
     else:
         checks.append(("RunBunAI.choose contains exactly 4 MoveEvaluation.getDamage calls", False))
         checks.append(("RunBunAI.choose LVT 'evaluations' in scope at first getDamage call", False))
@@ -339,6 +357,10 @@ def main():
         checks.append(("RunBunAI.choose LVT 'move' in scope at percentChange store site", False))
         checks.append(("RunBunAI.choose LVT 'teraMatch' (BattlePokemon) exists", False))
         checks.append(("RunBunAI.choose bytecode contains astore 42 for teraMatch", False))
+        checks.append(("RunBunAI.choose LVT 'dmg' (int) exists", False))
+        checks.append(("RunBunAI.choose LVT 'm' (Move) exists", False))
+        checks.append(("RunBunAI.choose LVT 'm' in scope at dmg store site", False))
+        checks.append(("RunBunAI.choose bytecode contains istore 58 for dmg", False))
 
     checks.append(("RunBunAI contains private String teraTarget field", "private java.lang.String teraTarget;" in runbun_javap))
 
@@ -350,10 +372,14 @@ def main():
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"evaluations\")", '@Local(name = "evaluations")' in mixin_src))
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"move\")", '@Local(name = "move")' in mixin_src))
         checks.append(('RunBunAIChooseMixin declares @ModifyVariable targeting name = "teraMatch"', 'name = "teraMatch"' in mixin_src and 'cobbleverse$resolveAliveTeraTarget' in mixin_src))
+        checks.append(('RunBunAIChooseMixin declares @ModifyVariable targeting name = "dmg"', 'name = "dmg"' in mixin_src and 'cobbleverse$normalizeSolarScoringDamage' in mixin_src))
+        checks.append(('RunBunAIChooseMixin declares explicit @Local(name = "m")', '@Local(name = "m")' in mixin_src))
     else:
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"evaluations\")", False))
         checks.append(("RunBunAIChooseMixin declares explicit @Local(name = \"move\")", False))
         checks.append(('RunBunAIChooseMixin declares @ModifyVariable targeting name = "teraMatch"', False))
+        checks.append(('RunBunAIChooseMixin declares @ModifyVariable targeting name = "dmg"', False))
+        checks.append(('RunBunAIChooseMixin declares explicit @Local(name = "m")', False))
 
     # d) RunBunAI$MoveEvaluation methods
     eval_javap = get_class_javap(rbrctai_jar, "com/gitlab/surilexa/rbrctai/api/ai/RunBunAI$MoveEvaluation.class")

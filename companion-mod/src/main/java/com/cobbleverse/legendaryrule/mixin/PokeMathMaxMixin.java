@@ -6,6 +6,7 @@ import com.cobblemon.mod.common.battles.ActiveBattlePokemon;
 import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
 import com.cobbleverse.legendaryrule.strategy.dynamic.DynamicMoveResolver;
 import com.cobbleverse.legendaryrule.strategy.guard.RedirectAbilityGuard;
+import com.cobbleverse.legendaryrule.strategy.weather.SolarMoveValuationStrategy;
 import com.cobbleverse.legendaryrule.strategy.weight.WeightDependentMoveResolver;
 import com.gitlab.surilexa.rbrctai.api.ai.utils.PokeMathMax;
 import com.gitlab.surilexa.rbrctai.api.ai.utils.RBStatStages;
@@ -55,6 +56,7 @@ public abstract class PokeMathMaxMixin {
         }
 
         double rawDamage = damage(effectiveMove, physical, false, parentalBond, glaiveRush, burn, zmove, reflect, lightscreen, attacker, defender, statStages, activeBattlePokemon, predictTera, isAttacker);
+        rawDamage = SolarMoveValuationStrategy.adjustAdverseWeatherDamage(rawDamage, effectiveMove, attacker, activeBattlePokemon, null);
         return multiTarget ? rawDamage * 0.75d : rawDamage;
     }
 
