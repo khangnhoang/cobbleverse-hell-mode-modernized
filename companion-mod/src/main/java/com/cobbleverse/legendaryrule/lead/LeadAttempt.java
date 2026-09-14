@@ -15,7 +15,10 @@ public record LeadAttempt(
         List<ExpectedLeadMember> expectedLeadMembers,
         String description,
         List<String> favoredAgainst,
-        List<String> favoredAgainstSpecies
+        List<String> favoredAgainstSpecies,
+        int minFastOpponents,
+        int fastSpeedThreshold,
+        boolean isDefault
 ) {
     public LeadAttempt {
         Objects.requireNonNull(id, "id must not be null");
@@ -39,6 +42,12 @@ public record LeadAttempt(
         description = description != null ? description : "";
         favoredAgainst = favoredAgainst != null ? normalizeStringList(favoredAgainst) : Collections.emptyList();
         favoredAgainstSpecies = favoredAgainstSpecies != null ? normalizeStringList(favoredAgainstSpecies) : Collections.emptyList();
+        if (minFastOpponents < 0) {
+            minFastOpponents = 0;
+        }
+        if (fastSpeedThreshold < 0) {
+            fastSpeedThreshold = 0;
+        }
         leadSlots = leadSlots.clone();
     }
 
@@ -50,16 +59,24 @@ public record LeadAttempt(
                 .toList();
     }
 
+    public LeadAttempt(String id, int[] leadSlots, int baseWeight, List<ExpectedLeadMember> expectedLeadMembers, String description, List<String> favoredAgainst, List<String> favoredAgainstSpecies, int minFastOpponents, int fastSpeedThreshold) {
+        this(id, leadSlots, baseWeight, expectedLeadMembers, description, favoredAgainst, favoredAgainstSpecies, minFastOpponents, fastSpeedThreshold, false);
+    }
+
+    public LeadAttempt(String id, int[] leadSlots, int baseWeight, List<ExpectedLeadMember> expectedLeadMembers, String description, List<String> favoredAgainst, List<String> favoredAgainstSpecies) {
+        this(id, leadSlots, baseWeight, expectedLeadMembers, description, favoredAgainst, favoredAgainstSpecies, 0, 0, false);
+    }
+
     public LeadAttempt(String id, int[] leadSlots, int baseWeight, List<ExpectedLeadMember> expectedLeadMembers, String description, List<String> favoredAgainst) {
-        this(id, leadSlots, baseWeight, expectedLeadMembers, description, favoredAgainst, Collections.emptyList());
+        this(id, leadSlots, baseWeight, expectedLeadMembers, description, favoredAgainst, Collections.emptyList(), 0, 0, false);
     }
 
     public LeadAttempt(String id, int[] leadSlots, int baseWeight, List<ExpectedLeadMember> expectedLeadMembers, String description) {
-        this(id, leadSlots, baseWeight, expectedLeadMembers, description, Collections.emptyList(), Collections.emptyList());
+        this(id, leadSlots, baseWeight, expectedLeadMembers, description, Collections.emptyList(), Collections.emptyList(), 0, 0, false);
     }
 
     public LeadAttempt(String id, int[] leadSlots, int baseWeight, List<ExpectedLeadMember> expectedLeadMembers) {
-        this(id, leadSlots, baseWeight, expectedLeadMembers, "", Collections.emptyList(), Collections.emptyList());
+        this(id, leadSlots, baseWeight, expectedLeadMembers, "", Collections.emptyList(), Collections.emptyList(), 0, 0, false);
     }
 
     @Override
@@ -72,6 +89,9 @@ public record LeadAttempt(
         if (this == o) return true;
         if (!(o instanceof LeadAttempt that)) return false;
         return baseWeight == that.baseWeight
+                && minFastOpponents == that.minFastOpponents
+                && fastSpeedThreshold == that.fastSpeedThreshold
+                && isDefault == that.isDefault
                 && Arrays.equals(leadSlots, that.leadSlots)
                 && Objects.equals(id, that.id)
                 && Objects.equals(expectedLeadMembers, that.expectedLeadMembers)
@@ -82,7 +102,7 @@ public record LeadAttempt(
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, baseWeight, expectedLeadMembers, description, favoredAgainst, favoredAgainstSpecies);
+        int result = Objects.hash(id, baseWeight, expectedLeadMembers, description, favoredAgainst, favoredAgainstSpecies, minFastOpponents, fastSpeedThreshold, isDefault);
         result = 31 * result + Arrays.hashCode(leadSlots);
         return result;
     }

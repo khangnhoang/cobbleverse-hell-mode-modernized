@@ -115,6 +115,7 @@ public final class LeadSelectionConfig {
             return Collections.emptyList();
         }
         List<LeadAttempt> validAttempts = new ArrayList<>();
+        boolean seenDefault = false;
         for (JsonElement attemptElem : attemptsArr) {
             if (!attemptElem.isJsonObject()) {
                 continue;
@@ -122,6 +123,12 @@ public final class LeadSelectionConfig {
             JsonObject attObj = attemptElem.getAsJsonObject();
             try {
                 LeadAttempt attempt = parseAttempt(attObj);
+                if (attempt.isDefault()) {
+                    if (seenDefault) {
+                        throw new IllegalArgumentException("Attempt '" + attempt.id() + "' cannot be default; trainer already declared a default preset");
+                    }
+                    seenDefault = true;
+                }
                 validAttempts.add(attempt);
             } catch (Exception ignored) {
                 // Per-attempt isolation: skip malformed attempt, preserve valid siblings
@@ -249,6 +256,25 @@ public final class LeadSelectionConfig {
             }
         }
 
-        return new LeadAttempt(id, new int[]{slot0, slot1}, baseWeight, expectedMembers, description, favoredAgainst, favoredAgainstSpecies);
+        int minFastOpponents = 0;
+        if (obj.has("minFastOpponents") && !obj.get("minFastOpponents").isJsonNull()) {
+            minFastOpponents = parseExactInt(obj.get("minFastOpponents"), "Attempt '" + id + "' minFastOpponents");
+        }
+
+        int fastSpeedThreshold = 0;
+        if (obj.has("fastSpeedThreshold") && !obj.get("fastSpeedThreshold").isJsonNull()) {
+            fastSpeedThreshold = parseExactInt(obj.get("fastSpeedThreshold"), "Attempt '" + id + "' fastSpeedThreshold");
+        }
+
+        boolean isDefault = false;
+        if (obj.has("default") && !obj.get("default").isJsonNull()) {
+            JsonElement defElem = obj.get("default");
+            if (!defElem.isJsonPrimitive() || !defElem.getAsJsonPrimitive().isBoolean()) {
+                throw new IllegalArgumentException("Attempt '" + id + "' 'default' must be a boolean primitive");
+            }
+            isDefault = defElem.getAsBoolean();
+        }
+
+        return new LeadAttempt(id, new int[]{slot0, slot1}, baseWeight, expectedMembers, description, favoredAgainst, favoredAgainstSpecies, minFastOpponents, fastSpeedThreshold, isDefault);
     }
 }

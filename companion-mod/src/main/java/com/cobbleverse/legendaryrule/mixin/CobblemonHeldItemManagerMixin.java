@@ -29,5 +29,6 @@ public class CobblemonHeldItemManagerMixin {
             CallbackInfo ci
     ) {
         BattleItemStateTracker.markEndedIfThroatSpray(pokemon, battleMessage);
+        BattleItemStateTracker.markEndedIfPowerHerb(pokemon, battleMessage);
     }
 }

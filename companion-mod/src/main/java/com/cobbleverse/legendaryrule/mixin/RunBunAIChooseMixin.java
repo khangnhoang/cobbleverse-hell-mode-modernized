@@ -1,6 +1,7 @@
 package com.cobbleverse.legendaryrule.mixin;
 
 import com.cobblemon.mod.common.api.battles.model.PokemonBattle;
+import com.cobblemon.mod.common.api.moves.Move;
 import com.cobblemon.mod.common.battles.ActiveBattlePokemon;
 import com.cobblemon.mod.common.battles.BattleSide;
 import com.cobblemon.mod.common.battles.MoveActionResponse;
@@ -11,6 +12,7 @@ import com.cobbleverse.legendaryrule.strategy.diagnostic.AIDecisionDiagnostics;
 import com.cobbleverse.legendaryrule.strategy.spread.SpreadFriendlyFireValuationStrategy;
 import com.cobbleverse.legendaryrule.strategy.spread.SpreadMoveValuationContext;
 import com.cobbleverse.legendaryrule.strategy.tera.TeraTargetResolver;
+import com.cobbleverse.legendaryrule.strategy.weather.SolarMoveValuationStrategy;
 import com.cobbleverse.legendaryrule.strategy.weather.WeatherAccuracyValuationStrategy;
 import com.gitlab.surilexa.rbrctai.api.ai.RunBunAI;
 import com.gitlab.surilexa.rbrctai.api.ai.utils.RBSlotInformation;
@@ -139,6 +141,29 @@ public abstract class RunBunAIChooseMixin {
             activeBattlePokemon.getActor().getPokemonList(),
             this.teraTarget
         );
+    }
+
+    /**
+     * Normalizes immediate scoring damage for two-turn solar moves (Solar Beam and Solar Blade)
+     * in RunBunAI.choose() right after damage calculation and before killingMoves / maxMove classification.
+     * Outside of active Sun and without usable Power Herb, immediate scoring damage is normalized to 0,
+     * preventing false killingMoves/maxMove classification and enforcing native damaging-zero-damage scoring (-5).
+     */
+    @ModifyVariable(
+        method = "choose(Lcom/cobblemon/mod/common/battles/ActiveBattlePokemon;Lcom/cobblemon/mod/common/api/battles/model/PokemonBattle;Lcom/cobblemon/mod/common/battles/BattleSide;Lcom/cobblemon/mod/common/battles/ShowdownMoveset;Z)Lcom/cobblemon/mod/common/battles/ShowdownActionResponse;",
+        at = @At(value = "STORE"),
+        name = "dmg",
+        remap = false
+    )
+    private int cobbleverse$normalizeSolarScoringDamage(
+        int dmg,
+        ActiveBattlePokemon activeBattlePokemon,
+        PokemonBattle battle,
+        @Local(name = "m") Move m,
+        @Local(name = "battlePokemon") BattlePokemon battlePokemon
+    ) {
+        BattlePokemon attacker = battlePokemon != null ? battlePokemon : (activeBattlePokemon != null ? activeBattlePokemon.getBattlePokemon() : null);
+        return SolarMoveValuationStrategy.resolveImmediateScoringDamage(dmg, m, attacker, activeBattlePokemon, battle);
     }
 
     /**

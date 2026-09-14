@@ -29,7 +29,14 @@ public final class MegaSolWeatherGuard {
         if (attacker == null) {
             return false;
         }
-        return PokeMathMax.hasAbility(MEGA_SOL_ABILITY, attacker);
+        try {
+            if (attacker.getEffectedPokemon() == null || attacker.getEffectedPokemon().getAbility() == null) {
+                return false;
+            }
+            return PokeMathMax.hasAbility(MEGA_SOL_ABILITY, attacker);
+        } catch (Throwable ignored) {
+            return false;
+        }
     }
 
     /**

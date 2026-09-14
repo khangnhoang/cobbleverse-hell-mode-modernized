@@ -18,6 +18,9 @@ public class BattlePokemonMixin implements BattleItemStateTracker {
     @Unique
     private boolean cobbleverse$throatSprayEnded = false;
 
+    @Unique
+    private boolean cobbleverse$powerHerbEnded = false;
+
     @Override
     public boolean cobbleverse$isThroatSprayEnded() {
         return this.cobbleverse$throatSprayEnded;
@@ -26,5 +29,15 @@ public class BattlePokemonMixin implements BattleItemStateTracker {
     @Override
     public void cobbleverse$markThroatSprayEnded() {
         this.cobbleverse$throatSprayEnded = true;
+    }
+
+    @Override
+    public boolean cobbleverse$isPowerHerbEnded() {
+        return this.cobbleverse$powerHerbEnded;
+    }
+
+    @Override
+    public void cobbleverse$markPowerHerbEnded() {
+        this.cobbleverse$powerHerbEnded = true;
     }
 }
