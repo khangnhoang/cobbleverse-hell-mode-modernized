@@ -133,27 +133,33 @@ In `LeadSelectionEngine.java`, all condition evaluations are computed **independ
 - `fastBonus` iterates over player leads and counts how many are fast.
 
 ### Concrete Failure Walkthrough
-Suppose an author wants an anti-fast-water preset (targeting Swift Swim or fast Water sweepers like Barraskewda or Floatzel) and writes:
+Suppose an author wants an anti-fast-electric preset (attempting to counter fast Electric threats like Regieleki, Electrode, or Kilowattrel) and writes:
 
 ```json
 {
-  "id": "anti_fast_water_attempt",
+  "id": "anti_fast_electric_attempt",
   "leadSlots": [2, 3],
-  "favoredAgainst": ["water"],
+  "favoredAgainst": ["electric"],
   "minFastOpponents": 1
 }
 ```
 
 Now assume the player leads with:
-1. **Gastrodon:** Water/Ground typing, Base Speed 39 (Slow).
-2. **Jolteon:** Electric typing, Base Speed 130 (Fast).
+1. **Pokémon A (Slow Electric):** **Ampharos** — Electric typing, Base Speed 55 (Slow).
+2. **Pokémon B (Fast non-Electric):** **Aerodactyl** — Rock/Flying typing, Base Speed 130 (Fast, non-Electric).
 
 **Engine Evaluation:**
-1. `favoredAgainst` inspects Gastrodon $\to$ matches `"water"` $\to$ awards **+2**.
-2. `minFastOpponents` inspects Jolteon $\to$ speed exceeds threshold $\to$ fast count = 1 $\ge 1 \to$ awards **+4**.
+1. `favoredAgainst` (`"electric"`) is satisfied by **Pokémon A (Ampharos)** $\to$ matches `"electric"` $\to$ awards **+2**.
+2. `minFastOpponents` (`1`) is satisfied by **Pokémon B (Aerodactyl)** $\to$ speed exceeds threshold $\to$ fast count = 1 $\ge 1 \to$ awards **+4**.
 3. **Total conditional bonus awarded: +6**.
 
-The preset triggers with maximum conditional bonus despite the player having brought **zero fast Water Pokémon**. The two conditions matched two separate Pokémon on the board.
+**The False-Positive Fallacy:**
+The preset triggers with maximum conditional bonus (+6) despite the player having brought **zero fast Electric Pokémon**:
+- `favoredAgainst` is satisfied exclusively by Pokémon A (Ampharos), which is Electric but slow.
+- `minFastOpponents` is satisfied exclusively by Pokémon B (Aerodactyl), which is fast but non-Electric.
+- **No single opposing Pokémon satisfies both conditions.**
+
+Because `LeadSelectionEngine.java` computes these criteria independently across the entire opposing lead board, independent additive fields cannot express a single-Pokémon conjunction requirement.
 
 **Authoring Principle:**
 Never rely on combinations of independent fields to target a conjoined threat profile. If targeting a specific threat, use `favoredAgainstSpecies` or evaluate whether the preset remains sound if the traits are distributed across two different opposing leads.
