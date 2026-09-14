@@ -220,4 +220,145 @@ class OpponentMatchTest {
         assertEquals(4, scoreOf(result, "probe").fastBonus(),
                 "Rule 2 must resolve the conditionless successor, so dynamicThreatSpeed is 200 and the 300-speed lead is fast");
     }
+
+    // ---------------------------------------------------------------------------------------------
+    // Eligibility gate (G13–G19): an attempt carrying a matcher is a CONDITIONAL preset. While its
+    // matcher is unsatisfied the attempt must not be selectable, and no structural score may rescue it.
+    // ---------------------------------------------------------------------------------------------
+
+    @Test
+    void g13_unsatisfiedMatcherMakesTheAttemptIneligibleAndUnselectable() {
+        OpponentMatch unsatisfied = new OpponentMatch("electric", "electric", 1, 13);
+        LeadAttempt gated = matcherAttempt("gated", new int[]{0, 1}, unsatisfied);
+        LeadAttempt unconditional = plainAttempt("unconditional", new int[]{0, 1});
+        // Neither lead is Electric-typed, so the matcher is unsatisfied and awards nothing.
+        List<PlayerLeadTyping> leads = List.of(
+                new PlayerLeadTyping("tyranitar", List.of("rock", "dark"), 81),
+                new PlayerLeadTyping("garchomp", List.of("dragon", "ground"), 134));
+
+        LeadSelectionResult result = engine.select(List.of(gated, unconditional), leads, roster());
+
+        assertFalse(scoreOf(result, "gated").eligible(),
+                "A matcher-bearing attempt whose matcher is unsatisfied must be ineligible");
+        assertTrue(scoreOf(result, "unconditional").eligible(),
+                "An attempt with no matcher is unconditional and stays eligible");
+        assertEquals("unconditional", result.selectedAttempt().id(),
+                "The ineligible attempt must not be selected even though it is declared first");
+    }
+
+    @Test
+    void g14_satisfiedMatcherKeepsTheAttemptEligibleAndStillAwardsTheAuthoredBonus() {
+        // Regression 2: the positive board the preset was authored for must keep winning.
+        OpponentMatch satisfied = new OpponentMatch("electric", "electric", 1, 11);
+        LeadAttempt gated = matcherAttempt("gated", new int[]{0, 1}, satisfied);
+        LeadAttempt unconditional = new LeadAttempt("unconditional", new int[]{0, 1}, 2, List.of(), "");
+        List<PlayerLeadTyping> leads = List.of(
+                new PlayerLeadTyping("pelipper", List.of("water", "flying"), 65),
+                new PlayerLeadTyping("regieleki", List.of("electric"), 250, List.of("electric")));
+
+        LeadSelectionResult result = engine.select(List.of(unconditional, gated), leads, roster());
+
+        AttemptScore gatedScore = scoreOf(result, "gated");
+        assertTrue(gatedScore.eligible(), "A satisfied matcher must leave the attempt eligible");
+        assertEquals(11, gatedScore.opponentMatchBonus(),
+                "A satisfied matcher must still add exactly the authored bonus on top of the structural score");
+        assertEquals("gated", result.selectedAttempt().id());
+    }
+
+    @Test
+    void g15_splitConditionBoardStaysIneligible() {
+        // Regression 3: Ampharos is Electric with a damaging Electric move but slower than 210;
+        // Aerodactyl is faster than 210 but not Electric. No single lead satisfies the conjunction.
+        OpponentMatch match = new OpponentMatch("electric", "electric", 1, 13);
+        LeadAttempt gated = matcherAttempt("gated", new int[]{0, 1}, match);
+        LeadAttempt unconditional = plainAttempt("unconditional", new int[]{0, 1});
+        List<PlayerLeadTyping> leads = List.of(
+                new PlayerLeadTyping("ampharos", List.of("electric"), 180, List.of("electric")),
+                new PlayerLeadTyping("aerodactyl", List.of("rock", "flying"), 230, List.of("rock")));
+
+        LeadSelectionResult result = engine.select(List.of(gated, unconditional), leads, roster());
+
+        assertEquals(0, scoreOf(result, "gated").opponentMatchBonus());
+        assertFalse(scoreOf(result, "gated").eligible());
+        assertEquals("unconditional", result.selectedAttempt().id());
+    }
+
+    @Test
+    void g16_equalSpeedBoundaryStaysIneligible() {
+        // Regression 4: the strict > comparison against the 210 reference must not be relaxed by the gate.
+        OpponentMatch match = new OpponentMatch("electric", null, 1, 9);
+        LeadAttempt gated = matcherAttempt("gated", new int[]{0, 1}, match);
+        LeadAttempt unconditional = plainAttempt("unconditional", new int[]{0, 1});
+        List<PlayerLeadTyping> leads = List.of(
+                new PlayerLeadTyping("tie_lead", List.of("electric"), 210, List.of("electric")));
+
+        LeadSelectionResult result = engine.select(List.of(gated, unconditional), leads, roster());
+
+        assertEquals(0, scoreOf(result, "gated").opponentMatchBonus());
+        assertFalse(scoreOf(result, "gated").eligible());
+        assertEquals("unconditional", result.selectedAttempt().id());
+    }
+
+    @Test
+    void g17_unsatisfiedMatcherIsNotRescuedByAVeryHighStructuralScore() {
+        // Regression 7 (load-bearing for the live bug): the gated attempt carries the maximum authored
+        // baseWeight plus both favored-opponent bonuses, so it out-scores the matcherless attempt by a
+        // deterministic margin that does not depend on the type chart. Both attempts still resolve their
+        // offensive/defensive components from the same roster slots, so the gap is structural, not typing.
+        OpponentMatch unsatisfied = new OpponentMatch("electric", "electric", 1, 16);
+        LeadAttempt gated = new LeadAttempt("gated_high", new int[]{0, 1}, 2, List.of(), "",
+                List.of("water"), List.of("pelipper"), 0, 0, false, unsatisfied);
+        LeadAttempt plain = new LeadAttempt("plain_low", new int[]{0, 1}, -2, List.of(), "");
+        List<PlayerLeadTyping> leads = List.of(
+                new PlayerLeadTyping("pelipper", List.of("water", "flying"), 65));
+
+        LeadSelectionResult result = engine.select(List.of(plain, gated), leads, roster());
+
+        AttemptScore gatedScore = scoreOf(result, "gated_high");
+        AttemptScore plainScore = scoreOf(result, "plain_low");
+
+        assertFalse(gatedScore.eligible(), "Precondition: the matcher is unsatisfied on this board");
+        assertEquals(0, gatedScore.opponentMatchBonus());
+        assertTrue(gatedScore.totalScore() > plainScore.totalScore(),
+                "Precondition: the gated attempt genuinely out-scores the matcherless attempt ("
+                        + gatedScore.totalScore() + " vs " + plainScore.totalScore() + ")");
+        assertEquals("plain_low", result.selectedAttempt().id(),
+                "A very high structural score must not let an ineligible attempt win");
+    }
+
+    @Test
+    void g18_matcherlessAttemptsKeepTheirExistingOrderingSemantics() {
+        // Regression 6: with no matcher in play the tie-break chain is untouched, and every attempt
+        // is eligible so the gate is inert.
+        LeadAttempt lowWeight = new LeadAttempt("low_weight", new int[]{0, 1}, 0, List.of(), "");
+        LeadAttempt highWeight = new LeadAttempt("high_weight", new int[]{0, 1}, 2, List.of(), "");
+        List<PlayerLeadTyping> leads = List.of(
+                new PlayerLeadTyping("pelipper", List.of("water", "flying"), 65));
+
+        LeadSelectionResult result = engine.select(List.of(lowWeight, highWeight), leads, roster());
+
+        assertEquals("high_weight", result.selectedAttempt().id(),
+                "Identical matcherless presets must still separate on baseWeight descending");
+        result.evaluatedScores().forEach(s -> assertTrue(s.eligible(),
+                "No attempt carries a matcher, so every attempt must remain eligible: " + s.attemptId()));
+    }
+
+    @Test
+    void g19_boardWhereEveryPresetIsGatedStillReturnsATotalEvidenceResult() {
+        // The engine contract stays total: it always returns a winner plus complete evidence. When no
+        // preset is eligible the evidence flags every attempt ineligible, which is the signal
+        // LeadSelectionService uses to reject the selection and fall back to native ordering.
+        OpponentMatch unsatisfied = new OpponentMatch("electric", null, null, 4);
+        List<PlayerLeadTyping> leads = List.of(
+                new PlayerLeadTyping("tyranitar", List.of("rock", "dark"), 81));
+
+        LeadSelectionResult result = engine.select(List.of(
+                matcherAttempt("gated_a", new int[]{0, 1}, unsatisfied),
+                matcherAttempt("gated_b", new int[]{2, 3}, unsatisfied)), leads, roster());
+
+        assertEquals(2, result.evaluatedScores().size(), "Every attempt must still be recorded as evidence");
+        assertTrue(result.evaluatedScores().stream().noneMatch(AttemptScore::eligible),
+                "No attempt on this board is eligible");
+        assertNotNull(result.selectedAttempt(), "The engine must still return a total result");
+    }
 }

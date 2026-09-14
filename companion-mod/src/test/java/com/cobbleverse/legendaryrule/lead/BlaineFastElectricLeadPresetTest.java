@@ -203,6 +203,8 @@ class BlaineFastElectricLeadPresetTest {
         LeadSelectionResult scarfed = run(List.of(pelipper(), lead("gengar", List.of("electric"), 225, "electric")));
         assertEquals(TARGET, scarfed.selectedAttempt().id(),
                 "A scarf-resolved Electric lead at 225 must satisfy the matcher against the 210 reference");
+        assertTrue(scoreOf(scarfed, TARGET).eligible(),
+                "A satisfied matcher must leave anti_fast_electric eligible");
 
         // A second x1.5 application would turn 141 into 211 (> 210) and fire the matcher. The engine
         // compares PlayerLeadTyping.speed() verbatim, so 141 must NOT satisfy it.
@@ -210,6 +212,8 @@ class BlaineFastElectricLeadPresetTest {
         assertNotEquals(TARGET, notScarfed.selectedAttempt().id(),
                 "The engine must not re-apply the Choice Scarf multiplier to speed it is already given resolved");
         assertEquals(0, scoreOf(notScarfed, TARGET).opponentMatchBonus());
+        assertFalse(scoreOf(notScarfed, TARGET).eligible(),
+                "A double-counted scarf would have made this board eligible; verbatim speed keeps it ineligible");
     }
 
     @Test
@@ -247,6 +251,70 @@ class BlaineFastElectricLeadPresetTest {
                 "Rillaboom must match the real roster at slot 3");
         assertTrue(expected.get(1).matches(actualRoster.get(target.leadSlots()[1])),
                 "Mega Golisopod (requiredAspects: [mega]) must match the real roster at slot 4");
+    }
+
+    /**
+     * Live-canary reproduction of the eligibility-gate bug (regressions 1 and 7).
+     * <p>
+     * The canary logged {@code Selected=anti_fast_electric} with
+     * {@code anti_fast_electric=4(off=4,def=0,bw=0,type=0,spec=0,match=0)} beating
+     * {@code default_sun_intimidate=-9}. Because {@code match=0} the matcher never fired, so the preset
+     * won purely on its structural offensive score. Neither Tyranitar (rock/dark) nor Garchomp
+     * (dragon/ground) is Electric-typed, so the {@code type: electric} property is decisive at any speed;
+     * the listed speeds are representative resolved values kept below the 210 reference.
+     */
+    @Test
+    void b13_liveCanaryBoardTyranitarPlusGarchompIsNotWonByAnUnsatisfiedMatcher() throws Exception {
+        LeadSelectionResult result = run(List.of(
+                new PlayerLeadTyping("tyranitar", List.of("rock", "dark"), 81),
+                new PlayerLeadTyping("garchomp", List.of("dragon", "ground"), 134)));
+
+        AttemptScore target = scoreOf(result, TARGET);
+        assertEquals(0, target.opponentMatchBonus(),
+                "Live canary precondition: the matcher is unsatisfied on this board (match=0)");
+        assertFalse(target.eligible(),
+                "An unsatisfied matcher must make anti_fast_electric ineligible on the live canary board");
+        assertNotEquals(TARGET, result.selectedAttempt().id(),
+                "The live canary board must not select anti_fast_electric");
+        assertTrue(scoreOf(result, result.selectedAttempt().id()).eligible(),
+                "Whatever wins must itself be an eligible attempt");
+    }
+
+    /**
+     * Real-config invariant (regression 6): on every pre-existing board the gate must be exactly
+     * equivalent to the matcher outcome — ineligible if and only if the matcher awarded nothing — and it
+     * must never disturb which preset wins.
+     */
+    @Test
+    void b14_ineligibilityOnRealConfigIsExactlyTheUnsatisfiedMatcher() throws Exception {
+        List<List<PlayerLeadTyping>> boards = List.of(
+                List.of(pelipper(), regieleki()),
+                List.of(pelipper(), lead("regieleki", List.of("electric"), 250)),
+                List.of(pelipper(), lead("ampharos", List.of("electric"), 180, "electric")),
+                List.of(pelipper(), lead("dragapult", List.of("dragon", "ghost"), 304, "electric")),
+                List.of(lead("ampharos", List.of("electric"), 180, "electric"),
+                        lead("dragapult", List.of("dragon", "ghost"), 304, "dragon")),
+                List.of(new PlayerLeadTyping("corviknight", List.of("steel", "flying"), 67),
+                        new PlayerLeadTyping("clefable", List.of("fairy"), 60)),
+                List.of(new PlayerLeadTyping("miraidon", List.of("electric", "dragon"), 205),
+                        new PlayerLeadTyping("ironhands", List.of("fighting", "electric"), 80)),
+                // The live canary board: the only listed board where an ungated matcher actually wins.
+                List.of(new PlayerLeadTyping("tyranitar", List.of("rock", "dark"), 81),
+                        new PlayerLeadTyping("garchomp", List.of("dragon", "ground"), 134)));
+
+        for (List<PlayerLeadTyping> leads : boards) {
+            LeadSelectionResult result = run(leads);
+            AttemptScore target = scoreOf(result, TARGET);
+            boolean matched = target.opponentMatchBonus() > 0;
+            assertEquals(matched, target.eligible(),
+                    "Ineligibility must be exactly the unsatisfied matcher; board: "
+                            + leads.stream().map(PlayerLeadTyping::species).toList());
+            if (!matched) {
+                assertNotEquals(TARGET, result.selectedAttempt().id(),
+                        "An ineligible preset must not be selected on board: "
+                                + leads.stream().map(PlayerLeadTyping::species).toList());
+            }
+        }
     }
 
     /**

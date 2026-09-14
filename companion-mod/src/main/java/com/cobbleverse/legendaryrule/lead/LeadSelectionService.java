@@ -191,7 +191,18 @@ public final class LeadSelectionService {
                 result.evaluatedScores().stream().map(s -> s.attemptId() + "=" + s.totalScore()
                         + "(off=" + s.offensiveScore() + ",def=" + s.defensiveScore() + ",bw=" + s.baseWeight()
                         + ",type=" + s.typeFavoredBonus() + ",spec=" + s.speciesFavoredBonus()
-                        + ",match=" + s.opponentMatchBonus() + ")").toList());
+                        + ",match=" + s.opponentMatchBonus() + ",elig=" + s.eligible() + ")").toList());
+
+        // Eligibility gate closure: when every authored preset carries a matcher and none is satisfied,
+        // there is no applicable preset for this board. The engine still returns a winner to keep its
+        // contract total, so the selection is rejected here and the caller falls back to native ordering
+        // rather than deploying an attempt whose condition the board does not meet.
+        boolean anyEligible = result.evaluatedScores().stream().anyMatch(AttemptScore::eligible);
+        if (!anyEligible) {
+            LOGGER.warn("[HellMode-Lead] Trainer '{}' has no eligible lead attempt: every authored preset carries an opponentMatch and none is satisfied on this board. Falling back to native ordering.",
+                    trainerId);
+            return Optional.empty();
+        }
 
         return Optional.of(result);
     }
