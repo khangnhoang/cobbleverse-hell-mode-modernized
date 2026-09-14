@@ -144,19 +144,29 @@ Suppose an author wants an anti-fast-electric preset (attempting to counter fast
 }
 ```
 
-Now assume the player leads with:
-1. **Pokémon A (Slow Electric):** **Ampharos** — Electric typing, Base Speed 55 (Slow).
-2. **Pokémon B (Fast non-Electric):** **Aerodactyl** — Rock/Flying typing, Base Speed 130 (Fast, non-Electric).
+Now assume the resolved speed threshold is $T = 210$ (derived dynamically from the default lead pair or configured statically), and the player leads with:
+
+1. **Pokémon A (e.g., Ampharos):**
+   - Typing: Electric
+   - Actual resolved Speed: $180$ (derived from runtime `Pokemon.getSpeed()`, including level, IVs, EVs, nature, and item adjustments such as Choice Scarf)
+   - Speed evaluation: $180 \le 210 \to$ **not fast**
+
+2. **Pokémon B (e.g., Aerodactyl):**
+   - Typing: Rock/Flying (non-Electric)
+   - Actual resolved Speed: $230$
+   - Speed evaluation: $230 > 210 \to$ **fast**
+
+*(Note: Species names are illustrative; the engine evaluates actual resolved runtime speed, not base speed stats).*
 
 **Engine Evaluation:**
-1. `favoredAgainst` (`"electric"`) is satisfied by **Pokémon A (Ampharos)** $\to$ matches `"electric"` $\to$ awards **+2**.
-2. `minFastOpponents` (`1`) is satisfied by **Pokémon B (Aerodactyl)** $\to$ speed exceeds threshold $\to$ fast count = 1 $\ge 1 \to$ awards **+4**.
+1. `favoredAgainst` (`"electric"`) is satisfied exclusively by **Pokémon A** $\to$ matches `"electric"` $\to$ awards **+2**.
+2. `minFastOpponents` (`1`) is satisfied exclusively by **Pokémon B** $\to$ actual resolved Speed ($230 > 210$) $\to$ fast count = 1 $\ge 1 \to$ awards **+4**.
 3. **Total conditional bonus awarded: +6**.
 
 **The False-Positive Fallacy:**
 The preset triggers with maximum conditional bonus (+6) despite the player having brought **zero fast Electric Pokémon**:
-- `favoredAgainst` is satisfied exclusively by Pokémon A (Ampharos), which is Electric but slow.
-- `minFastOpponents` is satisfied exclusively by Pokémon B (Aerodactyl), which is fast but non-Electric.
+- `favoredAgainst` is satisfied exclusively by Pokémon A (Electric, but actual Speed $180 \le 210$).
+- `minFastOpponents` is satisfied exclusively by Pokémon B (actual Speed $230 > 210$, but non-Electric).
 - **No single opposing Pokémon satisfies both conditions.**
 
 Because `LeadSelectionEngine.java` computes these criteria independently across the entire opposing lead board, independent additive fields cannot express a single-Pokémon conjunction requirement.
