@@ -108,8 +108,29 @@ public final class LeadSelectionEngine {
                 }
             }
 
-            int total = offScore + defScore + attempt.baseWeight() + typeFavoredBonus + speciesFavoredBonus + fastBonus;
-            AttemptScore evidence = new AttemptScore(attempt.id(), offScore, defScore, attempt.baseWeight(), typeFavoredBonus, speciesFavoredBonus, fastBonus, total);
+            int opponentMatchBonus = 0;
+            OpponentMatch match = attempt.opponentMatch();
+            if (match != null) {
+                Integer refSlot = match.fasterThanRosterSlot();
+                RosterMemberTyping refMember = refSlot != null ? rosterBySlot.get(refSlot) : null;
+                // Degeneracy guard: an absent referenced slot or a non-positive resolved speed makes the
+                // property unsatisfiable rather than vacuously true.
+                boolean resolvable = refSlot == null || (refMember != null && refMember.speed() > 0);
+                if (resolvable) {
+                    for (PlayerLeadTyping player : playerLeads) {
+                        // Same-opponent AND: every present property is tested on this single lead.
+                        if ((match.type() == null || player.types().contains(match.type()))
+                                && (match.damagingMoveType() == null || player.damagingMoveTypes().contains(match.damagingMoveType()))
+                                && (refMember == null || player.speed() > refMember.speed())) {
+                            opponentMatchBonus = match.bonus();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            int total = offScore + defScore + attempt.baseWeight() + typeFavoredBonus + speciesFavoredBonus + fastBonus + opponentMatchBonus;
+            AttemptScore evidence = new AttemptScore(attempt.id(), offScore, defScore, attempt.baseWeight(), typeFavoredBonus, speciesFavoredBonus, fastBonus, opponentMatchBonus, total);
             evidenceList.add(evidence);
             scoredList.add(new ScoredAttempt(attempt, total, attempt.baseWeight(), i));
         }
@@ -134,7 +155,8 @@ public final class LeadSelectionEngine {
         for (LeadAttempt attempt : attempts) {
             if (attempt.minFastOpponents() == 0
                     && attempt.favoredAgainst().isEmpty()
-                    && attempt.favoredAgainstSpecies().isEmpty()) {
+                    && attempt.favoredAgainstSpecies().isEmpty()
+                    && attempt.opponentMatch() == null) {
                 return attempt;
             }
         }

@@ -11,8 +11,13 @@ public record AttemptScore(
         int typeFavoredBonus,
         int speciesFavoredBonus,
         int fastBonus,
+        int opponentMatchBonus,
         int totalScore
 ) {
+    public AttemptScore(String attemptId, int offensiveScore, int defensiveScore, int baseWeight, int typeFavoredBonus, int speciesFavoredBonus, int fastBonus, int totalScore) {
+        this(attemptId, offensiveScore, defensiveScore, baseWeight, typeFavoredBonus, speciesFavoredBonus, fastBonus, 0, totalScore);
+    }
+
     public AttemptScore(String attemptId, int offensiveScore, int defensiveScore, int baseWeight, int typeFavoredBonus, int speciesFavoredBonus, int totalScore) {
         this(attemptId, offensiveScore, defensiveScore, baseWeight, typeFavoredBonus, speciesFavoredBonus, 0, totalScore);
     }

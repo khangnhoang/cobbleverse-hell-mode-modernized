@@ -334,6 +334,32 @@
       ],
       "baseWeight": 2,
       "description": "Mega Charizard Y + Arcanine (Default Mega Sol Fire STAB + Intimidate core)"
+    },
+    {
+      "id": "anti_fast_electric",
+      "leadSlots": [
+        3,
+        4
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "rillaboom"
+        },
+        {
+          "species": "golisopod",
+          "requiredAspects": [
+            "mega"
+          ]
+        }
+      ],
+      "baseWeight": 0,
+      "opponentMatch": {
+        "type": "electric",
+        "damagingMoveType": "electric",
+        "fasterThanRosterSlot": 1,
+        "bonus": 14
+      },
+      "description": "Rillaboom + Mega Golisopod (Grass STAB + Mega Tough Claws) vs a fast Electric STAB lead that outruns Mega Charizard Y"
     }
   ],
   "battleFormat": "GEN_9_DOUBLES"

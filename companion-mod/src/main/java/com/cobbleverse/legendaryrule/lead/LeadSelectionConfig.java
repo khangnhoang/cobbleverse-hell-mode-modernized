@@ -24,6 +24,9 @@ import java.util.Optional;
 public final class LeadSelectionConfig {
     public static final String CONFIG_FILENAME = "cobbleverse-hell-mode-leads.json";
 
+    private static final List<String> OPPONENT_MATCH_SUB_KEYS =
+            List.of("type", "damagingMoveType", "fasterThanRosterSlot", "bonus");
+
     public record ConfigLoadResult(boolean success, int loadedTrainersCount, String errorMessage) {}
 
     private static volatile Map<String, TrainerLeadConfig> trainerConfigs = Collections.emptyMap();
@@ -159,6 +162,51 @@ public final class LeadSelectionConfig {
         return elem.getAsString().trim();
     }
 
+    private static OpponentMatch parseOpponentMatch(JsonObject obj, String id) {
+        if (!obj.has("opponentMatch")) {
+            return null;
+        }
+        JsonElement omElem = obj.get("opponentMatch");
+        if (!omElem.isJsonObject()) {
+            throw new IllegalArgumentException("Attempt '" + id + "' opponentMatch must be a JSON object");
+        }
+        JsonObject om = omElem.getAsJsonObject();
+
+        // Unknown sub-key rejection is scoped to the opponentMatch object only (Finding-07 boundary);
+        // top-level attempt keys remain permissive.
+        for (Map.Entry<String, JsonElement> entry : om.entrySet()) {
+            String subKey = entry.getKey();
+            if (!OPPONENT_MATCH_SUB_KEYS.contains(subKey)) {
+                throw new IllegalArgumentException("Attempt '" + id + "' opponentMatch has unknown sub-key: " + subKey);
+            }
+        }
+
+        if (!om.has("bonus")) {
+            throw new IllegalArgumentException("Attempt '" + id + "' opponentMatch requires a mandatory 'bonus' integer in ["
+                    + OpponentMatch.MIN_BONUS + ", " + OpponentMatch.MAX_BONUS + "]");
+        }
+        int bonus = parseExactInt(om.get("bonus"), "Attempt '" + id + "' opponentMatch.bonus");
+
+        String type = null;
+        if (om.has("type")) {
+            type = parseNonBlankString(om.get("type"), "Attempt '" + id + "' opponentMatch.type").toLowerCase(Locale.ROOT);
+        }
+
+        String damagingMoveType = null;
+        if (om.has("damagingMoveType")) {
+            damagingMoveType = parseNonBlankString(om.get("damagingMoveType"),
+                    "Attempt '" + id + "' opponentMatch.damagingMoveType").toLowerCase(Locale.ROOT);
+        }
+
+        Integer fasterThanRosterSlot = null;
+        if (om.has("fasterThanRosterSlot")) {
+            fasterThanRosterSlot = parseExactInt(om.get("fasterThanRosterSlot"),
+                    "Attempt '" + id + "' opponentMatch.fasterThanRosterSlot");
+        }
+
+        return new OpponentMatch(type, damagingMoveType, fasterThanRosterSlot, bonus);
+    }
+
     private static LeadAttempt parseAttempt(JsonObject obj) {
         if (!obj.has("id")) {
             throw new IllegalArgumentException("Attempt missing required 'id'");
@@ -275,6 +323,8 @@ public final class LeadSelectionConfig {
             isDefault = defElem.getAsBoolean();
         }
 
-        return new LeadAttempt(id, new int[]{slot0, slot1}, baseWeight, expectedMembers, description, favoredAgainst, favoredAgainstSpecies, minFastOpponents, fastSpeedThreshold, isDefault);
+        OpponentMatch opponentMatch = parseOpponentMatch(obj, id);
+
+        return new LeadAttempt(id, new int[]{slot0, slot1}, baseWeight, expectedMembers, description, favoredAgainst, favoredAgainstSpecies, minFastOpponents, fastSpeedThreshold, isDefault, opponentMatch);
     }
 }

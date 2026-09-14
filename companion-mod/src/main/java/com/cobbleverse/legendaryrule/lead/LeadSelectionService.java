@@ -142,6 +142,15 @@ public final class LeadSelectionService {
                 continue;
             }
 
+            Integer matchRefSlot = attempt.opponentMatch() != null
+                    ? attempt.opponentMatch().fasterThanRosterSlot()
+                    : null;
+            if (matchRefSlot != null && matchRefSlot >= trainerTeam.length) {
+                LOGGER.warn("[HellMode-Lead] Trainer '{}' attempt '{}' has opponentMatch.fasterThanRosterSlot {} exceeding team length {}. Skipping attempt.",
+                        trainerId, attempt.id(), matchRefSlot, trainerTeam.length);
+                continue;
+            }
+
             // Semantic drift guard: verify expectedLeadMembers against actual PokemonIdentity
             List<ExpectedLeadMember> expected = attempt.expectedLeadMembers();
             if (expected != null && expected.size() == 2) {
@@ -181,7 +190,8 @@ public final class LeadSelectionService {
                 result.selectedAttempt().id(),
                 result.evaluatedScores().stream().map(s -> s.attemptId() + "=" + s.totalScore()
                         + "(off=" + s.offensiveScore() + ",def=" + s.defensiveScore() + ",bw=" + s.baseWeight()
-                        + ",type=" + s.typeFavoredBonus() + ",spec=" + s.speciesFavoredBonus() + ")").toList());
+                        + ",type=" + s.typeFavoredBonus() + ",spec=" + s.speciesFavoredBonus()
+                        + ",match=" + s.opponentMatchBonus() + ")").toList());
 
         return Optional.of(result);
     }

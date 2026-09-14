@@ -1,5 +1,9 @@
 package com.cobbleverse.legendaryrule.lead.adapter;
 
+import com.cobblemon.mod.common.api.moves.Move;
+import com.cobblemon.mod.common.api.moves.MoveSet;
+import com.cobblemon.mod.common.api.moves.categories.DamageCategory;
+import com.cobblemon.mod.common.api.types.ElementalType;
 import com.cobblemon.mod.common.pokemon.Pokemon;
 import com.cobbleverse.legendaryrule.lead.PlayerLeadTyping;
 import com.cobbleverse.legendaryrule.lead.PokemonIdentity;
@@ -8,6 +12,7 @@ import com.cobbleverse.legendaryrule.lead.RosterMemberTyping;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -99,13 +104,61 @@ public final class CobblemonLeadAdapter {
         return false;
     }
 
+    /**
+     * Extracts the distinct elemental types of the Pokémon's actually equipped <em>damaging</em> moves.
+     * <p>
+     * A move is damaging when its damage category is readable and its name is not {@code status};
+     * no move-name allowlist is consulted and no damage/power estimate is performed, because the
+     * subject here is the type set rather than a damage figure. A move whose category cannot be read
+     * is treated as "not established as damaging" and skipped.
+     */
+    public static List<String> extractDamagingMoveTypes(Pokemon pokemon) {
+        if (pokemon == null) {
+            return Collections.emptyList();
+        }
+        Set<String> types = new LinkedHashSet<>();
+        try {
+            MoveSet moveSet = pokemon.getMoveSet();
+            if (moveSet == null) {
+                return Collections.emptyList();
+            }
+            List<Move> moves = moveSet.getMoves();
+            if (moves != null) {
+                for (Move move : moves) {
+                    if (move == null) {
+                        continue;
+                    }
+                    DamageCategory category = move.getDamageCategory();
+                    if (category == null) {
+                        continue;
+                    }
+                    String categoryName = category.getName();
+                    if (categoryName == null || "status".equalsIgnoreCase(categoryName.trim())) {
+                        continue;
+                    }
+                    ElementalType type = move.getType();
+                    if (type == null) {
+                        continue;
+                    }
+                    String typeName = type.getName();
+                    if (typeName != null && !typeName.isBlank()) {
+                        types.add(typeName.trim().toLowerCase(Locale.ROOT));
+                    }
+                }
+            }
+        } catch (Throwable ignored) {
+            // Defensive posture consistent with the rest of this adapter: never fail lead resolution.
+        }
+        return List.copyOf(types);
+    }
+
     public static PlayerLeadTyping toPlayerLeadTyping(Pokemon pokemon) {
         if (pokemon == null || pokemon.getSpecies() == null) {
             return new PlayerLeadTyping("unknown", Collections.emptyList(), 0);
         }
         String species = pokemon.getSpecies().getName().toLowerCase(Locale.ROOT);
         int speed = resolveSpeed(pokemon);
-        return new PlayerLeadTyping(species, extractTypes(pokemon), speed);
+        return new PlayerLeadTyping(species, extractTypes(pokemon), speed, extractDamagingMoveTypes(pokemon));
     }
 
     public static RosterMemberTyping toRosterMemberTyping(int slot, Pokemon pokemon) {

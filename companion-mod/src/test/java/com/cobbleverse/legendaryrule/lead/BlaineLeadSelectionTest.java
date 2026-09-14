@@ -462,7 +462,7 @@ class BlaineLeadSelectionTest {
     @Test
     void test15_ExpectedLeadMemberValidationMatchesActualBlaineRoster() throws Exception {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
-        assertEquals(4, presets.size(), "Blaine must have exactly 4 authored presets");
+        assertEquals(5, presets.size(), "Blaine must have exactly 5 authored presets");
 
         // Actual identities in Blaine's 6-mon roster
         PokemonIdentity arcanine = new PokemonIdentity("arcanine");

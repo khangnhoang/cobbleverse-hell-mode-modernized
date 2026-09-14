@@ -18,7 +18,8 @@ public record LeadAttempt(
         List<String> favoredAgainstSpecies,
         int minFastOpponents,
         int fastSpeedThreshold,
-        boolean isDefault
+        boolean isDefault,
+        OpponentMatch opponentMatch
 ) {
     public LeadAttempt {
         Objects.requireNonNull(id, "id must not be null");
@@ -59,6 +60,10 @@ public record LeadAttempt(
                 .toList();
     }
 
+    public LeadAttempt(String id, int[] leadSlots, int baseWeight, List<ExpectedLeadMember> expectedLeadMembers, String description, List<String> favoredAgainst, List<String> favoredAgainstSpecies, int minFastOpponents, int fastSpeedThreshold, boolean isDefault) {
+        this(id, leadSlots, baseWeight, expectedLeadMembers, description, favoredAgainst, favoredAgainstSpecies, minFastOpponents, fastSpeedThreshold, isDefault, null);
+    }
+
     public LeadAttempt(String id, int[] leadSlots, int baseWeight, List<ExpectedLeadMember> expectedLeadMembers, String description, List<String> favoredAgainst, List<String> favoredAgainstSpecies, int minFastOpponents, int fastSpeedThreshold) {
         this(id, leadSlots, baseWeight, expectedLeadMembers, description, favoredAgainst, favoredAgainstSpecies, minFastOpponents, fastSpeedThreshold, false);
     }
@@ -97,12 +102,13 @@ public record LeadAttempt(
                 && Objects.equals(expectedLeadMembers, that.expectedLeadMembers)
                 && Objects.equals(description, that.description)
                 && Objects.equals(favoredAgainst, that.favoredAgainst)
-                && Objects.equals(favoredAgainstSpecies, that.favoredAgainstSpecies);
+                && Objects.equals(favoredAgainstSpecies, that.favoredAgainstSpecies)
+                && Objects.equals(opponentMatch, that.opponentMatch);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, baseWeight, expectedLeadMembers, description, favoredAgainst, favoredAgainstSpecies, minFastOpponents, fastSpeedThreshold, isDefault);
+        int result = Objects.hash(id, baseWeight, expectedLeadMembers, description, favoredAgainst, favoredAgainstSpecies, minFastOpponents, fastSpeedThreshold, isDefault, opponentMatch);
         result = 31 * result + Arrays.hashCode(leadSlots);
         return result;
     }

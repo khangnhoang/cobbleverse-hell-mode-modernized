@@ -408,6 +408,42 @@ def validate_future_pack(repo_root):
                                                             for a in req_asp:
                                                                 if str(a).strip().lower() not in actual_aspects:
                                                                     errors.append(f"{f}: preset '{pid}' expected member {idx} aspect '{a}' missing on slot {actual_slot}")
+
+                                    if "opponentMatch" in preset:
+                                        om = preset["opponentMatch"]
+                                        if not isinstance(om, dict):
+                                            errors.append(f"{f}: preset '{pid}' opponentMatch must be a dict")
+                                        else:
+                                            allowed_om_keys = {"type", "damagingMoveType", "fasterThanRosterSlot", "bonus"}
+                                            unknown_om = sorted(k for k in om.keys() if k not in allowed_om_keys)
+                                            if unknown_om:
+                                                errors.append(f"{f}: preset '{pid}' opponentMatch contains unknown sub-key(s): {unknown_om}")
+
+                                            om_condition_present = False
+                                            for om_type_key in ("type", "damagingMoveType"):
+                                                if om_type_key in om:
+                                                    om_condition_present = True
+                                                    om_type_val = om[om_type_key]
+                                                    if not isinstance(om_type_val, str) or om_type_val.strip().lower() not in VALID_TYPES:
+                                                        errors.append(f"{f}: preset '{pid}' opponentMatch.{om_type_key} must be a canonical Gen 9 type, got {om_type_val!r}")
+
+                                            if "fasterThanRosterSlot" in om:
+                                                om_condition_present = True
+                                                om_slot = om["fasterThanRosterSlot"]
+                                                if not isinstance(om_slot, int) or isinstance(om_slot, bool) or om_slot < 0:
+                                                    errors.append(f"{f}: preset '{pid}' opponentMatch.fasterThanRosterSlot must be a non-negative integer, got {om_slot!r}")
+                                                elif om_slot >= team_len:
+                                                    errors.append(f"{f}: preset '{pid}' opponentMatch.fasterThanRosterSlot {om_slot} out of bounds for team of size {team_len}")
+
+                                            if not om_condition_present:
+                                                errors.append(f"{f}: preset '{pid}' opponentMatch must declare at least one of type, damagingMoveType, fasterThanRosterSlot")
+
+                                            if "bonus" not in om:
+                                                errors.append(f"{f}: preset '{pid}' opponentMatch requires a mandatory 'bonus' integer in [1, 16]")
+                                            else:
+                                                om_bonus = om["bonus"]
+                                                if not isinstance(om_bonus, int) or isinstance(om_bonus, bool) or om_bonus < 1 or om_bonus > 16:
+                                                    errors.append(f"{f}: preset '{pid}' opponentMatch.bonus must be an integer in [1, 16], got {om_bonus!r}")
                 except Exception as e:
                     errors.append(f"{f}: JSON parse error: {e}")
 

@@ -1,0 +1,22 @@
+{
+  "base_commit": "d63f833",
+  "candidate_files": [
+    { "path": ".agents/skills/competitive-pokemon-doubles-team-design/references/trainer-json-authoring-contract.md", "blob_hash": "df1469898a6109f4acd316f1feda98fad1c4b902" },
+    { "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/lead/AttemptScore.java", "blob_hash": "1d9dd43d61c046bf5ac75dc4ae1619d0fe35b355" },
+    { "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/lead/LeadAttempt.java", "blob_hash": "264c9a26be1402d17d1009c13b97a74cc573b1c7" },
+    { "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/lead/LeadSelectionConfig.java", "blob_hash": "e951c109f6e6b5c1d4842befe6861a0c8dfaf8f5" },
+    { "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/lead/LeadSelectionEngine.java", "blob_hash": "a5b5291e07727d3b46cac86abc087dd627f1afe1" },
+    { "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/lead/LeadSelectionService.java", "blob_hash": "270d61d1d94140449a5c013bb016bc41b2e8a991" },
+    { "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/lead/OpponentMatch.java", "blob_hash": "e046869dff760a44a6b4b8a75c4e1ed0be367b8a" },
+    { "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/lead/PlayerLeadTyping.java", "blob_hash": "87d0a9b64e65f608658bd08e13c20a36fe57392c" },
+    { "path": "companion-mod/src/main/java/com/cobbleverse/legendaryrule/lead/adapter/CobblemonLeadAdapter.java", "blob_hash": "4709a11fef213dc43bfbdb991203cee6cc3a0587" },
+    { "path": "companion-mod/src/test/java/com/cobbleverse/legendaryrule/lead/BlaineFastElectricLeadPresetTest.java", "blob_hash": "86dccd5c486f24119b36015e15ba2c789bfd6c11" },
+    { "path": "companion-mod/src/test/java/com/cobbleverse/legendaryrule/lead/BlaineLeadSelectionTest.java", "blob_hash": "1a4ebb7ae50dee40877dd6e33706b8cd4c857ae3" },
+    { "path": "companion-mod/src/test/java/com/cobbleverse/legendaryrule/lead/LeadSelectionConfigTest.java", "blob_hash": "d58fab860325fc595eca5a67b46be731009fadf8" },
+    { "path": "companion-mod/src/test/java/com/cobbleverse/legendaryrule/lead/OpponentMatchTest.java", "blob_hash": "644be18b255803ccfe5d41530823e54a55221039" },
+    { "path": "companion-mod/src/test/java/com/cobbleverse/legendaryrule/lead/adapter/CobblemonLeadAdapterMovesetTest.java", "blob_hash": "1b9143d3fb3c934d42af21d116408ffe43460251" },
+    { "path": "datapacks/hell-mode/data/rctmod/trainers/kanto_blaine.json", "blob_hash": "c8d02e8ff7c0b65bfb5070d31b3554e297e47d2a" },
+    { "path": "docs/workstreams/opponent-match-conjunction-lead-preset/verification.md", "blob_hash": "5c4f26e639cb1fce3c602621dae1c5c89bcc6849" },
+    { "path": "scripts/ci/validate_repo.py", "blob_hash": "a10975db5bf1ba3ccbe2f24f356b57a18361d295" }
+  ]
+}
