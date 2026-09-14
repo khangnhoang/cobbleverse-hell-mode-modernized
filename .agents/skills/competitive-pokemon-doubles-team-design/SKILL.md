@@ -12,7 +12,7 @@ This skill defines the core engineering principles, mechanical invariants, and e
 ## 1. Activation Scope & Ownership
 
 Activate this skill whenever a task touches:
-- Creating or refining 6-mon NPC trainer rosters in datapack JSON (`datapacks/hell-mode/data/rctmod/trainers/`);
+- Creating, modifying, reviewing, or validating any trainer definition JSON file under `datapacks/hell-mode/data/rctmod/trainers/` (including 6-mon rosters, moves, items, EVs/IVs, dynamic lead presets, AI parameters, and schema compliance);
 - Establishing competitive team archetypes (Weather, Trick Room, Tailwind, Redirection, Terrain);
 - Auditing team synergy, item/ability legality, speed control, or friendly-fire avoidance;
 - Evaluating turn-1 gimmick safety (Mega Evolution, Terastallization, Dynamax) under RCT AI constraints;
@@ -28,6 +28,7 @@ Read bundled references strictly when their conditions match:
 
 | Resource | Read Condition | Skip When |
 | :--- | :--- | :--- |
+| [`references/trainer-json-authoring-contract.md`](references/trainer-json-authoring-contract.md) | Mandatory read before creating, modifying, reviewing, or validating any trainer JSON file under `datapacks/hell-mode/data/rctmod/trainers/`. Applies across all modes (including routine Mode 2 edits). | Task strictly does not touch trainer JSON definitions. |
 | [`references/doubles-archetypes-and-synergies.md`](references/doubles-archetypes-and-synergies.md) | Read before selecting or analyzing team archetypes (Weather, Trick Room, Tailwind, Redirection, Terrain), speed control mechanisms, win conditions, or interactive doubles combinations. | Archetype and speed tier are already determined, or task is an isolated data/syntax fix. |
 | [`references/gimmick-architecture-and-runtime-rules.md`](references/gimmick-architecture-and-runtime-rules.md) | Read before assigning, evaluating, or auditing Mega Evolution, Terastallization, Dynamax, aspect syntax, or held item namespaces. | Roster contains zero gimmicks, or task does not evaluate gimmick mechanics. |
 | [`references/failure-modes-and-plan-b.md`](references/failure-modes-and-plan-b.md) | Read before designing or reviewing team resilience against disruption (opposing weather, Trick Room denial, Wide Guard, early gimmick neutralization). | Task is a routine typo/moveset correction without strategic scope. |

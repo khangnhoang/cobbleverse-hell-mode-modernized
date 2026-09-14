@@ -36,6 +36,7 @@ This reference provides the canonical 6-part checklist required for reviewing, m
 - [ ] Plan B exists without introducing conflicting field conditions?
 
 ## 6. Schema & Cobblemon Runtime Legality
+- [ ] Trainer configuration conforms to [`trainer-json-authoring-contract.md`](trainer-json-authoring-contract.md) (valid leadPresets schema, slot indices within team bounds, expectedLeadMembers drift guards, at most one default preset, and conjunction independence awareness)?
 - [ ] `battleFormat: "GEN_9_DOUBLES"` declared?
 - [ ] All moves (exactly 4 per Pokémon) exist in Showdown registry (lowercase alphanumeric, no hyphens/underscores)?
 - [ ] Species and aspects strictly valid in Cobblemon 1.7.3 registry?

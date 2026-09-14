@@ -1,0 +1,22 @@
+{
+  "workstream": "trainer-json-authoring-contract",
+  "base_commit": "9dce7a8",
+  "candidate_files": [
+    {
+      "path": ".agents/skills/competitive-pokemon-doubles-team-design/SKILL.md",
+      "blob_hash": "ee468fc7f462af02ee75600325a74deacf5a29da"
+    },
+    {
+      "path": ".agents/skills/competitive-pokemon-doubles-team-design/references/trainer-audit-checklist.md",
+      "blob_hash": "74009062aa3997b74bbc9dc70046af1c484a7ec5"
+    },
+    {
+      "path": ".agents/skills/competitive-pokemon-doubles-team-design/references/trainer-json-authoring-contract.md",
+      "blob_hash": "3f018656d3d098bc58575b2c6bab0465663703b0"
+    },
+    {
+      "path": "AGENTS.md",
+      "blob_hash": "fc4b537357ed6337425c61b872accd5276f58823"
+    }
+  ]
+}
