@@ -13,7 +13,9 @@
     "ContextManagerMixin",
     "IsSwitchingOverrideMixin",
     "SwitchCandidateScoringMixin",
-    "BroadcasterMixin"
+    "BroadcasterMixin",
+    "battle.BattleActorActionResponsesMixin",
+    "battle.ShowdownActionRequestSanitizeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

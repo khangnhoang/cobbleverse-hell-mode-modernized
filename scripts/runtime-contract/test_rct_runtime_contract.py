@@ -534,6 +534,45 @@ def main():
         checks.append(("SwitchCandidateScoringMixin captures switchScore at index 32", False))
         checks.append(("SwitchCandidateScoringMixin enforces fail-loud IllegalStateException (F-REV-05)", False))
 
+    # 11. Single Major Battle Mechanic (Cross-Mechanic Exclusivity) Bytecode & Mixin Contracts
+    # a) Cobblemon target class javap
+    battle_actor_javap = get_class_javap(cobblemon_jars[0], "com/cobblemon/mod/common/api/battles/model/actor/BattleActor.class")
+    has_set_action_responses = "setActionResponses(java.util.List" in battle_actor_javap or "setActionResponses(Ljava/util/List;)V" in battle_actor_javap
+    checks.append(("BattleActor.setActionResponses method exists in Cobblemon", has_set_action_responses))
+
+    showdown_request_javap = get_class_javap(cobblemon_jars[0], "com/cobblemon/mod/common/battles/ShowdownActionRequest.class")
+    has_sanitize = "sanitize(com.cobblemon.mod.common.api.battles.model.PokemonBattle, com.cobblemon.mod.common.api.battles.model.actor.BattleActor)" in showdown_request_javap or "sanitize(Lcom/cobblemon/mod/common/api/battles/model/PokemonBattle;Lcom/cobblemon/mod/common/api/battles/model/actor/BattleActor;)V" in showdown_request_javap
+    checks.append(("ShowdownActionRequest.sanitize method exists in Cobblemon", has_sanitize))
+
+    # b) Mixin registration in rct_legendary_rule.mixins.json
+    if mixins_json_path.exists():
+        with open(mixins_json_path, "r", encoding="utf-8") as mf:
+            mixins_data = json.load(mf)
+            declared_mixins = mixins_data.get("mixins", [])
+            checks.append(("rct_legendary_rule.mixins.json declares battle.BattleActorActionResponsesMixin", "battle.BattleActorActionResponsesMixin" in declared_mixins))
+            checks.append(("rct_legendary_rule.mixins.json declares battle.ShowdownActionRequestSanitizeMixin", "battle.ShowdownActionRequestSanitizeMixin" in declared_mixins))
+
+    # c) Mixin source verification
+    actor_mixin_source_path = os.path.join(repo_root, "companion-mod", "src", "main", "java", "com", "cobbleverse", "legendaryrule", "mixin", "battle", "BattleActorActionResponsesMixin.java")
+    if os.path.exists(actor_mixin_source_path):
+        with open(actor_mixin_source_path, "r", encoding="utf-8") as f:
+            actor_mixin_src = f.read()
+        checks.append(("BattleActorActionResponsesMixin targets BattleActor", "BattleActor.class" in actor_mixin_src))
+        checks.append(("BattleActorActionResponsesMixin declares @Inject on setActionResponses at HEAD", '@Inject(method = "setActionResponses", at = @At("HEAD"))' in actor_mixin_src))
+    else:
+        checks.append(("BattleActorActionResponsesMixin targets BattleActor", False))
+        checks.append(("BattleActorActionResponsesMixin declares @Inject on setActionResponses at HEAD", False))
+
+    sanitize_mixin_source_path = os.path.join(repo_root, "companion-mod", "src", "main", "java", "com", "cobbleverse", "legendaryrule", "mixin", "battle", "ShowdownActionRequestSanitizeMixin.java")
+    if os.path.exists(sanitize_mixin_source_path):
+        with open(sanitize_mixin_source_path, "r", encoding="utf-8") as f:
+            sanitize_mixin_src = f.read()
+        checks.append(("ShowdownActionRequestSanitizeMixin targets ShowdownActionRequest", "ShowdownActionRequest.class" in sanitize_mixin_src))
+        checks.append(("ShowdownActionRequestSanitizeMixin declares @Inject on sanitize at TAIL", '@Inject(method = "sanitize", at = @At("TAIL"))' in sanitize_mixin_src))
+    else:
+        checks.append(("ShowdownActionRequestSanitizeMixin targets ShowdownActionRequest", False))
+        checks.append(("ShowdownActionRequestSanitizeMixin declares @Inject on sanitize at TAIL", False))
+
     # Evaluate checks
     failed = False
     for desc, passed in checks:
