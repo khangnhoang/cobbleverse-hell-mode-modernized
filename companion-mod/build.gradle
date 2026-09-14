@@ -43,11 +43,14 @@ dependencies {
     modImplementation files("${curseforgeMods}/rbrctai-fabric-1.21.1-0.15.4-beta.jar")
     modCompileOnly files("${curseforgeMods}/spawnnotification-fabric-1.7.3-2.3.0.jar")
     modCompileOnly files("${curseforgeMods}/timcore-fabric-1.7.3-1.32.0.jar")
+    modCompileOnly files("${curseforgeMods}/architectury-13.0.8-fabric.jar")
+    modCompileOnly files("${curseforgeMods}/mega_showdown-fabric-1.8.4+1.7.3+1.21.1.jar")
     modLocalRuntime files("${curseforgeMods}/spawnnotification-fabric-1.7.3-2.3.0.jar")
     modLocalRuntime files("${curseforgeMods}/timcore-fabric-1.7.3-1.32.0.jar")
     modLocalRuntime files("${curseforgeMods}/fabric-language-kotlin-1.13.13+kotlin.2.4.10.jar")
     modLocalRuntime files("${curseforgeMods}/architectury-13.0.8-fabric.jar")
     modLocalRuntime files("${curseforgeMods}/ForgeConfigAPIPort-v21.1.6-1.21.1-Fabric.jar")
+    modLocalRuntime files("${curseforgeMods}/mega_showdown-fabric-1.8.4+1.7.3+1.21.1.jar")
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

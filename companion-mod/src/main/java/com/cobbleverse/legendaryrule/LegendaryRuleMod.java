@@ -51,6 +51,7 @@ public class LegendaryRuleMod implements ModInitializer, DedicatedServerModIniti
         CommandRegistrationCallback.EVENT.register(HellModeCommand::register);
         CommandRegistrationCallback.EVENT.register(NotifyWatchlistCommand::register);
         OutsideMegaBattleNormalizer.register();
+        com.cobbleverse.legendaryrule.mechanic.BattleMechanicEventListener.register();
         LOGGER.info("RCT Legendary Rule Companion initialized (active limit: {}).", CompanionConfig.getMaxLegendaryMythical());
 
         // Register Dynamic Trainer Lead Presets Datapack Reload Listener
