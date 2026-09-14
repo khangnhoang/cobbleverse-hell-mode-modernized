@@ -12,6 +12,7 @@ import com.cobbleverse.legendaryrule.strategy.diagnostic.AIDecisionDiagnostics;
 import com.cobbleverse.legendaryrule.strategy.spread.SpreadFriendlyFireValuationStrategy;
 import com.cobbleverse.legendaryrule.strategy.spread.SpreadMoveValuationContext;
 import com.cobbleverse.legendaryrule.strategy.tera.TeraTargetResolver;
+import com.cobbleverse.legendaryrule.strategy.terrain.GrassyGlideValuationStrategy;
 import com.cobbleverse.legendaryrule.strategy.weather.SolarMoveValuationStrategy;
 import com.cobbleverse.legendaryrule.strategy.weather.WeatherAccuracyValuationStrategy;
 import com.gitlab.surilexa.rbrctai.api.ai.RunBunAI;
@@ -197,6 +198,7 @@ public abstract class RunBunAIChooseMixin {
         BattlePokemon attacker = activeBattlePokemon.getBattlePokemon();
         WeatherAccuracyValuationStrategy.adjustMoveValuations(evaluations, attacker, activeBattlePokemon, battle);
         SpreadFriendlyFireValuationStrategy.adjustFriendlyFireValuations(evaluations, attacker, activeBattlePokemon, battle, this.battleStatStages);
+        GrassyGlideValuationStrategy.adjustMoveValuations(evaluations, attacker, activeBattlePokemon, battle, this.battleStatStages);
 
         // Observability: Log post-adjustment candidate snapshot [AI-FINAL]
         AIDecisionDiagnostics.logFinalCandidates(evaluations, attacker);
