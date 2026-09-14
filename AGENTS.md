@@ -65,6 +65,7 @@ Determine what permissions are explicitly granted in the current prompt:
 - Activate domain skills only when the prompt intent strictly matches the skill's activation scope.
 - Mentioning a domain concept does not automatically warrant loading every related skill.
 - Never preload bundled `references/` before their specific `Read condition` matches.
+- **Mandatory Trainer JSON Routing:** Any task creating, modifying, reviewing, or validating files under `datapacks/hell-mode/data/rctmod/trainers/` MUST activate [`.agents/skills/competitive-pokemon-doubles-team-design/SKILL.md`](.agents/skills/competitive-pokemon-doubles-team-design/SKILL.md) and read its bundled [`references/trainer-json-authoring-contract.md`](.agents/skills/competitive-pokemon-doubles-team-design/references/trainer-json-authoring-contract.md) before planning or editing.
 
 ### 2.5 Execution Depth Routing
 Route the request into exactly one of the following five modes:
@@ -85,6 +86,7 @@ Route the request into exactly one of the following five modes:
 #### Mode 2 — Direct Bounded Execution
 - **Trigger:** Owner requests implementation with clear scope, unambiguous expected behavior, low blast radius, established patterns, and bounded direct verification (e.g., *"Update moveset X to Y and run validator"*, *"Fix typo in config"*, *"Add trainer tag"*).
 - **Behavior:** The agent performs targeted discovery → surgical edits → proportional verification → review checkpoint report. No multi-agent ceremony or heavy planning artifacts.
+- **Trainer JSON Invariant:** Routine Mode 2 trainer configuration edits (e.g., moveset, item, EV/IV, or lead preset tweaks) CANNOT skip activating `competitive-pokemon-doubles-team-design` and reading `references/trainer-json-authoring-contract.md`. The small size of an edit does not exempt it from authoring contract compliance.
 - **Escalation Trigger:** If during Mode 2 execution, the agent discovers unexpected cross-module coupling, architectural ambiguity, or invariant risks, it must halt direct edits immediately without further exploratory investigation and **promote the task to Mode 3**.
 
 #### Mode 3 — Managed-Agent Workflow
@@ -182,7 +184,9 @@ Before planning non-trivial work or modifying specialized domains, inspect the t
 - **Test & Verification Strategy:**
   Activate [`.agents/skills/test-and-verification-strategy/SKILL.md`](.agents/skills/test-and-verification-strategy/SKILL.md) whenever designing verification plans, executing test suites across Hell's 6 layers, evaluating artifact freshness, or assembling Verification Evidence Manifests.
 - **Competitive Pokémon Doubles Team Design:**
-  Activate [`.agents/skills/competitive-pokemon-doubles-team-design/SKILL.md`](.agents/skills/competitive-pokemon-doubles-team-design/SKILL.md) whenever creating, modernizing, reviewing, or balancing 6-mon NPC Doubles rosters, assigning held items/moves/abilities, establishing weather/Trick Room/Tailwind strategies, or evaluating turn-1 gimmick safety for Run & Bun AI.
+  Activate [`.agents/skills/competitive-pokemon-doubles-team-design/SKILL.md`](.agents/skills/competitive-pokemon-doubles-team-design/SKILL.md) whenever creating, modernizing, reviewing, balancing, or modifying any trainer definition under `datapacks/hell-mode/data/rctmod/trainers/` (including 6-mon NPC Doubles rosters, lead presets, AI parameters, held items, moves, abilities, weather/Trick Room/Tailwind strategies, or turn-1 gimmick safety for RCT AI).
+  *Contract Mandate:* Reading [`.agents/skills/competitive-pokemon-doubles-team-design/references/trainer-json-authoring-contract.md`](.agents/skills/competitive-pokemon-doubles-team-design/references/trainer-json-authoring-contract.md) is MANDATORY before planning or editing any trainer definition under `datapacks/hell-mode/data/rctmod/trainers/`, even for routine Mode 2 edits.
+  *Single Source of Truth:* Creating nested `AGENTS.md` files in trainer directories is strictly prohibited; root `AGENTS.md` remains the SSOT routing authority.
 
 ---
 
