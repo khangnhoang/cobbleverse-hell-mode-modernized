@@ -414,7 +414,7 @@ def validate_future_pack(repo_root):
                                         if not isinstance(om, dict):
                                             errors.append(f"{f}: preset '{pid}' opponentMatch must be a dict")
                                         else:
-                                            allowed_om_keys = {"type", "damagingMoveType", "fasterThanRosterSlot", "bonus"}
+                                            allowed_om_keys = {"type", "typeAnyOf", "damagingMoveType", "fasterThanRosterSlot", "slowerThanRosterSlot", "bonus"}
                                             unknown_om = sorted(k for k in om.keys() if k not in allowed_om_keys)
                                             if unknown_om:
                                                 errors.append(f"{f}: preset '{pid}' opponentMatch contains unknown sub-key(s): {unknown_om}")
@@ -427,16 +427,35 @@ def validate_future_pack(repo_root):
                                                     if not isinstance(om_type_val, str) or om_type_val.strip().lower() not in VALID_TYPES:
                                                         errors.append(f"{f}: preset '{pid}' opponentMatch.{om_type_key} must be a canonical Gen 9 type, got {om_type_val!r}")
 
-                                            if "fasterThanRosterSlot" in om:
+                                            if "typeAnyOf" in om:
                                                 om_condition_present = True
-                                                om_slot = om["fasterThanRosterSlot"]
-                                                if not isinstance(om_slot, int) or isinstance(om_slot, bool) or om_slot < 0:
-                                                    errors.append(f"{f}: preset '{pid}' opponentMatch.fasterThanRosterSlot must be a non-negative integer, got {om_slot!r}")
-                                                elif om_slot >= team_len:
-                                                    errors.append(f"{f}: preset '{pid}' opponentMatch.fasterThanRosterSlot {om_slot} out of bounds for team of size {team_len}")
+                                                om_any = om["typeAnyOf"]
+                                                if not isinstance(om_any, list):
+                                                    errors.append(f"{f}: preset '{pid}' opponentMatch.typeAnyOf must be a non-empty array of canonical Gen 9 types, got {om_any!r}")
+                                                elif not om_any:
+                                                    errors.append(f"{f}: preset '{pid}' opponentMatch.typeAnyOf must not be empty")
+                                                else:
+                                                    for t in om_any:
+                                                        if not isinstance(t, str) or t.strip().lower() not in VALID_TYPES:
+                                                            errors.append(f"{f}: preset '{pid}' opponentMatch.typeAnyOf entry {t!r} must be a canonical Gen 9 type")
+
+                                            if "type" in om and "typeAnyOf" in om:
+                                                errors.append(f"{f}: preset '{pid}' opponentMatch must not declare both 'type' and 'typeAnyOf'; use 'typeAnyOf' alone for a set")
+
+                                            for om_speed_key in ("fasterThanRosterSlot", "slowerThanRosterSlot"):
+                                                if om_speed_key in om:
+                                                    om_condition_present = True
+                                                    om_slot = om[om_speed_key]
+                                                    if not isinstance(om_slot, int) or isinstance(om_slot, bool) or om_slot < 0:
+                                                        errors.append(f"{f}: preset '{pid}' opponentMatch.{om_speed_key} must be a non-negative integer, got {om_slot!r}")
+                                                    elif om_slot >= team_len:
+                                                        errors.append(f"{f}: preset '{pid}' opponentMatch.{om_speed_key} {om_slot} out of bounds for team of size {team_len}")
+
+                                            if "fasterThanRosterSlot" in om and "slowerThanRosterSlot" in om:
+                                                errors.append(f"{f}: preset '{pid}' opponentMatch must not declare both 'fasterThanRosterSlot' and 'slowerThanRosterSlot'; no speed can be strictly greater and strictly less than the same reference")
 
                                             if not om_condition_present:
-                                                errors.append(f"{f}: preset '{pid}' opponentMatch must declare at least one of type, damagingMoveType, fasterThanRosterSlot")
+                                                errors.append(f"{f}: preset '{pid}' opponentMatch must declare at least one of type, typeAnyOf, damagingMoveType, fasterThanRosterSlot, slowerThanRosterSlot")
 
                                             if "bonus" not in om:
                                                 errors.append(f"{f}: preset '{pid}' opponentMatch requires a mandatory 'bonus' integer in [1, 16]")

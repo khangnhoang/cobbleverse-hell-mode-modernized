@@ -361,4 +361,198 @@ class OpponentMatchTest {
                 "No attempt on this board is eligible");
         assertNotNull(result.selectedAttempt(), "The engine must still return a total result");
     }
+
+    // ---------------------------------------------------------------------------------------------
+    // G20–G28: the generic `typeAnyOf` set primitive and the `slowerThanRosterSlot` symmetric
+    // counterpart to `fasterThanRosterSlot`. Both are same-opponent conjuncts, both strict.
+    // ---------------------------------------------------------------------------------------------
+
+    @Test
+    void g20_typeAnyOfMatchesAPokemonCarryingAtLeastOneOfTheListedTypes() {
+        // The load-bearing property for the Blaine Water/Ground split: the set is satisfied by a
+        // Pokémon that has EITHER type, not only by one that is dual Water/Ground.
+        OpponentMatch anyOf = new OpponentMatch(null, List.of("water", "ground"), null, null, null, 7);
+
+        LeadSelectionResult monoWater = engine.select(List.of(matcherAttempt("m_anyof", new int[]{0, 1}, anyOf)),
+                List.of(new PlayerLeadTyping("blastoise", List.of("water"), 78)), roster());
+        assertEquals(7, scoreOf(monoWater, "m_anyof").opponentMatchBonus(),
+                "A mono-Water lead must satisfy typeAnyOf [water, ground]");
+
+        LeadSelectionResult monoGround = engine.select(List.of(matcherAttempt("m_anyof", new int[]{0, 1}, anyOf)),
+                List.of(new PlayerLeadTyping("sandslash", List.of("ground"), 65)), roster());
+        assertEquals(7, scoreOf(monoGround, "m_anyof").opponentMatchBonus(),
+                "A mono-Ground lead must satisfy typeAnyOf [water, ground]");
+
+        LeadSelectionResult dual = engine.select(List.of(matcherAttempt("m_anyof", new int[]{0, 1}, anyOf)),
+                List.of(new PlayerLeadTyping("swampert", List.of("water", "ground"), 60)), roster());
+        assertEquals(7, scoreOf(dual, "m_anyof").opponentMatchBonus(),
+                "A dual Water/Ground lead must satisfy typeAnyOf [water, ground]");
+
+        LeadSelectionResult neither = engine.select(List.of(matcherAttempt("m_anyof", new int[]{0, 1}, anyOf)),
+                List.of(new PlayerLeadTyping("scizor", List.of("bug", "steel"), 65)), roster());
+        assertEquals(0, scoreOf(neither, "m_anyof").opponentMatchBonus(),
+                "A lead with neither type must not satisfy typeAnyOf [water, ground]");
+        assertFalse(scoreOf(neither, "m_anyof").eligible(),
+                "An unsatisfied typeAnyOf matcher must leave the attempt ineligible");
+    }
+
+    @Test
+    void g21_typeAnyOfIsCaseInsensitiveAndCanonicalisedLikeType() {
+        OpponentMatch anyOf = new OpponentMatch(null, List.of("Water", "GROUND"), null, null, null, 7);
+        assertEquals(List.of("water", "ground"), anyOf.typeAnyOf(),
+                "typeAnyOf entries must be lower-cased and canonicalised like the singular type property");
+    }
+
+    @Test
+    void g22_slowerThanRosterSlotUsesAStrictLessThanComparison() {
+        OpponentMatch slower = new OpponentMatch(null, List.of("water"), null, null, 1, 6);
+
+        // Reference is roster slot 1 at speed 210.
+        LeadSelectionResult below = engine.select(List.of(matcherAttempt("m_slow", new int[]{0, 1}, slower)),
+                List.of(new PlayerLeadTyping("slowbro", List.of("water"), 209)), roster());
+        assertEquals(6, scoreOf(below, "m_slow").opponentMatchBonus(),
+                "209 < 210 must satisfy slowerThanRosterSlot 1");
+
+        LeadSelectionResult equal = engine.select(List.of(matcherAttempt("m_slow", new int[]{0, 1}, slower)),
+                List.of(new PlayerLeadTyping("slowbro", List.of("water"), 210)), roster());
+        assertEquals(0, scoreOf(equal, "m_slow").opponentMatchBonus(),
+                "Speed equality must NOT satisfy the strict < comparison");
+        assertFalse(scoreOf(equal, "m_slow").eligible(), "An equal-speed board must leave the attempt ineligible");
+
+        LeadSelectionResult above = engine.select(List.of(matcherAttempt("m_slow", new int[]{0, 1}, slower)),
+                List.of(new PlayerLeadTyping("barraskewda", List.of("water"), 211)), roster());
+        assertEquals(0, scoreOf(above, "m_slow").opponentMatchBonus(),
+                "211 > 210 must not satisfy slowerThanRosterSlot 1");
+        assertFalse(scoreOf(above, "m_slow").eligible());
+    }
+
+    @Test
+    void g23_slowerAndFasterThanRosterSlotAreExactMirrorsAroundTheReferenceSpeed() {
+        OpponentMatch slower = new OpponentMatch(null, List.of("water"), null, null, 1, 6);
+        OpponentMatch faster = new OpponentMatch(null, List.of("water"), null, 1, null, 6);
+
+        for (int speed : List.of(120, 209, 210, 211, 304)) {
+            List<PlayerLeadTyping> leads = List.of(new PlayerLeadTyping("subject", List.of("water"), speed));
+            int slowBonus = scoreOf(engine.select(List.of(matcherAttempt("s", new int[]{0, 1}, slower)), leads, roster()), "s")
+                    .opponentMatchBonus();
+            int fastBonus = scoreOf(engine.select(List.of(matcherAttempt("f", new int[]{0, 1}, faster)), leads, roster()), "f")
+                    .opponentMatchBonus();
+            assertTrue(slowBonus == 0 || fastBonus == 0,
+                    "No speed can be both strictly slower and strictly faster than 210; speed=" + speed);
+            assertEquals(210 == speed ? 0 : 6, slowBonus + fastBonus,
+                    "Exactly one side must fire for any non-equal speed; speed=" + speed);
+        }
+    }
+
+    @Test
+    void g24_typeAndSpeedConditionsMustHoldOnTheSameOpposingPokemon() {
+        // A fast non-Water lead plus a slow Water lead must NOT satisfy typeAnyOf + slowerThan.
+        OpponentMatch conjunction = new OpponentMatch(null, List.of("water", "ground"), null, null, 1, 9);
+
+        LeadSelectionResult split = engine.select(List.of(matcherAttempt("m_conj", new int[]{0, 1}, conjunction)),
+                List.of(new PlayerLeadTyping("dragapult", List.of("dragon", "ghost"), 304),
+                        new PlayerLeadTyping("blastoise", List.of("water"), 78)), roster());
+        assertEquals(9, scoreOf(split, "m_conj").opponentMatchBonus(),
+                "blastoise alone satisfies both conjuncts (water AND 78 < 210), so the conjunction holds");
+
+        LeadSelectionResult splitInverted = engine.select(List.of(matcherAttempt("m_conj", new int[]{0, 1}, conjunction)),
+                List.of(new PlayerLeadTyping("barraskewda", List.of("water"), 250),
+                        new PlayerLeadTyping("sandslash", List.of("ground"), 65)), roster());
+        assertEquals(9, scoreOf(splitInverted, "m_conj").opponentMatchBonus(),
+                "sandslash alone satisfies both conjuncts (ground AND 65 < 210)");
+
+        LeadSelectionResult neither = engine.select(List.of(matcherAttempt("m_conj", new int[]{0, 1}, conjunction)),
+                List.of(new PlayerLeadTyping("barraskewda", List.of("water"), 250),
+                        new PlayerLeadTyping("dragapult", List.of("dragon", "ghost"), 304)), roster());
+        assertEquals(0, scoreOf(neither, "m_conj").opponentMatchBonus(),
+                "A fast Water lead and a slow non-Water lead must not satisfy the conjunction");
+        assertFalse(scoreOf(neither, "m_conj").eligible());
+    }
+
+    @Test
+    void g25_omittedSpeedPropertyLeavesSpeedUnconstrained() {
+        OpponentMatch typeOnly = new OpponentMatch(null, List.of("water"), null, null, null, 4);
+        for (int speed : List.of(1, 210, 999)) {
+            LeadSelectionResult result = engine.select(List.of(matcherAttempt("m", new int[]{0, 1}, typeOnly)),
+                    List.of(new PlayerLeadTyping("subject", List.of("water"), speed)), roster());
+            assertEquals(4, scoreOf(result, "m").opponentMatchBonus(),
+                    "An omitted speed property must not constrain the match; speed=" + speed);
+        }
+    }
+
+    @Test
+    void g26_degenerateSlowerReferenceSpeedIsUnsatisfiableRatherThanVacuouslyTrue() {
+        // Roster slot 2 has speed 0; a strict < against a non-positive reference must never match.
+        OpponentMatch slower = new OpponentMatch(null, List.of("water"), null, null, 2, 6);
+        LeadSelectionResult result = engine.select(List.of(matcherAttempt("m", new int[]{0, 1}, slower)),
+                List.of(new PlayerLeadTyping("subject", List.of("water"), 1)), roster());
+
+        assertEquals(0, scoreOf(result, "m").opponentMatchBonus(),
+                "A non-positive reference speed must make slowerThanRosterSlot unsatisfiable");
+        assertFalse(scoreOf(result, "m").eligible());
+    }
+
+    @Test
+    void g27_absentSlowerReferenceSlotIsUnsatisfiableRatherThanVacuouslyTrue() {
+        OpponentMatch slower = new OpponentMatch(null, List.of("water"), null, null, 99, 6);
+        LeadSelectionResult result = engine.select(List.of(matcherAttempt("m", new int[]{0, 1}, slower)),
+                List.of(new PlayerLeadTyping("subject", List.of("water"), 1)), roster());
+
+        assertEquals(0, scoreOf(result, "m").opponentMatchBonus(),
+                "An absent referenced slot must make slowerThanRosterSlot unsatisfiable");
+        assertFalse(scoreOf(result, "m").eligible());
+    }
+
+    @Test
+    void g28_typeAnyOfCombinesWithDamagingMoveTypeOnTheSameOpponent() {
+        OpponentMatch conjunction = new OpponentMatch(
+                null, List.of("water", "ground"), "electric", null, null, 8);
+
+        LeadSelectionResult satisfied = engine.select(List.of(matcherAttempt("m", new int[]{0, 1}, conjunction)),
+                List.of(new PlayerLeadTyping("rotomwash", List.of("electric", "water"), 200, List.of("electric"))),
+                roster());
+        assertEquals(8, scoreOf(satisfied, "m").opponentMatchBonus(),
+                "A Water lead carrying a damaging Electric move satisfies both conjuncts");
+
+        LeadSelectionResult noMove = engine.select(List.of(matcherAttempt("m", new int[]{0, 1}, conjunction)),
+                List.of(new PlayerLeadTyping("rotomwash", List.of("electric", "water"), 200)), roster());
+        assertEquals(0, scoreOf(noMove, "m").opponentMatchBonus(),
+                "Without the damaging move the conjunction fails");
+        assertFalse(scoreOf(noMove, "m").eligible());
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // G29–G32: constructor guards. These keep the authoring surface honest so an unsatisfiable or
+    // ambiguous matcher cannot be authored by accident.
+    // ---------------------------------------------------------------------------------------------
+
+    @Test
+    void g29_declaringBothTypeAndTypeAnyOfIsRejected() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch("water", List.of("ground"), null, null, null, 4));
+        assertTrue(ex.getMessage().contains("typeAnyOf"), "The rejection must name the conflicting keys");
+    }
+
+    @Test
+    void g30_declaringBothSpeedReferencesIsRejected() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch(null, List.of("water"), null, 1, 1, 4));
+        assertTrue(ex.getMessage().contains("slowerThanRosterSlot"),
+                "The rejection must name the conflicting speed references");
+    }
+
+    @Test
+    void g31_anEntirelyEmptyMatcherIsRejected() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch(null, List.of(), null, null, null, 4),
+                "A matcher with no condition at all would be vacuously true and must be rejected");
+    }
+
+    @Test
+    void g32_negativeSpeedReferenceSlotsAreRejected() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch(null, List.of("water"), null, -1, null, 4));
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch(null, List.of("water"), null, null, -1, 4));
+    }
 }

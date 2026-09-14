@@ -547,6 +547,61 @@ class LeadSelectionConfigTest {
                   "opponentMatch": { "fasterThanRosterSlot": 0, "bonus": 7 }
                 },
                 {
+                  "id": "valid_type_any_of",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "typeAnyOf": ["WATER", "ground"], "bonus": 9 }
+                },
+                {
+                  "id": "valid_slower_slot",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "typeAnyOf": ["water", "ground"], "slowerThanRosterSlot": 1, "bonus": 10 }
+                },
+                {
+                  "id": "valid_slower_slot_without_type",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "slowerThanRosterSlot": 1, "bonus": 3 }
+                },
+                {
+                  "id": "bad_type_any_of_empty",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "typeAnyOf": [], "bonus": 5 }
+                },
+                {
+                  "id": "bad_type_any_of_unknown_type",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "typeAnyOf": ["water", "light"], "bonus": 5 }
+                },
+                {
+                  "id": "bad_type_any_of_not_an_array",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "typeAnyOf": "water", "bonus": 5 }
+                },
+                {
+                  "id": "bad_type_and_type_any_of_together",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "type": "water", "typeAnyOf": ["ground"], "bonus": 5 }
+                },
+                {
+                  "id": "bad_both_speed_references",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "fasterThanRosterSlot": 1, "slowerThanRosterSlot": 1, "bonus": 5 }
+                },
+                {
+                  "id": "bad_slower_slot_fractional",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "slowerThanRosterSlot": 1.5, "bonus": 5 }
+                },
+                {
+                  "id": "bad_slower_slot_negative",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "slowerThanRosterSlot": -1, "bonus": 5 }
+                },
+                {
+                  "id": "bad_slower_slot_string",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "slowerThanRosterSlot": "1", "bonus": 5 }
+                },
+                {
                   "id": "bad_not_an_object",
                   "leadSlots": [0, 1],
                   "opponentMatch": "electric"
@@ -633,6 +688,7 @@ class LeadSelectionConfigTest {
         assertTrue(opt.isPresent(), "Trainer must be registered because valid attempts exist");
         List<LeadAttempt> attempts = opt.get().attempts();
         assertEquals(List.of("valid_full", "valid_type_only", "valid_damaging_only", "valid_slot_only",
+                        "valid_type_any_of", "valid_slower_slot", "valid_slower_slot_without_type",
                         "valid_sibling_no_matcher"),
                 attempts.stream().map(LeadAttempt::id).toList(),
                 "Every malformed matcher must be skipped in isolation while its valid siblings survive");
@@ -663,7 +719,28 @@ class LeadSelectionConfigTest {
         assertNull(slotOnly.damagingMoveType());
         assertEquals(0, slotOnly.fasterThanRosterSlot());
 
-        assertNull(attempts.get(4).opponentMatch(), "An attempt without opponentMatch must carry a null matcher");
+        OpponentMatch typeAnyOf = attempts.get(4).opponentMatch();
+        assertNotNull(typeAnyOf);
+        assertNull(typeAnyOf.type(), "typeAnyOf must not be folded into the singular type property");
+        assertEquals(List.of("water", "ground"), typeAnyOf.typeAnyOf(),
+                "typeAnyOf entries must be lowercased and canonicalised, and order preserved");
+        assertTrue(typeAnyOf.fasterThanRosterSlot() == null && typeAnyOf.slowerThanRosterSlot() == null,
+                "An omitted speed reference must stay unset");
+        assertEquals(9, typeAnyOf.bonus());
+
+        OpponentMatch slower = attempts.get(5).opponentMatch();
+        assertNotNull(slower);
+        assertEquals(List.of("water", "ground"), slower.typeAnyOf());
+        assertEquals(1, slower.slowerThanRosterSlot());
+        assertNull(slower.fasterThanRosterSlot(), "The slower reference must not populate the faster field");
+        assertEquals(10, slower.bonus());
+
+        OpponentMatch slowerNoType = attempts.get(6).opponentMatch();
+        assertNotNull(slowerNoType);
+        assertTrue(slowerNoType.typeAnyOf().isEmpty(), "An omitted typeAnyOf must normalize to an empty list");
+        assertEquals(1, slowerNoType.slowerThanRosterSlot());
+
+        assertNull(attempts.get(7).opponentMatch(), "An attempt without opponentMatch must carry a null matcher");
     }
 
     @Test
@@ -674,6 +751,23 @@ class LeadSelectionConfigTest {
         assertThrows(IllegalArgumentException.class, () -> new OpponentMatch(null, "shadow", null, 5));
         assertThrows(IllegalArgumentException.class, () -> new OpponentMatch(null, null, -1, 5));
         assertThrows(IllegalArgumentException.class, () -> new OpponentMatch(null, null, null, 5));
+
+        // The generic set primitive and the symmetric speed reference carry the same policy.
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch(null, List.of(), null, null, null, 5),
+                "An empty typeAnyOf carries no condition and must be rejected");
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch(null, List.of("water", "light"), null, null, null, 5),
+                "An unknown type inside typeAnyOf must be rejected");
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch(null, List.of("water"), null, null, -1, 5),
+                "A negative slowerThanRosterSlot must be rejected");
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch("water", List.of("ground"), null, null, null, 5),
+                "Declaring both type and typeAnyOf must be rejected");
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch(null, List.of("water"), null, 1, 1, 5),
+                "Declaring both speed references must be rejected");
     }
 
     @Test

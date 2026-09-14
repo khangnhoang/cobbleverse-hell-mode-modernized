@@ -25,7 +25,7 @@ public final class LeadSelectionConfig {
     public static final String CONFIG_FILENAME = "cobbleverse-hell-mode-leads.json";
 
     private static final List<String> OPPONENT_MATCH_SUB_KEYS =
-            List.of("type", "damagingMoveType", "fasterThanRosterSlot", "bonus");
+            List.of("type", "typeAnyOf", "damagingMoveType", "fasterThanRosterSlot", "slowerThanRosterSlot", "bonus");
 
     public record ConfigLoadResult(boolean success, int loadedTrainersCount, String errorMessage) {}
 
@@ -192,6 +192,21 @@ public final class LeadSelectionConfig {
             type = parseNonBlankString(om.get("type"), "Attempt '" + id + "' opponentMatch.type").toLowerCase(Locale.ROOT);
         }
 
+        List<String> typeAnyOf = new ArrayList<>();
+        if (om.has("typeAnyOf") && !om.get("typeAnyOf").isJsonNull()) {
+            if (!om.get("typeAnyOf").isJsonArray()) {
+                throw new IllegalArgumentException("Attempt '" + id + "' opponentMatch.typeAnyOf must be an array");
+            }
+            JsonArray anyOfArr = om.getAsJsonArray("typeAnyOf");
+            if (anyOfArr.isEmpty()) {
+                throw new IllegalArgumentException("Attempt '" + id + "' opponentMatch.typeAnyOf must not be empty when present");
+            }
+            for (JsonElement anyOfElem : anyOfArr) {
+                typeAnyOf.add(parseNonBlankString(anyOfElem,
+                        "Attempt '" + id + "' opponentMatch.typeAnyOf entry").toLowerCase(Locale.ROOT));
+            }
+        }
+
         String damagingMoveType = null;
         if (om.has("damagingMoveType")) {
             damagingMoveType = parseNonBlankString(om.get("damagingMoveType"),
@@ -204,7 +219,13 @@ public final class LeadSelectionConfig {
                     "Attempt '" + id + "' opponentMatch.fasterThanRosterSlot");
         }
 
-        return new OpponentMatch(type, damagingMoveType, fasterThanRosterSlot, bonus);
+        Integer slowerThanRosterSlot = null;
+        if (om.has("slowerThanRosterSlot")) {
+            slowerThanRosterSlot = parseExactInt(om.get("slowerThanRosterSlot"),
+                    "Attempt '" + id + "' opponentMatch.slowerThanRosterSlot");
+        }
+
+        return new OpponentMatch(type, typeAnyOf, damagingMoveType, fasterThanRosterSlot, slowerThanRosterSlot, bonus);
     }
 
     private static LeadAttempt parseAttempt(JsonObject obj) {

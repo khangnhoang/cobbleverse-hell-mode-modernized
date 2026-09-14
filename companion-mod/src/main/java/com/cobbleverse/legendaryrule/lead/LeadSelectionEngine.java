@@ -118,17 +118,23 @@ public final class LeadSelectionEngine {
             OpponentMatch match = attempt.opponentMatch();
             if (match != null) {
                 eligible = false;
-                Integer refSlot = match.fasterThanRosterSlot();
-                RosterMemberTyping refMember = refSlot != null ? rosterBySlot.get(refSlot) : null;
+                Integer fasterRefSlot = match.fasterThanRosterSlot();
+                Integer slowerRefSlot = match.slowerThanRosterSlot();
+                RosterMemberTyping fasterRef = fasterRefSlot != null ? rosterBySlot.get(fasterRefSlot) : null;
+                RosterMemberTyping slowerRef = slowerRefSlot != null ? rosterBySlot.get(slowerRefSlot) : null;
                 // Degeneracy guard: an absent referenced slot or a non-positive resolved speed makes the
                 // property unsatisfiable rather than vacuously true.
-                boolean resolvable = refSlot == null || (refMember != null && refMember.speed() > 0);
+                boolean resolvable = (fasterRefSlot == null || (fasterRef != null && fasterRef.speed() > 0))
+                        && (slowerRefSlot == null || (slowerRef != null && slowerRef.speed() > 0));
+                List<String> anyOf = match.typeAnyOf();
                 if (resolvable) {
                     for (PlayerLeadTyping player : playerLeads) {
                         // Same-opponent AND: every present property is tested on this single lead.
                         if ((match.type() == null || player.types().contains(match.type()))
+                                && (anyOf.isEmpty() || player.types().stream().anyMatch(anyOf::contains))
                                 && (match.damagingMoveType() == null || player.damagingMoveTypes().contains(match.damagingMoveType()))
-                                && (refMember == null || player.speed() > refMember.speed())) {
+                                && (fasterRef == null || player.speed() > fasterRef.speed())
+                                && (slowerRef == null || player.speed() < slowerRef.speed())) {
                             opponentMatchBonus = match.bonus();
                             eligible = true;
                             break;

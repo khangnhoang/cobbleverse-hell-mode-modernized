@@ -151,6 +151,15 @@ public final class LeadSelectionService {
                 continue;
             }
 
+            Integer matchSlowerRefSlot = attempt.opponentMatch() != null
+                    ? attempt.opponentMatch().slowerThanRosterSlot()
+                    : null;
+            if (matchSlowerRefSlot != null && matchSlowerRefSlot >= trainerTeam.length) {
+                LOGGER.warn("[HellMode-Lead] Trainer '{}' attempt '{}' has opponentMatch.slowerThanRosterSlot {} exceeding team length {}. Skipping attempt.",
+                        trainerId, attempt.id(), matchSlowerRefSlot, trainerTeam.length);
+                continue;
+            }
+
             // Semantic drift guard: verify expectedLeadMembers against actual PokemonIdentity
             List<ExpectedLeadMember> expected = attempt.expectedLeadMembers();
             if (expected != null && expected.size() == 2) {

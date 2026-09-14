@@ -254,7 +254,7 @@
       "description": "Zeraora + Rillaboom (Unseen Fist Electric + Grassy Surge / Grass STAB anti-Rain core)"
     },
     {
-      "id": "anti_water_ground",
+      "id": "anti_water_ground_slow",
       "leadSlots": [
         1,
         3
@@ -271,27 +271,67 @@
         }
       ],
       "baseWeight": -2,
-      "favoredAgainst": [
-        "ground",
-        "rock"
+      "opponentMatch": {
+        "typeAnyOf": [
+          "water",
+          "ground"
+        ],
+        "slowerThanRosterSlot": 1,
+        "bonus": 10
+      },
+      "description": "Mega Charizard Y + Rillaboom vs a Water/Ground lead SLOWER than Mega Charizard Y: Mega Sol Solar Beam and Grass STAB resolve the threat before it can act"
+    },
+    {
+      "id": "anti_water_ground_fast",
+      "leadSlots": [
+        3,
+        4
       ],
-      "favoredAgainstSpecies": [
-        "gastrodon",
-        "quagsire",
-        "swampert",
-        "landorus",
-        "garchomp",
-        "gliscor",
-        "ursaluna",
-        "mamoswine",
-        "excadrill",
-        "hippowdon",
-        "seismitoad",
-        "whiscash",
-        "donphan",
-        "rhyperior"
+      "expectedLeadMembers": [
+        {
+          "species": "rillaboom"
+        },
+        {
+          "species": "golisopod",
+          "requiredAspects": [
+            "mega"
+          ]
+        }
       ],
-      "description": "Mega Charizard Y + Rillaboom (Mega Sol Solar Beam + Grassy Surge anti-Water/Ground core)"
+      "baseWeight": -2,
+      "opponentMatch": {
+        "typeAnyOf": [
+          "water",
+          "ground"
+        ],
+        "fasterThanRosterSlot": 1,
+        "bonus": 14
+      },
+      "description": "Rillaboom + Mega Golisopod vs a Water/Ground lead FASTER than Mega Charizard Y: safe core instead of a Charizard that gets outsped and forced out"
+    },
+    {
+      "id": "anti_rock",
+      "leadSlots": [
+        3,
+        4
+      ],
+      "expectedLeadMembers": [
+        {
+          "species": "rillaboom"
+        },
+        {
+          "species": "golisopod",
+          "requiredAspects": [
+            "mega"
+          ]
+        }
+      ],
+      "baseWeight": 0,
+      "opponentMatch": {
+        "type": "rock",
+        "bonus": 14
+      },
+      "description": "Rillaboom + Mega Golisopod vs a Rock threat: Mega Charizard Y is 4x weak to Rock and must not be led into it"
     },
     {
       "id": "anti_fast_threats",

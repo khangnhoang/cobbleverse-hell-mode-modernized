@@ -73,13 +73,17 @@ Dynamic lead presets allow an NPC boss to inspect the player's predicted lead pa
 | `minFastOpponents` | Integer | Exact integer $\ge 0$, defaults to `0` | Minimum opposing leads meeting speed threshold to trigger fast bonus. |
 | `fastSpeedThreshold` | Integer | Exact integer $\ge 0$, defaults to `0` | Static speed cutoff. If $\le 0$, enables dynamic speed derivation. |
 | `opponentMatch` | Object | Optional | **Per-opponent conjunction.** Sub-fields below. Rejected if not a JSON object, if every condition sub-field is absent, if `bonus` is absent, if a value is malformed, or if an unknown sub-key is present. |
-| `opponentMatch.type` | String | Optional, canonical Gen 9 type | Matches an opposing lead whose own typing includes this type. |
+| `opponentMatch.type` | String | Optional, canonical Gen 9 type | Matches an opposing lead whose own typing includes this type. Mutually exclusive with `typeAnyOf`. |
+| `opponentMatch.typeAnyOf` | Array | Optional, non-empty array of canonical Gen 9 types | Matches an opposing lead whose own typing includes **at least one** of the listed types. Mutually exclusive with `type`. |
 | `opponentMatch.damagingMoveType` | String | Optional, canonical Gen 9 type | Matches an opposing lead carrying an equipped **damaging** (non-`status`) move of this type. |
-| `opponentMatch.fasterThanRosterSlot` | Integer | Optional, exact integer $\ge 0$ and $< \text{len(team)}$ | Matches an opposing lead strictly faster than the **resolved** speed of this NPC roster slot. |
+| `opponentMatch.fasterThanRosterSlot` | Integer | Optional, exact integer $\ge 0$ and $< \text{len(team)}$ | Matches an opposing lead strictly faster than the **resolved** speed of this NPC roster slot. Mutually exclusive with `slowerThanRosterSlot`. |
+| `opponentMatch.slowerThanRosterSlot` | Integer | Optional, exact integer $\ge 0$ and $< \text{len(team)}$ | Matches an opposing lead strictly slower than the **resolved** speed of this NPC roster slot. Mutually exclusive with `fasterThanRosterSlot`. |
 | `opponentMatch.bonus` | Integer | **Mandatory when `opponentMatch` is present**; exact integer in `[1, 16]` | Additive score awarded when the conjunction holds. **No default.** |
 | `default` | Boolean | Boolean primitive, defaults to `false` | Marks fallback preset. **At most one preset may declare `default: true`**. |
 
-**`bonus` is mandatory and the bound is a policy guard, not a derivation.** `opponentMatch` is a weight, not a condition, so it is exempt from the "every property is optional" rule that governs `type`, `damagingMoveType` and `fasterThanRosterSlot`: all three condition properties remain independently omittable and any subset (including one) is expressible. An omitted `bonus` cannot be defaulted — the parser cannot distinguish "the author meant a small number" from "the author forgot" — so making it mandatory forces the calibration decision into the diff. The `[1, 16]` bound exists to keep a typo (`bonus: 1400`) within the order of magnitude of the other score components; it is **not** derived from the aggregate maximum of 12.
+**`bonus` is mandatory and the bound is a policy guard, not a derivation.** `opponentMatch` is a weight, not a condition, so it is exempt from the "every property is optional" rule that governs `type`, `typeAnyOf`, `damagingMoveType`, `fasterThanRosterSlot` and `slowerThanRosterSlot`: all five condition properties remain independently omittable and any subset (including one) is expressible. An omitted `bonus` cannot be defaulted — the parser cannot distinguish "the author meant a small number" from "the author forgot" — so making it mandatory forces the calibration decision into the diff. The `[1, 16]` bound exists to keep a typo (`bonus: 1400`) within the order of magnitude of the other score components; it is **not** derived from the aggregate maximum of 12.
+
+**Two authoring rules keep a conjunction satisfiable.** `type` and `typeAnyOf` are mutually exclusive (a set of one is just `type`), and `fasterThanRosterSlot` and `slowerThanRosterSlot` are mutually exclusive because no speed can be simultaneously strictly greater and strictly less than the same reference. Both are rejected by the parser and by `validate_repo.py` rather than silently resolved, so an ambiguous matcher cannot be authored by accident.
 
 ### 2. Scoring & Selection Pipeline
 
@@ -104,8 +108,9 @@ $$\text{totalScore} = \text{offScore} + \text{defScore} + \text{baseWeight} + \t
 #### Per-Opponent Conjunction (`opponentMatch`)
 - **Same-opponent AND.** Every present sub-field must be satisfied by **one single** opposing lead. Satisfaction is never assembled across two different opposing leads.
 - **Omitted sub-field = unconstrained.** A sub-field that is not declared is skipped, never treated as false.
+- **Set membership.** `typeAnyOf` is satisfied by an opposing lead carrying **at least one** of the listed types — it is an OR over the set, and a mono-typed lead qualifies. The conjunction as a whole remains an AND of its declared sub-fields.
 - **Exists-quantifier.** One qualifying opposing lead is sufficient; a second qualifying lead does not duplicate the bonus.
-- **Strict inequality.** `fasterThanRosterSlot` compares $\text{playerSpeed} > \text{slotSpeed}$, matching the dynamic-threshold convention below.
+- **Strict inequality.** `fasterThanRosterSlot` compares $\text{playerSpeed} > \text{slotSpeed}$ and `slowerThanRosterSlot` compares $\text{playerSpeed} < \text{slotSpeed}$, matching the dynamic-threshold convention below. Equal speed satisfies **neither**, so a board at exactly the reference speed falls through to the remaining presets.
 - **Speed authority.** Both sides of the comparison are values produced by `CobblemonLeadAdapter.resolveSpeed()`; the engine never re-applies the Choice Scarf multiplier.
 - **Degeneracy guard.** If the referenced roster slot is absent, or its resolved speed is $\le 0$, the property is **unsatisfiable** — it does not become vacuously true.
 

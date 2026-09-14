@@ -163,10 +163,10 @@ class BlaineFastElectricLeadPresetTest {
                         lead("scizor", List.of("bug", "steel"), 65)), "default_sun_intimidate", 7),
                 new Board("water/ground pair", List.of(
                         lead("gastrodon", List.of("water", "ground"), 39),
-                        lead("landorus", List.of("ground", "flying"), 101)), "anti_water_ground", 7),
+                        lead("landorus", List.of("ground", "flying"), 101)), "anti_water_ground_slow", 9),
                 new Board("single ground + Scizor", List.of(
                         lead("gastrodon", List.of("water", "ground"), 39),
-                        lead("scizor", List.of("bug", "steel"), 65)), "default_sun_intimidate", 7),
+                        lead("scizor", List.of("bug", "steel"), 65)), "anti_water_ground_slow", 12),
                 new Board("double fast non-Electric", List.of(
                         lead("fluttermane", List.of("ghost", "fairy"), 293),
                         lead("dragapult", List.of("dragon", "ghost"), 304)), "anti_fast_threats", 4),
@@ -181,7 +181,7 @@ class BlaineFastElectricLeadPresetTest {
                         new PlayerLeadTyping("ironhands", List.of("fighting", "electric"), 80)), "default_sun_intimidate", -4),
                 new Board("swift-swim pair", List.of(
                         lead("swampert", List.of("water", "ground"), 130),
-                        lead("landorus", List.of("ground", "flying"), 140)), "anti_water_ground", 7),
+                        lead("landorus", List.of("ground", "flying"), 140)), "anti_water_ground_slow", 9),
                 new Board("Choice-Scarf Gengar + Dragapult", List.of(
                         new PlayerLeadTyping("gengar", List.of("ghost", "poison"), (int) Math.floor(150 * 1.5)),
                         lead("dragapult", List.of("dragon", "ghost"), 304)), "anti_fast_threats", 4));
@@ -220,7 +220,7 @@ class BlaineFastElectricLeadPresetTest {
     void b11_presetInventoryDeclaresAntiFastElectricLastWithASingleDefault() throws Exception {
         List<LeadAttempt> presets = BlaineLeadSelectionTest.loadBlainePresetsFromDatapack();
 
-        assertEquals(5, presets.size(), "Blaine must declare exactly 5 authored presets");
+        assertEquals(7, presets.size(), "Blaine must declare exactly 7 authored presets");
         assertEquals(TARGET, presets.get(presets.size() - 1).id(),
                 "anti_fast_electric must be declared last so pre-existing presets keep winning exact ties");
         assertEquals(1, presets.stream().filter(LeadAttempt::isDefault).count(),
@@ -320,9 +320,12 @@ class BlaineFastElectricLeadPresetTest {
     /**
      * Checkpoint-3 re-measurement of the plan's precedence calibration table against the real engine.
      * <p>
-     * Rows 1–3 reproduce the plan's printed values. Row 4 is recorded here with the corrected winner cell:
-     * structural 5 + bonus 14 = 19 (the plan printed 17, which is 5 + 12), and the margin over
-     * {@code anti_water_ground} (4) is therefore 15, not 13.
+     * Rows 1 and 3 reproduce the plan's printed values. Rows 2 and 4 carry the runner-up that the
+     * Water/Ground split actually produces: row 2's runner-up is {@code anti_water_ground_fast} (15),
+     * which now competes on the same board because barraskewda is both a fast Water lead and a fast
+     * Electric-STAB carrier, and row 4's runner-up is {@code anti_water_ground_slow} (10) because
+     * swampert is a Water/Ground lead slower than Mega Charizard Y. Both remain strictly behind
+     * {@code anti_fast_electric}, so the pre-existing winner is unchanged.
      */
     @Test
     void checkpoint3_precedenceCalibrationMeasuredAgainstTheRealEngine() throws Exception {
@@ -331,11 +334,11 @@ class BlaineFastElectricLeadPresetTest {
         List<Row> rows = List.of(
                 new Row("pelipper + fast Electric", List.of(pelipper(), regieleki()), 8, "anti_rain_core", 5),
                 new Row("barraskewda + fast Electric", List.of(
-                        lead("barraskewda", List.of("water"), 250), regieleki()), 17, "anti_rain_core", 8),
+                        lead("barraskewda", List.of("water"), 250), regieleki()), 17, "anti_water_ground_fast", 15),
                 new Row("fast Electric + dragapult", List.of(
                         regieleki(), lead("dragapult", List.of("dragon", "ghost"), 304)), 11, "anti_fast_threats", 0),
                 new Row("swampert + fast Electric", List.of(
-                        lead("swampert", List.of("water", "ground"), 60), regieleki()), 19, "anti_water_ground", 4));
+                        lead("swampert", List.of("water", "ground"), 60), regieleki()), 19, "anti_water_ground_slow", 10));
 
         for (Row row : rows) {
             LeadSelectionResult result = run(row.leads());
