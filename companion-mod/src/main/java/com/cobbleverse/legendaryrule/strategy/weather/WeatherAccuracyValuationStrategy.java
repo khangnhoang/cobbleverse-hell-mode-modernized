@@ -24,6 +24,7 @@ import java.util.Locale;
  * 5. Under Rain, Thunder strictly dominates lower-power alternatives (Thunderbolt)
  *    in both raw damage and effective accuracy, eliminating RNG inversion and tie-break loss.
  * 6. Outside Rain, Thunderbolt maintains higher reliability over Thunder (1.0 vs 0.7).
+ * 7. A candidate Run &amp; Bun has ruled hard-invalid is never adjusted (see {@link #isHardInvalidEvaluation}).
  */
 public final class WeatherAccuracyValuationStrategy {
 
@@ -32,9 +33,35 @@ public final class WeatherAccuracyValuationStrategy {
     public static final String BLIZZARD = "blizzard";
     public static final String THUNDERBOLT = "thunderbolt";
 
+    /**
+     * The terminal score Run &amp; Bun writes when it has ruled a move unusable against that specific
+     * target — a type/ability immunity resolved through {@code PokeMathMax.isImmuneCheck}.
+     * <p>
+     * This is a sentinel, not a rank. In {@code RunBunAI} the constant occurs exactly once, as a direct
+     * overwrite of the running accumulator guarded by {@code MoveEvaluation.isImmune}, before the class's
+     * single {@code setScore} call; the accumulator otherwise starts at 0 and its mutually exclusive
+     * negative branches bottom out at -20. No legitimate raw score can therefore land on this value.
+     */
+    public static final int HARD_INVALID_SCORE = -50;
+
     private static final String UTILITY_UMBRELLA = "utilityumbrella";
 
     private WeatherAccuracyValuationStrategy() {
+    }
+
+    /**
+     * True when Run &amp; Bun's raw evaluation for this candidate is its terminal hard-invalid sentinel,
+     * i.e. the AI has already decided this move cannot be used against that target.
+     * <p>
+     * Comparative corrections in this class exist to reorder candidates that the AI considers usable.
+     * Ranking or boosting a candidate that the AI has ruled unusable is not a correction — it resurrects a
+     * move the AI had removed, which is why both adjustment steps below skip such candidates entirely.
+     * The check is a state check on the AI's own verdict, so it stays correct across turns: it fires on the
+     * turn the move genuinely becomes unusable, and stops firing as soon as the AI's state says it is
+     * usable again (for example after switching out and back in).
+     */
+    public static boolean isHardInvalidEvaluation(RunBunAI.MoveEvaluation eval) {
+        return eval != null && eval.getScore() == HARD_INVALID_SCORE;
     }
 
     /**
@@ -194,6 +221,8 @@ public final class WeatherAccuracyValuationStrategy {
      * 3. Resolves move dominance across candidate pairs: when candidateA dominates candidateB under
      *    active weather, score(candidateA) is guaranteed to be strictly greater than score(candidateB),
      *    eliminating independent RNG roll inversion and 50/50 tie-break coin flips.
+     * 4. Leaves any candidate Run &amp; Bun ruled hard-invalid untouched: such a candidate is skipped by both
+     *    steps, so its sentinel is neither raised nor used as the baseline another move must beat.
      *
      * @param evaluations list of MoveEvaluation instances from RunBunAI.choose()
      * @param attacker attacking BattlePokemon
@@ -219,6 +248,11 @@ public final class WeatherAccuracyValuationStrategy {
             if (eval == null || eval.getMove() == null) {
                 continue;
             }
+            // A weather bonus is only meaningful for a move the AI still considers usable. Adding it to a
+            // hard-invalid candidate would raise an unusable move back into contention.
+            if (isHardInvalidEvaluation(eval)) {
+                continue;
+            }
             String moveName = eval.getMove().getName().toLowerCase(Locale.ROOT);
             if (THUNDER.equals(moveName) || HURRICANE.equals(moveName)) {
                 if (rain) {
@@ -239,10 +273,16 @@ public final class WeatherAccuracyValuationStrategy {
             for (int i = 0; i < size; i++) {
                 RunBunAI.MoveEvaluation evalA = evaluations.get(i);
                 if (evalA == null || evalA.getMove() == null) continue;
+                if (isHardInvalidEvaluation(evalA)) continue;
 
                 for (int j = i + 1; j < size; j++) {
                     RunBunAI.MoveEvaluation evalB = evaluations.get(j);
                     if (evalB == null || evalB.getMove() == null) continue;
+
+                    // Terminal veto: dominance is a statement about two candidates the AI would actually
+                    // consider. A hard-invalid candidate is not one, so it is neither re-ranked against a
+                    // usable move nor allowed to donate its sentinel as the baseline another move must beat.
+                    if (isHardInvalidEvaluation(evalB)) continue;
 
                     if (!isSameOpponent(evalA, evalB)) {
                         continue;
