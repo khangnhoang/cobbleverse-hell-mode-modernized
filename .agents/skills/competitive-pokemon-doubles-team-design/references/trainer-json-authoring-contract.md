@@ -94,6 +94,10 @@ $$\text{totalScore} = \text{offScore} + \text{defScore} + \text{baseWeight} + \t
 - **`fastBonus` (+4 flat):** If `minFastOpponents > 0` and the count of opposing leads meeting the speed threshold is $\ge \text{minFastOpponents}$, a flat +4 is awarded.
 
 #### Speed Threshold Derivation
+- **Runtime Speed Authority (`CobblemonLeadAdapter.resolveSpeed()`):**
+  - Evaluates runtime speed from `pokemon.getSpeed()` (accounting for level, IVs, EVs, nature).
+  - Explicitly applies a Choice Scarf multiplier: $\lfloor\text{speed} \times 1.5\rfloor$.
+  - Species base Speed is strictly an emergency fallback when runtime speed is $\le 0$, never the primary matcher authority.
 - **Dynamic Mode (`fastSpeedThreshold <= 0` and `dynamicThreatSpeed > 0`):**
   - $\text{dynamicThreatSpeed} = \max(\text{speed}_A, \text{speed}_B)$ of the resolved default lead preset.
   - Evaluates via strict inequality: $\text{playerSpeed} > \text{dynamicThreatSpeed}$.
@@ -148,7 +152,7 @@ Now assume the resolved speed threshold is $T = 210$ (derived dynamically from t
 
 1. **Pokémon A (e.g., Ampharos):**
    - Typing: Electric
-   - Actual resolved Speed: $180$ (derived from runtime `Pokemon.getSpeed()`, including level, IVs, EVs, nature, and item adjustments such as Choice Scarf)
+   - Actual resolved Speed: $180$ (derived via `CobblemonLeadAdapter.resolveSpeed()`, querying runtime `pokemon.getSpeed()` plus any explicit adapter adjustments like Choice Scarf $\times 1.5$)
    - Speed evaluation: $180 \le 210 \to$ **not fast**
 
 2. **Pokémon B (e.g., Aerodactyl):**
@@ -156,7 +160,7 @@ Now assume the resolved speed threshold is $T = 210$ (derived dynamically from t
    - Actual resolved Speed: $230$
    - Speed evaluation: $230 > 210 \to$ **fast**
 
-*(Note: Species names are illustrative; the engine evaluates actual resolved runtime speed, not base speed stats).*
+*(Note: Species names are illustrative. The selector uses the Pokémon's runtime Speed from `pokemon.getSpeed()`. `CobblemonLeadAdapter` then applies its explicit Choice Scarf $\times 1.5$ adjustment. Species base Speed is not used as the matcher authority).*
 
 **Engine Evaluation:**
 1. `favoredAgainst` (`"electric"`) is satisfied exclusively by **Pokémon A** $\to$ matches `"electric"` $\to$ awards **+2**.
