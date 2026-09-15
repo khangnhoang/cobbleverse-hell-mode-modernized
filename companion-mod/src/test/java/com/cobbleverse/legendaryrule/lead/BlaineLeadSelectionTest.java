@@ -154,42 +154,45 @@ class BlaineLeadSelectionTest {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
         List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
 
-        // Player leads Gastrodon (water/ground) + Landorus (ground/flying)
-        // Both match ground type (+2 each) and species (+2 each). Total matchup bonus = +8.
-        // anti_water_ground total = -2 (base) + 8 (favored) + 1 (type chart) = 7 > default -2.
+        // Player leads Gastrodon (water/ground) + Landorus (ground/flying), both SLOWER than Mega
+        // Charizard Y (210). The slow branch fires on typeAnyOf [water, ground] + slowerThanRosterSlot 1,
+        // which is a single satisfied matcher (+10) regardless of how many leads are threats.
+        // anti_water_ground_slow total = 4 (off) - 3 (def) - 2 (base) + 10 (match) = 9.
         List<PlayerLeadTyping> waterGroundLeads = List.of(
                 new PlayerLeadTyping("gastrodon", List.of("water", "ground"), 39),
                 new PlayerLeadTyping("landorus", List.of("ground", "flying"), 101)
         );
 
         LeadSelectionResult result = engine.select(presets, waterGroundLeads, roster);
-        assertEquals("anti_water_ground", result.selectedAttempt().id(),
-                "True Water/Ground pressure pair MUST select anti_water_ground (Mega Charizard Y + Rillaboom)");
+        assertEquals("anti_water_ground_slow", result.selectedAttempt().id(),
+                "A slow Water/Ground lead MUST select anti_water_ground_slow (Mega Charizard Y + Rillaboom)");
         assertArrayEquals(new int[]{1, 3}, result.selectedAttempt().leadSlots(),
                 "Lead slots must be [1, 3] for Mega Charizard Y + Rillaboom");
 
         AttemptScore wgScore = result.evaluatedScores().stream()
-                .filter(s -> s.attemptId().equals("anti_water_ground"))
+                .filter(s -> s.attemptId().equals("anti_water_ground_slow"))
                 .findFirst().orElseThrow();
-        assertEquals(7, wgScore.totalScore(), "Water/Ground score must be 7 (-2 base + 8 matchup bonus + 1 type chart)");
+        assertEquals(9, wgScore.totalScore(), "Slow Water/Ground score must be 9 (4 off - 3 def - 2 base + 10 match)");
     }
 
     @Test
-    void test5_SingleGroundThreatWithNonGroundPartnerSelectsDefaultSunIntimidate() throws Exception {
+    void test5_SlowWaterGroundLeadSelectsCharizardEvenWithANonThreateningPartner() throws Exception {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
         List<RosterMemberTyping> roster = loadBlaineRosterFromDatapack();
 
-        // Single ground threat: Gastrodon (water/ground) + Scizor (bug/steel)
-        // Scizor vulnerability to Fire allows default_sun_intimidate (score 7) to beat anti_water_ground (score 6).
+        // Gastrodon (water/ground, 39) + Scizor (bug/steel, 65). Gastrodon is SLOWER than Mega
+        // Charizard Y (210), so the slow branch fires. Rule A keys on the threat itself, not on the
+        // partner: "a Water OR Ground lead slower than Mega Charizard Y" is the whole trigger.
+        // anti_water_ground_slow = 6 (off) - 2 (def) - 2 (base) + 10 (match) = 12 > default 7.
         List<PlayerLeadTyping> singleGroundLeads = List.of(
                 new PlayerLeadTyping("gastrodon", List.of("water", "ground"), 39),
                 new PlayerLeadTyping("scizor", List.of("bug", "steel"), 65)
         );
 
         LeadSelectionResult result = engine.select(presets, singleGroundLeads, roster);
-        assertEquals("default_sun_intimidate", result.selectedAttempt().id(),
-                "Single ground threat with non-ground partner MUST defer to default_sun_intimidate");
-        assertArrayEquals(new int[]{1, 0}, result.selectedAttempt().leadSlots());
+        assertEquals("anti_water_ground_slow", result.selectedAttempt().id(),
+                "A slow Water/Ground lead must select the slow branch even when its partner is not a threat");
+        assertArrayEquals(new int[]{1, 3}, result.selectedAttempt().leadSlots());
     }
 
     @Test
@@ -363,8 +366,8 @@ class BlaineLeadSelectionTest {
         LeadSelectionResult result = engine.select(presets, swiftSwimLeads, roster);
         assertNotEquals("anti_fast_threats", result.selectedAttempt().id(),
                 "Swift Swim must NOT receive unconditional x2 multiplier pre-battle to falsely trigger anti_fast_threats");
-        assertEquals("anti_water_ground", result.selectedAttempt().id(),
-                "Matchup should be handled by anti_water_ground based on typing and species");
+        assertEquals("anti_water_ground_slow", result.selectedAttempt().id(),
+                "Matchup should be handled by anti_water_ground_slow: Swampert is a slow Water/Ground lead");
     }
 
     @Test
@@ -462,7 +465,7 @@ class BlaineLeadSelectionTest {
     @Test
     void test15_ExpectedLeadMemberValidationMatchesActualBlaineRoster() throws Exception {
         List<LeadAttempt> presets = loadBlainePresetsFromDatapack();
-        assertEquals(4, presets.size(), "Blaine must have exactly 4 authored presets");
+        assertEquals(7, presets.size(), "Blaine must have exactly 7 authored presets");
 
         // Actual identities in Blaine's 6-mon roster
         PokemonIdentity arcanine = new PokemonIdentity("arcanine");

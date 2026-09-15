@@ -515,6 +515,262 @@ class LeadSelectionConfigTest {
     }
 
     @Test
+    void testOpponentMatchParsingAndStrictPerAttemptRejection() {
+        String json = """
+        {
+          "trainers": {
+            "opponent_match_test": {
+              "attempts": [
+                {
+                  "id": "valid_full",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": {
+                    "type": "electric",
+                    "damagingMoveType": "electric",
+                    "fasterThanRosterSlot": 1,
+                    "bonus": 14
+                  }
+                },
+                {
+                  "id": "valid_type_only",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "type": "ELECTRIC", "bonus": 1 }
+                },
+                {
+                  "id": "valid_damaging_only",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "damagingMoveType": "ground", "bonus": 16 }
+                },
+                {
+                  "id": "valid_slot_only",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "fasterThanRosterSlot": 0, "bonus": 7 }
+                },
+                {
+                  "id": "valid_type_any_of",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "typeAnyOf": ["WATER", "ground"], "bonus": 9 }
+                },
+                {
+                  "id": "valid_slower_slot",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "typeAnyOf": ["water", "ground"], "slowerThanRosterSlot": 1, "bonus": 10 }
+                },
+                {
+                  "id": "valid_slower_slot_without_type",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "slowerThanRosterSlot": 1, "bonus": 3 }
+                },
+                {
+                  "id": "bad_type_any_of_empty",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "typeAnyOf": [], "bonus": 5 }
+                },
+                {
+                  "id": "bad_type_any_of_unknown_type",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "typeAnyOf": ["water", "light"], "bonus": 5 }
+                },
+                {
+                  "id": "bad_type_any_of_not_an_array",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "typeAnyOf": "water", "bonus": 5 }
+                },
+                {
+                  "id": "bad_type_and_type_any_of_together",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "type": "water", "typeAnyOf": ["ground"], "bonus": 5 }
+                },
+                {
+                  "id": "bad_both_speed_references",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "fasterThanRosterSlot": 1, "slowerThanRosterSlot": 1, "bonus": 5 }
+                },
+                {
+                  "id": "bad_slower_slot_fractional",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "slowerThanRosterSlot": 1.5, "bonus": 5 }
+                },
+                {
+                  "id": "bad_slower_slot_negative",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "slowerThanRosterSlot": -1, "bonus": 5 }
+                },
+                {
+                  "id": "bad_slower_slot_string",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "slowerThanRosterSlot": "1", "bonus": 5 }
+                },
+                {
+                  "id": "bad_not_an_object",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": "electric"
+                },
+                {
+                  "id": "bad_bonus_absent",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "type": "electric" }
+                },
+                {
+                  "id": "bad_unknown_sub_key",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "typ": "electric", "bonus": 5 }
+                },
+                {
+                  "id": "bad_unknown_type",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "type": "light", "bonus": 5 }
+                },
+                {
+                  "id": "bad_unknown_damaging_move_type",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "damagingMoveType": "shadow", "bonus": 5 }
+                },
+                {
+                  "id": "bad_slot_fractional",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "fasterThanRosterSlot": 1.5, "bonus": 5 }
+                },
+                {
+                  "id": "bad_slot_negative",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "fasterThanRosterSlot": -1, "bonus": 5 }
+                },
+                {
+                  "id": "bad_slot_string",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "fasterThanRosterSlot": "1", "bonus": 5 }
+                },
+                {
+                  "id": "bad_slot_overflow",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "fasterThanRosterSlot": 99999999999999999999999999999999, "bonus": 5 }
+                },
+                {
+                  "id": "bad_bonus_zero",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "type": "electric", "bonus": 0 }
+                },
+                {
+                  "id": "bad_bonus_too_high",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "type": "electric", "bonus": 17 }
+                },
+                {
+                  "id": "bad_bonus_fractional",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "type": "electric", "bonus": 1.5 }
+                },
+                {
+                  "id": "bad_bonus_string",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "type": "electric", "bonus": "7" }
+                },
+                {
+                  "id": "bad_all_conditions_absent",
+                  "leadSlots": [0, 1],
+                  "opponentMatch": { "bonus": 5 }
+                },
+                {
+                  "id": "valid_sibling_no_matcher",
+                  "leadSlots": [0, 1],
+                  "baseWeight": 1
+                }
+              ]
+            }
+          }
+        }
+        """;
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+        LeadSelectionConfig.loadFromJson(root);
+
+        Optional<TrainerLeadConfig> opt = LeadSelectionConfig.getTrainerConfig("opponent_match_test");
+        assertTrue(opt.isPresent(), "Trainer must be registered because valid attempts exist");
+        List<LeadAttempt> attempts = opt.get().attempts();
+        assertEquals(List.of("valid_full", "valid_type_only", "valid_damaging_only", "valid_slot_only",
+                        "valid_type_any_of", "valid_slower_slot", "valid_slower_slot_without_type",
+                        "valid_sibling_no_matcher"),
+                attempts.stream().map(LeadAttempt::id).toList(),
+                "Every malformed matcher must be skipped in isolation while its valid siblings survive");
+
+        OpponentMatch full = attempts.get(0).opponentMatch();
+        assertNotNull(full);
+        assertEquals("electric", full.type());
+        assertEquals("electric", full.damagingMoveType());
+        assertEquals(1, full.fasterThanRosterSlot());
+        assertEquals(14, full.bonus());
+
+        OpponentMatch typeOnly = attempts.get(1).opponentMatch();
+        assertNotNull(typeOnly);
+        assertEquals("electric", typeOnly.type(), "Type values must be lowercased during normalization");
+        assertNull(typeOnly.damagingMoveType());
+        assertNull(typeOnly.fasterThanRosterSlot());
+        assertEquals(1, typeOnly.bonus());
+
+        OpponentMatch damagingOnly = attempts.get(2).opponentMatch();
+        assertNotNull(damagingOnly);
+        assertNull(damagingOnly.type());
+        assertEquals("ground", damagingOnly.damagingMoveType());
+        assertEquals(16, damagingOnly.bonus());
+
+        OpponentMatch slotOnly = attempts.get(3).opponentMatch();
+        assertNotNull(slotOnly);
+        assertNull(slotOnly.type());
+        assertNull(slotOnly.damagingMoveType());
+        assertEquals(0, slotOnly.fasterThanRosterSlot());
+
+        OpponentMatch typeAnyOf = attempts.get(4).opponentMatch();
+        assertNotNull(typeAnyOf);
+        assertNull(typeAnyOf.type(), "typeAnyOf must not be folded into the singular type property");
+        assertEquals(List.of("water", "ground"), typeAnyOf.typeAnyOf(),
+                "typeAnyOf entries must be lowercased and canonicalised, and order preserved");
+        assertTrue(typeAnyOf.fasterThanRosterSlot() == null && typeAnyOf.slowerThanRosterSlot() == null,
+                "An omitted speed reference must stay unset");
+        assertEquals(9, typeAnyOf.bonus());
+
+        OpponentMatch slower = attempts.get(5).opponentMatch();
+        assertNotNull(slower);
+        assertEquals(List.of("water", "ground"), slower.typeAnyOf());
+        assertEquals(1, slower.slowerThanRosterSlot());
+        assertNull(slower.fasterThanRosterSlot(), "The slower reference must not populate the faster field");
+        assertEquals(10, slower.bonus());
+
+        OpponentMatch slowerNoType = attempts.get(6).opponentMatch();
+        assertNotNull(slowerNoType);
+        assertTrue(slowerNoType.typeAnyOf().isEmpty(), "An omitted typeAnyOf must normalize to an empty list");
+        assertEquals(1, slowerNoType.slowerThanRosterSlot());
+
+        assertNull(attempts.get(7).opponentMatch(), "An attempt without opponentMatch must carry a null matcher");
+    }
+
+    @Test
+    void testOpponentMatchRecordRejectsOutOfPolicyValuesDirectly() {
+        assertThrows(IllegalArgumentException.class, () -> new OpponentMatch("electric", null, null, 0));
+        assertThrows(IllegalArgumentException.class, () -> new OpponentMatch("electric", null, null, 17));
+        assertThrows(IllegalArgumentException.class, () -> new OpponentMatch("light", null, null, 5));
+        assertThrows(IllegalArgumentException.class, () -> new OpponentMatch(null, "shadow", null, 5));
+        assertThrows(IllegalArgumentException.class, () -> new OpponentMatch(null, null, -1, 5));
+        assertThrows(IllegalArgumentException.class, () -> new OpponentMatch(null, null, null, 5));
+
+        // The generic set primitive and the symmetric speed reference carry the same policy.
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch(null, List.of(), null, null, null, 5),
+                "An empty typeAnyOf carries no condition and must be rejected");
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch(null, List.of("water", "light"), null, null, null, 5),
+                "An unknown type inside typeAnyOf must be rejected");
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch(null, List.of("water"), null, null, -1, 5),
+                "A negative slowerThanRosterSlot must be rejected");
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch("water", List.of("ground"), null, null, null, 5),
+                "Declaring both type and typeAnyOf must be rejected");
+        assertThrows(IllegalArgumentException.class,
+                () -> new OpponentMatch(null, List.of("water"), null, 1, 1, 5),
+                "Declaring both speed references must be rejected");
+    }
+
+    @Test
     void testDynamicLeadEnabledDelegatesToCompanionConfig() {
         com.cobbleverse.legendaryrule.CompanionConfig.setDynamicLeadEnabled(false);
         assertFalse(LeadSelectionConfig.isEnabled());

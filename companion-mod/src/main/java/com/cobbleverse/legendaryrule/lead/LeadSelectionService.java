@@ -142,6 +142,24 @@ public final class LeadSelectionService {
                 continue;
             }
 
+            Integer matchRefSlot = attempt.opponentMatch() != null
+                    ? attempt.opponentMatch().fasterThanRosterSlot()
+                    : null;
+            if (matchRefSlot != null && matchRefSlot >= trainerTeam.length) {
+                LOGGER.warn("[HellMode-Lead] Trainer '{}' attempt '{}' has opponentMatch.fasterThanRosterSlot {} exceeding team length {}. Skipping attempt.",
+                        trainerId, attempt.id(), matchRefSlot, trainerTeam.length);
+                continue;
+            }
+
+            Integer matchSlowerRefSlot = attempt.opponentMatch() != null
+                    ? attempt.opponentMatch().slowerThanRosterSlot()
+                    : null;
+            if (matchSlowerRefSlot != null && matchSlowerRefSlot >= trainerTeam.length) {
+                LOGGER.warn("[HellMode-Lead] Trainer '{}' attempt '{}' has opponentMatch.slowerThanRosterSlot {} exceeding team length {}. Skipping attempt.",
+                        trainerId, attempt.id(), matchSlowerRefSlot, trainerTeam.length);
+                continue;
+            }
+
             // Semantic drift guard: verify expectedLeadMembers against actual PokemonIdentity
             List<ExpectedLeadMember> expected = attempt.expectedLeadMembers();
             if (expected != null && expected.size() == 2) {
@@ -181,7 +199,19 @@ public final class LeadSelectionService {
                 result.selectedAttempt().id(),
                 result.evaluatedScores().stream().map(s -> s.attemptId() + "=" + s.totalScore()
                         + "(off=" + s.offensiveScore() + ",def=" + s.defensiveScore() + ",bw=" + s.baseWeight()
-                        + ",type=" + s.typeFavoredBonus() + ",spec=" + s.speciesFavoredBonus() + ")").toList());
+                        + ",type=" + s.typeFavoredBonus() + ",spec=" + s.speciesFavoredBonus()
+                        + ",match=" + s.opponentMatchBonus() + ",elig=" + s.eligible() + ")").toList());
+
+        // Eligibility gate closure: when every authored preset carries a matcher and none is satisfied,
+        // there is no applicable preset for this board. The engine still returns a winner to keep its
+        // contract total, so the selection is rejected here and the caller falls back to native ordering
+        // rather than deploying an attempt whose condition the board does not meet.
+        boolean anyEligible = result.evaluatedScores().stream().anyMatch(AttemptScore::eligible);
+        if (!anyEligible) {
+            LOGGER.warn("[HellMode-Lead] Trainer '{}' has no eligible lead attempt: every authored preset carries an opponentMatch and none is satisfied on this board. Falling back to native ordering.",
+                    trainerId);
+            return Optional.empty();
+        }
 
         return Optional.of(result);
     }

@@ -108,15 +108,52 @@ public final class LeadSelectionEngine {
                 }
             }
 
-            int total = offScore + defScore + attempt.baseWeight() + typeFavoredBonus + speciesFavoredBonus + fastBonus;
-            AttemptScore evidence = new AttemptScore(attempt.id(), offScore, defScore, attempt.baseWeight(), typeFavoredBonus, speciesFavoredBonus, fastBonus, total);
+            int opponentMatchBonus = 0;
+            // Eligibility gate: an attempt that carries a matcher is a CONDITIONAL preset. It is eligible
+            // for selection only while its matcher is satisfied; when the matcher does not match, no amount
+            // of structural (offensive/defensive/base) score may let it win. When the matcher IS satisfied
+            // the authored bonus is still added on top of the structural score, which is how preset
+            // precedence is calibrated. Attempts with no matcher are unconditional and stay eligible.
+            boolean eligible = true;
+            OpponentMatch match = attempt.opponentMatch();
+            if (match != null) {
+                eligible = false;
+                Integer fasterRefSlot = match.fasterThanRosterSlot();
+                Integer slowerRefSlot = match.slowerThanRosterSlot();
+                RosterMemberTyping fasterRef = fasterRefSlot != null ? rosterBySlot.get(fasterRefSlot) : null;
+                RosterMemberTyping slowerRef = slowerRefSlot != null ? rosterBySlot.get(slowerRefSlot) : null;
+                // Degeneracy guard: an absent referenced slot or a non-positive resolved speed makes the
+                // property unsatisfiable rather than vacuously true.
+                boolean resolvable = (fasterRefSlot == null || (fasterRef != null && fasterRef.speed() > 0))
+                        && (slowerRefSlot == null || (slowerRef != null && slowerRef.speed() > 0));
+                List<String> anyOf = match.typeAnyOf();
+                if (resolvable) {
+                    for (PlayerLeadTyping player : playerLeads) {
+                        // Same-opponent AND: every present property is tested on this single lead.
+                        if ((match.type() == null || player.types().contains(match.type()))
+                                && (anyOf.isEmpty() || player.types().stream().anyMatch(anyOf::contains))
+                                && (match.damagingMoveType() == null || player.damagingMoveTypes().contains(match.damagingMoveType()))
+                                && (fasterRef == null || player.speed() > fasterRef.speed())
+                                && (slowerRef == null || player.speed() < slowerRef.speed())) {
+                            opponentMatchBonus = match.bonus();
+                            eligible = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            int total = offScore + defScore + attempt.baseWeight() + typeFavoredBonus + speciesFavoredBonus + fastBonus + opponentMatchBonus;
+            AttemptScore evidence = new AttemptScore(attempt.id(), offScore, defScore, attempt.baseWeight(), typeFavoredBonus, speciesFavoredBonus, fastBonus, opponentMatchBonus, eligible, total);
             evidenceList.add(evidence);
-            scoredList.add(new ScoredAttempt(attempt, total, attempt.baseWeight(), i));
+            scoredList.add(new ScoredAttempt(attempt, total, attempt.baseWeight(), i, eligible));
         }
 
-        // Tie-breaker: totalScore descending -> baseWeight descending -> declarationIndex ascending
+        // Tie-breaker: eligible before ineligible (the matcher gate) -> totalScore descending
+        // -> baseWeight descending -> declarationIndex ascending.
         scoredList.sort(Comparator
-                .comparingInt(ScoredAttempt::totalScore).reversed()
+                .comparingInt((ScoredAttempt s) -> s.eligible() ? 0 : 1)
+                .thenComparing(Comparator.comparingInt(ScoredAttempt::totalScore).reversed())
                 .thenComparing(Comparator.comparingInt(ScoredAttempt::baseWeight).reversed())
                 .thenComparingInt(ScoredAttempt::declarationIndex)
         );
@@ -125,6 +162,16 @@ public final class LeadSelectionEngine {
         return new LeadSelectionResult(winner, evidenceList);
     }
 
+    /**
+     * Resolves the attempt that supplies {@code dynamicThreatSpeed} (the reference speed used by the
+     * dynamic fast-threshold path). This is <strong>not</strong> a selection path: the winner is always
+     * {@code scoredList.get(0)}, so no attempt returned here can become the selected attempt.
+     * <p>
+     * Rule 2 deliberately excludes any attempt carrying an {@link OpponentMatch}: a matcher-bearing
+     * attempt is conditional, so it must never be read as the "unconditional" attempt. Rule 3 is the
+     * last-resort fallback and can return a matcher-bearing attempt, but only to read its slot speeds
+     * for the reference — it confers no eligibility and cannot resurrect an unsatisfied matcher.
+     */
     private static LeadAttempt resolveDefaultAttempt(List<LeadAttempt> attempts) {
         for (LeadAttempt attempt : attempts) {
             if (attempt.isDefault()) {
@@ -134,12 +181,13 @@ public final class LeadSelectionEngine {
         for (LeadAttempt attempt : attempts) {
             if (attempt.minFastOpponents() == 0
                     && attempt.favoredAgainst().isEmpty()
-                    && attempt.favoredAgainstSpecies().isEmpty()) {
+                    && attempt.favoredAgainstSpecies().isEmpty()
+                    && attempt.opponentMatch() == null) {
                 return attempt;
             }
         }
         return attempts.get(0);
     }
 
-    private record ScoredAttempt(LeadAttempt attempt, int totalScore, int baseWeight, int declarationIndex) {}
+    private record ScoredAttempt(LeadAttempt attempt, int totalScore, int baseWeight, int declarationIndex, boolean eligible) {}
 }

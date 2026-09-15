@@ -72,13 +72,24 @@ Dynamic lead presets allow an NPC boss to inspect the player's predicted lead pa
 | `favoredAgainstSpecies` | Array | Lowercase valid Pokémon species | Species list granting +2 bonus per matching player lead. |
 | `minFastOpponents` | Integer | Exact integer $\ge 0$, defaults to `0` | Minimum opposing leads meeting speed threshold to trigger fast bonus. |
 | `fastSpeedThreshold` | Integer | Exact integer $\ge 0$, defaults to `0` | Static speed cutoff. If $\le 0$, enables dynamic speed derivation. |
+| `opponentMatch` | Object | Optional | **Per-opponent conjunction.** Sub-fields below. Rejected if not a JSON object, if every condition sub-field is absent, if `bonus` is absent, if a value is malformed, or if an unknown sub-key is present. |
+| `opponentMatch.type` | String | Optional, canonical Gen 9 type | Matches an opposing lead whose own typing includes this type. Mutually exclusive with `typeAnyOf`. |
+| `opponentMatch.typeAnyOf` | Array | Optional, non-empty array of canonical Gen 9 types | Matches an opposing lead whose own typing includes **at least one** of the listed types. Mutually exclusive with `type`. |
+| `opponentMatch.damagingMoveType` | String | Optional, canonical Gen 9 type | Matches an opposing lead carrying an equipped **damaging** (non-`status`) move of this type. |
+| `opponentMatch.fasterThanRosterSlot` | Integer | Optional, exact integer $\ge 0$ and $< \text{len(team)}$ | Matches an opposing lead strictly faster than the **resolved** speed of this NPC roster slot. Mutually exclusive with `slowerThanRosterSlot`. |
+| `opponentMatch.slowerThanRosterSlot` | Integer | Optional, exact integer $\ge 0$ and $< \text{len(team)}$ | Matches an opposing lead strictly slower than the **resolved** speed of this NPC roster slot. Mutually exclusive with `fasterThanRosterSlot`. |
+| `opponentMatch.bonus` | Integer | **Mandatory when `opponentMatch` is present**; exact integer in `[1, 16]` | Additive score awarded when the conjunction holds. **No default.** |
 | `default` | Boolean | Boolean primitive, defaults to `false` | Marks fallback preset. **At most one preset may declare `default: true`**. |
+
+**`bonus` is mandatory and the bound is a policy guard, not a derivation.** `opponentMatch` is a weight, not a condition, so it is exempt from the "every property is optional" rule that governs `type`, `typeAnyOf`, `damagingMoveType`, `fasterThanRosterSlot` and `slowerThanRosterSlot`: all five condition properties remain independently omittable and any subset (including one) is expressible. An omitted `bonus` cannot be defaulted — the parser cannot distinguish "the author meant a small number" from "the author forgot" — so making it mandatory forces the calibration decision into the diff. The `[1, 16]` bound exists to keep a typo (`bonus: 1400`) within the order of magnitude of the other score components; it is **not** derived from the aggregate maximum of 12.
+
+**Two authoring rules keep a conjunction satisfiable.** `type` and `typeAnyOf` are mutually exclusive (a set of one is just `type`), and `fasterThanRosterSlot` and `slowerThanRosterSlot` are mutually exclusive because no speed can be simultaneously strictly greater and strictly less than the same reference. Both are rejected by the parser and by `validate_repo.py` rather than silently resolved, so an ambiguous matcher cannot be authored by accident.
 
 ### 2. Scoring & Selection Pipeline
 
 When a battle initiates, `LeadSelectionEngine.java` computes `totalScore` for every declared preset:
 
-$$\text{totalScore} = \text{offScore} + \text{defScore} + \text{baseWeight} + \text{typeFavoredBonus} + \text{speciesFavoredBonus} + \text{fastBonus}$$
+$$\text{totalScore} = \text{offScore} + \text{defScore} + \text{baseWeight} + \text{typeFavoredBonus} + \text{speciesFavoredBonus} + \text{fastBonus} + \text{opponentMatchBonus}$$
 
 #### Discrete Matchup Scoring (`offScore`, `defScore`)
 - Evaluated across both NPC leads ($A$ and $B$) against both opposing player leads:
@@ -92,6 +103,16 @@ $$\text{totalScore} = \text{offScore} + \text{defScore} + \text{baseWeight} + \t
 - **`typeFavoredBonus` (+2 per matching player lead, max +4):** For each player lead, if at least one of its types is present in `favoredAgainst`, +2 is added. A dual-type matching multiple favored types receives +2 only once.
 - **`speciesFavoredBonus` (+2 per matching player lead, max +4):** For each player lead, if its species matches an entry in `favoredAgainstSpecies`, +2 is added.
 - **`fastBonus` (+4 flat):** If `minFastOpponents > 0` and the count of opposing leads meeting the speed threshold is $\ge \text{minFastOpponents}$, a flat +4 is awarded.
+- **`opponentMatchBonus` (`opponentMatch.bonus`, authored per preset):** Unlike every other term in this pipeline, the magnitude here is authored in the trainer JSON rather than frozen in the engine. The matcher is evaluated per opposing lead (see the conjunction rules below) and its `bonus` is added at most once.
+
+#### Per-Opponent Conjunction (`opponentMatch`)
+- **Same-opponent AND.** Every present sub-field must be satisfied by **one single** opposing lead. Satisfaction is never assembled across two different opposing leads.
+- **Omitted sub-field = unconstrained.** A sub-field that is not declared is skipped, never treated as false.
+- **Set membership.** `typeAnyOf` is satisfied by an opposing lead carrying **at least one** of the listed types — it is an OR over the set, and a mono-typed lead qualifies. The conjunction as a whole remains an AND of its declared sub-fields.
+- **Exists-quantifier.** One qualifying opposing lead is sufficient; a second qualifying lead does not duplicate the bonus.
+- **Strict inequality.** `fasterThanRosterSlot` compares $\text{playerSpeed} > \text{slotSpeed}$ and `slowerThanRosterSlot` compares $\text{playerSpeed} < \text{slotSpeed}$, matching the dynamic-threshold convention below. Equal speed satisfies **neither**, so a board at exactly the reference speed falls through to the remaining presets.
+- **Speed authority.** Both sides of the comparison are values produced by `CobblemonLeadAdapter.resolveSpeed()`; the engine never re-applies the Choice Scarf multiplier.
+- **Degeneracy guard.** If the referenced roster slot is absent, or its resolved speed is $\le 0$, the property is **unsatisfiable** — it does not become vacuously true.
 
 #### Speed Threshold Derivation
 - **Runtime Speed Authority (`CobblemonLeadAdapter.resolveSpeed()`):**
@@ -110,11 +131,32 @@ When multiple presets are evaluated, the winning preset is selected strictly by:
 2. `baseWeight` descending (higher base weight wins);
 3. `declarationIndex` ascending (order declared in JSON file wins).
 
+*This section is deliberately unchanged by the `opponentMatch` extension.* No first-class precedence or
+priority tier was introduced; a matcher influences the outcome through its additive `bonus` only, so the
+ordering contract above governs all presets exactly as before.
+
 ### 4. Default Preset Resolution
 The default preset (used for dynamic threat speed derivation and fallback) is resolved sequentially:
 1. First preset with `"default": true` (at most one permitted);
-2. First preset declared with no conditions (`minFastOpponents == 0`, empty `favoredAgainst`, and empty `favoredAgainstSpecies`);
+2. First preset declared with no conditions (`minFastOpponents == 0`, empty `favoredAgainst`, empty `favoredAgainstSpecies`, **and no `opponentMatch`**);
 3. First declared preset in the `leadPresets` array.
+
+Rule 2 excludes matcher-bearing presets so a matcher-only preset is never mis-resolved as
+"unconditional". Rule 3 is retained unchanged as the documented last-resort fallback. Rule 3 is live
+today: `kanto_koga.json` declares three presets, all with a non-empty `favoredAgainstSpecies` and none
+with `default: true`, so `default_sun` (index 0) supplies `dynamicThreatSpeed` through it. The residual
+boundary is narrow but real: a **future** trainer whose only rule-3 candidate carried an `opponentMatch`
+would derive `dynamicThreatSpeed` from that preset — pre-existing rule-3 behaviour, not behaviour
+introduced by the matcher.
+
+> [!NOTE]
+> **A `bonus` above the aggregate maximum (12) is a precedence declaration.** The board-aggregate
+> conditions can award at most 12 (`typeFavored` 4 + `speciesFavored` 4 + `fastBonus` 4), and
+> `baseWeight` is capped at $\pm 2$. A matcher whose `bonus` exceeds 12 therefore outranks the aggregate
+> conditions by construction, which means it is doing **precedence** work while being named a bonus. Such
+> a value must be calibrated against the structural scores of the presets it has to beat on that trainer's
+> roster — not read as an ordinary weight, and not copied between trainers. The honest upgrade path, if
+> categorical precedence is ever needed rather than calibrated precedence, is a first-class priority tier.
 
 ### 5. Semantic Drift Guard (`expectedLeadMembers`)
 `expectedLeadMembers` is a regression-prevention mechanism. Each entry validates:
@@ -130,13 +172,16 @@ The default preset (used for dynamic threat speed derivation and fallback) is re
 
 > [!WARNING]
 > **Independent conditions and bonuses do NOT imply that the same opposing Pokémon satisfies all of them.**
+> This is exactly the behaviour that `opponentMatch` (§C.1) exists to fix. The aggregate predicates below
+> remain the right tool for *board-wide* pressure; use `opponentMatch` when the requirement is a
+> conjunction on a **single** opposing Pokémon.
 
-In `LeadSelectionEngine.java`, all condition evaluations are computed **independently across the opposing board**:
+In `LeadSelectionEngine.java`, aggregate condition evaluations are computed **independently across the opposing board**:
 - `favoredAgainst` iterates over player leads and checks types.
 - `favoredAgainstSpecies` iterates over player leads and checks species.
 - `fastBonus` iterates over player leads and counts how many are fast.
 
-### Concrete Failure Walkthrough
+### Concrete Failure Walkthrough (the behaviour `opponentMatch` fixes)
 Suppose an author wants an anti-fast-electric preset (attempting to counter fast Electric threats like Regieleki, Electrode, or Kilowattrel) and writes:
 
 ```json
@@ -175,8 +220,30 @@ The preset triggers with maximum conditional bonus (+6) despite the player havin
 
 Because `LeadSelectionEngine.java` computes these criteria independently across the entire opposing lead board, independent additive fields cannot express a single-Pokémon conjunction requirement.
 
+**Supported remedy — the `opponentMatch` primitive.** The same intent expressed with the conjunction matcher:
+
+```json
+{
+  "id": "anti_fast_electric",
+  "leadSlots": [3, 4],
+  "baseWeight": 0,
+  "opponentMatch": {
+    "type": "electric",
+    "damagingMoveType": "electric",
+    "fasterThanRosterSlot": 1,
+    "bonus": 14
+  }
+}
+```
+
+This fires only when **one** opposing lead is simultaneously Electric, carries a damaging Electric move,
+and is strictly faster than NPC roster slot 1 — so the Ampharos + Aerodactyl board above awards **nothing**.
+
 **Authoring Principle:**
-Never rely on combinations of independent fields to target a conjoined threat profile. If targeting a specific threat, use `favoredAgainstSpecies` or evaluate whether the preset remains sound if the traits are distributed across two different opposing leads.
+Never rely on combinations of independent aggregate fields to target a conjoined threat profile. Reach
+for `opponentMatch` when the traits must co-occur on one Pokémon; keep `favoredAgainst`,
+`favoredAgainstSpecies` and `minFastOpponents` for board-wide pressure; and use `favoredAgainstSpecies`
+when a specific species (not a trait conjunction) is the target.
 
 ---
 
@@ -184,19 +251,22 @@ Never rely on combinations of independent fields to target a conjoined threat pr
 
 When existing primitives cannot express a desired tactical behavior, adhere to these principles:
 
-1. **Smallest-Data-Path Principle:** Exhaust existing primitives (`baseWeight`, `favoredAgainst`, `favoredAgainstSpecies`, `minFastOpponents`) before proposing code modifications.
+1. **Smallest-Data-Path Principle:** Exhaust existing primitives (`baseWeight`, `favoredAgainst`, `favoredAgainstSpecies`, `minFastOpponents`, `opponentMatch`) before proposing code modifications.
 2. **Generic Composable Primitives:** Any future companion mod engine extension must be generic, parameter-driven, and composable. Never introduce trainer-specific Java logic (e.g., no `antiFastElectricLeadSelector`).
-3. **Per-Opponent Conjunction Abstractions:** If conjoined trait matching is implemented in the future, it must be introduced as an explicit, distinct abstraction (such as an array of conjoined opponent criteria) evaluated per opposing Pokémon, keeping aggregate board conditions separate.
+3. **Per-Opponent Conjunction Abstractions:** Conjoined trait matching must be an explicit, distinct abstraction evaluated per opposing Pokémon, keeping aggregate board conditions separate. This now exists as `opponentMatch` (§C.1); extend it with further *properties* rather than by overloading aggregate predicates.
 4. **Zero Domain-Engine I/O:** Domain services like `LeadSelectionEngine.java` must remain pure algorithms with zero file I/O, zero Minecraft dependencies, and zero static mutable state.
+5. **Authored Weights, Not Trainer Branching:** A weight whose correct value depends on one trainer's roster and on the presets competing with it is **calibration data** and belongs in that trainer's JSON file. E.1/E.2 forbid freezing such a value in the engine, because a constant chosen so that one trainer's preset wins is trainer-specific logic inside generic engine code. `opponentMatch.bonus` is authored for this reason; a weight that reads the same for every trainer may still be frozen in the engine.
 
 ---
 
 ## Section F: Current vs. Future Syntax Discipline
 
 To prevent invalid configurations from entering the codebase:
-- **Active Syntax Only:** Author configurations strictly using fields currently recognized by `LeadSelectionConfig.java` and verified by `validate_repo.py`.
+- **Active Syntax Only:** Author configurations strictly using fields currently recognized by `LeadSelectionConfig.java` and verified by `validate_repo.py`. The active vocabulary is: `id`, `leadSlots`, `expectedLeadMembers`, `description`, `baseWeight`, `favoredAgainst`, `favoredAgainstSpecies`, `minFastOpponents`, `fastSpeedThreshold`, `default`, and `opponentMatch` (with its four sub-fields).
+- **`opponentMatch` rejection rules (active):** a non-object value, an absent `bonus`, a `bonus` outside `[1, 16]`, any non-exact-integer or negative `fasterThanRosterSlot`, a `type`/`damagingMoveType` that is not a canonical Gen 9 type, a matcher declaring no condition sub-field, and any **unknown sub-key inside the `opponentMatch` object** all cause rejection. The parser rejects per attempt in isolation — a malformed preset is skipped and its valid siblings survive.
+- **Known boundary — top-level keys remain permissive:** strict unknown-key rejection is enforced **only** for sub-keys inside `opponentMatch`. Neither `LeadSelectionConfig` nor `validate_repo.py` rejects an unknown **top-level** attempt key, so a typo such as `opponentMAtch` is silently ignored today and the resulting preset (no `minFastOpponents`, empty favored lists, no matcher) also becomes eligible for default-resolution rule 2. Closing that gap is a separate change with legacy-data blast radius across every preset-carrying trainer.
 - **Proposals Must Be Labeled:** If proposing hypothetical extensions in design discussions, explicitly mark them as `[PROPOSED / UNIMPLEMENTED]`. Never document hypothetical schemas as active syntax.
-- **Strict Parsing Rejection:** Any unrecognized field or improper primitive type in `leadPresets` will cause validation failure in CI or runtime fallback.
+- **Strict Parsing Rejection:** Any unrecognized sub-field inside `opponentMatch`, or improper primitive type in `leadPresets`, causes validation failure in CI or the attempt to be skipped at runtime.
 
 ---
 
@@ -296,6 +366,34 @@ Establishes the primary team synergy, acts as fallback, and sets dynamic threat 
 }
 ```
 
+### Pattern 5: Per-Opponent Conjunction (`opponentMatch`)
+Deploys a counter-lead only when **one** opposing Pokémon combines every listed trait (e.g. Blaine's
+`anti_fast_electric`, which must not fire when the Electric lead is slow and the fast lead is not Electric):
+
+```json
+{
+  "id": "anti_fast_electric",
+  "leadSlots": [3, 4],
+  "expectedLeadMembers": [
+    { "species": "rillaboom" },
+    { "species": "golisopod", "requiredAspects": ["mega"] }
+  ],
+  "baseWeight": 0,
+  "opponentMatch": {
+    "type": "electric",
+    "damagingMoveType": "electric",
+    "fasterThanRosterSlot": 1,
+    "bonus": 14
+  },
+  "description": "Rillaboom + Mega Golisopod vs a fast Electric STAB lead that outruns Mega Charizard Y"
+}
+```
+
+`fasterThanRosterSlot` refers to the **resolved** speed of NPC team slot `1` (Mega Charizard Y here), the
+lead this preset exists to protect. `bonus: 14` exceeds the aggregate maximum of 12 and is therefore a
+**precedence declaration** calibrated against Blaine's competing presets — a value a different trainer must
+re-derive from its own roster, never copy.
+
 ### Anti-Pattern: Conjunction Fallacy via Independent Fields
 **INCORRECT:**
 ```json
@@ -308,6 +406,11 @@ Establishes the primary team synergy, acts as fallback, and sets dynamic threat 
 }
 ```
 *Why it fails:* Matches slow Fire Pokémon (Torkoal) + fast non-Fire Pokémon (Whimsicott) independently, triggering the full bonus.
+
+*Status:* This intent is now **expressible** with `opponentMatch` (Pattern 5) — the pattern above is correct
+for the *board-aggregate* case and remains an anti-pattern only when a single-Pokémon conjunction was meant.
+Note that a conjunction cannot be assembled from aggregate fields even in combination with `opponentMatch`:
+the matcher is a single additional term, not a per-lead override of the aggregate predicates.
 
 ### Fallback Workflow When Schema Cannot Express Requirement
 If a desired matchup condition cannot be cleanly expressed using independent type, species, or speed filters:
@@ -333,9 +436,12 @@ When modifying or creating trainer JSON files without Java changes:
 When modifying engine logic or scoring algorithms:
 - **Layer 2 Verification (Mandatory):**
   ```powershell
-  ./gradlew :companion-mod:test --tests "com.cobbleverse.legendaryrule.lead.*"
+  cd companion-mod
+  ./gradlew test --tests "com.cobbleverse.legendaryrule.lead.*"
   ```
-  Must exit with code 0 across all unit test suites.
+  Must exit with code 0 across all unit test suites. Run the wrapper **from inside `companion-mod/`**:
+  `companion-mod/settings.gradle` declares `rootProject.name = 'rct-legendary-rule-companion'` and includes
+  no subprojects, so the `:companion-mod:` project selector has nothing to resolve.
 
 ### 3. Schema Extension Modifications
 When adding new fields to `leadPresets`:
@@ -344,6 +450,13 @@ When adding new fields to `leadPresets`:
   2. Domain engine: `LeadSelectionEngine.java`
   3. CI validator: `scripts/ci/validate_repo.py`
   4. Authoring contract: This document.
+
+The `opponentMatch` extension is the worked example of this rule: the parser sub-key surface
+(`type`, `damagingMoveType`, `fasterThanRosterSlot`, `bonus`), the engine's conjunction term and
+rule-2 default predicate, the `validate_repo.py` block (which additionally enforces
+`fasterThanRosterSlot < len(team)`), and §C.1/§C.2/§C.4/§D/§E/§F/§G of this contract all moved in the
+same change. Because the parser and the validator are **separate implementations** of one schema, the same
+fixtures are asserted against both.
 
 ### 4. Offline vs. Production Reality
 Automated local passes (Layers 0, 1, and 2) confirm syntactic legality, schema conformance, and unit mathematical correctness. They do not substitute for live production gameplay verification (Layer 5) on the dedicated server host.
